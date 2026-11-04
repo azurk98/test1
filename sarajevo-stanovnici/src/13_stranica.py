@@ -1,0 +1,157 @@
+"""Interaktivna stranica (claude.ai artifact) -> out/stranica.html
+
+Sastavlja jednu samostalnu HTML stranicu iz izlaza koraka 05–11 i šablona
+src/stranica_sablon.html: H3 polja (stanovnici, dostupnost, supermarket, teren),
+granice, postojeće trgovine i predložene lokacije, satelitsku podlogu
+(Sentinel-2 cloudless 2016, EOX, CC BY 4.0), reljef i izohipse (10_teren.py)
+i mrežu puteva (11_putevi.py). Slike i podaci su ugrađeni, jer stranica ne
+smije učitavati sadržaj s drugih servera.
+
+Zamjene u šablonu: __DATA__, __SAT__, __X0__/__Y0__/__X1__/__Y1__, __TEREN__, __ROADS__.
+"""
+from __future__ import annotations
+
+import base64
+import io
+import json
+
+import geopandas as gpd
+import h3
+import pandas as pd
+import requests
+from PIL import Image
+from shapely.geometry import LineString, mapping
+
+from common import DATA, INTERIM, OUT, RAW, ucitaj_granice
+
+OP = ["Centar Sarajevo", "Novi Grad Sarajevo", "Novo Sarajevo", "Stari Grad Sarajevo"]
+SAT_OKVIR = (18.2352, 43.8089, 18.53, 43.9783)
+SAT_SIRINA = 2400
+SAT_URL = ("https://tiles.maps.eox.at/wms?service=WMS&version=1.1.1&request=GetMap&layers=s2cloudless"
+           "&styles=&srs=EPSG:4326&bbox={},{},{},{}&width={}&height={}&format=image/jpeg")
+SABLON = OUT.parent / "src" / "stranica_sablon.html"
+
+
+def rnd(g):
+    def f(c):
+        if isinstance(c[0], (list, tuple)):
+            return [f(x) for x in c]
+        return [round(c[0], 5), round(c[1], 5)]
+    m = mapping(g)
+    return {"type": m["type"], "coordinates": f(m["coordinates"])}
+
+
+def podaci() -> dict:
+    p = gpd.read_file(OUT / "polja_h3.gpkg")
+    acc = pd.read_csv(OUT / "dostupnost_h3.csv").set_index("h3_id")
+    sm = pd.read_csv(OUT / "supermarket_pokrivenost.csv").set_index("h3_id").supermarket_pjesice_min
+    ter = pd.read_csv(OUT / "teren_h3.csv").set_index("h3_id")
+    cells = []
+    for r in p.itertuples():
+        cells.append(
+            [r.h3_id, OP.index(r.opcina) if r.opcina in OP else -1, r.mz if isinstance(r.mz, str) else "",
+             int(r.stanovnici), int(r.stanovnici_min), int(r.stanovnici_max), int(r.d0_14), int(r.d15_64),
+             int(r.d65plus), r.pouzdanost, round(h3.cell_area(r.h3_id, "km^2"), 4)]
+            + [int(acc.loc[r.h3_id, k]) if k != "stanica_tip" else acc.loc[r.h3_id, k]
+               for k in ("atraktivnost", "pjesice_5", "pjesice_10", "pjesice_15", "auto_5", "auto_10", "auto_15",
+                         "poi_10min", "stanica_m", "stanica_tip", "stanice_400m", "tramvaj_400m", "glavna_cesta_m")]
+            + [None if pd.isna(sm.get(r.h3_id)) else float(sm.get(r.h3_id))]
+            + ([int(ter.loc[r.h3_id, "visina_m"]), int(ter.loc[r.h3_id, "nagib_pct"])]
+               if r.h3_id in ter.index else [None, None]))
+
+    op, _ = ucitaj_granice()
+    op = op.set_index("opcina").loc[OP].reset_index()
+    op["geometry"] = op.simplify(12)
+    op = op.to_crs(4326)
+    mz = gpd.read_file(INTERIM / "mz_granice.gpkg")
+    sl = [mz[["opcina", "mz", "geometry"]]]
+    if (INTERIM / "mz_novi_grad.gpkg").exists():
+        sl.append(gpd.read_file(INTERIM / "mz_novi_grad.gpkg")[["opcina", "mz", "geometry"]])
+    mzall = gpd.GeoDataFrame(pd.concat(sl, ignore_index=True), crs=mz.crs)
+    mzall["geometry"] = mzall.simplify(10)
+    mzall = mzall.to_crs(4326)
+
+    fzs = pd.read_csv(DATA / "opcine_procjena_2026.csv").set_index("opcina")
+    d = gpd.read_file(INTERIM / "raspodjela_dijelovi.gpkg")
+    summ = []
+    for o in OP:
+        dd = d[d.opcina == o]
+        pz = dd.groupby("pouzdanost").stanovnici.sum()
+        summ.append({"name": o, "total": int(fzs.loc[o, "stanovnici"]),
+                     "ages": [int(fzs.loc[o, k]) for k in ("d0_14", "d15_64", "d65plus")],
+                     "cells": int(dd.h3_id.nunique()), "abc": [int(pz.get(k, 0)) for k in "ABC"]})
+    mzt = pd.read_csv(OUT / "mz_zbirovi.csv")
+    mzrows = [[OP.index(r.opcina), r.mz, int(r.stanovnici), int(r.stanovnici_min), int(r.stanovnici_max),
+               r.kontrolni_zbir] for r in mzt.itertuples()]
+
+    st = pd.read_csv(OUT / "supermarket_trgovine.csv")
+    st = st[st.tip.isin(["supermarket", "mall", "department_store"])]
+    if "izvor" in st:  # Google Places se ne prikazuje na karti koja nije Google karta
+        st = st[st.izvor != "google"]
+    kd = pd.read_csv(OUT / "supermarket_kandidati.csv")
+    sites = [[r.strategija, int(r.rang), r.h3_id, r.mz if isinstance(r.mz, str) else "", OP.index(r.opcina),
+              int(r.kupci_procjena), int(r.stanovnici_10min_pjesice), int(r.od_toga_bez_supermarketa_10min),
+              int(r.najblizi_supermarket_m), int(r.glavna_cesta_m), r.znakovi_zemljista, r.lon, r.lat]
+             for r in kd.itertuples()]
+    return {"stores": [[round(a, 5), round(b, 5), (n if isinstance(n, str) else "")]
+                       for a, b, n in zip(st.lon, st.lat, st.ime)],
+            "sites": sites, "cells": cells, "summ": summ, "mz": mzrows,
+            "op": [rnd(x) for x in op.geometry],
+            "mzlines": [[OP.index(o) if o in OP else -1, n, rnd(x)]
+                        for o, n, x in zip(mzall.opcina, mzall.mz, mzall.geometry)]}
+
+
+def satelit() -> tuple[str, tuple]:
+    f = RAW / "s2cloudless_2016.jpg"
+    x0, y0, x1, y1 = SAT_OKVIR
+    if not f.exists():
+        import math
+        h = round(SAT_SIRINA * (y1 - y0) / ((x1 - x0) * math.cos(math.radians((y0 + y1) / 2))))
+        r = requests.get(SAT_URL.format(x0, y0, x1, y1, SAT_SIRINA, h), timeout=180)
+        r.raise_for_status()
+        f.write_bytes(r.content)
+    return "data:image/jpeg;base64," + base64.b64encode(f.read_bytes()).decode(), SAT_OKVIR
+
+
+def teren() -> dict:
+    def jpg(path, mode, q):
+        b = io.BytesIO()
+        Image.open(OUT / path).convert(mode).save(b, "JPEG", quality=q, optimize=True)
+        return "data:image/jpeg;base64," + base64.b64encode(b.getvalue()).decode()
+
+    gj = json.loads((OUT / "teren_izohipse.geojson").read_text())
+    cont = []
+    for f in gj["features"]:
+        ln = LineString(f["geometry"]["coordinates"]).simplify(0.00015)
+        if ln.length < 0.003:
+            continue
+        cont.append([f["properties"]["m"], 1 if f["properties"]["glavna"] else 0,
+                     [round(c, 4) for xy in ln.coords for c in xy]])
+    return {"rel": jpg("teren_reljef.png", "RGB", 82), "sj": jpg("teren_sjena.png", "L", 80),
+            "cont": cont, "box": json.loads((OUT / "teren_okvir.json").read_text())}
+
+
+def putevi() -> dict:
+    gj = json.loads((OUT / "putevi.geojson").read_text())
+    roads: dict[str, list] = {}
+    for f in gj["features"]:
+        k = f["properties"]["klasa"]
+        nd = 4 if k == "ulica" else 5
+        roads.setdefault(k, []).append([round(c, nd) for xy in f["geometry"]["coordinates"] for c in xy])
+    return roads
+
+
+def main() -> None:
+    sat, (x0, y0, x1, y1) = satelit()
+    t = SABLON.read_text(encoding="utf-8")
+    t = (t.replace("__X0__", str(x0)).replace("__Y0__", str(y0)).replace("__X1__", str(x1)).replace("__Y1__", str(y1))
+         .replace("__ROADS__", json.dumps(putevi(), separators=(",", ":")))
+         .replace("__TEREN__", json.dumps(teren(), separators=(",", ":")))
+         .replace("__DATA__", json.dumps(podaci(), ensure_ascii=False, separators=(",", ":")))
+         .replace("__SAT__", sat))
+    (OUT / "stranica.html").write_text(t, encoding="utf-8")
+    print(f"-> out/stranica.html ({len(t) // 1024} KB)")
+
+
+if __name__ == "__main__":
+    main()
