@@ -53,6 +53,7 @@ def podaci() -> dict:
     kz_kol = ["indeks"] + [f"min_{k}" for k in KZ_KAT]
     ul = pd.read_csv(OUT / "ulice_h3.csv").set_index("h3_id")
     su = pd.read_csv(OUT / "sunce_h3.csv", keep_default_na=False).set_index("h3_id")
+    zr = pd.read_csv(OUT / "zrak_h3.csv").set_index("h3_id")
     cells = []
     for r in p.itertuples():
         cells.append(
@@ -71,7 +72,9 @@ def podaci() -> dict:
                int(round(ul.loc[r.h3_id, "udio_strmo"] * 100)), int(ul.loc[r.h3_id, "put_min_koridor_m"])]
             + [float(su.loc[r.h3_id, "sunce_21dec_h"]), su.loc[r.h3_id, "sunce_21dec_od"],
                su.loc[r.h3_id, "sunce_21dec_do"], float(su.loc[r.h3_id, "sunce_21jan_h"]),
-               float(su.loc[r.h3_id, "astro_21dec_h"])])
+               float(su.loc[r.h3_id, "astro_21dec_h"])]
+            + [int(zr.loc[r.h3_id, "iznad_dna_m"]), float(zr.loc[r.h3_id, "inverzija"]),
+               int(zr.loc[r.h3_id, "smog_indeks"]), int(zr.loc[r.h3_id, "magla_indeks"])])
 
     op, _ = ucitaj_granice()
     op = op.set_index("opcina").loc[OP].reset_index()
@@ -120,7 +123,9 @@ def podaci() -> dict:
     acc = {}
     for kod, g in dio.groupby("kod"):
         acc[int(kod)] = [[round(c, 5) for xy in geom.coords for c in xy] for geom in g.geometry]
-    return {"acc": acc, "poi": poi,
+    zs = pd.read_csv(OUT / "zrak_stanice.csv")
+    stanice = [[r.stanica, round(r.lat, 5), round(r.lon, 5), int(r.pm25)] for r in zs.itertuples()]
+    return {"aq": stanice, "acc": acc, "poi": poi,
             "stores": [[round(a, 5), round(b, 5), (n if isinstance(n, str) else "")]
                        for a, b, n in zip(st.lon, st.lat, st.ime)],
             "sites": sites, "cells": cells, "summ": summ, "mz": mzrows,

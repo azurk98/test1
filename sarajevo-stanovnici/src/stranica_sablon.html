@@ -127,6 +127,9 @@ aside.read{border-left:1px solid var(--line);padding:16px;max-height:calc(min(68
 .sites table{min-width:0;font-size:13.5px}
 .sites tbody tr{cursor:pointer}
 .sites td:first-child{width:28px}
+.aqs rect{fill:#2b2d42;stroke:#fff;stroke-width:1px}
+.aqs text{font:600 10px var(--mono);fill:#fff;pointer-events:none}
+.legend b.aqk{display:inline-grid;place-items:center;min-width:22px;height:15px;border-radius:3px;background:#2b2d42;color:#fff;font:600 9.5px var(--mono);padding:0 3px}
 .acc{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke;pointer-events:none;stroke-width:calc(1.6px * var(--zw))}
 .acc.a1{stroke:#ff8c1a}.acc.a2{stroke:#e63946}.acc.a3{stroke:#b5179e;stroke-width:calc(2.2px * var(--zw))}
 .poi{stroke:#fff;pointer-events:visiblePainted;cursor:help}
@@ -183,6 +186,8 @@ footer{font-size:13px;color:var(--muted);max-width:80ch}
           <button id="m-liv" aria-pressed="false">Livability</button>
           <button id="m-car" aria-pressed="false">Car access</button>
           <button id="m-sun" aria-pressed="false">Winter sun</button>
+          <button id="m-smog" aria-pressed="false">Smog</button>
+          <button id="m-fog" aria-pressed="false">Fog</button>
         </div>
         <div>
           <span class="seg seg-sm" role="group" aria-label="Background">
@@ -210,6 +215,7 @@ footer{font-size:13px;color:var(--muted);max-width:80ch}
     <li><b>Floor counts</b>Only 4.7% of OSM buildings record their floors. The rest come from a model trained on those that do (spatial cross-check: r = 0.70), since GHSL heights alone barely separate houses from towers (r = 0.13).</li>
     <li><b>Attractiveness</b>A location score from 0 to 100, separate from the population estimate. It weighs, as percentile ranks among populated cells: residents within a 10-minute walk (20%) and a 10-minute drive (15%), shops and services within a 10-minute walk (20%), stops within 400 m (15%), distance to the nearest stop (10%), distance to a main road (10%) and intersection density (10%). Walking and driving times run on the OSM street network. Walking slows on slopes (Tobler's hiking function: 4.8 km/h on the flat, 3.4 km/h up a 10% grade); driving assumes 65% of the speed limit, and transit counts stops only, without timetables. Cells at the edge toward Ilidža and Vogošća under-count reachable residents, since those municipalities are not modelled.</li>
     <li><b>Livability</b>Walking minutes, with slopes, from each cell to the nearest grocery, transit stop, primary school, clinic, park, kindergarten, pharmacy, playground, hospital and sports ground. Each counts half at a set time (5 min for a stop, 8 for a shop or park, 12 for a school or clinic, 25 for a hospital) and is weighted: grocery, transit and school 15% each, clinic and park 12%, kindergarten 8%, pharmacy 7%, playground 6%, hospital and sports 5%. Points come off near a motorway or primary road (up to 10), in industrial areas (10) and on very steep ground (5). Weights are a judgement, not a calibration. Places come from OpenStreetMap.</li>
+    <li><b>Smog and fog</b>Winter smog and fog in Sarajevo come from the temperature inversion that traps cold air and smoke in the valley. Each cell's exposure is the share of inversion days it lies below the inversion top, from its height above the valley floor (lowest ground within 3 km) assuming a typical top about 200 m above the floor, raised near busy roads (smog) or rivers (fog). These are relative indices, not measurements. They agree in direction with the FHMZ stations shown on the map (2025 annual PM2.5: Bjelave 26, Otoka 35, Saraj Polje 61, Ilidža 29, Vogošća 26 µg/m³; station positions approximate), but five stations cannot pin down street-level values, and the biggest local factor, gas versus wood or coal heating, has no open data.</li>
     <li><b>Winter sun</b>Hours of direct sun on 21 December and 21 January on a clear day. For seven points per cell the sun's path is traced every 5 minutes against the horizon formed by the surrounding mountains (Trebević, Igman, Hum and others, up to 25 km away, with the Earth's curvature) from the Copernicus surface model with buildings filtered out. Shade from neighbouring buildings and the valley's winter fog are not included. On a flat horizon the day would give 8.8 hours.</li>
     <li><b>Car access</b>For each cell, the drive along OSM streets from its centre to the nearest tertiary or larger road: the steepest 100 m on the way, metres of narrow road, and the share of the cell's own streets that are steep (over 12%) or narrow. OSM almost never records street width, so width is estimated as the gap between buildings on both sides; fences and walls are not mapped, so real streets can be narrower. Gradients come from the Copernicus surface model with buildings filtered out, measured over 100 m. Poor access takes up to 15 points off livability.</li>
     <li><b>MZ outlines</b>Novi Grad's MZ outlines come from the official street list: buildings are matched by address, or by the nearest named street when that whole street belongs to one MZ (70% of homes), and the rest by their neighbours. Novo Sarajevo and Stari Grad outlines come from OpenStreetMap.</li>
@@ -256,7 +262,10 @@ const POP_T = [1,50,150,300,600,1000,1600], DEN_T = [1,500,1500,3000,6000,10000,
 let mode = "pop", focusOp = -1, selected = null, showMZ = true;
 
 const cells = D.cells.map(c => ({h:c[0],op:c[1],mz:c[2],s:c[3],mn:c[4],mx:c[5],a:[c[6],c[7],c[8]],p:c[9],km2:c[10],
-  att:c[11],w:[c[12],c[13],c[14]],car:[c[15],c[16],c[17]],poi:c[18],stm:c[19],stt:c[20],s4:c[21],t4:c[22],road:c[23],sup:c[24],elev:c[25],slope:c[26],liv:c[27],need:c.slice(28,38),acc:c[38],accMax:c[39],accNarrow:c[40],accNarrowPct:c[41],accSteepPct:c[42],accMinW:c[43],sun:c[44],sunFrom:c[45],sunTo:c[46],sunJan:c[47],sunMax:c[48]}));
+  att:c[11],w:[c[12],c[13],c[14]],car:[c[15],c[16],c[17]],poi:c[18],stm:c[19],stt:c[20],s4:c[21],t4:c[22],road:c[23],sup:c[24],elev:c[25],slope:c[26],liv:c[27],need:c.slice(28,38),acc:c[38],accMax:c[39],accNarrow:c[40],accNarrowPct:c[41],accSteepPct:c[42],accMinW:c[43],sun:c[44],sunFrom:c[45],sunTo:c[46],sunJan:c[47],sunMax:c[48],aboveFloor:c[49],inv:c[50],smog:c[51],fog:c[52]}));
+const AIR_T = [0,20,35,50,65,80,90], SMOG_C = ["#f1f7e8","#d9ead3","#f6e3a1","#f3b562","#e07a5f","#b5446e","#5c2a5e"],
+  FOG_C = ["#f4f6f8","#dfe6ec","#c3ced8","#a3b3c2","#8496a8","#66798c","#4a5a6b"];
+function airColor(v, C){ let i = 0; while (i < AIR_T.length-1 && v >= AIR_T[i+1]) i++; return C[i]; }
 const SUN_T = [0,2,4,5,6,7,7.5], SUN_C = ["#1d1f3a","#3b3a6b","#6b4f8a","#a8577e","#e07a5f","#f2a65a","#ffd166"];
 function sunColor(h){ let i = 0; while (i < SUN_T.length-1 && h >= SUN_T[i+1]) i++; return SUN_C[i]; }
 const NEEDS = [["trgovina","grocery"],["stanica","transit stop"],["osnovna_skola","primary school"],["ambulanta","clinic"],
@@ -279,6 +288,8 @@ function color(c){
   if (mode === "att") return binColor(c.att, ATT_T);
   if (mode === "liv") return binColor(c.liv, ATT_T);
   if (mode === "sun") return sunColor(c.sun);
+  if (mode === "smog") return c.s === 0 ? css("--zero") : airColor(c.smog, SMOG_C);
+  if (mode === "fog") return airColor(c.fog, FOG_C);
   if (mode === "car") return c.s === 0 ? css("--zero") : binColor(c.acc, ATT_T);
   if (mode === "sup"){ if (c.s === 0 || c.sup == null) return css("--zero"); return c.sup <= 5 ? css("--r1") : c.sup <= 10 ? css("--r3") : css("--rel-c"); }
   return mode === "pop" ? binColor(c.s, POP_T) : binColor(c.den, DEN_T);
@@ -334,6 +345,11 @@ const siteG = supG.append("g").selectAll("g").data(SITES).join("g").attr("class"
 siteG.append("circle").attr("r",7.5);
 siteG.append("text").attr("text-anchor","middle").attr("dy","0.35em").text(d => d.rank);
 let zk = 1;
+const aqG = g.append("g").attr("class","aq").attr("display","none");
+const aqS = aqG.selectAll("g").data(D.aq).join("g").attr("class","aqs");
+aqS.append("rect").attr("x",-15).attr("y",-9).attr("width",30).attr("height",18).attr("rx",4);
+aqS.append("text").attr("text-anchor","middle").attr("dy","0.35em").text(d => d[3]);
+aqS.append("title").text(d => `${d[0]}: PM2.5 ${d[3]} µg/m³ (FHMZ, annual mean 2025)`);
 const accG = g.append("g").attr("class","accl").attr("display","none");
 const accP = accG.selectAll("path").data(Object.entries(D.acc)).join("path").attr("class", d => "acc a" + d[0]);
 const poiG = g.append("g").attr("class","pois").attr("display","none");
@@ -354,6 +370,7 @@ function layout(){
   [relImg, sjImg].forEach(im => im.attr("x", rx).attr("y", ry).attr("width", sx2-rx).attr("height", sy2-ry));
   contP.attr("d", d => line(d[2]));
   accP.attr("d", d => d[1].map(line).join(""));
+  aqS.attr("transform", d => { const [x,y] = proj([d[2]*KX, d[1]]); return `translate(${x},${y}) scale(${1/zk})`; });
   const rd = k => ROADS[k].map(line).join("");
   const cache = {}; RORDER.forEach(k => { if (ROADS[k]) cache[k] = rd(k); });
   roadP.attr("d", k => cache[k]); roadCase.attr("d", k => cache[k]);
@@ -368,6 +385,7 @@ const zoom = d3.zoom().scaleExtent([1,14]).on("zoom", e => { g.attr("transform",
   svg.style("--zw", Math.pow(e.transform.k, 0.35).toFixed(2)); svg.classed("zin", e.transform.k >= 2.5);
   if (e.transform.k !== zk){ zk = e.transform.k; siteG.attr("transform", d => { const [x,y] = proj([d.lon*KX, d.lat]); return `translate(${x},${y}) scale(${1/zk})`; }); storeP.attr("r", 2.2/zk);
     poiG.selectAll("circle").attr("r", d => (d.k === "bolnica" ? 4.6 : 3.2)/zk).attr("stroke-width", 1/zk);
+    aqS.attr("transform", d => { const [x,y] = proj([d[2]*KX, d[1]]); return `translate(${x},${y}) scale(${1/zk})`; });
     contL.attr("transform", d => { const i = Math.floor(d[2].length/4)*2; const [x,y] = proj([d[2][i]*KX, d[2][i+1]]); return `translate(${x},${y}) scale(${1/zk})`; }); } });
 svg.call(zoom);
 document.getElementById("reset").onclick = () => { focusOp = -1; updateFocus(false); svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity); };
@@ -408,9 +426,10 @@ function updateFocus(zoomTo){
   } else if (zoomTo) svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity);
   show(selected);
 }
-const MODES = ["pop","den","rel","att","sup","liv","car","sun"];
+const MODES = ["pop","den","rel","att","sup","liv","car","sun","smog","fog"];
 MODES.forEach(m => document.getElementById("m-"+m).onclick = () => {
   mode = m; MODES.forEach(x => document.getElementById("m-"+x).setAttribute("aria-pressed", x === m)); supG.attr("display", m === "sup" ? null : "none"); accG.attr("display", m === "car" ? null : "none");
+  aqG.attr("display", m === "smog" || m === "fog" ? null : "none");
   if (m === "liv" && !showPoi) document.getElementById("poiToggle").click(); paint(); show(selected); });
 
 const ROADLEG = `<div class="cat rleg"><span><i class="rl r-autoput"></i>motorway, trunk</span><span><i class="rl r-glavna"></i>primary</span><span><i class="rl r-sekundarna"></i>secondary</span><span><i class="rl r-ulica"></i>street</span><span><i class="rl r-tramvaj"></i>tram</span></div>`;
@@ -428,6 +447,13 @@ function legend0(){
     el.innerHTML = `<div style="font-size:12px;color:var(--muted)">Walk to nearest supermarket</div>
       <div class="cat"><span><i style="background:var(--r1)"></i>≤ 5 min</span><span><i style="background:var(--r3)"></i>5–10 min</span><span><i style="background:var(--rel-c)"></i>over 10 min</span></div>
       <div class="cat"><span><i class="dot"></i>existing supermarket</span><span><b class="mk gapsite">1</b>gap site</span><span><b class="mk topsite">1</b>top-sales site</span></div>`;
+    return;
+  }
+  if (mode === "smog" || mode === "fog"){
+    const C = mode === "smog" ? SMOG_C : FOG_C;
+    el.innerHTML = `<div style="font-size:12px;color:var(--muted)">${mode === "smog" ? "Winter smog exposure, relative 0–100 (inversion + traffic)" : "Winter fog exposure, relative 0–100 (inversion + rivers)"}</div>
+      <div class="row">${AIR_T.map((t,i)=>`<div class="sw"><i style="background:${C[i]}"></i><span>${t}${i===AIR_T.length-1?"+":""}</span></div>`).join("")}</div>
+      <div class="cat"><span><b class="aqk">26</b>measured PM2.5, µg/m³, 2025 annual mean (FHMZ)</span></div>`;
     return;
   }
   if (mode === "sun"){
@@ -486,12 +512,12 @@ function show(c){
   }
   if (!c){
     const pool = focusOp >= 0 ? cells.filter(x => x.op === focusOp) : cells;
-    const key = mode === "att" ? "att" : mode === "liv" ? "liv" : mode === "car" ? "acc" : mode === "sun" ? "sun" : "s";
+    const key = mode === "att" ? "att" : mode === "liv" ? "liv" : mode === "car" ? "acc" : mode === "sun" ? "sun" : mode === "smog" ? "smog" : mode === "fog" ? "fog" : "s";
     const tot = d3.sum(pool, x => x.s), top = pool.filter(x => x.s > 0).sort((a,b)=>b[key]-a[key]).slice(0,5);
     el.innerHTML = `<div class="k">${focusOp >= 0 ? OPN[focusOp] : "Four municipalities"}</div>
       <div class="big num">${fmt(tot)}</div><div class="rng num">${pool.filter(x=>x.s>0).length} populated cells of ${pool.length}</div>
       <p class="hint">Hover or tap a cell to read it. Drag to pan, scroll or pinch to zoom, pick a municipality above to focus it.</p>
-      <div class="k">${mode === "att" ? "Most attractive cells" : mode === "liv" ? "Best cells to live in" : mode === "car" ? "Easiest car access" : mode === "sun" ? "Most winter sun (hours)" : "Fullest cells"}</div>
+      <div class="k">${mode === "att" ? "Most attractive cells" : mode === "liv" ? "Best cells to live in" : mode === "car" ? "Easiest car access" : mode === "sun" ? "Most winter sun (hours)" : mode === "smog" ? "Most smog-exposed cells" : mode === "fog" ? "Most fog-exposed cells" : "Fullest cells"}</div>
       <dl>${top.map(x=>`<dt>${x.mz || OPN[x.op]}</dt><dd class="num">${fmt(x[key])}</dd>`).join("")}</dl>`;
     return;
   }
@@ -506,6 +532,10 @@ function show(c){
     <div class="k">Livability ${c.liv}/100 · minutes on foot</div>
     <div class="score"><i style="width:${c.liv}%"></i></div>
     <dl class="needs">${NEEDS.map(([k,n],i) => `<dt><i class="nd ${c.need[i] <= 5 ? "g" : c.need[i] <= 15 ? "m" : "f"}"></i>${n}</dt><dd class="num">${c.need[i] >= 60 ? "60+" : c.need[i]} min</dd>`).join("")}</dl>
+    <div class="k">Winter air</div>
+    <dl><dt>Height above valley floor</dt><dd class="num">${c.aboveFloor} m</dd>
+      <dt>Inside the inversion</dt><dd class="num">${Math.round(c.inv*100)}% of inversion days</dd>
+      <dt>Smog / fog exposure</dt><dd class="num">${c.smog} / ${c.fog}</dd></dl>
     <div class="k">Winter sun · clear day</div>
     <dl><dt>21 December</dt><dd class="num">${c.sun} h${c.sunFrom ? " · " + c.sunFrom + "–" + c.sunTo : ""}</dd>
       <dt>21 January</dt><dd class="num">${c.sunJan} h</dd>

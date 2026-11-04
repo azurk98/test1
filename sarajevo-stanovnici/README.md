@@ -23,6 +23,7 @@ python 11_putevi.py             # mreža puteva za prikaz -> out/putevi.geojson
 python 15_ulice.py              # pristup autom: uske i strme ulice -> out/ulice_h3.csv (prije koraka 14)
 python 14_kvalitet_zivota.py    # kvalitet života: pješačka dostupnost sadržaja -> out/kvalitet_zivota_h3.csv
 python 16_sunce.py              # sati sunca zimi (zasjenjenje brdima) -> out/sunce_h3.csv
+python 17_zrak.py               # smog i magla zimi: izloženost inverziji -> out/zrak_h3.csv
 python 13_stranica.py           # interaktivna stranica (artifact) -> out/stranica.html
 python 07_karta.py              # ponovo, da karta dobije slojeve iz koraka 08–11
 ```
@@ -140,6 +141,18 @@ uskog puta, makadam) i udio strmih/uskih ulica u polju; ocjena 0–100. Loš pri
 od indeksa kvaliteta života. Najteži pristup: Toka-Džeka, Gornji Velešići, Sumbuluša, Mahmutovac,
 Hrid-Jarčedoli. Najveći uspon na putu do glavne ceste: ≤ 8% za ~182.000 stanovnika, 8–12% ~21.000,
 12–16% ~23.000, 16–20% ~20.000, > 20% ~24.000; ~33.000 stanovnika ima više od 100 m uske ulice do glavne ceste.
+
+## Smog i magla (`17_zrak.py`)
+
+Relativni indeksi izloženosti (0–100), ne mjerenje. Inverzija: udio inverzionih dana kad je polje ispod
+gornje granice, iz visine iznad dna doline (najniža tačka terena u krugu 3 km), uz pretpostavljenu granicu
+~200 m iznad dna (logistička, širina 50 m). Smog = inverzija × (1 + 0,5 × blizina prometnih cesta);
+magla = inverzija × blizina rijeka. Provjera na FHMZ stanicama (godišnji PM2.5 2025, izvještaj u
+`raw/zrak/`; koordinate stanica približne): Spearman 0,56 (0,74 bez Saraj Polja, obuhvat 66%). Prva
+verzija s gustinom malih kuća kao znakom grijanja na čvrsto gorivo dala je obrnut odnos (r = −0,42; oko
+Bjelava je mnogo kuća, a zrak je najčišći jer centar grije plin), pa je izbačena; podaci o gasnoj mreži
+bi to riješili. ~210.000 stanovnika je ispod inverzije u > 90% inverzionih dana; najmanje izloženi: Mošćanica,
+Sedrenik, Toka-Džeka, Širokača (200–260 m iznad dna doline).
 
 ## Sati sunca zimi (`16_sunce.py`)
 
