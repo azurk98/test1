@@ -1,5 +1,5 @@
 opcina,mz,stanovnici,d0_14,d15_64,d65plus,stanovnici_min,stanovnici_max,stanovnici_bez_mz_ogranicenja,kontrolni_zbir
-Centar Sarajevo,(MZ nepoznata),51598,8038,31961,11599,51598,51598,51598,samo općina
+Centar Sarajevo,(MZ nepoznata),51598,8041,31962,11595,51598,51598,51598,samo općina
 Novi Grad Sarajevo,Alipašin Most I,7222,1040,4772,1410,6597,8281,6139,MZ
 Novi Grad Sarajevo,Alipašin Most II,2526,365,1669,492,2393,2950,1989,MZ
 Novi Grad Sarajevo,Alipašin Most III,6849,988,4522,1339,4782,7990,6851,MZ
@@ -46,19 +46,19 @@ Novo Sarajevo,Vraca,3198,477,2034,687,2537,4341,3199,samo općina
 Novo Sarajevo,Čengić Vila I,3963,592,2521,850,3289,4413,3964,samo općina
 Novo Sarajevo,Čengić Vila II,1506,224,958,324,1238,1624,1506,samo općina
 Novo Sarajevo,Željeznička,7526,1125,4787,1614,6411,8348,7526,samo općina
-Stari Grad Sarajevo,Babića bašča,1085,147,669,269,1023,1196,1084,samo općina
-Stari Grad Sarajevo,Baščaršija,3464,466,2134,864,2437,3950,3464,samo općina
-Stari Grad Sarajevo,Bistrik,2388,322,1471,595,2153,2523,2388,samo općina
-Stari Grad Sarajevo,Ferhadija,1743,235,1074,434,1199,2059,1743,samo općina
-Stari Grad Sarajevo,Hrid-Jarčedoli,1715,231,1055,429,1616,2148,1714,samo općina
-Stari Grad Sarajevo,Kovači,1462,197,900,365,1420,1599,1462,samo općina
-Stari Grad Sarajevo,Logavina,3068,414,1891,763,2873,3145,3069,samo općina
-Stari Grad Sarajevo,Mahmutovac,898,120,554,224,768,1038,898,samo općina
-Stari Grad Sarajevo,Medrese,2162,291,1334,537,2015,2309,2162,samo općina
-Stari Grad Sarajevo,Mjedenica,693,93,427,173,613,854,693,samo općina
-Stari Grad Sarajevo,Mošćanica,5770,776,3558,1436,5776,6046,5776,samo općina
-Stari Grad Sarajevo,Sedrenik,2245,299,1383,563,2075,2546,2244,samo općina
-Stari Grad Sarajevo,Sumbuluša,959,131,590,238,863,1028,957,samo općina
-Stari Grad Sarajevo,Toka-Džeka,1081,145,665,271,896,1300,1080,samo općina
-Stari Grad Sarajevo,Vratnik,2475,334,1525,616,2285,2576,2475,samo općina
-Stari Grad Sarajevo,Širokača,1895,256,1169,470,1773,2130,1894,samo općina
+Stari Grad Sarajevo,Babića bašča,1415,189,871,355,1415,1415,1190,MZ
+Stari Grad Sarajevo,Baščaršija,1865,253,1148,464,1864,1864,2176,MZ
+Stari Grad Sarajevo,Bistrik,2741,368,1690,683,2741,2741,2135,MZ
+Stari Grad Sarajevo,Ferhadija,962,129,593,240,963,963,1048,MZ
+Stari Grad Sarajevo,Hrid-Jarčedoli,2154,290,1328,536,2153,2153,2224,MZ
+Stari Grad Sarajevo,Kovači,1312,178,807,327,1311,1311,1661,MZ
+Stari Grad Sarajevo,Logavina,3015,405,1859,751,3014,3014,2919,MZ
+Stari Grad Sarajevo,Mahmutovac,1839,246,1134,459,1840,1840,1078,MZ
+Stari Grad Sarajevo,Medrese,2833,381,1746,706,2832,2832,2376,MZ
+Stari Grad Sarajevo,Mjedenica,606,82,373,151,606,606,685,MZ
+Stari Grad Sarajevo,Mošćanica,3823,519,2356,948,3825,3825,5904,MZ
+Stari Grad Sarajevo,Sedrenik,2725,365,1681,679,2725,2725,2614,MZ
+Stari Grad Sarajevo,Sumbuluša,1257,169,774,314,1256,1256,1077,MZ
+Stari Grad Sarajevo,Toka-Džeka,1412,189,871,352,1412,1412,1344,MZ
+Stari Grad Sarajevo,Vratnik,2886,388,1777,721,2887,2887,2514,MZ
+Stari Grad Sarajevo,Širokača,2258,302,1393,563,2258,2258,2157,MZ

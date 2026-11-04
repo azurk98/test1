@@ -31,7 +31,6 @@ ukupno i po općini. Pregledati prije pokretanja `05_raspodjela.py`.
 
 | Šta | Gdje | Posljedica ako se preskoči |
 |---|---|---|
-| Pročitati nazive MZ na Grafu 3 (Strategija Stari Grad, str. 16) i spremiti `data/stari_grad_graf3.csv` (`mz,stanovnici`) | `raw/stari_grad_strategija.pdf` | Stari Grad samo sa zbirom općine; nema MAPE provjere (validacija 2) |
 | (Opcionalno) pregledati `interim/novi_grad_ulice_mz_auto.csv` (620 pravila, 290 ulica, izvučeno iz tabela PDF-a; napomene o izuzecima u koloni `izvorni_tekst` se ne primjenjuju) i ispravljenu verziju spremiti kao `data/novi_grad_ulice_mz.csv` | `raw/novi_grad_ulice_mz.pdf` | Izuzeci iz napomena (npr. brojevi koji pripadaju Novom Sarajevu) se ignorišu |
 | Utvrditi matične MZ za Alipašin Most III i Zabrđe, upisati u `MATICNE_MZ_NOVI_GRAD` u `src/common.py` | odluka općine | Koristi se pravilo za nepoznatu matičnu MZ (SPEC 5.2) |
 
@@ -123,6 +122,16 @@ izglađuje (~60 m). Izlazi: `teren_h3.csv` (srednja/min/max visina, srednji nagi
 
 Lokalna karta (`out/karta.html`): podloge Esri satelit (zadano), OpenTopoMap, OpenStreetMap;
 preko njih Esri sjenčenje reljefa i izohipse.
+
+## Graf 3 i parametri po općini
+
+Nazivi MZ na Grafu 3 (Strategija Starog Grada 2024–2027, str. 16) pročitani su s renderovane stranice
+(`data/stari_grad_graf3.csv`; redoslijed stubova nije abecedni). Stari Grad sada ima MZ kontrolne zbirove,
+a provjera 2 (MAPE) je moguća. S parametrima kalibrisanim na Novom Gradu (α 0,9, niske 0,5) MAPE je bila
+29,5%; u Starom Gradu (stare mahale, malo blokova) najbolje odgovara α ≈ 0,5 bez korekcije za kuće
+(MAPE 16,4%, izmjereno na istim podacima na kojima je kalibrisano). Zato su α i gustina niskih zgrada
+po općini (`ALFA_OPCINA`, `GUSTINA_NISKA_OPCINA` u `common.py`); Novo Sarajevo preuzima parametre
+Novog Grada (blokovi), Centar sredinu (nema podataka).
 
 ## Odluke u implementaciji (gdje SPEC ostavlja prostor)
 

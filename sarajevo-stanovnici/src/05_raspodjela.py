@@ -16,7 +16,7 @@ import geopandas as gpd
 import numpy as np
 import pandas as pd
 
-from common import (GUSTINA_NISKA, PRAG_BLOK, ALFA, ALFE_SCENARIJI, BETA_NOVI_GRAD, C_PRAG_WORLDPOP, CRS_M, CRS_WGS,
+from common import (ALFA_OPCINA, GUSTINA_NISKA_OPCINA, GUSTINA_NISKA, PRAG_BLOK, ALFA, ALFE_SCENARIJI, BETA_NOVI_GRAD, C_PRAG_WORLDPOP, CRS_M, CRS_WGS,
                     DATA, INTERIM, MATICNE_MZ_NOVI_GRAD, OUT, SPRAT_POMAK_SCENARIJI,
                     VELIKA_ZGRADA, najveci_ostatak, normaliziraj, opcine_ukupno)
 
@@ -51,13 +51,15 @@ def zgrade_u_dijelove(z: gpd.GeoDataFrame, d: gpd.GeoDataFrame) -> pd.DataFrame:
 
 # ------------------------------------------------------------ model
 
-def tezine(B: np.ndarray, P: np.ndarray, C: np.ndarray, zona: np.ndarray, alfa: float) -> np.ndarray:
+def tezine(B: np.ndarray, P: np.ndarray, C: np.ndarray, zona: np.ndarray, alfa_ulaz) -> np.ndarray:
+    """alfa_ulaz: broj (isti za sve zone) ili rječnik općina -> α."""
     W = np.zeros(len(B))
     for zz in np.unique(zona):
         m = zona == zz
         b, p, c = B[m], P[m], C[m]
         sb, sp = b.sum(), p.sum()
         if sb > 0 and sp > 0:
+            alfa = alfa_ulaz[str(zz).split("|")[0]] if isinstance(alfa_ulaz, dict) else alfa_ulaz
             w = alfa * b / sb + (1 - alfa) * p / sp
             w[c] = p[c] / sp  # nedostaju zgrade: samo WorldPop
         elif sb > 0:
@@ -158,7 +160,8 @@ def main() -> None:
     print(f"Zgrada pridruženo dijelovima: {veze.zgrada.nunique()} od {len(z)}")
 
     # težina zgrade = stambena površina × gustina stanovanja (kuće < blokovi)
-    gustina = np.where(z.spratnost.to_numpy() >= PRAG_BLOK, 1.0, GUSTINA_NISKA)
+    niska = z.opcina.map(GUSTINA_NISKA_OPCINA).fillna(GUSTINA_NISKA).to_numpy()
+    gustina = np.where(z.spratnost.to_numpy() >= PRAG_BLOK, 1.0, niska)
 
     def B_za(pomak: int, fizicka: bool = False) -> np.ndarray:
         vol = zapremina(z, pomak).to_numpy() * (1.0 if fizicka else gustina)
@@ -181,12 +184,12 @@ def main() -> None:
         W = tezine(B, P, C, zona, alfa)
         return rasporedi(T, W, zona), (zona, info)
 
-    glavni, (zona, info) = model(ALFA, 0)
-    bez_mz, _ = model(ALFA, 0, mz_ogr=False)
+    glavni, (zona, info) = model(ALFA_OPCINA, 0)
+    bez_mz, _ = model(ALFA_OPCINA, 0, mz_ogr=False)
     scen = {}
     for a in ALFE_SCENARIJI:
         for s in SPRAT_POMAK_SCENARIJI:
-            scen[f"a{a}_s{s:+d}"] = glavni if (a == ALFA and s == 0) else model(a, s)[0]
+            scen[f"a{a}_s{s:+d}"] = model(a, s)[0]
     S = np.column_stack(list(scen.values()))
 
     # cijeli brojevi: najveći ostatak po općini (tačan zbir)
@@ -241,9 +244,9 @@ def main() -> None:
         if udio["C"] >= 0.999:
             izv = "WorldPop (nema zgrada)"
         elif udio["C"] > 0:
-            izv = f"zgrade+WorldPop (α={ALFA}); dio samo WorldPop"
+            izv = f"zgrade+WorldPop (α={ALFA_OPCINA.get(dominantna(g, 'opcina'), ALFA)}); dio samo WorldPop"
         elif g.B.sum() > 0:
-            izv = f"zgrade+WorldPop (α={ALFA})"
+            izv = f"zgrade+WorldPop (α={ALFA_OPCINA.get(dominantna(g, 'opcina'), ALFA)})"
         else:
             izv = "WorldPop" if g.P.sum() > 0 else "nema težine"
         rows.append({"h3_id": h, "opcina": dominantna(g, "opcina"), "mz": dominantna(g, "mz"),

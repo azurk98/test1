@@ -41,6 +41,13 @@ GRAD_SARAJEVO_REL = 2567380
 # (visoke MZ: 11% po WorldPopu, 30% po evidenciji 2010). Novi Grad je jedina
 # općina s podacima ispod općine, pa se 0,9 primjenjuje na sve četiri.
 ALFA = 0.9
+# α i gustina niskih zgrada po općini (SPEC: "α ... po općini"). Kalibrisano:
+#  Novi Grad na evidenciji MZ 2010 (α 0,9, niske 0,5); Stari Grad na Grafu 3
+#  (α 0,5, bez korekcije: MAPE 16% umjesto 30% s parametrima Novog Grada).
+#  Novo Sarajevo: blokovi kao Novi Grad -> isti parametri. Centar: nema podataka,
+#  sredina dviju kalibracija.
+ALFA_OPCINA = {"Novi Grad Sarajevo": 0.9, "Novo Sarajevo": 0.9, "Stari Grad Sarajevo": 0.5,
+               "Centar Sarajevo": 0.7}
 ALFE_SCENARIJI = (0.5, 0.7, 0.9)
 SPRAT_POMAK_SCENARIJI = (-1, 0, 1)
 BETA_NOVI_GRAD = 0.5
@@ -56,6 +63,8 @@ C_PRAG_WORLDPOP = 5.0
 # (src/kalibracija_gustine.py): ~0,5 uz bilo koji prag 4–6 spratova.
 PRAG_BLOK = 5
 GUSTINA_NISKA = 0.5
+GUSTINA_NISKA_OPCINA = {"Novi Grad Sarajevo": 0.5, "Novo Sarajevo": 0.5, "Stari Grad Sarajevo": 1.0,
+                        "Centar Sarajevo": 0.75}
 
 # Novi Grad: iz kojih su MZ izdvojene nove MZ. Popuniti tek kad se utvrdi
 # (odluka općine ili poređenje spiska ulica). Prazno = pravilo za nepoznatu
