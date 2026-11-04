@@ -31,6 +31,7 @@ python 14_kvalitet_zivota.py    # kvalitet života: pješačka dostupnost sadrž
 python 16_sunce.py              # sati sunca zimi (zasjenjenje brdima) -> out/sunce_h3.csv
 python 17_zrak.py               # smog i magla zimi: izloženost inverziji -> out/zrak_h3.csv
 python 18_javni_prevoz.py       # javni prevoz: linije, frekvencija, PTAL -> out/prevoz_h3.csv, out/linije.geojson
+python 19_autopraonica.py       # lokacije za autopraonicu -> out/autopraonica_*.csv
 python 13_stranica.py           # interaktivna stranica (artifact) -> out/stranica.html
 python 07_karta.py              # ponovo, da karta dobije slojeve iz koraka 08–11
 ```
@@ -116,6 +117,34 @@ Oprez: bijele mrlje su u prigradskim dijelovima Novog Grada, gdje je model stano
 (1,75–2,5× udjela iz 2010) i gdje OSM vjerovatno ne bilježi sve male trgovine. Kolona
 `znakovi_zemljista` (parking, poslovni objekat, gradilište) je samo nagovještaj; vlasništvo i
 namjenu provjeriti u katastru i prostornom planu.
+
+## Lokacije za autopraonicu (`19_autopraonica.py`)
+
+Autopraonica ima dvije vrste kupaca, pa se oba svode na pranja mjesečno (red veličine za
+poređenje lokacija, ne prognoza prihoda):
+
+- **stanovnici koji dovezu auto**: Huff na vremenu vožnje (λ = 2, do 12 min); postojeća
+  praonica A = 1, pumpa s pranjem 0,6, detailing 0,4; 0,35 auta po stanovniku, 1 plaćeno pranje
+  po autu mjesečno (pretpostavke);
+- **promet koji prolazi**: tipičan dnevni promet po klasi ceste (magistrala 30.000, primarna
+  20.000, sekundarna 10.000, tercijarna 4.000 vozila/dan, pretpostavka jer nema brojanja),
+  0,1% svrati, podijeljeno sa svim praonicama na ≤ 1 km.
+
+Kandidat-polje: cesta tercijarna ili veća na ≤ 60 m, nagib ≤ 8%, ocjena pristupa ulica ≥ 50,
+zgrade na < 30% površine polja, bez postojeće praonice. Dvije strategije, kao za supermarket:
+`najveci_promet` (najviše pranja) i `bijela_mrlja` (najviše stanovnika koji sad voze > 5 min
+do praonice dovodi na ≤ 5 min).
+
+Postojeće: OSM 54 praonice i 2 pumpe s pranjem, plus 25 praonica i 26 detailing studija koje su samo
+u Overture (bez praonica ćilima). U 5 min vožnje nema praonicu ~39.800 od 270.600 stanovnika.
+
+Rezultat (04.11.2026): obje strategije na prvo mjesto stavljaju **Zabrđe / Rajlovac** (Safeta Zajke,
+Rajlovačka cesta): ~7.000 stanovnika bez praonice u 5 min, najbliža praonica ~1,6 km, ravno.
+Zatim slijede rubna naselja bez praonice (Pionirska Dolina uz Nahorevsku, Alipašin Most I,
+Sokolje, Sedrenik) i gusti dio grada uz glavne ceste (Bulevar Meše Selimovića, Zmaja od Bosne),
+gdje je potražnja velika, ali je i konkurencija na 200–400 m. Ograničenja: nema podataka o
+broju auta ni o prometu po ulici; ručne praonice uz vulkanizere često nisu u OSM-u ni u
+Overture; parcelu, priključak vode i kanalizacije i dozvole treba provjeriti posebno.
 
 ## Google Places (`12_google_places.py`, opcionalno)
 

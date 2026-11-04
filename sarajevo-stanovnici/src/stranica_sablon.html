@@ -110,12 +110,12 @@ svg:not(.on-sat) .road.r-ulica,svg:not(.on-sat) .road.r-tercijarna{stroke:var(--
 .legend .cat{display:flex;gap:12px;flex-wrap:wrap}
 .legend .cat span{display:inline-flex;gap:6px;align-items:center}
 .legend .cat i{width:12px;height:12px;border-radius:2px;display:inline-block}
-aside.read{border-left:1px solid var(--line);padding:16px;max-height:calc(min(68vh,640px) + 54px);overflow-y:auto;display:grid;align-content:start;gap:14px;min-width:0}
+aside.read{border-left:1px solid var(--line);padding:16px;max-height:calc(min(68vh,640px) + 54px);overflow-y:auto;display:grid;grid-template-columns:minmax(0,1fr);align-content:start;gap:14px;min-width:0}
 @media (max-width:860px){aside.read{border-left:0;border-top:1px solid var(--line);max-height:none}}
 .read .k{font-size:12px;color:var(--muted);font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em}
 .read .big{font-family:var(--display);font-size:38px;font-weight:600;line-height:1}
 .read .rng{font-family:var(--mono);font-size:13px;color:var(--muted)}
-.read dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:0;font-size:14px}
+.read dl{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;margin:0;font-size:14px}
 .read dt{color:var(--muted)} .read dd{margin:0;text-align:right;white-space:nowrap}
 .pill{display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:3px 9px;border-radius:999px;border:1px solid var(--line)}
 .pill i{width:8px;height:8px;border-radius:50%}
@@ -223,6 +223,7 @@ footer{font-size:13px;color:var(--muted);max-width:80ch}
           <button id="m-rel" aria-pressed="false">Reliability</button>
           <button id="m-att" aria-pressed="false">Attractiveness</button>
           <button id="m-sup" aria-pressed="false">Supermarket</button>
+          <button id="m-wash" aria-pressed="false">Car wash</button>
           <button id="m-liv" aria-pressed="false">Livability</button>
           <button id="m-car" aria-pressed="false">Car access</button>
           <button id="m-sun" aria-pressed="false">Winter sun</button>
@@ -280,6 +281,18 @@ footer{font-size:13px;color:var(--muted);max-width:80ch}
     <p class="hint">Existing stores come from OpenStreetMap plus 28 found only in Overture Maps Places. Comparing the two sources suggests they still hold only 35–60% of grocery stores, mostly missing small independent shops, so some gaps may already have a shop. Gap sites cluster in Novi Grad's suburbs, where the population model is least certain (it runs 1.75–2.5× above the 2010 MZ shares there) and where small shops are more likely to be missing from OpenStreetMap. Check ground ownership and zoning in the cadastre before acting on any site.</p>
   </section>
 
+  <section class="ledger" aria-labelledby="wh">
+    <h2 id="wh">Car wash sites</h2>
+    <p class="lede">A car wash lives on two kinds of customer: residents who drive to it, and drivers who stop on the way. Residents are shared over the washes within a 12-minute drive by a Huff model (travel time squared, a fuel station's wash counts 0.6, a detailing studio 0.4), assuming 0.35 cars per resident and one paid wash per car a month. Passing trade assumes 0.1% of the road's typical daily traffic stops, split with every wash within 1 km. Candidate cells sit on a tertiary or bigger road, have slopes of 8% or less, no narrow or steep access, buildings on under 30% of the ground, and no wash yet.</p>
+    <div class="sites">
+      <div><h3>Fill a gap</h3><p>Brings the most residents who now drive over 5 minutes to a wash within 5 minutes.</p>
+        <div class="tbl"><table><thead><tr><th>#</th><th>Location</th><th class="r">Washes / month</th><th class="r">Newly covered</th></tr></thead><tbody id="wgap"></tbody></table></div></div>
+      <div><h3>Most washes</h3><p>Wins the most washes a month, from residents and passing drivers together.</p>
+        <div class="tbl"><table><thead><tr><th>#</th><th>Location</th><th class="r">Washes / month</th><th class="r">Nearest rival</th></tr></thead><tbody id="wtop"></tbody></table></div></div>
+    </div>
+    <p class="hint">Washes a month are an order of magnitude for comparing sites, not a forecast: there are no car ownership or traffic counts per street. Self-service and hand-wash bays at tyre shops are often missing from OpenStreetMap and Overture Maps, so check each site on the ground, and check the plot, the water and sewer connection and the permits before acting.</p>
+  </section>
+
   <section class="ledger" aria-labelledby="lh">
     <div class="bar">
       <h2 id="lh">Totals by MZ</h2>
@@ -309,7 +322,7 @@ const POP_T = [1,50,150,300,600,1000,1600], DEN_T = [1,500,1500,3000,6000,10000,
 let mode = "pop", focusOp = -1, selected = null, showMZ = true;
 
 const cells = D.cells.map(c => ({h:c[0],op:c[1],mz:c[2],s:c[3],mn:c[4],mx:c[5],a:[c[6],c[7],c[8]],p:c[9],km2:c[10],
-  att:c[11],w:[c[12],c[13],c[14]],car:[c[15],c[16],c[17]],poi:c[18],stm:c[19],stt:c[20],s4:c[21],t4:c[22],road:c[23],sup:c[24],elev:c[25],slope:c[26],liv:c[27],need:c.slice(28,38),acc:c[38],accMax:c[39],accNarrow:c[40],accNarrowPct:c[41],accSteepPct:c[42],accMinW:c[43],sun:c[44],sunFrom:c[45],sunTo:c[46],sunJan:c[47],sunMax:c[48],aboveFloor:c[49],inv:c[50],smog:c[51],fog:c[52],noise:c[53],ind:c[54],ai:c[55],ptal:c[56],lines:c[57],dep:c[58],stopMin:c[59]}));
+  att:c[11],w:[c[12],c[13],c[14]],car:[c[15],c[16],c[17]],poi:c[18],stm:c[19],stt:c[20],s4:c[21],t4:c[22],road:c[23],sup:c[24],elev:c[25],slope:c[26],liv:c[27],need:c.slice(28,38),acc:c[38],accMax:c[39],accNarrow:c[40],accNarrowPct:c[41],accSteepPct:c[42],accMinW:c[43],sun:c[44],sunFrom:c[45],sunTo:c[46],sunJan:c[47],sunMax:c[48],aboveFloor:c[49],inv:c[50],smog:c[51],fog:c[52],noise:c[53],ind:c[54],ai:c[55],ptal:c[56],lines:c[57],dep:c[58],stopMin:c[59],wash:c[60]}));
 const PTAL_K = ["0","1a","1b","2","3","4","5","6a","6b"],
   PTAL_C = {"0":"#1f2a44","1a":"#2f4b7c","1b":"#3f6fa5","2":"#4ca3c7","3":"#7fcdbb","4":"#c7e9b4","5":"#fee08b","6a":"#fc8d59","6b":"#d73027"};
 const MODE_C = {tram:"#e63946", trolleybus:"#3a86ff", bus:"#06d6a0"};
@@ -324,6 +337,9 @@ const POIK = {osnovna_skola:["primary school","#4361ee"], vrtic:["kindergarten",
   bolnica:["hospital","#9d0208"], apoteka:["pharmacy","#2a9d8f"], park:["park","#52b788"], igraliste:["playground","#c7e66a"], sport:["sports","#8338ec"]};
 const poiOn = new Set(Object.keys(POIK)); let showPoi = false;
 const byH = new Map(cells.map(c => [c.h, c]));
+const RCLS = {magistrala:"trunk road", primarna:"primary road", sekundarna:"secondary road", tercijarna:"tertiary road"};
+const roadEn = t => { const [k, ...n] = t.split(" "); return n.length ? n.join(" ") + " (" + (RCLS[k] || k) + ")" : (RCLS[k] || k); };
+const WSITES = D.wsites.map(r => ({strat:r[0],rank:r[1],h:r[2],mz:r[3],op:r[4],wash:r[5],res:r[6],pass:r[7],d10:r[8],gap:r[9],near:r[10],fuel:r[11],road:roadEn(r[12]),land:r[13],lon:r[14],lat:r[15]}));
 const SITES = D.sites.map(r => ({strat:r[0],rank:r[1],h:r[2],mz:r[3],op:r[4],cap:r[5],w10:r[6],gap:r[7],near:r[8],road:r[9],land:r[10],lon:r[11],lat:r[12]}));
 // planar coordinates: longitude scaled by cos(latitude) so the city keeps its shape
 const KX = Math.cos(43.86 * Math.PI / 180);
@@ -343,6 +359,7 @@ function color(c){
   if (mode === "smog") return c.s === 0 ? css("--zero") : airColor(c.smog, SMOG_C);
   if (mode === "fog") return airColor(c.fog, FOG_C);
   if (mode === "car") return c.s === 0 ? css("--zero") : binColor(c.acc, ATT_T);
+  if (mode === "wash"){ if (c.s === 0 || c.wash == null) return css("--zero"); return c.wash <= 3 ? css("--r1") : c.wash <= 5 ? css("--r3") : css("--rel-c"); }
   if (mode === "sup"){ if (c.s === 0 || c.sup == null) return css("--zero"); return c.sup <= 5 ? css("--r1") : c.sup <= 10 ? css("--r3") : css("--rel-c"); }
   return mode === "pop" ? binColor(c.s, POP_T) : binColor(c.den, DEN_T);
 }
@@ -396,6 +413,13 @@ const siteG = supG.append("g").selectAll("g").data(SITES).join("g").attr("class"
   .on("click", (e,d) => { e.stopPropagation(); pickSite(d); });
 siteG.append("circle").attr("r",7.5);
 siteG.append("text").attr("text-anchor","middle").attr("dy","0.35em").text(d => d.rank);
+const washG = g.append("g").attr("display","none");
+const washP = washG.append("g").selectAll("circle").data(D.washes).join("circle").attr("class", d => "store wash w-" + d[3]).attr("r",3);
+washP.append("title").text(d => (d[2] || "car wash") + (d[3] === "detailing" ? " (detailing)" : d[3] === "pumpa_pranje" ? " (at a fuel station)" : ""));
+const wsiteG = washG.append("g").selectAll("g").data(WSITES).join("g").attr("class", d => "site " + (d.strat === "bijela_mrlja" ? "gapsite" : "topsite"))
+  .on("click", (e,d) => { e.stopPropagation(); pickWash(d); });
+wsiteG.append("circle").attr("r",7.5);
+wsiteG.append("text").attr("text-anchor","middle").attr("dy","0.35em").text(d => d.rank);
 let zk = 1;
 const ptG = g.append("g").attr("class","ptl").attr("display","none");
 const ptOrder = {bus:0, trolleybus:1, tram:2};
@@ -436,12 +460,15 @@ function layout(){
   storeP.attr("cx", d => proj([d[0]*KX, d[1]])[0]).attr("cy", d => proj([d[0]*KX, d[1]])[1]);
   siteG.attr("transform", d => { const [x,y] = proj([d.lon*KX, d.lat]); return `translate(${x},${y}) scale(${1/zk})`; });
   storeP.attr("r", 2.2/zk);
+  washP.attr("cx", d => proj([d[0]*KX, d[1]])[0]).attr("cy", d => proj([d[0]*KX, d[1]])[1]).attr("r", 3/zk);
+  wsiteG.attr("transform", d => { const [x,y] = proj([d.lon*KX, d.lat]); return `translate(${x},${y}) scale(${1/zk})`; });
   poiG.selectAll("circle").attr("cx", d => proj([d.lon*KX, d.lat])[0]).attr("cy", d => proj([d.lon*KX, d.lat])[1])
     .attr("r", d => (d.k === "bolnica" ? 4.6 : 3.2)/zk).attr("stroke-width", 1/zk);
 }
 const zoom = d3.zoom().scaleExtent([1,14]).on("zoom", e => { g.attr("transform", e.transform);
   svg.style("--zw", Math.pow(e.transform.k, 0.35).toFixed(2)); svg.classed("zin", e.transform.k >= 2.5);
   if (e.transform.k !== zk){ zk = e.transform.k; siteG.attr("transform", d => { const [x,y] = proj([d.lon*KX, d.lat]); return `translate(${x},${y}) scale(${1/zk})`; }); storeP.attr("r", 2.2/zk);
+    wsiteG.attr("transform", d => { const [x,y] = proj([d.lon*KX, d.lat]); return `translate(${x},${y}) scale(${1/zk})`; }); washP.attr("r", 3/zk);
     poiG.selectAll("circle").attr("r", d => (d.k === "bolnica" ? 4.6 : 3.2)/zk).attr("stroke-width", 1/zk);
     aqS.attr("transform", d => { const [x,y] = proj([d[2]*KX, d[1]]); return `translate(${x},${y}) scale(${1/zk})`; });
     contL.attr("transform", d => { const i = Math.floor(d[2].length/4)*2; const [x,y] = proj([d[2][i]*KX, d[2][i+1]]); return `translate(${x},${y}) scale(${1/zk})`; }); } });
@@ -484,9 +511,9 @@ function updateFocus(zoomTo){
   } else if (zoomTo) svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity);
   show(selected);
 }
-const MODES = ["best","pop","den","rel","att","sup","liv","car","sun","smog","fog","pt"];
+const MODES = ["best","pop","den","rel","att","sup","wash","liv","car","sun","smog","fog","pt"];
 MODES.forEach(m => document.getElementById("m-"+m).onclick = () => {
-  mode = m; MODES.forEach(x => document.getElementById("m-"+x).setAttribute("aria-pressed", x === m)); supG.attr("display", m === "sup" ? null : "none"); accG.attr("display", m === "car" ? null : "none");
+  mode = m; MODES.forEach(x => document.getElementById("m-"+x).setAttribute("aria-pressed", x === m)); supG.attr("display", m === "sup" ? null : "none"); washG.attr("display", m === "wash" ? null : "none"); accG.attr("display", m === "car" ? null : "none");
   aqG.attr("display", m === "smog" || m === "fog" ? null : "none");
   ptG.attr("display", m === "pt" ? null : "none");
   if (m === "liv" && !showPoi) document.getElementById("poiToggle").click(); paint(); show(selected); });
@@ -506,6 +533,12 @@ function legend0(){
     el.innerHTML = `<div style="font-size:12px;color:var(--muted)">Walk to nearest supermarket</div>
       <div class="cat"><span><i style="background:var(--r1)"></i>≤ 5 min</span><span><i style="background:var(--r3)"></i>5–10 min</span><span><i style="background:var(--rel-c)"></i>over 10 min</span></div>
       <div class="cat"><span><i class="dot"></i>existing supermarket</span><span><b class="mk gapsite">1</b>gap site</span><span><b class="mk topsite">1</b>top-sales site</span></div>`;
+    return;
+  }
+  if (mode === "wash"){
+    el.innerHTML = `<div style="font-size:12px;color:var(--muted)">Drive to nearest car wash</div>
+      <div class="cat"><span><i style="background:var(--r1)"></i>≤ 3 min</span><span><i style="background:var(--r3)"></i>3–5 min</span><span><i style="background:var(--rel-c)"></i>over 5 min</span></div>
+      <div class="cat"><span><i class="dot"></i>existing car wash</span><span><b class="mk gapsite">1</b>gap site</span><span><b class="mk topsite">1</b>most washes</span></div>`;
     return;
   }
   if (mode === "pt"){
@@ -552,7 +585,16 @@ function legend0(){
 }
 
 const k = v => v >= 10000 ? Math.round(v/1000)+"k" : v >= 1000 ? (v/1000).toFixed(1)+"k" : String(v);
+function washBlock(c){
+  const ss = WSITES.filter(x => x.h === c.h); if (!ss.length) return "";
+  return ss.map(d => `<div class="k">Car wash site · ${d.strat === "bijela_mrlja" ? "gap" : "most washes"} #${d.rank}</div>
+    <dl><dt>Washes a month (model)</dt><dd class="num">${fmt(d.wash)}</dd><dt>…from residents / passing</dt><dd class="num">${fmt(d.res)} / ${fmt(d.pass)}</dd>
+    <dt>Residents within 10 min drive</dt><dd class="num">${fmt(d.d10)}</dd><dt>…now without a wash in 5 min</dt><dd class="num">${fmt(d.gap)}</dd>
+    <dt>Nearest car wash</dt><dd class="num">${fmt(d.near)} m</dd><dt>Nearest fuel station</dt><dd class="num">${fmt(d.fuel)} m</dd></dl>
+    <p class="hint" style="font-size:13px">On ${d.road}. Possible ground: ${landTxt(d.land)}</p>`).join("");
+}
 function siteBlock(c){
+  if (mode === "wash") return washBlock(c);
   const ss = SITES.filter(x => x.h === c.h); if (!ss.length) return "";
   return ss.map(d => `<div class="k">Proposed site · ${d.strat === "bijela_mrlja" ? "gap" : "top sales"} #${d.rank}</div>
     <dl><dt>Expected customers</dt><dd class="num">${fmt(d.cap)}</dd><dt>Within 10 min walk</dt><dd class="num">${fmt(d.w10)}</dd>
@@ -566,6 +608,14 @@ const GR = {A:["--rel-a","A · MZ total constrained"],B:["--rel-b","B · municip
 function pickSite(d){
   const c = byH.get(d.h); if (!c) return;
   if (mode !== "sup") document.getElementById("m-sup").click();
+  selected = c; hexes.classed("sel", x => x === c); show(c);
+  const [x,y] = proj([d.lon*KX, d.lat]);
+  svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(W()/2,H()/2).scale(5).translate(-x,-y));
+  document.getElementById("map").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"center"});
+}
+function pickWash(d){
+  const c = byH.get(d.h); if (!c) return;
+  if (mode !== "wash") document.getElementById("m-wash").click();
   selected = c; hexes.classed("sel", x => x === c); show(c);
   const [x,y] = proj([d.lon*KX, d.lat]);
   svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(W()/2,H()/2).scale(5).translate(-x,-y));
@@ -602,6 +652,14 @@ function show(c){
       <div class="k">Lowest MZ</div>
       <dl>${grp.slice(-3).reverse().map(([m, v]) => `<dt>${m} <span class="tag">${OPN[v.op]}</span></dt><dd class="num">${Math.round(v.sc)}</dd>`).join("")}</dl>`;
     el.querySelectorAll("button.lnk").forEach(b => b.onclick = () => pickCell(b.dataset.h));
+    return;
+  }
+  if (!c && mode === "wash"){
+    const pool = focusOp >= 0 ? cells.filter(x => x.op === focusOp) : cells;
+    const far = d3.sum(pool.filter(x => x.wash != null && x.wash > 5), x => x.s), tot = d3.sum(pool, x => x.s);
+    el.innerHTML = `<div class="k">Without a car wash in a 5-min drive</div>
+      <div class="big num">${fmt(far)}</div><div class="rng num">${Math.round(far/tot*100)}% of ${fmt(tot)} residents</div>
+      <p class="hint">Dots are the ${fmt(D.washes.length)} car washes, fuel stations with a wash and detailing studios in OpenStreetMap and Overture Maps. Hand-wash bays at tyre shops are often missing from both. Numbered markers are the proposed sites; tap one, or use the table below the map.</p>`;
     return;
   }
   if (!c && mode === "sup"){
@@ -668,6 +726,7 @@ function show(c){
       <dt>Main road</dt><dd class="num">${fmt(c.road)} m</dd>
       <dt>Elevation, slope</dt><dd class="num">${c.elev == null ? "—" : fmt(c.elev) + " m · " + c.slope + "%"}</dd>
       <dt>Supermarket, walking</dt><dd class="num">${c.sup == null ? "—" : c.sup >= 20 ? "20+ min" : c.sup + " min"}</dd>
+      <dt>Car wash, driving</dt><dd class="num">${c.wash == null ? "—" : c.wash >= 12 ? "12+ min" : c.wash + " min"}</dd>
     </dl>
     ${siteBlock(c)}
     <div class="tag">${c.h}</div>`;
@@ -691,7 +750,11 @@ function siteTables(){
     <td class="r num">${fmt(d.cap)}</td><td class="r num">${d.strat === "bijela_mrlja" ? fmt(d.gap) : fmt(d.near) + " m"}</td></tr>`;
   document.getElementById("tgap").innerHTML = SITES.filter(d => d.strat === "bijela_mrlja").map(row).join("");
   document.getElementById("ttop").innerHTML = SITES.filter(d => d.strat !== "bijela_mrlja").map(row).join("");
-  document.querySelectorAll(".sites tbody tr").forEach(tr => { const go = () => pickSite(SITES.find(d => d.h === tr.dataset.h && d.strat === tr.dataset.s));
+  const wrow = d => `<tr tabindex="0" data-h="${d.h}" data-s="${d.strat}" data-w="1"><td class="num">${d.rank}</td><td>${d.mz || OPN[d.op]}<div class="tag">${d.road}</div></td>
+    <td class="r num">${fmt(d.wash)}</td><td class="r num">${d.strat === "bijela_mrlja" ? fmt(d.gap) : fmt(d.near) + " m"}</td></tr>`;
+  document.getElementById("wgap").innerHTML = WSITES.filter(d => d.strat === "bijela_mrlja").map(wrow).join("");
+  document.getElementById("wtop").innerHTML = WSITES.filter(d => d.strat !== "bijela_mrlja").map(wrow).join("");
+  document.querySelectorAll(".sites tbody tr").forEach(tr => { const go = () => tr.dataset.w ? pickWash(WSITES.find(d => d.h === tr.dataset.h && d.strat === tr.dataset.s)) : pickSite(SITES.find(d => d.h === tr.dataset.h && d.strat === tr.dataset.s));
     tr.addEventListener("click", go); tr.addEventListener("keydown", e => { if (e.key === "Enter"){ go(); } }); });
 }
 // ---- Best to live: weighted mix of every factor, computed in the browser

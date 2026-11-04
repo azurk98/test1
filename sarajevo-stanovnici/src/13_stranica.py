@@ -54,6 +54,7 @@ def podaci() -> dict:
     ul = pd.read_csv(OUT / "ulice_h3.csv").set_index("h3_id")
     su = pd.read_csv(OUT / "sunce_h3.csv", keep_default_na=False).set_index("h3_id")
     zr = pd.read_csv(OUT / "zrak_h3.csv").set_index("h3_id")
+    ap = pd.read_csv(OUT / "autopraonica_pokrivenost.csv").set_index("h3_id").praonica_auto_min
     pv = pd.read_csv(OUT / "prevoz_h3.csv", dtype={"ptal": str}, keep_default_na=False).set_index("h3_id")
     cells = []
     for r in p.itertuples():
@@ -64,7 +65,7 @@ def podaci() -> dict:
             + [int(acc.loc[r.h3_id, k]) if k != "stanica_tip" else acc.loc[r.h3_id, k]
                for k in ("atraktivnost", "pjesice_5", "pjesice_10", "pjesice_15", "auto_5", "auto_10", "auto_15",
                          "poi_10min", "stanica_m", "stanica_tip", "stanice_400m", "tramvaj_400m", "glavna_cesta_m")]
-            + [None if pd.isna(sm.get(r.h3_id)) else float(sm.get(r.h3_id))]
+            + [None if pd.isna(sm.get(r.h3_id)) else round(float(sm.get(r.h3_id)), 1)]
             + ([int(ter.loc[r.h3_id, "visina_m"]), int(ter.loc[r.h3_id, "nagib_pct"])]
                if r.h3_id in ter.index else [None, None])
             + [int(round(float(kz.loc[r.h3_id, k]))) for k in kz_kol]
@@ -78,7 +79,8 @@ def podaci() -> dict:
                int(zr.loc[r.h3_id, "smog_indeks"]), int(zr.loc[r.h3_id, "magla_indeks"])]
             + [int(kz.loc[r.h3_id, "buka_m"]), float(kz.loc[r.h3_id, "industrija_udio"])]
             + [float(pv.loc[r.h3_id, "ptal_ai"]), pv.loc[r.h3_id, "ptal"], pv.loc[r.h3_id, "linije"],
-               int(pv.loc[r.h3_id, "polazaka_na_sat"]), float(pv.loc[r.h3_id, "stanica_min"])])
+               int(pv.loc[r.h3_id, "polazaka_na_sat"]), float(pv.loc[r.h3_id, "stanica_min"])]
+            + [None if pd.isna(ap.get(r.h3_id)) else round(float(ap.get(r.h3_id)), 1)])
 
     op, _ = ucitaj_granice()
     op = op.set_index("opcina").loc[OP].reset_index()
@@ -116,6 +118,14 @@ def podaci() -> dict:
               int(r.kupci_procjena), int(r.stanovnici_10min_pjesice), int(r.od_toga_bez_supermarketa_10min),
               int(r.najblizi_supermarket_m), int(r.glavna_cesta_m), r.znakovi_zemljista, r.lon, r.lat]
              for r in kd.itertuples()]
+    pr = pd.read_csv(OUT / "autopraonica_postojece.csv")
+    praonice = [[round(r.lon, 5), round(r.lat, 5), r.ime if isinstance(r.ime, str) else "", r.vrsta]
+                for r in pr.itertuples()]
+    ak = pd.read_csv(OUT / "autopraonica_kandidati.csv")
+    wsites = [[r.strategija, int(r.rang), r.h3_id, r.mz if isinstance(r.mz, str) else "", OP.index(r.opcina),
+               int(r.pranja_mj), int(r.od_stanovnika), int(r.od_prolaza), int(r.stanovnici_10min_voznje),
+               int(r.bez_praonice_5min), int(r.najbliza_praonica_m), int(r.najbliza_pumpa_m), r.cesta,
+               r.znakovi_zemljista, r.lon, r.lat] for r in ak.itertuples()]
     sd = gpd.read_file(OUT / "sadrzaji.geojson")
     x0, y0, x1, y1 = SAT_OKVIR
     sd = sd[(sd.geometry.x.between(x0, x1)) & (sd.geometry.y.between(y0, y1))]
@@ -141,7 +151,7 @@ def podaci() -> dict:
     return {"lines": linije, "aq": stanice, "acc": acc, "poi": poi,
             "stores": [[round(a, 5), round(b, 5), (n if isinstance(n, str) else "")]
                        for a, b, n in zip(st.lon, st.lat, st.ime)],
-            "sites": sites, "cells": cells, "summ": summ, "mz": mzrows,
+            "sites": sites, "washes": praonice, "wsites": wsites, "cells": cells, "summ": summ, "mz": mzrows,
             "op": [rnd(x) for x in op.geometry],
             "mzlines": [[OP.index(o) if o in OP else -1, n, rnd(x)]
                         for o, n, x in zip(mzall.opcina, mzall.mz, mzall.geometry)]}
