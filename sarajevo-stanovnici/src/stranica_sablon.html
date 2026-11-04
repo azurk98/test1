@@ -261,7 +261,7 @@ footer{font-size:13px;color:var(--muted);max-width:80ch}
     <li><b>Attractiveness</b>A location score from 0 to 100, separate from the population estimate. It weighs, as percentile ranks among populated cells: residents within a 10-minute walk (20%) and a 10-minute drive (15%), shops and services within a 10-minute walk (20%), stops within 400 m (15%), distance to the nearest stop (10%), distance to a main road (10%) and intersection density (10%). Walking and driving times run on the OSM street network. Walking slows on slopes (Tobler's hiking function: 4.8 km/h on the flat, 3.4 km/h up a 10% grade); driving assumes 65% of the speed limit, and transit counts stops only, without timetables. Cells at the edge toward Ilidža and Vogošća under-count reachable residents, since those municipalities are not modelled.</li>
     <li><b>Livability</b>Walking minutes, with slopes, from each cell to the nearest grocery, transit stop, primary school, clinic, park, kindergarten, pharmacy, playground, hospital and sports ground. Each counts half at a set time (5 min for a stop, 8 for a shop or park, 12 for a school or clinic, 25 for a hospital) and is weighted: grocery, transit and school 15% each, clinic and park 12%, kindergarten 8%, pharmacy 7%, playground 6%, hospital and sports 5%. Points come off near a motorway or primary road (up to 10), in industrial areas (10) and on very steep ground (5). Weights are a judgement, not a calibration. Places come from OpenStreetMap.</li>
     <li><b>Transit</b>Routes of all tram and trolleybus lines and part of the bus network come from OpenStreetMap. Each cell gets a Public Transport Accessibility Level (PTAL, the Transport for London method): walking time to stops (8 min for bus and trolleybus, 12 for tram, with slopes), plus half the interval as waiting time, with each line counted once at its best stop. There is no published timetable data for Sarajevo, so departures per hour are assumptions by line type (tram 3: 10 an hour, other trams 5, main trolleybuses 6, others 4, buses 3, stops without a mapped line 2) kept in data/linije_frekvencija.csv until real timetables replace them.</li>
-    <li><b>Best to live</b>One score that mixes every layer, weighted by who is choosing: public transport (PTAL), daily needs within walking distance (the profile sets which needs count most, such as school and kindergarten for families or clinic and pharmacy for seniors), car access, winter sun (3 h or less scores 0, 7.8 h scores 100), clean winter air and little fog (from the smog and fog indices), distance from main-road noise and industry, and gentle terrain (5% slope or less scores 100, 25% scores 0). Only cells with residents are scored, and colour bands follow the city's own percentiles. Move the sliders to set your own weights.</li>
+    <li><b>Best to live</b>One score that mixes every layer, weighted by who is choosing: public transport (PTAL), daily needs within walking distance (the profile sets which needs count most, such as school and kindergarten for families or clinic and pharmacy for seniors), car access, winter sun (3 h or less scores 0, 7.8 h scores 100), clean winter air and little fog (from the smog and fog indices), distance from main-road noise and industry, and gentle terrain (5% slope or less scores 100, 25% scores 0). Only cells with residents are scored. Scores are ranks within the city: each factor is first turned into its rank among populated cells (0 = worst, 100 = best), the ranks are weighted, and the result is ranked again, so a score of 87 means the cell beats 87% of populated cells for that profile. This spreads scores across the full range instead of bunching them near the middle. Move the sliders to set your own weights.</li>
     <li><b>Smog and fog</b>Winter smog and fog in Sarajevo come from the temperature inversion that traps cold air and smoke in the valley. Each cell's exposure is the share of inversion days it lies below the inversion top, from its height above the valley floor (lowest ground within 3 km) assuming a typical top about 200 m above the floor, raised near busy roads (smog) or rivers (fog). These are relative indices, not measurements. They agree in direction with the FHMZ stations shown on the map (2025 annual PM2.5: Bjelave 26, Otoka 35, Saraj Polje 61, Ilidža 29, Vogošća 26 µg/m³; station positions approximate), but five stations cannot pin down street-level values, and the biggest local factor, gas versus wood or coal heating, has no open data.</li>
     <li><b>Winter sun</b>Hours of direct sun on 21 December and 21 January on a clear day. For seven points per cell the sun's path is traced every 5 minutes against the horizon formed by the surrounding mountains (Trebević, Igman, Hum and others, up to 25 km away, with the Earth's curvature) from the Copernicus surface model with buildings filtered out. Shade from neighbouring buildings and the valley's winter fog are not included. On a flat horizon the day would give 8.8 hours.</li>
     <li><b>Car access</b>For each cell, the drive along OSM streets from its centre to the nearest tertiary or larger road: the steepest 100 m on the way, metres of narrow road, and the share of the cell's own streets that are steep (over 12%) or narrow. OSM almost never records street width, so width is estimated as the gap between buildings on both sides; fences and walls are not mapped, so real streets can be narrower. Gradients come from the Copernicus surface model with buildings filtered out, measured over 100 m. Poor access takes up to 15 points off livability.</li>
@@ -516,7 +516,7 @@ function legend0(){
   }
   if (mode === "best"){
     const r = ramp();
-    el.innerHTML = `<div style="font-size:12px;color:var(--muted)">Best to live: ${PROFILES[profile] ? PROFILES[profile].name : "custom weights"}, score 0–100 (bands by city percentile)</div>
+    el.innerHTML = `<div style="font-size:12px;color:var(--muted)">Best to live: ${PROFILES[profile] ? PROFILES[profile].name : "custom weights"} · rank in the city, 0 = worst, 100 = best populated cell</div>
       <div class="row"><div class="sw"><i style="background:var(--zero)"></i><span>empty</span></div>${BEST_T.map((t,i)=>`<div class="sw"><i style="background:${r[i]}"></i><span>${Math.round(t)}</span></div>`).join("")}</div>`;
     return;
   }
@@ -578,11 +578,13 @@ function pickCell(h){
   svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(W()/2,H()/2).scale(6).translate(-x,-y));
 }
 function bestBlock(c){
-  const sc = factorScores(c), tw = d3.sum(FACT, ([k]) => weights[k]) || 1;
+  if (!c.bestF) return "";
+  const tw = d3.sum(FACT, ([k]) => weights[k]) || 1;
   return `<div class="k">Best to live ${Math.round(c.best)}/100</div>
     <div class="score"><i style="width:${c.best}%"></i></div>
+    <p class="hint" style="font-size:12.5px;margin:0">Better than ${Math.round(c.best)}% of populated cells in the city. Each bar is that factor's rank in the city.</p>
     <dl class="fb">${FACT.map(([k, n]) => weights[k] ? `<dt>${n} <span class="tag">${Math.round(weights[k]/tw*100)}%</span></dt>
-      <dd><span class="mini"><i style="width:${Math.round(sc[k])}%"></i></span><b class="num">${Math.round(sc[k])}</b></dd>` : "").join("")}</dl>`;
+      <dd><span class="mini"><i style="width:${Math.round(c.bestF[k])}%"></i></span><b class="num">${Math.round(c.bestF[k])}</b></dd>` : "").join("")}</dl>`;
 }
 function show(c){
   const el = document.getElementById("read");
@@ -593,8 +595,8 @@ function show(c){
       .filter(([, v]) => v.st >= 500).sort((a,b) => b[1].sc - a[1].sc);
     el.innerHTML = `<div class="k">Best to live · ${PROFILES[profile] ? PROFILES[profile].name : "custom weights"}</div>
       <p class="hint">Pick who is choosing above the map, or move the sliders. Tap a cell to see what drives its score.</p>
-      <div class="k">Top cells</div>
-      <dl class="toplist">${top.map(x => `<dt><button class="lnk" data-h="${x.h}">${x.mz || OPN[x.op]}</button></dt><dd class="num">${Math.round(x.best)}</dd>`).join("")}</dl>
+      <div class="k">Top cells (rank)</div>
+      <dl class="toplist">${top.map((x, i) => `<dt><button class="lnk" data-h="${x.h}">${x.mz || OPN[x.op]}</button></dt><dd class="num">#${i + 1} of ${fmt(pool.length)}</dd>`).join("")}</dl>
       <div class="k">Top MZ (residents' average)</div>
       <dl>${grp.slice(0, 6).map(([m, v]) => `<dt>${m} <span class="tag">${OPN[v.op]}</span></dt><dd class="num">${Math.round(v.sc)}</dd>`).join("")}</dl>
       <div class="k">Lowest MZ</div>
@@ -719,11 +721,24 @@ function factorScores(c){
     transit: clamp01(c.ai / 20) * 100,
   };
 }
+// Ocjene se rangiraju u odnosu na grad: svaki faktor i konačni zbir pretvaraju se u percentil među
+// naseljenim poljima (0 = najlošije, 100 = najbolje), da prosjek više faktora ne zbije ocjene oko sredine.
+function pctRank(vals){
+  const idx = vals.map((v, i) => i).sort((a, b) => vals[a] - vals[b]), r = new Array(vals.length), n = vals.length;
+  for (let i = 0; i < n;){ let j = i; while (j + 1 < n && vals[idx[j + 1]] === vals[idx[i]]) j++;
+    const p = n > 1 ? ((i + j) / 2) / (n - 1) * 100 : 50; for (let k = i; k <= j; k++) r[idx[k]] = p; i = j + 1; }
+  return r;
+}
 function recompute(){
-  const tw = d3.sum(FACT, ([k]) => weights[k]) || 1;
-  cells.forEach(c => { const s = factorScores(c); c.best = d3.sum(FACT, ([k]) => weights[k] * s[k]) / tw; });
-  const v = cells.filter(c => c.s > 0).map(c => c.best).sort(d3.ascending);
-  BEST_T = [0, .1, .25, .45, .65, .82, .93].map((q, i) => i === 0 ? 0 : d3.quantileSorted(v, q));
+  const pop = cells.filter(c => c.s > 0), tw = d3.sum(FACT, ([k]) => weights[k]) || 1;
+  const raw = pop.map(factorScores);
+  const pr = {};
+  FACT.forEach(([k]) => { pr[k] = pctRank(raw.map(r => r[k])); });
+  const mix = pop.map((c, i) => d3.sum(FACT, ([k]) => weights[k] * pr[k][i]) / tw);
+  const fin = pctRank(mix);
+  pop.forEach((c, i) => { c.best = fin[i]; c.bestF = Object.fromEntries(FACT.map(([k]) => [k, pr[k][i]])); c.bestRaw = raw[i]; });
+  cells.filter(c => c.s === 0).forEach(c => { c.best = 0; c.bestF = null; });
+  BEST_T = [0, 10, 25, 45, 65, 82, 93];
 }
 function buildPanel(){
   document.getElementById("profiles").innerHTML = Object.entries(PROFILES).map(([k, p]) =>

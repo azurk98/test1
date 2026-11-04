@@ -167,8 +167,11 @@ Jedna ocjena 0–100 po naseljenom polju, računa se u pregledniku iz svih sloje
 pješice (koji se broje najviše zavisi od profila), pristup autom, zimsko sunce (≤ 3 h = 0, 7,8 h = 100),
 čist zrak i malo magle (100 − indeks), mir (udaljenost od bučnih cesta, industrija) i blag teren
 (≤ 5% = 100, ≥ 25% = 0). Profili: uravnoteženo, porodica s djecom, penzioneri, bez auta, zrak i sunce;
-klizači za vlastite pondere. Uravnoteženo: najbolje Dobrinja D, Malta, Čengić Vila I i II, Željeznička;
-„zrak i sunce“: Sedrenik, Dobrinja D, Medrese; najslabije Toka-Džeka, Mahmutovac, Hrid-Jarčedoli.
+klizači za vlastite pondere. Ocjena je rang u gradu: svaki faktor se pretvara u percentil među naseljenim
+poljima, percentili se ponderišu, a rezultat se ponovo rangira (87 = bolje od 87% naseljenih polja), da se
+ocjene ne zbijaju oko sredine. Uravnoteženo: najbolje Čengić Vila II (99), Kvadrant, Čengić Vila I, Malta,
+Dobrinja D; najslabije Reljevo, Toka-Džeka, Hrid-Jarčedoli (15–17). „Zrak i sunce“: Sedrenik (95), Medrese (87);
+najslabije Babića bašča, Bistrik, Toka-Džeka (4–9).
 
 ## Smog i magla (`17_zrak.py`)
 
