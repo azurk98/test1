@@ -20,6 +20,7 @@ python 09_supermarket.py        # lokacije za novi supermarket (Huff) -> out/sup
 python 12_google_places.py      # (opcionalno, treba GOOGLE_MAPS_API_KEY) trgovine iz Google Places -> raw/
 python 10_teren.py              # topografija: reljef, izohipse, visina i nagib po polju -> out/teren_*
 python 11_putevi.py             # mreža puteva za prikaz -> out/putevi.geojson
+python 13_stranica.py           # interaktivna stranica (artifact) -> out/stranica.html
 python 07_karta.py              # ponovo, da karta dobije slojeve iz koraka 08–11
 ```
 
@@ -68,7 +69,7 @@ Dodatni pokazatelji po polju, za analizu lokacija; procjena stanovnika se ne mij
 
 | Kolona | Značenje |
 |---|---|
-| `pjesice_5/10/15` | stanovnici dostupni pješice (OSM ulice i staze, 4,8 km/h) |
+| `pjesice_5/10/15` | stanovnici dostupni pješice (OSM ulice i staze; 4,8 km/h na ravnom, nagib po Toblerovoj formuli iz Copernicus DEM-a: 10% uzbrdo 3,4 km/h, 20% uzbrdo 2,4 km/h) |
 | `auto_5/10/15` | stanovnici dostupni autom (jednosmjerne, `maxspeed` ili tipična brzina klase × 0,65) |
 | `poi_10min` | trgovine, usluge, uredi (`shop`/`amenity`/`office`) za 10 min pješice |
 | `stanica_m`, `stanica_tip` | najbliža stanica (tramvaj / trolejbus / autobus; oznake < 40 m spojene) |
@@ -96,8 +97,10 @@ Nova trgovina (A = 1) u svakom polju bez supermarketa, ≤ 400 m od glavne ceste
 Postojeće trgovine: OSM + 28 trgovina koje ima samo Overture Maps Places (`raw/overture_places.parquet`,
 filtrirano po kategoriji, pouzdanosti i nazivu; duplikati < 75 m od OSM-a uklonjeni). Poređenje dva
 izvora (Lincoln–Petersen) procjenjuje 400–675 trgovina namirnica u četiri općine, a OSM ih ima 237
-(35–60%); nedostaju uglavnom male nezavisne trgovine. Danas ~53.900 od 270.600 stanovnika (20%)
-nema supermarket u 10 min pješice (prema OSM + Overture).
+(35–60%); nedostaju uglavnom male nezavisne trgovine. Uz nagib u pješačkom vremenu ~73.100 od 270.600 stanovnika (27%)
+nema supermarket u 10 min pješice (prema OSM + Overture; bez nagiba bilo bi ~53.900). Nagib smanjuje
+pješački doseg na strmim padinama (> 20%) na manje od pola, pa u bijele mrlje ulaze i brdska naselja
+(Hrasno Brdo, Velešići, Hrid-Jarčedoli).
 Oprez: bijele mrlje su u prigradskim dijelovima Novog Grada, gdje je model stanovništva najnesigurniji
 (1,75–2,5× udjela iz 2010) i gdje OSM vjerovatno ne bilježi sve male trgovine. Kolona
 `znakovi_zemljista` (parking, poslovni objekat, gradilište) je samo nagovještaj; vlasništvo i

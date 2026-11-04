@@ -209,13 +209,15 @@ def main() -> None:
     idx = {n: k for k, n in enumerate(used)}
     pts = gpd.GeoSeries(gpd.points_from_xy(*zip(*[nodes[n] for n in used])), crs=CRS_WGS).to_crs(CRS_M)
     xy = np.c_[pts.x, pts.y]
+    ll = np.array([nodes[n] for n in used])
+    vis = dost.visine_cvorova(ll[:, 0], ll[:, 1])
     cen = polja.geometry.centroid
     cxy = np.c_[cen.x, cen.y]
     pop = polja.stanovnici.to_numpy(float)
     orig = np.where(pop > 0)[0]
 
     def vremena(mod):
-        G = dost.graf(nodes, ways, xy, idx, mod)
+        G = dost.graf(nodes, ways, xy, idx, mod, visine=vis if mod == "pjesice" else None)
         _, lab = connected_components(G, directed=True, connection="strong" if mod == "auto" else "weak")
         ok = np.where(lab == np.bincount(lab).argmax())[0]
         tr = cKDTree(xy[ok])

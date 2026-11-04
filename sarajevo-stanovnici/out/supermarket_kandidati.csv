@@ -1,21 +1,21 @@
 strategija,rang,h3_id,opcina,mz,kupci_procjena,stanovnici_10min_pjesice,od_toga_bez_supermarketa_10min,najblizi_supermarket_m,glavna_cesta_m,stabilno_lambda,znakovi_zemljista,lon,lat
-bijela_mrlja,1,891ea92c9c7ffff,Novi Grad Sarajevo,Naselje heroja Sokolje,1040,1994,1994,984,182,,—,18.30937,43.86976
-bijela_mrlja,2,891ef459073ffff,Novi Grad Sarajevo,Švrakino Selo III,1843,7545,1824,435,82,,parking 2.275 m²,18.36437,43.84299
-bijela_mrlja,3,891ef459687ffff,Novi Grad Sarajevo,Briješće,1035,1485,1485,808,396,,—,18.33459,43.85634
-bijela_mrlja,4,891ef45b253ffff,Novi Grad Sarajevo,Zabrđe,1076,1459,1459,1205,9,,poslovni_objekat 16.038 m²,18.32079,43.88374
-bijela_mrlja,5,891ef45914bffff,Novo Sarajevo,Hrasno Brdo,780,1549,1307,746,377,,—,18.38497,43.84053
-bijela_mrlja,6,891ef459607ffff,Novi Grad Sarajevo,Saraj Polje,1004,1446,1228,565,363,,parking 7.178 m²,18.33689,43.8481
-bijela_mrlja,7,891ea92c973ffff,Novi Grad Sarajevo,Naselje heroja Sokolje,1082,1196,1196,791,111,,poslovni_objekat 158 m²,18.31626,43.86159
-bijela_mrlja,8,891ea92c88bffff,Novi Grad Sarajevo,Dobroševići,975,1142,1142,1238,178,,—,18.27961,43.87206
-bijela_mrlja,9,891ef45913bffff,Novo Sarajevo,Gornji Kovačići,1158,3291,927,595,196,,—,18.40327,43.84632
-bijela_mrlja,10,891ef45957bffff,Novo Sarajevo,Pofalići II,1219,4669,716,584,331,,—,18.37807,43.85976
-najveci_promet,1,891ef4591d7ffff,Novo Sarajevo,Željeznička,2307,13832,0,267,138,da/da,parking 12.106 m²; poslovni_objekat 11.919 m²,18.38724,43.85437
-najveci_promet,2,891ef4591cbffff,Novo Sarajevo,Trg heroja,2220,9704,0,261,207,da/da,parking 12.778 m²; poslovni_objekat 1.234 m²,18.38267,43.84878
-najveci_promet,3,891ef459003ffff,Novi Grad Sarajevo,Alipašin Most III,2037,10245,0,224,23,da/da,parking 3.590 m²; poslovni_objekat 400 m²,18.36436,43.84851
-najveci_promet,4,891ef45905bffff,Novi Grad Sarajevo,Alipašino Polje CI,1981,14741,0,206,181,da/da,parking 14.548 m²; poslovni_objekat 142 m²,18.35064,43.84278
-najveci_promet,5,891ef4591abffff,Novo Sarajevo,Kovačići,1897,9118,470,445,15,da/da,parking 5.743 m²; poslovni_objekat 2.781 m²,18.40326,43.85184
-najveci_promet,6,891ef459c87ffff,Stari Grad Sarajevo,Bistrik,1830,11367,0,196,7,da/da,poslovni_objekat 4.241 m²; parking 1.380 m²,18.43073,43.85776
-najveci_promet,7,891ef459033ffff,Novi Grad Sarajevo,Staro Hrasno,1781,12204,0,285,150,da/da,parking 7.814 m²; poslovni_objekat 1.020 m²,18.37351,43.84865
-najveci_promet,8,891ef459047ffff,Novi Grad Sarajevo,Švrakino Selo I,1716,7178,0,213,40,da/da,poslovni_objekat 1.328 m²,18.35979,43.84292
-najveci_promet,9,891ef45824bffff,Centar Sarajevo,Velešići,1580,4927,113,271,18,da/ne,parking 6.492 m²; poslovni_objekat 2.372 m²,18.40096,43.86009
-najveci_promet,10,891ef458267ffff,Centar Sarajevo,,1548,10472,0,208,166,ne/da,poslovni_objekat 1.546 m²; parking 1.480 m²,18.41928,43.86036
+bijela_mrlja,1,891ea92c9c7ffff,Novi Grad Sarajevo,Naselje heroja Sokolje,1044,2016,2016,984,182,,—,18.30937,43.86976
+bijela_mrlja,2,891ef459153ffff,Novo Sarajevo,Hrasno Brdo,1875,3484,1857,485,21,,parking 2.706 m²,18.38496,43.84605
+bijela_mrlja,3,891ef4590d3ffff,Novi Grad Sarajevo,Alipašin Most I,1429,1427,1427,418,207,,—,18.35061,43.85383
+bijela_mrlja,4,891ef458253ffff,Novo Sarajevo,Velešići,1555,3993,1414,292,194,,parking 2.096 m²,18.40095,43.86561
+bijela_mrlja,5,891ef45b253ffff,Novi Grad Sarajevo,Zabrđe,1041,1226,1226,1205,9,,poslovni_objekat 16.038 m²,18.32079,43.88374
+bijela_mrlja,6,891ea92c973ffff,Novi Grad Sarajevo,Naselje heroja Sokolje,1085,1208,1208,791,111,,poslovni_objekat 158 m²,18.31626,43.86159
+bijela_mrlja,7,891ef459ca3ffff,Stari Grad Sarajevo,Hrid-Jarčedoli,1183,1189,1189,328,15,,—,18.4376,43.8551
+bijela_mrlja,8,891ef459607ffff,Novi Grad Sarajevo,Saraj Polje,995,1397,1176,565,363,,parking 7.178 m²,18.33689,43.8481
+bijela_mrlja,9,891ea92c88bffff,Novi Grad Sarajevo,Dobroševići,987,1172,1172,1238,178,,—,18.27961,43.87206
+bijela_mrlja,10,891ef459073ffff,Novi Grad Sarajevo,Švrakino Selo I,1749,5462,1129,435,82,,parking 2.275 m²,18.36437,43.84299
+najveci_promet,1,891ef4591d7ffff,Novo Sarajevo,Željeznička,2324,11970,0,267,138,da/da,parking 12.106 m²; poslovni_objekat 11.919 m²,18.38724,43.85437
+najveci_promet,2,891ef4591cbffff,Novo Sarajevo,Trg heroja,2237,9699,0,261,207,da/da,parking 12.778 m²; poslovni_objekat 1.234 m²,18.38267,43.84878
+najveci_promet,3,891ef459003ffff,Novi Grad Sarajevo,Otoka,2115,13020,0,224,23,da/da,parking 3.590 m²; poslovni_objekat 400 m²,18.36436,43.84851
+najveci_promet,4,891ef45905bffff,Novi Grad Sarajevo,Alipašino Polje CI,2014,12441,0,206,181,da/da,parking 14.548 m²; poslovni_objekat 142 m²,18.35064,43.84278
+najveci_promet,5,891ef4591abffff,Novo Sarajevo,Kovačići,1917,8962,446,445,15,da/da,parking 5.743 m²; poslovni_objekat 2.781 m²,18.40326,43.85184
+najveci_promet,6,891ef459033ffff,Novi Grad Sarajevo,Staro Hrasno,1838,12915,0,285,150,da/da,parking 7.814 m²; poslovni_objekat 1.020 m²,18.37351,43.84865
+najveci_promet,7,891ef459c87ffff,Stari Grad Sarajevo,Bistrik,1744,8693,0,196,7,da/da,poslovni_objekat 4.241 m²; parking 1.380 m²,18.43073,43.85776
+najveci_promet,8,891ef459047ffff,Novi Grad Sarajevo,Švrakino Selo I,1679,3752,0,213,40,da/da,poslovni_objekat 1.328 m²,18.35979,43.84292
+najveci_promet,9,891ef45824bffff,Centar Sarajevo,Velešići,1585,4485,688,271,18,da/ne,parking 6.492 m²; poslovni_objekat 2.372 m²,18.40096,43.86009
+najveci_promet,10,891ef45963bffff,Novi Grad Sarajevo,Alipašino Polje AII,1522,5605,824,238,28,ne/ne,parking 12.399 m²; poslovni_objekat 373 m²,18.33919,43.84537

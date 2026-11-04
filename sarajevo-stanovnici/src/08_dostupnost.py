@@ -5,7 +5,8 @@ Ulaz:  raw/Sarajewo.osm.gz (cestovna mreža, stanice javnog prevoza),
 Izlaz: out/dostupnost_h3.gpkg, out/dostupnost_h3.csv
 
 Pokazatelji po polju:
-  pjesice_5/10/15   stanovnici dostupni pješice za 5/10/15 min (mreža ulica i staza, 4,8 km/h)
+  pjesice_5/10/15   stanovnici dostupni pješice za 5/10/15 min (mreža ulica i staza; 4,8 km/h na
+                    ravnom, nagib po Toblerovoj formuli: sporije uzbrdo i strmo nizbrdo)
   auto_5/10/15      stanovnici dostupni autom za 5/10/15 min (jednosmjerne ulice, ograničenja brzine)
   poi_10min         trgovine/usluge (shop, amenity, office) dostupne pješice za 10 min
   stanica_m         udaljenost do najbliže stanice javnog prevoza (m)
@@ -30,6 +31,8 @@ import xml.etree.ElementTree as ET
 import geopandas as gpd
 import numpy as np
 import pandas as pd
+from pathlib import Path
+
 from scipy.sparse import coo_matrix
 from scipy.sparse.csgraph import connected_components, dijkstra
 from scipy.spatial import cKDTree
@@ -100,8 +103,29 @@ def ucitaj_mrezu(xml_gz):
     return nodes, ways, stops
 
 
-def graf(nodes, ways, xy, idx, mod: str):
-    """Rijetka matrica vremena (minute) između čvorova za 'pjesice' ili 'auto'."""
+def tobler_kmh(nagib):
+    """Toblerova brzina hoda (km/h) za nagib dz/dx, skalirana da je na ravnom PJESACKA_BRZINA.
+    Najbrže na blagom nizbrdu (-5%); 10% uzbrdo ~3,4 km/h, 20% uzbrdo ~2,4 km/h."""
+    return PJESACKA_BRZINA / np.exp(-3.5 * 0.05) * np.exp(-3.5 * np.abs(np.clip(nagib, -1, 1) + 0.05))
+
+
+def visine_cvorova(lon, lat) -> np.ndarray:
+    """Nadmorska visina čvorova iz Copernicus DEM-a (izglađenog ~60 m, kao u 10_teren.py)."""
+    import importlib.util
+    from scipy.ndimage import gaussian_filter
+    sp = importlib.util.spec_from_file_location("teren", Path(__file__).with_name("10_teren.py"))
+    ter = importlib.util.module_from_spec(sp)
+    sp.loader.exec_module(ter)
+    z, t = ter.dem()
+    z = gaussian_filter(z, sigma=2)
+    col = np.clip(((np.asarray(lon) - t.c) / t.a).astype(int), 0, z.shape[1] - 1)
+    row = np.clip(((np.asarray(lat) - t.f) / t.e).astype(int), 0, z.shape[0] - 1)
+    return z[row, col]
+
+
+def graf(nodes, ways, xy, idx, mod: str, visine=None):
+    """Rijetka matrica vremena (minute) između čvorova za 'pjesice' ili 'auto'.
+    Uz visine (m po čvoru) pješačko vrijeme zavisi od nagiba i smjera (Tobler)."""
     r, c, w = [], [], []
     for t, nds in ways:
         hw = t["highway"]
@@ -123,10 +147,15 @@ def graf(nodes, ways, xy, idx, mod: str):
             i, j = idx[a], idx[b]
             d = float(np.hypot(*(xy[i] - xy[j])))
             minute = d / 1000 / v * 60
+            minute_nazad = minute
+            if mod == "pjesice" and visine is not None and d > 0:
+                nag = (visine[j] - visine[i]) / d
+                minute = d / 1000 / tobler_kmh(nag) * 60
+                minute_nazad = d / 1000 / tobler_kmh(-nag) * 60
             if jedno >= 0:
                 r.append(i); c.append(j); w.append(minute)
             if jedno <= 0:
-                r.append(j); c.append(i); w.append(minute)
+                r.append(j); c.append(i); w.append(minute_nazad)
     n = len(xy)
     return coo_matrix((w, (r, c)), shape=(n, n)).tocsr()
 
@@ -158,6 +187,8 @@ def main() -> None:
     idx = {n: k for k, n in enumerate(used)}
     pts = gpd.GeoSeries(gpd.points_from_xy(*zip(*[nodes[n] for n in used])), crs=CRS_WGS).to_crs(CRS_M)
     xy = np.c_[pts.x, pts.y]
+    ll = np.array([nodes[n] for n in used])
+    vis = visine_cvorova(ll[:, 0], ll[:, 1])  # nagib u pješačkom vremenu (Tobler)
 
     # središte polja: težište stambene površine je bolje od geometrijskog, ali polje
     # bez zgrada nema ga; koristi se reprezentativna tačka heksagona
@@ -177,7 +208,7 @@ def main() -> None:
 
     rez = pd.DataFrame({"h3_id": polja.h3_id})
     for mod in ("pjesice", "auto"):
-        G = graf(nodes, ways, xy, idx, mod)
+        G = graf(nodes, ways, xy, idx, mod, visine=vis if mod == "pjesice" else None)
         # najveća (jako) povezana komponenta, da se ne snapuje na izolovane dijelove
         _, lab = connected_components(G, directed=True, connection="strong" if mod == "auto" else "weak")
         glavna = np.bincount(lab).argmax()
