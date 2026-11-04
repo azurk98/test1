@@ -2,6 +2,7 @@
 
 Ulaz:  raw/Sarajewo.osm.gz (mreža, postojeće trgovine, namjena zemljišta),
        raw/overture_places.parquet (Overture Maps Places; dopuna trgovina koje OSM nema),
+       raw/google_places.json (opcionalno, 12_google_places.py; koristi se do 30 dana),
        out/polja_h3.gpkg (stanovnici), out/dostupnost_h3.csv
 Izlaz: out/supermarket_kandidati.csv/.gpkg (dvije strategije: bijela_mrlja, najveci_promet),
        out/supermarket_postojeci.csv (postojeće trgovine s kupcima po modelu),
@@ -77,6 +78,37 @@ DUPLIKAT_M = 75
 def bez_dijakritika(s) -> str:
     s = unicodedata.normalize("NFKD", str(s or "").lower().replace("đ", "dj"))
     return "".join(c for c in s if not unicodedata.combining(c))
+
+
+GOOGLE_MAX_DANA = 30  # uslovi Google Maps Platform: koordinate se čuvaju najduže 30 dana
+GOOGLE_TIP = {"supermarket": "supermarket", "hypermarket": "supermarket", "grocery_store": "convenience",
+              "convenience_store": "convenience", "market": "convenience", "food_store": "convenience"}
+
+
+def google_trgovine(postojece: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
+    """Trgovine iz Google Places (12_google_places.py) koje nisu već poznate (> 50 m)."""
+    import datetime as dt
+    import json
+
+    f = RAW / "google_places.json"
+    prazno = postojece.iloc[0:0]
+    if not f.exists():
+        return prazno
+    d = json.loads(f.read_text(encoding="utf-8"))
+    star = (dt.date.today() - dt.date.fromisoformat(d["preuzeto"])).days
+    if star > GOOGLE_MAX_DANA:
+        print(f"UPOZORENJE: Google podaci su stari {star} dana (> {GOOGLE_MAX_DANA}); ne koriste se. "
+              "Ponovo pokrenuti 12_google_places.py.")
+        return prazno
+    g = pd.DataFrame(d["mjesta"])
+    g = g[g.status.fillna("").ne("CLOSED_PERMANENTLY") & g.tip.isin(GOOGLE_TIP)]
+    g = g[~g.ime.map(bez_dijakritika).str.contains(NIJE_NAMIRNICE_RE)]
+    gg = gpd.GeoDataFrame({"tip": g.tip.map(GOOGLE_TIP), "ime": g.ime, "izvor": "google"},
+                          geometry=gpd.points_from_xy(g.lon, g.lat), crs=CRS_WGS).to_crs(CRS_M)
+    t = cKDTree(np.c_[postojece.geometry.x, postojece.geometry.y])
+    dist, _ = t.query(np.c_[gg.geometry.x, gg.geometry.y])
+    print(f"Google Places: {len(gg)} trgovina, od toga novih (> 50 m od poznatih): {(dist > 50).sum()}")
+    return gg[dist > 50]
 
 
 def overture_trgovine(osm: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
@@ -167,6 +199,9 @@ def main() -> None:
     ov = overture_trgovine(s)
     ov["A"] = ov.tip.map(A_TIP)
     s = gpd.GeoDataFrame(pd.concat([s, ov], ignore_index=True), crs=CRS_M)
+    go = google_trgovine(s)
+    go["A"] = go.tip.map(A_TIP)
+    s = gpd.GeoDataFrame(pd.concat([s, go], ignore_index=True), crs=CRS_M)
     print(f"Postojeće trgovine: {s.groupby(['izvor', 'tip']).size().to_dict()}")
 
     # --- mreža i čvorovi

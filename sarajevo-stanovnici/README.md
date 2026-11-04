@@ -17,6 +17,7 @@ python 06_provjera.py           # -> out/validacija.md
 python 07_karta.py              # -> out/karta.html
 python 08_dostupnost.py         # dostupnost i atraktivnost lokacije -> out/dostupnost_h3.gpkg/.csv
 python 09_supermarket.py        # lokacije za novi supermarket (Huff) -> out/supermarket_*.csv/.gpkg
+python 12_google_places.py      # (opcionalno, treba GOOGLE_MAPS_API_KEY) trgovine iz Google Places -> raw/
 python 10_teren.py              # topografija: reljef, izohipse, visina i nagib po polju -> out/teren_*
 python 11_putevi.py             # mreža puteva za prikaz -> out/putevi.geojson
 python 07_karta.py              # ponovo, da karta dobije slojeve iz koraka 08–11
@@ -102,6 +103,14 @@ Oprez: bijele mrlje su u prigradskim dijelovima Novog Grada, gdje je model stano
 (1,75–2,5× udjela iz 2010) i gdje OSM vjerovatno ne bilježi sve male trgovine. Kolona
 `znakovi_zemljista` (parking, poslovni objekat, gradilište) je samo nagovještaj; vlasništvo i
 namjenu provjeriti u katastru i prostornom planu.
+
+## Google Places (`12_google_places.py`, opcionalno)
+
+Nearby Search (New) za tipove supermarket, grocery_store, convenience_store, market, food_store u
+krugovima oko H3 polja rezolucije 8 koja pokrivaju naseljena polja (183 kruga, gusta područja se dijele;
+procjena 180–550 zahtjeva: `--koliko`). Ključ se čita iz `GOOGLE_MAPS_API_KEY`. Prema uslovima Google
+Maps Platform: koordinate se koriste najviše 30 dana od preuzimanja (`09_supermarket.py` ih poslije
+ignoriše), a Google trgovine se ne crtaju na kartama (ulaze samo u model).
 
 ## Topografija (`10_teren.py`)
 

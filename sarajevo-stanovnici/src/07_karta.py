@@ -106,6 +106,8 @@ def main() -> None:
     if tp.exists() and kp.exists():
         fg = folium.FeatureGroup(name="Postojeći supermarketi", show=False)
         t = pd.read_csv(tp)
+        if "izvor" in t:  # Google Places se ne smije prikazivati na karti koja nije Google karta
+            t = t[t.izvor != "google"]
         for r in t[t.tip.isin(["supermarket", "mall", "department_store"])].itertuples():
             folium.CircleMarker([r.lat, r.lon], radius=3, color="#fff", weight=1, fill=True,
                                 fill_color="#222", fill_opacity=0.9,
