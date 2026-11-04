@@ -16,6 +16,7 @@ python 01_preuzimanje.py        # OSM (Overpass; --bbbike za BBBike ekstrakt), W
 python 02_zgrade.py             # zgrade, spratnost, stambeni udio + KONTROLNA TAČKA
 python 03_mreza.py              # H3 res 9, dijelovi polja (polje ∩ općina ∩ MZ), WorldPop
 python 04_mz_novi_grad.py --nastavi  # MZ Novog Grada iz adresa (bez --nastavi staje ako je < 40% adresirano)
+python 04b_mz_centar.py         # MZ Centra iz Odluke o MZ (2022): ulice -> zgrade -> poligoni
 python 05_raspodjela.py         # težine, kontrolni zbirovi, starosne grupe, 9 scenarija
 python kalibracija_gustine.py   # (dijagnostika) omjer gustine kuće/blokovi i α na MZ Novog Grada
 python 06_provjera.py           # -> out/validacija.md
@@ -214,6 +215,17 @@ ulicu (≤ 50 m); ako cijela ta ulica po spisku pripada jednoj MZ, zgrada ide u 
 traka (0,92 udjela iz 2010; prije 0,08), Švrakino Selo I 0,58 (0,20), Aneks 0,71 (0,38). Reljevo sada
 dobija svih ~830 zgrada svojih ulica (3,2× udjela iz 2010: 1.193 stanovnika 2010. na 828 kuća, vjerovatno
 rast ili vikendice), pa je ukupna MAPE prema 2010. 0,396 (prije 0,375).
+
+## MZ Centra (`04b_mz_centar.py`)
+
+Odluka o osnivanju i organizaciji MZ Općine Centar (Službene novine KS, 04.08.2022; `raw/centar_odluka_mz.pdf`)
+navodi ulice i raspone kućnih brojeva za svih 19 MZ. Dokument je u dva stupca i čita se stupac po stupac;
+izvučeno 514 pravila za 257 ulica („Naselje Nahorevo“ se poklapa i s OSM nazivom „Nahorevo“). Zgrade se
+svrstavaju kao u Novom Gradu: adresa 12%, najbliža ulica 63%, glasanje susjeda 24%; Voronoi poligoni za
+svih 19 MZ. Centar i dalje nema broj stanovnika po MZ, pa nema MZ kontrolnih zbirova: MZ služe za prikaz
+i izvještaj (`out/mz_zbirovi.csv`). Glasovi s izbora za savjete MZ (oktobar 2025) su glasovi po kandidatu,
+ne broj birača, pa nisu upotrebljivi; broj upisanih birača po biračkom mjestu (CIK) bi bio dobar izvor, ali
+CIK ga ne nudi za preuzimanje.
 
 ## Graf 3 i parametri po općini
 

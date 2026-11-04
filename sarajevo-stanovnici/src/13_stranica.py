@@ -88,6 +88,8 @@ def podaci() -> dict:
     sl = [mz[["opcina", "mz", "geometry"]]]
     if (INTERIM / "mz_novi_grad.gpkg").exists():
         sl.append(gpd.read_file(INTERIM / "mz_novi_grad.gpkg")[["opcina", "mz", "geometry"]])
+    if (INTERIM / "mz_centar.gpkg").exists():
+        sl.append(gpd.read_file(INTERIM / "mz_centar.gpkg")[["opcina", "mz", "geometry"]])
     mzall = gpd.GeoDataFrame(pd.concat(sl, ignore_index=True), crs=mz.crs)
     mzall["geometry"] = mzall.simplify(10)
     mzall = mzall.to_crs(4326)

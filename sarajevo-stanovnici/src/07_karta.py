@@ -67,7 +67,8 @@ def main() -> None:
     ).add_to(m)
 
     for ime, f in (("MZ granice", INTERIM / "mz_granice.gpkg"),
-                   ("MZ Novi Grad (iz adresa)", INTERIM / "mz_novi_grad.gpkg")):
+                   ("MZ Novi Grad (iz adresa)", INTERIM / "mz_novi_grad.gpkg"),
+                   ("MZ Centar (iz Odluke 2022)", INTERIM / "mz_centar.gpkg")):
         if f.exists():
             g = gpd.read_file(f).to_crs(CRS_WGS)
             folium.GeoJson(g[["mz", "geometry"]], name=ime, show=False,
