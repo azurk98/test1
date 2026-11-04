@@ -249,7 +249,8 @@ def main() -> None:
             izv = f"zgrade+WorldPop (α={ALFA_OPCINA.get(dominantna(g, 'opcina'), ALFA)})"
         else:
             izv = "WorldPop" if g.P.sum() > 0 else "nema težine"
-        rows.append({"h3_id": h, "opcina": dominantna(g, "opcina"), "mz": dominantna(g, "mz"),
+        op_dom = dominantna(g, "opcina")
+        rows.append({"h3_id": h, "opcina": op_dom, "mz": dominantna(g[g.opcina == op_dom], "mz"),
                      "pouzdanost": pz, "izvor_tezine": izv})
     meta = pd.DataFrame(rows).set_index("h3_id")
     out = polja.set_index("h3_id").join(meta, how="inner").join(agg)

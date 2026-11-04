@@ -127,6 +127,14 @@ aside.read{border-left:1px solid var(--line);padding:16px;max-height:calc(min(68
 .sites table{min-width:0;font-size:13.5px}
 .sites tbody tr{cursor:pointer}
 .sites td:first-child{width:28px}
+.poi{stroke:#fff;pointer-events:visiblePainted;cursor:help}
+.legend .pleg{font-size:11px;gap:4px;border-top:1px solid var(--line);padding-top:6px}
+.legend .pleg button{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:5px;padding:2px 5px;border-radius:4px}
+.legend .pleg button[aria-pressed="false"]{opacity:.4;text-decoration:line-through}
+.legend .pleg button:focus-visible{outline:2px solid var(--accent)}
+.legend .pleg i{width:9px;height:9px;border-radius:50%;border:1px solid #fff}
+.nd{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.nd.g{background:#52b788}.nd.m{background:#e9c46a}.nd.f{background:#e76f51}
 .ages{display:flex;height:8px;border-radius:4px;overflow:hidden}
 .ages i{display:block}
 .hint{color:var(--muted);font-size:14px;margin:0}
@@ -170,6 +178,7 @@ footer{font-size:13px;color:var(--muted);max-width:80ch}
           <button id="m-rel" aria-pressed="false">Reliability</button>
           <button id="m-att" aria-pressed="false">Attractiveness</button>
           <button id="m-sup" aria-pressed="false">Supermarket</button>
+          <button id="m-liv" aria-pressed="false">Livability</button>
         </div>
         <div>
           <span class="seg seg-sm" role="group" aria-label="Background">
@@ -177,6 +186,7 @@ footer{font-size:13px;color:var(--muted);max-width:80ch}
           </span>
           <button class="btn" id="contToggle" aria-pressed="true">Contours: on</button>
           <button class="btn" id="roadToggle" aria-pressed="true">Roads: on</button>
+          <button class="btn" id="poiToggle" aria-pressed="false">Places: off</button>
           <label class="op-l" for="hexop">Cells <input id="hexop" type="range" min="0.15" max="1" step="0.05" value="0.6"></label>
           <button class="btn" id="mzToggle" aria-pressed="true">MZ outlines: on</button>
           <button class="btn" id="reset">Reset view</button>
@@ -195,6 +205,7 @@ footer{font-size:13px;color:var(--muted);max-width:80ch}
     <li><b>Calibration</b>In Novi Grad and Novo Sarajevo a square metre of house counts half as much as one in a block of 5+ floors, and WorldPop gets 10% of the weight, fitted to Novi Grad's 2010 MZ records. Stari Grad's old neighbourhoods fit best with no house correction and an even split with WorldPop: the MZ shares then differ from the municipality's own figures by 16% on average (30% with Novi Grad's settings). Centar has no MZ data and takes the midpoint.</li>
     <li><b>Floor counts</b>Only 4.7% of OSM buildings record their floors. The rest come from a model trained on those that do (spatial cross-check: r = 0.70), since GHSL heights alone barely separate houses from towers (r = 0.13).</li>
     <li><b>Attractiveness</b>A location score from 0 to 100, separate from the population estimate. It weighs, as percentile ranks among populated cells: residents within a 10-minute walk (20%) and a 10-minute drive (15%), shops and services within a 10-minute walk (20%), stops within 400 m (15%), distance to the nearest stop (10%), distance to a main road (10%) and intersection density (10%). Walking and driving times run on the OSM street network. Walking slows on slopes (Tobler's hiking function: 4.8 km/h on the flat, 3.4 km/h up a 10% grade); driving assumes 65% of the speed limit, and transit counts stops only, without timetables. Cells at the edge toward Ilidža and Vogošća under-count reachable residents, since those municipalities are not modelled.</li>
+    <li><b>Livability</b>Walking minutes, with slopes, from each cell to the nearest grocery, transit stop, primary school, clinic, park, kindergarten, pharmacy, playground, hospital and sports ground. Each counts half at a set time (5 min for a stop, 8 for a shop or park, 12 for a school or clinic, 25 for a hospital) and is weighted: grocery, transit and school 15% each, clinic and park 12%, kindergarten 8%, pharmacy 7%, playground 6%, hospital and sports 5%. Points come off near a motorway or primary road (up to 10), in industrial areas (10) and on very steep ground (5). Weights are a judgement, not a calibration. Places come from OpenStreetMap.</li>
     <li><b>MZ outlines</b>Novi Grad's MZ outlines come from the official street list: buildings are matched by address, or by the nearest named street when that whole street belongs to one MZ (70% of homes), and the rest by their neighbours. Novo Sarajevo and Stari Grad outlines come from OpenStreetMap.</li>
   </ul>
 
@@ -239,7 +250,12 @@ const POP_T = [1,50,150,300,600,1000,1600], DEN_T = [1,500,1500,3000,6000,10000,
 let mode = "pop", focusOp = -1, selected = null, showMZ = true;
 
 const cells = D.cells.map(c => ({h:c[0],op:c[1],mz:c[2],s:c[3],mn:c[4],mx:c[5],a:[c[6],c[7],c[8]],p:c[9],km2:c[10],
-  att:c[11],w:[c[12],c[13],c[14]],car:[c[15],c[16],c[17]],poi:c[18],stm:c[19],stt:c[20],s4:c[21],t4:c[22],road:c[23],sup:c[24],elev:c[25],slope:c[26]}));
+  att:c[11],w:[c[12],c[13],c[14]],car:[c[15],c[16],c[17]],poi:c[18],stm:c[19],stt:c[20],s4:c[21],t4:c[22],road:c[23],sup:c[24],elev:c[25],slope:c[26],liv:c[27],need:c.slice(28,38)}));
+const NEEDS = [["trgovina","grocery"],["stanica","transit stop"],["osnovna_skola","primary school"],["ambulanta","clinic"],
+  ["park","park"],["vrtic","kindergarten"],["apoteka","pharmacy"],["igraliste","playground"],["bolnica","hospital"],["sport","sports"]];
+const POIK = {osnovna_skola:["primary school","#4361ee"], vrtic:["kindergarten","#4cc9f0"], ambulanta:["clinic","#e63946"],
+  bolnica:["hospital","#9d0208"], apoteka:["pharmacy","#2a9d8f"], park:["park","#52b788"], igraliste:["playground","#c7e66a"], sport:["sports","#8338ec"]};
+const poiOn = new Set(Object.keys(POIK)); let showPoi = false;
 const byH = new Map(cells.map(c => [c.h, c]));
 const SITES = D.sites.map(r => ({strat:r[0],rank:r[1],h:r[2],mz:r[3],op:r[4],cap:r[5],w10:r[6],gap:r[7],near:r[8],road:r[9],land:r[10],lon:r[11],lat:r[12]}));
 // planar coordinates: longitude scaled by cos(latitude) so the city keeps its shape
@@ -253,6 +269,7 @@ function binColor(v, T){ const r = ramp(); if (v < T[0]) return css("--zero"); l
 function color(c){
   if (mode === "rel") return c.s === 0 ? css("--zero") : css({A:"--rel-a",B:"--rel-b",C:"--rel-c"}[c.p]);
   if (mode === "att") return binColor(c.att, ATT_T);
+  if (mode === "liv") return binColor(c.liv, ATT_T);
   if (mode === "sup"){ if (c.s === 0 || c.sup == null) return css("--zero"); return c.sup <= 5 ? css("--r1") : c.sup <= 10 ? css("--r3") : css("--rel-c"); }
   return mode === "pop" ? binColor(c.s, POP_T) : binColor(c.den, DEN_T);
 }
@@ -307,6 +324,11 @@ const siteG = supG.append("g").selectAll("g").data(SITES).join("g").attr("class"
 siteG.append("circle").attr("r",7.5);
 siteG.append("text").attr("text-anchor","middle").attr("dy","0.35em").text(d => d.rank);
 let zk = 1;
+const poiG = g.append("g").attr("class","pois").attr("display","none");
+const POIS = Object.entries(D.poi).flatMap(([k, arr]) => arr.map(a => ({k, lon:a[0], lat:a[1], n:a[2]})));
+const poiP = poiG.selectAll("circle").data(POIS).join("circle").attr("class", d => "poi p-" + d.k).attr("r", d => d.k === "bolnica" ? 4.6 : 3.2)
+  .attr("fill", d => POIK[d.k][1]).on("mouseenter", (e,d) => { if (!selected) document.getElementById("read").insertAdjacentHTML("afterbegin", ""); })
+  .append("title").text(d => (d.n || POIK[d.k][0]) + " · " + POIK[d.k][0]);
 svg.on("click", () => { selected = null; hexes.classed("sel", false); show(null); });
 
 function layout(){
@@ -326,10 +348,13 @@ function layout(){
   storeP.attr("cx", d => proj([d[0]*KX, d[1]])[0]).attr("cy", d => proj([d[0]*KX, d[1]])[1]);
   siteG.attr("transform", d => { const [x,y] = proj([d.lon*KX, d.lat]); return `translate(${x},${y}) scale(${1/zk})`; });
   storeP.attr("r", 2.2/zk);
+  poiG.selectAll("circle").attr("cx", d => proj([d.lon*KX, d.lat])[0]).attr("cy", d => proj([d.lon*KX, d.lat])[1])
+    .attr("r", d => (d.k === "bolnica" ? 4.6 : 3.2)/zk).attr("stroke-width", 1/zk);
 }
 const zoom = d3.zoom().scaleExtent([1,14]).on("zoom", e => { g.attr("transform", e.transform);
   svg.style("--zw", Math.pow(e.transform.k, 0.35).toFixed(2)); svg.classed("zin", e.transform.k >= 2.5);
   if (e.transform.k !== zk){ zk = e.transform.k; siteG.attr("transform", d => { const [x,y] = proj([d.lon*KX, d.lat]); return `translate(${x},${y}) scale(${1/zk})`; }); storeP.attr("r", 2.2/zk);
+    poiG.selectAll("circle").attr("r", d => (d.k === "bolnica" ? 4.6 : 3.2)/zk).attr("stroke-width", 1/zk);
     contL.attr("transform", d => { const i = Math.floor(d[2].length/4)*2; const [x,y] = proj([d[2][i]*KX, d[2][i+1]]); return `translate(${x},${y}) scale(${1/zk})`; }); } });
 svg.call(zoom);
 document.getElementById("reset").onclick = () => { focusOp = -1; updateFocus(false); svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity); };
@@ -343,6 +368,8 @@ function paint(){
   sjImg.attr("display", bg === "satrel" ? null : "none");
   contG.attr("display", showCont ? null : "none");
   roadG.attr("display", showRoads ? null : "none");
+  poiG.attr("display", showPoi ? null : "none");
+  poiG.selectAll("circle").attr("display", d => poiOn.has(d.k) ? null : "none");
   svg.classed("on-rel", bg === "rel");
   const cr = document.getElementById("satcredit");
   cr.textContent = [bg === "sat" || bg === "satrel" ? CREDIT.sat : "", bg === "rel" || bg === "satrel" || showCont ? CREDIT.rel : "", showRoads ? "Roads © OpenStreetMap contributors" : ""].filter(Boolean).join(" · ");
@@ -352,6 +379,9 @@ function paint(){
 }
 document.querySelectorAll("[data-bg]").forEach(b => b.onclick = () => { bg = b.dataset.bg;
   document.querySelectorAll("[data-bg]").forEach(x => x.setAttribute("aria-pressed", x === b)); document.getElementById("hexop").disabled = bg === "none"; paint(); });
+document.getElementById("poiToggle").onclick = e => { showPoi = !showPoi; e.target.textContent = "Places: " + (showPoi ? "on" : "off"); e.target.setAttribute("aria-pressed", showPoi); paint(); };
+document.getElementById("legend").addEventListener("click", e => { const b = e.target.closest("[data-poi]"); if (!b) return;
+  const k = b.dataset.poi; poiOn.has(k) ? poiOn.delete(k) : poiOn.add(k); paint(); });
 document.getElementById("roadToggle").onclick = e => { showRoads = !showRoads; e.target.textContent = "Roads: " + (showRoads ? "on" : "off"); e.target.setAttribute("aria-pressed", showRoads); paint(); };
 document.getElementById("contToggle").onclick = e => { showCont = !showCont; e.target.textContent = "Contours: " + (showCont ? "on" : "off"); e.target.setAttribute("aria-pressed", showCont); paint(); };
 document.getElementById("hexop").addEventListener("input", e => { hexOp = +e.target.value; paint(); });
@@ -365,12 +395,16 @@ function updateFocus(zoomTo){
   } else if (zoomTo) svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity);
   show(selected);
 }
-const MODES = ["pop","den","rel","att","sup"];
+const MODES = ["pop","den","rel","att","sup","liv"];
 MODES.forEach(m => document.getElementById("m-"+m).onclick = () => {
-  mode = m; MODES.forEach(x => document.getElementById("m-"+x).setAttribute("aria-pressed", x === m)); supG.attr("display", m === "sup" ? null : "none"); paint(); show(selected); });
+  mode = m; MODES.forEach(x => document.getElementById("m-"+x).setAttribute("aria-pressed", x === m)); supG.attr("display", m === "sup" ? null : "none");
+  if (m === "liv" && !showPoi) document.getElementById("poiToggle").click(); paint(); show(selected); });
 
 const ROADLEG = `<div class="cat rleg"><span><i class="rl r-autoput"></i>motorway, trunk</span><span><i class="rl r-glavna"></i>primary</span><span><i class="rl r-sekundarna"></i>secondary</span><span><i class="rl r-ulica"></i>street</span><span><i class="rl r-tramvaj"></i>tram</span></div>`;
-function legend(){ legend0(); if (showRoads) document.getElementById("legend").insertAdjacentHTML("beforeend", ROADLEG); }
+function legend(){ legend0(); const el = document.getElementById("legend");
+  if (showPoi) el.insertAdjacentHTML("beforeend", `<div class="cat pleg">${Object.entries(POIK).map(([k,[n,c]]) =>
+    `<button data-poi="${k}" aria-pressed="${poiOn.has(k)}"><i style="background:${c}"></i>${n}</button>`).join("")}</div>`);
+  if (showRoads) el.insertAdjacentHTML("beforeend", ROADLEG); }
 function legend0(){
   const el = document.getElementById("legend");
   if (mode === "rel"){
@@ -383,9 +417,9 @@ function legend0(){
       <div class="cat"><span><i class="dot"></i>existing supermarket</span><span><b class="mk gapsite">1</b>gap site</span><span><b class="mk topsite">1</b>top-sales site</span></div>`;
     return;
   }
-  if (mode === "att"){
+  if (mode === "att" || mode === "liv"){
     const r = ramp();
-    el.innerHTML = `<div style="font-size:12px;color:var(--muted)">Location attractiveness, 0–100</div>
+    el.innerHTML = `<div style="font-size:12px;color:var(--muted)">${mode === "liv" ? "Livability: daily needs on foot, 0–100" : "Location attractiveness, 0–100"}</div>
       <div class="row">${ATT_T.map((t,i)=>`<div class="sw"><i style="background:${r[i]}"></i><span>${t}${i===ATT_T.length-1?"+":""}</span></div>`).join("")}</div>`;
     return;
   }
@@ -427,12 +461,12 @@ function show(c){
   }
   if (!c){
     const pool = focusOp >= 0 ? cells.filter(x => x.op === focusOp) : cells;
-    const key = mode === "att" ? "att" : "s";
+    const key = mode === "att" ? "att" : mode === "liv" ? "liv" : "s";
     const tot = d3.sum(pool, x => x.s), top = pool.slice().sort((a,b)=>b[key]-a[key]).slice(0,5);
     el.innerHTML = `<div class="k">${focusOp >= 0 ? OPN[focusOp] : "Four municipalities"}</div>
       <div class="big num">${fmt(tot)}</div><div class="rng num">${pool.filter(x=>x.s>0).length} populated cells of ${pool.length}</div>
       <p class="hint">Hover or tap a cell to read it. Drag to pan, scroll or pinch to zoom, pick a municipality above to focus it.</p>
-      <div class="k">${mode === "att" ? "Most attractive cells" : "Fullest cells"}</div>
+      <div class="k">${mode === "att" ? "Most attractive cells" : mode === "liv" ? "Best cells to live in" : "Fullest cells"}</div>
       <dl>${top.map(x=>`<dt>${x.mz || OPN[x.op]}</dt><dd class="num">${fmt(x[key])}</dd>`).join("")}</dl>`;
     return;
   }
@@ -444,6 +478,9 @@ function show(c){
     <div class="k">Age groups</div>
     <div class="ages">${["--r2","--r4","--r6"].map((v,k)=>`<i style="width:${c.a[k]/t*100}%;background:var(${v})"></i>`).join("")}</div>
     <dl><dt>0–14</dt><dd class="num">${fmt(c.a[0])}</dd><dt>15–64</dt><dd class="num">${fmt(c.a[1])}</dd><dt>65+</dt><dd class="num">${fmt(c.a[2])}</dd></dl>
+    <div class="k">Livability ${c.liv}/100 · minutes on foot</div>
+    <div class="score"><i style="width:${c.liv}%"></i></div>
+    <dl class="needs">${NEEDS.map(([k,n],i) => `<dt><i class="nd ${c.need[i] <= 5 ? "g" : c.need[i] <= 15 ? "m" : "f"}"></i>${n}</dt><dd class="num">${c.need[i] >= 60 ? "60+" : c.need[i]} min</dd>`).join("")}</dl>
     <div class="k">Location · attractiveness ${c.att}/100</div>
     <div class="hint" style="font-size:12px">Residents reachable on foot and by car</div>
     <div class="score"><i style="width:${c.att}%"></i></div>

@@ -20,6 +20,7 @@ python 09_supermarket.py        # lokacije za novi supermarket (Huff) -> out/sup
 python 12_google_places.py      # (opcionalno, treba GOOGLE_MAPS_API_KEY) trgovine iz Google Places -> raw/
 python 10_teren.py              # topografija: reljef, izohipse, visina i nagib po polju -> out/teren_*
 python 11_putevi.py             # mreža puteva za prikaz -> out/putevi.geojson
+python 14_kvalitet_zivota.py    # kvalitet života: pješačka dostupnost sadržaja -> out/kvalitet_zivota_h3.csv
 python 13_stranica.py           # interaktivna stranica (artifact) -> out/stranica.html
 python 07_karta.py              # ponovo, da karta dobije slojeve iz koraka 08–11
 ```
@@ -113,6 +114,17 @@ krugovima oko H3 polja rezolucije 8 koja pokrivaju naseljena polja (183 kruga, g
 procjena 180–550 zahtjeva: `--koliko`). Ključ se čita iz `GOOGLE_MAPS_API_KEY`. Prema uslovima Google
 Maps Platform: koordinate se koriste najviše 30 dana od preuzimanja (`09_supermarket.py` ih poslije
 ignoriše), a Google trgovine se ne crtaju na kartama (ulaze samo u model).
+
+## Kvalitet života (`14_kvalitet_zivota.py`)
+
+Minute hoda (OSM mreža, nagib po Tobleru) od svakog polja do najbližeg sadržaja: trgovina namirnica
+(iz 09), stanica javnog prevoza, osnovna škola, ambulanta/dom zdravlja/poliklinika, park (pristup s
+ruba parka), vrtić, apoteka, dječije igralište, bolnica, sportski teren ili centar (sve iz OSM-a;
+`out/sadrzaji.geojson`). Bodovi po kategoriji 1/(1+(t/t50)²), indeks 0–100 = ponderisani zbir minus
+kazne za buku (≤ 150 m od autoputa/magistrale/primarne ceste), industriju (> 25% polja) i vrlo strm
+teren (> 20%). Ponderi i t50 u `KATEGORIJE` su procjena. Prosječan indeks po stanovniku: Novo Sarajevo 71,
+Centar 58, Novi Grad 51, Stari Grad 47. Najbolje MZ: Kovačići, Čengić Vila I, Malta, Željeznička, Trg heroja;
+najslabije: Reljevo, Zabrđe, Dobroševići, Mošćanica.
 
 ## Topografija (`10_teren.py`)
 

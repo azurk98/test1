@@ -80,7 +80,7 @@ Medijan (polja s ≥ 10 st.): 87.9 m²/st. Polja izvan raspona: **615** od 729. 
 | 891ea92cd6fffff | Novi Grad Sarajevo | Zabrđe | 12 | 38.400 | 3.200 | A |
 | 891ef459c77ffff | Stari Grad Sarajevo | Širokača | 20 | 145.900 | 7.300 | C |
 | 891ef4596abffff | Novi Grad Sarajevo | Briješće | 122 | 971.800 | 8.000 | C |
-| 891ef45866bffff | Centar Sarajevo | Gornji Velešići | 51 | 567.700 | 11.100 | B |
+| 891ef45866bffff | Centar Sarajevo | nan | 51 | 567.700 | 11.100 | B |
 | 891ef45919bffff | Novo Sarajevo | Željeznička | 492 | 29,685.600 | 60.300 | B |
 | 891ef4590a7ffff | Novo Sarajevo | Malta | 2018 | 121,846.900 | 60.400 | B |
 | 891ef4592a3ffff | Novi Grad Sarajevo | Švrakino Selo II | 102 | 6,166.000 | 60.500 | A |
@@ -95,11 +95,11 @@ Medijan (polja s ≥ 10 st.): 87.9 m²/st. Polja izvan raspona: **615** od 729. 
 | 891ea92c96bffff | Novi Grad Sarajevo | Briješće | 124 | 7,702.900 | 62.100 | A |
 | 891ef45960bffff | Novi Grad Sarajevo | Briješće | 15 | 933.100 | 62.200 | A |
 | 891ef4591abffff | Novo Sarajevo | Kovačići | 1839 | 115,010.900 | 62.500 | B |
-| 891ef45857bffff | Centar Sarajevo | Mošćanica | 20 | 1,265.900 | 63.300 | B |
+| 891ef45857bffff | Centar Sarajevo | nan | 20 | 1,265.900 | 63.300 | B |
 | 891ef459487ffff | Novi Grad Sarajevo | Zabrđe | 12 | 760.400 | 63.400 | A |
 | 891ef45844fffff | Centar Sarajevo | nan | 27 | 1,711.400 | 63.400 | B |
 | 891ea92c853ffff | Novi Grad Sarajevo | Dobroševići | 13 | 826.800 | 63.600 | A |
-| 891ef459cc7ffff | Centar Sarajevo | Širokača | 315 | 20,038.700 | 63.600 | B |
+| 891ef459cc7ffff | Centar Sarajevo | nan | 315 | 20,038.700 | 63.600 | B |
 | 891ea92c94bffff | Novi Grad Sarajevo | Briješće | 46 | 2,933.000 | 63.800 | A |
 | 891ea92cd2bffff | Novi Grad Sarajevo | Zabrđe | 447 | 28,507.700 | 63.800 | A |
 | 891ef45928bffff | Novi Grad Sarajevo | Dobrinja A | 2132 | 136,013.600 | 63.800 | A |
@@ -140,7 +140,7 @@ Medijan (polja s ≥ 10 st.): 87.9 m²/st. Polja izvan raspona: **615** od 729. 
 | 891ea92cd2fffff | Novi Grad Sarajevo | Zabrđe | 289 | 19,788.700 | 68.500 | A |
 | 891ef458253ffff | Novo Sarajevo | Velešići | 985 | 67,508.100 | 68.500 | B |
 | 891ef458143ffff | Stari Grad Sarajevo | Mošćanica | 17 | 1,165.800 | 68.600 | A |
-| 891ef45824bffff | Centar Sarajevo | Velešići | 487 | 33,481.900 | 68.800 | B |
+| 891ef45824bffff | Centar Sarajevo | nan | 487 | 33,481.900 | 68.800 | B |
 | 891ef459607ffff | Novi Grad Sarajevo | Saraj Polje | 767 | 52,926.400 | 69.000 | A |
 | 891ef4590bbffff | Novo Sarajevo | Pofalići II | 440 | 30,416.000 | 69.100 | B |
 | 891ef45830bffff | Stari Grad Sarajevo | Vratnik | 185 | 12,835.700 | 69.400 | A |
@@ -178,7 +178,7 @@ Medijan (polja s ≥ 10 st.): 87.9 m²/st. Polja izvan raspona: **615** od 729. 
 | 891ef45b167ffff | Centar Sarajevo | nan | 12 | 893.500 | 74.500 | B |
 | 891ef4590d3ffff | Novi Grad Sarajevo | Alipašin Most I | 775 | 57,769.300 | 74.500 | A |
 | 891ea92c96fffff | Novi Grad Sarajevo | Briješće | 191 | 14,309.700 | 74.900 | A |
-| 891ef459127ffff | Centar Sarajevo | Gornji Kovačići | 135 | 10,126.400 | 75.000 | B |
+| 891ef459127ffff | Centar Sarajevo | nan | 135 | 10,126.400 | 75.000 | B |
 | 891ef45946fffff | Novi Grad Sarajevo | Buća Potok | 655 | 49,154.100 | 75.000 | A |
 | 891ef458363ffff | Stari Grad Sarajevo | Vratnik | 147 | 11,043.900 | 75.100 | A |
 | 891ef458627ffff | Centar Sarajevo | nan | 110 | 8,284.500 | 75.300 | B |
@@ -191,7 +191,7 @@ Medijan (polja s ≥ 10 st.): 87.9 m²/st. Polja izvan raspona: **615** od 729. 
 | 891ef459c1bffff | Stari Grad Sarajevo | Širokača | 359 | 27,328.600 | 76.100 | A |
 | 891ef458357ffff | Stari Grad Sarajevo | Sumbuluša | 554 | 42,282.500 | 76.300 | A |
 | 891ef459dd7ffff | Stari Grad Sarajevo | Hrid-Jarčedoli | 82 | 6,268.400 | 76.400 | A |
-| 891ef458573ffff | Centar Sarajevo | Mošćanica | 18 | 1,376.100 | 76.500 | B |
+| 891ef458573ffff | Centar Sarajevo | nan | 18 | 1,376.100 | 76.500 | B |
 | 891ef459ca3ffff | Stari Grad Sarajevo | Hrid-Jarčedoli | 646 | 49,478.200 | 76.600 | A |
 | 891ef459c27ffff | Stari Grad Sarajevo | Hrid-Jarčedoli | 57 | 4,366.300 | 76.600 | A |
 | 891ea92c947ffff | Novi Grad Sarajevo | Naselje heroja Sokolje | 74 | 5,673.900 | 76.700 | A |
@@ -201,7 +201,7 @@ Medijan (polja s ≥ 10 st.): 87.9 m²/st. Polja izvan raspona: **615** od 729. 
 | 891ef45845bffff | Centar Sarajevo | nan | 14 | 1,078.300 | 77.000 | B |
 | 891ef45834fffff | Stari Grad Sarajevo | Vratnik | 529 | 40,784.600 | 77.100 | A |
 | 891ef459173ffff | Novo Sarajevo | Vraca | 317 | 24,486.700 | 77.200 | B |
-| 891ef4582d3ffff | Centar Sarajevo | Gornji Velešići | 179 | 13,827.100 | 77.200 | B |
+| 891ef4582d3ffff | Centar Sarajevo | nan | 179 | 13,827.100 | 77.200 | B |
 | 891ea92c9b7ffff | Novi Grad Sarajevo | Zabrđe | 42 | 3,246.700 | 77.300 | A |
 | 891ef459c37ffff | Stari Grad Sarajevo | Hrid-Jarčedoli | 243 | 18,836.300 | 77.500 | A |
 | 891ef45944fffff | Novi Grad Sarajevo | Alipašin Most I | 540 | 41,902.400 | 77.600 | A |
@@ -215,8 +215,8 @@ Medijan (polja s ≥ 10 st.): 87.9 m²/st. Polja izvan raspona: **615** od 729. 
 | 891ef4583cbffff | Stari Grad Sarajevo | Medrese | 746 | 58,286.900 | 78.100 | A |
 | 891ea92c99bffff | Novi Grad Sarajevo | Zabrđe | 114 | 8,913.100 | 78.200 | A |
 | 891ea92eb87ffff | Novi Grad Sarajevo | Reljevo | 35 | 2,747.000 | 78.500 | A |
-| 891ef4595b7ffff | Centar Sarajevo | Gornji Velešići | 171 | 13,435.300 | 78.600 | B |
-| 891ef458063ffff | Centar Sarajevo | Sedrenik | 55 | 4,324.400 | 78.600 | B |
+| 891ef4595b7ffff | Centar Sarajevo | nan | 171 | 13,435.300 | 78.600 | B |
+| 891ef458063ffff | Centar Sarajevo | nan | 55 | 4,324.400 | 78.600 | B |
 | 891ef45b2cfffff | Novi Grad Sarajevo | Reljevo | 386 | 30,367.700 | 78.700 | A |
 | 891ea92eb53ffff | Novi Grad Sarajevo | Dobroševići | 19 | 1,496.300 | 78.800 | A |
 | 891ea92c8d3ffff | Novi Grad Sarajevo | Dobroševići | 61 | 4,807.100 | 78.800 | A |
@@ -250,9 +250,9 @@ Medijan (polja s ≥ 10 st.): 87.9 m²/st. Polja izvan raspona: **615** od 729. 
 | 891ef45954fffff | Novo Sarajevo | Pofalići II | 214 | 17,396.100 | 81.300 | B |
 | 891ef458647ffff | Centar Sarajevo | nan | 286 | 23,290.200 | 81.400 | B |
 | 891ef45b24fffff | Novi Grad Sarajevo | Zabrđe | 29 | 2,364.600 | 81.500 | A |
-| 891ef458243ffff | Centar Sarajevo | Velešići | 575 | 46,890.100 | 81.500 | B |
+| 891ef458243ffff | Centar Sarajevo | nan | 575 | 46,890.100 | 81.500 | B |
 | 891ef459083ffff | Novi Grad Sarajevo | Buća Potok | 737 | 60,190.300 | 81.700 | A |
-| 891ef4591afffff | Centar Sarajevo | Kovačići | 446 | 36,503.000 | 81.800 | B |
+| 891ef4591afffff | Centar Sarajevo | nan | 446 | 36,503.000 | 81.800 | B |
 | 891ef459817ffff | Stari Grad Sarajevo | Širokača | 24 | 1,965.900 | 81.900 | A |
 | 891ef4586b3ffff | Centar Sarajevo | nan | 72 | 5,907.000 | 82.000 | B |
 | 891ea92c957ffff | Novi Grad Sarajevo | Naselje heroja Sokolje | 605 | 49,636.100 | 82.000 | A |
@@ -268,8 +268,8 @@ Medijan (polja s ≥ 10 st.): 87.9 m²/st. Polja izvan raspona: **615** od 729. 
 | 891ef459027ffff | Novo Sarajevo | Hrasno Brdo | 805 | 66,800.200 | 83.000 | B |
 | 891ef458353ffff | Stari Grad Sarajevo | Medrese | 947 | 78,637.300 | 83.000 | A |
 | 891ef458663ffff | Centar Sarajevo | nan | 498 | 41,353.900 | 83.000 | B |
-| 891ef459c53ffff | Centar Sarajevo | Širokača | 107 | 8,890.400 | 83.100 | B |
-| 891ef4591b3ffff | Centar Sarajevo | Željeznička | 969 | 80,588.400 | 83.200 | B |
+| 891ef459c53ffff | Centar Sarajevo | nan | 107 | 8,890.400 | 83.100 | B |
+| 891ef4591b3ffff | Centar Sarajevo | nan | 969 | 80,588.400 | 83.200 | B |
 | 891ef459533ffff | Novo Sarajevo | Velešići | 76 | 6,323.600 | 83.200 | B |
 | 891ef4584cbffff | Centar Sarajevo | nan | 44 | 3,664.400 | 83.300 | B |
 | 891ef45832fffff | Stari Grad Sarajevo | Mošćanica | 34 | 2,833.600 | 83.300 | A |
@@ -314,7 +314,7 @@ Medijan (polja s ≥ 10 st.): 87.9 m²/st. Polja izvan raspona: **615** od 729. 
 | 891ef459547ffff | Novo Sarajevo | Pofalići II | 102 | 8,832.300 | 86.600 | B |
 | 891ef4595a7ffff | Novo Sarajevo | Gornji Velešići | 77 | 6,677.300 | 86.700 | B |
 | 891ef458547ffff | Centar Sarajevo | nan | 42 | 3,645.200 | 86.800 | B |
-| 891ef4595b3ffff | Centar Sarajevo | Velešići | 91 | 7,903.800 | 86.900 | B |
+| 891ef4595b3ffff | Centar Sarajevo | nan | 91 | 7,903.800 | 86.900 | B |
 | 891ef459133ffff | Novo Sarajevo | Gornji Kovačići | 470 | 40,902.200 | 87.000 | B |
 | 891ea92cc8bffff | Novi Grad Sarajevo | Dobroševići | 90 | 7,832.600 | 87.000 | A |
 | 891ef45864fffff | Centar Sarajevo | nan | 326 | 28,386.600 | 87.100 | B |
@@ -325,15 +325,15 @@ Medijan (polja s ≥ 10 st.): 87.9 m²/st. Polja izvan raspona: **615** od 729. 
 | 891ef4591a7ffff | Centar Sarajevo | nan | 520 | 45,490.100 | 87.500 | B |
 | 891ef459577ffff | Novo Sarajevo | Pofalići I | 665 | 58,221.300 | 87.600 | B |
 | 891ef45849bffff | Centar Sarajevo | nan | 31 | 2,715.700 | 87.600 | B |
-| 891ef458237ffff | Centar Sarajevo | Logavina | 634 | 55,542.500 | 87.600 | B |
+| 891ef458237ffff | Centar Sarajevo | nan | 634 | 55,542.500 | 87.600 | B |
 | 891ef458693ffff | Centar Sarajevo | nan | 96 | 8,426.200 | 87.800 | B |
 | 891ef4581dbffff | Stari Grad Sarajevo | Mošćanica | 24 | 2,109.800 | 87.900 | A |
 | 891ef458057ffff | Centar Sarajevo | nan | 97 | 8,531.400 | 88.000 | B |
 | 891ef458087ffff | Centar Sarajevo | nan | 17 | 1,495.500 | 88.000 | B |
 | 891ef4592c3ffff | Novi Grad Sarajevo | Dobrinja A | 878 | 77,267.200 | 88.000 | A |
-| 891ef459ccfffff | Centar Sarajevo | Širokača | 330 | 29,045.600 | 88.000 | B |
+| 891ef459ccfffff | Centar Sarajevo | nan | 330 | 29,045.600 | 88.000 | B |
 | 891ef4584d7ffff | Centar Sarajevo | nan | 10 | 881.000 | 88.100 | B |
-| 891ef459137ffff | Centar Sarajevo | Gornji Kovačići | 360 | 31,773.900 | 88.300 | B |
+| 891ef459137ffff | Centar Sarajevo | nan | 360 | 31,773.900 | 88.300 | B |
 | 891ef4596d7ffff | Novi Grad Sarajevo | Briješće | 68 | 6,003.000 | 88.300 | A |
 | 891ef45807bffff | Centar Sarajevo | nan | 145 | 12,807.800 | 88.300 | B |
 | 891ef4595c3ffff | Novi Grad Sarajevo | Dolac | 13 | 1,148.900 | 88.400 | A |
@@ -385,7 +385,7 @@ Medijan (polja s ≥ 10 st.): 87.9 m²/st. Polja izvan raspona: **615** od 729. 
 | 891ea92cd37ffff | Novi Grad Sarajevo | Reljevo | 33 | 3,015.400 | 91.400 | A |
 | 891ef459557ffff | Novi Grad Sarajevo | Dolac | 73 | 6,671.800 | 91.400 | A |
 | 891ef45953bffff | Novo Sarajevo | Pofalići I | 257 | 23,491.000 | 91.400 | B |
-| 891ef458077ffff | Centar Sarajevo | Sedrenik | 22 | 2,010.900 | 91.400 | B |
+| 891ef458077ffff | Centar Sarajevo | nan | 22 | 2,010.900 | 91.400 | B |
 | 891ef4580c3ffff | Centar Sarajevo | nan | 128 | 11,706.000 | 91.500 | B |
 | 891ef45837bffff | Stari Grad Sarajevo | Vratnik | 773 | 70,704.400 | 91.500 | A |
 | 891ea92c9c7ffff | Novi Grad Sarajevo | Naselje heroja Sokolje | 829 | 75,841.000 | 91.500 | A |
@@ -424,7 +424,7 @@ Medijan (polja s ≥ 10 st.): 87.9 m²/st. Polja izvan raspona: **615** od 729. 
 | 891ef4591b7ffff | Centar Sarajevo | nan | 812 | 76,756.600 | 94.500 | B |
 | 891ef4580dbffff | Centar Sarajevo | nan | 110 | 10,423.000 | 94.800 | B |
 | 891ef4582c7ffff | Centar Sarajevo | nan | 602 | 57,072.400 | 94.800 | B |
-| 891ef4582cfffff | Centar Sarajevo | Velešići | 1033 | 97,943.700 | 94.800 | B |
+| 891ef4582cfffff | Centar Sarajevo | nan | 1033 | 97,943.700 | 94.800 | B |
 | 891ef45821bffff | Centar Sarajevo | nan | 986 | 93,498.700 | 94.800 | B |
 | 891ef4595abffff | Novo Sarajevo | Velešići | 74 | 7,035.100 | 95.100 | B |
 | 891ea92c98fffff | Novi Grad Sarajevo | Naselje heroja Sokolje | 183 | 17,420.400 | 95.200 | A |
@@ -451,7 +451,7 @@ Medijan (polja s ≥ 10 st.): 87.9 m²/st. Polja izvan raspona: **615** od 729. 
 | 891ef45846fffff | Centar Sarajevo | nan | 118 | 11,549.700 | 97.900 | B |
 | 891ef459d53ffff | Stari Grad Sarajevo | Hrid-Jarčedoli | 47 | 4,620.700 | 98.300 | A |
 | 891ef4596cbffff | Novi Grad Sarajevo | Briješće | 40 | 3,935.900 | 98.400 | A |
-| 891ef4583d3ffff | Centar Sarajevo | Sedrenik | 433 | 42,629.200 | 98.500 | B |
+| 891ef4583d3ffff | Centar Sarajevo | nan | 433 | 42,629.200 | 98.500 | B |
 | 891ef45915bffff | Novo Sarajevo | Hrasno Brdo | 541 | 53,311.900 | 98.500 | B |
 | 891ef458487ffff | Centar Sarajevo | nan | 23 | 2,268.200 | 98.600 | B |
 | 891ef458673ffff | Centar Sarajevo | nan | 635 | 63,093.700 | 99.400 | B |
@@ -471,7 +471,7 @@ Medijan (polja s ≥ 10 st.): 87.9 m²/st. Polja izvan raspona: **615** od 729. 
 | 891ef4580b3ffff | Centar Sarajevo | nan | 89 | 8,943.200 | 100.500 | B |
 | 891ef458687ffff | Centar Sarajevo | nan | 117 | 11,763.600 | 100.500 | B |
 | 891ea92cd43ffff | Novi Grad Sarajevo | Dobroševići | 110 | 11,074.900 | 100.700 | A |
-| 891ef458223ffff | Centar Sarajevo | Logavina | 829 | 83,502.400 | 100.700 | B |
+| 891ef458223ffff | Centar Sarajevo | nan | 829 | 83,502.400 | 100.700 | B |
 | 891ef458ec3ffff | Stari Grad Sarajevo | Mošćanica | 23 | 2,324.100 | 101.000 | A |
 | 891ef458233ffff | Centar Sarajevo | nan | 793 | 80,245.600 | 101.200 | B |
 | 891ef459d07ffff | Stari Grad Sarajevo | Mošćanica | 20 | 2,025.700 | 101.300 | A |
@@ -514,14 +514,14 @@ Medijan (polja s ≥ 10 st.): 87.9 m²/st. Polja izvan raspona: **615** od 729. 
 | 891ea92cdcfffff | Novi Grad Sarajevo | Dobroševići | 18 | 1,920.900 | 106.700 | A |
 | 891ef459c87ffff | Stari Grad Sarajevo | Bistrik | 1076 | 115,064.700 | 106.900 | A |
 | 891ef458343ffff | Stari Grad Sarajevo | Kovači | 815 | 87,211.200 | 107.000 | A |
-| 891ef45850fffff | Centar Sarajevo | Mošćanica | 54 | 5,783.400 | 107.100 | B |
+| 891ef45850fffff | Centar Sarajevo | nan | 54 | 5,783.400 | 107.100 | B |
 | 891ea92cdb3ffff | Novi Grad Sarajevo | Reljevo | 33 | 3,541.400 | 107.300 | A |
 | 891ef459cd7ffff | Centar Sarajevo | nan | 1348 | 145,147.700 | 107.700 | B |
 | 891ef4582b7ffff | Centar Sarajevo | nan | 443 | 47,827.700 | 108.000 | B |
 | 891ef45823bffff | Centar Sarajevo | nan | 1124 | 121,415.400 | 108.000 | B |
 | 891ef458367ffff | Stari Grad Sarajevo | Mošćanica | 113 | 12,246.900 | 108.400 | A |
 | 891ef458267ffff | Centar Sarajevo | nan | 1293 | 140,174.400 | 108.400 | B |
-| 891ef459c9bffff | Centar Sarajevo | Ferhadija | 1524 | 165,402.600 | 108.500 | B |
+| 891ef459c9bffff | Centar Sarajevo | nan | 1524 | 165,402.600 | 108.500 | B |
 | 891ef4586afffff | Centar Sarajevo | nan | 139 | 15,143.000 | 108.900 | B |
 | 891ef45828fffff | Centar Sarajevo | nan | 1035 | 112,797.600 | 109.000 | B |
 | 891ef4580d3ffff | Centar Sarajevo | nan | 208 | 22,716.300 | 109.200 | B |

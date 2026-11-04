@@ -24,6 +24,9 @@ from shapely.geometry import LineString, mapping
 
 from common import DATA, INTERIM, OUT, RAW, ucitaj_granice
 
+KZ_KAT = ["trgovina", "stanica", "osnovna_skola", "ambulanta", "park", "vrtic", "apoteka", "igraliste",
+          "bolnica", "sport"]
+POI_KAT = ["osnovna_skola", "vrtic", "ambulanta", "bolnica", "apoteka", "park", "igraliste", "sport"]
 OP = ["Centar Sarajevo", "Novi Grad Sarajevo", "Novo Sarajevo", "Stari Grad Sarajevo"]
 SAT_OKVIR = (18.2352, 43.8089, 18.53, 43.9783)
 SAT_SIRINA = 2400
@@ -46,6 +49,8 @@ def podaci() -> dict:
     acc = pd.read_csv(OUT / "dostupnost_h3.csv").set_index("h3_id")
     sm = pd.read_csv(OUT / "supermarket_pokrivenost.csv").set_index("h3_id").supermarket_pjesice_min
     ter = pd.read_csv(OUT / "teren_h3.csv").set_index("h3_id")
+    kz = pd.read_csv(OUT / "kvalitet_zivota_h3.csv").set_index("h3_id")
+    kz_kol = ["indeks"] + [f"min_{k}" for k in KZ_KAT]
     cells = []
     for r in p.itertuples():
         cells.append(
@@ -57,7 +62,8 @@ def podaci() -> dict:
                          "poi_10min", "stanica_m", "stanica_tip", "stanice_400m", "tramvaj_400m", "glavna_cesta_m")]
             + [None if pd.isna(sm.get(r.h3_id)) else float(sm.get(r.h3_id))]
             + ([int(ter.loc[r.h3_id, "visina_m"]), int(ter.loc[r.h3_id, "nagib_pct"])]
-               if r.h3_id in ter.index else [None, None]))
+               if r.h3_id in ter.index else [None, None])
+            + [int(round(float(kz.loc[r.h3_id, k]))) for k in kz_kol])
 
     op, _ = ucitaj_granice()
     op = op.set_index("opcina").loc[OP].reset_index()
@@ -93,7 +99,13 @@ def podaci() -> dict:
               int(r.kupci_procjena), int(r.stanovnici_10min_pjesice), int(r.od_toga_bez_supermarketa_10min),
               int(r.najblizi_supermarket_m), int(r.glavna_cesta_m), r.znakovi_zemljista, r.lon, r.lat]
              for r in kd.itertuples()]
-    return {"stores": [[round(a, 5), round(b, 5), (n if isinstance(n, str) else "")]
+    sd = gpd.read_file(OUT / "sadrzaji.geojson")
+    x0, y0, x1, y1 = SAT_OKVIR
+    sd = sd[(sd.geometry.x.between(x0, x1)) & (sd.geometry.y.between(y0, y1))]
+    poi = {k: [[round(g.x, 5), round(g.y, 5), (n if isinstance(n, str) else "")]
+               for g, n in zip(sd[sd.kategorija == k].geometry, sd[sd.kategorija == k].ime)] for k in POI_KAT}
+    return {"poi": poi,
+            "stores": [[round(a, 5), round(b, 5), (n if isinstance(n, str) else "")]
                        for a, b, n in zip(st.lon, st.lat, st.ime)],
             "sites": sites, "cells": cells, "summ": summ, "mz": mzrows,
             "op": [rnd(x) for x in op.geometry],
