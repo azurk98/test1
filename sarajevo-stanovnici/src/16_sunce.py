@@ -22,7 +22,7 @@ import rasterio
 from rasterio.windows import Window, from_bounds
 from scipy.ndimage import gaussian_filter, grey_opening
 
-from common import OUT, RAW
+from common import H3_RES, OUT, RAW
 
 DATUMI = {"21dec": dt.date(2026, 12, 21), "21jan": dt.date(2027, 1, 21)}
 KORAK_MIN = 5
@@ -67,10 +67,10 @@ def main() -> None:
     m_po_px_y = abs(t.e) * 111_320
     m_po_px_x = t.a * 111_320 * np.cos(np.radians(lat0))
 
-    # tačke: 7 središta H3 rezolucije 10 po polju
+    # tačke: na rezoluciji 9 sedam središta djece (rez. 10) po polju; na gušćoj mreži samo središte
     tacke, kome = [], []
     for i, h in enumerate(polja.h3_id):
-        for c in h3.cell_to_children(h, 10):
+        for c in (h3.cell_to_children(h, H3_RES + 1) if H3_RES <= 9 else [h]):
             la, lo = h3.cell_to_latlng(c)
             tacke.append((lo, la))
             kome.append(i)

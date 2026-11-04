@@ -216,6 +216,15 @@ def main() -> None:
     pop = polja.stanovnici.to_numpy(float)
     orig = np.where(pop > 0)[0]
 
+    # --- kandidati: polja bez supermarketa, blizu glavne ceste, u 4 općine
+    sp = gpd.sjoin(s[s.tip.isin(["supermarket", "mall", "department_store"])], polja[["h3_id", "geometry"]],
+                   predicate="within")
+    ima = set(sp.h3_id)
+    cesta = acc.reindex(polja.h3_id).glavna_cesta_m.to_numpy()
+    kand = np.array([(h not in ima) and (c <= MAX_CESTA_M) for h, c in zip(polja.h3_id, cesta)])
+    K = np.where(kand)[0]          # matrice vremena samo za kolone-kandidate (memorija na gušćoj mreži)
+    poz = {c: i for i, c in enumerate(K)}
+
     def vremena(mod):
         G = dost.graf(nodes, ways, xy, idx, mod, visine=vis if mod == "pjesice" else None)
         _, lab = connected_components(G, directed=True, connection="strong" if mod == "auto" else "weak")
@@ -225,18 +234,19 @@ def main() -> None:
         ds, is_ = tr.query(np.c_[s.geometry.x, s.geometry.y])
         nc, ns = ok[ic], ok[is_]
         hod = lambda d: d / 1000 / dost.PJESACKA_BRZINA * 60  # noqa: E731
-        Tc = np.full((len(orig), len(polja)), np.inf)
-        Ts = np.full((len(orig), len(s)), np.inf)
+        Tc = np.full((len(orig), len(K)), np.inf, dtype=np.float32)
+        Ts = np.full((len(orig), len(s)), np.inf, dtype=np.float32)
         for b in range(0, len(orig), 64):
             o = orig[b:b + 64]
             D = dijkstra(G, indices=nc[o], limit=T_MAX)
-            Tc[b:b + 64] = D[:, nc] + hod(dc[o])[:, None] + hod(dc)[None, :]
+            Tc[b:b + 64] = D[:, nc[K]] + hod(dc[o])[:, None] + hod(dc[K])[None, :]
             Ts[b:b + 64] = D[:, ns] + hod(dc[o])[:, None] + hod(ds)[None, :]
         return Tc, Ts
 
     Wc, Ws = vremena("pjesice")
     Cc, Cs = vremena("auto")
     Tc = np.maximum(np.minimum(Wc, Cc + PARKING_MIN), 1.0)
+    del Cc
     Ts = np.maximum(np.minimum(Ws, Cs + PARKING_MIN), 1.0)
     p = pop[orig]
 
@@ -245,26 +255,20 @@ def main() -> None:
         U[T > T_MAX] = 0
         return U
 
-    # --- kandidati: polja bez supermarketa, blizu glavne ceste, u 4 općine
-    sp = gpd.sjoin(s[s.tip.isin(["supermarket", "mall", "department_store"])], polja[["h3_id", "geometry"]],
-                   predicate="within")
-    ima = set(sp.h3_id)
-    cesta = acc.reindex(polja.h3_id).glavna_cesta_m.to_numpy()
-    kand = np.array([(h not in ima) and (c <= MAX_CESTA_M) for h, c in zip(polja.h3_id, cesta)])
 
     def izbor(lam, n=N_IZBOR):
         Uc = util(Tc, lam)
         S = util(Ts, lam) @ s.A.to_numpy()
         izabrano, prihod = [], []
-        mask = kand.copy()
+        mask = np.ones(len(K), bool)
         for _ in range(n):
             cap = p @ (Uc / (Uc + S[:, None] + 1e-12))
             cap[~mask] = -1
-            c = int(cap.argmax())
-            izabrano.append(c)
-            prihod.append(cap[c])
-            S = S + Uc[:, c]
-            mask &= np.hypot(*(cxy - cxy[c]).T) >= MIN_RAZMAK_M
+            ci = int(cap.argmax())
+            izabrano.append(int(K[ci]))
+            prihod.append(float(cap[ci]))
+            S = S + Uc[:, ci]
+            mask &= np.hypot(*(cxy[K] - cxy[K[ci]]).T) >= MIN_RAZMAK_M
         return izabrano, prihod
 
     izb, kup = izbor(LAMBDA)
@@ -305,7 +309,7 @@ def main() -> None:
         Uc = util(Tc, lam)
         S = util(Ts, lam) @ s.A.to_numpy()
         pokriveno = ~bez_sup_10
-        mask = kand.copy()
+        mask = np.ones(len(K), bool)
         W10 = Wc <= 10
         izabrano, prihod = [], []
         for _ in range(n):
@@ -313,14 +317,14 @@ def main() -> None:
             cap = p @ (Uc / (Uc + S[:, None] + 1e-12))
             score = dobit + 1e-3 * cap
             score[~mask] = -1
-            c = int(score.argmax())
-            if dobit[c] <= 0:
+            ci = int(score.argmax())
+            if dobit[ci] <= 0:
                 break
-            izabrano.append(c)
-            prihod.append(cap[c])
-            pokriveno |= W10[:, c]
-            S = S + Uc[:, c]
-            mask &= np.hypot(*(cxy - cxy[c]).T) >= MIN_RAZMAK_M
+            izabrano.append(int(K[ci]))
+            prihod.append(float(cap[ci]))
+            pokriveno |= W10[:, ci]
+            S = S + Uc[:, ci]
+            mask &= np.hypot(*(cxy[K] - cxy[K[ci]]).T) >= MIN_RAZMAK_M
         return izabrano, prihod
 
     sx = np.c_[s.geometry.x, s.geometry.y]
@@ -334,7 +338,7 @@ def main() -> None:
         hint = "; ".join(f"{v} {int(m):,} m²".replace(",", ".") for v, m in
                          u.groupby("vrsta").m2.sum().sort_values(ascending=False).items()) or "—"
         d_sup, _ = ts.query(cxy[c])
-        w10 = Wc[:, c] <= 10
+        w10 = Wc[:, poz[c]] <= 10
         rows.append({
             "strategija": strategija, "rang": r, "h3_id": polja.h3_id.iat[c], "opcina": polja.opcina.iat[c], "mz": polja.mz.iat[c],
             "kupci_procjena": int(round(k)),

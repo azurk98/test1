@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 import unicodedata
 from pathlib import Path
@@ -23,7 +24,9 @@ for _d in (RAW, INTERIM, OUT):
 CRS_WGS = "EPSG:4326"
 CRS_M = "EPSG:32634"  # UTM 34N, metri (Sarajevo ~18.4°E)
 
-H3_RES = 9
+# H3 rezolucija mreže: SPEC traži 9 (~0,105 km²); 10 (~0,015 km², 7× gušće) je zadano na zahtjev.
+# Promjena: H3_RES=9 python ... (sve od 03_mreza.py nadalje treba ponovo pokrenuti)
+H3_RES = int(os.environ.get("H3_RES", 10))
 
 # OSM relacije općina (naziv kao u data/opcine_procjena_2026.csv)
 OPCINE = {
