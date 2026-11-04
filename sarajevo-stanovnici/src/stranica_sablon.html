@@ -144,6 +144,7 @@ aside.read{border-left:1px solid var(--line);padding:16px;max-height:calc(min(68
   .satcredit{position:static;max-width:none;text-align:left;color:var(--muted);text-shadow:none;padding:4px 12px 8px}
   .legend{position:static;margin:8px 12px 0;max-width:none}
 }
+.bestp[hidden]{display:none}
 .bestp{display:grid;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--bg)}
 .sliders{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:4px 18px}
 .sliders label{display:grid;grid-template-columns:minmax(0,1fr) 110px 26px;align-items:center;gap:8px;font-size:13px}
@@ -154,6 +155,10 @@ aside.read{border-left:1px solid var(--line);padding:16px;max-height:calc(min(68
 .fb dd b{min-width:24px;text-align:right}
 .mini i{display:block;height:100%;background:var(--accent)}
 .lnk{all:unset;cursor:pointer;color:var(--accent)} .lnk:focus-visible{outline:2px solid var(--accent)}
+.ptline{fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;stroke-width:calc(2px * var(--zw));opacity:.9;pointer-events:visibleStroke}
+.ptline.m-tram{stroke-width:calc(3px * var(--zw))}
+.lchips{display:flex;flex-wrap:wrap;gap:4px}
+.lchip{font:500 11.5px var(--mono);padding:2px 6px;border-radius:4px;border:1px solid var(--line);background:var(--surface)}
 .acc{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke;pointer-events:none;stroke-width:calc(1.6px * var(--zw))}
 .acc.a1{stroke:#ff8c1a}.acc.a2{stroke:#e63946}.acc.a3{stroke:#b5179e;stroke-width:calc(2.2px * var(--zw))}
 .poi{stroke:#fff;pointer-events:visiblePainted;cursor:help}
@@ -213,6 +218,7 @@ footer{font-size:13px;color:var(--muted);max-width:80ch}
           <button id="m-sun" aria-pressed="false">Winter sun</button>
           <button id="m-smog" aria-pressed="false">Smog</button>
           <button id="m-fog" aria-pressed="false">Fog</button>
+          <button id="m-pt" aria-pressed="false">Transit</button>
         </div>
         <div>
           <span class="chips chips-sm" role="group" aria-label="Background">
@@ -244,7 +250,8 @@ footer{font-size:13px;color:var(--muted);max-width:80ch}
     <li><b>Floor counts</b>Only 4.7% of OSM buildings record their floors. The rest come from a model trained on those that do (spatial cross-check: r = 0.70), since GHSL heights alone barely separate houses from towers (r = 0.13).</li>
     <li><b>Attractiveness</b>A location score from 0 to 100, separate from the population estimate. It weighs, as percentile ranks among populated cells: residents within a 10-minute walk (20%) and a 10-minute drive (15%), shops and services within a 10-minute walk (20%), stops within 400 m (15%), distance to the nearest stop (10%), distance to a main road (10%) and intersection density (10%). Walking and driving times run on the OSM street network. Walking slows on slopes (Tobler's hiking function: 4.8 km/h on the flat, 3.4 km/h up a 10% grade); driving assumes 65% of the speed limit, and transit counts stops only, without timetables. Cells at the edge toward Ilidža and Vogošća under-count reachable residents, since those municipalities are not modelled.</li>
     <li><b>Livability</b>Walking minutes, with slopes, from each cell to the nearest grocery, transit stop, primary school, clinic, park, kindergarten, pharmacy, playground, hospital and sports ground. Each counts half at a set time (5 min for a stop, 8 for a shop or park, 12 for a school or clinic, 25 for a hospital) and is weighted: grocery, transit and school 15% each, clinic and park 12%, kindergarten 8%, pharmacy 7%, playground 6%, hospital and sports 5%. Points come off near a motorway or primary road (up to 10), in industrial areas (10) and on very steep ground (5). Weights are a judgement, not a calibration. Places come from OpenStreetMap.</li>
-    <li><b>Best to live</b>One score that mixes every layer, weighted by who is choosing: daily needs within walking distance (the profile sets which needs count most, such as school and kindergarten for families or clinic and pharmacy for seniors), car access, winter sun (3 h or less scores 0, 7.8 h scores 100), clean winter air and little fog (from the smog and fog indices), distance from main-road noise and industry, and gentle terrain (5% slope or less scores 100, 25% scores 0). Only cells with residents are scored, and colour bands follow the city's own percentiles. Move the sliders to set your own weights.</li>
+    <li><b>Transit</b>Routes of all tram and trolleybus lines and part of the bus network come from OpenStreetMap. Each cell gets a Public Transport Accessibility Level (PTAL, the Transport for London method): walking time to stops (8 min for bus and trolleybus, 12 for tram, with slopes), plus half the interval as waiting time, with each line counted once at its best stop. There is no published timetable data for Sarajevo, so departures per hour are assumptions by line type (tram 3: 10 an hour, other trams 5, main trolleybuses 6, others 4, buses 3, stops without a mapped line 2) kept in data/linije_frekvencija.csv until real timetables replace them.</li>
+    <li><b>Best to live</b>One score that mixes every layer, weighted by who is choosing: public transport (PTAL), daily needs within walking distance (the profile sets which needs count most, such as school and kindergarten for families or clinic and pharmacy for seniors), car access, winter sun (3 h or less scores 0, 7.8 h scores 100), clean winter air and little fog (from the smog and fog indices), distance from main-road noise and industry, and gentle terrain (5% slope or less scores 100, 25% scores 0). Only cells with residents are scored, and colour bands follow the city's own percentiles. Move the sliders to set your own weights.</li>
     <li><b>Smog and fog</b>Winter smog and fog in Sarajevo come from the temperature inversion that traps cold air and smoke in the valley. Each cell's exposure is the share of inversion days it lies below the inversion top, from its height above the valley floor (lowest ground within 3 km) assuming a typical top about 200 m above the floor, raised near busy roads (smog) or rivers (fog). These are relative indices, not measurements. They agree in direction with the FHMZ stations shown on the map (2025 annual PM2.5: Bjelave 26, Otoka 35, Saraj Polje 61, Ilidža 29, Vogošća 26 µg/m³; station positions approximate), but five stations cannot pin down street-level values, and the biggest local factor, gas versus wood or coal heating, has no open data.</li>
     <li><b>Winter sun</b>Hours of direct sun on 21 December and 21 January on a clear day. For seven points per cell the sun's path is traced every 5 minutes against the horizon formed by the surrounding mountains (Trebević, Igman, Hum and others, up to 25 km away, with the Earth's curvature) from the Copernicus surface model with buildings filtered out. Shade from neighbouring buildings and the valley's winter fog are not included. On a flat horizon the day would give 8.8 hours.</li>
     <li><b>Car access</b>For each cell, the drive along OSM streets from its centre to the nearest tertiary or larger road: the steepest 100 m on the way, metres of narrow road, and the share of the cell's own streets that are steep (over 12%) or narrow. OSM almost never records street width, so width is estimated as the gap between buildings on both sides; fences and walls are not mapped, so real streets can be narrower. Gradients come from the Copernicus surface model with buildings filtered out, measured over 100 m. Poor access takes up to 15 points off livability.</li>
@@ -292,7 +299,10 @@ const POP_T = [1,50,150,300,600,1000,1600], DEN_T = [1,500,1500,3000,6000,10000,
 let mode = "pop", focusOp = -1, selected = null, showMZ = true;
 
 const cells = D.cells.map(c => ({h:c[0],op:c[1],mz:c[2],s:c[3],mn:c[4],mx:c[5],a:[c[6],c[7],c[8]],p:c[9],km2:c[10],
-  att:c[11],w:[c[12],c[13],c[14]],car:[c[15],c[16],c[17]],poi:c[18],stm:c[19],stt:c[20],s4:c[21],t4:c[22],road:c[23],sup:c[24],elev:c[25],slope:c[26],liv:c[27],need:c.slice(28,38),acc:c[38],accMax:c[39],accNarrow:c[40],accNarrowPct:c[41],accSteepPct:c[42],accMinW:c[43],sun:c[44],sunFrom:c[45],sunTo:c[46],sunJan:c[47],sunMax:c[48],aboveFloor:c[49],inv:c[50],smog:c[51],fog:c[52],noise:c[53],ind:c[54]}));
+  att:c[11],w:[c[12],c[13],c[14]],car:[c[15],c[16],c[17]],poi:c[18],stm:c[19],stt:c[20],s4:c[21],t4:c[22],road:c[23],sup:c[24],elev:c[25],slope:c[26],liv:c[27],need:c.slice(28,38),acc:c[38],accMax:c[39],accNarrow:c[40],accNarrowPct:c[41],accSteepPct:c[42],accMinW:c[43],sun:c[44],sunFrom:c[45],sunTo:c[46],sunJan:c[47],sunMax:c[48],aboveFloor:c[49],inv:c[50],smog:c[51],fog:c[52],noise:c[53],ind:c[54],ai:c[55],ptal:c[56],lines:c[57],dep:c[58],stopMin:c[59]}));
+const PTAL_K = ["0","1a","1b","2","3","4","5","6a","6b"],
+  PTAL_C = {"0":"#1f2a44","1a":"#2f4b7c","1b":"#3f6fa5","2":"#4ca3c7","3":"#7fcdbb","4":"#c7e9b4","5":"#fee08b","6a":"#fc8d59","6b":"#d73027"};
+const MODE_C = {tram:"#e63946", trolleybus:"#3a86ff", bus:"#06d6a0"};
 const AIR_T = [0,20,35,50,65,80,90], SMOG_C = ["#f1f7e8","#d9ead3","#f6e3a1","#f3b562","#e07a5f","#b5446e","#5c2a5e"],
   FOG_C = ["#f4f6f8","#dfe6ec","#c3ced8","#a3b3c2","#8496a8","#66798c","#4a5a6b"];
 function airColor(v, C){ let i = 0; while (i < AIR_T.length-1 && v >= AIR_T[i+1]) i++; return C[i]; }
@@ -317,6 +327,7 @@ function color(c){
   if (mode === "rel") return c.s === 0 ? css("--zero") : css({A:"--rel-a",B:"--rel-b",C:"--rel-c"}[c.p]);
   if (mode === "att") return binColor(c.att, ATT_T);
   if (mode === "liv") return binColor(c.liv, ATT_T);
+  if (mode === "pt") return c.s === 0 ? css("--zero") : PTAL_C[c.ptal];
   if (mode === "best") return c.s === 0 ? css("--zero") : binColor(c.best, BEST_T);
   if (mode === "sun") return sunColor(c.sun);
   if (mode === "smog") return c.s === 0 ? css("--zero") : airColor(c.smog, SMOG_C);
@@ -376,6 +387,11 @@ const siteG = supG.append("g").selectAll("g").data(SITES).join("g").attr("class"
 siteG.append("circle").attr("r",7.5);
 siteG.append("text").attr("text-anchor","middle").attr("dy","0.35em").text(d => d.rank);
 let zk = 1;
+const ptG = g.append("g").attr("class","ptl").attr("display","none");
+const ptOrder = {bus:0, trolleybus:1, tram:2};
+const ptP = ptG.selectAll("path").data(D.lines.slice().sort((a,b) => ptOrder[a[0]] - ptOrder[b[0]])).join("path")
+  .attr("class", d => "ptline m-" + d[0]).attr("stroke", d => MODE_C[d[0]]);
+ptP.append("title").text(d => `${d[2] || d[1]} · ${d[3] ? d[3] + " departures/hour (assumed)" : "frequency unknown"}`);
 const aqG = g.append("g").attr("class","aq").attr("display","none");
 const aqS = aqG.selectAll("g").data(D.aq).join("g").attr("class","aqs");
 aqS.append("rect").attr("x",-15).attr("y",-9).attr("width",30).attr("height",18).attr("rx",4);
@@ -401,6 +417,7 @@ function layout(){
   [relImg, sjImg].forEach(im => im.attr("x", rx).attr("y", ry).attr("width", sx2-rx).attr("height", sy2-ry));
   contP.attr("d", d => line(d[2]));
   accP.attr("d", d => d[1].map(line).join(""));
+  ptP.attr("d", d => d[4].map(line).join(""));
   aqS.attr("transform", d => { const [x,y] = proj([d[2]*KX, d[1]]); return `translate(${x},${y}) scale(${1/zk})`; });
   const rd = k => ROADS[k].map(line).join("");
   const cache = {}; RORDER.forEach(k => { if (ROADS[k]) cache[k] = rd(k); });
@@ -457,10 +474,11 @@ function updateFocus(zoomTo){
   } else if (zoomTo) svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity);
   show(selected);
 }
-const MODES = ["best","pop","den","rel","att","sup","liv","car","sun","smog","fog"];
+const MODES = ["best","pop","den","rel","att","sup","liv","car","sun","smog","fog","pt"];
 MODES.forEach(m => document.getElementById("m-"+m).onclick = () => {
   mode = m; MODES.forEach(x => document.getElementById("m-"+x).setAttribute("aria-pressed", x === m)); supG.attr("display", m === "sup" ? null : "none"); accG.attr("display", m === "car" ? null : "none");
   aqG.attr("display", m === "smog" || m === "fog" ? null : "none");
+  ptG.attr("display", m === "pt" ? null : "none");
   if (m === "liv" && !showPoi) document.getElementById("poiToggle").click(); paint(); show(selected); });
 
 const ROADLEG = `<div class="cat rleg"><span><i class="rl r-autoput"></i>motorway, trunk</span><span><i class="rl r-glavna"></i>primary</span><span><i class="rl r-sekundarna"></i>secondary</span><span><i class="rl r-ulica"></i>street</span><span><i class="rl r-tramvaj"></i>tram</span></div>`;
@@ -478,6 +496,12 @@ function legend0(){
     el.innerHTML = `<div style="font-size:12px;color:var(--muted)">Walk to nearest supermarket</div>
       <div class="cat"><span><i style="background:var(--r1)"></i>≤ 5 min</span><span><i style="background:var(--r3)"></i>5–10 min</span><span><i style="background:var(--rel-c)"></i>over 10 min</span></div>
       <div class="cat"><span><i class="dot"></i>existing supermarket</span><span><b class="mk gapsite">1</b>gap site</span><span><b class="mk topsite">1</b>top-sales site</span></div>`;
+    return;
+  }
+  if (mode === "pt"){
+    el.innerHTML = `<div style="font-size:12px;color:var(--muted)">Public transport accessibility level (PTAL), 0 = none, 6b = excellent</div>
+      <div class="row">${PTAL_K.map(k => `<div class="sw"><i style="background:${PTAL_C[k]}"></i><span>${k}</span></div>`).join("")}</div>
+      <div class="cat"><span><i class="rl" style="border-color:${MODE_C.tram}"></i>tram</span><span><i class="rl" style="border-color:${MODE_C.trolleybus}"></i>trolleybus</span><span><i class="rl" style="border-color:${MODE_C.bus}"></i>bus (OSM has only part of the bus network)</span></div>`;
     return;
   }
   if (mode === "best"){
@@ -578,12 +602,12 @@ function show(c){
   }
   if (!c){
     const pool = focusOp >= 0 ? cells.filter(x => x.op === focusOp) : cells;
-    const key = mode === "att" ? "att" : mode === "liv" ? "liv" : mode === "car" ? "acc" : mode === "sun" ? "sun" : mode === "smog" ? "smog" : mode === "fog" ? "fog" : "s";
+    const key = mode === "att" ? "att" : mode === "liv" ? "liv" : mode === "car" ? "acc" : mode === "sun" ? "sun" : mode === "smog" ? "smog" : mode === "fog" ? "fog" : mode === "pt" ? "ai" : "s";
     const tot = d3.sum(pool, x => x.s), top = pool.filter(x => x.s > 0).sort((a,b)=>b[key]-a[key]).slice(0,5);
     el.innerHTML = `<div class="k">${focusOp >= 0 ? OPN[focusOp] : "Four municipalities"}</div>
       <div class="big num">${fmt(tot)}</div><div class="rng num">${pool.filter(x=>x.s>0).length} populated cells of ${pool.length}</div>
       <p class="hint">Hover or tap a cell to read it. Drag to pan, scroll or pinch to zoom, pick a municipality above to focus it.</p>
-      <div class="k">${mode === "att" ? "Most attractive cells" : mode === "liv" ? "Best cells to live in" : mode === "car" ? "Easiest car access" : mode === "sun" ? "Most winter sun (hours)" : mode === "smog" ? "Most smog-exposed cells" : mode === "fog" ? "Most fog-exposed cells" : "Fullest cells"}</div>
+      <div class="k">${mode === "att" ? "Most attractive cells" : mode === "liv" ? "Best cells to live in" : mode === "car" ? "Easiest car access" : mode === "sun" ? "Most winter sun (hours)" : mode === "smog" ? "Most smog-exposed cells" : mode === "fog" ? "Most fog-exposed cells" : mode === "pt" ? "Best public transport (PTAL index)" : "Fullest cells"}</div>
       <dl>${top.map(x=>`<dt>${x.mz || OPN[x.op]}</dt><dd class="num">${fmt(x[key])}</dd>`).join("")}</dl>`;
     return;
   }
@@ -599,6 +623,11 @@ function show(c){
     <div class="k">Livability ${c.liv}/100 · minutes on foot</div>
     <div class="score"><i style="width:${c.liv}%"></i></div>
     <dl class="needs">${NEEDS.map(([k,n],i) => `<dt><i class="nd ${c.need[i] <= 5 ? "g" : c.need[i] <= 15 ? "m" : "f"}"></i>${n}</dt><dd class="num">${c.need[i] >= 60 ? "60+" : c.need[i]} min</dd>`).join("")}</dl>
+    <div class="k">Public transport · PTAL ${c.ptal}</div>
+    <dl><dt>Accessibility index</dt><dd class="num">${c.ai}</dd>
+      <dt>Departures per hour in reach</dt><dd class="num">${c.dep}${c.dep ? " (assumed)" : ""}</dd>
+      <dt>Nearest stop on foot</dt><dd class="num">${c.stopMin >= 99 ? "over 12 min" : c.stopMin + " min"}</dd></dl>
+    ${c.lines ? `<div class="lchips">${c.lines.split(" ").map(l => `<span class="lchip">${l === "bus" ? "other bus" : l}</span>`).join("")}</div>` : ""}
     <div class="k">Winter air</div>
     <dl><dt>Height above valley floor</dt><dd class="num">${c.aboveFloor} m</dd>
       <dt>Inside the inversion</dt><dd class="num">${Math.round(c.inv*100)}% of inversion days</dd>
@@ -656,13 +685,13 @@ function siteTables(){
 // ---- Best to live: weighted mix of every factor, computed in the browser
 const T50 = [8,5,12,12,8,10,8,8,25,12];   // same order as NEEDS
 const FACT = [["needs","Daily needs on foot"],["car","Car access"],["sun","Winter sun"],["air","Clean winter air"],
-  ["fog","Little fog"],["quiet","Away from traffic noise"],["flat","Gentle terrain"]];
+  ["fog","Little fog"],["quiet","Away from traffic noise"],["flat","Gentle terrain"],["transit","Public transport"]];
 const PROFILES = {
-  balanced: {name:"Balanced", f:{needs:35,car:15,sun:15,air:15,fog:5,quiet:10,flat:5}, n:[15,15,15,12,12,8,7,6,5,5]},
-  family:   {name:"Family with children", f:{needs:40,car:15,sun:10,air:15,fog:5,quiet:10,flat:5}, n:[12,8,22,10,14,18,4,10,2,0]},
-  seniors:  {name:"Seniors", f:{needs:40,car:5,sun:15,air:15,fog:5,quiet:5,flat:15}, n:[18,15,0,22,10,0,18,0,15,2]},
-  nocar:    {name:"No car", f:{needs:55,car:0,sun:10,air:15,fog:5,quiet:10,flat:5}, n:[15,30,10,12,10,5,8,4,4,2]},
-  airsun:   {name:"Air and sun", f:{needs:20,car:10,sun:30,air:25,fog:10,quiet:5,flat:0}, n:[15,15,15,12,12,8,7,6,5,5]},
+  balanced: {name:"Balanced", f:{needs:30,car:15,sun:15,air:15,fog:5,quiet:10,flat:5,transit:10}, n:[15,0,15,12,12,8,7,6,5,5]},
+  family:   {name:"Family with children", f:{needs:35,car:15,sun:10,air:15,fog:5,quiet:10,flat:5,transit:5}, n:[12,0,22,10,14,18,4,10,2,0]},
+  seniors:  {name:"Seniors", f:{needs:35,car:5,sun:15,air:15,fog:5,quiet:5,flat:15,transit:10}, n:[18,0,0,22,10,0,18,0,15,2]},
+  nocar:    {name:"No car", f:{needs:35,car:0,sun:10,air:15,fog:5,quiet:10,flat:5,transit:30}, n:[15,0,10,12,10,5,8,4,4,2]},
+  airsun:   {name:"Air and sun", f:{needs:20,car:10,sun:30,air:25,fog:10,quiet:5,flat:0,transit:5}, n:[15,0,15,12,12,8,7,6,5,5]},
 };
 let profile = "balanced", weights = {...PROFILES.balanced.f}, needW = PROFILES.balanced.n.slice(), BEST_T = ATT_T.slice();
 const clamp01 = v => Math.max(0, Math.min(1, v));
@@ -677,6 +706,7 @@ function factorScores(c){
     fog: 100 - c.fog,
     quiet: clamp01((c.noise - 50) / 350) * (1 - 0.6 * clamp01(c.ind / 0.3)) * 100,
     flat: clamp01(1 - (c.slope - 5) / 20) * 100,
+    transit: clamp01(c.ai / 20) * 100,
   };
 }
 function recompute(){

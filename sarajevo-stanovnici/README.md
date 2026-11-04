@@ -29,6 +29,7 @@ python 15_ulice.py              # pristup autom: uske i strme ulice -> out/ulice
 python 14_kvalitet_zivota.py    # kvalitet života: pješačka dostupnost sadržaja -> out/kvalitet_zivota_h3.csv
 python 16_sunce.py              # sati sunca zimi (zasjenjenje brdima) -> out/sunce_h3.csv
 python 17_zrak.py               # smog i magla zimi: izloženost inverziji -> out/zrak_h3.csv
+python 18_javni_prevoz.py       # javni prevoz: linije, frekvencija, PTAL -> out/prevoz_h3.csv, out/linije.geojson
 python 13_stranica.py           # interaktivna stranica (artifact) -> out/stranica.html
 python 07_karta.py              # ponovo, da karta dobije slojeve iz koraka 08–11
 ```
@@ -146,6 +147,19 @@ uskog puta, makadam) i udio strmih/uskih ulica u polju; ocjena 0–100. Loš pri
 od indeksa kvaliteta života. Najteži pristup: Toka-Džeka, Gornji Velešići, Sumbuluša, Mahmutovac,
 Hrid-Jarčedoli. Najveći uspon na putu do glavne ceste: ≤ 8% za ~182.000 stanovnika, 8–12% ~21.000,
 12–16% ~23.000, 16–20% ~20.000, > 20% ~24.000; ~33.000 stanovnika ima više od 100 m uske ulice do glavne ceste.
+
+## Javni prevoz (`18_javni_prevoz.py`)
+
+Trase iz OSM ruta: svi tramvaji (1–6) i trolejbusi (101, 102, 103, 105, 107, 108), a od autobusa samo dio
+(15, 16, 18, 21, 23, 24, 27, 27A, 31E, 32, 41, 61, 200E; međunarodne i FlixBus isključene). GTFS za Sarajevo
+ne postoji (Mobility Database), a GRAS-ova stranica ne dozvoljava automatski pristup, pa su polasci na sat
+u `data/linije_frekvencija.csv` **pretpostavke** (kolona `izvor`): tramvaj 3 = 10/h, ostali tramvaji 5,
+trolejbusi 103 i 107 = 6, ostali 4, autobusi 3, 31E 4, 200E 2. Upisati stvarne iz voznog reda i ponovo
+pokrenuti 18 i 13. Stanice bez OSM linije (454 od 670) računaju se kao jedna nepoznata autobuska linija (2/h).
+PTAL (Transport for London): hod do stanica uz nagib (autobus/trolejbus ≤ 8 min, tramvaj ≤ 12), čekanje =
+pola intervala + pouzdanost, svaka linija jednom; razredi 0–6b. Najbolje: Baščaršija, Ferhadija, Čengić Vila,
+Hrasno, Kovačići; najslabije: Dobroševići, Reljevo, Mošćanica, Hrid-Jarčedoli, Mahmutovac; ~35.000 stanovnika
+u razredu 0. U „Best to live“ javni prevoz je poseban faktor (blizina stanice više nije u svakodnevnim sadržajima).
 
 ## Najbolje za život (stranica, pogled „Best to live“)
 

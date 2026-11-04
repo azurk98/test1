@@ -54,6 +54,7 @@ def podaci() -> dict:
     ul = pd.read_csv(OUT / "ulice_h3.csv").set_index("h3_id")
     su = pd.read_csv(OUT / "sunce_h3.csv", keep_default_na=False).set_index("h3_id")
     zr = pd.read_csv(OUT / "zrak_h3.csv").set_index("h3_id")
+    pv = pd.read_csv(OUT / "prevoz_h3.csv", dtype={"ptal": str}, keep_default_na=False).set_index("h3_id")
     cells = []
     for r in p.itertuples():
         cells.append(
@@ -75,7 +76,9 @@ def podaci() -> dict:
                float(su.loc[r.h3_id, "astro_21dec_h"])]
             + [int(zr.loc[r.h3_id, "iznad_dna_m"]), float(zr.loc[r.h3_id, "inverzija"]),
                int(zr.loc[r.h3_id, "smog_indeks"]), int(zr.loc[r.h3_id, "magla_indeks"])]
-            + [int(kz.loc[r.h3_id, "buka_m"]), float(kz.loc[r.h3_id, "industrija_udio"])])
+            + [int(kz.loc[r.h3_id, "buka_m"]), float(kz.loc[r.h3_id, "industrija_udio"])]
+            + [float(pv.loc[r.h3_id, "ptal_ai"]), pv.loc[r.h3_id, "ptal"], pv.loc[r.h3_id, "linije"],
+               int(pv.loc[r.h3_id, "polazaka_na_sat"]), float(pv.loc[r.h3_id, "stanica_min"])])
 
     op, _ = ucitaj_granice()
     op = op.set_index("opcina").loc[OP].reset_index()
@@ -126,7 +129,14 @@ def podaci() -> dict:
         acc[int(kod)] = [[round(c, 5) for xy in geom.coords for c in xy] for geom in g.geometry]
     zs = pd.read_csv(OUT / "zrak_stanice.csv")
     stanice = [[r.stanica, round(r.lat, 5), round(r.lon, 5), int(r.pm25)] for r in zs.itertuples()]
-    return {"aq": stanice, "acc": acc, "poi": poi,
+    li = gpd.read_file(OUT / "linije.geojson")
+    li["geometry"] = li.to_crs(32634).simplify(8).to_crs(4326)
+    linije = []
+    for r in li.itertuples():
+        parts = getattr(r.geometry, "geoms", [r.geometry])
+        linije.append([r.mod, r.linija, r.ime, None if pd.isna(r.polazaka_na_sat) else float(r.polazaka_na_sat),
+                       [[round(c, 5) for xy in p.coords for c in xy] for p in parts]])
+    return {"lines": linije, "aq": stanice, "acc": acc, "poi": poi,
             "stores": [[round(a, 5), round(b, 5), (n if isinstance(n, str) else "")]
                        for a, b, n in zip(st.lon, st.lat, st.ime)],
             "sites": sites, "cells": cells, "summ": summ, "mz": mzrows,
