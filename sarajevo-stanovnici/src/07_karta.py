@@ -73,6 +73,18 @@ def main() -> None:
             folium.GeoJson(g[["mz", "geometry"]], name=ime, show=False,
                            style_function=lambda _: {"fill": False, "color": "#225ea8", "weight": 1.5},
                            tooltip=folium.GeoJsonTooltip(fields=["mz"], aliases=["MZ"])).add_to(m)
+    pp = OUT / "putevi.geojson"
+    if pp.exists():
+        boje = {"autoput": ("#f4a259", 4), "glavna": ("#ffd166", 3), "sekundarna": ("#fff1a8", 2.2),
+                "tercijarna": ("#ffffff", 1.6), "ulica": ("#ffffff", 0.8), "tramvaj": ("#e63946", 2)}
+        folium.GeoJson(
+            str(pp), name="Mreža puteva (OSM)", show=True,
+            style_function=lambda f: {"color": boje[f["properties"]["klasa"]][0],
+                                      "weight": boje[f["properties"]["klasa"]][1],
+                                      "opacity": 0.6 if f["properties"]["klasa"] == "ulica" else 0.95,
+                                      "dashArray": "6 4" if f["properties"]["klasa"] == "tramvaj" else None},
+            tooltip=folium.GeoJsonTooltip(fields=["ime", "klasa"], aliases=["Naziv", "Klasa"]),
+        ).add_to(m)
     dp = OUT / "dostupnost_h3.gpkg"
     if dp.exists():
         a = gpd.read_file(dp).to_crs(CRS_WGS)

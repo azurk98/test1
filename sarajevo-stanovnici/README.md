@@ -18,7 +18,8 @@ python 07_karta.py              # -> out/karta.html
 python 08_dostupnost.py         # dostupnost i atraktivnost lokacije -> out/dostupnost_h3.gpkg/.csv
 python 09_supermarket.py        # lokacije za novi supermarket (Huff) -> out/supermarket_*.csv/.gpkg
 python 10_teren.py              # topografija: reljef, izohipse, visina i nagib po polju -> out/teren_*
-python 07_karta.py              # ponovo, da karta dobije slojeve iz koraka 08–10
+python 11_putevi.py             # mreža puteva za prikaz -> out/putevi.geojson
+python 07_karta.py              # ponovo, da karta dobije slojeve iz koraka 08–11
 ```
 
 **Kontrolna tačka prije koraka 5:** `02_zgrade.py` ispisuje (i sprema u
