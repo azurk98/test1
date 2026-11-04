@@ -2,11 +2,11 @@
 
 Iz OSM ekstrakta (raw/Sarajewo.osm.gz) uzima ceste i tramvajsku prugu u okviru
 četiri općine (+ ~1 km), razvrstava ih u klase za prikaz i pojednostavljuje
-geometriju (~5 m). Pješačke staze, stepenice i servisne ceste se ne crtaju.
+geometriju (~5 m). Parkirališne trake i prilazi kućama (service=parking_aisle/driveway) se ne crtaju.
 
-klasa: autoput (motorway/trunk), glavna (primary), sekundarna (secondary),
-       tercijarna (tertiary), ulica (residential/unclassified/living_street),
-       tramvaj (railway=tram)
+klasa: autoput (motorway), magistrala (trunk), primarna, sekundarna, tercijarna,
+       ulica (residential/unclassified), pristupna (living_street/service/track),
+       pjesacka (pedestrian/footway/path/cycleway), stepenice (steps), tramvaj (railway=tram)
 """
 from __future__ import annotations
 
@@ -20,11 +20,16 @@ from shapely.geometry import LineString, box
 from common import CRS_WGS, OUT, RAW
 
 KLASA = {
-    "motorway": "autoput", "motorway_link": "autoput", "trunk": "autoput", "trunk_link": "autoput",
-    "primary": "glavna", "primary_link": "glavna",
+    "motorway": "autoput", "motorway_link": "autoput",
+    "trunk": "magistrala", "trunk_link": "magistrala",
+    "primary": "primarna", "primary_link": "primarna",
     "secondary": "sekundarna", "secondary_link": "sekundarna",
     "tertiary": "tercijarna", "tertiary_link": "tercijarna",
-    "residential": "ulica", "unclassified": "ulica", "living_street": "ulica", "road": "ulica",
+    "residential": "ulica", "unclassified": "ulica", "road": "ulica",
+    "living_street": "pristupna", "service": "pristupna", "track": "pristupna",
+    "pedestrian": "pjesacka", "footway": "pjesacka", "path": "pjesacka", "cycleway": "pjesacka",
+    "bridleway": "pjesacka",
+    "steps": "stepenice",
 }
 
 
@@ -42,6 +47,8 @@ def main() -> None:
             elif el.tag == "way":
                 t = {c.get("k"): c.get("v") for c in el.findall("tag")}
                 k = "tramvaj" if t.get("railway") == "tram" else KLASA.get(t.get("highway"))
+                if t.get("service") in ("parking_aisle", "driveway", "drive-through"):
+                    k = None
                 if k:
                     pts = [nodes[int(n.get("ref"))] for n in el.findall("nd") if int(n.get("ref")) in nodes]
                     if len(pts) >= 2:

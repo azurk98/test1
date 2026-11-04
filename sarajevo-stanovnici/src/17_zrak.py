@@ -92,7 +92,7 @@ def main() -> None:
     np.add.at(kuce, (row[ok], col[ok]), 1)
     kuce = gaussian_filter(kuce, sigma=(500 / py, 500 / px)) / (py * px / 1e6)  # kuća po km²
     pu = gpd.read_file(OUT / "putevi.geojson")
-    tez = {"autoput": 1.0, "glavna": 0.7, "sekundarna": 0.4}
+    tez = {"autoput": 1.0, "magistrala": 1.0, "primarna": 0.7, "sekundarna": 0.4}
     pu = pu[pu.klasa.isin(tez)]
     sao = rasterize(((g, tez[k]) for g, k in zip(pu.geometry, pu.klasa)), out_shape=(ny, nx), transform=t,
                     fill=0, all_touched=True, merge_alg=rasterio.enums.MergeAlg.add).astype(float)

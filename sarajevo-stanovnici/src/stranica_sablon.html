@@ -76,18 +76,28 @@ svg.on-rel .contl{fill:#4a3826;stroke:rgba(255,255,255,.7)}
 svg#map{--zw:1}
 .road,.rcase{fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;pointer-events:none}
 .rcase{stroke:rgba(20,20,20,.55)}
-.rcase.r-autoput{stroke-width:calc(4.2px * var(--zw))} .road.r-autoput{stroke:#f4a259;stroke-width:calc(2.8px * var(--zw))}
-.rcase.r-glavna{stroke-width:calc(3.4px * var(--zw))} .road.r-glavna{stroke:#ffd166;stroke-width:calc(2.2px * var(--zw))}
-.rcase.r-sekundarna{stroke-width:calc(2.6px * var(--zw))} .road.r-sekundarna{stroke:#fff1a8;stroke-width:calc(1.6px * var(--zw))}
-.rcase.r-tercijarna{stroke-width:calc(2px * var(--zw))} .road.r-tercijarna{stroke:#ffffff;stroke-width:calc(1.2px * var(--zw))}
-.road.r-ulica{stroke:#ffffff;stroke-width:calc(.55px * var(--zw));opacity:.45}
-svg.zin .road.r-ulica{opacity:.8}
+.rcase.r-autoput{stroke-width:calc(5.6px * var(--zw))} .road.r-autoput{stroke:#e8590c;stroke-width:calc(3.8px * var(--zw))}
+.rcase.r-magistrala{stroke-width:calc(4.6px * var(--zw))} .road.r-magistrala{stroke:#f4a259;stroke-width:calc(3px * var(--zw))}
+.rcase.r-primarna{stroke-width:calc(3.6px * var(--zw))} .road.r-primarna{stroke:#ffd166;stroke-width:calc(2.3px * var(--zw))}
+.rcase.r-sekundarna{stroke-width:calc(2.8px * var(--zw))} .road.r-sekundarna{stroke:#fff1a8;stroke-width:calc(1.7px * var(--zw))}
+.rcase.r-tercijarna{stroke-width:calc(2.2px * var(--zw))} .road.r-tercijarna{stroke:#ffffff;stroke-width:calc(1.25px * var(--zw))}
+.road.r-ulica{stroke:#ffffff;stroke-width:calc(.6px * var(--zw));opacity:.45}
+svg.zin .road.r-ulica{opacity:.85}
+.road.r-pristupna{stroke:#d9d9d9;stroke-width:calc(.45px * var(--zw));opacity:0}
+.road.r-pjesacka{stroke:#cdb4db;stroke-width:calc(.5px * var(--zw));stroke-dasharray:3 2;opacity:0}
+.road.r-stepenice{stroke:#ff70a6;stroke-width:calc(1.1px * var(--zw));stroke-dasharray:1 2;opacity:0}
+svg.zin .road.r-pristupna{opacity:.7} svg.zin .road.r-pjesacka{opacity:.85} svg.zin .road.r-stepenice{opacity:1}
 .road.r-tramvaj{stroke:#e63946;stroke-width:calc(1.3px * var(--zw));stroke-dasharray:4 3}
 svg.on-rel .road.r-ulica,svg.on-rel .road.r-tercijarna{stroke:#6b6258}
+svg.on-rel .road.r-pristupna{stroke:#8a8178} svg.on-rel .road.r-pjesacka{stroke:#7b5e91}
+svg:not(.on-sat) .road.r-pristupna{stroke:var(--muted)}
 svg:not(.on-sat) .road.r-ulica,svg:not(.on-sat) .road.r-tercijarna{stroke:var(--muted)}
 .legend .rl{display:inline-block;width:18px;height:0;border-top:3px solid;border-radius:0}
-.legend .rl.r-autoput{border-color:#f4a259}.legend .rl.r-glavna{border-color:#ffd166}.legend .rl.r-sekundarna{border-color:#e9d77a}
-.legend .rl.r-ulica{border-top-width:1px;border-color:var(--muted)}.legend .rl.r-tramvaj{border-top:2px dashed #e63946}
+.legend .rl.r-autoput{border-top-width:4px;border-color:#e8590c}.legend .rl.r-magistrala{border-top-width:3.5px;border-color:#f4a259}
+.legend .rl.r-primarna{border-color:#ffd166}.legend .rl.r-sekundarna{border-top-width:2.5px;border-color:#e9d77a}
+.legend .rl.r-tercijarna{border-top-width:2px;border-color:#bdbdbd}.legend .rl.r-ulica{border-top-width:1px;border-color:var(--muted)}
+.legend .rl.r-pristupna{border-top-width:1px;border-color:#bdbdbd}.legend .rl.r-pjesacka{border-top:1.5px dashed #b392c9}
+.legend .rl.r-stepenice{border-top:2px dotted #ff70a6}.legend .rl.r-tramvaj{border-top:2px dashed #e63946}
 .legend .rleg{font-size:11px;gap:8px;border-top:1px solid var(--line);padding-top:6px}
 .satcredit{max-width:calc(100% - 460px);text-align:right;position:absolute;right:calc(8px + env(safe-area-inset-right,0px));bottom:6px;font-size:10.5px;color:#fff;text-shadow:0 0 3px #000;pointer-events:none}
 .opl{fill:none;stroke:var(--fg);stroke-width:1.4px;vector-effect:non-scaling-stroke;opacity:.75;pointer-events:none}
@@ -372,10 +382,10 @@ const contG = g.append("g").attr("class","contours");
 const contP = contG.selectAll("path").data(TER.cont).join("path").attr("class", d => d[1] ? "cont major" : "cont");
 const contL = contG.selectAll("text").data(TER.cont.filter(d => d[1] && d[2].length > 40)).join("text").attr("class","contl").attr("text-anchor","middle").attr("dy","0.35em").text(d => d[0] + " m");
 const ROADS = __ROADS__;
-const RORDER = ["ulica","tercijarna","sekundarna","glavna","autoput","tramvaj"];
+const RORDER = ["pjesacka","stepenice","pristupna","ulica","tercijarna","sekundarna","primarna","magistrala","autoput","tramvaj"];
 let showRoads = true;
 const roadG = g.append("g").attr("class","roads");
-const roadCase = roadG.append("g").selectAll("path").data(RORDER.filter(k => k !== "tramvaj" && k !== "ulica" && ROADS[k])).join("path").attr("class", k => "rcase r-" + k);
+const roadCase = roadG.append("g").selectAll("path").data(RORDER.filter(k => ["tercijarna","sekundarna","primarna","magistrala","autoput"].includes(k) && ROADS[k])).join("path").attr("class", k => "rcase r-" + k);
 const roadP = roadG.append("g").selectAll("path").data(RORDER.filter(k => ROADS[k])).join("path").attr("class", k => "road r-" + k);
 const mzG = g.append("g");
 const mzP = mzG.selectAll("path").data(D.mzlines).join("path").attr("class","mzl");
@@ -481,7 +491,7 @@ MODES.forEach(m => document.getElementById("m-"+m).onclick = () => {
   ptG.attr("display", m === "pt" ? null : "none");
   if (m === "liv" && !showPoi) document.getElementById("poiToggle").click(); paint(); show(selected); });
 
-const ROADLEG = `<div class="cat rleg"><span><i class="rl r-autoput"></i>motorway, trunk</span><span><i class="rl r-glavna"></i>primary</span><span><i class="rl r-sekundarna"></i>secondary</span><span><i class="rl r-ulica"></i>street</span><span><i class="rl r-tramvaj"></i>tram</span></div>`;
+const ROADLEG = `<div class="cat rleg">${[["autoput","motorway"],["magistrala","trunk road"],["primarna","primary"],["sekundarna","secondary"],["tercijarna","tertiary"],["ulica","street"],["pristupna","access, service*"],["pjesacka","footpath*"],["stepenice","steps*"],["tramvaj","tram"]].map(([k,n]) => `<span><i class="rl r-${k}"></i>${n}</span>`).join("")}<span class="tag">* shown when zoomed in</span></div>`;
 function legend(){ legend0(); const el = document.getElementById("legend");
   if (showPoi) el.insertAdjacentHTML("beforeend", `<div class="cat pleg">${Object.entries(POIK).map(([k,[n,c]]) =>
     `<button data-poi="${k}" aria-pressed="${poiOn.has(k)}"><i style="background:${c}"></i>${n}</button>`).join("")}</div>`);

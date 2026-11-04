@@ -24,7 +24,7 @@ python 08_dostupnost.py         # dostupnost i atraktivnost lokacije -> out/dost
 python 09_supermarket.py        # lokacije za novi supermarket (Huff) -> out/supermarket_*.csv/.gpkg
 python 12_google_places.py      # (opcionalno, treba GOOGLE_MAPS_API_KEY) trgovine iz Google Places -> raw/
 python 10_teren.py              # topografija: reljef, izohipse, visina i nagib po polju -> out/teren_*
-python 11_putevi.py             # mreža puteva za prikaz -> out/putevi.geojson
+python 11_putevi.py             # mreža puteva za prikaz (10 klasa: autoput … stepenice, tramvaj) -> out/putevi.geojson
 python 15_ulice.py              # pristup autom: uske i strme ulice -> out/ulice_h3.csv (prije koraka 14)
 python 14_kvalitet_zivota.py    # kvalitet života: pješačka dostupnost sadržaja -> out/kvalitet_zivota_h3.csv
 python 16_sunce.py              # sati sunca zimi (zasjenjenje brdima) -> out/sunce_h3.csv

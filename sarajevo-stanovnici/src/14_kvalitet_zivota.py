@@ -188,7 +188,7 @@ def main() -> None:
     rez["indeks_bez_kazni"] = (skor * 100).round(1)
 
     pu = gpd.read_file(OUT / "putevi.geojson").to_crs(CRS_M)
-    bucne = pu[pu.klasa.isin(["autoput", "glavna"])].union_all()
+    bucne = pu[pu.klasa.isin(["autoput", "magistrala", "primarna"])].union_all()
     d_buka = cen.distance(bucne).to_numpy()
     kazna = np.zeros(len(rez))
     for prag, b in sorted(KAZNA_BUKA.items(), reverse=True):

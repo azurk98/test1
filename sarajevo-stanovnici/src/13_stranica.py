@@ -180,7 +180,7 @@ def putevi() -> dict:
     roads: dict[str, list] = {}
     for f in gj["features"]:
         k = f["properties"]["klasa"]
-        nd = 4 if k == "ulica" else 5
+        nd = 4 if k in ("ulica", "pristupna", "pjesacka", "stepenice") else 5
         roads.setdefault(k, []).append([round(c, nd) for xy in f["geometry"]["coordinates"] for c in xy])
     return roads
 

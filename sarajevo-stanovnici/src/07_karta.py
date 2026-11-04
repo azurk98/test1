@@ -75,14 +75,17 @@ def main() -> None:
                            tooltip=folium.GeoJsonTooltip(fields=["mz"], aliases=["MZ"])).add_to(m)
     pp = OUT / "putevi.geojson"
     if pp.exists():
-        boje = {"autoput": ("#f4a259", 4), "glavna": ("#ffd166", 3), "sekundarna": ("#fff1a8", 2.2),
-                "tercijarna": ("#ffffff", 1.6), "ulica": ("#ffffff", 0.8), "tramvaj": ("#e63946", 2)}
+        boje = {"autoput": ("#e8590c", 5), "magistrala": ("#f4a259", 4), "primarna": ("#ffd166", 3.2),
+                "sekundarna": ("#fff1a8", 2.4), "tercijarna": ("#ffffff", 1.8), "ulica": ("#ffffff", 0.9),
+                "pristupna": ("#d9d9d9", 0.6), "pjesacka": ("#cdb4db", 0.6), "stepenice": ("#ff70a6", 1.2),
+                "tramvaj": ("#e63946", 2)}
         folium.GeoJson(
             str(pp), name="Mreža puteva (OSM)", show=True,
             style_function=lambda f: {"color": boje[f["properties"]["klasa"]][0],
                                       "weight": boje[f["properties"]["klasa"]][1],
                                       "opacity": 0.6 if f["properties"]["klasa"] == "ulica" else 0.95,
-                                      "dashArray": "6 4" if f["properties"]["klasa"] == "tramvaj" else None},
+                                      "dashArray": {"tramvaj": "6 4", "pjesacka": "3 3", "stepenice": "1 3"}.get(
+                                          f["properties"]["klasa"])},
             tooltip=folium.GeoJsonTooltip(fields=["ime", "klasa"], aliases=["Naziv", "Klasa"]),
         ).add_to(m)
     dp = OUT / "dostupnost_h3.gpkg"
