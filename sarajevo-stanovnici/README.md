@@ -137,8 +137,8 @@ Nagib: Copernicus DSM bez zgrada (najniža tačka u 90 m, pa izglađivanje), mje
 dionica ≤ 6,8%. Za svako polje: put autom do najbliže tercijarne ili veće ceste (najveći nagib, metri
 uskog puta, makadam) i udio strmih/uskih ulica u polju; ocjena 0–100. Loš pristup oduzima do 15 bodova
 od indeksa kvaliteta života. Najteži pristup: Toka-Džeka, Gornji Velešići, Sumbuluša, Mahmutovac,
-Hrid-Jarčedoli. Oko 43.000 stanovnika ima na putu do glavne ceste uspon > 20% (prije filtriranja zgrada;
-vidi ispis koraka za aktuelne brojke), ~33.000 više od 100 m uske ulice.
+Hrid-Jarčedoli. Najveći uspon na putu do glavne ceste: ≤ 8% za ~182.000 stanovnika, 8–12% ~21.000,
+12–16% ~23.000, 16–20% ~20.000, > 20% ~24.000; ~33.000 stanovnika ima više od 100 m uske ulice do glavne ceste.
 
 ## Topografija (`10_teren.py`)
 
