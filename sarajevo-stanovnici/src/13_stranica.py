@@ -52,6 +52,7 @@ def podaci() -> dict:
     kz = pd.read_csv(OUT / "kvalitet_zivota_h3.csv").set_index("h3_id")
     kz_kol = ["indeks"] + [f"min_{k}" for k in KZ_KAT]
     ul = pd.read_csv(OUT / "ulice_h3.csv").set_index("h3_id")
+    su = pd.read_csv(OUT / "sunce_h3.csv", keep_default_na=False).set_index("h3_id")
     cells = []
     for r in p.itertuples():
         cells.append(
@@ -67,7 +68,10 @@ def podaci() -> dict:
             + [int(round(float(kz.loc[r.h3_id, k]))) for k in kz_kol]
             + [int(ul.loc[r.h3_id, "ocjena_pristupa"]), float(ul.loc[r.h3_id, "put_max_nagib"]),
                int(ul.loc[r.h3_id, "put_usko_m"]), int(round(ul.loc[r.h3_id, "udio_usko"] * 100)),
-               int(round(ul.loc[r.h3_id, "udio_strmo"] * 100)), int(ul.loc[r.h3_id, "put_min_koridor_m"])])
+               int(round(ul.loc[r.h3_id, "udio_strmo"] * 100)), int(ul.loc[r.h3_id, "put_min_koridor_m"])]
+            + [float(su.loc[r.h3_id, "sunce_21dec_h"]), su.loc[r.h3_id, "sunce_21dec_od"],
+               su.loc[r.h3_id, "sunce_21dec_do"], float(su.loc[r.h3_id, "sunce_21jan_h"]),
+               float(su.loc[r.h3_id, "astro_21dec_h"])])
 
     op, _ = ucitaj_granice()
     op = op.set_index("opcina").loc[OP].reset_index()

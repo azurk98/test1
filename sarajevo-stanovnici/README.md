@@ -22,6 +22,7 @@ python 10_teren.py              # topografija: reljef, izohipse, visina i nagib 
 python 11_putevi.py             # mreža puteva za prikaz -> out/putevi.geojson
 python 15_ulice.py              # pristup autom: uske i strme ulice -> out/ulice_h3.csv (prije koraka 14)
 python 14_kvalitet_zivota.py    # kvalitet života: pješačka dostupnost sadržaja -> out/kvalitet_zivota_h3.csv
+python 16_sunce.py              # sati sunca zimi (zasjenjenje brdima) -> out/sunce_h3.csv
 python 13_stranica.py           # interaktivna stranica (artifact) -> out/stranica.html
 python 07_karta.py              # ponovo, da karta dobije slojeve iz koraka 08–11
 ```
@@ -139,6 +140,15 @@ uskog puta, makadam) i udio strmih/uskih ulica u polju; ocjena 0–100. Loš pri
 od indeksa kvaliteta života. Najteži pristup: Toka-Džeka, Gornji Velešići, Sumbuluša, Mahmutovac,
 Hrid-Jarčedoli. Najveći uspon na putu do glavne ceste: ≤ 8% za ~182.000 stanovnika, 8–12% ~21.000,
 12–16% ~23.000, 16–20% ~20.000, > 20% ~24.000; ~33.000 stanovnika ima više od 100 m uske ulice do glavne ceste.
+
+## Sati sunca zimi (`16_sunce.py`)
+
+Sati direktnog sunca 21. decembra i 21. januara (vedar dan): položaj sunca svakih 5 minuta, za 7 tačaka
+po polju zraka prema suncu do 25 km kroz Copernicus DEM (bez zgrada, uz zakrivljenost Zemlje i refrakciju).
+Na ravnom horizontu 21. decembar ima 8,8 h. Najviše sunca: južne padine (Medrese, Sedrenik ~7,9 h) i
+otvoreni zapad (Dobroševići, Sokolje, Briješće); najmanje: Mahmutovac (2,2 h), Toka-Džeka (2,7 h),
+Hrid-Jarčedoli, Širokača, Babića bašča, Bistrik, Mjedenica (4,2–5,6 h; sjeverne padine ispod Trebevića i
+kanjon Miljacke). Sjena susjednih zgrada i zimska magla u dolini nisu uključeni.
 
 ## Topografija (`10_teren.py`)
 
