@@ -62,62 +62,50 @@ def parsiraj_brojeve(tekst: str) -> list[tuple[int | None, int | None, str]]:
 
 
 def izvuci_pravila_iz_pdf(pdf_path, mz_nazivi: list[str]) -> pd.DataFrame:
+    """Tabele iz liste Općine Novi Grad (04.11.2025): po MZ zaglavlje
+    'Mjesna zajednica “X”', pa redovi [r/br, ulica, parni od, parni do,
+    neparni od, neparni do, napomena]; sekcija 'Savjet mjesne zajednice' se preskače.
+    Tabele se mogu nastaviti na sljedećoj stranici (stanje se prenosi)."""
     import pdfplumber
 
     mz_norm = {normaliziraj(m): m for m in mz_nazivi}
-    # dodatni oblici naziva u dokumentima
-    for m in mz_nazivi:
-        mz_norm.setdefault(normaliziraj(m).replace("alipasino polje ", "alipasino polje "), m)
-        mz_norm.setdefault(normaliziraj(m.replace("Naselje heroja", "N.H.")), m)
-
-    def prepoznaj_mz(txt: str) -> str | None:
-        n = normaliziraj(re.sub(r"^\s*(mz|mjesna zajednica)\s*", "", txt, flags=re.I))
-        n = re.sub(r"^(mz|mjesna zajednica)\s+", "", n)
-        if n in mz_norm:
-            return mz_norm[n]
-        for k, v in mz_norm.items():
-            if n.startswith(k) and len(n) - len(k) <= 3:
-                return v
-        return None
-
-    redovi, trenutna = [], None
+    redovi, trenutna, u_ulicama = [], None, False
     with pdfplumber.open(pdf_path) as pdf:
         for page in pdf.pages:
-            tabele = page.extract_tables()
-            linije = []
-            if tabele:
-                for tab in tabele:
-                    for red in tab:
-                        celije = [c.strip() for c in red if c and c.strip()]
-                        if celije:
-                            linije.append(celije)
-            else:
-                for l in (page.extract_text() or "").splitlines():
-                    if l.strip():
-                        linije.append([l.strip()])
-            for celije in linije:
-                prva = celije[0]
-                mz = prepoznaj_mz(" ".join(celije)) or prepoznaj_mz(prva)
-                if mz:
-                    trenutna = mz
-                    continue
-                if trenutna is None:
-                    continue
-                # ukloni redni broj
-                celije = [re.sub(r"^\d+\.\s*", "", c) for c in celije]
-                if len(celije) >= 2:
-                    ulica, brojevi = celije[0], " ".join(celije[1:])
-                else:
-                    m = re.match(r"^(?P<u>.*?[A-Za-zčćžšđČĆŽŠĐ.)])\s*(?:[-–:]\s*)?(?P<b>(?:(?:ne)?parni|od|br\.?|bb|\d).*)?$",
-                                 celije[0])
-                    if not m:
+            for tab in page.extract_tables():
+                for red in tab:
+                    celije = [c if c is None else c.replace("\n", " ").strip() for c in red]
+                    tekst = " ".join(c for c in celije if c)
+                    m = re.search(r"Mjesna zajednica\s*[“\"„]([^”\"“]+)[”\"“]", tekst)
+                    if m:
+                        trenutna = mz_norm.get(normaliziraj(m.group(1)))
+                        if trenutna is None:
+                            print(f"  nepoznata MZ u PDF-u: {m.group(1)}")
+                        u_ulicama = False
                         continue
-                    ulica, brojevi = m.group("u"), m.group("b") or ""
-                if len(normaliziraj(ulica)) < 3 or normaliziraj(ulica) in ("naziv ulice", "ulica", "r br"):
-                    continue
-                for od, do, par in parsiraj_brojeve(brojevi):
-                    redovi.append({"mz": trenutna, "ulica": ulica.strip(), "od": od, "do": do,
-                                   "paritet": par, "izvorni_tekst": " | ".join(celije)})
+                    if "Ulice mjesne zajednice" in tekst:
+                        u_ulicama = True
+                        continue
+                    if "Savjet mjesne zajednice" in tekst:
+                        u_ulicama = False
+                        continue
+                    if not u_ulicama or trenutna is None:
+                        continue
+                    v = [c for c in celije if c is not None]
+                    if len(v) < 2 or not re.match(r"^\d+\.?$", v[0] or ""):
+                        continue
+                    v += [""] * (7 - len(v))
+                    _, ulica, p_od, p_do, n_od, n_do, nap = v[:7]
+                    pravila = []
+                    for od, do, par in ((p_od, p_do, "parni"), (n_od, n_do, "neparni")):
+                        o, d = kucni_broj(od), kucni_broj(do)
+                        if o is not None or d is not None:
+                            pravila.append((o, d if d is not None else o, par))
+                    if not pravila:
+                        pravila = [(None, None, "sve")]
+                    for o, d, par in pravila:
+                        redovi.append({"mz": trenutna, "ulica": ulica, "od": o, "do": d,
+                                       "paritet": par, "izvorni_tekst": " | ".join(x for x in v if x)})
     return pd.DataFrame(redovi, columns=["mz", "ulica", "od", "do", "paritet", "izvorni_tekst"])
 
 

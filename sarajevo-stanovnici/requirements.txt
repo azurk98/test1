@@ -9,3 +9,4 @@ requests
 pdfplumber
 folium
 pyogrio
+scikit-learn

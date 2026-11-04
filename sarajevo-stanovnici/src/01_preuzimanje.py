@@ -31,6 +31,7 @@ area(id:{AREA})->.grad;
   node["shop"](area.grad);
   node["amenity"](area.grad);
   node["office"](area.grad);
+  node["addr:housenumber"]["addr:street"](area.grad);
   way["landuse"](area.grad);
   relation["landuse"](area.grad);
   way["leisure"="park"](area.grad);
@@ -54,6 +55,8 @@ PDF = {
     "stari_grad_strategija.pdf": "https://starigrad.ba/userfiles/file/2024/2/strategija.pdf",
     "centar_odluka_mz.pdf": "https://www.centar.ba/documents/download/86618/odluka-o-osnivanju-i-organizaciji-mjesnih-zajednica-na-podrucju-opcine-centar",
 }
+
+BBBIKE = "https://download.bbbike.org/osm/bbbike/Sarajewo/Sarajewo.osm.gz"
 
 UA = {"User-Agent": "sarajevo-stanovnici/1.0 (procjena stanovnistva, istrazivacki skript)"}
 
@@ -100,9 +103,43 @@ def preuzmi(url: str, cilj, force: bool) -> bool:
         return False
 
 
+GHSL_URL = ("https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_BUILT_H_GLOBE_R2023A/"
+            "GHS_BUILT_H_ANBH_E2018_GLOBE_R2023A_54009_100/V1-0/tiles/"
+            "GHS_BUILT_H_ANBH_E2018_GLOBE_R2023A_54009_100_V1_0_R4_C20.zip")  # pločica sa Sarajevom
+
+
+def ghsl(force: bool) -> bool:
+    """Preuzme GHSL pločicu i izreže okvir Sarajeva u raw/ghsl_built_h.tif."""
+    cilj = RAW / "ghsl_built_h.tif"
+    if cilj.exists() and not force:
+        print(f"  postoji: {cilj.name}")
+        return True
+    zp = RAW / "ghsl_tile.zip"
+    if not preuzmi(GHSL_URL, zp, force):
+        return False
+    import zipfile
+
+    import rasterio
+    from rasterio.warp import transform_bounds
+    from rasterio.windows import from_bounds
+    with zipfile.ZipFile(zp) as z:
+        ime = next(n for n in z.namelist() if n.endswith(".tif"))
+        z.extract(ime, RAW / "ghsl_x")
+    with rasterio.open(RAW / "ghsl_x" / ime) as src:
+        b = transform_bounds("EPSG:4326", src.crs, 18.20, 43.74, 18.56, 43.97)
+        win = from_bounds(*b, transform=src.transform).round_offsets().round_lengths()
+        prof = src.profile | {"width": int(win.width), "height": int(win.height),
+                              "transform": src.window_transform(win), "compress": "deflate"}
+        with rasterio.open(cilj, "w", **prof) as dst:
+            dst.write(src.read(window=win))
+    print(f"  -> {cilj.name}")
+    return True
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--force", action="store_true")
+    ap.add_argument("--bbbike", action="store_true", help="OSM iz BBBike ekstrakta umjesto Overpassa")
     a = ap.parse_args()
     greske = []
 
@@ -110,16 +147,37 @@ def main() -> int:
     mz = pd.read_csv(DATA / "mz_lista.csv").osm_relacija.dropna().astype(int)
     rels = sorted(set(OPCINE.values()) | {GRAD_SARAJEVO_REL} | set(mz))
     upit = f"[out:json][timeout:300];\nrel(id:{','.join(map(str, rels))});\nout geom tags;\n"
-    try:
-        overpass(upit, RAW / "granice.json", a.force)
-    except RuntimeError as e:
-        greske.append(str(e))
+    osm_greske = []
+    if not a.bbbike:
+        try:
+            overpass(upit, RAW / "granice.json", a.force)
+        except RuntimeError as e:
+            osm_greske.append(str(e))
 
-    print("OSM zgrade, POI, landuse, parkovi, aerodrom")
-    try:
-        overpass(UPIT_OSM, RAW / "osm_grad.json", a.force)
-    except RuntimeError as e:
-        greske.append(str(e))
+        print("OSM zgrade, POI, landuse, parkovi, aerodrom")
+        try:
+            overpass(UPIT_OSM, RAW / "osm_grad.json", a.force)
+        except RuntimeError as e:
+            osm_greske.append(str(e))
+
+    if osm_greske or a.bbbike:
+        # Rezerva: BBBike sedmični OSM ekstrakt za Sarajevo (18.24–18.52 E, 43.77–43.94 N)
+        print("Overpass nedostupan ili --bbbike: koristim BBBike ekstrakt")
+        xml = RAW / "Sarajewo.osm.gz"
+        if preuzmi(BBBIKE, xml, a.force):
+            from osm_xml import dopuni_relacije_iz_api, konvertuj
+            if a.force or not (RAW / "osm_grad.json").exists():
+                info = konvertuj(xml, set(rels), RAW / "granice.json", RAW / "osm_grad.json")
+                print(f"  {info}")
+                # granice koje izlaze iz okvira ekstrakta: pune verzije s OSM API-ja
+                dopuna = info["nedostaju_relacije"] + info["nepotpune_relacije"]
+                if dopuna:
+                    print(f"  dopuna relacija s api.openstreetmap.org: {dopuna}")
+                    neusp = dopuni_relacije_iz_api(dopuna, RAW / "granice.json", UA)
+                    if neusp:
+                        greske.append(f"OSM API: relacije nisu dopunjene: {neusp}")
+        else:
+            greske += osm_greske
 
     print("WorldPop 2026")
     cilj = RAW / "worldpop_2026.tif"
@@ -132,8 +190,9 @@ def main() -> int:
         if not preuzmi(url, RAW / ime, a.force):
             greske.append(f"{ime}: {url}")
 
-    print("GHSL (opcionalno): ako 02_zgrade.py prijavi < 30% zgrada sa spratnošću,\n"
-          "  ručno spremiti isječak GHS-BUILT-H (100 m) kao raw/ghsl_built_h.tif")
+    print("GHSL GHS-BUILT-H (prosječna visina zgrada, 100 m, 2018)")
+    if not ghsl(a.force):
+        greske.append(f"GHSL: {GHSL_URL}")
 
     if greske:
         print("\nNIJE PREUZETO:")

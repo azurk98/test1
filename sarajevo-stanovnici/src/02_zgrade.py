@@ -29,6 +29,47 @@ def broj(s):
     return float(m.group(0).replace(",", ".")) if m else np.nan
 
 
+def procjena_spratnosti(z: gpd.GeoDataFrame, cent: gpd.GeoDataFrame) -> tuple[np.ndarray, dict]:
+    """Gradient boosting na zgradama s building:levels. Ulazi: površina i oblik
+    otiska, tip, gustina i veličina okolnih zgrada, GHSL visina. Vraća procjenu
+    za sve zgrade i rezultat prostorne unakrsne provjere (blokovi 500 m)."""
+    from scipy.spatial import cKDTree
+    from sklearn.ensemble import GradientBoostingRegressor
+    from sklearn.model_selection import GroupKFold
+
+    xy = np.c_[cent.geometry.x, cent.geometry.y]
+    tree = cKDTree(xy)
+    _, idx = tree.query(xy, k=min(16, len(z)))
+    X = pd.DataFrame({
+        "log_povrsina": np.log(z.povrsina.to_numpy()),
+        "oblik": (z.length / np.sqrt(z.povrsina)).to_numpy(),
+        "ghsl_m": z["ghsl_m"].fillna(0).to_numpy(),
+        "susjedi_povrsina": np.log(np.median(z.povrsina.to_numpy()[idx[:, 1:]], axis=1)),
+        "gustina_100m": tree.query_ball_point(xy, r=100, return_length=True),
+        "stambena_visoka": z.tip.isin(["apartments", "residential"]).astype(int).to_numpy(),
+        "kuca": z.tip.isin(["house", "detached", "semidetached_house", "terrace", "bungalow"]).astype(int).to_numpy(),
+    })
+    lab = (z.spratnost_izvor == "building:levels").to_numpy()
+    y = z.spratnost.to_numpy(float)
+    blok = (xy[:, 0] // 500).astype(int) * 100000 + (xy[:, 1] // 500).astype(int)
+
+    def gbm():
+        return GradientBoostingRegressor(n_estimators=300, max_depth=3, learning_rate=0.05,
+                                         subsample=0.8, random_state=0)
+
+    cv = np.zeros(lab.sum())
+    for tr, te in GroupKFold(5).split(X[lab], y[lab], blok[lab]):
+        cv[te] = gbm().fit(X[lab].iloc[tr], y[lab][tr]).predict(X[lab].iloc[te])
+    g = np.maximum(np.round(X.ghsl_m[lab] / 3), 1)
+    info = {"n_ucenje": int(lab.sum()),
+            "model_mae": round(float(np.mean(np.abs(cv - y[lab]))), 2),
+            "model_r": round(float(np.corrcoef(cv, y[lab])[0, 1]), 2),
+            "ghsl_mae": round(float(np.mean(np.abs(g - y[lab]))), 2),
+            "ghsl_r": round(float(np.corrcoef(g, y[lab])[0, 1]), 2)}
+    pred = gbm().fit(X[lab], y[lab]).predict(X)
+    return np.clip(np.round(pred), 1, None), info
+
+
 def stambeni_udio(tip: str, landuse: str | None) -> float:
     if tip in STAMBENE:
         return 1.0
@@ -47,8 +88,9 @@ def stambeni_udio(tip: str, landuse: str | None) -> float:
 
 
 def zapremina(z: pd.DataFrame, pomak: int = 0) -> pd.Series:
-    """Stambena zapremina (m² poda) uz pomak podrazumijevane spratnosti."""
-    sprat = z.spratnost + np.where(z.spratnost_izvor == "podrazumijevano", pomak, 0)
+    """Stambena zapremina (m² poda) uz pomak procijenjene spratnosti
+    (podrazumijevana po tipu i model; izmjerena OSM spratnost se ne mijenja)."""
+    sprat = z.spratnost + np.where(z.spratnost_izvor.isin(["podrazumijevano", "model"]), pomak, 0)
     sprat = np.maximum(sprat, 1)
     stambeni = np.maximum(sprat - z.poslovno_prizemlje.astype(int), 0)
     return z.povrsina * stambeni * z.stambeni_udio
@@ -73,6 +115,16 @@ def main() -> None:
             z[kol] = None
     z["tip"] = z["building"].astype(str).str.strip().str.lower()
 
+    # adresne tačke (čvorovi s addr:*) unutar zgrade bez adrese -> adresa zgrade
+    if "addr:housenumber" in osm and "addr:street" in osm:
+        at = osm[(osm.geom_type == "Point") & osm["addr:housenumber"].notna()
+                 & osm["addr:street"].notna()][["addr:street", "addr:housenumber", "geometry"]].to_crs(CRS_M)
+        bez = z["addr:street"].isna() | z["addr:housenumber"].isna()
+        hit = gpd.sjoin(at, z.loc[bez, ["geometry"]], predicate="within").drop_duplicates("index_right")
+        z.loc[hit.index_right, "addr:street"] = hit["addr:street"].to_numpy()
+        z.loc[hit.index_right, "addr:housenumber"] = hit["addr:housenumber"].to_numpy()
+        print(f"Adresa preuzeta iz adresnih tačaka: {len(hit)} zgrada")
+
     # --- landuse
     lu = poligoni(osm[osm.get("landuse").notna()]).to_crs(CRS_M)[["landuse", "geometry"]]
     prioritet = {"industrial": 0, "commercial": 1, "retail": 1, "residential": 2}
@@ -94,17 +146,25 @@ def main() -> None:
     udio_nivoi = float(nivoi.notna().mean()) if len(z) else 0.0
     ghsl = RAW / "ghsl_built_h.tif"
     ghsl_koristen = False
+    model_cv = None
     if udio_nivoi < 0.30:
         if ghsl.exists():
             import rasterio
             with rasterio.open(ghsl) as src:
-                m = z.spratnost.isna()
-                pts = cent.loc[m].to_crs(src.crs)
-                vals = np.array([v[0] for v in src.sample(zip(pts.x, pts.y))], float)
+                pts = cent.to_crs(src.crs)
+                vals = np.array([v[0] for v in src.sample(zip(pts.geometry.x, pts.geometry.y))], float)
                 vals[(vals <= 0) | (vals == src.nodata)] = np.nan
-                z.loc[m, "spratnost"] = vals / 3.0
-                z.loc[m & z.spratnost.notna(), "spratnost_izvor"] = "ghsl"
-                ghsl_koristen = True
+            z["ghsl_m"] = vals
+            ghsl_koristen = True
+            # GHSL (prosjek 100 m ćelije) slabo razlikuje zgrade (provjera na zgradama
+            # s building:levels: r ≈ 0.13). Zato se spratnost procjenjuje modelom
+            # naučenim na zgradama s poznatom spratnošću; GHSL je jedan od ulaza.
+            pred, model_cv = procjena_spratnosti(z, cent)
+            m = z.spratnost.isna()
+            z.loc[m, "spratnost"] = pred[m.to_numpy()]
+            z.loc[m, "spratnost_izvor"] = "model"
+            print(f"Spratnost procijenjena modelom za {int(m.sum())} zgrada; "
+                  f"prostorna unakrsna provjera: {model_cv}")
         else:
             print("UPOZORENJE: < 30% zgrada ima building:levels, a raw/ghsl_built_h.tif ne postoji.")
 
@@ -152,6 +212,7 @@ def main() -> None:
         "stambene_sa_adresom_pct": round(float(adresa[stambene].mean() * 100), 1) if stambene.any() else 0,
         "izvor_spratnosti": z.spratnost_izvor.value_counts().to_dict(),
         "ghsl_koristen": ghsl_koristen,
+        "model_spratnosti_cv": model_cv,
         "po_tipu": z.tip.value_counts().head(20).to_dict(),
         "po_opcini_sve": tabela(np.ones(len(z), bool)).to_dict(orient="index"),
         "po_opcini_stambene": tabela(stambene.values).to_dict(orient="index"),
