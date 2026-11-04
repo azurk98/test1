@@ -16,6 +16,7 @@ python kalibracija_gustine.py   # (dijagnostika) omjer gustine kuće/blokovi i �
 python 06_provjera.py           # -> out/validacija.md
 python 07_karta.py              # -> out/karta.html
 python 08_dostupnost.py         # dostupnost i atraktivnost lokacije -> out/dostupnost_h3.gpkg/.csv
+python 09_supermarket.py        # lokacije za novi supermarket (Huff) -> out/supermarket_*.csv/.gpkg
 ```
 
 **Kontrolna tačka prije koraka 5:** `02_zgrade.py` ispisuje (i sprema u
@@ -75,6 +76,25 @@ Dodatni pokazatelji po polju, za analizu lokacija; procjena stanovnika se ne mij
 
 Ograničenja: dostupni stanovnici samo iz četiri modelirane općine (rubni efekat prema Ilidži,
 Vogošći, Istočnom Sarajevu); bez podataka o gužvi; javni prevoz je samo blizina stanica, bez voznog reda.
+
+## Lokacije za supermarket (`09_supermarket.py`)
+
+Huffov model: stanovnici polja dijele kupovinu namirnica na trgovine do 20 min
+(P ∝ veličina · vrijeme^-2; vrijeme = min(pješice, autom + 2 min)). Postojeće trgovine iz OSM-a:
+supermarket = 1 (ili površina/1000 m², 0,5–4), mall 1, department_store 0,5, convenience 0,25.
+Nova trgovina (A = 1) u svakom polju bez supermarketa, ≤ 400 m od glavne ceste; izbor redom
+(svaki izbor ulazi u konkurenciju), najmanje 700 m razmaka. Dvije strategije:
+
+- **bijela_mrlja**: najviše stanovnika koji danas hodaju > 10 min do supermarketa dolazi na ≤ 10 min.
+  Prva tri: Briješće, Naselje heroja Sokolje, Švrakino Selo III (najviše kupaca među njima, ~1.900).
+- **najveci_promet**: najviše osvojenih kupaca (uglavnom od konkurencije): Željeznička, Trg heroja,
+  Alipašino Polje BII; stabilno za λ 1,5–2,5.
+
+Danas ~56.000 od 270.600 stanovnika (21%) nema supermarket u 10 min pješice (prema OSM-u).
+Oprez: bijele mrlje su u prigradskim dijelovima Novog Grada, gdje je model stanovništva najnesigurniji
+(1,75–2,5× udjela iz 2010) i gdje OSM vjerovatno ne bilježi sve male trgovine. Kolona
+`znakovi_zemljista` (parking, poslovni objekat, gradilište) je samo nagovještaj; vlasništvo i
+namjenu provjeriti u katastru i prostornom planu.
 
 ## Odluke u implementaciji (gdje SPEC ostavlja prostor)
 
