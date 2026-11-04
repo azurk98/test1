@@ -24,7 +24,7 @@ def main() -> None:
     p["mz"] = p.mz.fillna("–")
     vmax = float(np.percentile(p.stanovnici, 98)) if len(p) else 1
     cmap = cm.LinearColormap(["#fff5eb", "#fdae6b", "#e6550d", "#7f2704"], vmin=0, vmax=vmax,
-                             caption="Stanovnici po H3 polju (~0,1 km²)")
+                             caption="Stanovnici po H3 polju")
 
     c = p.geometry.union_all().centroid
     m = folium.Map(location=[c.y, c.x], zoom_start=13, tiles=None)

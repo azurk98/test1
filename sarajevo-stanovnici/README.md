@@ -1,5 +1,10 @@
 # Procjena broja stanovnika po H3 polju: Grad Sarajevo
 
+Mreža: H3 rezolucija **10** (~0,015 km², stranica šestougla ~66 m; 9.033 polja), zadano u `common.py`
+(`H3_RES`, ili varijabla okruženja `H3_RES=9` za rezoluciju iz SPEC-a, ~0,105 km²). Na rezoluciji 10
+procjena po polju je nesigurnija (manje zgrada po polju), ali zbirovi po općini ostaju tačni; MAPE za
+Stari Grad 17,1% (rezolucija 9: 16,4%).
+
 Implementacija specifikacije iz [`SPEC.md`](SPEC.md).
 
 ## Pokretanje
