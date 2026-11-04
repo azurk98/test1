@@ -109,7 +109,7 @@ def tobler_kmh(nagib):
     return PJESACKA_BRZINA / np.exp(-3.5 * 0.05) * np.exp(-3.5 * np.abs(np.clip(nagib, -1, 1) + 0.05))
 
 
-def visine_cvorova(lon, lat) -> np.ndarray:
+def visine_cvorova(lon, lat, sigma: float = 2, tlo: bool = False) -> np.ndarray:
     """Nadmorska visina čvorova iz Copernicus DEM-a (izglađenog ~60 m, kao u 10_teren.py)."""
     import importlib.util
     from scipy.ndimage import gaussian_filter
@@ -117,7 +117,11 @@ def visine_cvorova(lon, lat) -> np.ndarray:
     ter = importlib.util.module_from_spec(sp)
     sp.loader.exec_module(ter)
     z, t = ter.dem()
-    z = gaussian_filter(z, sigma=2)
+    if tlo:
+        # DSM -> približno tlo: najniža tačka u prozoru 90 m (ceste su na tlu, krovovi nisu)
+        from scipy.ndimage import grey_opening
+        z = grey_opening(z, size=(3, 3))
+    z = gaussian_filter(z, sigma=sigma)
     col = np.clip(((np.asarray(lon) - t.c) / t.a).astype(int), 0, z.shape[1] - 1)
     row = np.clip(((np.asarray(lat) - t.f) / t.e).astype(int), 0, z.shape[0] - 1)
     return z[row, col]

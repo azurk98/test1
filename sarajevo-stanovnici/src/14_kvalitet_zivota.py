@@ -10,7 +10,8 @@ Vrijeme hoda: OSM mreža ulica i staza, nagib po Toblerovoj formuli (kao 08), od
 do najbližeg sadržaja svake kategorije. Bodovi po kategoriji: 1 / (1 + (t / t50)²), gdje je
 t50 vrijeme na kojem sadržaj vrijedi pola (npr. škola 12 min). Indeks 0–100 je ponderisani
 zbir bodova (KATEGORIJE) umanjen za buku uz autoput/magistralu/primarnu cestu, industriju
-u polju i vrlo strm teren. Ponderi i pragovi su procjena, ne kalibracija; mijenjaju se ovdje.
+u polju, vrlo strm teren i težak pristup autom (uske i strme ulice, 15_ulice.py; pokrenuti
+prije ovog koraka). Ponderi i pragovi su procjena, ne kalibracija; mijenjaju se ovdje.
 Sadržaji izvan četiri općine (Ilidža, Vogošća...) se računaju, jer ih stanovnici koriste.
 """
 from __future__ import annotations
@@ -51,6 +52,7 @@ KATEGORIJE = {
 KAZNA_BUKA = {75: 10, 150: 5}       # m od autoputa/magistrale/primarne ceste -> oduzeti bodovi
 KAZNA_INDUSTRIJA = (0.25, 10)       # udio industrijskog zemljišta u polju > 25% -> -10
 KAZNA_STRMO = (20, 5)               # srednji nagib polja > 20% -> -5
+KAZNA_PRISTUP = 0.15                # (100 - ocjena pristupa autom iz 15_ulice.py) × 0,15 -> do -15
 MAX_MIN = 60
 
 NIJE_OSNOVNA = re.compile(r"(srednj|gimnaz|tehni[cč]k|medicinsk|ekonomsk|škola za|jezi|keramik|français|umjetni|"
@@ -199,7 +201,12 @@ def main() -> None:
     kazna += np.where(udio_ind > KAZNA_INDUSTRIJA[0], KAZNA_INDUSTRIJA[1], 0)
     ter = pd.read_csv(OUT / "teren_h3.csv").set_index("h3_id").nagib_pct.reindex(rez.h3_id).fillna(0).to_numpy()
     kazna += np.where(ter > KAZNA_STRMO[0], KAZNA_STRMO[1], 0)
-    rez["kazne"] = kazna
+    up = OUT / "ulice_h3.csv"
+    if up.exists():
+        pr = pd.read_csv(up).set_index("h3_id").ocjena_pristupa.reindex(rez.h3_id).fillna(100).to_numpy()
+        rez["ocjena_pristupa"] = pr.astype(int)
+        kazna += (100 - pr) * KAZNA_PRISTUP
+    rez["kazne"] = kazna.round(1)
     rez["indeks"] = np.clip(rez.indeks_bez_kazni - kazna, 0, 100).round(0).astype(int)
     rez.to_csv(OUT / "kvalitet_zivota_h3.csv", index=False)
 

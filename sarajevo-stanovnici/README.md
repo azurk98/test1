@@ -20,6 +20,7 @@ python 09_supermarket.py        # lokacije za novi supermarket (Huff) -> out/sup
 python 12_google_places.py      # (opcionalno, treba GOOGLE_MAPS_API_KEY) trgovine iz Google Places -> raw/
 python 10_teren.py              # topografija: reljef, izohipse, visina i nagib po polju -> out/teren_*
 python 11_putevi.py             # mreža puteva za prikaz -> out/putevi.geojson
+python 15_ulice.py              # pristup autom: uske i strme ulice -> out/ulice_h3.csv (prije koraka 14)
 python 14_kvalitet_zivota.py    # kvalitet života: pješačka dostupnost sadržaja -> out/kvalitet_zivota_h3.csv
 python 13_stranica.py           # interaktivna stranica (artifact) -> out/stranica.html
 python 07_karta.py              # ponovo, da karta dobije slojeve iz koraka 08–11
@@ -125,6 +126,19 @@ kazne za buku (≤ 150 m od autoputa/magistrale/primarne ceste), industriju (> 2
 teren (> 20%). Ponderi i t50 u `KATEGORIJE` su procjena. Prosječan indeks po stanovniku: Novo Sarajevo 71,
 Centar 58, Novi Grad 51, Stari Grad 47. Najbolje MZ: Kovačići, Čengić Vila I, Malta, Željeznička, Trg heroja;
 najslabije: Reljevo, Zabrđe, Dobroševići, Mošćanica.
+
+## Pristup autom: uske i strme ulice (`15_ulice.py`)
+
+OSM gotovo nema širinu ulica (29 od 6.650 stambenih), pa se širina procjenjuje kao koridor između
+zgrada (okomice lijevo i desno do 20 m s polovine svake dionice): < 9 m usko, < 6 m vrlo usko; uske su
+i `lanes=1`, `living_street`, `track`. Ograde i zidovi nisu u OSM-u, pa stvarna ulica može biti uža.
+Nagib: Copernicus DSM bez zgrada (najniža tačka u 90 m, pa izglađivanje), mjeren na 100 m duž ulice
+(kraće dionice su šum DEM-a od 30 m); mostovi i tuneli isključeni. Provjera: primarne ceste 90%
+dionica ≤ 6,8%. Za svako polje: put autom do najbliže tercijarne ili veće ceste (najveći nagib, metri
+uskog puta, makadam) i udio strmih/uskih ulica u polju; ocjena 0–100. Loš pristup oduzima do 15 bodova
+od indeksa kvaliteta života. Najteži pristup: Toka-Džeka, Gornji Velešići, Sumbuluša, Mahmutovac,
+Hrid-Jarčedoli. Oko 43.000 stanovnika ima na putu do glavne ceste uspon > 20% (prije filtriranja zgrada;
+vidi ispis koraka za aktuelne brojke), ~33.000 više od 100 m uske ulice.
 
 ## Topografija (`10_teren.py`)
 

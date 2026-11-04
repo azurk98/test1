@@ -51,6 +51,7 @@ def podaci() -> dict:
     ter = pd.read_csv(OUT / "teren_h3.csv").set_index("h3_id")
     kz = pd.read_csv(OUT / "kvalitet_zivota_h3.csv").set_index("h3_id")
     kz_kol = ["indeks"] + [f"min_{k}" for k in KZ_KAT]
+    ul = pd.read_csv(OUT / "ulice_h3.csv").set_index("h3_id")
     cells = []
     for r in p.itertuples():
         cells.append(
@@ -63,7 +64,10 @@ def podaci() -> dict:
             + [None if pd.isna(sm.get(r.h3_id)) else float(sm.get(r.h3_id))]
             + ([int(ter.loc[r.h3_id, "visina_m"]), int(ter.loc[r.h3_id, "nagib_pct"])]
                if r.h3_id in ter.index else [None, None])
-            + [int(round(float(kz.loc[r.h3_id, k]))) for k in kz_kol])
+            + [int(round(float(kz.loc[r.h3_id, k]))) for k in kz_kol]
+            + [int(ul.loc[r.h3_id, "ocjena_pristupa"]), float(ul.loc[r.h3_id, "put_max_nagib"]),
+               int(ul.loc[r.h3_id, "put_usko_m"]), int(round(ul.loc[r.h3_id, "udio_usko"] * 100)),
+               int(round(ul.loc[r.h3_id, "udio_strmo"] * 100)), int(ul.loc[r.h3_id, "put_min_koridor_m"])])
 
     op, _ = ucitaj_granice()
     op = op.set_index("opcina").loc[OP].reset_index()
@@ -104,7 +108,15 @@ def podaci() -> dict:
     sd = sd[(sd.geometry.x.between(x0, x1)) & (sd.geometry.y.between(y0, y1))]
     poi = {k: [[round(g.x, 5), round(g.y, 5), (n if isinstance(n, str) else "")]
                for g, n in zip(sd[sd.kategorija == k].geometry, sd[sd.kategorija == k].ime)] for k in POI_KAT}
-    return {"poi": poi,
+    dio = gpd.read_file(OUT / "ulice_dionice.gpkg")
+    dio = dio[~dio.klasa.isin(["motorway", "motorway_link", "trunk", "trunk_link", "primary", "primary_link",
+                               "secondary", "secondary_link", "tertiary", "tertiary_link"])]
+    dio["kod"] = (dio.nagib > 12).astype(int) + 2 * dio.uska.astype(bool).astype(int)
+    dio = dio[dio.kod > 0].to_crs(4326)
+    acc = {}
+    for kod, g in dio.groupby("kod"):
+        acc[int(kod)] = [[round(c, 5) for xy in geom.coords for c in xy] for geom in g.geometry]
+    return {"acc": acc, "poi": poi,
             "stores": [[round(a, 5), round(b, 5), (n if isinstance(n, str) else "")]
                        for a, b, n in zip(st.lon, st.lat, st.ime)],
             "sites": sites, "cells": cells, "summ": summ, "mz": mzrows,
