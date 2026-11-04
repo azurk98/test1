@@ -130,6 +130,17 @@ aside.read{border-left:1px solid var(--line);padding:16px;max-height:calc(min(68
 .aqs rect{fill:#2b2d42;stroke:#fff;stroke-width:1px}
 .aqs text{font:600 10px var(--mono);fill:#fff;pointer-events:none}
 .legend b.aqk{display:inline-grid;place-items:center;min-width:22px;height:15px;border-radius:3px;background:#2b2d42;color:#fff;font:600 9.5px var(--mono);padding:0 3px}
+.bestbtn{font-weight:600}
+.bestp{display:grid;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--bg)}
+.sliders{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:4px 18px}
+.sliders label{display:grid;grid-template-columns:minmax(0,1fr) 110px 26px;align-items:center;gap:8px;font-size:13px}
+.sliders input{width:100%;accent-color:var(--accent)}
+.sliders b{text-align:right;font-weight:500;color:var(--muted)}
+.fb dd{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+.mini{display:inline-block;width:52px;height:6px;border-radius:3px;background:var(--line);overflow:hidden;flex:none}
+.fb dd b{min-width:24px;text-align:right}
+.mini i{display:block;height:100%;background:var(--accent)}
+.lnk{all:unset;cursor:pointer;color:var(--accent)} .lnk:focus-visible{outline:2px solid var(--accent)}
 .acc{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke;pointer-events:none;stroke-width:calc(1.6px * var(--zw))}
 .acc.a1{stroke:#ff8c1a}.acc.a2{stroke:#e63946}.acc.a3{stroke:#b5179e;stroke-width:calc(2.2px * var(--zw))}
 .poi{stroke:#fff;pointer-events:visiblePainted;cursor:help}
@@ -178,6 +189,7 @@ footer{font-size:13px;color:var(--muted);max-width:80ch}
     <div class="mapcol">
       <div class="tools">
         <div class="seg" role="group" aria-label="Colour cells by">
+          <button id="m-best" aria-pressed="false" class="bestbtn">Best to live</button>
           <button id="m-pop" aria-pressed="true">Residents</button>
           <button id="m-den" aria-pressed="false">Per km²</button>
           <button id="m-rel" aria-pressed="false">Reliability</button>
@@ -201,6 +213,10 @@ footer{font-size:13px;color:var(--muted);max-width:80ch}
           <button class="btn" id="reset">Reset view</button>
         </div>
       </div>
+      <div class="bestp" id="bestPanel" hidden>
+        <div class="seg seg-sm" role="group" aria-label="Who is choosing" id="profiles"></div>
+        <div class="sliders" id="sliders"></div>
+      </div>
       <svg id="map" role="img" aria-label="Hexagon map of estimated residents"></svg>
       <div class="legend" id="legend"></div>
       <div class="satcredit" id="satcredit"></div>
@@ -215,6 +231,7 @@ footer{font-size:13px;color:var(--muted);max-width:80ch}
     <li><b>Floor counts</b>Only 4.7% of OSM buildings record their floors. The rest come from a model trained on those that do (spatial cross-check: r = 0.70), since GHSL heights alone barely separate houses from towers (r = 0.13).</li>
     <li><b>Attractiveness</b>A location score from 0 to 100, separate from the population estimate. It weighs, as percentile ranks among populated cells: residents within a 10-minute walk (20%) and a 10-minute drive (15%), shops and services within a 10-minute walk (20%), stops within 400 m (15%), distance to the nearest stop (10%), distance to a main road (10%) and intersection density (10%). Walking and driving times run on the OSM street network. Walking slows on slopes (Tobler's hiking function: 4.8 km/h on the flat, 3.4 km/h up a 10% grade); driving assumes 65% of the speed limit, and transit counts stops only, without timetables. Cells at the edge toward Ilidža and Vogošća under-count reachable residents, since those municipalities are not modelled.</li>
     <li><b>Livability</b>Walking minutes, with slopes, from each cell to the nearest grocery, transit stop, primary school, clinic, park, kindergarten, pharmacy, playground, hospital and sports ground. Each counts half at a set time (5 min for a stop, 8 for a shop or park, 12 for a school or clinic, 25 for a hospital) and is weighted: grocery, transit and school 15% each, clinic and park 12%, kindergarten 8%, pharmacy 7%, playground 6%, hospital and sports 5%. Points come off near a motorway or primary road (up to 10), in industrial areas (10) and on very steep ground (5). Weights are a judgement, not a calibration. Places come from OpenStreetMap.</li>
+    <li><b>Best to live</b>One score that mixes every layer, weighted by who is choosing: daily needs within walking distance (the profile sets which needs count most, such as school and kindergarten for families or clinic and pharmacy for seniors), car access, winter sun (3 h or less scores 0, 7.8 h scores 100), clean winter air and little fog (from the smog and fog indices), distance from main-road noise and industry, and gentle terrain (5% slope or less scores 100, 25% scores 0). Only cells with residents are scored, and colour bands follow the city's own percentiles. Move the sliders to set your own weights.</li>
     <li><b>Smog and fog</b>Winter smog and fog in Sarajevo come from the temperature inversion that traps cold air and smoke in the valley. Each cell's exposure is the share of inversion days it lies below the inversion top, from its height above the valley floor (lowest ground within 3 km) assuming a typical top about 200 m above the floor, raised near busy roads (smog) or rivers (fog). These are relative indices, not measurements. They agree in direction with the FHMZ stations shown on the map (2025 annual PM2.5: Bjelave 26, Otoka 35, Saraj Polje 61, Ilidža 29, Vogošća 26 µg/m³; station positions approximate), but five stations cannot pin down street-level values, and the biggest local factor, gas versus wood or coal heating, has no open data.</li>
     <li><b>Winter sun</b>Hours of direct sun on 21 December and 21 January on a clear day. For seven points per cell the sun's path is traced every 5 minutes against the horizon formed by the surrounding mountains (Trebević, Igman, Hum and others, up to 25 km away, with the Earth's curvature) from the Copernicus surface model with buildings filtered out. Shade from neighbouring buildings and the valley's winter fog are not included. On a flat horizon the day would give 8.8 hours.</li>
     <li><b>Car access</b>For each cell, the drive along OSM streets from its centre to the nearest tertiary or larger road: the steepest 100 m on the way, metres of narrow road, and the share of the cell's own streets that are steep (over 12%) or narrow. OSM almost never records street width, so width is estimated as the gap between buildings on both sides; fences and walls are not mapped, so real streets can be narrower. Gradients come from the Copernicus surface model with buildings filtered out, measured over 100 m. Poor access takes up to 15 points off livability.</li>
@@ -262,7 +279,7 @@ const POP_T = [1,50,150,300,600,1000,1600], DEN_T = [1,500,1500,3000,6000,10000,
 let mode = "pop", focusOp = -1, selected = null, showMZ = true;
 
 const cells = D.cells.map(c => ({h:c[0],op:c[1],mz:c[2],s:c[3],mn:c[4],mx:c[5],a:[c[6],c[7],c[8]],p:c[9],km2:c[10],
-  att:c[11],w:[c[12],c[13],c[14]],car:[c[15],c[16],c[17]],poi:c[18],stm:c[19],stt:c[20],s4:c[21],t4:c[22],road:c[23],sup:c[24],elev:c[25],slope:c[26],liv:c[27],need:c.slice(28,38),acc:c[38],accMax:c[39],accNarrow:c[40],accNarrowPct:c[41],accSteepPct:c[42],accMinW:c[43],sun:c[44],sunFrom:c[45],sunTo:c[46],sunJan:c[47],sunMax:c[48],aboveFloor:c[49],inv:c[50],smog:c[51],fog:c[52]}));
+  att:c[11],w:[c[12],c[13],c[14]],car:[c[15],c[16],c[17]],poi:c[18],stm:c[19],stt:c[20],s4:c[21],t4:c[22],road:c[23],sup:c[24],elev:c[25],slope:c[26],liv:c[27],need:c.slice(28,38),acc:c[38],accMax:c[39],accNarrow:c[40],accNarrowPct:c[41],accSteepPct:c[42],accMinW:c[43],sun:c[44],sunFrom:c[45],sunTo:c[46],sunJan:c[47],sunMax:c[48],aboveFloor:c[49],inv:c[50],smog:c[51],fog:c[52],noise:c[53],ind:c[54]}));
 const AIR_T = [0,20,35,50,65,80,90], SMOG_C = ["#f1f7e8","#d9ead3","#f6e3a1","#f3b562","#e07a5f","#b5446e","#5c2a5e"],
   FOG_C = ["#f4f6f8","#dfe6ec","#c3ced8","#a3b3c2","#8496a8","#66798c","#4a5a6b"];
 function airColor(v, C){ let i = 0; while (i < AIR_T.length-1 && v >= AIR_T[i+1]) i++; return C[i]; }
@@ -287,6 +304,7 @@ function color(c){
   if (mode === "rel") return c.s === 0 ? css("--zero") : css({A:"--rel-a",B:"--rel-b",C:"--rel-c"}[c.p]);
   if (mode === "att") return binColor(c.att, ATT_T);
   if (mode === "liv") return binColor(c.liv, ATT_T);
+  if (mode === "best") return c.s === 0 ? css("--zero") : binColor(c.best, BEST_T);
   if (mode === "sun") return sunColor(c.sun);
   if (mode === "smog") return c.s === 0 ? css("--zero") : airColor(c.smog, SMOG_C);
   if (mode === "fog") return airColor(c.fog, FOG_C);
@@ -426,7 +444,7 @@ function updateFocus(zoomTo){
   } else if (zoomTo) svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity);
   show(selected);
 }
-const MODES = ["pop","den","rel","att","sup","liv","car","sun","smog","fog"];
+const MODES = ["best","pop","den","rel","att","sup","liv","car","sun","smog","fog"];
 MODES.forEach(m => document.getElementById("m-"+m).onclick = () => {
   mode = m; MODES.forEach(x => document.getElementById("m-"+x).setAttribute("aria-pressed", x === m)); supG.attr("display", m === "sup" ? null : "none"); accG.attr("display", m === "car" ? null : "none");
   aqG.attr("display", m === "smog" || m === "fog" ? null : "none");
@@ -447,6 +465,12 @@ function legend0(){
     el.innerHTML = `<div style="font-size:12px;color:var(--muted)">Walk to nearest supermarket</div>
       <div class="cat"><span><i style="background:var(--r1)"></i>≤ 5 min</span><span><i style="background:var(--r3)"></i>5–10 min</span><span><i style="background:var(--rel-c)"></i>over 10 min</span></div>
       <div class="cat"><span><i class="dot"></i>existing supermarket</span><span><b class="mk gapsite">1</b>gap site</span><span><b class="mk topsite">1</b>top-sales site</span></div>`;
+    return;
+  }
+  if (mode === "best"){
+    const r = ramp();
+    el.innerHTML = `<div style="font-size:12px;color:var(--muted)">Best to live: ${PROFILES[profile] ? PROFILES[profile].name : "custom weights"}, score 0–100 (bands by city percentile)</div>
+      <div class="row"><div class="sw"><i style="background:var(--zero)"></i><span>empty</span></div>${BEST_T.map((t,i)=>`<div class="sw"><i style="background:${r[i]}"></i><span>${Math.round(t)}</span></div>`).join("")}</div>`;
     return;
   }
   if (mode === "smog" || mode === "fog"){
@@ -500,8 +524,37 @@ function pickSite(d){
   svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(W()/2,H()/2).scale(5).translate(-x,-y));
   document.getElementById("map").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"center"});
 }
+function pickCell(h){
+  const c = byH.get(h); if (!c) return;
+  selected = c; hexes.classed("sel", x => x === c); show(c);
+  const [x, y] = proj(d3.polygonCentroid(c.ring.map(p => [p[0], p[1]])));
+  svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(W()/2,H()/2).scale(6).translate(-x,-y));
+}
+function bestBlock(c){
+  const sc = factorScores(c), tw = d3.sum(FACT, ([k]) => weights[k]) || 1;
+  return `<div class="k">Best to live ${Math.round(c.best)}/100</div>
+    <div class="score"><i style="width:${c.best}%"></i></div>
+    <dl class="fb">${FACT.map(([k, n]) => weights[k] ? `<dt>${n} <span class="tag">${Math.round(weights[k]/tw*100)}%</span></dt>
+      <dd><span class="mini"><i style="width:${Math.round(sc[k])}%"></i></span><b class="num">${Math.round(sc[k])}</b></dd>` : "").join("")}</dl>`;
+}
 function show(c){
   const el = document.getElementById("read");
+  if (!c && mode === "best"){
+    const pool = (focusOp >= 0 ? cells.filter(x => x.op === focusOp) : cells).filter(x => x.s > 0);
+    const top = pool.slice().sort((a,b) => b.best - a.best).slice(0, 8);
+    const grp = d3.rollups(pool.filter(x => x.mz), v => ({st: d3.sum(v, x => x.s), sc: d3.sum(v, x => x.s * x.best) / d3.sum(v, x => x.s), op: v[0].op}), x => x.mz)
+      .filter(([, v]) => v.st >= 500).sort((a,b) => b[1].sc - a[1].sc);
+    el.innerHTML = `<div class="k">Best to live · ${PROFILES[profile] ? PROFILES[profile].name : "custom weights"}</div>
+      <p class="hint">Pick who is choosing above the map, or move the sliders. Tap a cell to see what drives its score.</p>
+      <div class="k">Top cells</div>
+      <dl class="toplist">${top.map(x => `<dt><button class="lnk" data-h="${x.h}">${x.mz || OPN[x.op]}</button></dt><dd class="num">${Math.round(x.best)}</dd>`).join("")}</dl>
+      <div class="k">Top MZ (residents' average)</div>
+      <dl>${grp.slice(0, 6).map(([m, v]) => `<dt>${m} <span class="tag">${OPN[v.op]}</span></dt><dd class="num">${Math.round(v.sc)}</dd>`).join("")}</dl>
+      <div class="k">Lowest MZ</div>
+      <dl>${grp.slice(-3).reverse().map(([m, v]) => `<dt>${m} <span class="tag">${OPN[v.op]}</span></dt><dd class="num">${Math.round(v.sc)}</dd>`).join("")}</dl>`;
+    el.querySelectorAll("button.lnk").forEach(b => b.onclick = () => pickCell(b.dataset.h));
+    return;
+  }
   if (!c && mode === "sup"){
     const pool = focusOp >= 0 ? cells.filter(x => x.op === focusOp) : cells;
     const far = d3.sum(pool.filter(x => x.sup != null && x.sup > 10), x => x.s), tot = d3.sum(pool, x => x.s);
@@ -526,6 +579,7 @@ function show(c){
     <div class="big num">${fmt(c.s)}</div>
     <div class="rng num">range ${fmt(c.mn)} – ${fmt(c.mx)} · ${fmt(Math.round(c.den))} per km²</div>
     <span class="pill"><i style="background:var(${GR[c.p][0]})"></i>${GR[c.p][1]}</span>
+    ${mode === "best" ? bestBlock(c) : ""}
     <div class="k">Age groups</div>
     <div class="ages">${["--r2","--r4","--r6"].map((v,k)=>`<i style="width:${c.a[k]/t*100}%;background:var(${v})"></i>`).join("")}</div>
     <dl><dt>0–14</dt><dd class="num">${fmt(c.a[0])}</dd><dt>15–64</dt><dd class="num">${fmt(c.a[1])}</dd><dt>65+</dt><dd class="num">${fmt(c.a[2])}</dd></dl>
@@ -586,6 +640,54 @@ function siteTables(){
   document.querySelectorAll(".sites tbody tr").forEach(tr => { const go = () => pickSite(SITES.find(d => d.h === tr.dataset.h && d.strat === tr.dataset.s));
     tr.addEventListener("click", go); tr.addEventListener("keydown", e => { if (e.key === "Enter"){ go(); } }); });
 }
+// ---- Best to live: weighted mix of every factor, computed in the browser
+const T50 = [8,5,12,12,8,10,8,8,25,12];   // same order as NEEDS
+const FACT = [["needs","Daily needs on foot"],["car","Car access"],["sun","Winter sun"],["air","Clean winter air"],
+  ["fog","Little fog"],["quiet","Away from traffic noise"],["flat","Gentle terrain"]];
+const PROFILES = {
+  balanced: {name:"Balanced", f:{needs:35,car:15,sun:15,air:15,fog:5,quiet:10,flat:5}, n:[15,15,15,12,12,8,7,6,5,5]},
+  family:   {name:"Family with children", f:{needs:40,car:15,sun:10,air:15,fog:5,quiet:10,flat:5}, n:[12,8,22,10,14,18,4,10,2,0]},
+  seniors:  {name:"Seniors", f:{needs:40,car:5,sun:15,air:15,fog:5,quiet:5,flat:15}, n:[18,15,0,22,10,0,18,0,15,2]},
+  nocar:    {name:"No car", f:{needs:55,car:0,sun:10,air:15,fog:5,quiet:10,flat:5}, n:[15,30,10,12,10,5,8,4,4,2]},
+  airsun:   {name:"Air and sun", f:{needs:20,car:10,sun:30,air:25,fog:10,quiet:5,flat:0}, n:[15,15,15,12,12,8,7,6,5,5]},
+};
+let profile = "balanced", weights = {...PROFILES.balanced.f}, needW = PROFILES.balanced.n.slice(), BEST_T = ATT_T.slice();
+const clamp01 = v => Math.max(0, Math.min(1, v));
+function factorScores(c){
+  let a = 0, b = 0;
+  NEEDS.forEach((_, i) => { const t = c.need[i]; a += needW[i] / (1 + (t / T50[i]) ** 2); b += needW[i]; });
+  return {
+    needs: b ? a / b * 100 : 0,
+    car: c.acc,
+    sun: clamp01((c.sun - 3) / (7.8 - 3)) * 100,
+    air: 100 - c.smog,
+    fog: 100 - c.fog,
+    quiet: clamp01((c.noise - 50) / 350) * (1 - 0.6 * clamp01(c.ind / 0.3)) * 100,
+    flat: clamp01(1 - (c.slope - 5) / 20) * 100,
+  };
+}
+function recompute(){
+  const tw = d3.sum(FACT, ([k]) => weights[k]) || 1;
+  cells.forEach(c => { const s = factorScores(c); c.best = d3.sum(FACT, ([k]) => weights[k] * s[k]) / tw; });
+  const v = cells.filter(c => c.s > 0).map(c => c.best).sort(d3.ascending);
+  BEST_T = [0, .1, .25, .45, .65, .82, .93].map((q, i) => i === 0 ? 0 : d3.quantileSorted(v, q));
+}
+function buildPanel(){
+  document.getElementById("profiles").innerHTML = Object.entries(PROFILES).map(([k, p]) =>
+    `<button data-prof="${k}" aria-pressed="${k === profile}">${p.name}</button>`).join("");
+  document.getElementById("sliders").innerHTML = FACT.map(([k, n]) =>
+    `<label for="w-${k}"><span>${n}</span><input id="w-${k}" type="range" min="0" max="60" step="5" value="${weights[k]}"><b class="num" id="v-${k}">${weights[k]}</b></label>`).join("");
+  document.querySelectorAll("[data-prof]").forEach(b => b.onclick = () => {
+    profile = b.dataset.prof; weights = {...PROFILES[profile].f}; needW = PROFILES[profile].n.slice(); buildPanel(); update(); });
+  FACT.forEach(([k]) => document.getElementById("w-" + k).addEventListener("input", e => {
+    weights[k] = +e.target.value; document.getElementById("v-" + k).textContent = weights[k];
+    profile = "custom"; document.querySelectorAll("[data-prof]").forEach(x => x.setAttribute("aria-pressed", "false")); update(); }));
+}
+function update(){ recompute(); if (mode === "best"){ paint(); show(selected); } }
+document.getElementById("m-best").addEventListener("click", () => { document.getElementById("bestPanel").hidden = false; });
+MODES.filter(m => m !== "best").forEach(m => document.getElementById("m-" + m).addEventListener("click", () => { document.getElementById("bestPanel").hidden = true; }));
+buildPanel(); recompute();
+
 layout(); paint(); show(null); table(); siteTables();
 new ResizeObserver(() => layout()).observe(svg.node());
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change", paint);

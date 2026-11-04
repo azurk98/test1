@@ -74,7 +74,8 @@ def podaci() -> dict:
                su.loc[r.h3_id, "sunce_21dec_do"], float(su.loc[r.h3_id, "sunce_21jan_h"]),
                float(su.loc[r.h3_id, "astro_21dec_h"])]
             + [int(zr.loc[r.h3_id, "iznad_dna_m"]), float(zr.loc[r.h3_id, "inverzija"]),
-               int(zr.loc[r.h3_id, "smog_indeks"]), int(zr.loc[r.h3_id, "magla_indeks"])])
+               int(zr.loc[r.h3_id, "smog_indeks"]), int(zr.loc[r.h3_id, "magla_indeks"])]
+            + [int(kz.loc[r.h3_id, "buka_m"]), float(kz.loc[r.h3_id, "industrija_udio"])])
 
     op, _ = ucitaj_granice()
     op = op.set_index("opcina").loc[OP].reset_index()

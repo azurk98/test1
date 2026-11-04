@@ -147,6 +147,15 @@ od indeksa kvaliteta života. Najteži pristup: Toka-Džeka, Gornji Velešići, 
 Hrid-Jarčedoli. Najveći uspon na putu do glavne ceste: ≤ 8% za ~182.000 stanovnika, 8–12% ~21.000,
 12–16% ~23.000, 16–20% ~20.000, > 20% ~24.000; ~33.000 stanovnika ima više od 100 m uske ulice do glavne ceste.
 
+## Najbolje za život (stranica, pogled „Best to live“)
+
+Jedna ocjena 0–100 po naseljenom polju, računa se u pregledniku iz svih slojeva: svakodnevni sadržaji
+pješice (koji se broje najviše zavisi od profila), pristup autom, zimsko sunce (≤ 3 h = 0, 7,8 h = 100),
+čist zrak i malo magle (100 − indeks), mir (udaljenost od bučnih cesta, industrija) i blag teren
+(≤ 5% = 100, ≥ 25% = 0). Profili: uravnoteženo, porodica s djecom, penzioneri, bez auta, zrak i sunce;
+klizači za vlastite pondere. Uravnoteženo: najbolje Dobrinja D, Malta, Čengić Vila I i II, Željeznička;
+„zrak i sunce“: Sedrenik, Dobrinja D, Medrese; najslabije Toka-Džeka, Mahmutovac, Hrid-Jarčedoli.
+
 ## Smog i magla (`17_zrak.py`)
 
 Relativni indeksi izloženosti (0–100), ne mjerenje. Inverzija: udio inverzionih dana kad je polje ispod
