@@ -35,7 +35,12 @@ OPCINE = {
 GRAD_SARAJEVO_REL = 2567380
 
 # Parametri modela
-ALFA = 0.7
+# α: udio težine zgrada (ostatak WorldPop). SPEC počinje od 0,7; na MZ Novog
+# Grada 2010 greška udjela pada s α (0,7: MAPE 0,40; 0,9: 0,375; 1,0: 0,37),
+# jer WorldPop razvlači stanovnike iz blokova u prigradska naselja
+# (visoke MZ: 11% po WorldPopu, 30% po evidenciji 2010). Novi Grad je jedina
+# općina s podacima ispod općine, pa se 0,9 primjenjuje na sve četiri.
+ALFA = 0.9
 ALFE_SCENARIJI = (0.5, 0.7, 0.9)
 SPRAT_POMAK_SCENARIJI = (-1, 0, 1)
 BETA_NOVI_GRAD = 0.5
@@ -44,6 +49,13 @@ VELIKA_ZGRADA = 2000.0
 # Dio polja je "C" (nedostaju zgrade) ako WorldPop u njemu ima bar ovoliko
 # stanovnika a stambena zapremina je 0.
 C_PRAG_WORLDPOP = 5.0
+
+# Gustina stanovanja: m² u niskim zgradama (kuće, < PRAG_BLOK spratova) nosi
+# manje stanovnika od m² u stambenim blokovima (veći stanovi, prazne i
+# nedovršene kuće, pomoćni objekti). Procijenjeno na MZ Novog Grada 2010
+# (src/kalibracija_gustine.py): ~0,5 uz bilo koji prag 4–6 spratova.
+PRAG_BLOK = 5
+GUSTINA_NISKA = 0.5
 
 # Novi Grad: iz kojih su MZ izdvojene nove MZ. Popuniti tek kad se utvrdi
 # (odluka općine ili poređenje spiska ulica). Prazno = pravilo za nepoznatu

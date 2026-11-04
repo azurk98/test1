@@ -12,6 +12,7 @@ python 02_zgrade.py             # zgrade, spratnost, stambeni udio + KONTROLNA T
 python 03_mreza.py              # H3 res 9, dijelovi polja (polje ∩ općina ∩ MZ), WorldPop
 python 04_mz_novi_grad.py --nastavi  # MZ Novog Grada iz adresa (bez --nastavi staje ako je < 40% adresirano)
 python 05_raspodjela.py         # težine, kontrolni zbirovi, starosne grupe, 9 scenarija
+python kalibracija_gustine.py   # (dijagnostika) omjer gustine kuće/blokovi i α na MZ Novog Grada
 python 06_provjera.py           # -> out/validacija.md
 python 07_karta.py              # -> out/karta.html
 ```
@@ -45,7 +46,16 @@ ukupno i po općini. Pregledati prije pokretanja `05_raspodjela.py`.
 - **Validacija**: zbirovi općina i starosnih grupa tačni. Stambena površina je precijenjena
   (medijan ~80 m²/st.; vjerovatno pomoćni objekti tipa `yes`), što utiče samo na apsolutni
   nivo, ne na raspodjelu unutar općine. Visoke zgrade (Alipašino Polje, Dobrinja C/D) su
-  vjerovatno i dalje potcijenjene u odnosu na prigradska naselja (Briješće, Dobroševići).
+  bile potcijenjene u odnosu na prigradska naselja (Briješće, Dobroševići); vidi ispravku ispod.
+- **Ispravka potcjenjivanja visokih zgrada** (`src/kalibracija_gustine.py`, na MZ Novog Grada 2010):
+  1. *Gustina stanovanja*: m² u zgradama ispod 5 spratova nosi ~0,5 stanovnika u odnosu na m²
+     u blokovima (~100 vs ~50 m²/st.; stabilno za pragove 4–6). `GUSTINA_NISKA = 0.5`.
+  2. *α = 0,9* umjesto 0,7: WorldPop daje visokim MZ 11% stanovnika Novog Grada (evidencija 2010: 30%),
+     a prigradskim 34% (2010: 13%). Greška udjela MZ pada s α (0,7: 0,40; 0,9: 0,375; 1,0: 0,37).
+     Scenariji raspona ostaju 0,5 / 0,7 / 0,9.
+  Rezultat: Alipašino Polje 0,70–1,10 udjela iz 2010 (prije 0,29–0,69), Dobrinja D 0,92 (0,65),
+  Olimpijsko Selo 0,83 (0,61); Briješće 1,75 (2,24), Dobroševići 2,50 (3,14).
+  Preostala odstupanja (Dobrinja C, Švrakino Selo I, Aneks) potiču od grubih MZ poligona.
 
 ## Odluke u implementaciji (gdje SPEC ostavlja prostor)
 

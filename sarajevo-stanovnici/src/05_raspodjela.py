@@ -16,7 +16,7 @@ import geopandas as gpd
 import numpy as np
 import pandas as pd
 
-from common import (ALFA, ALFE_SCENARIJI, BETA_NOVI_GRAD, C_PRAG_WORLDPOP, CRS_M, CRS_WGS,
+from common import (GUSTINA_NISKA, PRAG_BLOK, ALFA, ALFE_SCENARIJI, BETA_NOVI_GRAD, C_PRAG_WORLDPOP, CRS_M, CRS_WGS,
                     DATA, INTERIM, MATICNE_MZ_NOVI_GRAD, OUT, SPRAT_POMAK_SCENARIJI,
                     VELIKA_ZGRADA, najveci_ostatak, normaliziraj, opcine_ukupno)
 
@@ -157,12 +157,16 @@ def main() -> None:
     veze = zgrade_u_dijelove(z, d)
     print(f"Zgrada pridruženo dijelovima: {veze.zgrada.nunique()} od {len(z)}")
 
-    def B_za(pomak: int) -> np.ndarray:
-        vol = zapremina(z, pomak).to_numpy()
+    # težina zgrade = stambena površina × gustina stanovanja (kuće < blokovi)
+    gustina = np.where(z.spratnost.to_numpy() >= PRAG_BLOK, 1.0, GUSTINA_NISKA)
+
+    def B_za(pomak: int, fizicka: bool = False) -> np.ndarray:
+        vol = zapremina(z, pomak).to_numpy() * (1.0 if fizicka else gustina)
         return np.bincount(veze.dio, weights=vol[veze.zgrada] * veze.udio, minlength=len(d))
 
     P = d.P.to_numpy()
     B0 = B_za(0)
+    M0 = B_za(0, fizicka=True)  # stambeni m² (za provjeru gustine poda)
     C = (B0 == 0) & (P >= C_PRAG_WORLDPOP)
     print(f"Dijelova s oznakom C (WorldPop ≥ {C_PRAG_WORLDPOP}, zgrade = 0): {C.sum()}")
 
@@ -203,6 +207,7 @@ def main() -> None:
     dd = d.copy()
     dd["zona"] = zona
     dd["B"] = B0
+    dd["m2"] = M0
     dd["C"] = C
     dd["pouzdanost"] = pouz
     dd["stanovnici_f"] = glavni
@@ -225,7 +230,7 @@ def main() -> None:
     agg = dd.groupby("h3_id").agg(
         stanovnici=("stanovnici", "sum"), stanovnici_min=("stanovnici_min", "sum"),
         stanovnici_max=("stanovnici_max", "sum"), d0_14=("d0_14", "sum"),
-        d15_64=("d15_64", "sum"), d65plus=("d65plus", "sum"), stambeni_m2=("B", "sum"),
+        d15_64=("d15_64", "sum"), d65plus=("d65plus", "sum"), stambeni_m2=("m2", "sum"),
         worldpop=("P", "sum"))
     rows = []
     for h, g in dd.groupby("h3_id"):
