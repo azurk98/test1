@@ -123,6 +123,15 @@ izglađuje (~60 m). Izlazi: `teren_h3.csv` (srednja/min/max visina, srednji nagi
 Lokalna karta (`out/karta.html`): podloge Esri satelit (zadano), OpenTopoMap, OpenStreetMap;
 preko njih Esri sjenčenje reljefa i izohipse.
 
+## MZ Novog Grada po nazivima ulica
+
+Pored adresa s kućnim brojem (8% stambenih zgrada), zgrada bez adrese dobija najbližu imenovanu OSM
+ulicu (≤ 50 m); ako cijela ta ulica po spisku pripada jednoj MZ, zgrada ide u tu MZ. Direktno svrstano:
+70% stambenih zgrada (adresa 8%, ulica 62%), ostatak glasanjem susjeda. Dobrinja C više nije uska
+traka (0,92 udjela iz 2010; prije 0,08), Švrakino Selo I 0,58 (0,20), Aneks 0,71 (0,38). Reljevo sada
+dobija svih ~830 zgrada svojih ulica (3,2× udjela iz 2010: 1.193 stanovnika 2010. na 828 kuća, vjerovatno
+rast ili vikendice), pa je ukupna MAPE prema 2010. 0,396 (prije 0,375).
+
 ## Graf 3 i parametri po općini
 
 Nazivi MZ na Grafu 3 (Strategija Starog Grada 2024–2027, str. 16) pročitani su s renderovane stranice

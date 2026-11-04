@@ -111,6 +111,47 @@ def izvuci_pravila_iz_pdf(pdf_path, mz_nazivi: list[str]) -> pd.DataFrame:
 
 # ------------------------------------------------------------ svrstavanje
 
+ULICA_MAX_M = 50
+
+
+def imenovane_ulice() -> gpd.GeoDataFrame:
+    """Imenovane ceste i ulice iz OSM ekstrakta (linije s nazivom)."""
+    import gzip
+    import xml.etree.ElementTree as ET
+    from shapely.geometry import LineString
+
+    nodes, rows = {}, []
+    with gzip.open(RAW / "Sarajewo.osm.gz", "rb") as f:
+        for _, el in ET.iterparse(f):
+            if el.tag == "node":
+                nodes[int(el.get("id"))] = (float(el.get("lon")), float(el.get("lat")))
+                el.clear()
+            elif el.tag == "way":
+                t = {c.get("k"): c.get("v") for c in el.findall("tag")}
+                if "highway" in t and t.get("name"):
+                    pts = [nodes[int(n.get("ref"))] for n in el.findall("nd") if int(n.get("ref")) in nodes]
+                    if len(pts) >= 2:
+                        rows.append({"ime": t["name"], "geometry": LineString(pts)})
+                el.clear()
+            elif el.tag == "relation":
+                el.clear()
+    return gpd.GeoDataFrame(rows, crs="EPSG:4326").to_crs(CRS_M)
+
+
+def svrstaj_po_ulici(z: gpd.GeoDataFrame, pravila: pd.DataFrame) -> pd.Series:
+    """Zgrada bez MZ -> najbliža imenovana ulica (≤ ULICA_MAX_M); ako cijela ulica
+    pripada jednoj MZ u spisku, zgrada ide u tu MZ."""
+    pr = pravila.assign(u=pravila.ulica.map(normaliziraj_ulicu))
+    jedna = pr.groupby("u").mz.agg(lambda m: m.iloc[0] if m.nunique() == 1 else None).dropna()
+    ul = imenovane_ulice()
+    ul["u"] = ul.ime.map(normaliziraj_ulicu)
+    ul = ul[ul.u.isin(jedna.index)]
+    c = z[["geometry"]].copy()
+    c["geometry"] = z.representative_point()
+    j = gpd.sjoin_nearest(c, ul[["u", "geometry"]], how="left", max_distance=ULICA_MAX_M, distance_col="d")
+    j = j[~j.index.duplicated()]
+    return j.u.map(jedna).reindex(z.index)
+
 def svrstaj_po_adresi(z: pd.DataFrame, pravila: pd.DataFrame) -> pd.Series:
     pr = pravila.copy()
     pr["u"] = pr.ulica.map(normaliziraj_ulicu)
@@ -210,6 +251,13 @@ def main() -> int:
         m = z.addr_street.map(normaliziraj_ulicu) == normaliziraj_ulicu(u)
         print(f"  {u}: {m.sum()} zgrada -> {z.loc[m, 'mz'].value_counts().to_dict()}")
 
+    bez = z.mz.isna()
+    po_ulici = svrstaj_po_ulici(z[bez], pravila)
+    z.loc[bez, "mz"] = po_ulici
+    z.loc[bez & z.mz.notna(), "mz_izvor"] = "ulica"
+    stamb = z.zapremina > 0
+    print("Svrstavanje stambenih zgrada: " + ", ".join(
+        f"{k} {v:.0%}" for k, v in z[stamb].mz_izvor.where(z[stamb].mz.notna(), "knn").value_counts(normalize=True).items()))
     z["mz"] = knn_glasanje(z)
     z.to_file(INTERIM / "zgrade_mz_novi_grad.gpkg", driver="GPKG")
 
