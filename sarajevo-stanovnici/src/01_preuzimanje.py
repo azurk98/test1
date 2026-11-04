@@ -185,6 +185,19 @@ def main() -> int:
         greske.append(f"WorldPop: nijedan naziv nije pronađen u {WORLDPOP_DIR}; "
                       "provjeriti naziv i spremiti kao raw/worldpop_2026.tif")
 
+    print("Overture Maps Places (dopuna trgovina)")
+    ov = RAW / "overture_places.parquet"
+    if ov.exists() and not a.force:
+        print(f"  postoji: {ov.name}")
+    else:
+        import subprocess
+        r = subprocess.run(["overturemaps", "download", "--bbox=18.20,43.78,18.56,43.99", "-f", "geoparquet",
+                            "--type=place", "-o", str(ov)], capture_output=True, text=True)
+        if r.returncode != 0 or not ov.exists():
+            greske.append(f"Overture: {r.stderr[-300:]}")
+        else:
+            print(f"  -> {ov.name}")
+
     print("PDF dokumenti općina")
     for ime, url in PDF.items():
         if not preuzmi(url, RAW / ime, a.force):

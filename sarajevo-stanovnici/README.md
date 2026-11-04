@@ -93,7 +93,11 @@ Nova trgovina (A = 1) u svakom polju bez supermarketa, ≤ 400 m od glavne ceste
 - **najveci_promet**: najviše osvojenih kupaca (uglavnom od konkurencije): Željeznička, Trg heroja,
   Alipašino Polje BII; stabilno za λ 1,5–2,5.
 
-Danas ~56.000 od 270.600 stanovnika (21%) nema supermarket u 10 min pješice (prema OSM-u).
+Postojeće trgovine: OSM + 28 trgovina koje ima samo Overture Maps Places (`raw/overture_places.parquet`,
+filtrirano po kategoriji, pouzdanosti i nazivu; duplikati < 75 m od OSM-a uklonjeni). Poređenje dva
+izvora (Lincoln–Petersen) procjenjuje 400–675 trgovina namirnica u četiri općine, a OSM ih ima 237
+(35–60%); nedostaju uglavnom male nezavisne trgovine. Danas ~53.900 od 270.600 stanovnika (20%)
+nema supermarket u 10 min pješice (prema OSM + Overture).
 Oprez: bijele mrlje su u prigradskim dijelovima Novog Grada, gdje je model stanovništva najnesigurniji
 (1,75–2,5× udjela iz 2010) i gdje OSM vjerovatno ne bilježi sve male trgovine. Kolona
 `znakovi_zemljista` (parking, poslovni objekat, gradilište) je samo nagovještaj; vlasništvo i

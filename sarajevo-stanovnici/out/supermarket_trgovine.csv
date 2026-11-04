@@ -1,380 +1,408 @@
-tip,ime,A,lon,lat
-supermarket,Konzum,1.0,18.40349,43.85847
-convenience,Konzum,0.25,18.33998,43.84139
-convenience,Konzum,0.25,18.34075,43.84096
-convenience,Nasko,0.25,18.30928,43.81593
-supermarket,Mercator,1.0,18.35138,43.84634
-supermarket,Merkur,1.0,18.29962,43.82942
-supermarket,Konzum,1.0,18.30127,43.82851
-supermarket,,1.0,18.30244,43.82998
-convenience,,0.25,18.30003,43.82949
-convenience,,0.25,18.30144,43.8289
-supermarket,Sefo,1.0,18.29591,43.83069
-supermarket,Bingo,1.0,18.40988,43.86542
-supermarket,Amko,1.0,18.36885,43.84518
-convenience,,0.25,18.3711,43.84466
-convenience,,0.25,18.36996,43.84413
-supermarket,Amko,1.0,18.39493,43.85052
-convenience,Konzum,0.25,18.34837,43.82839
-convenience,,0.25,18.35147,43.83004
-convenience,,0.25,18.35443,43.82903
-convenience,,0.25,18.35329,43.82979
-supermarket,Bingo,1.0,18.36592,43.85018
-supermarket,Konzum,1.0,18.33812,43.82986
-convenience,Delijas Prehrana,0.25,18.33676,43.83032
-convenience,"""Granap kod Bebe""",0.25,18.33759,43.829
-supermarket,Supermarket Hoše,1.0,18.40693,43.86982
-supermarket,Mercator,1.0,18.40633,43.86934
-supermarket,Amko,1.0,18.3868,43.8626
-convenience,Plavi granap,0.25,18.38441,43.86263
-convenience,Fagner,0.25,18.38268,43.84201
-convenience,Prima,0.25,18.38033,43.84624
-convenience,ZI-2B,0.25,18.38083,43.84597
-convenience,Rašmer market,0.25,18.379,43.84578
-convenience,Rašmer market,0.25,18.3852,43.84503
-convenience,Šanac,0.25,18.38797,43.84441
-supermarket,Bingo,1.0,18.38909,43.85649
-convenience,Hoše Komerc,0.25,18.2816,43.87195
-convenience,,0.25,18.36413,43.84471
-convenience,,0.25,18.40483,43.86619
-supermarket,Konzum,1.0,18.40376,43.87112
-convenience,,0.25,18.36307,43.84381
-convenience,,0.25,18.36213,43.84348
-convenience,Amko komerc,0.25,18.35835,43.90916
-supermarket,Bingo,1.0,18.36479,43.85551
-supermarket,CM Cosmetic Market,1.0,18.34594,43.90009
-supermarket,,1.0,18.27846,43.8341
-convenience,,0.25,18.38218,43.80216
-supermarket,,1.0,18.38499,43.85042
-convenience,,0.25,18.3852,43.85046
-convenience,,0.25,18.2825,43.88475
-supermarket,Lovac,1.0,18.28654,43.88201
-supermarket,Konzum,1.0,18.34507,43.84116
-supermarket,Konzum,1.0,18.34529,43.84239
-supermarket,Klas,1.0,18.34488,43.84206
-convenience,Manarda,0.25,18.34324,43.84153
-supermarket,Amko komerc d.o.o.,1.0,18.34158,43.83936
-supermarket,Drvopromet d.o.o.,1.0,18.34126,43.83999
-convenience,Konzum,0.25,18.36745,43.85112
-convenience,Adil,0.25,18.35828,43.83951
-convenience,Konzum,0.25,18.42183,43.86605
-convenience,,0.25,18.36807,43.85179
-convenience,Saneal d.o.o.,0.25,18.34521,43.85279
-supermarket,Konzum,1.0,18.4517,43.86937
-convenience,"S.T.R. ""ADNA""",0.25,18.39322,43.85528
-convenience,Gera,0.25,18.32656,43.81817
-supermarket,,1.0,18.30866,43.83251
-convenience,"Prodavnica ""Rašmer""",0.25,18.34807,43.90248
-convenience,Prodavnica,0.25,18.34619,43.90515
-supermarket,Amko komerc,1.0,18.34274,43.90214
-supermarket,"Supermarket ""Dundee""",1.0,18.41231,43.87311
-supermarket,Deny,1.0,18.29732,43.85458
-supermarket,Amko,1.0,18.30207,43.8515
-supermarket,Konzum,1.0,18.35897,43.82056
-convenience,,0.25,18.38886,43.7979
-convenience,Bislim,0.25,18.35852,43.83876
-convenience,Onogošt,0.25,18.36308,43.82111
-convenience,N market,0.25,18.36116,43.81824
-convenience,N market,0.25,18.36242,43.82039
-convenience,,0.25,18.36731,43.82453
-convenience,,0.25,18.35609,43.81949
-convenience,Prodavnica,0.25,18.3648,43.82319
-convenience,Prodavnica,0.25,18.36707,43.82254
-supermarket,Bingo,1.0,18.31228,43.81512
-convenience,N market,0.25,18.35868,43.82407
-convenience,N market,0.25,18.36401,43.82151
-supermarket,Megamarkt,1.0,18.40497,43.85802
-convenience,Prodavnica,0.25,18.35396,43.81444
-convenience,Prodavnica,0.25,18.33819,43.90136
-convenience,Prodavnica,0.25,18.3415,43.90102
-convenience,Prodavnica,0.25,18.33857,43.90082
-supermarket,Supermarket Sofa,1.0,18.34104,43.90098
-supermarket,,1.0,18.4165,43.85476
-convenience,,0.25,18.41671,43.8547
-supermarket,,1.0,18.41776,43.85422
-convenience,,0.25,18.4268,43.85661
-convenience,Dan & Noć,0.25,18.42179,43.85756
-supermarket,Amko,1.0,18.43438,43.85837
-supermarket,Amko,1.0,18.4295,43.85623
-supermarket,,1.0,18.41252,43.8751
-convenience,Hoše komerc,0.25,18.41997,43.86155
-supermarket,,1.0,18.29376,43.83498
-supermarket,Drvo Promet DP Market,1.0,18.40196,43.86814
-convenience,Osman Small Store,0.25,18.39374,43.86776
-convenience,Hadžijin granap,0.25,18.39968,43.86677
-convenience,,0.25,18.39741,43.86789
-convenience,,0.25,18.39572,43.86786
-convenience,,0.25,18.39947,43.86478
-supermarket,Robot,1.0,18.38411,43.85203
-supermarket,Mercator,1.0,18.39172,43.85044
-convenience,,0.25,18.39225,43.84914
-supermarket,Mercator,1.0,18.41773,43.85818
-supermarket,,1.0,18.32724,43.86638
-convenience,,0.25,18.33074,43.86451
-convenience,Optika Durak,0.25,18.34769,43.82824
-supermarket,Amko comerc d.d.,1.0,18.34796,43.89989
-supermarket,Hiper Kort,1.0,18.36452,43.82761
-convenience,Amko,0.25,18.40629,43.85409
-supermarket,,1.0,18.40821,43.85624
-convenience,,0.25,18.40451,43.85238
-convenience,Amko,0.25,18.4282,43.86175
-greengrocer,Zelenara,0.1,18.36387,43.81991
-convenience,"""N market""",0.25,18.37037,43.82907
-supermarket,DP Market,1.0,18.3952,43.84737
-supermarket,Amko komerc,1.0,18.35724,43.84238
-supermarket,Amko Komerc,1.0,18.37938,43.84947
-convenience,Corner shop,0.25,18.30636,43.83337
-convenience,Small corner shop,0.25,18.30473,43.8324
-convenience,Trgovina MM,0.25,18.3003,43.80911
-convenience,Trgovina Kurtagić,0.25,18.30213,43.81033
-convenience,,0.25,18.30372,43.80091
-supermarket,Konzum,1.0,18.41756,43.87081
-convenience,MAH,0.25,18.34038,43.82887
-convenience,Onogošt,0.25,18.37011,43.82429
-supermarket,Konzum,1.0,18.34018,43.90192
-convenience,Denyprom,0.25,18.39948,43.85027
-supermarket,AK Marketi,1.0,18.4209,43.85492
-convenience,Ambrela D.o.o,0.25,18.42392,43.85609
-convenience,,0.25,18.41853,43.85895
-convenience,Deny Prom Marketi,0.25,18.41346,43.86207
-convenience,Bingo,0.25,18.41691,43.86221
-convenience,Konzum,0.25,18.41226,43.85628
-convenience,,0.25,18.37551,43.84736
-convenience,,0.25,18.37814,43.84782
-supermarket,Amco,1.0,18.35091,43.82708
-convenience,,0.25,18.33237,43.84251
-convenience,,0.25,18.34879,43.82789
-convenience,,0.25,18.35211,43.82696
-convenience,,0.25,18.30777,43.83228
-convenience,Diskont Arizona,0.25,18.36173,43.81855
-supermarket,Cosmetic market (CM),1.0,18.35213,43.84655
-supermarket,DM market,1.0,18.35267,43.84658
-convenience,,0.25,18.4295,43.85937
-supermarket,Konzum,1.0,18.43166,43.86015
-convenience,,0.25,18.42989,43.85509
-convenience,,0.25,18.41151,43.86033
-convenience,,0.25,18.35574,43.82199
-convenience,Elektrotehna (elektro oprema),0.25,18.35579,43.82346
-convenience,Kineska prodavnica,0.25,18.35721,43.82263
-convenience,Prodavnica mjesovite robe,0.25,18.34227,43.90242
-convenience,Prodavnica mjesovite robe,0.25,18.34334,43.90253
-convenience,Oaza 0-24,0.25,18.37249,43.85136
-supermarket,Balon dekor BH,1.0,18.40756,43.86779
-supermarket,Best,1.0,18.35406,43.82673
-supermarket,Konzum,1.0,18.39566,43.85029
-supermarket,Bingo,1.0,18.39153,43.84992
-convenience,Mercator,0.25,18.35111,43.84293
-supermarket,Konzum,1.0,18.3433,43.84476
-supermarket,Amko,1.0,18.34193,43.84455
-convenience,Ribarnica,0.25,18.3501,43.84623
-convenience,,0.25,18.32908,43.80917
-convenience,Rašmer,0.25,18.39604,43.85033
-supermarket,N market,1.0,18.35808,43.82754
-convenience,Daco,0.25,18.37099,43.82298
-supermarket,PENNY PLUS doo,1.0,18.37049,43.90588
-supermarket,Bingo,1.0,18.34406,43.82964
-supermarket,Bingo,1.0,18.42361,43.85985
-supermarket,Super Konzum,1.0,18.32845,43.84803
-convenience,,0.25,18.37024,43.84787
-supermarket,Mercator,1.0,18.38461,43.85716
-supermarket,Bingo,1.0,18.40582,43.85638
-supermarket,Konzum,1.0,18.39944,43.85508
-supermarket,Konzum,1.0,18.41652,43.85821
-greengrocer,Zelena pijaca,0.1,18.36736,43.84825
-supermarket,Minimarket Bingo 3,1.0,18.42432,43.85976
-supermarket,Amko,1.0,18.42049,43.85869
-convenience,Market (Minimarket),0.25,18.41953,43.85787
-convenience,,0.25,18.42706,43.85988
-supermarket,Hoše komerc,1.0,18.42356,43.85941
-supermarket,Konzum,1.0,18.39603,43.84747
-supermarket,Konzum,1.0,18.31224,43.79889
-greengrocer,Secret Garden,0.1,18.42771,43.85947
-convenience,,0.25,18.44117,43.86236
-supermarket,Konzum,1.0,18.4263,43.85822
-supermarket,Konzum,1.0,18.42033,43.86805
-supermarket,Eman,1.0,18.34974,43.82757
-supermarket,,1.0,18.34983,43.8249
-supermarket,Arbin Market,1.0,18.34936,43.8263
-supermarket,"Supermarket ""Bingo""",1.0,18.34773,43.83149
-greengrocer,,0.1,18.35044,43.82563
-supermarket,,1.0,18.35018,43.82429
-supermarket,Konzum,1.0,18.31777,43.81389
-supermarket,Bingo,1.0,18.31714,43.81373
-supermarket,Mercator,1.0,18.34479,43.82851
-department_store,Heliodent d.o.o.,0.5,18.42656,43.85653
-convenience,,0.25,18.42486,43.87314
-supermarket,,1.0,18.34278,43.83367
-convenience,M.A.S. Shop,0.25,18.4205,43.85566
-supermarket,,1.0,18.45253,43.87235
-supermarket,Konzum,1.0,18.35065,43.82753
-supermarket,Amko,1.0,18.31258,43.79807
-supermarket,Megamarkt,1.0,18.35259,43.84619
-supermarket,Konzum,1.0,18.39214,43.88122
-supermarket,Šamon HoReCa shop and market,1.0,18.41154,43.8579
-convenience,Mercator,0.25,18.41166,43.85628
-convenience,,0.25,18.41599,43.8705
-convenience,,0.25,18.4112,43.85226
-supermarket,Robot,1.0,18.40726,43.86904
-convenience,Konzum,0.25,18.38954,43.85413
-supermarket,Bingo,1.0,18.40306,43.87847
-supermarket,Brojler Market,1.0,18.32083,43.87289
-convenience,Mini Market,0.25,18.42446,43.86167
-convenience,Bazar,0.25,18.41862,43.86664
-supermarket,Mercator,1.0,18.41902,43.86693
-convenience,Amko,0.25,18.42122,43.86651
-convenience,,0.25,18.2568,43.84045
-convenience,,0.25,18.39328,43.8636
-mall,UNITIC Business Center,1.0,18.40613,43.8571
-convenience,,0.25,18.3597,43.85044
-supermarket,Bingo,1.0,18.31784,43.79592
-supermarket,Bazar,1.0,18.44032,43.86223
-supermarket,Tropic,1.0,18.35691,43.81679
-supermarket,Mercator,1.0,18.41694,43.87048
-mall,ARIA,1.0,18.41653,43.85834
-supermarket,Bingo,1.0,18.35256,43.85034
-supermarket,Konzum,1.0,18.40891,43.8552
-supermarket,Bingo,1.0,18.32575,43.83963
-supermarket,Bingo,1.0,18.366,43.85526
-supermarket,Delikatesa,1.0,18.4244,43.85886
-supermarket,Konzum,1.0,18.41276,43.86078
-supermarket,Amko komerc,1.0,18.41225,43.87568
-supermarket,Amko,1.0,18.43303,43.86112
-convenience,,0.25,18.4316,43.86051
-greengrocer,Košpića,0.1,18.43335,43.86118
-supermarket,Deny Prom,1.0,18.43368,43.85595
-convenience,Market Diskont,0.25,18.4321,43.87271
-supermarket,,1.0,18.42785,43.86886
-convenience,,0.25,18.43815,43.87315
-convenience,T.R. Alli,0.25,18.4471,43.85349
-convenience,Konzum,0.25,18.43173,43.8599
-convenience,,0.25,18.27304,43.83032
-supermarket,Bingo,1.0,18.37754,43.85359
-supermarket,Konzum,1.0,18.38252,43.85559
-supermarket,Mercator,1.0,18.37936,43.85302
-supermarket,Amko,1.0,18.38104,43.85332
-supermarket,DM Supermarket,1.0,18.24973,43.84631
-convenience,Vindija D.O.O. Sarajevo,0.25,18.41797,43.86776
-supermarket,Crvena Jabuka Gastro Market,1.0,18.40407,43.85635
-convenience,,0.25,18.3328,43.83911
-supermarket,Amko komerc,1.0,18.32359,43.84066
-convenience,,0.25,18.37886,43.85121
-convenience,Konzum,0.25,18.37652,43.85152
-grocery,Saraj Smart Market,0.25,18.35708,43.82884
-grocery,Bingo,0.25,18.32752,43.83422
-convenience,Konzum,0.25,18.40073,43.84855
-supermarket,Konzum,1.0,18.36401,43.81728
-convenience,Mercator,0.25,18.38617,43.84884
-convenience,Konzum,0.25,18.3235,43.84336
-convenience,Kineska prodavnica,0.25,18.36142,43.81669
-convenience,Power Market,0.25,18.36277,43.81761
-convenience,Onogošt,0.25,18.36422,43.81679
-supermarket,Bingo,1.0,18.36733,43.84848
-supermarket,Bingo,1.0,18.31105,43.82888
-convenience,Prodavnica,0.25,18.45336,43.86204
-convenience,iNovine,0.25,18.3361,43.8264
-convenience,,0.25,18.31619,43.92031
-supermarket,Mercator,1.0,18.30644,43.83066
-convenience,,0.25,18.41826,43.8657
-supermarket,Amko Komerc Koševsko Brdo,1.0,18.40591,43.86439
-supermarket,Gama,1.0,18.31604,43.81612
-convenience,Prodavnica,0.25,18.41847,43.84991
-convenience,,0.25,18.42487,43.85176
-convenience,Zaaan,0.25,18.41701,43.8526
-convenience,NEO market,0.25,18.42982,43.85368
-supermarket,Amko,1.0,18.43086,43.85007
-convenience,,0.25,18.43827,43.85361
-supermarket,Bingo,1.0,18.36157,43.82351
-supermarket,Trgovačka radnja Hair,1.0,18.37571,43.84005
-supermarket,D&D MARKET,1.0,18.31167,43.84135
-supermarket,Ćelo,1.0,18.29494,43.85313
-convenience,TR Ivana,0.25,18.37172,43.82327
-supermarket,b Bazar,1.0,18.36282,43.85055
-supermarket,Amko,1.0,18.41738,43.85881
-convenience,,0.25,18.40936,43.85989
-convenience,Tr. Bedr,0.25,18.33778,43.81917
-convenience,BEHAR d.o.o.,0.25,18.35053,43.83991
-convenience,Neo Market,0.25,18.43417,43.84969
-convenience,Dreams Market,0.25,18.41596,43.86684
-convenience,,0.25,18.43239,43.85957
-supermarket,Amko,1.0,18.42778,43.87254
-supermarket,Duric,1.0,18.35457,43.81717
-supermarket,Konzum,1.0,18.32523,43.84011
-mall,East Sarajevo City Park,1.0,18.36011,43.81992
-mall,"Shopping centar ""Tom""",1.0,18.35891,43.82068
-mall,Mercator Ložionička,1.0,18.38458,43.85712
-mall,Bingo Centar Istočno Sarajevo,1.0,18.36189,43.82394
-mall,BTC Merkur Otoka,1.0,18.36776,43.84841
-supermarket,AMKO,2.4706614368715307,18.34653,43.83775
-department_store,WISA Shopping centar,0.5,18.32863,43.84795
-supermarket,Mercator,1.645035736821571,18.39849,43.88012
-mall,Mercator Dobrinja,1.0,18.34514,43.8282
-mall,Sarajevo City Center,1.0,18.40806,43.85539
-supermarket,Penny Plus,0.8044652436516658,18.34938,43.84602
-department_store,FIS,0.5,18.34464,43.84859
-mall,Alta Shopping Center,1.0,18.40591,43.85646
-mall,Villa House,1.0,18.37666,43.85053
-supermarket,Sara Centar,1.227764601181329,18.30834,43.83162
-supermarket,ATOM Veleprodajni Centar,4.0,18.36059,43.85161
-mall,Shopping center Grbavica,1.0,18.39163,43.85039
-supermarket,Konzum,0.5934852544011485,18.37028,43.84757
-mall,,1.0,18.34346,43.90254
-supermarket,Hoše Komerc,0.5655861947197645,18.38467,43.85283
-supermarket,Konzum,0.8804414337320813,18.37128,43.85065
-mall,Bingo,1.0,18.38917,43.85642
-department_store,Bosnamed,0.5,18.40151,43.87814
-convenience,Hoše komerc,0.25,18.3273,43.81624
-convenience,,0.25,18.32801,43.81616
-department_store,Austrian PX,0.5,18.3413,43.81421
-convenience,Hamer Shop,0.25,18.40164,43.85003
-convenience,Prodavnica,0.25,18.34614,43.90552
-supermarket,Konzum,0.5,18.4111,43.85048
-supermarket,Amko,0.5,18.4251,43.85178
-convenience,,0.25,18.44399,43.85414
-mall,Adazal,1.0,18.33228,43.8312
-supermarket,Bingo,4.0,18.32729,43.83588
-mall,,1.0,18.33826,43.84096
-mall,,1.0,18.33808,43.84137
-supermarket,Mercator,1.5675678958389838,18.35433,43.84197
-convenience,Cosmetic Market,0.25,18.41218,43.85868
-supermarket,Robot Hrasno,2.2096292428188655,18.3784,43.84882
-convenience,,0.25,18.33764,43.84518
-supermarket,Robot,4.0,18.30501,43.87896
-convenience,Petrol,0.25,18.32803,43.85478
-convenience,,0.25,18.3224,43.85691
-supermarket,Osmo,0.5,18.35743,43.85767
-supermarket,Super Market SOFA,0.5,18.35786,43.86121
-convenience,kupa shop,0.25,18.41567,43.87496
-supermarket,Ezalm Promet d.o.o.,0.5,18.33562,43.83969
-supermarket,Hoše Komerc d.o.o. (Veleprodaja),0.5,18.31457,43.82904
-mall,Tržni Centar BINGO,1.0,18.3485,43.84381
-supermarket,Konzum,0.5459948937065648,18.3186,43.83879
-department_store,French PX,0.5,18.34372,43.81388
-department_store,Norwegian PX,0.5,18.34225,43.81478
-department_store,Spanish PX,0.5,18.3417,43.81372
-department_store,,0.5,18.34404,43.81425
-convenience,,0.25,18.3206,43.9058
-convenience,Eso,0.25,18.32285,43.9064
-convenience,HIFA-Petrol,0.25,18.36516,43.85421
-supermarket,TC Robot Šip - Sarajevo,1.8278466290942534,18.40048,43.88007
-supermarket,Bingo,0.5,18.34531,43.85289
-supermarket,Power market,0.5,18.36947,43.81286
-supermarket,Bingo,4.0,18.35998,43.89695
-mall,Privredni grad Skenderija,1.0,18.41386,43.85498
-mall,Importanne Centar,1.0,18.39969,43.85491
-convenience,T.R. Buda,0.25,18.42512,43.86329
-convenience,,0.25,18.32883,43.83799
-convenience,HIFA-Petrol,0.25,18.3091,43.83269
-convenience,Ali Market,0.25,18.41823,43.87566
-supermarket,Penny,0.978906746898924,18.36492,43.90362
-supermarket,Konzum,0.5,18.35606,43.8991
-convenience,,0.25,18.49615,43.8781
-mall,,1.0,18.29742,43.83886
-mall,Bingo City Center Sarajevo,1.0,18.35356,43.85053
-mall,Bingo City Center Ilidža,1.0,18.31166,43.82914
-mall,TC Sofa - Doglodi,1.0,18.30632,43.84989
-mall,West Gate Retail Park,1.0,18.24373,43.84706
-supermarket,Robot,2.9871859430483054,18.37084,43.81222
-supermarket,ŠKAFA,0.5,18.38444,43.8829
-supermarket,,0.5,18.37381,43.83948
-mall,,1.0,18.35935,43.81983
-mall,,1.0,18.3593,43.81902
+tip,ime,A,izvor,lon,lat
+supermarket,Konzum,1.0,osm,18.40349,43.85847
+convenience,Konzum,0.25,osm,18.33998,43.84139
+convenience,Konzum,0.25,osm,18.34075,43.84096
+convenience,Nasko,0.25,osm,18.30928,43.81593
+supermarket,Mercator,1.0,osm,18.35138,43.84634
+supermarket,Merkur,1.0,osm,18.29962,43.82942
+supermarket,Konzum,1.0,osm,18.30127,43.82851
+supermarket,,1.0,osm,18.30244,43.82998
+convenience,,0.25,osm,18.30003,43.82949
+convenience,,0.25,osm,18.30144,43.8289
+supermarket,Sefo,1.0,osm,18.29591,43.83069
+supermarket,Bingo,1.0,osm,18.40988,43.86542
+supermarket,Amko,1.0,osm,18.36885,43.84518
+convenience,,0.25,osm,18.3711,43.84466
+convenience,,0.25,osm,18.36996,43.84413
+supermarket,Amko,1.0,osm,18.39493,43.85052
+convenience,Konzum,0.25,osm,18.34837,43.82839
+convenience,,0.25,osm,18.35147,43.83004
+convenience,,0.25,osm,18.35443,43.82903
+convenience,,0.25,osm,18.35329,43.82979
+supermarket,Bingo,1.0,osm,18.36592,43.85018
+supermarket,Konzum,1.0,osm,18.33812,43.82986
+convenience,Delijas Prehrana,0.25,osm,18.33676,43.83032
+convenience,"""Granap kod Bebe""",0.25,osm,18.33759,43.829
+supermarket,Supermarket Hoše,1.0,osm,18.40693,43.86982
+supermarket,Mercator,1.0,osm,18.40633,43.86934
+supermarket,Amko,1.0,osm,18.3868,43.8626
+convenience,Plavi granap,0.25,osm,18.38441,43.86263
+convenience,Fagner,0.25,osm,18.38268,43.84201
+convenience,Prima,0.25,osm,18.38033,43.84624
+convenience,ZI-2B,0.25,osm,18.38083,43.84597
+convenience,Rašmer market,0.25,osm,18.379,43.84578
+convenience,Rašmer market,0.25,osm,18.3852,43.84503
+convenience,Šanac,0.25,osm,18.38797,43.84441
+supermarket,Bingo,1.0,osm,18.38909,43.85649
+convenience,Hoše Komerc,0.25,osm,18.2816,43.87195
+convenience,,0.25,osm,18.36413,43.84471
+convenience,,0.25,osm,18.40483,43.86619
+supermarket,Konzum,1.0,osm,18.40376,43.87112
+convenience,,0.25,osm,18.36307,43.84381
+convenience,,0.25,osm,18.36213,43.84348
+convenience,Amko komerc,0.25,osm,18.35835,43.90916
+supermarket,Bingo,1.0,osm,18.36479,43.85551
+supermarket,CM Cosmetic Market,1.0,osm,18.34594,43.90009
+supermarket,,1.0,osm,18.27846,43.8341
+convenience,,0.25,osm,18.38218,43.80216
+supermarket,,1.0,osm,18.38499,43.85042
+convenience,,0.25,osm,18.3852,43.85046
+convenience,,0.25,osm,18.2825,43.88475
+supermarket,Lovac,1.0,osm,18.28654,43.88201
+supermarket,Konzum,1.0,osm,18.34507,43.84116
+supermarket,Konzum,1.0,osm,18.34529,43.84239
+supermarket,Klas,1.0,osm,18.34488,43.84206
+convenience,Manarda,0.25,osm,18.34324,43.84153
+supermarket,Amko komerc d.o.o.,1.0,osm,18.34158,43.83936
+supermarket,Drvopromet d.o.o.,1.0,osm,18.34126,43.83999
+convenience,Konzum,0.25,osm,18.36745,43.85112
+convenience,Adil,0.25,osm,18.35828,43.83951
+convenience,Konzum,0.25,osm,18.42183,43.86605
+convenience,,0.25,osm,18.36807,43.85179
+convenience,Saneal d.o.o.,0.25,osm,18.34521,43.85279
+supermarket,Konzum,1.0,osm,18.4517,43.86937
+convenience,"S.T.R. ""ADNA""",0.25,osm,18.39322,43.85528
+convenience,Gera,0.25,osm,18.32656,43.81817
+supermarket,,1.0,osm,18.30866,43.83251
+convenience,"Prodavnica ""Rašmer""",0.25,osm,18.34807,43.90248
+convenience,Prodavnica,0.25,osm,18.34619,43.90515
+supermarket,Amko komerc,1.0,osm,18.34274,43.90214
+supermarket,"Supermarket ""Dundee""",1.0,osm,18.41231,43.87311
+supermarket,Deny,1.0,osm,18.29732,43.85458
+supermarket,Amko,1.0,osm,18.30207,43.8515
+supermarket,Konzum,1.0,osm,18.35897,43.82056
+convenience,,0.25,osm,18.38886,43.7979
+convenience,Bislim,0.25,osm,18.35852,43.83876
+convenience,Onogošt,0.25,osm,18.36308,43.82111
+convenience,N market,0.25,osm,18.36116,43.81824
+convenience,N market,0.25,osm,18.36242,43.82039
+convenience,,0.25,osm,18.36731,43.82453
+convenience,,0.25,osm,18.35609,43.81949
+convenience,Prodavnica,0.25,osm,18.3648,43.82319
+convenience,Prodavnica,0.25,osm,18.36707,43.82254
+supermarket,Bingo,1.0,osm,18.31228,43.81512
+convenience,N market,0.25,osm,18.35868,43.82407
+convenience,N market,0.25,osm,18.36401,43.82151
+supermarket,Megamarkt,1.0,osm,18.40497,43.85802
+convenience,Prodavnica,0.25,osm,18.35396,43.81444
+convenience,Prodavnica,0.25,osm,18.33819,43.90136
+convenience,Prodavnica,0.25,osm,18.3415,43.90102
+convenience,Prodavnica,0.25,osm,18.33857,43.90082
+supermarket,Supermarket Sofa,1.0,osm,18.34104,43.90098
+supermarket,,1.0,osm,18.4165,43.85476
+convenience,,0.25,osm,18.41671,43.8547
+supermarket,,1.0,osm,18.41776,43.85422
+convenience,,0.25,osm,18.4268,43.85661
+convenience,Dan & Noć,0.25,osm,18.42179,43.85756
+supermarket,Amko,1.0,osm,18.43438,43.85837
+supermarket,Amko,1.0,osm,18.4295,43.85623
+supermarket,,1.0,osm,18.41252,43.8751
+convenience,Hoše komerc,0.25,osm,18.41997,43.86155
+supermarket,,1.0,osm,18.29376,43.83498
+supermarket,Drvo Promet DP Market,1.0,osm,18.40196,43.86814
+convenience,Osman Small Store,0.25,osm,18.39374,43.86776
+convenience,Hadžijin granap,0.25,osm,18.39968,43.86677
+convenience,,0.25,osm,18.39741,43.86789
+convenience,,0.25,osm,18.39572,43.86786
+convenience,,0.25,osm,18.39947,43.86478
+supermarket,Robot,1.0,osm,18.38411,43.85203
+supermarket,Mercator,1.0,osm,18.39172,43.85044
+convenience,,0.25,osm,18.39225,43.84914
+supermarket,Mercator,1.0,osm,18.41773,43.85818
+supermarket,,1.0,osm,18.32724,43.86638
+convenience,,0.25,osm,18.33074,43.86451
+convenience,Optika Durak,0.25,osm,18.34769,43.82824
+supermarket,Amko comerc d.d.,1.0,osm,18.34796,43.89989
+supermarket,Hiper Kort,1.0,osm,18.36452,43.82761
+convenience,Amko,0.25,osm,18.40629,43.85409
+supermarket,,1.0,osm,18.40821,43.85624
+convenience,,0.25,osm,18.40451,43.85238
+convenience,Amko,0.25,osm,18.4282,43.86175
+greengrocer,Zelenara,0.1,osm,18.36387,43.81991
+convenience,"""N market""",0.25,osm,18.37037,43.82907
+supermarket,DP Market,1.0,osm,18.3952,43.84737
+supermarket,Amko komerc,1.0,osm,18.35724,43.84238
+supermarket,Amko Komerc,1.0,osm,18.37938,43.84947
+convenience,Corner shop,0.25,osm,18.30636,43.83337
+convenience,Small corner shop,0.25,osm,18.30473,43.8324
+convenience,Trgovina MM,0.25,osm,18.3003,43.80911
+convenience,Trgovina Kurtagić,0.25,osm,18.30213,43.81033
+convenience,,0.25,osm,18.30372,43.80091
+supermarket,Konzum,1.0,osm,18.41756,43.87081
+convenience,MAH,0.25,osm,18.34038,43.82887
+convenience,Onogošt,0.25,osm,18.37011,43.82429
+supermarket,Konzum,1.0,osm,18.34018,43.90192
+convenience,Denyprom,0.25,osm,18.39948,43.85027
+supermarket,AK Marketi,1.0,osm,18.4209,43.85492
+convenience,Ambrela D.o.o,0.25,osm,18.42392,43.85609
+convenience,,0.25,osm,18.41853,43.85895
+convenience,Deny Prom Marketi,0.25,osm,18.41346,43.86207
+convenience,Bingo,0.25,osm,18.41691,43.86221
+convenience,Konzum,0.25,osm,18.41226,43.85628
+convenience,,0.25,osm,18.37551,43.84736
+convenience,,0.25,osm,18.37814,43.84782
+supermarket,Amco,1.0,osm,18.35091,43.82708
+convenience,,0.25,osm,18.33237,43.84251
+convenience,,0.25,osm,18.34879,43.82789
+convenience,,0.25,osm,18.35211,43.82696
+convenience,,0.25,osm,18.30777,43.83228
+convenience,Diskont Arizona,0.25,osm,18.36173,43.81855
+supermarket,Cosmetic market (CM),1.0,osm,18.35213,43.84655
+supermarket,DM market,1.0,osm,18.35267,43.84658
+convenience,,0.25,osm,18.4295,43.85937
+supermarket,Konzum,1.0,osm,18.43166,43.86015
+convenience,,0.25,osm,18.42989,43.85509
+convenience,,0.25,osm,18.41151,43.86033
+convenience,,0.25,osm,18.35574,43.82199
+convenience,Elektrotehna (elektro oprema),0.25,osm,18.35579,43.82346
+convenience,Kineska prodavnica,0.25,osm,18.35721,43.82263
+convenience,Prodavnica mjesovite robe,0.25,osm,18.34227,43.90242
+convenience,Prodavnica mjesovite robe,0.25,osm,18.34334,43.90253
+convenience,Oaza 0-24,0.25,osm,18.37249,43.85136
+supermarket,Balon dekor BH,1.0,osm,18.40756,43.86779
+supermarket,Best,1.0,osm,18.35406,43.82673
+supermarket,Konzum,1.0,osm,18.39566,43.85029
+supermarket,Bingo,1.0,osm,18.39153,43.84992
+convenience,Mercator,0.25,osm,18.35111,43.84293
+supermarket,Konzum,1.0,osm,18.3433,43.84476
+supermarket,Amko,1.0,osm,18.34193,43.84455
+convenience,Ribarnica,0.25,osm,18.3501,43.84623
+convenience,,0.25,osm,18.32908,43.80917
+convenience,Rašmer,0.25,osm,18.39604,43.85033
+supermarket,N market,1.0,osm,18.35808,43.82754
+convenience,Daco,0.25,osm,18.37099,43.82298
+supermarket,PENNY PLUS doo,1.0,osm,18.37049,43.90588
+supermarket,Bingo,1.0,osm,18.34406,43.82964
+supermarket,Bingo,1.0,osm,18.42361,43.85985
+supermarket,Super Konzum,1.0,osm,18.32845,43.84803
+convenience,,0.25,osm,18.37024,43.84787
+supermarket,Mercator,1.0,osm,18.38461,43.85716
+supermarket,Bingo,1.0,osm,18.40582,43.85638
+supermarket,Konzum,1.0,osm,18.39944,43.85508
+supermarket,Konzum,1.0,osm,18.41652,43.85821
+greengrocer,Zelena pijaca,0.1,osm,18.36736,43.84825
+supermarket,Minimarket Bingo 3,1.0,osm,18.42432,43.85976
+supermarket,Amko,1.0,osm,18.42049,43.85869
+convenience,Market (Minimarket),0.25,osm,18.41953,43.85787
+convenience,,0.25,osm,18.42706,43.85988
+supermarket,Hoše komerc,1.0,osm,18.42356,43.85941
+supermarket,Konzum,1.0,osm,18.39603,43.84747
+supermarket,Konzum,1.0,osm,18.31224,43.79889
+greengrocer,Secret Garden,0.1,osm,18.42771,43.85947
+convenience,,0.25,osm,18.44117,43.86236
+supermarket,Konzum,1.0,osm,18.4263,43.85822
+supermarket,Konzum,1.0,osm,18.42033,43.86805
+supermarket,Eman,1.0,osm,18.34974,43.82757
+supermarket,,1.0,osm,18.34983,43.8249
+supermarket,Arbin Market,1.0,osm,18.34936,43.8263
+supermarket,"Supermarket ""Bingo""",1.0,osm,18.34773,43.83149
+greengrocer,,0.1,osm,18.35044,43.82563
+supermarket,,1.0,osm,18.35018,43.82429
+supermarket,Konzum,1.0,osm,18.31777,43.81389
+supermarket,Bingo,1.0,osm,18.31714,43.81373
+supermarket,Mercator,1.0,osm,18.34479,43.82851
+department_store,Heliodent d.o.o.,0.5,osm,18.42656,43.85653
+convenience,,0.25,osm,18.42486,43.87314
+supermarket,,1.0,osm,18.34278,43.83367
+convenience,M.A.S. Shop,0.25,osm,18.4205,43.85566
+supermarket,,1.0,osm,18.45253,43.87235
+supermarket,Konzum,1.0,osm,18.35065,43.82753
+supermarket,Amko,1.0,osm,18.31258,43.79807
+supermarket,Megamarkt,1.0,osm,18.35259,43.84619
+supermarket,Konzum,1.0,osm,18.39214,43.88122
+supermarket,Šamon HoReCa shop and market,1.0,osm,18.41154,43.8579
+convenience,Mercator,0.25,osm,18.41166,43.85628
+convenience,,0.25,osm,18.41599,43.8705
+convenience,,0.25,osm,18.4112,43.85226
+supermarket,Robot,1.0,osm,18.40726,43.86904
+convenience,Konzum,0.25,osm,18.38954,43.85413
+supermarket,Bingo,1.0,osm,18.40306,43.87847
+supermarket,Brojler Market,1.0,osm,18.32083,43.87289
+convenience,Mini Market,0.25,osm,18.42446,43.86167
+convenience,Bazar,0.25,osm,18.41862,43.86664
+supermarket,Mercator,1.0,osm,18.41902,43.86693
+convenience,Amko,0.25,osm,18.42122,43.86651
+convenience,,0.25,osm,18.2568,43.84045
+convenience,,0.25,osm,18.39328,43.8636
+mall,UNITIC Business Center,1.0,osm,18.40613,43.8571
+convenience,,0.25,osm,18.3597,43.85044
+supermarket,Bingo,1.0,osm,18.31784,43.79592
+supermarket,Bazar,1.0,osm,18.44032,43.86223
+supermarket,Tropic,1.0,osm,18.35691,43.81679
+supermarket,Mercator,1.0,osm,18.41694,43.87048
+mall,ARIA,1.0,osm,18.41653,43.85834
+supermarket,Bingo,1.0,osm,18.35256,43.85034
+supermarket,Konzum,1.0,osm,18.40891,43.8552
+supermarket,Bingo,1.0,osm,18.32575,43.83963
+supermarket,Bingo,1.0,osm,18.366,43.85526
+supermarket,Delikatesa,1.0,osm,18.4244,43.85886
+supermarket,Konzum,1.0,osm,18.41276,43.86078
+supermarket,Amko komerc,1.0,osm,18.41225,43.87568
+supermarket,Amko,1.0,osm,18.43303,43.86112
+convenience,,0.25,osm,18.4316,43.86051
+greengrocer,Košpića,0.1,osm,18.43335,43.86118
+supermarket,Deny Prom,1.0,osm,18.43368,43.85595
+convenience,Market Diskont,0.25,osm,18.4321,43.87271
+supermarket,,1.0,osm,18.42785,43.86886
+convenience,,0.25,osm,18.43815,43.87315
+convenience,T.R. Alli,0.25,osm,18.4471,43.85349
+convenience,Konzum,0.25,osm,18.43173,43.8599
+convenience,,0.25,osm,18.27304,43.83032
+supermarket,Bingo,1.0,osm,18.37754,43.85359
+supermarket,Konzum,1.0,osm,18.38252,43.85559
+supermarket,Mercator,1.0,osm,18.37936,43.85302
+supermarket,Amko,1.0,osm,18.38104,43.85332
+supermarket,DM Supermarket,1.0,osm,18.24973,43.84631
+convenience,Vindija D.O.O. Sarajevo,0.25,osm,18.41797,43.86776
+supermarket,Crvena Jabuka Gastro Market,1.0,osm,18.40407,43.85635
+convenience,,0.25,osm,18.3328,43.83911
+supermarket,Amko komerc,1.0,osm,18.32359,43.84066
+convenience,,0.25,osm,18.37886,43.85121
+convenience,Konzum,0.25,osm,18.37652,43.85152
+grocery,Saraj Smart Market,0.25,osm,18.35708,43.82884
+grocery,Bingo,0.25,osm,18.32752,43.83422
+convenience,Konzum,0.25,osm,18.40073,43.84855
+supermarket,Konzum,1.0,osm,18.36401,43.81728
+convenience,Mercator,0.25,osm,18.38617,43.84884
+convenience,Konzum,0.25,osm,18.3235,43.84336
+convenience,Kineska prodavnica,0.25,osm,18.36142,43.81669
+convenience,Power Market,0.25,osm,18.36277,43.81761
+convenience,Onogošt,0.25,osm,18.36422,43.81679
+supermarket,Bingo,1.0,osm,18.36733,43.84848
+supermarket,Bingo,1.0,osm,18.31105,43.82888
+convenience,Prodavnica,0.25,osm,18.45336,43.86204
+convenience,iNovine,0.25,osm,18.3361,43.8264
+convenience,,0.25,osm,18.31619,43.92031
+supermarket,Mercator,1.0,osm,18.30644,43.83066
+convenience,,0.25,osm,18.41826,43.8657
+supermarket,Amko Komerc Koševsko Brdo,1.0,osm,18.40591,43.86439
+supermarket,Gama,1.0,osm,18.31604,43.81612
+convenience,Prodavnica,0.25,osm,18.41847,43.84991
+convenience,,0.25,osm,18.42487,43.85176
+convenience,Zaaan,0.25,osm,18.41701,43.8526
+convenience,NEO market,0.25,osm,18.42982,43.85368
+supermarket,Amko,1.0,osm,18.43086,43.85007
+convenience,,0.25,osm,18.43827,43.85361
+supermarket,Bingo,1.0,osm,18.36157,43.82351
+supermarket,Trgovačka radnja Hair,1.0,osm,18.37571,43.84005
+supermarket,D&D MARKET,1.0,osm,18.31167,43.84135
+supermarket,Ćelo,1.0,osm,18.29494,43.85313
+convenience,TR Ivana,0.25,osm,18.37172,43.82327
+supermarket,b Bazar,1.0,osm,18.36282,43.85055
+supermarket,Amko,1.0,osm,18.41738,43.85881
+convenience,,0.25,osm,18.40936,43.85989
+convenience,Tr. Bedr,0.25,osm,18.33778,43.81917
+convenience,BEHAR d.o.o.,0.25,osm,18.35053,43.83991
+convenience,Neo Market,0.25,osm,18.43417,43.84969
+convenience,Dreams Market,0.25,osm,18.41596,43.86684
+convenience,,0.25,osm,18.43239,43.85957
+supermarket,Amko,1.0,osm,18.42778,43.87254
+supermarket,Duric,1.0,osm,18.35457,43.81717
+supermarket,Konzum,1.0,osm,18.32523,43.84011
+mall,East Sarajevo City Park,1.0,osm,18.36011,43.81992
+mall,"Shopping centar ""Tom""",1.0,osm,18.35891,43.82068
+mall,Mercator Ložionička,1.0,osm,18.38458,43.85712
+mall,Bingo Centar Istočno Sarajevo,1.0,osm,18.36189,43.82394
+mall,BTC Merkur Otoka,1.0,osm,18.36776,43.84841
+supermarket,AMKO,2.4706614368715307,osm,18.34653,43.83775
+department_store,WISA Shopping centar,0.5,osm,18.32863,43.84795
+supermarket,Mercator,1.645035736821571,osm,18.39849,43.88012
+mall,Mercator Dobrinja,1.0,osm,18.34514,43.8282
+mall,Sarajevo City Center,1.0,osm,18.40806,43.85539
+supermarket,Penny Plus,0.8044652436516658,osm,18.34938,43.84602
+department_store,FIS,0.5,osm,18.34464,43.84859
+mall,Alta Shopping Center,1.0,osm,18.40591,43.85646
+mall,Villa House,1.0,osm,18.37666,43.85053
+supermarket,Sara Centar,1.227764601181329,osm,18.30834,43.83162
+supermarket,ATOM Veleprodajni Centar,4.0,osm,18.36059,43.85161
+mall,Shopping center Grbavica,1.0,osm,18.39163,43.85039
+supermarket,Konzum,0.5934852544011485,osm,18.37028,43.84757
+mall,,1.0,osm,18.34346,43.90254
+supermarket,Hoše Komerc,0.5655861947197645,osm,18.38467,43.85283
+supermarket,Konzum,0.8804414337320813,osm,18.37128,43.85065
+mall,Bingo,1.0,osm,18.38917,43.85642
+department_store,Bosnamed,0.5,osm,18.40151,43.87814
+convenience,Hoše komerc,0.25,osm,18.3273,43.81624
+convenience,,0.25,osm,18.32801,43.81616
+department_store,Austrian PX,0.5,osm,18.3413,43.81421
+convenience,Hamer Shop,0.25,osm,18.40164,43.85003
+convenience,Prodavnica,0.25,osm,18.34614,43.90552
+supermarket,Konzum,0.5,osm,18.4111,43.85048
+supermarket,Amko,0.5,osm,18.4251,43.85178
+convenience,,0.25,osm,18.44399,43.85414
+mall,Adazal,1.0,osm,18.33228,43.8312
+supermarket,Bingo,4.0,osm,18.32729,43.83588
+mall,,1.0,osm,18.33826,43.84096
+mall,,1.0,osm,18.33808,43.84137
+supermarket,Mercator,1.5675678958389838,osm,18.35433,43.84197
+convenience,Cosmetic Market,0.25,osm,18.41218,43.85868
+supermarket,Robot Hrasno,2.2096292428188655,osm,18.3784,43.84882
+convenience,,0.25,osm,18.33764,43.84518
+supermarket,Robot,4.0,osm,18.30501,43.87896
+convenience,Petrol,0.25,osm,18.32803,43.85478
+convenience,,0.25,osm,18.3224,43.85691
+supermarket,Osmo,0.5,osm,18.35743,43.85767
+supermarket,Super Market SOFA,0.5,osm,18.35786,43.86121
+convenience,kupa shop,0.25,osm,18.41567,43.87496
+supermarket,Ezalm Promet d.o.o.,0.5,osm,18.33562,43.83969
+supermarket,Hoše Komerc d.o.o. (Veleprodaja),0.5,osm,18.31457,43.82904
+mall,Tržni Centar BINGO,1.0,osm,18.3485,43.84381
+supermarket,Konzum,0.5459948937065648,osm,18.3186,43.83879
+department_store,French PX,0.5,osm,18.34372,43.81388
+department_store,Norwegian PX,0.5,osm,18.34225,43.81478
+department_store,Spanish PX,0.5,osm,18.3417,43.81372
+department_store,,0.5,osm,18.34404,43.81425
+convenience,,0.25,osm,18.3206,43.9058
+convenience,Eso,0.25,osm,18.32285,43.9064
+convenience,HIFA-Petrol,0.25,osm,18.36516,43.85421
+supermarket,TC Robot Šip - Sarajevo,1.8278466290942534,osm,18.40048,43.88007
+supermarket,Bingo,0.5,osm,18.34531,43.85289
+supermarket,Power market,0.5,osm,18.36947,43.81286
+supermarket,Bingo,4.0,osm,18.35998,43.89695
+mall,Privredni grad Skenderija,1.0,osm,18.41386,43.85498
+mall,Importanne Centar,1.0,osm,18.39969,43.85491
+convenience,T.R. Buda,0.25,osm,18.42512,43.86329
+convenience,,0.25,osm,18.32883,43.83799
+convenience,HIFA-Petrol,0.25,osm,18.3091,43.83269
+convenience,Ali Market,0.25,osm,18.41823,43.87566
+supermarket,Penny,0.978906746898924,osm,18.36492,43.90362
+supermarket,Konzum,0.5,osm,18.35606,43.8991
+convenience,,0.25,osm,18.49615,43.8781
+mall,,1.0,osm,18.29742,43.83886
+mall,Bingo City Center Sarajevo,1.0,osm,18.35356,43.85053
+mall,Bingo City Center Ilidža,1.0,osm,18.31166,43.82914
+mall,TC Sofa - Doglodi,1.0,osm,18.30632,43.84989
+mall,West Gate Retail Park,1.0,osm,18.24373,43.84706
+supermarket,Robot,2.9871859430483054,osm,18.37084,43.81222
+supermarket,ŠKAFA,0.5,osm,18.38444,43.8829
+supermarket,,0.5,osm,18.37381,43.83948
+mall,,1.0,osm,18.35935,43.81983
+mall,,1.0,osm,18.3593,43.81902
+supermarket,Bingo Ilijaš,1.0,overture,18.26536,43.96263
+supermarket,I-Centar Konzum Ilijaš,1.0,overture,18.26448,43.96395
+convenience,TOMS markt,0.25,overture,18.22821,43.85927
+convenience,Aperto Diskontni Centar Ilidža,0.25,overture,18.31165,43.83063
+convenience,Trgovina Sarac,0.25,overture,18.31402,43.81139
+convenience,Trgovina Zeleni Put,0.25,overture,18.30779,43.81102
+convenience,T.R. Plus Market,0.25,overture,18.33137,43.81924
+supermarket,Neo Market Briješće,1.0,overture,18.32583,43.85992
+supermarket,Neo Market,1.0,overture,18.34541,43.82688
+supermarket,Konzum - Alipasino polje (B faza),1.0,overture,18.34349,43.84268
+convenience,Market,0.25,overture,18.3532,43.8409
+supermarket,Tropic (Tempo),1.0,overture,18.35592,43.81697
+supermarket,Deny Prom,1.0,overture,18.35827,43.86207
+convenience,Maline,0.25,overture,18.36326,43.85689
+convenience,Market Kvadrant,0.25,overture,18.36611,43.85115
+supermarket,KLAS - Hrana puna ljubavi,1.0,overture,18.37531,43.85343
+convenience,Bazar 457,0.25,overture,18.37564,43.85405
+convenience,Bazar 1 Kapija,0.25,overture,18.3768,43.85416
+convenience,bazar.ba,0.25,overture,18.38338,43.84791
+supermarket,Megamarkt,1.0,overture,18.38987,43.86093
+convenience,Bazar 94 Soukbunar,0.25,overture,18.41309,43.84865
+convenience,SUPER GILE,0.25,overture,18.41325,43.85097
+convenience,SAGRO - Sarajevo Grocery,0.25,overture,18.42977,43.85745
+convenience,Sajmir,0.25,overture,18.33939,43.90329
+supermarket,Megamarkt Sarajevo,1.0,overture,18.38503,43.8653
+convenience,Market ANIS,0.25,overture,18.43109,43.87449
+convenience,BAZAR 443,0.25,overture,18.41496,43.87216
+convenience,bazar.ba,0.25,overture,18.41655,43.86788

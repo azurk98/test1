@@ -1,6 +1,7 @@
 """Najbolje slobodne lokacije za novi supermarket (Huffov gravitacijski model).
 
 Ulaz:  raw/Sarajewo.osm.gz (mreža, postojeće trgovine, namjena zemljišta),
+       raw/overture_places.parquet (Overture Maps Places; dopuna trgovina koje OSM nema),
        out/polja_h3.gpkg (stanovnici), out/dostupnost_h3.csv
 Izlaz: out/supermarket_kandidati.csv/.gpkg (dvije strategije: bijela_mrlja, najveci_promet),
        out/supermarket_postojeci.csv (postojeće trgovine s kupcima po modelu),
@@ -29,6 +30,8 @@ from __future__ import annotations
 
 import gzip
 import importlib.util
+import re
+import unicodedata
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -58,6 +61,45 @@ A_TIP = {"supermarket": 1.0, "mall": 1.0,  # OSM "mall" uključuje i poslovne ce
          "department_store": 0.5, "convenience": 0.25,
          "grocery": 0.25, "general": 0.25, "greengrocer": 0.1}
 NIJE_NAMIRNICE = {"dm", "müller", "muller", "lilly", "dm drogerie markt"}
+
+# Overture Maps Places (raw/overture_places.parquet) kao drugi izvor trgovina
+OVERTURE_KAT = {"grocery_store", "supermarket", "convenience_store", "hypermarket", "discount_store"}
+LANCI = re.compile(r"\b(bingo|konzum|amko|mercator|robot|hose|megamarkt|tropic|deny|merkur|penny|klas|neo market)\b")
+NIJE_NAMIRNICE_RE = re.compile(
+    r"(aparat|tehnik|pcelar|slastic|serdz|home|health|apoteka|ljekarn|cvjecar|kozmet|cosmetic|candy|boutique|"
+    r"namjestaj|tekstil|obuc|parfem|elektro|auto|sport|book|knjig|vulkan|kinesk|jumbo|trading|limited|"
+    r"bureg|burek|pekar|caff|cafe|ambalaz|\bart\b|art$|mesnic|plantaz|frutta|\bd\.? ?o\.? ?o\b|komerc|b ?& ?h|"
+    r"\bmarketi\b|edeka|1\.99|gric|bariba|smart mjesto)")
+OVERTURE_MIN_POUZDANOST = 0.4
+DUPLIKAT_M = 75
+
+
+def bez_dijakritika(s) -> str:
+    s = unicodedata.normalize("NFKD", str(s or "").lower().replace("đ", "dj"))
+    return "".join(c for c in s if not unicodedata.combining(c))
+
+
+def overture_trgovine(osm: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
+    """Trgovine namirnica iz Overture koje nisu u OSM-u (dalje od DUPLIKAT_M)."""
+    f = RAW / "overture_places.parquet"
+    if not f.exists():
+        return osm.iloc[0:0]
+    g = gpd.read_parquet(f)
+    g["kat"] = g.taxonomy.apply(lambda t: t.get("primary") if t is not None else None)
+    g["ime"] = g.names.apply(lambda n: n.get("primary") if n is not None else "")
+    n = g.ime.map(bez_dijakritika)
+    lanac = n.str.contains(LANCI)
+    ok = (g.kat.isin(OVERTURE_KAT) | ((g.kat == "shopping") & lanac)) & ~n.str.contains(NIJE_NAMIRNICE_RE)
+    ok &= (g.confidence >= OVERTURE_MIN_POUZDANOST) | lanac
+    if "operating_status" in g:
+        ok &= g.operating_status.fillna("open").ne("permanently_closed")
+    v = g[ok].to_crs(CRS_M).copy()
+    v["geometry"] = v.geometry.representative_point()
+    v["tip"] = np.where(lanac[ok] | v.kat.isin(["supermarket", "hypermarket"]), "supermarket", "convenience")
+    t = cKDTree(np.c_[osm.geometry.x, osm.geometry.y])
+    d, _ = t.query(np.c_[v.geometry.x, v.geometry.y])
+    v = v[d > DUPLIKAT_M]
+    return gpd.GeoDataFrame({"tip": v.tip, "ime": v.ime, "izvor": "overture"}, geometry=v.geometry, crs=CRS_M)
 
 
 def trgovine_i_zemljiste(xml_gz, nodes):
@@ -121,7 +163,11 @@ def main() -> None:
         if keep[i] and keep[j] and s.tip.iat[i] == s.tip.iat[j]:
             keep[j if s.A.iat[i] >= s.A.iat[j] else i] = False
     s = s[keep].reset_index(drop=True)
-    print(f"Postojeće trgovine: {s.tip.value_counts().to_dict()}")
+    s["izvor"] = "osm"
+    ov = overture_trgovine(s)
+    ov["A"] = ov.tip.map(A_TIP)
+    s = gpd.GeoDataFrame(pd.concat([s, ov], ignore_index=True), crs=CRS_M)
+    print(f"Postojeće trgovine: {s.groupby(['izvor', 'tip']).size().to_dict()}")
 
     # --- mreža i čvorovi
     used = sorted({n for _, nds in ways for n in nds if n in nodes})
@@ -212,7 +258,7 @@ def main() -> None:
     # postojeći tržišni udio konkurencije u Huffu (za kontekst)
     P0 = U0 * s.A.to_numpy() / (U0 @ s.A.to_numpy() + 1e-12)[:, None]
     s["kupci_model"] = (p @ P0).round()
-    s[["tip", "ime", "A", "kupci_model"]].assign(
+    s[["tip", "ime", "A", "izvor", "kupci_model"]].assign(
         lon=s.to_crs(CRS_WGS).geometry.x.round(5), lat=s.to_crs(CRS_WGS).geometry.y.round(5)
     ).sort_values("kupci_model", ascending=False).to_csv(OUT / "supermarket_postojeci.csv", index=False)
 
@@ -272,7 +318,7 @@ def main() -> None:
     pd.DataFrame({"h3_id": polja.h3_id, "supermarket_pjesice_min": min_sup}).to_csv(
         OUT / "supermarket_pokrivenost.csv", index=False)
     s.assign(lon=s.to_crs(CRS_WGS).geometry.x.round(5), lat=s.to_crs(CRS_WGS).geometry.y.round(5))[
-        ["tip", "ime", "A", "lon", "lat"]].to_csv(OUT / "supermarket_trgovine.csv", index=False)
+        ["tip", "ime", "A", "izvor", "lon", "lat"]].to_csv(OUT / "supermarket_trgovine.csv", index=False)
 
     izb2, kup2 = izbor_praznine()
     out = pd.DataFrame(tabela(izb2, kup2, "bijela_mrlja") + tabela(izb, kup, "najveci_promet", stab))
