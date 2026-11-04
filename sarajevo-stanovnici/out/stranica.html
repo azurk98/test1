@@ -131,6 +131,19 @@ aside.read{border-left:1px solid var(--line);padding:16px;max-height:calc(min(68
 .aqs text{font:600 10px var(--mono);fill:#fff;pointer-events:none}
 .legend b.aqk{display:inline-grid;place-items:center;min-width:22px;height:15px;border-radius:3px;background:#2b2d42;color:#fff;font:600 9.5px var(--mono);padding:0 3px}
 .bestbtn{font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:4px;min-width:0}
+.chips button{all:unset;cursor:pointer;padding:6px 11px;font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:999px;background:var(--surface);white-space:nowrap}
+.chips button:hover{border-color:var(--accent);color:var(--fg)}
+.chips button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.chips button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.chips-sm{display:inline-flex}
+.chips-sm button{padding:4px 9px;font-size:12.5px}
+.tools > div{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;min-width:0}
+#profiles{flex-wrap:wrap}
+@media (max-width:860px){
+  .satcredit{position:static;max-width:none;text-align:left;color:var(--muted);text-shadow:none;padding:4px 12px 8px}
+  .legend{position:static;margin:8px 12px 0;max-width:none}
+}
 .bestp{display:grid;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--bg)}
 .sliders{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:4px 18px}
 .sliders label{display:grid;grid-template-columns:minmax(0,1fr) 110px 26px;align-items:center;gap:8px;font-size:13px}
@@ -188,7 +201,7 @@ footer{font-size:13px;color:var(--muted);max-width:80ch}
   <section class="mapbox">
     <div class="mapcol">
       <div class="tools">
-        <div class="seg" role="group" aria-label="Colour cells by">
+        <div class="chips" role="group" aria-label="Colour cells by">
           <button id="m-best" aria-pressed="false" class="bestbtn">Best to live</button>
           <button id="m-pop" aria-pressed="true">Residents</button>
           <button id="m-den" aria-pressed="false">Per km²</button>
@@ -202,7 +215,7 @@ footer{font-size:13px;color:var(--muted);max-width:80ch}
           <button id="m-fog" aria-pressed="false">Fog</button>
         </div>
         <div>
-          <span class="seg seg-sm" role="group" aria-label="Background">
+          <span class="chips chips-sm" role="group" aria-label="Background">
             <button data-bg="sat" aria-pressed="false">Satellite</button><button data-bg="satrel" aria-pressed="true">Sat + relief</button><button data-bg="rel" aria-pressed="false">Relief</button><button data-bg="none" aria-pressed="false">None</button>
           </span>
           <button class="btn" id="contToggle" aria-pressed="true">Contours: on</button>
@@ -214,7 +227,7 @@ footer{font-size:13px;color:var(--muted);max-width:80ch}
         </div>
       </div>
       <div class="bestp" id="bestPanel" hidden>
-        <div class="seg seg-sm" role="group" aria-label="Who is choosing" id="profiles"></div>
+        <div class="chips chips-sm" role="group" aria-label="Who is choosing" id="profiles"></div>
         <div class="sliders" id="sliders"></div>
       </div>
       <svg id="map" role="img" aria-label="Hexagon map of estimated residents"></svg>
