@@ -1,6 +1,7 @@
 """Interaktivna karta -> out/karta.html
 
-Podloge: Esri World Imagery (satelit, zadano), OpenStreetMap.
+Podloge: Esri World Imagery (satelit, zadano), OpenTopoMap, OpenStreetMap;
+preko njih sjenčenje reljefa (Esri World Hillshade) i izohipse iz koraka 10.
 Slojevi: stanovnici, MZ granice, a ako postoje rezultati koraka 08/09 i
 atraktivnost lokacije, postojeći supermarketi i predložene lokacije.
 Karta učitava podloge s njihovih servera (treba internet); Esri World Imagery
@@ -31,7 +32,24 @@ def main() -> None:
         tiles="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
         attr="Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community",
         name="Satelit (Esri)", max_zoom=19).add_to(m)
+    folium.TileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png", name="Topografska (OpenTopoMap)",
+                     attr="Map data © OpenStreetMap contributors, SRTM | Style © OpenTopoMap (CC-BY-SA)",
+                     max_zoom=17, show=False).add_to(m)
     folium.TileLayer("OpenStreetMap", name="OpenStreetMap", show=False).add_to(m)
+    folium.TileLayer(
+        tiles="https://server.arcgisonline.com/ArcGIS/rest/services/Elevation/World_Hillshade/MapServer/tile/{z}/{y}/{x}",
+        attr="Hillshade © Esri", name="Sjenčenje reljefa (Esri)", overlay=True, show=True, opacity=0.7,
+        max_zoom=16, className="sjencenje").add_to(m)
+    m.get_root().header.add_child(folium.Element(
+        "<style>.sjencenje{mix-blend-mode:multiply}</style>"))
+    izo = OUT / "teren_izohipse.geojson"
+    if izo.exists():
+        folium.GeoJson(
+            str(izo), name="Izohipse (50 m, Copernicus DEM)", show=True,
+            style_function=lambda f: {"color": "#ffffff", "weight": 1.4 if f["properties"]["glavna"] else 0.6,
+                                      "opacity": 0.8 if f["properties"]["glavna"] else 0.45},
+            tooltip=folium.GeoJsonTooltip(fields=["m"], aliases=["Nadmorska visina (m)"]),
+        ).add_to(m)
     folium.GeoJson(
         p[["h3_id", "opcina", "mz", "stanovnici", "stanovnici_min", "stanovnici_max",
            "d0_14", "d15_64", "d65plus", "pouzdanost", "izvor_tezine", "geometry"]],

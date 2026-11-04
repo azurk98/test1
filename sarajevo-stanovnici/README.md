@@ -17,6 +17,8 @@ python 06_provjera.py           # -> out/validacija.md
 python 07_karta.py              # -> out/karta.html
 python 08_dostupnost.py         # dostupnost i atraktivnost lokacije -> out/dostupnost_h3.gpkg/.csv
 python 09_supermarket.py        # lokacije za novi supermarket (Huff) -> out/supermarket_*.csv/.gpkg
+python 10_teren.py              # topografija: reljef, izohipse, visina i nagib po polju -> out/teren_*
+python 07_karta.py              # ponovo, da karta dobije slojeve iz koraka 08–10
 ```
 
 **Kontrolna tačka prije koraka 5:** `02_zgrade.py` ispisuje (i sprema u
@@ -95,6 +97,18 @@ Oprez: bijele mrlje su u prigradskim dijelovima Novog Grada, gdje je model stano
 (1,75–2,5× udjela iz 2010) i gdje OSM vjerovatno ne bilježi sve male trgovine. Kolona
 `znakovi_zemljista` (parking, poslovni objekat, gradilište) je samo nagovještaj; vlasništvo i
 namjenu provjeriti u katastru i prostornom planu.
+
+## Topografija (`10_teren.py`)
+
+Copernicus DEM GLO-30 (30 m; © DLR e.V. 2010–2014, © Airbus Defence and Space GmbH 2014–2018,
+Copernicus licenca). To je model površine (uključuje zgrade i krošnje), pa se prije računanja
+izglađuje (~60 m). Izlazi: `teren_h3.csv` (srednja/min/max visina, srednji nagib u % po polju),
+`teren_reljef.png` (sjenčenje + boje po visini), `teren_sjena.png`, `teren_izohipse.geojson`
+(50 m, glavne 250 m), `teren_okvir.json` (okvir slika). Stanovnici po nagibu polja: ravno (< 5%)
+~93.000, 5–10% ~51.000, 10–20% ~90.000, > 20% ~36.000; iznad 700 m n.v. ~15.600.
+
+Lokalna karta (`out/karta.html`): podloge Esri satelit (zadano), OpenTopoMap, OpenStreetMap;
+preko njih Esri sjenčenje reljefa i izohipse.
 
 ## Odluke u implementaciji (gdje SPEC ostavlja prostor)
 
