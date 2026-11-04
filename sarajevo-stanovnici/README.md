@@ -15,6 +15,7 @@ python 05_raspodjela.py         # težine, kontrolni zbirovi, starosne grupe, 9 
 python kalibracija_gustine.py   # (dijagnostika) omjer gustine kuće/blokovi i α na MZ Novog Grada
 python 06_provjera.py           # -> out/validacija.md
 python 07_karta.py              # -> out/karta.html
+python 08_dostupnost.py         # dostupnost i atraktivnost lokacije -> out/dostupnost_h3.gpkg/.csv
 ```
 
 **Kontrolna tačka prije koraka 5:** `02_zgrade.py` ispisuje (i sprema u
@@ -56,6 +57,24 @@ ukupno i po općini. Pregledati prije pokretanja `05_raspodjela.py`.
   Rezultat: Alipašino Polje 0,70–1,10 udjela iz 2010 (prije 0,29–0,69), Dobrinja D 0,92 (0,65),
   Olimpijsko Selo 0,83 (0,61); Briješće 1,75 (2,24), Dobroševići 2,50 (3,14).
   Preostala odstupanja (Dobrinja C, Švrakino Selo I, Aneks) potiču od grubih MZ poligona.
+
+## Dostupnost i atraktivnost lokacije (`08_dostupnost.py`)
+
+Dodatni pokazatelji po polju, za analizu lokacija; procjena stanovnika se ne mijenja.
+
+| Kolona | Značenje |
+|---|---|
+| `pjesice_5/10/15` | stanovnici dostupni pješice (OSM ulice i staze, 4,8 km/h) |
+| `auto_5/10/15` | stanovnici dostupni autom (jednosmjerne, `maxspeed` ili tipična brzina klase × 0,65) |
+| `poi_10min` | trgovine, usluge, uredi (`shop`/`amenity`/`office`) za 10 min pješice |
+| `stanica_m`, `stanica_tip` | najbliža stanica (tramvaj / trolejbus / autobus; oznake < 40 m spojene) |
+| `stanice_400m`, `tramvaj_400m` | broj stanica u krugu 400 m |
+| `glavna_cesta_m` | udaljenost do magistralne/primarne/sekundarne ceste |
+| `ulice_km_km2`, `raskrsnice_km2` | gustina ulica i raskrsnica |
+| `atraktivnost` | 0–100: ponderisani percentilni rangovi (pješice 10 min 20%, auto 10 min 15%, POI 20%, stanice 400 m 15%, najbliža stanica 10%, glavna cesta 10%, raskrsnice 10%); ponderi u `TEZINE` |
+
+Ograničenja: dostupni stanovnici samo iz četiri modelirane općine (rubni efekat prema Ilidži,
+Vogošći, Istočnom Sarajevu); bez podataka o gužvi; javni prevoz je samo blizina stanica, bez voznog reda.
 
 ## Odluke u implementaciji (gdje SPEC ostavlja prostor)
 
