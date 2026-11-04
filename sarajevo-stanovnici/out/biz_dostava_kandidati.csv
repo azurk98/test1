@@ -1,0 +1,21 @@
+strategija,rang,h3_id,opcina,mz,procjena,potraznja_blizu,novo_pokriveno,najblizi_konkurent_m,konkurenata_1500m,cesta_m,stanica_m,nagib_pct,znakovi_zemljista,lon,lat
+najvise,1,8a1ef4590a9ffff,Novo Sarajevo,Čengić Vila II,50.6,130793,0,73,84,2,36,2.0,parking 214 m²,18.37155,43.85019
+najvise,2,8a1ea92cd76ffff,Novi Grad Sarajevo,Zabrđe,48.0,17379,2082,306,10,19,228,2.0,—,18.30607,43.88154
+najvise,3,8a1ef4591c27fff,Novo Sarajevo,Malta,47.5,131741,0,47,98,16,34,2.0,parking 5.111 m²; poslovni_objekat 2.265 m²,18.38462,43.85275
+najvise,4,8a1ef459052ffff,Novi Grad Sarajevo,Švrakino Selo II,46.2,117828,0,105,53,11,98,3.0,parking 2.840 m²,18.35422,43.84639
+najvise,5,8a1ef459072ffff,Novi Grad Sarajevo,Švrakino Selo III,44.8,121174,0,13,61,7,129,7.0,parking 2.275 m²,18.36567,43.8438
+najvise,6,8a1ef45918f7fff,Novo Sarajevo,Željeznička,44.2,128248,0,94,104,8,132,1.0,parking 583 m²,18.39476,43.85487
+najvise,7,8a1ef4591a27fff,Centar Sarajevo,Marijin Dvor,43.0,120097,0,62,120,4,136,4.0,parking 1.694 m²,18.40522,43.85581
+najvise,8,8a1ef4590127fff,Novi Grad Sarajevo,Alipašin Most III,41.9,115242,23,222,63,32,85,6.0,—,18.36173,43.85241
+najvise,9,8a1ef4592947fff,Novi Grad Sarajevo,Alipašino Polje BI,41.0,106687,0,311,61,1,4,4.0,parking 7.216 m²,18.34835,43.83999
+najvise,10,8a1ef4596b9ffff,Novi Grad Sarajevo,Briješće,40.4,103267,58,754,47,0,96,10.0,parking 300 m²,18.33721,43.85244
+bijela_mrlja,1,8a1ea92cd4d7fff,Novi Grad Sarajevo,Dobroševići,45.0,10528,2830,22,5,10,49,4.0,—,18.29202,43.87699
+bijela_mrlja,2,8a1ef4580c17fff,Centar Sarajevo,Pionirska Dolina,19.7,17221,536,460,5,96,189,7.0,—,18.41564,43.88988
+bijela_mrlja,3,8a1ea92c9837fff,Novi Grad Sarajevo,Zabrđe,38.7,24351,385,271,13,1,16,4.0,—,18.3123,43.87572
+bijela_mrlja,4,8a1ef4596197fff,Novi Grad Sarajevo,Briješće,32.6,67027,240,185,50,55,445,1.0,—,18.32643,43.84715
+bijela_mrlja,5,8a1ef4582c6ffff,Centar Sarajevo,Koševsko Brdo,33.6,80606,209,202,46,1,45,7.0,—,18.40683,43.87201
+bijela_mrlja,6,8a1ea92eb487fff,Novi Grad Sarajevo,Dobroševići,18.3,2658,194,2674,0,0,789,8.0,—,18.27267,43.89679
+bijela_mrlja,7,8a1ef4598baffff,Stari Grad Sarajevo,Širokača,3.6,1551,121,254,4,0,138,9.0,parking 6.590 m²,18.45037,43.83674
+bijela_mrlja,8,8a1ef4583c6ffff,Stari Grad Sarajevo,Sedrenik,22.8,37523,102,289,24,44,54,9.0,—,18.43889,43.87247
+bijela_mrlja,9,8a1ef459c8effff,Stari Grad Sarajevo,Bistrik,32.3,88026,86,252,97,11,113,10.0,—,18.42975,43.85577
+bijela_mrlja,10,8a1ef459559ffff,Novi Grad Sarajevo,Dolac,37.8,98907,79,262,39,15,111,9.0,—,18.36695,43.86117

@@ -126,6 +126,19 @@ def podaci() -> dict:
                int(r.pranja_mj), int(r.od_stanovnika), int(r.od_prolaza), int(r.stanovnici_10min_voznje),
                int(r.bez_praonice_5min), int(r.najbliza_praonica_m), int(r.najbliza_pumpa_m), r.cesta,
                r.znakovi_zemljista, r.lon, r.lat] for r in ak.itertuples()]
+    biz = {}
+    for k in ("dostava", "muzicka"):
+        bk = pd.read_csv(OUT / f"biz_{k}_kandidati.csv")
+        bp = pd.read_csv(OUT / f"biz_{k}_postojeci.csv")
+        bc = pd.read_csv(OUT / f"biz_{k}_pokrivenost.csv").set_index("h3_id").reindex(p.h3_id)
+        biz[k] = {
+            "sites": [[r.strategija, int(r.rang), r.h3_id, r.mz if isinstance(r.mz, str) else "", OP.index(r.opcina),
+                       float(r.procjena), int(r.potraznja_blizu), int(r.novo_pokriveno), int(r.najblizi_konkurent_m),
+                       int(r.konkurenata_1500m), r.znakovi_zemljista, r.lon, r.lat] for r in bk.itertuples()],
+            "places": [[round(r.lon, 5), round(r.lat, 5), r.ime if isinstance(r.ime, str) else "", r.vrsta]
+                       for r in bp.itertuples()],
+            "cov": [[None if pd.isna(m) else round(float(m), 1), None if pd.isna(n) else int(n)]
+                    for m, n in zip(bc.min_do_najblizeg, bc.u_blizini)]}
     sd = gpd.read_file(OUT / "sadrzaji.geojson")
     x0, y0, x1, y1 = SAT_OKVIR
     sd = sd[(sd.geometry.x.between(x0, x1)) & (sd.geometry.y.between(y0, y1))]
@@ -151,7 +164,7 @@ def podaci() -> dict:
     return {"lines": linije, "aq": stanice, "acc": acc, "poi": poi,
             "stores": [[round(a, 5), round(b, 5), (n if isinstance(n, str) else "")]
                        for a, b, n in zip(st.lon, st.lat, st.ime)],
-            "sites": sites, "washes": praonice, "wsites": wsites, "cells": cells, "summ": summ, "mz": mzrows,
+            "sites": sites, "washes": praonice, "wsites": wsites, "biz": biz, "cells": cells, "summ": summ, "mz": mzrows,
             "op": [rnd(x) for x in op.geometry],
             "mzlines": [[OP.index(o) if o in OP else -1, n, rnd(x)]
                         for o, n, x in zip(mzall.opcina, mzall.mz, mzall.geometry)]}

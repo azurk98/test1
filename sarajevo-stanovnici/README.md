@@ -32,6 +32,7 @@ python 16_sunce.py              # sati sunca zimi (zasjenjenje brdima) -> out/su
 python 17_zrak.py               # smog i magla zimi: izloženost inverziji -> out/zrak_h3.csv
 python 18_javni_prevoz.py       # javni prevoz: linije, frekvencija, PTAL -> out/prevoz_h3.csv, out/linije.geojson
 python 19_autopraonica.py       # lokacije za autopraonicu -> out/autopraonica_*.csv
+python 20_biznisi.py            # dostavna kuhinja i muzička škola -> out/biz_*.csv
 python 13_stranica.py           # interaktivna stranica (artifact) -> out/stranica.html
 python 07_karta.py              # ponovo, da karta dobije slojeve iz koraka 08–11
 ```
@@ -145,6 +146,22 @@ Sokolje, Sedrenik) i gusti dio grada uz glavne ceste (Bulevar Meše Selimovića,
 gdje je potražnja velika, ali je i konkurencija na 200–400 m. Ograničenja: nema podataka o
 broju auta ni o prometu po ulici; ručne praonice uz vulkanizere često nisu u OSM-u ni u
 Overture; parcelu, priključak vode i kanalizacije i dozvole treba provjeriti posebno.
+
+## Dostavna kuhinja i muzička škola (`20_biznisi.py`)
+
+Isti Huffov model kao 09 i 19, s drugim kupcima, dolaskom i konkurencijom (pretpostavke u
+zaglavlju skripta). Dvije strategije: `najvise` (najveći udio) i `bijela_mrlja`.
+
+- **Dostavna kuhinja**: odrasli (15–64, 65+ × 0,2), dostava do 15 min vožnje, λ = 1;
+  konkurencija ~590 restorana i fast fooda (OSM + Overture); 0,03 narudžbe po odraslom dnevno.
+  Kandidat: cesta ≥ tercijarna na ≤ 100 m, nagib ≤ 10%, pristup ≥ 50.
+  Najviše narudžbi: Čengić Vila II, Malta, Švrakino Selo (≈ 45–50 narudžbi dnevno, ali s
+  50–100 restorana na 1,5 km). Bijela mrlja: Dobroševići, Pionirska Dolina, Zabrđe.
+- **Muzička škola**: 0,55 · (0–14) + 0,04 · (15–64), 5% upis; pješice ili autom do 20 min;
+  javne škole A = 3, privatne 1. Pronađeno 11 škola (OMŠ Pozajić i Srednja muzička su u istoj
+  zgradi i broje se kao jedna). Najviše učenika: Švrakino Selo II (~145), Čengić Vila (~125),
+  Trg heroja (~105); Novi Grad nema javnu muzičku školu u modelu, a najbliža je ~2 km.
+  Bijela mrlja: Zabrđe (~1.750 djece bez škole u 15 min), Betanija, Alipašin Most I.
 
 ## Google Places (`12_google_places.py`, opcionalno)
 

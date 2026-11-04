@@ -224,6 +224,8 @@ footer{font-size:13px;color:var(--muted);max-width:80ch}
           <button id="m-att" aria-pressed="false">Attractiveness</button>
           <button id="m-sup" aria-pressed="false">Supermarket</button>
           <button id="m-wash" aria-pressed="false">Car wash</button>
+          <button id="m-kit" aria-pressed="false">Delivery kitchen</button>
+          <button id="m-mus" aria-pressed="false">Music school</button>
           <button id="m-liv" aria-pressed="false">Livability</button>
           <button id="m-car" aria-pressed="false">Car access</button>
           <button id="m-sun" aria-pressed="false">Winter sun</button>
@@ -293,6 +295,30 @@ footer{font-size:13px;color:var(--muted);max-width:80ch}
     <p class="hint">Washes a month are an order of magnitude for comparing sites, not a forecast: there are no car ownership or traffic counts per street. Self-service and hand-wash bays at tyre shops are often missing from OpenStreetMap and Overture Maps, so check each site on the ground, and check the plot, the water and sewer connection and the permits before acting.</p>
   </section>
 
+  <section class="ledger" aria-labelledby="kh">
+    <h2 id="kh">Delivery kitchen sites</h2>
+    <p class="lede">A delivery-only kitchen needs no shop window: what counts is how many adults its couriers reach and how many restaurants already deliver there. Adults aged 15–64 (and 65+ at a fifth) are shared over every restaurant and fast-food place within a 15-minute drive, with distance mattering less than for a shop (travel time to the power 1). A new kitchen running several brands counts double a fast-food place, a sit-down restaurant half. Orders assume one delivery per adult a month. Sites sit within 100 m of a tertiary or bigger road for couriers, on slopes of 10% or less, with easy street access.</p>
+    <div class="sites">
+      <div><h3>Fill a gap</h3><p>Brings the most adults who now have fewer than 10 restaurants within a 10-minute drive into reach.</p>
+        <div class="tbl"><table><thead><tr><th>#</th><th>Location</th><th class="r">Orders / day</th><th class="r">Newly in reach</th></tr></thead><tbody id="kitgap"></tbody></table></div></div>
+      <div><h3>Most orders</h3><p>Takes the largest share from existing competitors and earlier picks.</p>
+        <div class="tbl"><table><thead><tr><th>#</th><th>Location</th><th class="r">Orders / day</th><th class="r">Nearest rival</th></tr></thead><tbody id="kittop"></tbody></table></div></div>
+    </div>
+    <p class="hint">Orders a day are an order of magnitude for comparing sites, not a forecast. Delivery platforms set their own delivery zones and fees, which can matter more than distance. Rent is not modelled; the cheapest suitable space is usually a ground-floor commercial unit or a small industrial hall near a main road.</p>
+  </section>
+
+  <section class="ledger" aria-labelledby="mh">
+    <h2 id="mh">Music school sites</h2>
+    <p class="lede">Pupils are children aged about 7 to 18, estimated as 55% of under-15s plus 4% of 15–64-year-olds, of whom 5% take music lessons. They reach a school on foot (with slopes) or are driven (plus three minutes to park), whichever is quicker, up to 20 minutes. Public music schools count three times a private one, since they are free and larger. Sites need a transit stop within 400 m or a road within 150 m, slopes of 12% or less, easy street access, and existing buildings to rent space in.</p>
+    <div class="sites">
+      <div><h3>Fill a gap</h3><p>Brings the most children with no music school within 15 minutes into reach.</p>
+        <div class="tbl"><table><thead><tr><th>#</th><th>Location</th><th class="r">Pupils</th><th class="r">Newly in reach</th></tr></thead><tbody id="musgap"></tbody></table></div></div>
+      <div><h3>Most pupils</h3><p>Takes the largest share from existing competitors and earlier picks.</p>
+        <div class="tbl"><table><thead><tr><th>#</th><th>Location</th><th class="r">Pupils</th><th class="r">Nearest rival</th></tr></thead><tbody id="mustop"></tbody></table></div></div>
+    </div>
+    <p class="hint">Eleven music schools were found: the public schools in Novo Sarajevo, Centar (primary and secondary share a building and count as one), Ilidža and Istočno Novo Sarajevo, plus private schools such as Pop Rock Škola, Mali Mozart, BASIC, Espressivo, Rockschool and Atelje Maya. Private teachers and small studios are mostly missing, so check each area before acting.</p>
+  </section>
+
   <section class="ledger" aria-labelledby="lh">
     <div class="bar">
       <h2 id="lh">Totals by MZ</h2>
@@ -350,6 +376,8 @@ cells.forEach(c => { c.den = c.s / c.km2; c.ring = sc(h3.cellToBoundary(c.h, tru
 
 function binColor(v, T){ const r = ramp(); if (v < T[0]) return css("--zero"); let i = 0; while (i < T.length-1 && v >= T[i+1]) i++; return r[i]; }
 function color(c){
+  if (mode === "kit"){ if (c.s === 0 || c.kitN == null) return css("--zero"); return c.kitN < 10 ? css("--rel-c") : c.kitN < 50 ? css("--r3") : css("--r1"); }
+  if (mode === "mus"){ if (c.s === 0 || c.musMin == null) return css("--zero"); return c.musMin <= 10 ? css("--r1") : c.musMin <= 15 ? css("--r3") : css("--rel-c"); }
   if (mode === "rel") return c.s === 0 ? css("--zero") : css({A:"--rel-a",B:"--rel-b",C:"--rel-c"}[c.p]);
   if (mode === "att") return binColor(c.att, ATT_T);
   if (mode === "liv") return binColor(c.liv, ATT_T);
@@ -413,6 +441,22 @@ const siteG = supG.append("g").selectAll("g").data(SITES).join("g").attr("class"
   .on("click", (e,d) => { e.stopPropagation(); pickSite(d); });
 siteG.append("circle").attr("r",7.5);
 siteG.append("text").attr("text-anchor","middle").attr("dy","0.35em").text(d => d.rank);
+cells.forEach((c, i) => { c.kitMin = D.biz.dostava.cov[i][0]; c.kitN = D.biz.dostava.cov[i][1]; c.musMin = D.biz.muzicka.cov[i][0]; c.musN = D.biz.muzicka.cov[i][1]; });
+const BIZ = {
+  kit:{d:D.biz.dostava, name:"Delivery kitchen", unit:"orders a day", near:"Adults within a 10-min drive", place:"restaurant"},
+  mus:{d:D.biz.muzicka, name:"Music school", unit:"pupils", near:"Children within 15 min", place:"music school"}};
+Object.entries(BIZ).forEach(([m, b]) => {
+  b.sites = b.d.sites.map(r => ({strat:r[0],rank:r[1],h:r[2],mz:r[3],op:r[4],est:r[5],near:r[6],gap:r[7],rival:r[8],rivals:r[9],land:r[10],lon:r[11],lat:r[12]}));
+  b.g = g.append("g").attr("display","none");
+  b.pts = b.g.append("g").selectAll("circle").data(b.d.places).join("circle").attr("class","store").attr("r",2.2);
+  b.sg = b.g.append("g").selectAll("g").data(b.sites).join("g").attr("class", d => "site " + (d.strat === "bijela_mrlja" ? "gapsite" : "topsite"))
+    .on("click", (e,d) => { e.stopPropagation(); pickBiz(m, d); });
+  b.sg.append("circle").attr("r",7.5);
+  b.sg.append("text").attr("text-anchor","middle").attr("dy","0.35em").text(d => d.rank);
+});
+const bizPlace = () => Object.values(BIZ).forEach(b => {
+  b.pts.attr("cx", d => proj([d[0]*KX, d[1]])[0]).attr("cy", d => proj([d[0]*KX, d[1]])[1]).attr("r", 2.2/zk);
+  b.sg.attr("transform", d => { const [x,y] = proj([d.lon*KX, d.lat]); return `translate(${x},${y}) scale(${1/zk})`; }); });
 const washG = g.append("g").attr("display","none");
 const washP = washG.append("g").selectAll("circle").data(D.washes).join("circle").attr("class", d => "store wash w-" + d[3]).attr("r",3);
 washP.append("title").text(d => (d[2] || "car wash") + (d[3] === "detailing" ? " (detailing)" : d[3] === "pumpa_pranje" ? " (at a fuel station)" : ""));
@@ -462,13 +506,14 @@ function layout(){
   storeP.attr("r", 2.2/zk);
   washP.attr("cx", d => proj([d[0]*KX, d[1]])[0]).attr("cy", d => proj([d[0]*KX, d[1]])[1]).attr("r", 3/zk);
   wsiteG.attr("transform", d => { const [x,y] = proj([d.lon*KX, d.lat]); return `translate(${x},${y}) scale(${1/zk})`; });
+  bizPlace();
   poiG.selectAll("circle").attr("cx", d => proj([d.lon*KX, d.lat])[0]).attr("cy", d => proj([d.lon*KX, d.lat])[1])
     .attr("r", d => (d.k === "bolnica" ? 4.6 : 3.2)/zk).attr("stroke-width", 1/zk);
 }
 const zoom = d3.zoom().scaleExtent([1,14]).on("zoom", e => { g.attr("transform", e.transform);
   svg.style("--zw", Math.pow(e.transform.k, 0.35).toFixed(2)); svg.classed("zin", e.transform.k >= 2.5);
   if (e.transform.k !== zk){ zk = e.transform.k; siteG.attr("transform", d => { const [x,y] = proj([d.lon*KX, d.lat]); return `translate(${x},${y}) scale(${1/zk})`; }); storeP.attr("r", 2.2/zk);
-    wsiteG.attr("transform", d => { const [x,y] = proj([d.lon*KX, d.lat]); return `translate(${x},${y}) scale(${1/zk})`; }); washP.attr("r", 3/zk);
+    wsiteG.attr("transform", d => { const [x,y] = proj([d.lon*KX, d.lat]); return `translate(${x},${y}) scale(${1/zk})`; }); washP.attr("r", 3/zk); bizPlace();
     poiG.selectAll("circle").attr("r", d => (d.k === "bolnica" ? 4.6 : 3.2)/zk).attr("stroke-width", 1/zk);
     aqS.attr("transform", d => { const [x,y] = proj([d[2]*KX, d[1]]); return `translate(${x},${y}) scale(${1/zk})`; });
     contL.attr("transform", d => { const i = Math.floor(d[2].length/4)*2; const [x,y] = proj([d[2][i]*KX, d[2][i+1]]); return `translate(${x},${y}) scale(${1/zk})`; }); } });
@@ -511,9 +556,10 @@ function updateFocus(zoomTo){
   } else if (zoomTo) svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity);
   show(selected);
 }
-const MODES = ["best","pop","den","rel","att","sup","wash","liv","car","sun","smog","fog","pt"];
+const MODES = ["best","pop","den","rel","att","sup","wash","kit","mus","liv","car","sun","smog","fog","pt"];
 MODES.forEach(m => document.getElementById("m-"+m).onclick = () => {
-  mode = m; MODES.forEach(x => document.getElementById("m-"+x).setAttribute("aria-pressed", x === m)); supG.attr("display", m === "sup" ? null : "none"); washG.attr("display", m === "wash" ? null : "none"); accG.attr("display", m === "car" ? null : "none");
+  mode = m; MODES.forEach(x => document.getElementById("m-"+x).setAttribute("aria-pressed", x === m)); supG.attr("display", m === "sup" ? null : "none"); washG.attr("display", m === "wash" ? null : "none");
+  Object.entries(BIZ).forEach(([k, b]) => b.g.attr("display", m === k ? null : "none")); accG.attr("display", m === "car" ? null : "none");
   aqG.attr("display", m === "smog" || m === "fog" ? null : "none");
   ptG.attr("display", m === "pt" ? null : "none");
   if (m === "liv" && !showPoi) document.getElementById("poiToggle").click(); paint(); show(selected); });
@@ -533,6 +579,14 @@ function legend0(){
     el.innerHTML = `<div style="font-size:12px;color:var(--muted)">Walk to nearest supermarket</div>
       <div class="cat"><span><i style="background:var(--r1)"></i>≤ 5 min</span><span><i style="background:var(--r3)"></i>5–10 min</span><span><i style="background:var(--rel-c)"></i>over 10 min</span></div>
       <div class="cat"><span><i class="dot"></i>existing supermarket</span><span><b class="mk gapsite">1</b>gap site</span><span><b class="mk topsite">1</b>top-sales site</span></div>`;
+    return;
+  }
+  if (mode === "kit" || mode === "mus"){
+    el.innerHTML = (mode === "kit" ? `<div style="font-size:12px;color:var(--muted)">Restaurants and fast food within a 10-min drive</div>
+      <div class="cat"><span><i style="background:var(--rel-c)"></i>under 10</span><span><i style="background:var(--r3)"></i>10–49</span><span><i style="background:var(--r1)"></i>50 or more</span></div>`
+      : `<div style="font-size:12px;color:var(--muted)">Nearest music school, on foot or by car</div>
+      <div class="cat"><span><i style="background:var(--r1)"></i>≤ 10 min</span><span><i style="background:var(--r3)"></i>10–15 min</span><span><i style="background:var(--rel-c)"></i>over 15 min</span></div>`)
+      + `<div class="cat"><span><i class="dot"></i>existing ${BIZ[mode].place}</span><span><b class="mk gapsite">1</b>gap site</span><span><b class="mk topsite">1</b>${mode === "kit" ? "most orders" : "most pupils"}</span></div>`;
     return;
   }
   if (mode === "wash"){
@@ -593,8 +647,17 @@ function washBlock(c){
     <dt>Nearest car wash</dt><dd class="num">${fmt(d.near)} m</dd><dt>Nearest fuel station</dt><dd class="num">${fmt(d.fuel)} m</dd></dl>
     <p class="hint" style="font-size:13px">On ${d.road}. Possible ground: ${landTxt(d.land)}</p>`).join("");
 }
+function bizBlock(c){
+  const b = BIZ[mode], ss = b.sites.filter(x => x.h === c.h); if (!ss.length) return "";
+  return ss.map(d => `<div class="k">${b.name} site · ${d.strat === "bijela_mrlja" ? "gap" : "top"} #${d.rank}</div>
+    <dl><dt>Estimated ${b.unit}</dt><dd class="num">${fmt(d.est)}</dd><dt>${b.near}</dt><dd class="num">${fmt(d.near)}</dd>
+    <dt>…newly in reach</dt><dd class="num">${fmt(d.gap)}</dd><dt>Nearest ${b.place}</dt><dd class="num">${fmt(d.rival)} m</dd>
+    <dt>${b.place[0].toUpperCase() + b.place.slice(1)}s within 1.5 km</dt><dd class="num">${d.rivals}</dd></dl>
+    <p class="hint" style="font-size:13px">Possible ground: ${landTxt(d.land)}</p>`).join("");
+}
 function siteBlock(c){
   if (mode === "wash") return washBlock(c);
+  if (mode === "kit" || mode === "mus") return bizBlock(c);
   const ss = SITES.filter(x => x.h === c.h); if (!ss.length) return "";
   return ss.map(d => `<div class="k">Proposed site · ${d.strat === "bijela_mrlja" ? "gap" : "top sales"} #${d.rank}</div>
     <dl><dt>Expected customers</dt><dd class="num">${fmt(d.cap)}</dd><dt>Within 10 min walk</dt><dd class="num">${fmt(d.w10)}</dd>
@@ -616,6 +679,14 @@ function pickSite(d){
 function pickWash(d){
   const c = byH.get(d.h); if (!c) return;
   if (mode !== "wash") document.getElementById("m-wash").click();
+  selected = c; hexes.classed("sel", x => x === c); show(c);
+  const [x,y] = proj([d.lon*KX, d.lat]);
+  svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(W()/2,H()/2).scale(5).translate(-x,-y));
+  document.getElementById("map").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"center"});
+}
+function pickBiz(m, d){
+  const c = byH.get(d.h); if (!c) return;
+  if (mode !== m) document.getElementById("m-" + m).click();
   selected = c; hexes.classed("sel", x => x === c); show(c);
   const [x,y] = proj([d.lon*KX, d.lat]);
   svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(W()/2,H()/2).scale(5).translate(-x,-y));
@@ -652,6 +723,17 @@ function show(c){
       <div class="k">Lowest MZ</div>
       <dl>${grp.slice(-3).reverse().map(([m, v]) => `<dt>${m} <span class="tag">${OPN[v.op]}</span></dt><dd class="num">${Math.round(v.sc)}</dd>`).join("")}</dl>`;
     el.querySelectorAll("button.lnk").forEach(b => b.onclick = () => pickCell(b.dataset.h));
+    return;
+  }
+  if (!c && (mode === "kit" || mode === "mus")){
+    const pool = focusOp >= 0 ? cells.filter(x => x.op === focusOp) : cells;
+    const far = mode === "kit" ? d3.sum(pool.filter(x => x.kitN != null && x.kitN < 10), x => x.s)
+      : d3.sum(pool.filter(x => x.musMin != null && x.musMin > 15), x => x.s), tot = d3.sum(pool, x => x.s);
+    el.innerHTML = `<div class="k">${mode === "kit" ? "Fewer than 10 restaurants in a 10-min drive" : "No music school within 15 min"}</div>
+      <div class="big num">${fmt(far)}</div><div class="rng num">${Math.round(far/tot*100)}% of ${fmt(tot)} residents</div>
+      <p class="hint">${mode === "kit" ? `Dots are the ${fmt(BIZ.kit.d.places.length)} restaurants and fast-food places in OpenStreetMap and Overture Maps; most deliver through Wolt or Glovo.`
+        : `Dots are the ${BIZ.mus.d.places.length} music schools found in OpenStreetMap and Overture Maps, public and private. Small private studios and teachers working from home are mostly missing.`}
+      Numbered markers are the proposed sites; tap one, or use the table below the map.</p>`;
     return;
   }
   if (!c && mode === "wash"){
@@ -726,6 +808,8 @@ function show(c){
       <dt>Main road</dt><dd class="num">${fmt(c.road)} m</dd>
       <dt>Elevation, slope</dt><dd class="num">${c.elev == null ? "—" : fmt(c.elev) + " m · " + c.slope + "%"}</dd>
       <dt>Supermarket, walking</dt><dd class="num">${c.sup == null ? "—" : c.sup >= 20 ? "20+ min" : c.sup + " min"}</dd>
+      <dt>Restaurants ≤10 min drive</dt><dd class="num">${c.kitN == null ? "—" : fmt(c.kitN)}</dd>
+      <dt>Music school</dt><dd class="num">${c.musMin == null ? "—" : c.musMin >= 20 ? "20+ min" : c.musMin + " min"}</dd>
       <dt>Car wash, driving</dt><dd class="num">${c.wash == null ? "—" : c.wash >= 12 ? "12+ min" : c.wash + " min"}</dd>
     </dl>
     ${siteBlock(c)}
@@ -754,7 +838,12 @@ function siteTables(){
     <td class="r num">${fmt(d.wash)}</td><td class="r num">${d.strat === "bijela_mrlja" ? fmt(d.gap) : fmt(d.near) + " m"}</td></tr>`;
   document.getElementById("wgap").innerHTML = WSITES.filter(d => d.strat === "bijela_mrlja").map(wrow).join("");
   document.getElementById("wtop").innerHTML = WSITES.filter(d => d.strat !== "bijela_mrlja").map(wrow).join("");
-  document.querySelectorAll(".sites tbody tr").forEach(tr => { const go = () => tr.dataset.w ? pickWash(WSITES.find(d => d.h === tr.dataset.h && d.strat === tr.dataset.s)) : pickSite(SITES.find(d => d.h === tr.dataset.h && d.strat === tr.dataset.s));
+  Object.entries(BIZ).forEach(([m, b]) => {
+    const brow = d => `<tr tabindex="0" data-h="${d.h}" data-s="${d.strat}" data-b="${m}"><td class="num">${d.rank}</td><td>${d.mz || OPN[d.op]}<div class="tag">${OPN[d.op]}</div></td>
+      <td class="r num">${fmt(d.est)}</td><td class="r num">${d.strat === "bijela_mrlja" ? fmt(d.gap) : fmt(d.rival) + " m"}</td></tr>`;
+    document.getElementById(m + "gap").innerHTML = b.sites.filter(d => d.strat === "bijela_mrlja").map(brow).join("");
+    document.getElementById(m + "top").innerHTML = b.sites.filter(d => d.strat !== "bijela_mrlja").map(brow).join(""); });
+  document.querySelectorAll(".sites tbody tr").forEach(tr => { const go = () => tr.dataset.b ? pickBiz(tr.dataset.b, BIZ[tr.dataset.b].sites.find(d => d.h === tr.dataset.h && d.strat === tr.dataset.s)) : tr.dataset.w ? pickWash(WSITES.find(d => d.h === tr.dataset.h && d.strat === tr.dataset.s)) : pickSite(SITES.find(d => d.h === tr.dataset.h && d.strat === tr.dataset.s));
     tr.addEventListener("click", go); tr.addEventListener("keydown", e => { if (e.key === "Enter"){ go(); } }); });
 }
 // ---- Best to live: weighted mix of every factor, computed in the browser
