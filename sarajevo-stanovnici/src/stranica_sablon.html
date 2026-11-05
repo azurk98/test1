@@ -533,7 +533,8 @@ const REC = {"nova linija":"New line: nothing runs here today",
   "jedna jaka linija (6–8 polazaka/h) umjesto više rijetkih; voziti i kroz nepokrivene ulice":"One strong line (6–8 an hour) instead of several sparse ones, also through the streets they miss",
   "produžiti/preusmjeriti postojeće kroz nepokriveni dio":"Extend or reroute existing lines through the part they miss",
   "pojačati na ≥ 3 polaska/h i proširiti trasu":"Run existing lines at least 3 times an hour and widen the route",
-  "pojačati na ≥ 3 polaska/h":"Run existing lines at least 3 times an hour", "dovoljno pokriveno":"Already well served"};
+  "pojačati na ≥ 3 polaska/h":"Run existing lines at least 3 times an hour", "dovoljno pokriveno":"Already well served",
+  "sjeverna":"Northern hillside line, half of a pair: midibus (8–9 m) every 10 minutes, the two halves overlapping at Buća Potok"};
 let newSel = null;
 const newP = ptG.append("g").selectAll("path").data(D.newlines).join("path").attr("class", d => "newl n-" + d[1])
   .attr("stroke", d => NEW_C[d[1]]).on("click", (e, d) => { e.stopPropagation(); newSel = d; newP.classed("sel", x => x === d); show(null); });
@@ -891,7 +892,9 @@ function show(c){
       <div class="k">Recommendation</div><div style="font-weight:600">${REC[d[12]] || d[12]}</div>
       ${d[10] ? `<p class="hint" style="font-size:12.5px">Lines already on the route (weekday 7–9 h departures per hour): ${d[10].replace(/autobus/g,"bus")}</p>` : ""}
       <p class="hint" style="font-size:13px">${{P1:"The busiest corridor with no tram or trolleybus at either end (about 3,700 trips a day). Trolleybus or electric bus every 7–10 minutes, changing to the tram at Alipašin most.",
-        P2:"About 2,200 trips a day; the cantonal timetable has no line on the Lukavica side, so check whether a Republika Srpska operator runs one."}[d[0]] ||
+        P2:"About 2,200 trips a day; the cantonal timetable has no line on the Lukavica side, so check whether a Republika Srpska operator runs one.",
+        S1:"Western half of a northern hillside line. Today these neighbourhoods are linked only through the valley; about 12,000 trips a day run between places on this route, and 7,800 residents along it walk over 8 minutes to a stop. Up to 25% gradients and short narrow stretches call for a midibus.",
+        S2:"Eastern half of a northern hillside line, down to the railway station. About 21,000 trips a day run between places on this route. Pofalići and Velešići are 1.7 km apart but 3.2 km by road, so a short bus-only link there would save several minutes."}[d[0]] ||
         "Small bus for a steep neighbourhood, from the part farthest from a stop to the nearest tram or trolleybus stop. Check street width and a turning point on site."}</p>` :
       `<div class="k">Proposed new lines</div><p class="hint">Drawn from the trip model: corridors with the most daily trips and no tram or trolleybus, and steep neighbourhoods where many people walk over 8 minutes to a stop. Most already have a bus or minibus, but one that runs once or twice an hour or misses whole streets; each line says what to change. Tap a line or a label.</p>`)
       + `<div class="k">Lines · residents gaining a stop within 400 m</div><dl>${lst}</dl>

@@ -208,6 +208,29 @@ def podaci() -> dict:
                                    [round(c, 5) for xy in r.geometry.coords for c in xy],
                                    getattr(r, "postojece_linije", "") or "", float(getattr(r, "postojeci_polasci_h", 0) or 0),
                                    getattr(r, "preporuka", "") or ""] for r in nl.itertuples()]
+    def sjev_post(sid):
+        """Postojeće linije na dionicama sjeverne linije (28): S1 = dionice 2–4, S2 = 5–7 (bez tramvaja)."""
+        import re
+        f_ = OUT / "sjeverna_linija_dionice.csv"
+        if not f_.exists():
+            return "", 0.0
+        d = pd.read_csv(f_)
+        d = d.iloc[1:4] if sid == "S1" else d.iloc[4:]
+        lin = {}
+        for txt in d.postojece:
+            for v, k, h in re.findall(r"(minibus|autobus|trolejbus|tramvaj) (\S+) \(([\d.]+)/h\)", str(txt)):
+                if v not in ("tramvaj", "trolejbus"):
+                    lin[f"{v} {k}"] = float(h)
+        top = sorted(lin.items(), key=lambda x: -x[1])
+        return ", ".join(f"{k} ({h:g}/h)" for k, h in top), round(sum(lin.values()), 1)
+
+    for sid, fajl, naz in (("S1", "sjeverna_s_zapad.geojson", "Zabrđe – Briješće – Sokolje – Buća Potok – Otoka"),
+                           ("S2", "sjeverna_s_istok.geojson", "Buća Potok – Pofalići – Velešići – Željeznička stanica")):
+        if (OUT / fajl).exists():
+            r = gpd.read_file(OUT / fajl).iloc[0]
+            nove.append([sid, "glavna", naz, float(r.km), int(r.stanovnici_400m), int(r.radna_mjesta_400m),
+                         int(r["danas_>8min_od_stanice"]), int(r.voznja_min), max(2, round(float(r.km) / 0.4)),
+                         [round(c, 5) for xy in r.geometry.coords for c in xy], *sjev_post(sid), "sjeverna"])
     return {"lines": linije, "newlines": nove, "aq": stanice, "acc": acc, "poi": poi,
             "stores": [[round(a, 5), round(b, 5), (n if isinstance(n, str) else "")]
                        for a, b, n in zip(st.lon, st.lat, st.ime)],

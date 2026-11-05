@@ -268,6 +268,17 @@ izvan tramvaja/trolejbusa i preporuku: skoro svugdje već vozi linija, ali 0,5�
 mimo naselja; P3 (Stup – Alipašin Most) je izbačen jer tim pravcem voze tramvaji 3, 6 i 11, a nova
 linija u pravom smislu je samo M1 (Hrastovi-Mrkovići).
 
+## Sjeverna brdska linija (`28_sjeverna_linija.py`)
+
+Ocjena prijedloga Stup – Zabrđe – Briješće – Sokolje – Buća Potok – Pofalići – Velešići – Željeznička
+(trasa kroz brdske dijelove naselja, najkraćim putem po cestama). Cijela: 23 km, ~69 min, 50.400
+stanovnika do 400 m (11.100 danas > 8 min od stanice), 45.500 putovanja dnevno između zona uz trasu,
+nagib do 25,5%, 700 m uskih ulica. Dionica Stup – Zabrđe ide dolinom uz tramvaje 3/6/7/11, a cesta
+nema kontinuitet po brdu (Sokolje – Buća Potok +37%, Pofalići – Velešići +88% u odnosu na zračnu
+liniju). Preporuka: dvije linije midibusom s preklapanjem u Buća Potoku – S1 Zabrđe – Buća Potok –
+Otoka (11,7 km, ~33 min, 7.800 danas daleko od stanice) i S2 Buća Potok – Velešići – Željeznička
+(7,4 km, ~26 min, 21.200 putovanja dnevno u koridoru); obje su na karti (Transit).
+
 ## Google Places (`12_google_places.py`, opcionalno)
 
 Nearby Search (New) za tipove supermarket, grocery_store, convenience_store, market, food_store u
