@@ -322,6 +322,11 @@ C3 Hrasno – istočna Dobrinja 31.100; 893 (ali Zmaja od Bosne +11%).
 G produžetak Gradskog autoputa uz prugu do Marijin Dvora 36.700; −257 (gore: puni centar).
 S sjeverna longitudinala Pofalići – Koševo 17.700; 556 (Maršala Tita −21%, Alipašina +26%).
 SP S + planirani tunel 18.400; 287 (Maršala Tita −17%, Obala −9%, Alipašina +29%).
+T1 Prva transverzala (planirana; Pofalići – Željeznička – Koševsko brdo/Velešići – Kobilja Glava,
+trasa približna) 21.500; 617 (Alipašina −59%, Safeta Zajke −10%, Maršala Tita −6%).
+T6 Šesta transverzala (planirana; Hrasno – Čengić Vila – Buća Potok – Hotonj, približno) 21.500;
+1.113 (Zmaja od Bosne −15%, Maršala Tita −14%, Alipašina −19%, Safeta Zajke −11%) – najveći
+pojedinačni efekat. T1 + T6 zajedno 1.216 (Alipašina −64%, Zmaja od Bosne −21%, Safeta Zajke −15%).
 Zaključak: ceste uglavnom pomjeraju gužvu prema istim uskim grlima; za putovanje zapad → centar
 veći efekat se očekuje od P+R uz tramvaj, BRT/žutih traka, pomjerenog radnog vremena i radnih mjesta
 u Novom Gradu (model ne računa promjenu načina prevoza). Inducirani promet nije uključen.
