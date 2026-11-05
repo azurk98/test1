@@ -67,7 +67,11 @@ def main() -> None:
     eime = e0.w.map(lambda q: wmeta[q]["ime"]).to_numpy()
     glavni_cv = np.unique(np.r_[e0.u[np.isin(ehw, list(GLAVNE))], e0.v[np.isin(ehw, list(GLAVNE))]])
     tg = cKDTree(xy[glavni_cv])
-    sve_cv = np.unique(np.r_[e0.u, e0.v]); ta = cKDTree(xy[sve_cv])
+    # samo čvorovi glavne jako povezane komponente (spojevi se ne smiju vezati za izolovane puteve)
+    from scipy.sparse.csgraph import connected_components
+    _, lab = connected_components(mp.graf(e0, n, e0.t0.to_numpy()), directed=True, connection="strong")
+    sve_cv = np.where(lab == np.bincount(lab).argmax())[0]; ta = cKDTree(xy[sve_cv])
+    glavni_cv = np.intersect1d(glavni_cv, sve_cv); tg = cKDTree(xy[glavni_cv])
 
     def m_xy(lon, lat):
         p = gpd.GeoSeries([Point(lon, lat)], crs=CRS_WGS).to_crs(CRS_M)[0]
@@ -139,7 +143,7 @@ def main() -> None:
         pres = {}
         for nz, ul, lon, lat in PRESJECI:
             p = m_xy(lon, lat)
-            sel = np.where((np.hypot(*(mid - p).T) < 150) & np.array([ul.lower() in s.lower() for s in ime_e]))[0]
+            sel = np.where((np.hypot(*(mid - p).T) < 400) & np.array([ul.lower() in s.lower() for s in ime_e]))[0]
             if not len(sel):
                 pres[nz] = np.nan; continue
             j = sel[np.argmax(tok[sel])]
@@ -156,7 +160,9 @@ def main() -> None:
 
     rez, pre, geo = [], [], []
     baza = None
-    for sc in ["0"] + list(SCENARIJI):
+    import os
+    izbor = os.environ.get("SCEN", "0," + ",".join(SCENARIJI)).split(",")
+    for sc in izbor:
         print(f"Scenarij {sc} ...", flush=True)
         vh, pres, vr, na_novoj, geoms = pokreni(sc)
         if sc == "0":
@@ -172,6 +178,11 @@ def main() -> None:
             geo.append({"scenarij": sc, "naziv": naziv, "geometry": g})
         print(pd.DataFrame(rez).tail(1).to_string(index=False), flush=True)
     R = pd.DataFrame(rez); Pp = pd.DataFrame(pre)
+    if os.environ.get("SCEN"):   # djelimično pokretanje: spoji s postojećim rezultatima (zamijeni iste scenarije)
+        if (OUT / "scenariji.csv").exists():
+            R0 = pd.read_csv(OUT / "scenariji.csv", dtype={"scenarij": str}); P0 = pd.read_csv(OUT / "scenariji_presjeci.csv", dtype={"scenarij": str})
+            R = pd.concat([R0[~R0.scenarij.isin(R.scenarij)], R]).sort_values("scenarij")
+            Pp = pd.concat([P0[~P0.scenarij.isin(Pp.scenarij)], Pp])
     R.to_csv(OUT / "scenariji.csv", index=False); Pp.to_csv(OUT / "scenariji_presjeci.csv", index=False)
     if geo:
         gpd.GeoDataFrame(geo, crs=CRS_M).to_crs(CRS_WGS).to_file(OUT / "scenariji.geojson", driver="GeoJSON", COORDINATE_PRECISION=5)
