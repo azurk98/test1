@@ -1,116 +1,136 @@
 scenarij,presjek,dnevno,promjena_pct
-P,Obala Kulina bana,22725,-6.6
-P,Maršala Tita,30067,-8.0
-P,Zmaja od Bosne (Čengić Vila),33567,1.3
-P,Bulevar Meše Selimovića,37331,-2.8
-P,Alipašina,17294,-0.3
-P,Safeta Zajke,15478,0.6
-P,Džemala Bijedića,0,
-B,Obala Kulina bana,24654,1.4
-B,Maršala Tita,29978,-8.2
-B,Zmaja od Bosne (Čengić Vila),28666,-13.4
-B,Bulevar Meše Selimovića,36014,-6.3
-B,Alipašina,16777,-3.3
-B,Safeta Zajke,15828,2.8
-B,Džemala Bijedića,0,
-C,Obala Kulina bana,24454,0.5
-C,Maršala Tita,30320,-7.2
-C,Zmaja od Bosne (Čengić Vila),33414,0.9
-C,Bulevar Meše Selimovića,33693,-12.3
-C,Alipašina,17095,-1.5
-C,Safeta Zajke,15658,1.7
-C,Džemala Bijedića,0,
-C2,Obala Kulina bana,24497,0.7
-C2,Maršala Tita,31045,-5.0
-C2,Zmaja od Bosne (Čengić Vila),35108,6.0
-C2,Bulevar Meše Selimovića,34855,-9.3
-C2,Alipašina,17113,-1.4
-C2,Safeta Zajke,15725,2.2
-C2,Džemala Bijedića,0,
-C3,Obala Kulina bana,24006,-1.3
-C3,Maršala Tita,31662,-3.1
-C3,Zmaja od Bosne (Čengić Vila),36655,10.7
-C3,Bulevar Meše Selimovića,35027,-8.8
-C3,Alipašina,17012,-1.9
-C3,Safeta Zajke,15469,0.5
-C3,Džemala Bijedića,0,
-G,Obala Kulina bana,25139,3.4
-G,Maršala Tita,34427,5.4
-G,Zmaja od Bosne (Čengić Vila),28962,-12.6
-G,Bulevar Meše Selimovića,39400,2.6
-G,Alipašina,17485,0.8
-G,Safeta Zajke,16484,7.1
-G,Džemala Bijedića,0,
-S,Obala Kulina bana,24490,0.7
-S,Maršala Tita,25774,-21.1
-S,Zmaja od Bosne (Čengić Vila),30337,-8.4
-S,Bulevar Meše Selimovića,36615,-4.7
-S,Alipašina,21791,25.6
-S,Safeta Zajke,16451,6.9
-S,Džemala Bijedića,0,
-SP,Obala Kulina bana,22251,-8.5
-SP,Maršala Tita,27242,-16.6
-SP,Zmaja od Bosne (Čengić Vila),32258,-2.6
-SP,Bulevar Meše Selimovića,39150,1.9
-SP,Alipašina,22376,29.0
-SP,Safeta Zajke,15804,2.7
-SP,Džemala Bijedića,0,
-T1,Obala Kulina bana,24595,1.1
-T1,Maršala Tita,30622,-6.3
-T1,Zmaja od Bosne (Čengić Vila),32610,-1.5
-T1,Bulevar Meše Selimovića,38491,0.2
-T1,Alipašina,7171,-58.7
-T1,Safeta Zajke,13852,-10.0
-T1,Džemala Bijedića,0,
-T16,Obala Kulina bana,24749,1.7
-T16,Maršala Tita,29356,-10.2
-T16,Zmaja od Bosne (Čengić Vila),26043,-21.4
-T16,Bulevar Meše Selimovića,40026,4.2
-T16,Alipašina,6262,-63.9
-T16,Safeta Zajke,13039,-15.3
-T16,Džemala Bijedića,0,
-T6,Obala Kulina bana,24466,0.6
-T6,Maršala Tita,27970,-14.4
-T6,Zmaja od Bosne (Čengić Vila),28244,-14.7
-T6,Bulevar Meše Selimovića,38288,-0.3
-T6,Alipašina,14004,-19.3
-T6,Safeta Zajke,13753,-10.6
-T6,Džemala Bijedića,0,
-T6,Otoka: ulazni tok,66794,5.0
-T6,Otoka: najveće opterećenje (vršni sat),1,12.6
-T6O,Obala Kulina bana,24537,0.9
-T6O,Maršala Tita,27691,-15.2
-T6O,Zmaja od Bosne (Čengić Vila),27353,-17.4
-T6O,Bulevar Meše Selimovića,39634,3.2
-T6O,Alipašina,14662,-15.5
-T6O,Safeta Zajke,13836,-10.1
-T6O,Džemala Bijedića,216,
-T6O,Otoka: ulazni tok,84359,32.5
-T6O,Otoka: najveće opterećenje (vršni sat),1,15.4
-T6D,Obala Kulina bana,24635,1.3
-T6D,Maršala Tita,30494,-6.7
-T6D,Zmaja od Bosne (Čengić Vila),30475,-8.0
-T6D,Bulevar Meše Selimovića,39093,1.8
-T6D,Alipašina,14183,-18.2
-T6D,Safeta Zajke,13204,-14.2
-T6D,Džemala Bijedića,0,
-T6D,Otoka: ulazni tok,63108,-0.8
-T6D,Otoka: najveće opterećenje (vršni sat),1,2.1
-0,Obala Kulina bana,24323,0.0
-0,Maršala Tita,32673,0.0
-0,Zmaja od Bosne (Čengić Vila),33121,0.0
-0,Bulevar Meše Selimovića,38417,0.0
-0,Alipašina,17350,0.0
-0,Safeta Zajke,15391,0.0
+0,Obala Kulina bana,23368,0.0
+0,Maršala Tita,27390,0.0
+0,Zmaja od Bosne (Čengić Vila),29138,0.0
+0,Bulevar Meše Selimovića,36596,0.0
+0,Alipašina,16171,0.0
+0,Safeta Zajke,14267,0.0
 0,Džemala Bijedića,0,
-0,Otoka: ulazni tok,63643,0.0
+0,Otoka: ulazni tok,60703,0.0
 0,Otoka: najveće opterećenje (vršni sat),1,0.0
-SC,Obala Kulina bana,24560,1.0
-SC,Maršala Tita,26713,-18.2
-SC,Zmaja od Bosne (Čengić Vila),28520,-13.9
-SC,Bulevar Meše Selimovića,38211,-0.5
-SC,Alipašina,15736,-9.3
-SC,Safeta Zajke,10401,-32.4
+P,Obala Kulina bana,22095,-5.4
+P,Maršala Tita,28076,2.5
+P,Zmaja od Bosne (Čengić Vila),30145,3.5
+P,Bulevar Meše Selimovića,35337,-3.4
+P,Alipašina,16189,0.1
+P,Safeta Zajke,15371,7.7
+P,Džemala Bijedića,0,
+P,Otoka: ulazni tok,57964,-4.5
+P,Otoka: najveće opterećenje (vršni sat),1,-9.2
+B,Obala Kulina bana,23453,0.4
+B,Maršala Tita,30074,9.8
+B,Zmaja od Bosne (Čengić Vila),29365,0.8
+B,Bulevar Meše Selimovića,34939,-4.5
+B,Alipašina,16319,0.9
+B,Safeta Zajke,14332,0.5
+B,Džemala Bijedića,0,
+B,Otoka: ulazni tok,56716,-6.6
+B,Otoka: najveće opterećenje (vršni sat),1,-10.2
+C,Obala Kulina bana,23868,2.1
+C,Maršala Tita,28232,3.1
+C,Zmaja od Bosne (Čengić Vila),30193,3.6
+C,Bulevar Meše Selimovića,32504,-11.2
+C,Alipašina,15937,-1.5
+C,Safeta Zajke,15671,9.8
+C,Džemala Bijedića,0,
+C,Otoka: ulazni tok,60762,0.1
+C,Otoka: najveće opterećenje (vršni sat),1,-7.0
+C2,Obala Kulina bana,23953,2.5
+C2,Maršala Tita,28416,3.7
+C2,Zmaja od Bosne (Čengić Vila),30266,3.9
+C2,Bulevar Meše Selimovića,32803,-10.4
+C2,Alipašina,15947,-1.4
+C2,Safeta Zajke,15555,9.0
+C2,Džemala Bijedića,0,
+C2,Otoka: ulazni tok,57645,-5.0
+C2,Otoka: najveće opterećenje (vršni sat),1,-14.8
+C3,Obala Kulina bana,24095,3.1
+C3,Maršala Tita,28475,4.0
+C3,Zmaja od Bosne (Čengić Vila),31256,7.3
+C3,Bulevar Meše Selimovića,33289,-9.0
+C3,Alipašina,16016,-1.0
+C3,Safeta Zajke,15370,7.7
+C3,Džemala Bijedića,0,
+C3,Otoka: ulazni tok,57129,-5.9
+C3,Otoka: najveće opterećenje (vršni sat),1,-8.0
+G,Obala Kulina bana,24550,5.1
+G,Maršala Tita,32279,17.8
+G,Zmaja od Bosne (Čengić Vila),28198,-3.2
+G,Bulevar Meše Selimovića,34732,-5.1
+G,Alipašina,17015,5.2
+G,Safeta Zajke,14930,4.6
+G,Džemala Bijedića,93,
+G,Otoka: ulazni tok,60115,-1.0
+G,Otoka: najveće opterećenje (vršni sat),1,-12.6
+S,Obala Kulina bana,23814,1.9
+S,Maršala Tita,25028,-8.6
+S,Zmaja od Bosne (Čengić Vila),30566,4.9
+S,Bulevar Meše Selimovića,35001,-4.4
+S,Alipašina,21346,32.0
+S,Safeta Zajke,13654,-4.3
+S,Džemala Bijedića,0,
+S,Otoka: ulazni tok,57564,-5.2
+S,Otoka: najveće opterećenje (vršni sat),1,-5.3
+T1,Obala Kulina bana,23547,0.8
+T1,Maršala Tita,27270,-0.4
+T1,Zmaja od Bosne (Čengić Vila),31193,7.1
+T1,Bulevar Meše Selimovića,36454,-0.4
+T1,Alipašina,7765,-52.0
+T1,Safeta Zajke,14445,1.2
+T1,Džemala Bijedića,0,
+T1,Otoka: ulazni tok,58024,-4.4
+T1,Otoka: najveće opterećenje (vršni sat),1,-10.7
+T6,Obala Kulina bana,23518,0.6
+T6,Maršala Tita,28553,4.2
+T6,Zmaja od Bosne (Čengić Vila),25569,-12.3
+T6,Bulevar Meše Selimovića,35932,-1.8
+T6,Alipašina,12024,-25.6
+T6,Safeta Zajke,13877,-2.7
+T6,Džemala Bijedića,0,
+T6,Otoka: ulazni tok,59948,-1.2
+T6,Otoka: najveće opterećenje (vršni sat),2,28.8
+T6O,Obala Kulina bana,23550,0.8
+T6O,Maršala Tita,28105,2.6
+T6O,Zmaja od Bosne (Čengić Vila),24179,-17.0
+T6O,Bulevar Meše Selimovića,36704,0.3
+T6O,Alipašina,12792,-20.9
+T6O,Safeta Zajke,14108,-1.1
+T6O,Džemala Bijedića,201,
+T6O,Otoka: ulazni tok,79289,30.6
+T6O,Otoka: najveće opterećenje (vršni sat),2,43.0
+T6D,Obala Kulina bana,23516,0.6
+T6D,Maršala Tita,27897,1.9
+T6D,Zmaja od Bosne (Čengić Vila),29383,0.8
+T6D,Bulevar Meše Selimovića,36290,-0.8
+T6D,Alipašina,12550,-22.4
+T6D,Safeta Zajke,14201,-0.5
+T6D,Džemala Bijedića,0,
+T6D,Otoka: ulazni tok,58075,-4.3
+T6D,Otoka: najveće opterećenje (vršni sat),1,-10.0
+T16,Obala Kulina bana,23414,0.2
+T16,Maršala Tita,29931,9.3
+T16,Zmaja od Bosne (Čengić Vila),27967,-4.0
+T16,Bulevar Meše Selimovića,35613,-2.7
+T16,Alipašina,7402,-54.2
+T16,Safeta Zajke,13362,-6.3
+T16,Džemala Bijedića,0,
+T16,Otoka: ulazni tok,59692,-1.7
+T16,Otoka: najveće opterećenje (vršni sat),1,-11.5
+SC,Obala Kulina bana,23625,1.1
+SC,Maršala Tita,26171,-4.5
+SC,Zmaja od Bosne (Čengić Vila),25433,-12.7
+SC,Bulevar Meše Selimovića,35508,-3.0
+SC,Alipašina,15485,-4.2
+SC,Safeta Zajke,11330,-20.6
 SC,Džemala Bijedića,0,
-SC,Otoka: ulazni tok,60796,-4.5
-SC,Otoka: najveće opterećenje (vršni sat),1,7.2
+SC,Otoka: ulazni tok,55852,-8.0
+SC,Otoka: najveće opterećenje (vršni sat),1,4.1
+SP,Obala Kulina bana,21958,-6.0
+SP,Maršala Tita,24867,-9.2
+SP,Zmaja od Bosne (Čengić Vila),31777,9.1
+SP,Bulevar Meše Selimovića,35307,-3.5
+SP,Alipašina,22068,36.5
+SP,Safeta Zajke,14233,-0.2
+SP,Džemala Bijedića,0,
+SP,Otoka: ulazni tok,62212,2.5
+SP,Otoka: najveće opterećenje (vršni sat),1,-12.2

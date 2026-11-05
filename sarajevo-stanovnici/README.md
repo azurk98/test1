@@ -76,6 +76,38 @@ zaposleni stanovnici 07/2025: 23.474 i 10.354 (FZS KS u brojkama 2025, tabela 4.
   podloga se ponovo preuzima (`raw/s2cloudless_2016_sire.jpg`). Model putovanja: WorldPop izvan
   šest općina samo unutar područja s OSM cestama (`common.pokrivenost_osm`), ulazi na rubu tog područja.
 
+### Rezultati scenarija sa šest općina (zamjenjuju brojke u odjeljcima 31–34 niže)
+
+Proširenje je uklonilo vještačku gužvu na rubu starog okvira: saobraćaj sa zapada (Hadžići,
+Kiseljak) je ulazio na rubu ekstrakta kod Stupa i išao Igmanskom i Ravnogorskom kao lokalnim
+ulicama (v/c do 1,9). Sada su to dionice ispod kapaciteta, a najopterećenije su Obala Kulina bana i
+Vilsonovo šetalište. Dionica preko kapaciteta u vršnom satu: 130 → 69; vozilo-km dnevno 4,88 → 4,20
+miliona; vozilo-sati dnevno 191.300 → 107.900. Zato su i uštede scenarija manje u apsolutnom iznosu.
+Model vs brojači (prije prilagođavanja): R² 0,46 → 0,51, medijan greške 27,7 → 27,2%; izostavljeni
+brojač 31,8 → 28,0%. Novi brojači u modelu: Mostarsko raskršće i Bojnička (Ilidža).
+
+| Scenarij | vozila/dan na novoj dionici | ušteda vozilo-sati/dan | glavni efekti |
+|---|---|---|---|
+| T16 Prva + Šesta transverzala | 19.200 | 936 | Alipašina −54%, Otoka vršno −12% |
+| SC nova sjeverna cesta (34) | 26.200 | 907 | Safeta Zajke −21%, Zmaja od Bosne −13%, Otoka ulaz −8% |
+| T6 Šesta transverzala | 23.800 | 693 | Alipašina −26%, Zmaja od Bosne −12%, Otoka vršno +29% |
+| T6O Šesta preko Otoke, u nivou | 19.600 | 635 | Otoka ulaz +31%, vršno +43% |
+| C3 Hrasno – istočna Dobrinja | 26.100 | 606 | Bulevar M. Selimovića −9% |
+| T6D Šesta preko Otoke, denivelisano | 18.800 | 516 | Otoka vršno −10%, Alipašina −22% |
+| C2 Mojmilo istočnije | 19.200 | 496 | Bulevar M. Selimovića −10% |
+| T1 Prva transverzala | 17.200 | 353 | Alipašina −52% |
+| SP sjeverni obilazak + tunel | 16.300 | 304 | Maršala Tita −9%, Alipašina +37% |
+| S sjeverna longitudinala | 16.900 | 248 | Maršala Tita −9%, Alipašina +32% |
+| G autoput do Marijin Dvora | 24.600 | 182 | Maršala Tita +18% |
+| B brdska veza | – | 160 | |
+| C Mojmilo | 12.300 | 141 | Bulevar M. Selimovića −11% |
+| P tunel Bentbaša – Koševo | 8.200 | 123 | Obala −5% |
+
+Javni prevoz (32, S0 45%): udio 45 → 56%, putovanja autom −20% (S0 35%: −16%, 55%: −24%),
+vozilo-sati 107.900 → 95.100 (−12.800 dnevno, ~14× najbolje ceste); svi koridori −12 do −19%.
+Brda (33; sada 233 brdske zone, ~178.000 stanovnika): B1 udio brdo↔dolina 39 → 56%, auta iz brda
+−28%, vozilo-sati −10.100; B2 (+ parking u centru) 60%, −34%, −13.000; Alipašina −27%, Obala −19%.
+
 ## Prvo pokretanje (04.11.2026)
 
 - **OSM**: Overpass nije bio dostupan (prekid veze / preopterećen), pa je korišten BBBike
