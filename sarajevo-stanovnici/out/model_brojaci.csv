@@ -1,29 +1,27 @@
 brojac,lokacija,lat,lon,pgds_2025,model_faza1,model,unakrsna,korigovan
-KSBS02,R447 Dariva – Granica entiteta,43.86039,18.44708,2172,5273.0,2172.0,5273.0,True
-KSBS03,"GGL – Ispred Učiteljske škole, Centar",43.85658,18.41597,32841,23007.0,32841.0,23007.0,True
-KSBS04,"GGL– Ispred zgrade BBI centra, Centar",43.85901,18.41662,33084,19441.0,33084.0,18475.0,True
-KSBS05,"GGL– Ispred Doma zdravlja Centar, Centar",43.8582,18.413,28257,29734.0,28257.0,50601.0,True
-KSBS06,"GGL- Marijin Dvor, Općina Centar",43.85586,18.41003,24186,23161.0,24186.0,23161.0,True
-KSBS07,"M 223 –Koševo (kod dvorane Zetra), Centar",43.87047,18.40761,20328,16435.0,20328.0,16435.0,True
-KSBS08,"Skenderija, Centar",43.85339,18.40919,20158,9598.0,20158.0,9598.0,True
-KSBS10,"Derviša Numića (II tr.), Vraca",43.84292,18.39572,13560,18759.0,13560.0,18759.0,True
-KSBS11,"Pofalići, Novo Sarajevo (II tr.) Ulica Hamdije Čemerlića",43.8545,18.3925,16087,12560.0,16087.0,12560.0,True
-KSBS13,"Pofalići, Novo Sarajevo: Sjeverna longitudinala (Ulica Put života)",43.85697,18.38825,15073,29757.0,15073.0,29757.0,True
-KSBS14,"Grbavica, Novo Sarajevo: (III tr.) Ulica Topal Osman paše",43.84808,18.38696,7864,4460.0,7864.0,4460.0,True
-KSBS15,"Pofalići (iza „Merkatora“), Novo Sarajevo, GAP, Ulica Drinska",43.85791,18.38265,15874,14440.0,15874.0,14440.0,True
-KSBS16,"Hrasno, Novo Sarajevo: (IV tr.) Ulica Azize Šaćirbegović",43.84763,18.38031,18956,14124.0,18956.0,14124.0,True
-KSBS17,"Čengić Vila, Novo Sarajevo: GGL, Ulica Zmaja od Bosne",43.85096,18.37417,34526,26423.0,34526.0,26423.0,True
-KSBS18,"Čengić Vila, Novo Sarajevo: (V tr.)",43.85142,18.37219,10120,5363.0,10120.0,5363.0,True
-KSBS21,Majdanska kod RTV doma (VIII tr.),43.84622,18.35397,13372,9784.0,13372.0,9784.0,True
-KSBS22,"Ispred preduzeća „Žica“, Novi Grad, ulica Džemala Bijedića",43.8452,18.347,12366,221.0,417.0,417.0,False
-KSBS23,"Alipašino polje – Alipašin most, Novi Grad: (IX tr.) Ulica Ive Andrića",43.84741,18.34697,17826,12475.0,17826.0,12475.0,True
-KSBS24,"Alipašino polje, Općina Novi Grad: Ulica Bulevar Meše Selimović",43.84533,18.34228,30317,32982.0,30317.0,32982.0,True
-KSBS25,"Nedžarići, Općina Novi Grad: (X tr.) ulica Ante Babića",43.83449,18.34497,18998,16247.0,18998.0,16247.0,True
-KSBS26,"Alipašin most, Novi Grad: Gradski autoput (Ulica Safeta Zajke)",43.85211,18.34214,18592,23314.0,18592.0,23314.0,True
-KSBS27,"XI transferzala, kod Avaz Business Centra",43.84294,18.33453,7108,3379.0,7108.0,3379.0,True
-KSBS29a,"Rajlovačka cesta, Novi Grad",43.873,18.311,8156,6964.0,8156.0,6964.0,True
-KSBS32,"Ulica Bojnička, Ilidža (XIII tr.)",43.85872,18.29533,6199,4630.0,6199.0,4630.0,True
+KSBS02,R447 Dariva – Granica entiteta,43.86039,18.44708,2172,5274.0,2172.0,5274.0,True
+KSBS03,"GGL – Ispred Učiteljske škole, Centar",43.85658,18.41597,32841,23291.0,32841.0,23291.0,True
+KSBS04,"GGL– Ispred zgrade BBI centra, Centar",43.85901,18.41662,33084,19812.0,33084.0,18794.0,True
+KSBS05,"GGL– Ispred Doma zdravlja Centar, Centar",43.8582,18.413,28257,29788.0,28257.0,49741.0,True
+KSBS06,"GGL- Marijin Dvor, Općina Centar",43.85586,18.41003,24186,23227.0,24186.0,23227.0,True
+KSBS07,"M 223 –Koševo (kod dvorane Zetra), Centar",43.87047,18.40761,20328,16235.0,20328.0,16235.0,True
+KSBS08,"Skenderija, Centar",43.85339,18.40919,20158,9623.0,20158.0,9623.0,True
+KSBS10,"Derviša Numića (II tr.), Vraca",43.84292,18.39572,13560,19191.0,13560.0,19191.0,True
+KSBS11,"Pofalići, Novo Sarajevo (II tr.) Ulica Hamdije Čemerlića",43.8545,18.3925,16087,12369.0,16087.0,12369.0,True
+KSBS13,"Pofalići, Novo Sarajevo: Sjeverna longitudinala (Ulica Put života)",43.85697,18.38825,15073,29372.0,15073.0,29372.0,True
+KSBS14,"Grbavica, Novo Sarajevo: (III tr.) Ulica Topal Osman paše",43.84808,18.38696,7864,4322.0,7864.0,4322.0,True
+KSBS15,"Pofalići (iza „Merkatora“), Novo Sarajevo, GAP, Ulica Drinska",43.85791,18.38265,15874,14473.0,15874.0,14473.0,True
+KSBS16,"Hrasno, Novo Sarajevo: (IV tr.) Ulica Azize Šaćirbegović",43.84763,18.38031,18956,13798.0,18956.0,13798.0,True
+KSBS17,"Čengić Vila, Novo Sarajevo: GGL, Ulica Zmaja od Bosne",43.85096,18.37417,34526,26356.0,34526.0,26356.0,True
+KSBS18,"Čengić Vila, Novo Sarajevo: (V tr.)",43.85142,18.37219,10120,5282.0,10120.0,5282.0,True
+KSBS21,Majdanska kod RTV doma (VIII tr.),43.84622,18.35397,13372,9633.0,13372.0,9633.0,True
+KSBS22,"Ispred preduzeća „Žica“, Novi Grad, ulica Džemala Bijedića",43.8452,18.347,12366,229.0,438.0,438.0,False
+KSBS23,"Alipašino polje – Alipašin most, Novi Grad: (IX tr.) Ulica Ive Andrića",43.84741,18.34697,17826,12255.0,17826.0,12255.0,True
+KSBS24,"Alipašino polje, Općina Novi Grad: Ulica Bulevar Meše Selimović",43.84533,18.34228,30317,33084.0,30317.0,33084.0,True
+KSBS25,"Nedžarići, Općina Novi Grad: (X tr.) ulica Ante Babića",43.83449,18.34497,18998,16154.0,18998.0,16154.0,True
+KSBS26,"Alipašin most, Novi Grad: Gradski autoput (Ulica Safeta Zajke)",43.85211,18.34214,18592,23362.0,18592.0,23362.0,True
+KSBS27,"XI transferzala, kod Avaz Business Centra",43.84294,18.33453,7108,3312.0,7108.0,3312.0,True
+KSBS29a,"Rajlovačka cesta, Novi Grad",43.873,18.311,8156,7194.0,8156.0,7194.0,True
+KSBS32,"Ulica Bojnička, Ilidža (XIII tr.)",43.85872,18.29533,6199,4652.0,6199.0,4652.0,True
 KSBS33,"Malešići, Ilijaš: Regionalni put R 403",43.93844,18.29161,7707,0.0,0.0,0.0,True
-KSBS34,"Raskrsnica za Trnovo, Dejčiće i Pendičiće, R 906 (Krupac)",43.73078,18.29506,3265,4455.0,3265.0,4455.0,True
-KSBS35,"Mostarsko raskršće (Škripovci-Luščić), Ilidža: Zapadni prilaz gradu",43.84581,18.24792,33495,30303.0,33495.0,30303.0,True
-KSBS37,"Naselje Matići, Hadžići",43.81928,18.21719,1242,95.0,1242.0,95.0,True
+KSBS35,"Mostarsko raskršće (Škripovci-Luščić), Ilidža: Zapadni prilaz gradu",43.84581,18.24792,33495,32549.0,33495.0,32549.0,True

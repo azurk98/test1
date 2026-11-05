@@ -1,31 +1,31 @@
 {
  "odme_odbacen": "procjena matrice iz brojanja: unakrsni medijan 42–50% (lošije od faze 1)",
  "faza1": {
-  "R2": 0.585,
-  "srednja_aps_greska_pct": 40.5,
-  "medijan_aps_greska_pct": 28.4,
-  "GEH_satni_<5_udio": 0.32
+  "R2": 0.509,
+  "srednja_aps_greska_pct": 38.7,
+  "medijan_aps_greska_pct": 27.6,
+  "GEH_satni_<5_udio": 0.31
  },
  "faza2": {
-  "R2": 0.925,
-  "srednja_aps_greska_pct": 7.0,
+  "R2": 0.91,
+  "srednja_aps_greska_pct": 7.6,
   "medijan_aps_greska_pct": 0.0,
-  "GEH_satni_<5_udio": 0.93
+  "GEH_satni_<5_udio": 0.92
  },
  "unakrsna": {
-  "R2": 0.392,
-  "srednja_aps_greska_pct": 43.2,
-  "medijan_aps_greska_pct": 30.0,
-  "GEH_satni_<5_udio": 0.29
+  "R2": 0.293,
+  "srednja_aps_greska_pct": 41.5,
+  "medijan_aps_greska_pct": 28.5,
+  "GEH_satni_<5_udio": 0.27
  },
  "koef": {
   "posao_po_zaposlenom": 0.4,
-  "ostalo_po_stanovniku": 0.21263794060462554,
-  "izvana_po_ulazu": 7523.554239059694
+  "ostalo_po_stanovniku": 0.19036226754864227,
+  "izvana_po_ulazu": 9121.97796785758
  },
  "putovanja_dnevno": {
-  "posao": 58575.290937632395,
-  "ostalo": 88135.18485980791,
-  "izvana": 36113.06034748654
+  "posao": 58575.29093763241,
+  "ostalo": 78902.25795559098,
+  "izvana": 43785.49424571636
  }
 }
