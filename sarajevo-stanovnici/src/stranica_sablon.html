@@ -480,7 +480,7 @@ let trfHour = 8, trfDay = "radni", trfTimer = null;
 const SCN = TRF.scen || [];
 const scnG = trfG.append("g");
 const scnP = scnG.selectAll("path").data(SCN.flatMap(d => d.geo.map(g => ({id:d.id, g})))).join("path").attr("class","scnl");
-const scnL = scnG.selectAll("g").data(SCN).join("g").attr("class","scnlab");
+const scnL = scnG.selectAll("g").data(SCN.filter(d => d.geo.length)).join("g").attr("class","scnlab");
 scnL.append("rect").attr("x",-10).attr("y",-9).attr("width",20).attr("height",18).attr("rx",3);
 scnL.append("text").attr("text-anchor","middle").attr("dy","0.35em").text(d => d.id);
 const scnMid = d => { const g = d.geo.reduce((a,b) => b.length > a.length ? b : a, []), i = Math.floor(g.length/4)*2; return proj([g[i]*KX, g[i+1]]); };
@@ -889,13 +889,14 @@ function show(c){
       ${TRF.model ? `<div class="k">Model vs counters (vehicles a day)</div>
       <dl>${TRF.cnt.filter(d => d[6] >= 0).sort((a,b) => b[4]-a[4]).map(d => `<dt>${d[0]} <span class="tag">${d[1].slice(0,28)}</span></dt><dd class="num">${fmt(d[4])} · ${fmt(d[6])}${d[9] ? "" : " *"}</dd>`).join("")}</dl>
       <p class="hint">Counted 2025 average · model, vehicles a day. On each counted street the model is scaled to its counter, so the two match; * no position in the publication, not used. The trip model alone, before that scaling, gives R² ${TRF.model.faza1.R2} with a median error of ${TRF.model.faza1.medijan_aps_greska_pct}%. Leaving each counter out and estimating it from the rest gives R² ${TRF.model.unakrsna.R2} and a median error of ${TRF.model.unakrsna.medijan_aps_greska_pct}%: expect errors of about a third on roads without a counter.</p>` : ""}
-      ${SCN.length ? `<div class="k">New road ideas tested in the model</div>
+      ${SCN.length ? `<div class="k">Ideas tested in the model</div>
       ${SCN.map(d => `<div style="font-weight:600;margin-top:4px"><b class="scnk">${d.id}</b> ${d.name}</div>
-        <dl>${d.on_new ? `<dt>Vehicles a day on the new link</dt><dd class="num">${fmt(d.on_new)}</dd>` : ""}
+        <dl>${d.share ? `<dt>Public transport share of motorised trips</dt><dd class="num">${d.share[0]}% → ${d.share[1]}%</dd><dt>Car trips</dt><dd class="num">${d.share[2]}%</dd>` : ""}
+        ${d.on_new ? `<dt>Vehicles a day on the new link</dt><dd class="num">${fmt(d.on_new)}</dd>` : ""}
         ${d.corr.filter(c => Math.abs(c[1]) >= 5).map(c => `<dt>${c[0]}</dt><dd class="num">${c[1] > 0 ? "+" : ""}${c[1]}%</dd>`).join("")}
         ${d.times.filter(t => t[1] - t[2] >= 0.8).map(t => `<dt>${t[0]}</dt><dd class="num">${t[1]} → ${t[2]} min</dd>`).join("")}
         <dt>Driving time ${d.saved_vh >= 0 ? "saved" : "added"}, whole city</dt><dd class="num">${fmt(Math.abs(d.saved_vh))} vehicle-hours/day</dd></dl>`).join("")}
-      <p class="hint" style="font-size:12.5px">Concepts for discussion, not designs: the same daily trips are re-assigned with each new link, so new traffic a road would attract is not counted; cost, geology, portals and land are not checked. Differences under about 150 vehicle-hours are within the model's noise. Roads mostly move congestion: G carries the most traffic yet worsens the total by delivering it into Marijin Dvor, and S and SP relieve Maršala Tita but load Alipašina. B works by speeding up hillside streets, so it fits buses better than cars.</p>` : ""}
+      <p class="hint" style="font-size:12.5px">JP adds a choice between car and public transport (logit, today's public transport share assumed at 45%: with 35% or 55% car trips fall 18% or 26% instead of 22%); it needs roughly twice today's vehicles and drivers. Road concepts are for discussion, not designs: the same daily trips are re-assigned with each new link, so new traffic a road would attract is not counted; cost, geology, portals and land are not checked. Differences under about 150 vehicle-hours are within the model's noise. Roads mostly move congestion: G carries the most traffic yet worsens the total by delivering it into Marijin Dvor, and S and SP relieve Maršala Tita but load Alipašina. B works by speeding up hillside streets, so it fits buses better than cars.</p>` : ""}
       <p class="hint">${TRF.model ? "Road volumes come from a trip model: residents, jobs and outside traffic in 0.7 km² zones, car trips spread by travel time and assigned to the fastest routes with some route variety and congestion. Along each counted street (up to 2.5 km, in the direction the counter counts) the volume is scaled to the counter of the Sarajevo Canton road directorate (white dots, real 2025 counts). Hours follow the nearest counter's average day." : "Volumes come from the automatic counters of the Sarajevo Canton road directorate (2025 averages by hour) and are carried along the same street; dashed roads use an assumed volume for their class."} Capacity comes from the number of lanes (800 vehicles an hour per lane at traffic lights). Percentages are an estimate of load, not measured speeds.</p>`;
     el.querySelectorAll(".hbars button").forEach(b => b.onclick = () => trfSet(+b.dataset.h));
     return;

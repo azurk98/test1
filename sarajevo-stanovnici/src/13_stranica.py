@@ -74,6 +74,16 @@ def scen_data():
                     "corr": [[p.presjek, float(p.promjena_pct)] for p in pr.itertuples()],
                     "times": [[c.replace("min: ", ""), float(R.loc["0", c]), float(r[c])] for c in R.columns if c.startswith("min: ")],
                     "geo": [[round(c, 5) for xy in g.coords for c in xy] for g in G[G.scenarij == sc].geometry]})
+    pf = OUT / "prevoz_scenarij.json"
+    if pf.exists():
+        d = json.load(open(pf))
+        o = d["osjetljivost"]["0.45"]
+        out.insert(0, {"id": "JP", "name": "Much better public transport: 2× departures, +25% speed, shorter walks in the hills, easy transfers",
+                       "saved_vh": int(d["vozilo_sati"][0] - d["vozilo_sati"][1]), "on_new": None,
+                       "corr": [[k, v[2]] for k, v in d["presjeci"].items() if v[2] == v[2]],
+                       "times": [[f"{k} by public transport", v[0], v[1]] for k, v in d["javni_min"].items()],
+                       "geo": [], "share": [round(o["udio_danas"] * 100), round(o["udio_poslije"] * 100),
+                                            round(o["auto_putovanja_promjena_pct"])]})
     return out
 
 

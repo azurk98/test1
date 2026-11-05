@@ -1,0 +1,137 @@
+{
+ "pretpostavke": {
+  "beta": 0.07,
+  "S0": 0.45,
+  "poboljsanje": {
+   "frekvencija": 2.0,
+   "brzina": 1.25,
+   "hod_brda": 0.7,
+   "presjedanje": 0.5
+  }
+ },
+ "osjetljivost": {
+  "0.35": {
+   "udio_danas": 0.35,
+   "udio_poslije": 0.465,
+   "auto_putovanja_promjena_pct": -17.616,
+   "putnika_javni_promjena_pct": 32.716
+  },
+  "0.45": {
+   "udio_danas": 0.45,
+   "udio_poslije": 0.57,
+   "auto_putovanja_promjena_pct": -21.826,
+   "putnika_javni_promjena_pct": 26.676
+  },
+  "0.55": {
+   "udio_danas": 0.55,
+   "udio_poslije": 0.666,
+   "auto_putovanja_promjena_pct": -25.888,
+   "putnika_javni_promjena_pct": 21.181
+  }
+ },
+ "vozilo_sati": [
+  191274,
+  180319
+ ],
+ "km_preko_90pct_vrsni_sat": [
+  133.1,
+  115.6
+ ],
+ "presjeci": {
+  "Obala Kulina bana": [
+   24323,
+   21610,
+   -11.2
+  ],
+  "Maršala Tita": [
+   32673,
+   29574,
+   -9.5
+  ],
+  "Zmaja od Bosne (Čengić Vila)": [
+   33121,
+   28619,
+   -13.6
+  ],
+  "Bulevar Meše Selimovića": [
+   38417,
+   34476,
+   -10.3
+  ],
+  "Alipašina": [
+   17350,
+   15153,
+   -12.7
+  ],
+  "Safeta Zajke": [
+   15391,
+   13041,
+   -15.3
+  ],
+  "Džemala Bijedića": [
+   0,
+   0,
+   NaN
+  ]
+ },
+ "auto_min_vrsni": {
+  "Velešići → Zabrđe": [
+   17.8,
+   17.3
+  ],
+  "Dobrinja → Alipašino Polje": [
+   7.2,
+   7.1
+  ],
+  "Alipašin most → Bentbaša": [
+   14.4,
+   14.1
+  ],
+  "Koševo → Bentbaša": [
+   8.5,
+   8.4
+  ],
+  "Dobrinja I → Hrasno": [
+   9.0,
+   8.9
+  ],
+  "Alipašin most → Marijin Dvor": [
+   9.5,
+   9.3
+  ],
+  "Pale (ulaz) → Marijin Dvor": [
+   16.4,
+   16.4
+  ]
+ },
+ "javni_min": {
+  "Velešići → Zabrđe": [
+   51.0,
+   39.0
+  ],
+  "Dobrinja → Alipašino Polje": [
+   24.0,
+   19.0
+  ],
+  "Alipašin most → Bentbaša": [
+   43.0,
+   34.0
+  ],
+  "Koševo → Bentbaša": [
+   30.0,
+   24.0
+  ],
+  "Dobrinja I → Hrasno": [
+   33.0,
+   25.0
+  ],
+  "Alipašin most → Marijin Dvor": [
+   31.0,
+   24.0
+  ],
+  "Pale (ulaz) → Marijin Dvor": [
+   60.0,
+   42.0
+  ]
+ }
+}

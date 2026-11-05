@@ -336,6 +336,20 @@ Zaključak: ceste uglavnom pomjeraju gužvu prema istim uskim grlima; za putovan
 veći efekat se očekuje od P+R uz tramvaj, BRT/žutih traka, pomjerenog radnog vremena i radnih mjesta
 u Novom Gradu (model ne računa promjenu načina prevoza). Inducirani promet nije uključen.
 
+## Drastično bolji javni prevoz (`32_prevoz_scenarij.py`)
+
+Model izbora auto/javni prevoz (binarni logit, β = 0,07/min) po paru zona: auto = vožnja sa zastojem +
+parking (Centar/Stari Grad 6 min, Novo Sarajevo 3, ostalo 1); javni = hod do stanice (18) + čekanje
+(0,5 · 60 / f + 2, f = polasci u dosegu / 4) + vožnja (auto bez zastoja · 1,6) + presjedanje (5 min
+preko 3 km). Konstanta podešena na današnji udio javnog u motorizovanim putovanjima S0 = 45%
+(pretpostavka; nema ankete). Unapređenje: 2× polazaka, +25% brzina, hod u brdima −30%, presjedanje
+upola. Rezultat (S0 45%): udio 45% → 57%, putovanja autom −22% (S0 35%: −18%, 55%: −26%), putnika
++27%; vozilo-sati 191.300 → 180.300 (−11.000 dnevno, desetostruko više od najbolje ceste T1+T6:
+1.216); km cesta iznad 90% kapaciteta u vršnom satu 133 → 116; svi koridori −10 do −15% istovremeno.
+Javnim prevozom: Alipašin most → Marijin Dvor 31 → 24 min, Pale → Marijin Dvor 60 → 42 min.
+Ograničenja: S0 i β su pretpostavke; pješačenje i bicikl nisu u modelu; inducirana potražnja nije
+uključena; traži oko 2× vozila i vozača.
+
 ## Google Places (`12_google_places.py`, opcionalno)
 
 Nearby Search (New) za tipove supermarket, grocery_store, convenience_store, market, food_store u
