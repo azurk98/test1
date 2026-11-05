@@ -95,13 +95,20 @@ def main() -> None:
     # čvorovi s potražnjom: u 4 općine i do 400 m od slabo pokrivenih stanovnika
     sl_pts = cKDTree(pcx[slabo])
     blizu = np.array([len(x) > 0 for x in sl_pts.query_ball_point(xy, 400)])
-    kand = np.where(cv & u4 & blizu)[0]
-    print(f"Čvorova kandidata: {len(kand)}", flush=True)
+    # stepen čvora u neusmjerenom grafu ulica: krajevi spoja su slijepe ulice (1) ili raskrsnice (≥ 3)
+    stepen = np.asarray((Gd > 0).sum(axis=1)).ravel()
+    slijepa = stepen == 1
+    kand = np.where(cv & u4 & blizu & (stepen != 2))[0]
+    print(f"Čvorova kandidata: {len(kand)} (slijepih ulica {int((slijepa[kand]).sum())})", flush=True)
 
     vis = mp.dost.visine_cvorova(ll[:, 0], ll[:, 1], tlo=True)
     tk = cKDTree(xy[kand])
     parovi = tk.query_pairs(MAX_SPOJ_M, output_type="ndarray")
     a, b = kand[parovi[:, 0]], kand[parovi[:, 1]]
+    jedna = slijepa[a] | slijepa[b]                 # bar jedan kraj je slijepa ulica
+    a, b = a[jedna], b[jedna]
+    zamj = ~slijepa[a]                              # izvor dijkstre: slijepi kraj (manje izvora)
+    a, b = np.where(zamj, b, a), np.where(zamj, a, b)
     L = np.hypot(*(xy[a] - xy[b]).T)
     ok = (L >= MIN_SPOJ_M) & (np.abs(vis[a] - vis[b]) / np.maximum(L, 1) <= MAX_NAGIB)
     a, b, L = a[ok], b[ok], L[ok]
