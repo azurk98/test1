@@ -13,7 +13,7 @@ Javni prevoz
   Napomena: OSM ima sve tramvajske i trolejbuske linije, ali mali dio autobuskih, pa je
   "nema linije" pouzdano samo za tramvaj/trolejbus.
 Ceste
-  1. Najopterećeniji pravci u vršnom satu (model, četiri općine).
+  1. Najopterećeniji pravci u vršnom satu (model, šest općina).
   2. Nedostajući spojevi: parovi zona blizu zračnom linijom (< 2 km), a daleko cestom; za svaki
      par najbliži par čvorova ulica (≤ 900 m) postaje kandidat za novu dionicu (30 km/h). Kandidat se
      ocjenjuje ukupnom uštedom vremena svih putovanja autom (model) i nagibom (≤ 12%).
@@ -89,7 +89,7 @@ def main() -> None:
         if Z.tip.iat[i] != "zona":
             return f"ulaz ({cz[i][0]:.3f}, {cz[i][1]:.3f})"
         m = naziv.get(h)
-        return m if isinstance(m, str) else f"izvan 4 općine ({cz[i][0]:.3f}, {cz[i][1]:.3f})"
+        return m if isinstance(m, str) else f"izvan 6 općina ({cz[i][0]:.3f}, {cz[i][1]:.3f})"
 
     # ------------------------------------------------ javni prevoz: pravci
     li = gpd.read_file(OUT / "linije.geojson").to_crs(CRS_M)

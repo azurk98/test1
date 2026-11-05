@@ -28,9 +28,9 @@ from common import DATA, INTERIM, OUT, RAW, ucitaj_granice
 KZ_KAT = ["trgovina", "stanica", "osnovna_skola", "ambulanta", "park", "vrtic", "apoteka", "igraliste",
           "bolnica", "sport"]
 POI_KAT = ["osnovna_skola", "vrtic", "ambulanta", "bolnica", "apoteka", "park", "igraliste", "sport"]
-OP = ["Centar Sarajevo", "Novi Grad Sarajevo", "Novo Sarajevo", "Stari Grad Sarajevo"]
-SAT_OKVIR = (18.2352, 43.8089, 18.53, 43.9783)
-SAT_SIRINA = 2400
+OP = ["Centar Sarajevo", "Novi Grad Sarajevo", "Novo Sarajevo", "Stari Grad Sarajevo", "Ilidža", "Vogošća"]
+SAT_OKVIR = (18.15, 43.73, 18.53, 43.99)
+SAT_SIRINA = 2800
 SAT_URL = ("https://tiles.maps.eox.at/wms?service=WMS&version=1.1.1&request=GetMap&layers=s2cloudless"
            "&styles=&srs=EPSG:4326&bbox={},{},{},{}&width={}&height={}&format=image/jpeg")
 SABLON = OUT.parent / "src" / "stranica_sablon.html"
@@ -336,7 +336,7 @@ def podaci() -> dict:
 
 
 def satelit() -> tuple[str, tuple]:
-    f = RAW / "s2cloudless_2016.jpg"
+    f = RAW / "s2cloudless_2016_sire.jpg"
     x0, y0, x1, y1 = SAT_OKVIR
     if not f.exists():
         import math

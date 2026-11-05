@@ -126,7 +126,7 @@ def ghsl(force: bool) -> bool:
         ime = next(n for n in z.namelist() if n.endswith(".tif"))
         z.extract(ime, RAW / "ghsl_x")
     with rasterio.open(RAW / "ghsl_x" / ime) as src:
-        b = transform_bounds("EPSG:4326", src.crs, 18.20, 43.74, 18.56, 43.97)
+        b = transform_bounds("EPSG:4326", src.crs, 18.13, 43.72, 18.56, 44.02)
         win = from_bounds(*b, transform=src.transform).round_offsets().round_lengths()
         prof = src.profile | {"width": int(win.width), "height": int(win.height),
                               "transform": src.window_transform(win), "compress": "deflate"}
@@ -191,7 +191,7 @@ def main() -> int:
         print(f"  postoji: {ov.name}")
     else:
         import subprocess
-        r = subprocess.run(["overturemaps", "download", "--bbox=18.20,43.78,18.56,43.99", "-f", "geoparquet",
+        r = subprocess.run(["overturemaps", "download", "--bbox=18.13,43.72,18.56,44.02", "-f", "geoparquet",
                             "--type=place", "-o", str(ov)], capture_output=True, text=True)
         if r.returncode != 0 or not ov.exists():
             greske.append(f"Overture: {r.stderr[-300:]}")

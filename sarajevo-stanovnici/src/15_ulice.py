@@ -36,6 +36,7 @@ from scipy.sparse import coo_matrix
 from scipy.sparse.csgraph import connected_components, dijkstra
 from scipy.spatial import cKDTree
 
+from common import OSM_IME
 from common import CRS_M, CRS_WGS, INTERIM, OUT, RAW
 
 _s = importlib.util.spec_from_file_location("dost", Path(__file__).with_name("08_dostupnost.py"))
@@ -82,7 +83,7 @@ def koridor(a: np.ndarray, b: np.ndarray, zgrade: gpd.GeoSeries) -> np.ndarray:
 
 def main() -> None:
     polja = gpd.read_file(OUT / "polja_h3.gpkg")
-    nodes, ways, _ = dost.ucitaj_mrezu(RAW / "Sarajewo.osm.gz")
+    nodes, ways, _ = dost.ucitaj_mrezu(RAW / OSM_IME)
     used = sorted({n for _, nds in ways for n in nds if n in nodes})
     idx = {n: k for k, n in enumerate(used)}
     pts = gpd.GeoSeries(gpd.points_from_xy(*zip(*[nodes[n] for n in used])), crs=CRS_WGS).to_crs(CRS_M)

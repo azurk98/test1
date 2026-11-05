@@ -34,7 +34,11 @@ OPCINE = {
     "Centar Sarajevo": 2528180,
     "Novo Sarajevo": 2528239,
     "Novi Grad Sarajevo": 2528240,
+    "Ilidža": 2528207,
+    "Vogošća": 2528291,
 }
+# OSM ekstrakt: BBBike + dopuna iz Overture za Ilidžu i Vogošću (01b_dopuna_overture.py)
+OSM_IME = "Sarajewo_sire.osm.gz" if (RAW / "Sarajewo_sire.osm.gz").exists() else "Sarajewo.osm.gz"
 GRAD_SARAJEVO_REL = 2567380
 
 # Parametri modela
@@ -49,8 +53,9 @@ ALFA = 0.9
 #  (α 0,5, bez korekcije: MAPE 16% umjesto 30% s parametrima Novog Grada).
 #  Novo Sarajevo: blokovi kao Novi Grad -> isti parametri. Centar: nema podataka,
 #  sredina dviju kalibracija.
+#  Ilidža i Vogošća: nema podataka ispod općine; blokovi i kuće kao Novi Grad -> isti parametri.
 ALFA_OPCINA = {"Novi Grad Sarajevo": 0.9, "Novo Sarajevo": 0.9, "Stari Grad Sarajevo": 0.5,
-               "Centar Sarajevo": 0.7}
+               "Centar Sarajevo": 0.7, "Ilidža": 0.9, "Vogošća": 0.9}
 ALFE_SCENARIJI = (0.5, 0.7, 0.9)
 SPRAT_POMAK_SCENARIJI = (-1, 0, 1)
 BETA_NOVI_GRAD = 0.5
@@ -67,7 +72,7 @@ C_PRAG_WORLDPOP = 5.0
 PRAG_BLOK = 5
 GUSTINA_NISKA = 0.5
 GUSTINA_NISKA_OPCINA = {"Novi Grad Sarajevo": 0.5, "Novo Sarajevo": 0.5, "Stari Grad Sarajevo": 1.0,
-                        "Centar Sarajevo": 0.75}
+                        "Centar Sarajevo": 0.75, "Ilidža": 0.5, "Vogošća": 0.5}
 
 # Novi Grad: iz kojih su MZ izdvojene nove MZ. Popuniti tek kad se utvrdi
 # (odluka općine ili poređenje spiska ulica). Prazno = pravilo za nepoznatu
@@ -201,7 +206,24 @@ def ucitaj_granice() -> tuple[gpd.GeoDataFrame, gpd.GeoDataFrame]:
     mz = g.merge(mzl[["opcina", "mz", "osm_relacija"]], left_on="osm_id",
                  right_on="osm_relacija")
     mz = gpd.GeoDataFrame(mz[["opcina", "mz", "geometry"]], crs=CRS_M)
+    if (RAW / "granice_dopuna.gpkg").exists():   # Ilidža i Vogošća (01b_dopuna_overture.py)
+        dg = gpd.read_file(RAW / "granice_dopuna.gpkg").to_crs(CRS_M)
+        dg = dg[dg.opcina.isin(OPCINE)]
+        op = pd.concat([op, dg[dg.vrsta == "opcina"][["opcina", "geometry"]]], ignore_index=True)
+        mz = pd.concat([mz, dg[dg.vrsta == "mz"][["opcina", "mz", "geometry"]]], ignore_index=True)
+        op, mz = gpd.GeoDataFrame(op, crs=CRS_M), gpd.GeoDataFrame(mz, crs=CRS_M)
     return op, mz
+
+
+def pokrivenost_osm():
+    """Područje s OSM podacima (WGS84): okvir BBBike ekstrakta + 2 km oko Ilidže i Vogošće (dopuna)."""
+    from shapely.geometry import box
+    g = box(18.242, 43.768, 18.515, 43.935)
+    if OSM_IME != "Sarajewo.osm.gz" and (RAW / "granice_dopuna.gpkg").exists():
+        dg = gpd.read_file(RAW / "granice_dopuna.gpkg").to_crs(CRS_M)
+        d = dg[dg.vrsta == "opcina"].union_all().buffer(2000)
+        g = g.union(gpd.GeoSeries([d], crs=CRS_M).to_crs(CRS_WGS).iloc[0])
+    return g
 
 
 def opcine_ukupno() -> pd.DataFrame:

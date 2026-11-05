@@ -41,6 +41,7 @@ from scipy.sparse.csgraph import connected_components, dijkstra
 from scipy.spatial import cKDTree
 from shapely.geometry import Polygon
 
+from common import OSM_IME
 from common import CRS_M, CRS_WGS, INTERIM, OUT, RAW
 
 
@@ -130,10 +131,10 @@ def main() -> None:
     acc = pd.read_csv(OUT / "dostupnost_h3.csv").set_index("h3_id").reindex(polja.h3_id)
     teren = pd.read_csv(OUT / "teren_h3.csv").set_index("h3_id").reindex(polja.h3_id)
     ulice = pd.read_csv(OUT / "ulice_h3.csv").set_index("h3_id").reindex(polja.h3_id)
-    nodes, ways, _ = dost.ucitaj_mrezu(RAW / "Sarajewo.osm.gz")
-    _, land = sup.trgovine_i_zemljiste(RAW / "Sarajewo.osm.gz", nodes)
+    nodes, ways, _ = dost.ucitaj_mrezu(RAW / OSM_IME)
+    _, land = sup.trgovine_i_zemljiste(RAW / OSM_IME, nodes)
 
-    o = pd.DataFrame(osm_mjesta(RAW / "Sarajewo.osm.gz", nodes) + overture_mjesta(),
+    o = pd.DataFrame(osm_mjesta(RAW / OSM_IME, nodes) + overture_mjesta(),
                      columns=["vrsta", "ime", "lon", "lat", "izvor"])
     o = gpd.GeoDataFrame(o, geometry=gpd.points_from_xy(o.lon, o.lat), crs=CRS_WGS).to_crs(CRS_M)
     o["A"] = o.vrsta.map({"fast_food": 1.0, "restoran": 0.5, "muzicka_javna": 3.0, "muzicka_privatna": 1.0})

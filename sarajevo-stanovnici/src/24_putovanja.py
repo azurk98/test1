@@ -7,9 +7,9 @@ Izlaz: out/model_dionice.geojson   dnevni promet po dionici (oba smjera i jači 
        out/model_info.json          parametri i pokazatelji slaganja
 
 Zone: H3 rezolucija 8 (~0,7 km²) na cijelom području mreže (i Ilidža, Vogošća, Istočno Sarajevo).
-  stanovnici: u četiri općine iz modela stanovništva, izvan iz WorldPop-a
+  stanovnici: u šest općina iz modela stanovništva, izvan iz WorldPop-a
   zaposleni stanovnici: udio po općini (ZIS KS 07/2025), izvan 0,32 (kao Ilidža)
-  radna mjesta: u četiri općine iz 23_radna_mjesta.py, izvan 0,30 po stanovniku
+  radna mjesta: u šest općina iz 23_radna_mjesta.py, izvan 0,30 po stanovniku
   ulazi u područje: čvorovi magistralnih, primarnih i sekundarnih cesta na rubu mreže
 
 Putovanja (dnevna, autom, svako putovanje i povratak):
@@ -46,7 +46,8 @@ from scipy.sparse.linalg import spsolve_triangular
 from scipy.spatial import cKDTree
 from shapely.geometry import LineString, Point, box
 
-from common import CRS_M, CRS_WGS, DATA, OUT, RAW, ucitaj_granice
+from common import OSM_IME
+from common import CRS_M, CRS_WGS, DATA, OUT, RAW, ucitaj_granice, pokrivenost_osm
 
 
 def _uvezi(ime, fajl):
@@ -59,7 +60,8 @@ def _uvezi(ime, fajl):
 dost = _uvezi("dost", "08_dostupnost.py")
 guz = _uvezi("guz", "22_guzva.py")
 
-OKVIR = (18.242, 43.768, 18.515, 43.935)   # granice OSM ekstrakta
+POKR = pokrivenost_osm()                    # područje s OSM podacima (ekstrakt + dopuna)
+OKVIR = POKR.bounds
 H3Z = 8
 BETA = {"hbw": 0.08, "oth": 0.15, "ext": 0.04}
 UDIO_VRSNOG_SATA = 0.08
@@ -86,7 +88,7 @@ SIGMA_RUTA = 0.3
 
 # ---------------------------------------------------------------- mreža
 def mreza():
-    nodes, ways, _ = dost.ucitaj_mrezu(RAW / "Sarajewo.osm.gz")
+    nodes, ways, _ = dost.ucitaj_mrezu(RAW / OSM_IME)
     rows = []
     wmeta = []
     for wi, (t, nds) in enumerate(ways):
@@ -148,7 +150,7 @@ def zone(xy, ll, e, wmeta):
     polja["rm"] = rm.reindex(polja.h3_id).fillna(0).to_numpy()
     unutra = polja.groupby("z")[["stanovnici", "zap", "rm"]].sum()
 
-    # WorldPop izvan četiri općine, u okviru mreže
+    # WorldPop izvan šest općina, u okviru mreže
     opcine, _ = ucitaj_granice()
     cetiri = opcine.to_crs(CRS_WGS).union_all()
     with rasterio.open(RAW / "worldpop_2026.tif") as s:
@@ -158,6 +160,7 @@ def zone(xy, ll, e, wmeta):
     a[a < 0] = 0
     m_in = ~geometry_mask([cetiri], out_shape=a.shape, transform=tr)
     a[m_in] = 0
+    a[geometry_mask([POKR], out_shape=a.shape, transform=tr)] = 0   # izvan područja s OSM cestama
     rr, cc = np.nonzero(a > 0)
     lon = tr.c + (cc + 0.5) * tr.a
     lat = tr.f + (rr + 0.5) * tr.e
@@ -167,7 +170,7 @@ def zone(xy, ll, e, wmeta):
     vani["rm"] = 0.30 * vani.stanovnici
     z = unutra.add(vani, fill_value=0)
     z = z[(z.stanovnici + z.rm) >= 30].copy()
-    print(f"Zone: {len(z)} (H3 {H3Z}); stanovnici {z.stanovnici.sum():,.0f} (izvan 4 općine "
+    print(f"Zone: {len(z)} (H3 {H3Z}); stanovnici {z.stanovnici.sum():,.0f} (izvan modeliranih općina "
           f"{vani.stanovnici.sum():,.0f}), radna mjesta {z.rm.sum():,.0f}")
 
     # čvor zone: najbliži čvor ulice (residential ili veća) u glavnoj jako povezanoj komponenti
@@ -189,8 +192,9 @@ def zone(xy, ll, e, wmeta):
     z["tip"] = "zona"
 
     # ulazi: čvorovi glavnih cesta blizu ruba okvira
-    x0, y0, x1, y1 = OKVIR
-    rub = (np.minimum.reduce([ll[:, 0] - x0, x1 - ll[:, 0], ll[:, 1] - y0, y1 - ll[:, 1]]) < 0.004) & glavna
+    import shapely
+    gr = gpd.GeoSeries([POKR.boundary], crs=CRS_WGS).to_crs(CRS_M).iloc[0]
+    rub = (shapely.distance(shapely.points(xy[:, 0], xy[:, 1]), gr) < 350) & glavna
     ul = []
     ehw = e.w.map(lambda k: wmeta[k]["hw"])
     for cv, hw in zip(np.r_[e.u, e.v], np.r_[ehw, ehw]):
@@ -318,7 +322,8 @@ def main() -> None:
         if p:
             br.loc[br.brojac == k_, ["lat", "lon"]] = p
     br = br.dropna(subset=["lat", "lon"])
-    br = br[(br.lon.between(OKVIR[0], OKVIR[2])) & (br.lat.between(OKVIR[1], OKVIR[3]))].reset_index(drop=True)
+    import shapely
+    br = br[shapely.contains_xy(POKR, br.lon.to_numpy(), br.lat.to_numpy())].reset_index(drop=True)
     bxy = gpd.GeoSeries(gpd.points_from_xy(br.lon, br.lat), crs=CRS_WGS).to_crs(CRS_M)
     mid = (xy[e.u] + xy[e.v]) / 2
     ehw = e.w.map(lambda k: wmeta[k]["hw"]).to_numpy()

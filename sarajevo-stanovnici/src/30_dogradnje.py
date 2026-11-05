@@ -4,7 +4,7 @@ Ideja: u brdima se dvije ulice (često slijepe) gotovo dodiruju, a cestom su uda
 Kratka nova dionica (≤ MAX_SPOJ_M, nagib ≤ MAX_NAGIB) omogućava poprečnu liniju kroz naselja sa
 slabim prevozom.
 
-Kandidati: parovi čvorova ulica (residential i veće) u četiri općine, 60–MAX_SPOJ_M zračno, cestom
+Kandidati: parovi čvorova ulica (residential i veće) u šest općina, 60–MAX_SPOJ_M zračno, cestom
 ≥ 3× duže i ≥ 800 m, nagib spoja ≤ MAX_NAGIB (Copernicus, tlo), spoj ne siječe zgrade (± 3 m);
 prelaz preko rijeke se označava (treba most). Ocjena: stanovnici do 400 m od spoja koji su danas
 > 8 min hoda od stanice ili u PTAL ≤ 1b, puta ušteda puta (km, do 3). Za najbolje spojeve trasa
@@ -27,6 +27,7 @@ from scipy.sparse.csgraph import connected_components, dijkstra
 from scipy.spatial import cKDTree
 from shapely.geometry import LineString, Point
 
+from common import OSM_IME
 from common import CRS_M, CRS_WGS, DATA, INTERIM, OUT, RAW, ucitaj_granice
 
 
@@ -51,7 +52,7 @@ ULICE = {"residential", "unclassified", "tertiary", "secondary", "primary", "tru
 
 def rijeke():
     nodes, out = {}, []
-    with gzip.open(RAW / "Sarajewo.osm.gz", "rb") as f:
+    with gzip.open(RAW / OSM_IME, "rb") as f:
         for _, el in ET.iterparse(f):
             if el.tag == "node":
                 nodes[int(el.get("id"))] = (float(el.get("lon")), float(el.get("lat")))
@@ -92,7 +93,7 @@ def main() -> None:
     op, _ = ucitaj_granice()
     cetiri = op.to_crs(CRS_M).union_all()
     u4 = np.array([cetiri.contains(Point(p)) for p in xy]) if False else gpd.GeoSeries(gpd.points_from_xy(xy[:, 0], xy[:, 1]), crs=CRS_M).within(cetiri).to_numpy()
-    # čvorovi s potražnjom: u 4 općine i do 400 m od slabo pokrivenih stanovnika
+    # čvorovi s potražnjom: u 6 općina i do 400 m od slabo pokrivenih stanovnika
     sl_pts = cKDTree(pcx[slabo])
     blizu = np.array([len(x) > 0 for x in sl_pts.query_ball_point(xy, 400)])
     # stepen čvora u neusmjerenom grafu ulica: krajevi spoja su slijepe ulice (1) ili raskrsnice (≥ 3)

@@ -1,7 +1,7 @@
 """Mreža puteva za prikaz na karti -> out/putevi.geojson
 
 Iz OSM ekstrakta (raw/Sarajewo.osm.gz) uzima ceste i tramvajsku prugu u okviru
-četiri općine (+ ~1 km), razvrstava ih u klase za prikaz i pojednostavljuje
+šest općina (+ ~1 km), razvrstava ih u klase za prikaz i pojednostavljuje
 geometriju (~5 m). Parkirališne trake i prilazi kućama (service=parking_aisle/driveway) se ne crtaju.
 
 klasa: autoput (motorway), magistrala (trunk), primarna, sekundarna, tercijarna,
@@ -17,6 +17,7 @@ import xml.etree.ElementTree as ET
 import geopandas as gpd
 from shapely.geometry import LineString, box
 
+from common import OSM_IME
 from common import CRS_WGS, OUT, RAW
 
 KLASA = {
@@ -39,7 +40,7 @@ def main() -> None:
     okvir = box(x0 - 0.012, y0 - 0.009, x1 + 0.012, y1 + 0.009)
 
     nodes, rows = {}, []
-    with gzip.open(RAW / "Sarajewo.osm.gz", "rb") as f:
+    with gzip.open(RAW / OSM_IME, "rb") as f:
         for _, el in ET.iterparse(f):
             if el.tag == "node":
                 nodes[int(el.get("id"))] = (float(el.get("lon")), float(el.get("lat")))

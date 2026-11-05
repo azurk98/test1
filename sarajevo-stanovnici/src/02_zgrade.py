@@ -108,7 +108,7 @@ def main() -> None:
     z["povrsina"] = z.area
     ukupno_prije = len(z)
     z = z[z.povrsina >= MIN_POVRSINA_ZGRADE].copy()
-    print(f"Zgrade u 4 općine: {ukupno_prije}, nakon filtra < {MIN_POVRSINA_ZGRADE} m²: {len(z)}")
+    print(f"Zgrade u modeliranim općinama: {ukupno_prije}, nakon filtra < {MIN_POVRSINA_ZGRADE} m²: {len(z)}")
 
     for kol in ("building:levels", "height", "addr:street", "addr:housenumber"):
         if kol not in z:

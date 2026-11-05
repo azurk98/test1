@@ -20,7 +20,7 @@ Autopraonica živi od dvije vrste kupaca:
     od prolaza    = promet/dan · UDIO_SVRATI · 30 / (1 + praonice na ≤ 1 km)
   Gusto izgrađena polja (zgrade > MAX_IZGRADJENOST površine) se ne nude: nema mjesta za plac.
 
-Kandidat (polje H3): u četiri općine, cesta klase magistrala/primarna/sekundarna/tercijarna
+Kandidat (polje H3): u šest općina, cesta klase magistrala/primarna/sekundarna/tercijarna
 na ≤ MAX_CESTA_M od centra polja (autoput nema direktan pristup), nagib terena ≤ MAX_NAGIB %,
 ocjena pristupa ulica ≥ 50, bez postojeće praonice u polju. Lokacije se biraju redom
 (pohlepno) uz razmak ≥ MIN_RAZMAK_M. Strategija "bijela_mrlja" bira polja koja najviše
@@ -45,6 +45,7 @@ from scipy.sparse.csgraph import connected_components, dijkstra
 from scipy.spatial import cKDTree
 from shapely.geometry import Polygon
 
+from common import OSM_IME
 from common import CRS_M, CRS_WGS, INTERIM, OUT, RAW
 
 
@@ -128,11 +129,11 @@ def main() -> None:
     polja = gpd.read_file(OUT / "polja_h3.gpkg")
     teren = pd.read_csv(OUT / "teren_h3.csv").set_index("h3_id").reindex(polja.h3_id)
     ulice = pd.read_csv(OUT / "ulice_h3.csv").set_index("h3_id").reindex(polja.h3_id)
-    nodes, ways, _ = dost.ucitaj_mrezu(RAW / "Sarajewo.osm.gz")
-    _, land = sup.trgovine_i_zemljiste(RAW / "Sarajewo.osm.gz", nodes)
+    nodes, ways, _ = dost.ucitaj_mrezu(RAW / OSM_IME)
+    _, land = sup.trgovine_i_zemljiste(RAW / OSM_IME, nodes)
 
     # --- postojeće praonice i pumpe (OSM prvo, Overture samo ako nema ničega iste vrste na 60 m)
-    o = pd.DataFrame(osm_objekti(RAW / "Sarajewo.osm.gz", nodes) + overture_objekti(),
+    o = pd.DataFrame(osm_objekti(RAW / OSM_IME, nodes) + overture_objekti(),
                      columns=["vrsta", "ime", "lon", "lat", "izvor"])
     o = gpd.GeoDataFrame(o, geometry=gpd.points_from_xy(o.lon, o.lat), crs=CRS_WGS).to_crs(CRS_M)
     xy_o = np.c_[o.geometry.x, o.geometry.y]

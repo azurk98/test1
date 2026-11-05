@@ -17,7 +17,7 @@ Pokazatelji po polju:
   raskrsnice_km2    broj raskrsnica (čvorovi s ≥ 3 ulice) po km²
   atraktivnost      0–100, ponderisani zbir percentilnih rangova (TEZINE ispod)
 
-Dostupni stanovnici računaju se samo iz četiri modelirane općine; kod rubova
+Dostupni stanovnici računaju se samo iz šest modeliranih općina; kod rubova
 prema Ilidži, Vogošći i Istočnom Sarajevu potcijenjeni su (rubni efekat).
 Vremena autom: ograničenje brzine (ili tipična brzina klase ceste) × 0,65; javni prevoz je samo blizina
 stanica, bez voznog reda.
@@ -38,6 +38,7 @@ from scipy.sparse.csgraph import connected_components, dijkstra
 from scipy.spatial import cKDTree
 from shapely.geometry import LineString
 
+from common import OSM_IME
 from common import CRS_M, CRS_WGS, OUT, RAW, overpass_u_gdf
 
 PJESACKA_BRZINA = 4.8  # km/h
@@ -184,7 +185,7 @@ def dostupno(G, izvori, pop_cvor, poi_cvor, pragovi, ulaz_min):
 
 def main() -> None:
     polja = gpd.read_file(OUT / "polja_h3.gpkg")
-    nodes, ways, stops = ucitaj_mrezu(RAW / "Sarajewo.osm.gz")
+    nodes, ways, stops = ucitaj_mrezu(RAW / OSM_IME)
     print(f"Mreža: {len(ways)} cesta/staza, {len(stops)} oznaka stanica")
 
     used = sorted({n for _, nds in ways for n in nds if n in nodes})

@@ -26,6 +26,7 @@ from scipy.sparse.csgraph import dijkstra
 from scipy.spatial import cKDTree
 from shapely.geometry import LineString
 
+from common import OSM_IME
 from common import CRS_M, CRS_WGS, DATA, OUT
 
 
@@ -88,7 +89,7 @@ def main() -> None:
     # tramvajske i trolejbuske stanice: OSM stanice do 60 m od trunk linija
     li = gpd.read_file(OUT / "linije.geojson").to_crs(CRS_M)
     trunk = li[li["mod"].isin(["tram", "trolleybus"])]
-    _, _, stops = mp.dost.ucitaj_mrezu(mp.RAW / "Sarajewo.osm.gz")
+    _, _, stops = mp.dost.ucitaj_mrezu(mp.RAW / OSM_IME)
     st = gpd.GeoDataFrame(pd.DataFrame(stops, columns=["lon", "lat", "tip", "ime"]),
                           geometry=gpd.points_from_xy([s[0] for s in stops], [s[1] for s in stops]), crs=CRS_WGS).to_crs(CRS_M)
     st = st[st.distance(trunk.union_all()) <= 60].reset_index(drop=True)

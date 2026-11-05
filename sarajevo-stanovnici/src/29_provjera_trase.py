@@ -31,6 +31,7 @@ from scipy.ndimage import gaussian_filter, grey_opening, map_coordinates
 from scipy.spatial import cKDTree
 from shapely.geometry import LineString, Point
 
+from common import OSM_IME
 from common import CRS_M, CRS_WGS, OUT, RAW
 
 
@@ -90,7 +91,7 @@ def visine_fgu(s_m, korak=15.0):
 def oznake_ulica(okvir):
     """OSM ceste u okviru: oznake važne za autobus."""
     nodes, rows = {}, []
-    with gzip.open(RAW / "Sarajewo.osm.gz", "rb") as f:
+    with gzip.open(RAW / OSM_IME, "rb") as f:
         for _, el in ET.iterparse(f):
             if el.tag == "node":
                 nodes[int(el.get("id"))] = (float(el.get("lon")), float(el.get("lat")))

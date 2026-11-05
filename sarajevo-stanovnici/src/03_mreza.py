@@ -15,7 +15,7 @@ import numpy as np
 import pandas as pd
 from shapely.geometry import Polygon, mapping
 
-from common import (CRS_M, CRS_WGS, H3_RES, INTERIM, popuni_mz, ucitaj_granice,
+from common import (OPCINE, CRS_M, CRS_WGS, H3_RES, INTERIM, popuni_mz, ucitaj_granice,
                     worldpop_po_dijelu)
 
 
@@ -31,8 +31,8 @@ def h3_polja(geom_wgs) -> gpd.GeoDataFrame:
 
 def main() -> None:
     opcine, mz_osm = ucitaj_granice()
-    print(f"Općine: {len(opcine)}/4, MZ poligona iz OSM-a: {len(mz_osm)}")
-    if len(opcine) != 4:
+    print(f"Općine: {len(opcine)}/{len(OPCINE)}, MZ poligona: {len(mz_osm)}")
+    if len(opcine) != len(OPCINE):
         raise SystemExit("Nedostaju granice općina u raw/granice.json")
 
     unija = opcine.union_all()

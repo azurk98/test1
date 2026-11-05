@@ -12,7 +12,7 @@ t50 vrijeme na kojem sadržaj vrijedi pola (npr. škola 12 min). Indeks 0–100 
 zbir bodova (KATEGORIJE) umanjen za buku uz autoput/magistralu/primarnu cestu, industriju
 u polju, vrlo strm teren i težak pristup autom (uske i strme ulice, 15_ulice.py; pokrenuti
 prije ovog koraka). Ponderi i pragovi su procjena, ne kalibracija; mijenjaju se ovdje.
-Sadržaji izvan četiri općine (Ilidža, Vogošća...) se računaju, jer ih stanovnici koriste.
+Sadržaji izvan šest općina (Hadžići, Ilijaš, Istočno Sarajevo...) se računaju, jer ih stanovnici koriste.
 """
 from __future__ import annotations
 
@@ -29,6 +29,7 @@ from scipy.sparse.csgraph import connected_components, dijkstra
 from scipy.spatial import cKDTree
 from shapely.geometry import Point, Polygon
 
+from common import OSM_IME
 from common import CRS_M, CRS_WGS, INTERIM, OUT, RAW
 from common import _rel_geom
 
@@ -140,7 +141,7 @@ def pristupne_tacke(g: gpd.GeoDataFrame) -> pd.DataFrame:
 
 def main() -> None:
     polja = gpd.read_file(OUT / "polja_h3.gpkg")
-    nodes, ways, stops = dost.ucitaj_mrezu(RAW / "Sarajewo.osm.gz")
+    nodes, ways, stops = dost.ucitaj_mrezu(RAW / OSM_IME)
     used = sorted({n for _, nds in ways for n in nds if n in nodes})
     idx = {n: k for k, n in enumerate(used)}
     pts = gpd.GeoSeries(gpd.points_from_xy(*zip(*[nodes[n] for n in used])), crs=CRS_WGS).to_crs(CRS_M)
@@ -152,7 +153,7 @@ def main() -> None:
     tree = cKDTree(xy[ok])
     hod = lambda d: d / 1000 / dost.PJESACKA_BRZINA * 60  # noqa: E731
 
-    s = sadrzaji(RAW / "Sarajewo.osm.gz")
+    s = sadrzaji(RAW / OSM_IME)
     print("Sadržaji (OSM):", s.kategorija.value_counts().to_dict())
     tacke = pristupne_tacke(s)
     # trgovine namirnica iz 09 (OSM + Overture, i Google ako je svjež) i stanice javnog prevoza

@@ -38,6 +38,7 @@ from scipy.spatial import cKDTree
 from shapely.geometry import LineString, MultiLineString
 from shapely.ops import linemerge
 
+from common import OSM_IME
 from common import CRS_M, CRS_WGS, DATA, OUT, RAW
 
 _s = importlib.util.spec_from_file_location("dost", Path(__file__).with_name("08_dostupnost.py"))
@@ -90,7 +91,7 @@ def ucitaj_rute(xml_gz):
 
 
 def main() -> None:
-    rute = ucitaj_rute(RAW / "Sarajewo.osm.gz")
+    rute = ucitaj_rute(RAW / OSM_IME)
     lin = pd.DataFrame([(r["mod"], r["ref"]) for r in rute], columns=["mod", "linija"]).drop_duplicates()
     fp = DATA / "linije_frekvencija.csv"
     if fp.exists():
@@ -104,7 +105,7 @@ def main() -> None:
 
     # stvarne linije, stanice i polasci s portala Ministarstva (27_javniprevozks.py), ako postoje
     jp = (DATA / "jpks_linije.csv").exists()
-    nodes, ways, stops = dost.ucitaj_mrezu(RAW / "Sarajewo.osm.gz")
+    nodes, ways, stops = dost.ucitaj_mrezu(RAW / OSM_IME)
     if jp:
         jl = pd.read_csv(DATA / "jpks_linije.csv", dtype={"linija": str})
         js = pd.read_csv(DATA / "jpks_stanice.csv")

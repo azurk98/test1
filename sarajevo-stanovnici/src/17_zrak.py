@@ -36,9 +36,10 @@ from rasterio.windows import Window, from_bounds
 from scipy.ndimage import distance_transform_edt, gaussian_filter, grey_opening, minimum_filter
 from shapely.geometry import LineString, shape
 
+from common import OSM_IME
 from common import OUT, RAW
 
-OKVIR = (18.20, 43.78, 18.56, 43.98)
+OKVIR = (18.13, 43.72, 18.56, 44.0)
 H50, W = 200.0, 50.0
 B_SAOBRACAJ = 0.5
 DNO_RADIJUS_M = 3000
@@ -67,7 +68,7 @@ def main() -> None:
     h = z - dno
     E = 1 / (1 + np.exp((h - H50) / W))
 
-    # male kuće (svi OSM objekti u ekstraktu, ne samo četiri općine)
+    # male kuće (svi OSM objekti u ekstraktu, ne samo šest općina)
     els = json.loads((RAW / "osm_grad.json").read_text())["elements"]
     pts = []
     for e in els:
@@ -103,7 +104,7 @@ def main() -> None:
 
     # rijeke
     rijeke = []
-    with gzip.open(RAW / "Sarajewo.osm.gz", "rb") as f:
+    with gzip.open(RAW / OSM_IME, "rb") as f:
         nodes = {}
         for _, el in ET.iterparse(f):
             if el.tag == "node":

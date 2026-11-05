@@ -29,6 +29,7 @@ import pandas as pd
 from scipy.spatial import cKDTree
 from shapely.geometry import LineString, Point, box
 
+from common import OSM_IME
 from common import CRS_M, CRS_WGS, DATA, OUT, RAW
 
 KLASA = {"motorway": "autoput", "motorway_link": "autoput", "trunk": "magistrala", "trunk_link": "magistrala",
@@ -55,7 +56,7 @@ ULICA = {
 
 def ucitaj_dionice(okvir):
     nodes, rows = {}, []
-    with gzip.open(RAW / "Sarajewo.osm.gz", "rb") as f:
+    with gzip.open(RAW / OSM_IME, "rb") as f:
         for _, el in ET.iterparse(f):
             if el.tag == "node":
                 nodes[int(el.get("id"))] = (float(el.get("lon")), float(el.get("lat")))

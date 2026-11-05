@@ -26,7 +26,7 @@ from common import OUT, RAW
 
 DEM_URL = ("https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N43_00_E018_00_DEM/"
            "Copernicus_DSM_COG_10_N43_00_E018_00_DEM.tif")
-TEREN_OKVIR = (18.2352, 43.8089, 18.53, 43.9783)  # isti okvir kao satelitska podloga
+TEREN_OKVIR = (18.15, 43.73, 18.53, 43.99)  # isti okvir kao satelitska podloga
 IZOHIPSE_M = 50
 GLAVNE_M = 250
 

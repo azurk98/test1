@@ -1,6 +1,6 @@
-# Procjena broja stanovnika po H3 polju: Grad Sarajevo
+# Procjena broja stanovnika po H3 polju: Grad Sarajevo, Ilidža i Vogošća
 
-Mreža: H3 rezolucija **10** (~0,015 km², stranica šestougla ~66 m; 9.033 polja), zadano u `common.py`
+Mreža: H3 rezolucija **10** (~0,015 km², stranica šestougla ~66 m; 22.163 polja u šest općina), zadano u `common.py`
 (`H3_RES`, ili varijabla okruženja `H3_RES=9` za rezoluciju iz SPEC-a, ~0,105 km²). Na rezoluciji 10
 procjena po polju je nesigurnija (manje zgrada po polju), ali zbirovi po općini ostaju tačni; MAPE za
 Stari Grad 17,1% (rezolucija 9: 16,4%).
@@ -13,6 +13,7 @@ Implementacija specifikacije iz [`SPEC.md`](SPEC.md).
 pip install -r requirements.txt
 cd src
 python 01_preuzimanje.py        # OSM (Overpass; --bbbike za BBBike ekstrakt), WorldPop, GHSL, PDF-ovi -> raw/
+python 01b_dopuna_overture.py   # Ilidža i Vogošća: granice, MZ i OSM objekti izvan BBBike okvira (Overture) -> raw/Sarajewo_sire.osm.gz
 python 02_zgrade.py             # zgrade, spratnost, stambeni udio + KONTROLNA TAČKA
 python 03_mreza.py              # H3 res 9, dijelovi polja (polje ∩ općina ∩ MZ), WorldPop
 python 04_mz_novi_grad.py --nastavi  # MZ Novog Grada iz adresa (bez --nastavi staje ako je < 40% adresirano)
@@ -50,6 +51,30 @@ ukupno i po općini. Pregledati prije pokretanja `05_raspodjela.py`.
 |---|---|---|
 | (Opcionalno) pregledati `interim/novi_grad_ulice_mz_auto.csv` (620 pravila, 290 ulica, izvučeno iz tabela PDF-a; napomene o izuzecima u koloni `izvorni_tekst` se ne primjenjuju) i ispravljenu verziju spremiti kao `data/novi_grad_ulice_mz.csv` | `raw/novi_grad_ulice_mz.pdf` | Izuzeci iz napomena (npr. brojevi koji pripadaju Novom Sarajevu) se ignorišu |
 | Utvrditi matične MZ za Alipašin Most III i Zabrđe, upisati u `MATICNE_MZ_NOVI_GRAD` u `src/common.py` | odluka općine | Koristi se pravilo za nepoznatu matičnu MZ (SPEC 5.2) |
+
+## Ilidža i Vogošća (05.11.2026)
+
+Model pokriva šest općina: Centar, Stari Grad, Novo Sarajevo, Novi Grad, **Ilidža** (74.137 st.)
+i **Vogošća** (30.450 st., FZS 30.06.2026). Radna mjesta 2024: Ilidža 26.600, Vogošća 6.888;
+zaposleni stanovnici 07/2025: 23.474 i 10.354 (FZS KS u brojkama 2025, tabela 4.2; ZIS KS).
+- **OSM podaci**: BBBike ekstrakt ne pokriva sjever Vogošće ni zapad i jug Ilidže, a Overpass i
+  Geofabrik nisu bili dostupni iz okruženja. `01b_dopuna_overture.py` dopunjuje taj dio iz Overture
+  Maps (izdanje 2026-10-21): zgrade samo iz OSM izvora (10.186; Microsoftove ML zgrade nisu uzete,
+  da metoda bude ista kao u ostalim općinama), ceste i pruge (čvorovi na rubu spojeni s ekstraktom),
+  namjena zemljišta, rijeke i sadržaji (škole, vrtići, ambulante ...). Rezultat je
+  `raw/Sarajewo_sire.osm.gz` u istom XML obliku; svi koraci ga koriste preko `common.OSM_IME`.
+  Overture nema broj traka ni sve jednosmjerne oznake, pa je model prometa tu grublji.
+- **Granice**: općine iz OSM relacija 2528207 (Ilidža) i 2528291 (Vogošća), preko Overture.
+  Vogošća: 21 MZ iz OSM poligona. Ilidža: 15 MZ iz OSM poligona (38% površine, uglavnom ruralno);
+  gradski dio (Stup, Otes, Hrasnica, Sokolović Kolonija, Butmir ...) podijeljen je oko Overture
+  naziva naselja (Voronoi), pa su te „MZ“ približne i ne odgovaraju zvaničnim granicama.
+  Isti naziv u dvije općine dobija oznaku općine, npr. „Kovači (Ilidža)“.
+- **Parametri raspodjele**: nema podataka ispod općine, pa Ilidža i Vogošća koriste parametre
+  Novog Grada (α 0,9, gustina niskih zgrada 0,5): mješavina blokova i kuća. Spratnost je u OSM-u
+  rijetka (Ilidža 2%, Vogošća 0,3%), pa je procjena iz modela spratnosti.
+- Okviri karte, terena, smoga i GHSL-a prošireni na 18,13–18,56 E, 43,72–44,02 N; satelitska
+  podloga se ponovo preuzima (`raw/s2cloudless_2016_sire.jpg`). Model putovanja: WorldPop izvan
+  šest općina samo unutar područja s OSM cestama (`common.pokrivenost_osm`), ulazi na rubu tog područja.
 
 ## Prvo pokretanje (04.11.2026)
 

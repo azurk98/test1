@@ -24,7 +24,7 @@ ulazi u konkurenciju, pa sljedeći izbor ne kanibalizuje prethodni.
 glavna cesta je na najviše MAX_CESTA_M. Za svako polje navode se znakovi
 mogućeg zemljišta (gradilište, napušteno zemljište, parking, veći poslovni
 objekat) — stvarnu dostupnost parcele treba provjeriti na terenu i u katastru.
-Potražnja postoji samo u četiri modelirane općine; konkurencija se računa
+Potražnja postoji samo u šest modeliranih općina; konkurencija se računa
 iz cijelog OSM ekstrakta (i Ilidža, Vogošća).
 """
 from __future__ import annotations
@@ -43,6 +43,7 @@ from scipy.sparse.csgraph import connected_components, dijkstra
 from scipy.spatial import cKDTree
 from shapely.geometry import Polygon
 
+from common import OSM_IME
 from common import CRS_M, CRS_WGS, OUT, RAW
 
 _s = importlib.util.spec_from_file_location("dost", Path(__file__).with_name("08_dostupnost.py"))
@@ -167,8 +168,8 @@ def trgovine_i_zemljiste(xml_gz, nodes):
 def main() -> None:
     polja = gpd.read_file(OUT / "polja_h3.gpkg")
     acc = pd.read_csv(OUT / "dostupnost_h3.csv").set_index("h3_id")
-    nodes, ways, _ = dost.ucitaj_mrezu(RAW / "Sarajewo.osm.gz")
-    shops, land = trgovine_i_zemljiste(RAW / "Sarajewo.osm.gz", nodes)
+    nodes, ways, _ = dost.ucitaj_mrezu(RAW / OSM_IME)
+    shops, land = trgovine_i_zemljiste(RAW / OSM_IME, nodes)
 
     # --- postojeće trgovine (tačke; poligoni -> težište, A po površini)
     rows = []
@@ -216,7 +217,7 @@ def main() -> None:
     pop = polja.stanovnici.to_numpy(float)
     orig = np.where(pop > 0)[0]
 
-    # --- kandidati: polja bez supermarketa, blizu glavne ceste, u 4 općine
+    # --- kandidati: polja bez supermarketa, blizu glavne ceste, u 6 općina
     sp = gpd.sjoin(s[s.tip.isin(["supermarket", "mall", "department_store"])], polja[["h3_id", "geometry"]],
                    predicate="within")
     ima = set(sp.h3_id)
