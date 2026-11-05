@@ -54,6 +54,7 @@ def podaci() -> dict:
     ul = pd.read_csv(OUT / "ulice_h3.csv").set_index("h3_id")
     su = pd.read_csv(OUT / "sunce_h3.csv", keep_default_na=False).set_index("h3_id")
     zr = pd.read_csv(OUT / "zrak_h3.csv").set_index("h3_id")
+    rmj = pd.read_csv(OUT / "radna_mjesta_h3.csv").set_index("h3_id").radna_mjesta
     ap = pd.read_csv(OUT / "autopraonica_pokrivenost.csv").set_index("h3_id").praonica_auto_min
     pv = pd.read_csv(OUT / "prevoz_h3.csv", dtype={"ptal": str}, keep_default_na=False).set_index("h3_id")
     cells = []
@@ -80,7 +81,8 @@ def podaci() -> dict:
             + [int(kz.loc[r.h3_id, "buka_m"]), float(kz.loc[r.h3_id, "industrija_udio"])]
             + [float(pv.loc[r.h3_id, "ptal_ai"]), pv.loc[r.h3_id, "ptal"], pv.loc[r.h3_id, "linije"],
                int(pv.loc[r.h3_id, "polazaka_na_sat"]), float(pv.loc[r.h3_id, "stanica_min"])]
-            + [None if pd.isna(ap.get(r.h3_id)) else round(float(ap.get(r.h3_id)), 1)])
+            + [None if pd.isna(ap.get(r.h3_id)) else round(float(ap.get(r.h3_id)), 1)]
+            + [int(rmj.get(r.h3_id, 0))])
 
     op, _ = ucitaj_granice()
     op = op.set_index("opcina").loc[OP].reset_index()
@@ -151,6 +153,10 @@ def podaci() -> dict:
                     [round(c, 5) for xy in r.geometry.coords for c in xy]] for r in gz.itertuples()],
            "cnt": [[r.brojac, r.lokacija, round(r.lat, 5), round(r.lon, 5), int(r.pgds_2025),
                     pk.index(r.brojac) if r.brojac in pk else -1] for r in gbr.itertuples()]}
+    rmo = pd.read_csv(DATA / "radna_mjesta_opcine.csv")
+    rmz = pd.read_csv(OUT / "radna_mjesta_mz.csv")
+    jobs = {"op": [[OP.index(r.opcina), int(r.radna_mjesta_2024), int(r.zaposleni_stanovnici_2025)] for r in rmo.itertuples()],
+            "mz": [[OP.index(r.opcina), r.mz, int(r.radna_mjesta), int(r.stanovnici)] for r in rmz.itertuples()]}
     sd = gpd.read_file(OUT / "sadrzaji.geojson")
     x0, y0, x1, y1 = SAT_OKVIR
     sd = sd[(sd.geometry.x.between(x0, x1)) & (sd.geometry.y.between(y0, y1))]
@@ -176,7 +182,7 @@ def podaci() -> dict:
     return {"lines": linije, "aq": stanice, "acc": acc, "poi": poi,
             "stores": [[round(a, 5), round(b, 5), (n if isinstance(n, str) else "")]
                        for a, b, n in zip(st.lon, st.lat, st.ime)],
-            "sites": sites, "washes": praonice, "wsites": wsites, "biz": biz, "trf": trf, "cells": cells, "summ": summ, "mz": mzrows,
+            "sites": sites, "washes": praonice, "wsites": wsites, "biz": biz, "trf": trf, "jobs": jobs, "cells": cells, "summ": summ, "mz": mzrows,
             "op": [rnd(x) for x in op.geometry],
             "mzlines": [[OP.index(o) if o in OP else -1, n, rnd(x)]
                         for o, n, x in zip(mzall.opcina, mzall.mz, mzall.geometry)]}

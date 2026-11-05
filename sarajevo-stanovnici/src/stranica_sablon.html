@@ -245,6 +245,7 @@ footer{font-size:13px;color:var(--muted);max-width:80ch}
           <button id="m-fog" aria-pressed="false">Fog</button>
           <button id="m-pt" aria-pressed="false">Transit</button>
           <button id="m-trf" aria-pressed="false">Traffic</button>
+          <button id="m-job" aria-pressed="false">Jobs</button>
         </div>
         <div>
           <span class="chips chips-sm" role="group" aria-label="Background">
@@ -366,7 +367,7 @@ const POP_T = [1,50,150,300,600,1000,1600], DEN_T = [1,500,1500,3000,6000,10000,
 let mode = "pop", focusOp = -1, selected = null, showMZ = true;
 
 const cells = D.cells.map(c => ({h:c[0],op:c[1],mz:c[2],s:c[3],mn:c[4],mx:c[5],a:[c[6],c[7],c[8]],p:c[9],km2:c[10],
-  att:c[11],w:[c[12],c[13],c[14]],car:[c[15],c[16],c[17]],poi:c[18],stm:c[19],stt:c[20],s4:c[21],t4:c[22],road:c[23],sup:c[24],elev:c[25],slope:c[26],liv:c[27],need:c.slice(28,38),acc:c[38],accMax:c[39],accNarrow:c[40],accNarrowPct:c[41],accSteepPct:c[42],accMinW:c[43],sun:c[44],sunFrom:c[45],sunTo:c[46],sunJan:c[47],sunMax:c[48],aboveFloor:c[49],inv:c[50],smog:c[51],fog:c[52],noise:c[53],ind:c[54],ai:c[55],ptal:c[56],lines:c[57],dep:c[58],stopMin:c[59],wash:c[60]}));
+  att:c[11],w:[c[12],c[13],c[14]],car:[c[15],c[16],c[17]],poi:c[18],stm:c[19],stt:c[20],s4:c[21],t4:c[22],road:c[23],sup:c[24],elev:c[25],slope:c[26],liv:c[27],need:c.slice(28,38),acc:c[38],accMax:c[39],accNarrow:c[40],accNarrowPct:c[41],accSteepPct:c[42],accMinW:c[43],sun:c[44],sunFrom:c[45],sunTo:c[46],sunJan:c[47],sunMax:c[48],aboveFloor:c[49],inv:c[50],smog:c[51],fog:c[52],noise:c[53],ind:c[54],ai:c[55],ptal:c[56],lines:c[57],dep:c[58],stopMin:c[59],wash:c[60],job:c[61]}));
 const PTAL_K = ["0","1a","1b","2","3","4","5","6a","6b"],
   PTAL_C = {"0":"#1f2a44","1a":"#2f4b7c","1b":"#3f6fa5","2":"#4ca3c7","3":"#7fcdbb","4":"#c7e9b4","5":"#fee08b","6a":"#fc8d59","6b":"#d73027"};
 const MODE_C = {tram:"#e63946", trolleybus:"#3a86ff", bus:"#06d6a0"};
@@ -393,8 +394,10 @@ D.op = D.op.map(flat); D.mzlines.forEach(m => m[2] = flat(m[2]));
 cells.forEach(c => { c.den = c.s / c.km2; c.ring = sc(h3.cellToBoundary(c.h, true)); });
 
 function binColor(v, T){ const r = ramp(); if (v < T[0]) return css("--zero"); let i = 0; while (i < T.length-1 && v >= T[i+1]) i++; return r[i]; }
+const JOB_T = [1,20,50,100,250,500,1000];
 function color(c){
   if (mode === "trf") return "transparent";
+  if (mode === "job") return binColor(c.job, JOB_T);
   if (mode === "kit"){ if (c.s === 0 || c.kitN == null) return css("--zero"); return c.kitN < 10 ? css("--rel-c") : c.kitN < 50 ? css("--r3") : css("--r1"); }
   if (mode === "mus"){ if (c.s === 0 || c.musMin == null) return css("--zero"); return c.musMin <= 10 ? css("--r1") : c.musMin <= 15 ? css("--r3") : css("--rel-c"); }
   if (mode === "rel") return c.s === 0 ? css("--zero") : css({A:"--rel-a",B:"--rel-b",C:"--rel-c"}[c.p]);
@@ -606,7 +609,7 @@ function updateFocus(zoomTo){
   } else if (zoomTo) svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity);
   show(selected);
 }
-const MODES = ["best","pop","den","rel","att","sup","wash","kit","mus","trf","liv","car","sun","smog","fog","pt"];
+const MODES = ["best","pop","den","rel","att","sup","wash","kit","mus","trf","job","liv","car","sun","smog","fog","pt"];
 MODES.forEach(m => document.getElementById("m-"+m).onclick = () => {
   mode = m; MODES.forEach(x => document.getElementById("m-"+x).setAttribute("aria-pressed", x === m)); supG.attr("display", m === "sup" ? null : "none"); washG.attr("display", m === "wash" ? null : "none");
   Object.entries(BIZ).forEach(([k, b]) => b.g.attr("display", m === k ? null : "none"));
@@ -682,6 +685,12 @@ function legend0(){
     el.innerHTML = `<div style="font-size:12px;color:var(--muted)">Car access, 0–100 (steep or narrow streets lower it)</div>
       <div class="row">${ATT_T.map((t,i)=>`<div class="sw"><i style="background:${r[i]}"></i><span>${t}${i===ATT_T.length-1?"+":""}</span></div>`).join("")}</div>
       <div class="cat"><span><i class="rl" style="border-color:#ff8c1a"></i>steep street (over 12% on 100 m)</span><span><i class="rl" style="border-color:#e63946"></i>narrow (under 9 m between buildings)</span><span><i class="rl" style="border-color:#b5179e"></i>both</span></div>`;
+    return;
+  }
+  if (mode === "job"){
+    const r = ramp();
+    el.innerHTML = `<div style="font-size:12px;color:var(--muted)">Estimated jobs per cell (place of work)</div>
+      <div class="row"><div class="sw"><i style="background:var(--zero)"></i><span>0</span></div>${JOB_T.map((t,i)=>`<div class="sw"><i style="background:${r[i]}"></i><span>${t}${i===JOB_T.length-1?"+":""}</span></div>`).join("")}</div>`;
     return;
   }
   if (mode === "att" || mode === "liv"){
@@ -783,6 +792,20 @@ function show(c){
     el.querySelectorAll("button.lnk").forEach(b => b.onclick = () => pickCell(b.dataset.h));
     return;
   }
+  if (!c && mode === "job"){
+    const pool = focusOp >= 0 ? cells.filter(x => x.op === focusOp) : cells;
+    const ops = D.jobs.op.filter(r => focusOp < 0 || r[0] === focusOp);
+    const tj = d3.sum(ops, r => r[1]), tw = d3.sum(ops, r => r[2]);
+    const mzs = D.jobs.mz.filter(r => focusOp < 0 || r[0] === focusOp);
+    el.innerHTML = `<div class="k">Jobs · ${focusOp >= 0 ? OPN[focusOp] : "four municipalities"}</div>
+      <div class="big num">${fmt(tj)}</div><div class="rng num">${fmt(tw)} working residents · ${(tj/tw).toFixed(2)} jobs per worker living here</div>
+      <div class="k">Jobs per working resident</div>
+      <dl>${ops.map(r => `<dt>${OPN[r[0]]}</dt><dd class="num">${fmt(r[1])} / ${fmt(r[2])} = ${(r[1]/r[2]).toFixed(2)}</dd>`).join("")}</dl>
+      <div class="k">Most jobs (MZ)</div>
+      <dl>${mzs.slice(0,8).map(r => `<dt>${r[1]} <span class="tag">${OPN[r[0]]}</span></dt><dd class="num">${fmt(r[2])}</dd>`).join("")}</dl>
+      <p class="hint">Jobs by place of work per municipality come from the FZS (2024 average); working residents from the cantonal statistics office (July 2025, tax records). Within a municipality, jobs are spread by the non-residential floor space of each building (about 25 m² per office job, 45 per hospital job, 120 per factory job) plus two jobs for each business listed in Overture Maps. The FZS may count some staff at their employer's head office rather than where they work.</p>`;
+    return;
+  }
   if (!c && mode === "trf"){
     const city = d3.range(24).map(h => d3.sum(TRF.cnt.filter(d => d[5] >= 0), d => d[4] * TRF.prof[d[5]][h]));
     const mx = d3.max(city);
@@ -882,6 +905,7 @@ function show(c){
       <dt>Main road</dt><dd class="num">${fmt(c.road)} m</dd>
       <dt>Elevation, slope</dt><dd class="num">${c.elev == null ? "—" : fmt(c.elev) + " m · " + c.slope + "%"}</dd>
       <dt>Supermarket, walking</dt><dd class="num">${c.sup == null ? "—" : c.sup >= 20 ? "20+ min" : c.sup + " min"}</dd>
+      <dt>Jobs (estimate)</dt><dd class="num">${fmt(c.job)}</dd>
       <dt>Restaurants ≤10 min drive</dt><dd class="num">${c.kitN == null ? "—" : fmt(c.kitN)}</dd>
       <dt>Music school</dt><dd class="num">${c.musMin == null ? "—" : c.musMin >= 20 ? "20+ min" : c.musMin + " min"}</dd>
       <dt>Car wash, driving</dt><dd class="num">${c.wash == null ? "—" : c.wash >= 12 ? "12+ min" : c.wash + " min"}</dd>

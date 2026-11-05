@@ -34,6 +34,7 @@ python 18_javni_prevoz.py       # javni prevoz: linije, frekvencija, PTAL -> out
 python 19_autopraonica.py       # lokacije za autopraonicu -> out/autopraonica_*.csv
 python 20_biznisi.py            # dostavna kuhinja i muzička škola -> out/biz_*.csv
 python 22_guzva.py              # gužva po satu na glavnim cestama -> out/guzva_*.{geojson,json}
+python 23_radna_mjesta.py       # radna mjesta po polju -> out/radna_mjesta_{h3,mz}.csv
 python 13_stranica.py           # interaktivna stranica (artifact) -> out/stranica.html
 python 07_karta.py              # ponovo, da karta dobije slojeve iz koraka 08–11
 ```
@@ -188,6 +189,22 @@ tipično) × 800 voz/h (semafori), autoput 1.800. Gužva = PGDS · udio sata · 
 kapacitet; faktor dana iz dnevnih brojanja (radni 1,06, subota 0,95, nedjelja 0,77 prosjeka).
 Ograničenja: prosjek 2025, ne određeni dan; vikendom isti oblik dana; procjena opterećenja, ne
 izmjerena brzina. Na stranici: klizač 00–24 h, izbor dana, animacija.
+
+## Radna mjesta (`23_radna_mjesta.py`, pogled „Jobs“)
+
+Kontrolni zbirovi (`data/radna_mjesta_opcine.csv`): FZS, *Kanton Sarajevo u brojkama 2025*, tabela 4.2,
+prosječan broj zaposlenih 2024 po općini (mjesto rada): Centar 46.573, Novi Grad 32.134, Novo Sarajevo
+29.789, Stari Grad 10.478. Za poređenje, zaposleni stanovnici (ZIS KS, 31.07.2025, Porezna uprava):
+20.232 / 43.268 / 23.848 / 12.706. Centar ima 2,3 radna mjesta po zaposlenom stanovniku, Novi Grad
+0,74, pa je glavni smjer putovanja na posao iz Novog Grada prema Centru i Novom Sarajevu.
+
+Unutar općine radna mjesta se raspoređuju po nestambenoj površini zgrade (m² po radnom mjestu
+po vrsti: kancelarija 25, bolnica 45, škola 60, industrija 120, skladište 200; nepoznato 50;
+poslovno prizemlje stambene zgrade 70% otiska / 40 m²) plus 2 po objektu iz Overture
+(~6.500 u zgradi). Velikim poslovnim otiscima s modelskom spratnošću visina je ograničena na 3.
+Najviše: Željeznička 13.800, Marijin Dvor 11.800, Park-Višnjik 8.700 (KCUS), Trg oslobođenja 7.800,
+Briješće 5.900. Ograničenja: FZS broji po sjedištu poslovne jedinice; m² po radniku su tipične
+vrijednosti; nema provjere na nivou ulice.
 
 ## Google Places (`12_google_places.py`, opcionalno)
 
