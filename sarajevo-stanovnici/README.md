@@ -313,15 +313,18 @@ i nosivost nisu provjereni.
 ## Koncepti novih cesta (`31_scenariji.py`, pogled „Traffic“)
 
 Ista dnevna matrica putovanja autom (24, faza 1) dodijeljena s MSA (3 iteracije, 2 rute) za osnovno
-stanje i za svaku ideju (isti slučajni brojevi). Ideje izvan planova koje smo pregledali:
-A tunel ispod Bistrika Skenderija – Dariva (2,6 km, 50 km/h, 2+2 trake): ~19.600 vozila dnevno,
-Obala Kulina bana −34%, Maršala Tita −17%, Pale → Marijin Dvor 16,4 → 14,7 min, 377 vozilo-sati
-dnevno uštede. B sjeverna brdska veza (ulice duž trase linije S na 40 km/h + spojevi N6, N4):
-Zmaja od Bosne −13%, Maršala Tita −8%, Bulevar −6%, 447 vozilo-sati; djeluje kroz brdske ulice
-(povukla bi tranzit kroz naselja – bolja za autobuse nego kao cesta). C tunel ispod Mojmila
-Alipašino Polje – Dobrinja (1,1 km): ~18.500 vozila dnevno, Bulevar −12%, Dobrinja → Alipašino
-7,2 → 5,1 min, 328 vozilo-sati. Ukupna ušteda je mala u odnosu na ~191.000 vozilo-sati dnevno;
-efekat je lokalan na uskim grlima. Cijena, geologija, portali i zemljište nisu provjereni.
+stanje i za svaki scenarij (isti slučajni brojevi; razlike < ~150 vozilo-sati su šum). Tunel ispod
+Bistrika (A) je odbačen. Rezultat (vozila dnevno na novoj dionici; ušteda vozilo-sati dnevno):
+P planirani tunel Bentbaša – Koševo 9.100; 135 (Maršala Tita −8%, Obala −7%).
+B sjeverna brdska veza –; 447 (Zmaja od Bosne −13%) – bolja za autobuse nego kao cesta.
+C Mojmilo 18.500; 328. C2 Mojmilo istočnije 26.400; 809 (Dobrinja I → Hrasno 9,0 → 4,7 min).
+C3 Hrasno – istočna Dobrinja 31.100; 893 (ali Zmaja od Bosne +11%).
+G produžetak Gradskog autoputa uz prugu do Marijin Dvora 36.700; −257 (gore: puni centar).
+S sjeverna longitudinala Pofalići – Koševo 17.700; 556 (Maršala Tita −21%, Alipašina +26%).
+SP S + planirani tunel 18.400; 287 (Maršala Tita −17%, Obala −9%, Alipašina +29%).
+Zaključak: ceste uglavnom pomjeraju gužvu prema istim uskim grlima; za putovanje zapad → centar
+veći efekat se očekuje od P+R uz tramvaj, BRT/žutih traka, pomjerenog radnog vremena i radnih mjesta
+u Novom Gradu (model ne računa promjenu načina prevoza). Inducirani promet nije uključen.
 
 ## Google Places (`12_google_places.py`, opcionalno)
 

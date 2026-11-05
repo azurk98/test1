@@ -1,5 +1,10 @@
-scenarij,naziv,vozilo_sati_dnevno,usteda_vozilo_sati,na_novoj_dionici_dnevno,min: Velešići → Zabrđe,min: Dobrinja → Alipašino Polje,min: Alipašin most → Bentbaša,min: Pale (ulaz) → Marijin Dvor
-0,Osnovno stanje,191274,0,,17.8,7.2,14.4,16.4
-A,Tunel ispod Bistrika: Skenderija – Dariva,190897,377,19566.0,18.0,7.2,14.2,14.7
-B,Sjeverna brdska veza: Zabrđe – Sokolje – Buća Potok – Pofalići – Velešići,190828,447,0.0,18.2,7.1,14.5,16.4
-C,Tunel ispod Mojmila: Alipašino Polje – Dobrinja,190946,328,18485.0,18.1,5.1,14.5,16.4
+scenarij,naziv,vozilo_sati_dnevno,usteda_vozilo_sati,na_novoj_dionici_dnevno,min: Velešići → Zabrđe,min: Dobrinja → Alipašino Polje,min: Alipašin most → Bentbaša,min: Koševo → Bentbaša,min: Dobrinja I → Hrasno,min: Alipašin most → Marijin Dvor,min: Pale (ulaz) → Marijin Dvor
+0,Osnovno stanje,191274,0,,17.8,7.2,14.4,8.5,9.0,9.5,16.4
+P,"Planirani tunel Bentbaša – Koševo (ispod Bjelava, prema tunelu Ciglane)",191139,135,9087.0,18.0,7.2,14.3,8.4,9.1,9.4,16.4
+B,Sjeverna brdska veza: Zabrđe – Sokolje – Buća Potok – Pofalići – Velešići,190828,447,0.0,18.2,7.1,14.5,8.5,8.9,9.5,16.4
+C,Tunel ispod Mojmila: Alipašino Polje – Dobrinja,190946,328,18485.0,18.1,5.1,14.5,8.5,8.3,9.5,16.4
+C2,"Tunel ispod Mojmila, istočnije: Alipašino Polje (istok) – Dobrinja I",190465,809,26395.0,17.9,7.1,14.5,8.5,4.7,9.5,16.4
+C3,Tunel Hrasno – istočna Dobrinja (prema Lukavici),190382,893,31107.0,17.9,7.1,14.5,8.5,5.6,9.5,16.4
+G,Produžetak Gradskog autoputa uz prugu: Drinska (Pofalići) – Željeznička – Marijin Dvor,191531,-257,36709.0,19.0,7.1,14.3,8.6,9.0,9.3,16.5
+S,Sjeverna longitudinala: Put života (Pofalići) – Koševo,190718,556,17679.0,18.2,7.1,14.4,8.5,8.9,9.5,16.4
+SP,Sjeverni obilazak: Put života – Koševo + planirani tunel Koševo – Bentbaša,190987,287,18439.0,18.0,7.1,14.3,8.4,9.0,9.5,16.4

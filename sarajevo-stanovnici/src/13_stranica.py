@@ -52,9 +52,14 @@ def scen_data():
     R = pd.read_csv(OUT / "scenariji.csv", dtype={"scenarij": str}).set_index("scenarij")
     P = pd.read_csv(OUT / "scenariji_presjeci.csv", dtype={"scenarij": str})
     G = gpd.read_file(OUT / "scenariji.geojson")
-    en = {"A": "Tunnel under Bistrik: Skenderija – Dariva (2.6 km)",
+    en = {"P": "Planned tunnel Bentbaša – Koševo, under Bjelave (planned; effect check)",
           "B": "Northern hillside road: Zabrđe – Sokolje – Buća Potok – Pofalići – Velešići",
-          "C": "Tunnel under Mojmilo: Alipašino Polje – Dobrinja (1.1 km)"}
+          "C": "Tunnel under Mojmilo: Alipašino Polje – Dobrinja (1.1 km)",
+          "C2": "Tunnel under Mojmilo, further east: Alipašino Polje (east) – Dobrinja I",
+          "C3": "Tunnel Hrasno – eastern Dobrinja (towards Lukavica)",
+          "G": "City motorway extended along the railway: Drinska – railway station – Marijin Dvor",
+          "S": "Northern longitudinal: Put života (Pofalići) – Koševo",
+          "SP": "Northern bypass: Put života – Koševo + planned tunnel Koševo – Bentbaša"}
     out = []
     for sc in [x for x in R.index if x != "0"]:
         r = R.loc[sc]
