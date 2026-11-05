@@ -12,61 +12,61 @@
  "osjetljivost": {
   "0.35": {
    "udio_danas": 0.35,
-   "udio_poslije": 0.465,
-   "auto_putovanja_promjena_pct": -17.616,
-   "putnika_javni_promjena_pct": 32.716
+   "udio_poslije": 0.457,
+   "auto_putovanja_promjena_pct": -16.476,
+   "putnika_javni_promjena_pct": 30.599
   },
   "0.45": {
    "udio_danas": 0.45,
-   "udio_poslije": 0.57,
-   "auto_putovanja_promjena_pct": -21.826,
-   "putnika_javni_promjena_pct": 26.676
+   "udio_poslije": 0.562,
+   "auto_putovanja_promjena_pct": -20.403,
+   "putnika_javni_promjena_pct": 24.938
   },
   "0.55": {
    "udio_danas": 0.55,
-   "udio_poslije": 0.666,
-   "auto_putovanja_promjena_pct": -25.888,
-   "putnika_javni_promjena_pct": 21.181
+   "udio_poslije": 0.659,
+   "auto_putovanja_promjena_pct": -24.236,
+   "putnika_javni_promjena_pct": 19.829
   }
  },
  "vozilo_sati": [
-  191274,
-  180319
+  107870,
+  95099
  ],
  "km_preko_90pct_vrsni_sat": [
-  133.1,
-  115.6
+  24.8,
+  8.9
  ],
  "presjeci": {
   "Obala Kulina bana": [
-   24323,
-   21610,
-   -11.2
+   23368,
+   20546,
+   -12.1
   ],
   "Maršala Tita": [
-   32673,
-   29574,
-   -9.5
+   27390,
+   23262,
+   -15.1
   ],
   "Zmaja od Bosne (Čengić Vila)": [
-   33121,
-   28619,
-   -13.6
+   29138,
+   25207,
+   -13.5
   ],
   "Bulevar Meše Selimovića": [
-   38417,
-   34476,
-   -10.3
+   36596,
+   31494,
+   -13.9
   ],
   "Alipašina": [
-   17350,
-   15153,
-   -12.7
+   16171,
+   13041,
+   -19.4
   ],
   "Safeta Zajke": [
-   15391,
-   13041,
-   -15.3
+   14267,
+   11701,
+   -18.0
   ],
   "Džemala Bijedića": [
    0,
@@ -80,34 +80,34 @@
    17.3
   ],
   "Dobrinja → Alipašino Polje": [
-   7.2,
+   7.1,
    7.1
   ],
   "Alipašin most → Bentbaša": [
-   14.4,
-   14.1
+   14.3,
+   14.0
   ],
   "Koševo → Bentbaša": [
    8.5,
-   8.4
+   8.3
   ],
   "Dobrinja I → Hrasno": [
-   9.0,
-   8.9
+   8.8,
+   8.6
   ],
   "Alipašin most → Marijin Dvor": [
-   9.5,
-   9.3
+   9.3,
+   9.2
   ],
   "Pale (ulaz) → Marijin Dvor": [
-   16.4,
-   16.4
+   16.3,
+   16.3
   ]
  },
  "javni_min": {
   "Velešići → Zabrđe": [
    51.0,
-   39.0
+   38.0
   ],
   "Dobrinja → Alipašino Polje": [
    24.0,
