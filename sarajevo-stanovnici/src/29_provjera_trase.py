@@ -13,8 +13,9 @@ Pragovi za midibus (pretpostavke, provjeriti s prevoznikom):
   na raskrsnici (~90°) nije problem
   povratak istim putem (skretanje > 150° na 20 m): greška trase, ispraviti ručno
   stanica: 20 m s nagibom ≤ 4% i koridorom ≥ 8 m
-Tačnost: visine iz Copernicus GLO-30 (30 m, zgrade djelimično filtrirane): nagib na 100 m ±3–4%,
-na 20 m nepouzdan. Koridor ne zna za ograde, zidove i parkirana auta.
+Visine: FGU model reljefa FBiH (DEM_2012, ~5 m, tlo, cijeli metri; javni ArcGIS servis geoportala
+katastar.ba, upit svakih 15 m, keš raw/fgu/visine_trase.json): nagib na 100 m ~±1%, na 50 m ~±2%.
+Bez mreže/keša: VISINE=cop koristi Copernicus GLO-30 (30 m): nagib na 100 m ±3–4%. Koridor ne zna za ograde, zidove i parkirana auta.
 """
 from __future__ import annotations
 
@@ -40,8 +41,50 @@ def _uvezi(ime, fajl):
     return m
 
 
+import os
 KORAK = 10.0
+VISINE = os.environ.get("VISINE", "cop")   # "fgu" (FGU DEM FBiH, ~5 m; traži dozvolu za upite) ili "cop" (Copernicus 30 m)
 DIONICA = 50.0
+
+
+def visine_fgu(s_m, korak=15.0):
+    """Visina tla iz FGU modela reljefa FBiH (DEM_2012, ~5 m, cijeli metri) duž trase, upitom
+    'identify' na javnom ArcGIS servisu geoportala katastar.ba (1 upit u sekundi, keš u raw/fgu/)."""
+    import json
+    import time
+    import requests
+    from pyproj import Transformer
+    keš = RAW / "fgu" / "visine_trase.json"
+    c = json.loads(keš.read_text()) if keš.exists() else {}
+    tr = Transformer.from_crs(CRS_M, 31276, always_xy=True)
+    dd = np.arange(0, s_m.length, korak)
+    url = "https://static.katastar.ba/arcgis/rest/services/DEM_2012/MapServer/identify"
+    zz = []
+    for i, x in enumerate(dd):
+        p = s_m.interpolate(x)
+        X, Y = tr.transform(p.x, p.y)
+        k = f"{X:.1f},{Y:.1f}"
+        if k not in c:
+            q = {"geometry": f"{X},{Y}", "geometryType": "esriGeometryPoint", "sr": 31276, "layers": "all:0",
+                 "tolerance": 0, "mapExtent": f"{X-50},{Y-50},{X+50},{Y+50}", "imageDisplay": "100,100,96",
+                 "returnGeometry": "false", "f": "json"}
+            for pokusaj in range(3):
+                try:
+                    r = requests.get(url, params=q, timeout=60,
+                                     headers={"User-Agent": "sarajevo-stanovnici research (non-commercial)"})
+                    res = r.json().get("results", [])
+                    c[k] = float(res[0]["attributes"]["Pixel Value"]) if res else None
+                    break
+                except Exception as ex:  # noqa: BLE001
+                    print("  ponovo:", ex, flush=True); time.sleep(5)
+            time.sleep(1.0)
+            if i % 100 == 0:
+                keš.parent.mkdir(parents=True, exist_ok=True)
+                keš.write_text(json.dumps(c)); print(f"  FGU visine {i}/{len(dd)}", flush=True)
+        zz.append(c.get(k))
+    keš.write_text(json.dumps(c))
+    zz = np.array([np.nan if v is None else v for v in zz], float)
+    return dd, zz
 
 
 def oznake_ulica(okvir):
@@ -85,6 +128,18 @@ def main() -> None:
     col = (ll.x.to_numpy() - t.c) / t.a - 0.5
     row = (ll.y.to_numpy() - t.f) / t.e - 0.5
     h = map_coordinates(z, [row, col], order=1)
+    izvor_visina = "Copernicus GLO-30"
+    if VISINE == "fgu":
+        dd_f, z_f = visine_fgu(s)
+        ok_ = np.isfinite(z_f)
+        if ok_.sum() > 10:
+            # cijeli metri: blago zagladi (prosjek 3 susjedne tačke) pa interpoliraj na korak 10 m
+            zs = pd.Series(z_f).interpolate(limit_direction="both").rolling(3, center=True, min_periods=1).mean().to_numpy()
+            h_cop = h.copy()
+            h = np.interp(d, dd_f, zs)
+            izvor_visina = "FGU DEM FBiH (~5 m)"
+            print(f"FGU visine: {ok_.sum()} tačaka; razlika prema Copernicusu: medijan "
+                  f"{np.median(np.abs(h - h_cop)):.1f} m, 90. percentil {np.percentile(np.abs(h - h_cop), 90):.1f} m")
 
     def nagib(win):
         k = int(round(win / 2 / KORAK))
@@ -195,6 +250,7 @@ def main() -> None:
     tm.to_csv(OUT / "provjera_trase_tacke.csv", index=False)
 
     duz = seg.do_m - seg.od_m
+    print(f"Visine: {izvor_visina}")
     print(f"Trasa {L / 1000:.1f} km: ok {duz[seg.ocjena == 0].sum() / 1000:.1f} km, provjeriti "
           f"{duz[seg.ocjena == 1].sum() / 1000:.1f} km, problem {duz[seg.ocjena == 2].sum() / 1000:.1f} km")
     print(f"Mjesta za provjeru: {len(tm)} (problem {int((tm.ocjena == 'problem').sum())}); "
