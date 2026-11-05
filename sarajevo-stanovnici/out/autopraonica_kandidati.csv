@@ -1,21 +1,21 @@
 strategija,rang,h3_id,opcina,mz,cesta,pranja_mj,od_stanovnika,od_prolaza,izgradjenost,stanovnici_5min_voznje,stanovnici_10min_voznje,bez_praonice_5min,najbliza_praonica_m,najbliza_pumpa_m,nagib_pct,znakovi_zemljista,lon,lat
-najveci_promet,1,8a1ea92c9837fff,Novi Grad Sarajevo,Zabrđe,primarna Safeta Zajke,2974,2374,600,0.06,9212,31744,7156,1674,412,4.0,—,18.3123,43.87572
-najveci_promet,2,8a1ef4590077fff,Novi Grad Sarajevo,Čengić Vila,sekundarna Bulevar Meše Selimovića,2423,2393,30,0.28,65112,180409,118,359,356,2.0,—,18.3673,43.84895
-najveci_promet,3,8a1ef459c847fff,Stari Grad Sarajevo,Bistrik,primarna Obala Kulina bana,2303,2145,158,0.21,29713,135350,129,274,436,2.0,—,18.43073,43.85776
-najveci_promet,4,8a1ef459188ffff,Novo Sarajevo,Željeznička,sekundarna Zmaja od Bosne,2185,2149,36,0.22,61750,185786,514,194,229,2.0,—,18.39345,43.85407
-najveci_promet,5,8a1ea92c9727fff,Novi Grad Sarajevo,Naselje heroja Sokolje,primarna Safeta Zajke,2164,1564,600,0.13,9246,71692,5232,1862,356,8.0,—,18.31593,43.86276
-najveci_promet,6,8a1ef458269ffff,Centar Sarajevo,Marijin Dvor,primarna Hamze Hume,2109,2028,81,0.14,42326,163053,159,337,457,4.0,parking 1.524 m²,18.41274,43.85632
-najveci_promet,7,8a1ef4591d97fff,Novo Sarajevo,Trg heroja,sekundarna Azize Šaćirbegović,2017,1995,22,0.08,66345,183453,0,323,422,1.0,parking 441 m²,18.37907,43.8507
-najveci_promet,8,8a1ef458231ffff,Centar Sarajevo,Bardakčije,tercijarna Bardakčije,1816,1788,27,0.26,23692,98387,790,615,558,7.0,—,18.42188,43.86749
-najveci_promet,9,8a1ef458249ffff,Centar Sarajevo,Crni Vrh-Gorica,sekundarna Halida Kajtaza,1710,1677,33,0.15,44853,173573,109,439,595,7.0,parking 450 m²; poslovni_objekat 189 m²,18.40129,43.85891
-najveci_promet,10,8a1ea92cd3b7fff,Novi Grad Sarajevo,Reljevo,sekundarna Reljevska,1661,1361,300,0.05,3700,22804,2204,1371,933,8.0,—,18.30541,43.88389
-bijela_mrlja,1,8a1ea92c999ffff,Novi Grad Sarajevo,Zabrđe,tercijarna Rajlovačka cesta,2580,2460,120,0.11,9489,33252,7349,1489,679,1.0,—,18.30969,43.8741
-bijela_mrlja,2,8a1ef45805affff,Centar Sarajevo,Pionirska Dolina,tercijarna Nahorevska,1583,1463,120,0.07,8257,60236,2117,1236,1275,8.0,—,18.41598,43.88318
-bijela_mrlja,3,8a1ef459440ffff,Novi Grad Sarajevo,Alipašin Most I,tercijarna Adema Buće,1039,919,120,0.01,6590,65476,2056,1003,1275,8.0,—,18.34079,43.86157
-bijela_mrlja,4,8a1ef4591917fff,Novo Sarajevo,Pofalići I,sekundarna Hamdije Čemerlića,1658,1620,38,0.13,37709,163766,1454,529,330,7.0,parking 615 m²,18.3905,43.85915
-bijela_mrlja,5,8a1ea92c9147fff,Novi Grad Sarajevo,Naselje heroja Sokolje,tercijarna Zaima Imamovića,1487,1427,60,0.18,8130,41393,5911,2265,1050,6.0,—,18.31853,43.8699
-bijela_mrlja,6,8a1ef4583c67fff,Stari Grad Sarajevo,Sedrenik,tercijarna Sedrenik,1390,1330,60,0.19,9138,53710,1139,649,1488,8.0,—,18.43725,43.87284
-bijela_mrlja,7,8a1ef459634ffff,Novi Grad Sarajevo,Alipašin Most I,tercijarna Džemala Bijedića,1686,1669,18,0.06,48116,159823,1083,237,134,2.0,—,18.34768,43.84787
-bijela_mrlja,8,8a1ea92c888ffff,Novi Grad Sarajevo,Dobroševići,sekundarna Bojnička,1226,1076,150,0.12,2842,7548,811,997,1786,4.0,—,18.28124,43.87169
-bijela_mrlja,9,8a1ef45b25b7fff,Novi Grad Sarajevo,Zabrđe,primarna Safeta Zajke,1443,1143,300,0.08,5894,23980,4514,1106,308,6.0,—,18.31687,43.88131
-bijela_mrlja,10,8a1ef4591b77fff,Centar Sarajevo,Marijin Dvor,tercijarna Kranjčevićeva,1883,1871,12,0.12,42862,167966,432,386,581,8.0,poslovni_objekat 4.257 m²; parking 194 m²,18.4062,43.8578
+najveci_promet,1,8a1ea92c9837fff,Novi Grad Sarajevo,Zabrđe,primarna Safeta Zajke,3325,2725,600,0.06,9177,42880,7264,1674,412,4.0,—,18.3123,43.87572
+najveci_promet,2,8a1ef4590077fff,Novi Grad Sarajevo,Čengić Vila,sekundarna Bulevar Meše Selimovića,2552,2522,30,0.28,65628,195639,126,359,356,2.0,—,18.3673,43.84895
+najveci_promet,3,8a1ea92c3747fff,Ilidža,Gladno polje,primarna Rakovička cesta,2391,1791,600,0.03,2505,8499,2249,1056,1778,7.0,—,18.22471,43.86015
+najveci_promet,4,8a1ea92c9727fff,Novi Grad Sarajevo,Naselje heroja Sokolje,primarna Safeta Zajke,2337,1737,600,0.13,9295,86733,5347,1862,356,8.0,—,18.31593,43.86276
+najveci_promet,5,8a1ef459c847fff,Stari Grad Sarajevo,Bistrik,primarna Obala Kulina bana,2300,2142,158,0.21,29776,135185,128,274,436,2.0,—,18.43073,43.85776
+najveci_promet,6,8a1ef459188ffff,Novo Sarajevo,Željeznička,sekundarna Zmaja od Bosne,2195,2160,36,0.22,62037,186754,504,194,229,2.0,—,18.39345,43.85407
+najveci_promet,7,8a1ef45b45b7fff,Vogošća,Semizovac,primarna,2147,1547,600,0.11,3817,19181,2726,2168,100,5.0,—,18.31677,43.91994
+najveci_promet,8,8a1ef6960a27fff,Ilidža,Sokolović-kolonija,sekundarna Hrasnička cesta,2146,1932,214,0.18,8730,38109,1597,489,1702,1.0,parking 521 m²; poslovni_objekat 439 m²,18.30918,43.81573
+najveci_promet,9,8a1ef458269ffff,Centar Sarajevo,Marijin Dvor,primarna Hamze Hume,2109,2028,81,0.14,42078,163672,151,337,457,4.0,parking 1.524 m²,18.41274,43.85632
+najveci_promet,10,8a1ef4591d97fff,Novo Sarajevo,Trg heroja,sekundarna Azize Šaćirbegović,2066,2045,22,0.08,66922,192238,0,323,422,1.0,parking 441 m²,18.37907,43.8507
+bijela_mrlja,1,8a1ea92c999ffff,Novi Grad Sarajevo,Zabrđe,tercijarna Rajlovačka cesta,2906,2786,120,0.11,9874,42659,7851,1489,679,1.0,—,18.30969,43.8741
+bijela_mrlja,2,8a1ef6963827fff,Ilidža,Hrasnica,sekundarna,1928,1628,300,0.0,5031,17271,4495,1529,196,1.0,—,18.3138,43.79923
+bijela_mrlja,3,8a1ef45b45b7fff,Vogošća,Semizovac,primarna,2170,1570,600,0.11,3817,19181,2726,2168,100,5.0,—,18.31677,43.91994
+bijela_mrlja,4,8a1ea92c3747fff,Ilidža,Gladno polje,primarna Rakovička cesta,2391,1791,600,0.03,2505,8499,2249,1056,1778,7.0,—,18.22471,43.86015
+bijela_mrlja,5,8a1ea92cb827fff,Ilidža,Doglodi,sekundarna Bojnička,1556,1256,300,0.01,4736,35950,2096,1988,847,1.0,—,18.29763,43.85696
+bijela_mrlja,6,8a1ef45805affff,Centar Sarajevo,Pionirska Dolina,tercijarna Nahorevska,1571,1451,120,0.07,8134,59893,2050,1236,1275,8.0,—,18.41598,43.88318
+bijela_mrlja,7,8a1ef459440ffff,Novi Grad Sarajevo,Alipašin Most I,tercijarna Adema Buće,1059,939,120,0.01,6366,67443,1985,1003,1275,8.0,—,18.34079,43.86157
+bijela_mrlja,8,8a1ea92c071ffff,Ilidža,Rakovica,primarna Rakovička cesta,1683,1083,600,0.09,1984,5424,1984,3246,4114,3.0,—,18.20438,43.87796
+bijela_mrlja,9,8a1ef69654d7fff,Ilidža,Sokolović-kolonija,sekundarna Butmirska cesta,1603,1388,214,0.12,11412,44579,1800,614,1331,1.0,—,18.30819,43.81926
+bijela_mrlja,10,8a1ef4591917fff,Novo Sarajevo,Pofalići I,sekundarna Hamdije Čemerlića,1659,1621,38,0.13,37890,163655,1481,529,330,7.0,parking 615 m²,18.3905,43.85915
