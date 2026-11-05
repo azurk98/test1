@@ -48,7 +48,7 @@ dost = mp.dost
 MIN_DUZINA_M = 2500
 TRUNK_M = 600
 N_PRAVACA = 8
-N_KAND = 40
+N_KAND = 25
 N_CESTA = 8
 
 
@@ -60,6 +60,7 @@ def main() -> None:
     zz = (Z.tip == "zona").to_numpy()
     G = mp.graf(e, n, e.t0.to_numpy())
     D = dijkstra(G, indices=cv)[:, cv]
+    print("matrica vremena ok", flush=True)
     D[~np.isfinite(D)] = 1e3
     mats = mp.matrice(Z, D)
     info = json.load(open(OUT / "model_info.json"))
@@ -94,7 +95,8 @@ def main() -> None:
     li = gpd.read_file(OUT / "linije.geojson").to_crs(CRS_M)
     trunk = li[li["mod"].isin(["tram", "trolleybus"])].union_all()
     na_trunku = np.array([Point(p).distance(trunk) <= TRUNK_M for p in zxy])
-    sve_linije = li.union_all()
+    sve_linije_buf = li.union_all().buffer(500)
+    print("linije ok", flush=True)
     z7 = np.array([h3.cell_to_parent(h, 7) if t == "zona" else f"u{i}" for i, (h, t) in enumerate(zip(Z.index, Z.tip))])
     rows = []
     for o in range(len(Z)):
@@ -133,8 +135,7 @@ def main() -> None:
         gm = gpd.GeoSeries([geom], crs=CRS_WGS).to_crs(CRS_M)[0]
         buf = gm.buffer(400)
         u400 = pc.within(buf).to_numpy()
-        postoji_bus = gm.buffer(500).contains(Point(zxy[a])) and gm.buffer(500).contains(Point(zxy[b])) and \
-            sve_linije.buffer(500).contains(Point(zxy[a])) and sve_linije.buffer(500).contains(Point(zxy[b]))
+        postoji_bus = sve_linije_buf.contains(Point(zxy[a])) and sve_linije_buf.contains(Point(zxy[b]))
         pravci.append({"tip": "pravac", "od": ime_zone(a), "do": ime_zone(b),
                        "putovanja_dnevno": round(r.put), "duzina_km": round(gm.length / 1000, 1),
                        "stanovnici_400m": int(polja.stanovnici[u400].sum()), "radna_mjesta_400m": int(rm[u400].sum()),
@@ -142,6 +143,7 @@ def main() -> None:
                        "osm_bus_blizu_oba_kraja": bool(postoji_bus), "geometry": geom})
         vec |= set(par)
     pravci = gpd.GeoDataFrame(pravci, crs=CRS_WGS)
+    print("pravci ok", flush=True)
 
     # ------------------------------------------------ javni prevoz: brdska naselja
     daleko = (pv.stanica_min.to_numpy() > 8) & (polja.stanovnici.to_numpy() > 0)
@@ -208,7 +210,7 @@ def main() -> None:
         cand_links.append((u, v, L, nag, o, d))
         if len(cand_links) >= N_KAND:
             break
-    print(f"Kandidati za nove spojeve: {len(cand_links)}")
+    print(f"Kandidati za nove spojeve: {len(cand_links)}", flush=True)
     # ocjena: ušteda vremena svih putovanja autom (zone do 6 km od spoja)
     from scipy.sparse import csr_matrix
     base = e.t0.to_numpy()
@@ -216,14 +218,15 @@ def main() -> None:
     for u, v, L, nag, o, d in cand_links:
         t_l = L / 1000 / (30 * dost.FAKTOR_GRADSKE_VOZNJE) * 60
         mid = (xy[u] + xy[v]) / 2
-        bliz = np.where(np.hypot(*(zxy - mid).T) < 6000)[0]
+        bliz = np.where(np.hypot(*(zxy - mid).T) < 4000)[0]
         G2 = csr_matrix((np.r_[base, t_l, t_l], (np.r_[e.u, u, v], np.r_[e.v, v, u])), shape=(n, n))
-        D2 = dijkstra(G2, indices=cv[bliz])[:, cv]
-        D2[~np.isfinite(D2)] = 1e3
+        D2 = dijkstra(G2, indices=cv[bliz], limit=40)[:, cv]
+        D2 = np.where(np.isfinite(D2), D2, D[bliz])
         dt = np.clip(D[bliz] - D2, 0, None)
         ustedjeno = float((T_auto[bliz] * dt).sum() + (T_auto[:, bliz].T * dt).sum())   # min/dan (oba smjera)
         korist = int((T_auto[bliz] * (dt > 1)).sum() + (T_auto[:, bliz].T * (dt > 1)).sum())
         geom = LineString([ll[u], ll[v]])
+        print(f"spoj {len(ocj)+1}/{len(cand_links)}: {ime_zone(o)} – {ime_zone(d)}, {ustedjeno/60:.0f} h/dan", flush=True)
         ocj.append({"tip": "spoj", "od": ime_zone(o), "do": ime_zone(d), "duzina_m": round(L),
                     "nagib_pct": round(nag * 100, 1), "usteda_sati_dnevno": round(ustedjeno / 60),
                     "putovanja_s_ustedom_1min": korist, "cestom_prije_min": round(float(D[o, d]), 1),
