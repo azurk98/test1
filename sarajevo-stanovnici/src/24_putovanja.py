@@ -17,8 +17,9 @@ Putovanja (dnevna, autom, svako putovanje i povratak):
   ostalo (OTH): izvor stanovnici, cilj radna mjesta + 0,3·stanovnici, β = 0,15/min
   izvana (EXT): s ulaza prema zonama, cilj radna mjesta + 0,5·stanovnici, β = 0,04/min
 Dodjela: najbrži put (vrijeme vožnje kao u 08, 65% ograničenja), 5 iteracija MSA s BPR
-  zastojem na vršnom satu (8% dnevnog prometa). Faza 1: tri faktora (broj putovanja na posao po
-  zaposlenom, ostalih po stanovniku, izvana po ulazu) iz najmanjih kvadrata na brojačima.
+  zastojem na vršnom satu (8% dnevnog prometa). Faza 1: putovanja na posao fiksno (40% zaposlenih autom,
+  tamo i nazad); ostala po stanovniku i izvana po ulazu iz najmanjih kvadrata na brojačima.
+  Šest brojača broji samo jedan smjer (SMJER_BROJANJA) i porede se samo s tim smjerom.
   Faza 2: procjena matrice iz brojanja (multiplikativna korekcija parova zona čiji put prolazi
   kroz brojač) dok se model ne poklopi s brojačima. Unakrsna provjera: svaki brojač izostavljen
   iz faze 2 i procijenjen iz ostalih (koliko model vrijedi tamo gdje nema brojača).
@@ -66,8 +67,17 @@ KAP_LOKALNA = 500
 GLAVNE = {"motorway", "trunk", "primary", "secondary", "tertiary", "motorway_link", "trunk_link",
           "primary_link", "secondary_link", "tertiary_link"}
 ULAZ_TEZINA = {"motorway": 1.0, "trunk": 1.0, "primary": 0.6, "secondary": 0.3}
-MSA_ITER = 5
+import os
+# brojači koji broje samo jedan kolovoz/smjer (publikacija: "pravac" i "profil saobraćajnice")
+SMJER_BROJANJA = {"KSBS03": "E", "KSBS04": "W", "KSBS05": "W", "KSBS06": "E", "KSBS17": "E", "KSBS24": "E"}
+# položaj: KSBS22 nema koordinate u publikaciji (približno, Džemala Bijedića kod "Žice");
+# KSBS27 je na poprečnoj ulici bez naziva (XI transferzala), ne na Džemala Bijedića
+TACKA = {"KSBS22": ("Džemala Bijedića", (43.8452, 18.3470)), "KSBS27": ("*", None)}
+MSA_ITER = int(os.environ.get("MSA_ITER", 5))
 ODME_ITER = 40
+AUTOM_NA_POSAO = 0.4
+R_RUTA = int(os.environ.get("R_RUTA", 4))
+SIGMA_RUTA = 0.3
 
 
 # ---------------------------------------------------------------- mreža
@@ -231,21 +241,37 @@ def stabla(G, izvori):
     return dijkstra(G, indices=izvori, return_predecessors=True)
 
 
+def dubina(pred):
+    """Broj grana od izvora do čvora (pointer doubling); nedostižni i izvor = 0."""
+    n = len(pred)
+    akt = pred >= 0
+    jump = np.where(akt, pred, np.arange(n))
+    d = akt.astype(np.int32)
+    for _ in range(22):
+        d = d + d[jump]
+        jump = jump[jump]
+    return d
+
+
 def dodijeli(P, cv, Ts, eid, n):
     """Tokovi po granama (sve ili ništa) za listu matrica Ts po stablima P (red = izvor).
-    Protok kroz čvor v = potražnja u podstablu v: (I − M) x = d, M[pred(v), v] = 1."""
-    from scipy.sparse.linalg import splu
+    Protok kroz granu pred(v)->v = potražnja u podstablu v; zbraja se po nivoima, od najdubljeg."""
     tok = np.zeros((eid.nnz + 1, len(Ts)))
     for o in range(P.shape[0]):
         pred = P[o]
         v = np.where(pred >= 0)[0]
         if not len(v):
             continue
-        d = np.zeros((n, len(Ts)))
+        x = np.zeros((n, len(Ts)))
         for k, T in enumerate(Ts):
-            np.add.at(d[:, k], cv, T[o])
-        A = (identity(n, format="csc") - coo_matrix((np.ones(len(v)), (pred[v], v)), shape=(n, n)).tocsc())
-        x = splu(A).solve(d)
+            np.add.at(x[:, k], cv, T[o])
+        dub = dubina(pred)
+        red = v[np.argsort(-dub[v], kind="stable")]
+        dr = dub[red]
+        granice = np.r_[0, np.nonzero(np.diff(dr))[0] + 1, len(red)]
+        for a_, b_ in zip(granice[:-1], granice[1:]):
+            sel = red[a_:b_]
+            np.add.at(x, pred[sel], x[sel])
         ids = np.asarray(eid[pred[v], v]).ravel().astype(int)
         np.add.at(tok, ids, x[v])
     return [tok[1:, k] for k in range(len(Ts))]
@@ -284,7 +310,7 @@ def main() -> None:
 
     # brojači -> grane
     br = pd.read_csv(DATA / "brojaci_2025.csv")
-    for k_, (_, p) in guz.ULICA.items():
+    for k_, (_, p) in list(guz.ULICA.items()) + list(TACKA.items()):
         if p:
             br.loc[br.brojac == k_, ["lat", "lon"]] = p
     br = br.dropna(subset=["lat", "lon"])
@@ -293,65 +319,81 @@ def main() -> None:
     mid = (xy[e.u] + xy[e.v]) / 2
     ehw = e.w.map(lambda k: wmeta[k]["hw"]).to_numpy()
     eime = e.w.map(lambda k: wmeta[k]["ime"]).to_numpy()
+    # kandidati: grane iste ulice (ili glavne ceste) do 100 m od brojača; po smjeru se kasnije bira
+    # grana s najvećim tokom (brojač broji cijeli presjek ceste, oba kolovoza)
+    smjer = xy[e.v] - xy[e.u]
+    smjer = smjer / np.maximum(np.linalg.norm(smjer, axis=1, keepdims=True), 1e-9)
     grane_br = []
     for i, r in br.iterrows():
-        ul = guz.ULICA.get(r.brojac, (None, None))[0]
+        ul = TACKA.get(r.brojac, guz.ULICA.get(r.brojac, (None, None)))[0]
         p = np.array([bxy.x[i], bxy.y[i]])
         dist = np.hypot(*(mid - p).T)
-        maska = np.isin(ehw, list(GLAVNE))
-        if ul:
+        maska = np.isin(ehw, list(GLAVNE)) if ul != "*" else np.ones(len(e), bool)
+        if ul and ul != "*":
             maska &= np.array([ul.lower() in s.lower() for s in eime])
         dist = np.where(maska, dist, np.inf)
         j = int(dist.argmin())
-        if dist[j] > (600 if ul else 150):
-            print(f"{r.brojac}: nema grane ({dist[j]:.0f} m)"); grane_br.append([]); continue
-        # obje strane: suprotna grana iste ulice (dvosmjerna) ili paralelni kolovoz (≤ 60 m od prve)
-        g = {j}
-        rev = eid[e.v[j], e.u[j]]
-        if rev:
-            g.add(int(rev) - 1)
+        if dist[j] > (600 if ul and ul != "*" else 150):
+            print(f"{r.brojac}: nema grane ({dist[j]:.0f} m)"); grane_br.append(None); continue
+        ista = (eime == eime[j]) if eime[j] else (ehw == ehw[j])
+        kand = np.where(ista & (np.hypot(*(mid - mid[j]).T) <= 100))[0]
+        sm = SMJER_BROJANJA.get(r.brojac)
+        if sm:
+            dx = smjer[kand, 0]
+            grane_br.append((kand[dx > 0.3],) if sm == "E" else (kand[dx < -0.3],))
         else:
-            ista = (eime == eime[j]) & (ehw == ehw[j]) & (np.hypot(*(mid - mid[j]).T) < 60)
-            smjer = xy[e.v] - xy[e.u]
-            s0 = smjer[j] / np.linalg.norm(smjer[j])
-            cosr = (smjer @ s0) / np.maximum(np.linalg.norm(smjer, axis=1), 1e-9)
-            kand = np.where(ista & (cosr < -0.7))[0]
-            if len(kand):
-                g.add(int(kand[np.argmin(np.hypot(*(mid[kand] - mid[j]).T))]))
-        grane_br.append(sorted(g))
+            cos = smjer[kand] @ smjer[j]
+            grane_br.append((kand[cos > 0.3], kand[cos < -0.3]))
     br["grane"] = grane_br
-    br = br[br.grane.map(len) > 0].reset_index(drop=True)
+    br = br[br.grane.notna()].reset_index(drop=True)
+    kandidati = list(br.grane)
     y = br.pgds_2025.to_numpy(float)
     print(f"Brojači u modelu: {len(br)}")
 
-    # ---- MSA s fazom 1
+    # ---- MSA s fazom 1; svaka iteracija = R dodjela sa slučajno izmijenjenim vremenima (više ruta)
+    rng = np.random.default_rng(1)
     t = e.t0.to_numpy().copy()
     tok = np.zeros(len(e))
     kap = e.kap.to_numpy(float)
+    K3 = ("hbw", "oth", "ext")
     for it in range(1, MSA_ITER + 1):
-        G = graf(e, n, t)
-        D, P = stabla(G, cv)
+        D, _ = stabla(graf(e, n, t), cv)
         C = D[:, cv]
         C[~np.isfinite(C)] = 1e3
         mats = matrice(Z, C)
-        F = dict(zip(mats, dodijeli(P, cv, list(mats.values()), eid, n)))
-        X = np.c_[[[F[k][g].sum() for k in ("hbw", "oth", "ext")] for g in br.grane]]
+        Ps, F = [], {k: 0 for k in K3}
+        for _ in range(R_RUTA):
+            _, P = stabla(graf(e, n, t * rng.lognormal(0, SIGMA_RUTA, len(t))), cv)
+            Ps.append(P)
+            for k, f_ in zip(K3, dodijeli(P, cv, [mats[k] for k in K3], eid, n)):
+                F[k] = F[k] + f_ / R_RUTA
+        if it == 1:
+            # brojač: po smjeru grana s najvećim tokom među kandidatima
+            br["grane"] = [sorted({int(g[np.argmax(F["oth"][g])]) for g in kk if len(g)}) for kk in kandidati]
+        X = np.c_[[[F[k][g].sum() for k in K3] for g in br.grane]]
         w = 1 / np.sqrt(y)
-        koef, _ = nnls(X * w[:, None], y * w)
-        novi = sum(c * F[k] for c, k in zip(koef, ("hbw", "oth", "ext")))
+        # posao i ostalo imaju skoro isti prostorni raspored (kolinearni), pa se posao ne procjenjuje:
+        # AUTOM_NA_POSAO zaposlenih ide autom (tamo i nazad), ostalo i izvana iz brojača
+        yr = y - AUTOM_NA_POSAO * X[:, 0]
+        k2, _ = nnls(X[:, 1:] * w[:, None], yr * w)
+        koef = np.r_[AUTOM_NA_POSAO, k2]
+        novi = sum(c * F[k] for c, k in zip(koef, K3))
         tok = novi if it == 1 else tok + (novi - tok) / it
         t = e.t0.to_numpy() * (1 + 0.15 * (tok * UDIO_VRSNOG_SATA / kap) ** 4)
         m1 = X @ koef
+        if os.environ.get("DIJAG"):
+            print(pd.DataFrame(X.round(0), columns=list(K3)).assign(
+                brojac=br.brojac, izbrojano=y, model=m1.round()).to_string(index=False))
         print(f"MSA {it}: koef posao {koef[0]:.2f}/zaposlenom, ostalo {koef[1]:.2f}/stanovniku, "
               f"izvana {koef[2]:,.0f}/ulaz; R² {1 - ((y - m1) ** 2).sum() / ((y - y.mean()) ** 2).sum():.2f}")
     m_faza1 = np.array([tok[g].sum() for g in br.grane])
-    T = sum(c * mats[k] for c, k in zip(koef, ("hbw", "oth", "ext")))
+    T = sum(c * mats[k] for c, k in zip(koef, K3))
 
     # ---- faza 2: procjena matrice iz brojanja (fiksna stabla zadnje iteracije)
     e_brojac = np.full(len(e), -1)
     for c, g in enumerate(br.grane):
         e_brojac[g] = c
-    inc = incidencija(P, cv, eid, e_brojac, len(br))
+    inc = sum(incidencija(P, cv, eid, e_brojac, len(br)).astype(np.float32) for P in Ps) / len(Ps)
 
     def odme(T0, aktivni):
         Tk = T0.copy()
@@ -374,7 +416,10 @@ def main() -> None:
         a = sve.copy(); a[c] = False
         loo[c] = np.einsum("od,od->", odme(T, a), inc[:, :, c])
     # konačni tokovi po grani: tok faze 1 skaliran omjerom matrica preko istih stabala
-    tok2, tok1 = dodijeli(P, cv, [T2, T], eid, n)
+    tok2, tok1 = np.zeros(len(e)), np.zeros(len(e))
+    for P in Ps:
+        a2, a1 = dodijeli(P, cv, [T2, T], eid, n)
+        tok2 += a2 / len(Ps); tok1 += a1 / len(Ps)
     tok_kon = tok * np.where(tok1 > 0, tok2 / np.maximum(tok1, 1e-9), 1.0)
 
     def pok(m):

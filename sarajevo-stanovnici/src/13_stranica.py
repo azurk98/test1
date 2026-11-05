@@ -17,6 +17,7 @@ import json
 
 import geopandas as gpd
 import h3
+import numpy as np
 import pandas as pd
 import requests
 from PIL import Image
@@ -144,15 +145,33 @@ def podaci() -> dict:
     gz = gpd.read_file(OUT / "guzva_dionice.geojson")
     gp = json.load(open(OUT / "guzva_profili.json"))
     pk = list(gp["profili"])
+    model = (OUT / "model_dionice.geojson").exists()
+    if model:
+        # tokovi iz modela putovanja (24_putovanja.py), profil sata s najbližeg brojača
+        from scipy.spatial import cKDTree
+        md = gpd.read_file(OUT / "model_dionice.geojson")
+        bp = pd.read_csv(DATA / "brojaci_2025.csv").dropna(subset=["lat", "lon"])
+        bp = bp[bp.brojac.isin(pk)]
+        tk = cKDTree(np.c_[bp.lon * 0.72, bp.lat])
+        c = md.geometry.interpolate(0.5, normalized=True)
+        prof = bp.brojac.to_numpy()[tk.query(np.c_[c.x * 0.72, c.y])[1]]
+        gz = gpd.GeoDataFrame({"pgds_smjer": md.jaci_smjer, "kapacitet": md.kap_smjer, "profil": prof,
+                               "izvor": "model", "ime": md.ime, "brojac": ""}, geometry=md.geometry, crs=md.crs)
+        mb = pd.read_csv(OUT / "model_brojaci.csv").set_index("brojac")
+        mi = json.load(open(OUT / "model_info.json"))
     gimena = sorted({x for x in gz.ime if isinstance(x, str) and x})
     gbr = pd.read_csv(DATA / "brojaci_2025.csv").dropna(subset=["lat", "lon"])
-    gbr = gbr[gbr.brojac.isin(set(gz.brojac))]
+    gbr = mb.reset_index()[["brojac", "lokacija", "lat", "lon", "pgds_2025"]] if model else gbr[gbr.brojac.isin(set(gz.brojac))]
     trf = {"prof": [gp["profili"][k] for k in pk], "day": gp["dan"], "names": gimena,
-           "seg": [[round(float(r.pgds_smjer)), int(r.kapacitet), pk.index(r.profil), 0 if r.izvor == "brojac" else 1,
+           "seg": [[round(float(r.pgds_smjer)), int(r.kapacitet), pk.index(r.profil), 0 if r.izvor in ("brojac", "model") else 1,
                     gimena.index(r.ime) if isinstance(r.ime, str) and r.ime else -1,
                     [round(c, 5) for xy in r.geometry.coords for c in xy]] for r in gz.itertuples()],
            "cnt": [[r.brojac, r.lokacija, round(r.lat, 5), round(r.lon, 5), int(r.pgds_2025),
-                    pk.index(r.brojac) if r.brojac in pk else -1] for r in gbr.itertuples()]}
+                    pk.index(r.brojac) if r.brojac in pk else -1,
+                    int(mb.model.get(r.brojac, -1)) if model else -1,
+                    int(mb.unakrsna.get(r.brojac, -1)) if model else -1,
+                    int(mb.model_faza1.get(r.brojac, -1)) if model else -1] for r in gbr.itertuples()],
+           "model": mi if model else None}
     rmo = pd.read_csv(DATA / "radna_mjesta_opcine.csv")
     rmz = pd.read_csv(OUT / "radna_mjesta_mz.csv")
     jobs = {"op": [[OP.index(r.opcina), int(r.radna_mjesta_2024), int(r.zaposleni_stanovnici_2025)] for r in rmo.itertuples()],

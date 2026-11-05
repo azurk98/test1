@@ -460,7 +460,8 @@ const trfP = trfG.append("g").selectAll("path").data(TRF.seg.slice().sort((a,b) 
 trfP.append("title");
 const trfC = trfG.append("g").selectAll("g").data(TRF.cnt).join("g").attr("class","trfc");
 trfC.append("circle").attr("r",4.5);
-trfC.append("title").text(d => `${d[0]} · ${d[1]}\nCounted 2025 average: ${fmt(d[4])} vehicles a day`);
+trfC.append("title").text(d => `${d[0]} · ${d[1]}\nCounted 2025 average: ${fmt(d[4])} vehicles a day` +
+  (d[6] >= 0 ? `\nModel: ${fmt(d[6])} (${d[6] >= d[4] ? "+" : ""}${Math.round((d[6]/d[4]-1)*100)}%); without this counter: ${fmt(d[7])}` : ""));
 let trfHour = 8, trfDay = "radni", trfTimer = null;
 const TRF_T = [0.3,0.5,0.7,0.9], TRF_C = ["#1a9850","#91cf60","#fee08b","#fc8d59","#d73027"];
 const trfVol = s => s[0] * TRF.prof[s[2]][trfHour] * TRF.day[trfDay];
@@ -469,7 +470,7 @@ const hh = h => String(h).padStart(2,"0") + ":00";
 function trfPaint(){
   trfP.attr("stroke", s => TRF_C[d3.bisect(TRF_T, trfVC(s))]).style("stroke-width", s => (1.6 + Math.min(5, trfVol(s)/350)) * Math.pow(zk, 0.35) + "px")
     .attr("stroke-dasharray", s => s[3] ? "5 3" : null);
-  trfP.select("title").text(s => `${s[4] >= 0 ? TRF.names[s[4]] : "unnamed road"}: about ${fmt(Math.round(trfVol(s)/10)*10)} vehicles/h each way, ${Math.round(trfVC(s)*100)}% of capacity${s[3] ? " (volume assumed by road class)" : " (from a counter)"}`);
+  trfP.select("title").text(s => `${s[4] >= 0 ? TRF.names[s[4]] : "unnamed road"}: about ${fmt(Math.round(trfVol(s)/10)*10)} vehicles/h in the busier direction, ${Math.round(trfVC(s)*100)}% of capacity${TRF.model ? " (trip model)" : s[3] ? " (volume assumed by road class)" : " (from a counter)"}`);
   trfC.select("text").remove();
   trfC.filter(d => d[5] >= 0).append("text").attr("text-anchor","middle").attr("dy","-0.9em")
     .text(d => k(Math.round(d[4] * TRF.prof[d[5]][trfHour] * TRF.day[trfDay])));
@@ -639,7 +640,7 @@ function legend0(){
   if (mode === "trf"){
     el.innerHTML = `<div style="font-size:12px;color:var(--muted)">Traffic as a share of road capacity, ${hh(trfHour)}–${hh(trfHour+1)}, ${{radni:"weekday",subota:"Saturday",nedjelja:"Sunday"}[trfDay]}</div>
       <div class="cat">${["under 30%","30–50%","50–70%","70–90%","over 90%"].map((t,i) => `<span><i style="background:${TRF_C[i]}"></i>${t}</span>`).join("")}</div>
-      <div class="cat"><span><i class="rl" style="border-top:3px solid var(--muted)"></i>volume from a counter</span><span><i class="rl" style="border-top:3px dashed var(--muted)"></i>volume assumed by road class</span><span><i class="dot" style="background:#fff;border:1.5px solid #111;opacity:1"></i>counter, vehicles this hour</span></div>`;
+      <div class="cat">${TRF.model ? `<span><i class="rl" style="border-top:3px solid var(--muted)"></i>volume from the calibrated trip model</span>` : `<span><i class="rl" style="border-top:3px solid var(--muted)"></i>volume from a counter</span><span><i class="rl" style="border-top:3px dashed var(--muted)"></i>volume assumed by road class</span>`}<span><i class="dot" style="background:#fff;border:1.5px solid #111;opacity:1"></i>counter, vehicles this hour</span></div>`;
     return;
   }
   if (mode === "kit" || mode === "mus"){
@@ -818,7 +819,10 @@ function show(c){
       <dl>${byName.slice(0,8).map(([n,v]) => `<dt>${n}</dt><dd class="num">${Math.round(v*100)}%</dd>`).join("")}</dl>
       <div class="k">Busiest counters, vehicles this hour</div>
       <dl>${cnt.slice(0,5).map(([n,v]) => `<dt>${n}</dt><dd class="num">${fmt(Math.round(v))}</dd>`).join("")}</dl>
-      <p class="hint">Volumes come from the 28 automatic counters of the Sarajevo Canton road directorate (2025 averages by hour) and are carried along the same street; dashed roads use an assumed volume for their class. Capacity comes from the number of lanes (800 vehicles an hour per lane at traffic lights). Percentages are an estimate of load, not measured speeds.</p>`;
+      ${TRF.model ? `<div class="k">Model vs counters (vehicles a day)</div>
+      <dl>${TRF.cnt.filter(d => d[6] >= 0).sort((a,b) => b[4]-a[4]).map(d => `<dt>${d[0]} <span class="tag">${d[1].slice(0,28)}</span></dt><dd class="num">${fmt(d[4])} · ${fmt(d[6])}</dd>`).join("")}</dl>
+      <p class="hint">Counted 2025 average · model. Fit: R² ${TRF.model.faza2.R2}, median error ${TRF.model.faza2.medijan_aps_greska_pct}%. Before the matrix was adjusted to the counts, the trip model alone gave R² ${TRF.model.faza1.R2}. Estimating each counter with that counter left out gives R² ${TRF.model.unakrsna.R2} and median error ${TRF.model.unakrsna.medijan_aps_greska_pct}%, a fair guide to accuracy on roads without a counter.</p>` : ""}
+      <p class="hint">${TRF.model ? "Road volumes come from a trip model: residents, jobs and outside traffic in 0.7 km² zones, trips by car spread by travel time and assigned to the fastest routes with some route variety and congestion, then adjusted until the model matches the 25 automatic counters of the Sarajevo Canton road directorate (white dots, real 2025 counts). Hours follow the nearest counter's average day." : "Volumes come from the automatic counters of the Sarajevo Canton road directorate (2025 averages by hour) and are carried along the same street; dashed roads use an assumed volume for their class."} Capacity comes from the number of lanes (800 vehicles an hour per lane at traffic lights). Percentages are an estimate of load, not measured speeds.</p>`;
     el.querySelectorAll(".hbars button").forEach(b => b.onclick = () => trfSet(+b.dataset.h));
     return;
   }
