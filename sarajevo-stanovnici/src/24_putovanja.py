@@ -395,19 +395,43 @@ def main() -> None:
         e_brojac[g] = c
     inc = sum(incidencija(P, cv, eid, e_brojac, len(br)).astype(np.float32) for P in Ps) / len(Ps)
 
-    def odme(T0, aktivni):
+    np.savez_compressed(OUT.parent / "interim" / "model_odme.npz", T=T, inc=inc, y=y)
+
+    def odme(T0, aktivni, iters=ODME_ITER, damp=0.7, lam=0.0):
+        """lam > 0: svaka iteracija povlači matricu prema početnoj (manje izobličenje)."""
         Tk = T0.copy()
-        for _ in range(ODME_ITER):
+        for _ in range(iters):
             m = np.einsum("od,odc->c", Tk, inc)
             r = np.where(aktivni & (m > 0), y / np.maximum(m, 1e-9), 1.0)
             # faktor para = geometrijska sredina omjera brojača na putu (prigušeno)
             lr = np.log(r)
             nk = inc[:, :, aktivni].sum(axis=2)
             s = np.einsum("odc,c->od", inc[:, :, aktivni], lr[aktivni])
-            Tk = Tk * np.exp(0.7 * np.where(nk > 0, s / np.maximum(nk, 1), 0))
+            Tk = Tk * np.exp(damp * np.where(nk > 0, s / np.maximum(nk, 1), 0))
+            if lam:
+                Tk = np.exp((1 - lam) * np.log(np.maximum(Tk, 1e-12)) + lam * np.log(np.maximum(T0, 1e-12)))
         return Tk
 
+    # izbor jačine korekcije: poklapanje s brojačima ≤ 5% (medijan) uz najbolju unakrsnu provjeru
     sve = np.ones(len(br), bool)
+    varijante = [(40, 0.7, 0.0), (20, 0.5, 0.0), (10, 0.5, 0.0), (6, 0.4, 0.0), (40, 0.7, 0.05), (40, 0.7, 0.15)]
+    rez = []
+    for v in varijante:
+        m_in = np.einsum("od,odc->c", odme(T, sve, *v), inc)
+        lo = np.array([np.einsum("od,od->", odme(T, np.where(np.arange(len(br)) == c, False, sve), *v), inc[:, :, c])
+                       for c in range(len(br))])
+        mi_ = float(np.median(np.abs(m_in / y - 1)) * 100)
+        ml_ = float(np.median(np.abs(lo / y - 1)) * 100)
+        r2l = float(1 - ((y - lo) ** 2).sum() / ((y - y.mean()) ** 2).sum())
+        rez.append((v, mi_, ml_, r2l))
+        print(f"ODME iter {v[0]}, prigušenje {v[1]}, povlačenje {v[2]}: brojači medijan {mi_:.1f}%, "
+              f"unakrsno medijan {ml_:.1f}% (R² {r2l:.2f})")
+    dobri = [r for r in rez if r[1] <= 5] or rez
+    izbor = min(dobri, key=lambda r: r[2])[0]
+    print("Izabrano:", izbor)
+    odme_v = odme
+    odme = lambda T0, akt: odme_v(T0, akt, *izbor)  # noqa: E731
+
     T2 = odme(T, sve)
     m_faza2 = np.einsum("od,odc->c", T2, inc)
     # unakrsna provjera
@@ -430,7 +454,10 @@ def main() -> None:
                 "medijan_aps_greska_pct": round(float(np.median(np.abs(gre)) * 100), 1),
                 "GEH_satni_<5_udio": round(float((geh < 5).mean()), 2)}
 
-    info = {"faza1": pok(m_faza1), "faza2": pok(m_faza2), "unakrsna": pok(loo),
+    info = {"odme": {"iteracija": izbor[0], "prigusenje": izbor[1], "povlacenje": izbor[2],
+                     "varijante": [{"v": list(v), "brojaci_medijan_pct": round(a, 1), "unakrsno_medijan_pct": round(b, 1),
+                                    "unakrsno_R2": round(c, 2)} for v, a, b, c in rez]},
+            "faza1": pok(m_faza1), "faza2": pok(m_faza2), "unakrsna": pok(loo),
             "koef": dict(zip(("posao_po_zaposlenom", "ostalo_po_stanovniku", "izvana_po_ulazu"),
                              map(float, koef))),
             "putovanja_dnevno": {"posao": float((koef[0] * mats["hbw"]).sum() / 2),

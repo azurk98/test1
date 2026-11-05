@@ -1,0 +1,31 @@
+{
+ "faza1": {
+  "R2": 0.46,
+  "srednja_aps_greska_pct": 37.8,
+  "medijan_aps_greska_pct": 27.7,
+  "GEH_satni_<5_udio": 0.28
+ },
+ "faza2": {
+  "R2": 1.0,
+  "srednja_aps_greska_pct": 0.1,
+  "medijan_aps_greska_pct": 0.0,
+  "GEH_satni_<5_udio": 1.0
+ },
+ "unakrsna": {
+  "R2": -0.267,
+  "srednja_aps_greska_pct": 53.3,
+  "medijan_aps_greska_pct": 49.4,
+  "GEH_satni_<5_udio": 0.24
+ },
+ "koef": {
+  "posao_po_zaposlenom": 0.4,
+  "ostalo_po_stanovniku": 0.12840569780277622,
+  "izvana_po_ulazu": 10335.303282677196
+ },
+ "putovanja_dnevno": {
+  "posao": 54353.443875317185,
+  "ostalo": 49130.428858253705,
+  "izvana": 75447.71396354353,
+  "nakon_faze2": 221375.28804712257
+ }
+}
