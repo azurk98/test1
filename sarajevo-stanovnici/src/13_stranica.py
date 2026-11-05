@@ -45,6 +45,28 @@ def rnd(g):
     return {"type": m["type"], "coordinates": f(m["coordinates"])}
 
 
+def scen_data():
+    """Scenariji novih cesta (31_scenariji.py): rezultati i geometrije."""
+    if not (OUT / "scenariji.csv").exists():
+        return None
+    R = pd.read_csv(OUT / "scenariji.csv", dtype={"scenarij": str}).set_index("scenarij")
+    P = pd.read_csv(OUT / "scenariji_presjeci.csv", dtype={"scenarij": str})
+    G = gpd.read_file(OUT / "scenariji.geojson")
+    en = {"A": "Tunnel under Bistrik: Skenderija – Dariva (2.6 km)",
+          "B": "Northern hillside road: Zabrđe – Sokolje – Buća Potok – Pofalići – Velešići",
+          "C": "Tunnel under Mojmilo: Alipašino Polje – Dobrinja (1.1 km)"}
+    out = []
+    for sc in [x for x in R.index if x != "0"]:
+        r = R.loc[sc]
+        pr = P[P.scenarij == sc].dropna(subset=["promjena_pct"])
+        out.append({"id": sc, "name": en.get(sc, r.naziv), "saved_vh": int(r.usteda_vozilo_sati),
+                    "on_new": None if pd.isna(r.na_novoj_dionici_dnevno) or sc == "B" else int(r.na_novoj_dionici_dnevno),
+                    "corr": [[p.presjek, float(p.promjena_pct)] for p in pr.itertuples()],
+                    "times": [[c.replace("min: ", ""), float(R.loc["0", c]), float(r[c])] for c in R.columns if c.startswith("min: ")],
+                    "geo": [[round(c, 5) for xy in g.coords for c in xy] for g in G[G.scenarij == sc].geometry]})
+    return out
+
+
 def podaci() -> dict:
     p = gpd.read_file(OUT / "polja_h3.gpkg")
     acc = pd.read_csv(OUT / "dostupnost_h3.csv").set_index("h3_id")
@@ -175,7 +197,8 @@ def podaci() -> dict:
                     int(mb.unakrsna.get(r.brojac, -1)) if model else -1,
                     int(mb.model_faza1.get(r.brojac, -1)) if model else -1,
                     int(bool(mb.korigovan.get(r.brojac, False))) if model else 0] for r in gbr.itertuples()],
-           "model": mi if model else None}
+           "model": mi if model else None,
+           "scen": scen_data()}
     rmo = pd.read_csv(DATA / "radna_mjesta_opcine.csv")
     rmz = pd.read_csv(OUT / "radna_mjesta_mz.csv")
     jobs = {"op": [[OP.index(r.opcina), int(r.radna_mjesta_2024), int(r.zaposleni_stanovnici_2025)] for r in rmo.itertuples()],

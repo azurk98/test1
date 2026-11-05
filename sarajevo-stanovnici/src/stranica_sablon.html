@@ -161,6 +161,9 @@ aside.read{border-left:1px solid var(--line);padding:16px;max-height:calc(min(68
 .trfp input[type=range]{flex:1;min-width:120px;accent-color:var(--accent)}
 .trfp output{font:600 15px var(--mono);color:var(--fg);min-width:96px}
 .trf{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke;pointer-events:visibleStroke}
+.scnl{fill:none;stroke:#fff;stroke-width:calc(5px * var(--zw));stroke-dasharray:10 6;vector-effect:non-scaling-stroke;opacity:.95;pointer-events:none}
+.scnlab rect{fill:#111;stroke:#fff;stroke-width:1.5px} .scnlab text{font:700 10px var(--mono);fill:#fff;pointer-events:none}
+.scnk{display:inline-grid;place-items:center;min-width:18px;height:18px;border-radius:3px;background:#111;color:#fff;font:700 10px var(--mono);margin-right:4px}
 .trfc circle{fill:#fff;stroke:#111;stroke-width:1.5px}
 .trfc text{font:600 9px var(--mono);fill:#fff;paint-order:stroke;stroke:#111;stroke-width:2.5px;pointer-events:none}
 .hbars{display:grid;grid-template-columns:repeat(24,minmax(0,1fr));gap:1px;align-items:end;height:48px}
@@ -473,6 +476,14 @@ trfC.append("title").text(d => `${d[0]} · ${d[1]}\nCounted 2025 average: ${fmt(
   (d[6] >= 0 ? (d[9] ? `\nModel: ${fmt(d[6])}; trip model alone: ${fmt(d[8])}; estimated without this counter: ${fmt(d[7])}`
     : `\nModel: ${fmt(d[6])}. The publication gives no position for this counter, so it is shown but not used to correct the model.`) : ""));
 let trfHour = 8, trfDay = "radni", trfTimer = null;
+// koncepti novih cesta (31_scenariji.py)
+const SCN = TRF.scen || [];
+const scnG = trfG.append("g");
+const scnP = scnG.selectAll("path").data(SCN.flatMap(d => d.geo.map(g => ({id:d.id, g})))).join("path").attr("class","scnl");
+const scnL = scnG.selectAll("g").data(SCN).join("g").attr("class","scnlab");
+scnL.append("rect").attr("x",-10).attr("y",-9).attr("width",20).attr("height",18).attr("rx",3);
+scnL.append("text").attr("text-anchor","middle").attr("dy","0.35em").text(d => d.id);
+const scnMid = d => { const g = d.geo.reduce((a,b) => b.length > a.length ? b : a, []), i = Math.floor(g.length/4)*2; return proj([g[i]*KX, g[i+1]]); };
 const TRF_T = [0.3,0.5,0.7,0.9], TRF_C = ["#1a9850","#91cf60","#fee08b","#fc8d59","#d73027"];
 const trfVol = s => s[0] * TRF.prof[s[2]][trfHour] * TRF.day[trfDay];
 const trfVC = s => trfVol(s) / s[1];
@@ -609,6 +620,8 @@ function layout(){
   wsiteG.attr("transform", d => { const [x,y] = proj([d.lon*KX, d.lat]); return `translate(${x},${y}) scale(${1/zk})`; });
   bizPlace();
   trfP.attr("d", s => line(s[5]));
+  scnP.attr("d", d => line(d.g));
+  scnL.attr("transform", d => { const [x,y] = scnMid(d); return `translate(${x},${y}) scale(${1/zk})`; });
   trfC.attr("transform", d => { const [x,y] = proj([d[3]*KX, d[2]]); return `translate(${x},${y}) scale(${1/zk})`; });
   poiG.selectAll("circle").attr("cx", d => proj([d.lon*KX, d.lat])[0]).attr("cy", d => proj([d.lon*KX, d.lat])[1])
     .attr("r", d => (d.k === "bolnica" ? 4.6 : 3.2)/zk).attr("stroke-width", 1/zk);
@@ -620,6 +633,7 @@ const zoom = d3.zoom().scaleExtent([1,14]).on("zoom", e => { g.attr("transform",
     newL.attr("transform", d => { const [x,y] = newMid(d); return `translate(${x},${y}) scale(${1/zk})`; });
     audM.attr("transform", d => { const [x,y] = proj([d[5]*KX, d[4]]); return `translate(${x},${y}) scale(${1/zk})`; });
     trfC.attr("transform", d => { const [x,y] = proj([d[3]*KX, d[2]]); return `translate(${x},${y}) scale(${1/zk})`; }); if (mode === "trf") trfPaint();
+    scnL.attr("transform", d => { const [x,y] = scnMid(d); return `translate(${x},${y}) scale(${1/zk})`; });
     poiG.selectAll("circle").attr("r", d => (d.k === "bolnica" ? 4.6 : 3.2)/zk).attr("stroke-width", 1/zk);
     aqS.attr("transform", d => { const [x,y] = proj([d[2]*KX, d[1]]); return `translate(${x},${y}) scale(${1/zk})`; });
     contL.attr("transform", d => { const i = Math.floor(d[2].length/4)*2; const [x,y] = proj([d[2][i]*KX, d[2][i+1]]); return `translate(${x},${y}) scale(${1/zk})`; }); } });
@@ -875,6 +889,13 @@ function show(c){
       ${TRF.model ? `<div class="k">Model vs counters (vehicles a day)</div>
       <dl>${TRF.cnt.filter(d => d[6] >= 0).sort((a,b) => b[4]-a[4]).map(d => `<dt>${d[0]} <span class="tag">${d[1].slice(0,28)}</span></dt><dd class="num">${fmt(d[4])} · ${fmt(d[6])}${d[9] ? "" : " *"}</dd>`).join("")}</dl>
       <p class="hint">Counted 2025 average · model, vehicles a day. On each counted street the model is scaled to its counter, so the two match; * no position in the publication, not used. The trip model alone, before that scaling, gives R² ${TRF.model.faza1.R2} with a median error of ${TRF.model.faza1.medijan_aps_greska_pct}%. Leaving each counter out and estimating it from the rest gives R² ${TRF.model.unakrsna.R2} and a median error of ${TRF.model.unakrsna.medijan_aps_greska_pct}%: expect errors of about a third on roads without a counter.</p>` : ""}
+      ${SCN.length ? `<div class="k">New road ideas tested in the model</div>
+      ${SCN.map(d => `<div style="font-weight:600;margin-top:4px"><b class="scnk">${d.id}</b> ${d.name}</div>
+        <dl>${d.on_new ? `<dt>Vehicles a day on the new link</dt><dd class="num">${fmt(d.on_new)}</dd>` : ""}
+        ${d.corr.filter(c => Math.abs(c[1]) >= 5).map(c => `<dt>${c[0]}</dt><dd class="num">${c[1] > 0 ? "+" : ""}${c[1]}%</dd>`).join("")}
+        ${d.times.filter(t => t[1] - t[2] >= 0.8).map(t => `<dt>${t[0]}</dt><dd class="num">${t[1]} → ${t[2]} min</dd>`).join("")}
+        <dt>Driving time saved, whole city</dt><dd class="num">${fmt(d.saved_vh)} vehicle-hours/day</dd></dl>`).join("")}
+      <p class="hint" style="font-size:12.5px">Concepts for discussion, not designs: the same daily trips are re-assigned with each new link; cost, geology, portals and land are not checked. B works by speeding up hillside streets, so as a car road it would draw through traffic into neighbourhoods; it fits buses better.</p>` : ""}
       <p class="hint">${TRF.model ? "Road volumes come from a trip model: residents, jobs and outside traffic in 0.7 km² zones, car trips spread by travel time and assigned to the fastest routes with some route variety and congestion. Along each counted street (up to 2.5 km, in the direction the counter counts) the volume is scaled to the counter of the Sarajevo Canton road directorate (white dots, real 2025 counts). Hours follow the nearest counter's average day." : "Volumes come from the automatic counters of the Sarajevo Canton road directorate (2025 averages by hour) and are carried along the same street; dashed roads use an assumed volume for their class."} Capacity comes from the number of lanes (800 vehicles an hour per lane at traffic lights). Percentages are an estimate of load, not measured speeds.</p>`;
     el.querySelectorAll(".hbars button").forEach(b => b.onclick = () => trfSet(+b.dataset.h));
     return;

@@ -1,29 +1,29 @@
 scenarij,presjek,dnevno,promjena_pct
-0,Obala Kulina bana,24323.0,0.0
-0,Maršala Tita,20675.0,0.0
-0,Zmaja od Bosne (Čengić Vila),,
-0,Bulevar Meše Selimovića,38417.0,0.0
-0,Alipašina,17395.0,0.0
-0,Safeta Zajke,13421.0,0.0
-0,Džemala Bijedića,,
-A,Obala Kulina bana,15961.0,-34.4
-A,Maršala Tita,13798.0,-33.3
-A,Zmaja od Bosne (Čengić Vila),,
-A,Bulevar Meše Selimovića,37273.0,-3.0
-A,Alipašina,17199.0,-1.1
-A,Safeta Zajke,13445.0,0.2
-A,Džemala Bijedića,,
-B,Obala Kulina bana,24480.0,0.6
-B,Maršala Tita,20453.0,-1.1
-B,Zmaja od Bosne (Čengić Vila),,
-B,Bulevar Meše Selimovića,36014.0,-6.3
-B,Alipašina,16823.0,-3.3
-B,Safeta Zajke,14603.0,8.8
-B,Džemala Bijedića,,
-C,Obala Kulina bana,24280.0,-0.2
-C,Maršala Tita,20915.0,1.2
-C,Zmaja od Bosne (Čengić Vila),,
-C,Bulevar Meše Selimovića,33693.0,-12.3
-C,Alipašina,17136.0,-1.5
-C,Safeta Zajke,13997.0,4.3
-C,Džemala Bijedića,,
+0,Obala Kulina bana,24323,0.0
+0,Maršala Tita,32673,0.0
+0,Zmaja od Bosne (Čengić Vila),33121,0.0
+0,Bulevar Meše Selimovića,38417,0.0
+0,Alipašina,17350,0.0
+0,Safeta Zajke,15391,0.0
+0,Džemala Bijedića,0,
+A,Obala Kulina bana,16151,-33.6
+A,Maršala Tita,27163,-16.9
+A,Zmaja od Bosne (Čengić Vila),33143,0.1
+A,Bulevar Meše Selimovića,37273,-3.0
+A,Alipašina,17158,-1.1
+A,Safeta Zajke,15417,0.2
+A,Džemala Bijedića,0,
+B,Obala Kulina bana,24654,1.4
+B,Maršala Tita,29978,-8.2
+B,Zmaja od Bosne (Čengić Vila),28666,-13.4
+B,Bulevar Meše Selimovića,36014,-6.3
+B,Alipašina,16777,-3.3
+B,Safeta Zajke,15828,2.8
+B,Džemala Bijedića,0,
+C,Obala Kulina bana,24454,0.5
+C,Maršala Tita,30320,-7.2
+C,Zmaja od Bosne (Čengić Vila),33414,0.9
+C,Bulevar Meše Selimovića,33693,-12.3
+C,Alipašina,17095,-1.5
+C,Safeta Zajke,15658,1.7
+C,Džemala Bijedića,0,
