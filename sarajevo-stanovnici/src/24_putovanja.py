@@ -80,6 +80,7 @@ TACKA = {"KSBS22": ("Džemala Bijedića", (43.8452, 18.3470)), "KSBS27": ("*", N
 MSA_ITER = int(os.environ.get("MSA_ITER", 5))
 ODME_ITER = 40
 KOREKCIJA_M = 2500
+IZVAN_MREZE = {"KSBS33"}         # Malešići (Ilijaš): uz rub Vogošće, ali cesta R 403 nije u dopuni
 NESIGURNA_LOKACIJA = {"KSBS22"}   # publikacija nema koordinate; tačka je približna
 AUTOM_NA_POSAO = 0.4
 R_RUTA = int(os.environ.get("R_RUTA", 4))
@@ -326,7 +327,8 @@ def main() -> None:
     # samo brojači u modeliranim općinama (+1 km): izvan njih mreža je samo rub dopune
     op_ = ucitaj_granice()[0].union_all().buffer(1000)
     bm = gpd.GeoSeries(gpd.points_from_xy(br.lon, br.lat), crs=CRS_WGS).to_crs(CRS_M)
-    br = br[shapely.contains_xy(POKR, br.lon.to_numpy(), br.lat.to_numpy()) & bm.within(op_).to_numpy()].reset_index(drop=True)
+    br = br[shapely.contains_xy(POKR, br.lon.to_numpy(), br.lat.to_numpy()) & bm.within(op_).to_numpy()
+            & ~br.brojac.isin(IZVAN_MREZE).to_numpy()].reset_index(drop=True)
     bxy = gpd.GeoSeries(gpd.points_from_xy(br.lon, br.lat), crs=CRS_WGS).to_crs(CRS_M)
     mid = (xy[e.u] + xy[e.v]) / 2
     ehw = e.w.map(lambda k: wmeta[k]["hw"]).to_numpy()
