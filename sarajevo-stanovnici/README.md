@@ -231,6 +231,18 @@ model. KSBS30 (Kasindolska) nema odgovarajuću ulicu u OSM-u. Male ceste uz rub 
 (Igmanska, Ravnogorska) i Vilsonovo šetalište vjerovatno su precijenjeni (ulazi u područje,
 OSM klasifikacija).
 
+## Prijedlozi linija i cesta (`25_prijedlozi.py`)
+
+Iz modela putovanja (24): pravci s najviše putovanja bez tramvaja/trolejbusa na bar jednom kraju,
+naselja s najviše stanovnika > 8 min hoda do stanice, najopterećenije ulice i kandidati za kratke
+nove cestovne spojeve (ocjena: ušteda vremena svih putovanja autom). Nalaz (05.11.2026): najjači
+pravac bez trunk linije je sjeverozapad Novog Grada (Zabrđe – Briješće – Alipašin Most, ~3.700
+putovanja dnevno, 34.500 stanovnika u 400 m); kratki novi spojevi donose malo (najbolji Sokolje–Zabrđe
+~25 sati vožnje dnevno), a kandidati prema Briješću su artefakt položaja čvora zone. Uska grla su
+glavna longitudinala, Obala Kulina bana i Alipašina, što odgovara već planiranoj Prvoj transverzali i
+Južnoj longitudinali. OSM nema veći dio autobuskih linija, pa „nema linije“ vrijedi samo za
+tramvaj/trolejbus.
+
 ## Google Places (`12_google_places.py`, opcionalno)
 
 Nearby Search (New) za tipove supermarket, grocery_store, convenience_store, market, food_store u
