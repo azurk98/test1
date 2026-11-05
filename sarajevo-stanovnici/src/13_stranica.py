@@ -59,7 +59,10 @@ def scen_data():
           "C3": "Tunnel Hrasno – eastern Dobrinja (towards Lukavica)",
           "G": "City motorway extended along the railway: Drinska – railway station – Marijin Dvor",
           "S": "Northern longitudinal: Put života (Pofalići) – Koševo",
-          "SP": "Northern bypass: Put života – Koševo + planned tunnel Koševo – Bentbaša"}
+          "SP": "Northern bypass: Put života – Koševo + planned tunnel Koševo – Bentbaša",
+          "T1": "First transversal (planned): Pofalići – railway station – Koševsko brdo/Velešići – Kobilja Glava",
+          "T6": "Sixth transversal (planned): Hrasno – Čengić Vila – Buća Potok – Hotonj",
+          "T16": "First and Sixth transversals together"}
     out = []
     for sc in [x for x in R.index if x != "0"]:
         r = R.loc[sc]

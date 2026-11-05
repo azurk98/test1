@@ -50,6 +50,14 @@ SCENARIJI = {
     "G": ("Produžetak Gradskog autoputa uz prugu: Drinska (Pofalići) – Željeznička – Marijin Dvor",
           [[(18.3826, 43.8579), (18.3920, 43.8590), (18.4000, 43.8585), (18.4085, 43.8565)]], 60, 2),
     "S": ("Sjeverna longitudinala: Put života (Pofalići) – Koševo", [[(18.3883, 43.8570), (18.3990, 43.8640), (18.4080, 43.8700)]], 50, 2),
+    # planirane transverzale (trase približne, prema opisima u medijima)
+    "T1": ("Prva transverzala: Pofalići (Ambasada SAD) – Željeznička – Koševsko brdo/Velešići – Kobilja Glava",
+           [[(18.3890, 43.8556), (18.3990, 43.8590), (18.4025, 43.8680), (18.3985, 43.8790), (18.3940, 43.8845)]], 50, 2),
+    "T6": ("Šesta transverzala: Hrasno – Čengić Vila – Buća Potok – Hotonj",
+           [[(18.3745, 43.8445), (18.3705, 43.8515), (18.3715, 43.8580), (18.3725, 43.8650), (18.3760, 43.8760), (18.3770, 43.8850)]], 50, 2),
+    "T16": ("Prva i Šesta transverzala zajedno",
+            [[(18.3890, 43.8556), (18.3990, 43.8590), (18.4025, 43.8680), (18.3985, 43.8790), (18.3940, 43.8845)],
+             [(18.3745, 43.8445), (18.3705, 43.8515), (18.3715, 43.8580), (18.3725, 43.8650), (18.3760, 43.8760), (18.3770, 43.8850)]], 50, 2),
     "SP": ("Sjeverni obilazak: Put života – Koševo + planirani tunel Koševo – Bentbaša",
            [[(18.3883, 43.8570), (18.3990, 43.8640), (18.4080, 43.8700)], [(18.4140, 43.8665), (18.4380, 43.8590)]], 50, 2),
 }
