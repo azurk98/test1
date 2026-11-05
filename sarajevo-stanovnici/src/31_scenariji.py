@@ -40,9 +40,12 @@ GLAVNE = {"motorway", "trunk", "primary", "secondary", "tertiary", "motorway_lin
 
 # novi spojevi: (naziv, [(lon, lat), ...] tačke trase, brzina km/h, traka po smjeru)
 SCENARIJI = {
-    "A": ("Tunel ispod Bistrika: Skenderija – Dariva", [[(18.4130, 43.8540), (18.4445, 43.8597)]], 50, 2),
+    # A (tunel ispod Bistrika) odbačen na zahtjev korisnika; P je već planirani tunel (provjera efekta)
+    "P": ("Planirani tunel Bentbaša – Koševo (ispod Bjelava, prema tunelu Ciglane)", [[(18.4380, 43.8590), (18.4140, 43.8665)]], 50, 2),
     "B": ("Sjeverna brdska veza: Zabrđe – Sokolje – Buća Potok – Pofalići – Velešići", "sjeverna", 40, 1),
     "C": ("Tunel ispod Mojmila: Alipašino Polje – Dobrinja", [[(18.3505, 43.8430), (18.3500, 43.8325)]], 50, 2),
+    "C2": ("Tunel ispod Mojmila, istočnije: Alipašino Polje (istok) – Dobrinja I", [[(18.3590, 43.8440), (18.3600, 43.8305)]], 50, 2),
+    "C3": ("Tunel Hrasno – istočna Dobrinja (prema Lukavici)", [[(18.3720, 43.8440), (18.3700, 43.8305)]], 50, 2),
 }
 # mjerni presjeci: (naziv, ulica u OSM-u, lon, lat)
 PRESJECI = [("Obala Kulina bana", "Obala Kulina bana", 18.4160, 43.8566), ("Maršala Tita", "Maršala Tita", 18.4166, 43.8590),
@@ -52,6 +55,8 @@ PRESJECI = [("Obala Kulina bana", "Obala Kulina bana", 18.4160, 43.8566), ("Mar�
 PAROVI = [("Velešići → Zabrđe", (18.4015, 43.8655), (18.3097, 43.8741)),
           ("Dobrinja → Alipašino Polje", (18.3470, 43.8290), (18.3480, 43.8450)),
           ("Alipašin most → Bentbaša", (18.3475, 43.8480), (18.4380, 43.8586)),
+          ("Koševo → Bentbaša", (18.4100, 43.8700), (18.4380, 43.8586)),
+          ("Dobrinja I → Hrasno", (18.3600, 43.8300), (18.3720, 43.8450)),
           ("Pale (ulaz) → Marijin Dvor", (18.5130, 43.8510), (18.4100, 43.8560))]
 
 
