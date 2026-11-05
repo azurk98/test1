@@ -528,6 +528,12 @@ const ptP = ptG.selectAll("path").data(D.lines.slice().sort((a,b) => ptOrder[a[0
 ptP.append("title").text(d => `${d[2] || d[1]} · ${d[3] ? d[3] + " departures/hour (assumed)" : "frequency unknown"}`);
 // predložene linije
 const NEW_C = {glavna:"#ff006e", minibus:"#9b5de5"};
+const REC = {"nova linija":"New line: nothing runs here today",
+  "jedna jaka linija (6–8 polazaka/h) umjesto više rijetkih":"One strong line (6–8 an hour) instead of several sparse ones",
+  "jedna jaka linija (6–8 polazaka/h) umjesto više rijetkih; voziti i kroz nepokrivene ulice":"One strong line (6–8 an hour) instead of several sparse ones, also through the streets they miss",
+  "produžiti/preusmjeriti postojeće kroz nepokriveni dio":"Extend or reroute existing lines through the part they miss",
+  "pojačati na ≥ 3 polaska/h i proširiti trasu":"Run existing lines at least 3 times an hour and widen the route",
+  "pojačati na ≥ 3 polaska/h":"Run existing lines at least 3 times an hour", "dovoljno pokriveno":"Already well served"};
 let newSel = null;
 const newP = ptG.append("g").selectAll("path").data(D.newlines).join("path").attr("class", d => "newl n-" + d[1])
   .attr("stroke", d => NEW_C[d[1]]).on("click", (e, d) => { e.stopPropagation(); newSel = d; newP.classed("sel", x => x === d); show(null); });
@@ -880,14 +886,16 @@ function show(c){
       <div style="font-weight:600">${d[2]}</div>
       <dl><dt>Length</dt><dd class="num">${d[3]} km</dd><dt>Running time, one way</dt><dd class="num">~${d[7]} min</dd>
       <dt>Stops (every ~400 m)</dt><dd class="num">${d[8]}</dd><dt>Residents within 400 m</dt><dd class="num">${fmt(d[4])}</dd>
-      <dt>Jobs within 400 m</dt><dd class="num">${fmt(d[5])}</dd><dt>…now over 8 min from a stop</dt><dd class="num">${fmt(d[6])}</dd></dl>
+      <dt>Jobs within 400 m</dt><dd class="num">${fmt(d[5])}</dd><dt>…now over 8 min from a stop</dt><dd class="num">${fmt(d[6])}</dd>
+      <dt>Existing buses off the tram/trolleybus</dt><dd class="num">${d[11] ? d[11] + "/h" : "none"}</dd></dl>
+      <div class="k">Recommendation</div><div style="font-weight:600">${REC[d[12]] || d[12]}</div>
+      ${d[10] ? `<p class="hint" style="font-size:12.5px">Lines already on the route (weekday 7–9 h departures per hour): ${d[10].replace(/autobus/g,"bus")}</p>` : ""}
       <p class="hint" style="font-size:13px">${{P1:"The busiest corridor with no tram or trolleybus at either end (about 3,700 trips a day). Trolleybus or electric bus every 7–10 minutes, changing to the tram at Alipašin most.",
-        P2:"About 2,200 trips a day and no line in OpenStreetMap; check first whether a Republika Srpska operator already runs one.",
-        P3:"About 2,100 trips a day; links Stup and eastern Ilidža to Alipašin most without a change."}[d[0]] ||
+        P2:"About 2,200 trips a day; the cantonal timetable has no line on the Lukavica side, so check whether a Republika Srpska operator runs one."}[d[0]] ||
         "Small bus for a steep neighbourhood, from the part farthest from a stop to the nearest tram or trolleybus stop. Check street width and a turning point on site."}</p>` :
-      `<div class="k">Proposed new lines</div><p class="hint">Drawn from the trip model: corridors with the most daily trips and no tram or trolleybus, and steep neighbourhoods where many people walk over 8 minutes to a stop. Routes follow existing roads; tap a line or a label.</p>`)
+      `<div class="k">Proposed new lines</div><p class="hint">Drawn from the trip model: corridors with the most daily trips and no tram or trolleybus, and steep neighbourhoods where many people walk over 8 minutes to a stop. Most already have a bus or minibus, but one that runs once or twice an hour or misses whole streets; each line says what to change. Tap a line or a label.</p>`)
       + `<div class="k">Lines · residents gaining a stop within 400 m</div><dl>${lst}</dl>
-      <p class="hint" style="font-size:12.5px">Sketches for discussion, not designs. OpenStreetMap lacks much of the bus network, so some areas may already have a bus.</p>`;
+      <p class="hint" style="font-size:12.5px">Sketches for discussion, not designs. Existing service comes from the timetables of the Sarajevo Canton Ministry of Transport (javniprevozks.ba, weekday 7–9 h).</p>`;
     el.querySelectorAll("[data-nl]").forEach(b => b.onclick = () => { newSel = D.newlines.find(x => x[0] === b.dataset.nl); newP.classed("sel", x => x === newSel);
       const [x,y] = newMid(newSel); svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(W()/2,H()/2).scale(3.5).translate(-x,-y)); show(null); });
     return;

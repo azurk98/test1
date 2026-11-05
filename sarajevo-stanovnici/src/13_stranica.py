@@ -205,7 +205,9 @@ def podaci() -> dict:
     nl = gpd.read_file(OUT / "nove_linije.geojson") if (OUT / "nove_linije.geojson").exists() else None
     nove = [] if nl is None else [[r.id, r.tip, r.naziv, float(r.duzina_km), int(r.stanovnici_400m),
                                    int(r.radna_mjesta_400m), int(r.novi_korisnici), int(r.voznja_min), int(r.stanica),
-                                   [round(c, 5) for xy in r.geometry.coords for c in xy]] for r in nl.itertuples()]
+                                   [round(c, 5) for xy in r.geometry.coords for c in xy],
+                                   getattr(r, "postojece_linije", "") or "", float(getattr(r, "postojeci_polasci_h", 0) or 0),
+                                   getattr(r, "preporuka", "") or ""] for r in nl.itertuples()]
     return {"lines": linije, "newlines": nove, "aq": stanice, "acc": acc, "poi": poi,
             "stores": [[round(a, 5), round(b, 5), (n if isinstance(n, str) else "")]
                        for a, b, n in zip(st.lon, st.lat, st.ime)],

@@ -4,13 +4,15 @@ Na osnovu 25_prijedlozi.py:
   P1  glavna linija sjeverozapad Novog Grada: Zabrđe – Briješće – Sokolje – Alipašin Most;
       Dobroševići dobijaju minibus do početka P1 (Zabrđe)
   P2  Lukavica (Istočno Sarajevo) – Željeznička stanica (u OSM-u nema linije; provjeriti RS prevoznika)
-  P3  Stup – Alipašin Most III
   M*  minibus za brdska naselja: od težišta stanovnika koji su > 8 min od stanice do najbliže
       tramvajske/trolejbuske stanice
 Trasa = najkraći put po cestama (mreža iz 24_putovanja.py). Za svaku liniju: dužina, stanovnici i
 radna mjesta do 400 m, "novi korisnici" = stanovnici do 400 m od trase koji su danas > 8 min hoda od
 stanice, okvirno vrijeme vožnje (vrijeme autom · 1,4 za stajanje) i broj stanica (svakih ~400 m).
-Trase su skica za raspravu, ne projekat: ulice za minibus treba provjeriti na terenu (širina, okretište).
+Uz svaku liniju: postojeće autobuske/minibus linije na dijelu trase dalje od 400 m od
+tramvaja/trolejbusa (≥ 2 stanice do 300 m) i njihovi polasci (portal Ministarstva saobraćaja KS)
+i preporuka: nova linija ili pojačanje postojećih (P3 Stup – Alipašin Most je izbačen: tramvaji
+3, 6 i 11 već voze tim pravcem). Trase su skica za raspravu, ne projekat: ulice za minibus treba provjeriti na terenu (širina, okretište).
 """
 from __future__ import annotations
 
@@ -24,7 +26,7 @@ from scipy.sparse.csgraph import dijkstra
 from scipy.spatial import cKDTree
 from shapely.geometry import LineString
 
-from common import CRS_M, CRS_WGS, OUT
+from common import CRS_M, CRS_WGS, DATA, OUT
 
 
 def _uvezi(ime, fajl):
@@ -108,9 +110,6 @@ def main() -> None:
         ("P2", "glavna", "Lukavica – Željeznička stanica",
          [(18.371, 43.824), najbliza_stanica(18.4000, 43.8565)[0]],
          "~2.200 putovanja dnevno, u OSM-u nema linije; provjeriti postoji li linija prevoznika iz RS-a."),
-        ("P3", "glavna", "Stup – Alipašin Most",
-         [(18.303, 43.839), am_stanica],
-         "~2.100 putovanja dnevno; spaja Stup i istočni dio Ilidže s Alipašinim mostom bez presjedanja."),
     ]
     for i, (op, ime) in enumerate(BRDSKA, 1):
         a = mz(op, ime, samo_daleko=True)
@@ -132,6 +131,42 @@ def main() -> None:
                      "voznja_min": round(minute * 1.4), "stanica": max(2, round(gm.length / 400)),
                      "geometry": g.simplify(0.00003)})
     out = gpd.GeoDataFrame(rows, crs=CRS_WGS)
+    # postojeće linije duž trase (portal Ministarstva, 27_javniprevozks.py): linija s ≥ 3 stanice do 300 m
+    if (DATA / "jpks_stanice.csv").exists():
+        import re
+        js = pd.read_csv(DATA / "jpks_stanice.csv")
+        S = gpd.GeoDataFrame(js, geometry=gpd.points_from_xy(js.lon, js.lat), crs=CRS_WGS).to_crs(CRS_M)
+        jl = pd.read_csv(DATA / "jpks_linije.csv", dtype={"linija": str})
+        jl["key"] = jl.vrsta + ":" + jl.linija.str.split().str[0]
+        fq = jl.groupby("key").vrsni_sat_7_9.max()
+        post, pol, preporuka = [], [], []
+        trunk_buf = trunk.union_all().buffer(400)
+        for r in out.to_crs(CRS_M).itertuples():
+            cnt = {}
+            dio = r.geometry.difference(trunk_buf)          # dio trase izvan tramvaja/trolejbusa
+            if dio.is_empty:
+                dio = r.geometry
+            for l in S[S.distance(dio) <= 300].linije.dropna():
+                for v, k in re.findall(r"(minibus|autobus|trolejbus|tramvaj):(\S+)", l):
+                    cnt[f"{v}:{k}"] = cnt.get(f"{v}:{k}", 0) + 1
+            lst = sorted([k for k, c in cnt.items() if c >= 2 and fq.get(k, 0) > 0 and not k.startswith(("tramvaj", "trolejbus"))],
+                         key=lambda k: -fq.get(k, 0))
+            ukupno = float(sum(fq.get(k, 0) for k in lst))
+            post.append(", ".join(f"{k.split(':')[0]} {k.split(':')[1]} ({fq.get(k, 0):g}/h)" for k in lst[:5]))
+            pol.append(round(ukupno, 1))
+            novi = r.novi_korisnici
+            if ukupno < 1:
+                p = "nova linija"
+            elif r.tip == "glavna":
+                p = ("jedna jaka linija (6–8 polazaka/h) umjesto više rijetkih" +
+                     ("; voziti i kroz nepokrivene ulice" if novi >= 1000 else ""))
+            elif novi >= 1000:
+                p = ("produžiti/preusmjeriti postojeće kroz nepokriveni dio" if ukupno >= 3
+                     else "pojačati na ≥ 3 polaska/h i proširiti trasu")
+            else:
+                p = "pojačati na ≥ 3 polaska/h" if ukupno < 3 else "dovoljno pokriveno"
+            preporuka.append(p)
+        out["postojece_linije"], out["postojeci_polasci_h"], out["preporuka"] = post, pol, preporuka
     out.to_file(OUT / "nove_linije.geojson", driver="GeoJSON", COORDINATE_PRECISION=5)
     pd.set_option("display.width", 250)
     print(out.drop(columns=["geometry", "opis"]).to_string(index=False))

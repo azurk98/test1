@@ -1,0 +1,1168 @@
+stanica_id,naziv,lat,lon,linije
+183,Drvenija A,43.856193,18.423391,minibus:59 minibus:62 minibus:98 trolejbus:101 trolejbus:103 trolejbus:104 trolejbus:105
+184,Hidrogradnja,43.855597,18.419333,autobus:18 autobus:41 autobus:41a minibus:59 minibus:62 minibus:98 trolejbus:101 trolejbus:103 trolejbus:104 trolejbus:105
+1321,Kovačići A,43.8525,18.404267,minibus:98
+685,Latinska Ćuprija Terminal,43.857221,18.429002,minibus:54 minibus:56 minibus:59 minibus:63 minibus:98
+185,Skenderija A,43.855373,18.412743,autobus:18 autobus:41 autobus:41a minibus:59 minibus:98 trolejbus:101 trolejbus:102 trolejbus:103 trolejbus:104 trolejbus:106 trolejbus:107
+730,Trebević Prvi Šumar A,43.83722,18.451996,minibus:98
+732,Trebević Vidikovac,43.841089,18.451388,minibus:98
+728,Vraca A,43.843557,18.39943,minibus:98
+1323,Zagrebačka (MIS) A,43.850154,18.399517,minibus:98
+181,Drvenija B,43.856133,18.423419,minibus:59 minibus:62 minibus:98 trolejbus:101 trolejbus:103 trolejbus:104 trolejbus:105
+1322,Kovačići B,43.852316,18.404257,minibus:98
+179,Skenderija B,43.855651,18.414052,autobus:18 autobus:41 autobus:41a minibus:59 minibus:62 minibus:98 trolejbus:101 trolejbus:103 trolejbus:104 trolejbus:105
+731,Trebević Prvi Šumar B,43.837229,18.451763,minibus:98
+729,Vraca B,43.844503,18.4,minibus:98
+1324,Zagrebačka (MIS) B ,43.849931,18.399445,minibus:70 minibus:98
+952,Osenik,43.802943,18.124837,minibus:57
+948,Osenik I A,43.794618,18.119416,minibus:57
+950,Osenik II A,43.799008,18.122279,minibus:57
+864,Pazarić A1,43.786728,18.153384,minibus:57 minibus:77 minibus:79
+946,Raskršće Osenik A,43.789848,18.119416,minibus:57
+317,Resnik A,43.78999,18.139033,autobus:33 minibus:57
+949,Osenik I B,43.794634,18.11934,minibus:57
+951,Osenik II B,43.798977,18.122176,minibus:57
+865,Pazarić B1,43.786758,18.153386,minibus:57 minibus:77 minibus:79
+947,Raskršće Osenik B,43.790149,18.118916,minibus:57
+318,Resnik B,43.790226,18.136942,autobus:33 minibus:57
+306,Dupovci B,43.818084,18.194529,autobus:33 minibus:57 minibus:77 minibus:79
+308,Gradac B,43.803499,18.183484,autobus:203 autobus:33 minibus:57 minibus:77 minibus:79
+285,Hadžići B,43.821899,18.202476,autobus:203 autobus:30 autobus:33 minibus:57 minibus:76 minibus:77 minibus:78 minibus:79 minibus:82 minibus:83
+312,Zovik B,43.788963,18.179954,autobus:203 autobus:33 minibus:57 minibus:77 minibus:79
+305,Dupovci A,43.815663,18.192786,autobus:33 minibus:57 minibus:77 minibus:79
+307,Gradac A,43.804315,18.184312,autobus:203 autobus:33 minibus:57 minibus:77 minibus:79
+284,Hadžići A,43.822145,18.203073,autobus:203 autobus:30 autobus:33 minibus:57 minibus:76 minibus:77 minibus:78 minibus:79 minibus:82 minibus:83
+311,Zovik A,43.788105,18.179647,autobus:203 autobus:33 minibus:57 minibus:77 minibus:79
+374,Bolnica Koševo A,43.866936,18.416638,autobus:14 minibus:72 minibus:74 minibus:89
+749,Krivina A,43.878345,18.438985,minibus:89
+746,Malta A,43.872628,18.429292,minibus:74 minibus:89
+761,Mrkovići,43.896315,18.434715,minibus:89
+751,Mrkovići raskršće A,43.88255,18.437947,minibus:89
+744,Panjina Kula Raskšće A,43.87239,18.426765,minibus:74 minibus:89
+88,Park,43.85933,18.41465,autobus:14 autobus:17 autobus:17b autobus:20 minibus:72 minibus:89
+656,Parlin Sokak A,43.873291,18.435724,minibus:55 minibus:74 minibus:89
+654,Ramića Potok A,43.872948,18.438786,minibus:55 minibus:89
+652,Sedrenik raskršće A,43.872208,18.44228,minibus:55 minibus:89
+748,Sedrenik samoposluga A,43.872896,18.433188,minibus:74 minibus:89
+759,Smreke A,43.885769,18.434844,minibus:89
+378,Studentski dom A,43.866974,18.421771,autobus:14 minibus:72 minibus:74 minibus:89
+375,Bolnica Koševo B,43.867181,18.416348,autobus:14 autobus:17 autobus:17b minibus:72 minibus:74 minibus:89
+750,Krivina B,43.878415,18.438771,minibus:89
+747,Malta B,43.872684,18.429238,minibus:74 minibus:89
+1139,Mrkovići B,43.896241,18.434415,minibus:89
+752,Mrkovići raskršće B,43.882492,18.437918,minibus:89
+745,Panjina Kula Raskršće B,43.872446,18.426712,minibus:74 minibus:89
+1138,Park B,43.859292,18.414706,autobus:20 minibus:62 minibus:72 minibus:89
+657,Parlin Sokak B,43.873229,18.43574,minibus:55 minibus:74 minibus:89
+655,Ramića Potok B,43.872924,18.438869,minibus:55 minibus:89
+653,Sedrenik raskršće B,43.87222,18.442158,minibus:55 minibus:89
+658,Sedrenik samoposluga B,43.872961,18.433165,minibus:55 minibus:74 minibus:89
+760,Smreke B,43.885491,18.434694,minibus:89
+379,Studentski dom B,43.866935,18.421582,autobus:14 minibus:72 minibus:74 minibus:89
+888,Ahmeda Rizve 1 A,43.901307,18.330629,minibus:94
+890,Ahmeda Rizve 38 A,43.895382,18.323084,minibus:94
+892,Ahmeda Rizve 57,43.892419,18.328071,minibus:94
+893,Garež A,43.927189,18.324293,minibus:94
+462,Ljubina A,43.975886,18.380107,autobus:202 autobus:227 autobus:29 minibus:94
+1186,Mesnica Gora A,43.961643,18.361094,minibus:94
+433,Semizovac A,43.920852,18.316654,autobus:201 autobus:202 autobus:21b autobus:22 autobus:227 autobus:29 minibus:94
+427,Vogošća (pekara) A,43.901914,18.341241,autobus:201 autobus:202 autobus:21b autobus:22 autobus:227 autobus:29 minibus:94 trolejbus:105 trolejbus:106
+889,Ahmeda Rizve 1 B,43.901253,18.330648,minibus:94
+891,Ahmeda Rizve 38 B,43.895339,18.323158,minibus:94
+1188,Ahmeda Rizve 57 B,43.891893,18.328457,minibus:94
+894,Garež B,43.927142,18.324156,minibus:94
+463,Ljubina B,43.975942,18.379978,autobus:202 autobus:223 autobus:227 autobus:29 minibus:94
+1187,Mesnica Gora B,43.961931,18.361043,minibus:94
+434,Semizovac B,43.92073,18.3165,autobus:201 autobus:202 autobus:21b autobus:22 autobus:227 autobus:29 minibus:94
+428,Vogošća B,43.901817,18.341578,autobus:201 autobus:202 autobus:21b autobus:22 autobus:227 autobus:29 minibus:94
+671,11 Plavih A,43.86786,18.451793,minibus:73 minibus:95
+639,Donje Hladivode A,43.874598,18.453802,minibus:52 minibus:73
+635,Gazin Han A,43.869274,18.451814,minibus:52 minibus:73 minibus:95
+675,Hladivode Okretnica,43.878421,18.454583,minibus:73
+637,Kruške A,43.871545,18.452362,minibus:52 minibus:73
+667,Obhodža I A,43.862312,18.448715,minibus:73 minibus:95
+669,Obhodža II A,43.86573,18.452055,minibus:73 minibus:95
+1130,Vijećnica A,43.859545,18.433132,minibus:73 minibus:95
+672,11 Plavih B,43.867603,18.451946,minibus:73 minibus:95
+640,Donje Hladivode B,43.874627,18.453701,minibus:52 minibus:73
+636,Gazin Han B,43.869496,18.451845,minibus:52 minibus:73 minibus:95
+638,Kruške B,43.87162,18.452332,minibus:52 minibus:73
+668,Obhodža I B,43.86219,18.448197,minibus:73 minibus:95
+670,Obhodža II B,43.86603,18.452493,minibus:73 minibus:95
+1131,Vijećnica B,43.859563,18.43315,minibus:73 minibus:95
+1080,Buturovići A,43.841813,18.15392,minibus:76
+292,Drozgometva A,43.840634,18.169456,autobus:30 minibus:76
+286,Grivići A,43.823047,18.194636,autobus:30 minibus:76
+1074,Košćan A,43.840882,18.1422,minibus:76
+856,Mokrine,43.837363,18.123234,minibus:75 minibus:76
+1017,Mokrine I A,43.834009,18.128145,minibus:76
+1076,Raskršće Suhodol A,43.835991,18.139465,minibus:76
+1070,Selimovići A,43.842578,18.160784,minibus:76
+288,Vrančići A,43.829554,18.178985,autobus:30 minibus:76
+1073,Buturovići B,43.841794,18.154274,minibus:76
+293,Drozgometva B,43.840533,18.169406,autobus:30 minibus:76
+287,Grivići B,43.82412,18.190276,autobus:30 minibus:76
+1075,Košćan B,43.840819,18.142392,minibus:76
+1079,Mokrine I B,43.833157,18.124139,minibus:76
+1081,Raskršće Suhodol B,43.836665,18.139675,minibus:76
+1071,Selimovići B,43.842611,18.161119,minibus:76
+289,Vrančići B,43.82926,18.179109,autobus:30 minibus:76
+757,Panjina Kula,43.87321,18.424652,minibus:72
+754,Raskrsnica Sedrenik,43.872274,18.426358,minibus:72
+756,Granap (Gornja Breka) ,43.874448,18.419496,minibus:72
+755,Raskrsnica Breka,43.870828,18.421776,minibus:72
+826,Aneks (minibus) A,43.844429,18.36969,minibus:53
+828,Cazinska,43.842631,18.37312,minibus:53
+836,Kodžina I A,43.838448,18.362124,minibus:53
+838,Kodžina II A,43.837473,18.359452,minibus:53
+832,Novopazarska I A,43.839563,18.371734,minibus:53
+834,Novopazarska II A,43.839023,18.363881,minibus:53
+171,Otoka Terminal,43.847614,18.367529,autobus:15b autobus:23c minibus:149 minibus:180 minibus:53 trolejbus:101 trolejbus:102 trolejbus:106 trolejbus:108
+840,Rasima Turkušića I A,43.83537,18.360445,minibus:53
+842,Rasima Turkušića II (okretnica),43.83472,18.356733,minibus:53
+830,Vrbovska A,43.839747,18.375075,minibus:53
+827,Aneks (minibus) B,43.844478,18.369751,minibus:53
+837,Kodžina I B,43.838342,18.36207,minibus:53
+839,Kodžina II B,43.83751,18.359511,minibus:53
+833,Novopazarska I B,43.839507,18.371721,minibus:53
+835,Novopazarska II B,43.838919,18.363937,minibus:53
+1141,Rasima Turkušića I B,43.835439,18.360471,minibus:53
+841,Rasima Turkušića II B,43.834669,18.356957,minibus:53
+829,Velikokladuška ,43.842724,18.373164,minibus:53
+831,Vrbovska B,43.839685,18.375116,minibus:53
+626,Baščaršija Terminal,43.860589,18.431462,minibus:51 minibus:52 minibus:55 minibus:58
+633,Dol A,43.865999,18.448454,minibus:52
+645,Donje Biosko A,43.880824,18.469808,minibus:52
+643,Donji Faletići A,43.879278,18.465719,minibus:52
+647,Gornji Faletići,43.882466,18.474912,minibus:52
+641,OŠ Faletići A,43.877232,18.457342,minibus:52
+627,Ploča A,43.863627,18.437505,minibus:51 minibus:52 minibus:55
+629,Vratnik A,43.862317,18.440849,minibus:51 minibus:52 minibus:55
+634,Dol B,43.866035,18.44843,minibus:52
+646,Donje Biosko B,43.880857,18.469799,minibus:52
+644,Donji Faletići B,43.879502,18.46583,minibus:52
+642,OŠ Faletići B,43.877292,18.457283,minibus:52
+628,Ploča B,43.863579,18.437734,minibus:51 minibus:52 minibus:55
+630,Vratnik B,43.862381,18.440847,minibus:51 minibus:52 minibus:55
+1082,Kasatići I A,43.803028,18.203432,minibus:82
+1084,Kasatići okretnica,43.797905,18.205239,minibus:82
+1025,Žunovnica A,43.816087,18.208264,minibus:82
+1083,Kasatići I B,43.803198,18.203865,minibus:82
+1026,Žunovnica B,43.816287,18.20836,minibus:82
+870,Donji Ljubovčići A,43.769796,18.157458,minibus:79
+313,Dub A,43.786095,18.167034,autobus:33 minibus:79
+866,Ferhatlije A,43.779387,18.157496,minibus:79
+868,Jeleč A,43.773076,18.156922,minibus:79
+872,Ljubovčići,43.762703,18.162163,minibus:79
+871,Donji Ljubovčići B,43.769742,18.157596,minibus:79
+314,Dub B,43.785,18.16856,autobus:33 minibus:77 minibus:79
+867,Ferhatlije B,43.779244,18.15749,minibus:79
+869,Jeleč B,43.773084,18.156986,minibus:79
+1343,"Bašćice A (A,M)",43.912015,18.364973,minibus:60
+1339,"Blagovac I A (A,M)",43.905095,18.359182,minibus:60
+1342,"Blagovac II A (A,M)",43.912959,18.360153,minibus:60
+1340,"Blagovac MZ A (A,M)",43.909596,18.358488,minibus:60
+1341,"Krivina Blagovac A (A,M)",43.910926,18.356172,minibus:60
+1338,"Pretis A (A,M)",43.899887,18.357202,minibus:60
+873,Sportska dvorana A,43.900014,18.34675,minibus:60
+1344,"Tihovići okretnica (A,M)",43.915457,18.372826,minibus:60
+1337,Vogošća (terminal),43.90035,18.337971,autobus:22a minibus:60 trolejbus:105 trolejbus:106
+1345,"Bašćice B (A,M)",43.912334,18.364501,minibus:60
+1351,"Blagovac I B (A,M)",43.904923,18.359236,minibus:60
+1346,"Blagovac II B (A,M)",43.912967,18.36053,minibus:60
+1352,"Blagovac MZ B (A,M)",43.909014,18.358666,minibus:60
+1347,"Krivina Blagovac B (A,M)",43.910638,18.356419,minibus:60
+1350,"Pretis B (A,M)",43.899953,18.357153,minibus:60
+1182,Džamija ( Orahov brijeg ),43.895796,18.386792,minibus:155
+1177,Kenana Brkanića br. 40,43.888745,18.388119,minibus:155
+412,Kobilja Glava A,43.882989,18.384303,autobus:201 autobus:202 autobus:21 autobus:21b autobus:22 autobus:227 autobus:29 minibus:155 trolejbus:105 trolejbus:106
+1183,Orahov brijeg br.16,43.894838,18.384866,minibus:155
+1184,Orahov brijeg br. 31,43.889648,18.381078,minibus:155
+382,Pijaca Ciglane A,43.866398,18.409959,autobus:16 autobus:16b autobus:20b autobus:21 autobus:21b autobus:22 autobus:227 autobus:29 minibus:155 trolejbus:105 trolejbus:106
+1180,"Raskrsnica ulica Ramiza Gugača, Kenana Brkanića i Orahov brijeg A",43.895652,18.392985,minibus:155
+410,Šip A,43.879715,18.389445,autobus:21 autobus:21b autobus:22 minibus:155 trolejbus:105 trolejbus:106
+406,Stadion A,43.87212,18.406224,autobus:20b autobus:21 autobus:21b autobus:22 autobus:227 autobus:29 minibus:155
+405,Sutjeska,43.861529,18.412681,autobus:21 autobus:21b autobus:22 autobus:29 minibus:155 minibus:68 minibus:69
+409,Bare B,43.878661,18.400666,autobus:201 autobus:202 autobus:20b autobus:21 autobus:21b autobus:22 autobus:227 autobus:29 minibus:155 trolejbus:105 trolejbus:106
+1178,Kenana Brkanića  br. 55,43.891425,18.39071,minibus:155
+1179,Kenana Brkanića br. 91,43.894074,18.392502,minibus:155
+1185,Orahov brijeg br.91,43.893337,18.382802,minibus:155
+383,Pijaca Ciglane B,43.866787,18.409497,autobus:16 autobus:16b autobus:20b autobus:21 autobus:21b autobus:22 autobus:227 autobus:29 minibus:155 trolejbus:105 trolejbus:106
+1176,Prodavnica Brojler ( na Kobiljoj Glavi ) ,43.883575,18.384821,minibus:155
+1181,"Raskrsnica ulica Ramiza Gugača, Kenana Brkanića i Orahov brijeg B",43.895617,18.392855,minibus:155
+411,Šip B,43.879077,18.390588,autobus:21 autobus:21b autobus:22 minibus:155 trolejbus:105 trolejbus:106
+407,Stadion B,43.871814,18.40653,autobus:20b autobus:21 autobus:21b autobus:22 autobus:227 autobus:29 minibus:155
+372,Medicinski fakultet A,43.865805,18.413563,autobus:14 autobus:17 autobus:17b minibus:74
+381,Park Terminal,43.85933,18.41465,autobus:20b minibus:74
+758,Rogina,43.871856,18.438782,minibus:74
+373,Medicinski fakultet B,43.865148,18.413182,autobus:14 autobus:17 autobus:17b minibus:74
+1021,Raskršće Trzanj A,43.777519,18.071006,minibus:90
+935,Smucka A,43.788102,18.080075,minibus:90
+899,Tarčin Terminal,43.793851,18.091918,minibus:78 minibus:80 minibus:81 minibus:90
+945,Trzanj,43.76801,18.081865,minibus:90
+943,Trzanj I A,43.770459,18.077424,minibus:90
+941,Trzanj II A,43.77607,18.076206,minibus:90
+939,Trzanj III A,43.779044,18.074056,minibus:90
+325,Vrbanja A,43.789532,18.081723,autobus:33 minibus:90
+1022,Raskršće Trzanj B,43.777894,18.071034,minibus:90
+936,Smucka B,43.788284,18.0805,minibus:90
+944,Trzanj I B,43.770358,18.077617,minibus:90
+942,Trzanj II B,43.775921,18.076334,minibus:90
+940,Trzanj III B,43.779061,18.073925,minibus:90
+326,Vrbanja B,43.790164,18.082744,autobus:33 minibus:90
+536,Jezero A,43.876363,18.412741,autobus:20 minibus:68 minibus:69
+764,Kromolj A,43.889167,18.409521,minibus:68
+205,Pijaca B,43.867555,18.412122,minibus:68 minibus:69 trolejbus:102 trolejbus:107
+772,Poljine,43.900428,18.394547,minibus:68
+770,Poljine I A,43.897606,18.399938,minibus:68
+766,Rudine A,43.892959,18.408024,minibus:68
+768,Sjenica A,43.895399,18.402998,minibus:68
+762,Slatina A,43.878874,18.409926,minibus:68
+207,Stadion Koševo B,43.872866,18.412053,autobus:20 minibus:68 minibus:69 trolejbus:102 trolejbus:107
+969,Jezero B,43.876113,18.412575,autobus:20 minibus:68 minibus:69
+765,Kromolj B,43.8891,18.409417,minibus:68
+204,Pijaca A,43.866275,18.412362,minibus:68 minibus:69 trolejbus:102 trolejbus:107
+771,Poljine I B,43.897492,18.399793,minibus:68
+767,Rudine B,43.89289,18.407991,minibus:68
+769,Sjenica B,43.895372,18.402876,minibus:68
+763,Slatina B,43.878817,18.409798,minibus:68
+206,Stadion Koševo A,43.871711,18.411924,autobus:20 minibus:68 minibus:69 trolejbus:102 trolejbus:107
+1367,Bijela voda A,43.665243,18.26465,minibus:85
+1051,Bogatići A ,43.728326,18.410464,autobus:45 autobus:47 minibus:85
+1358,Brutusi A,43.681826,18.405142,autobus:45 minibus:85
+1362,Dejčići A,43.685442,18.3397,autobus:45 minibus:85
+1360,Dujmovići A,43.662137,18.358786,autobus:45 minibus:85
+1041,Garež AA,43.684946,18.446741,autobus:47 minibus:85
+212,Ilidža Terminal,43.831311,18.308081,autobus:27 autobus:27E-1 autobus:27a autobus:27b autobus:28 autobus:28e autobus:30 autobus:32 autobus:33 autobus:38 autobus:43 autobus:44 autobus:45 autobus:46 autobus:47 autobus:49 autobus:75 (A) minibus:75 minibus:84 minibus:85
+1355,Ilovice A,43.701573,18.443547,autobus:45 minibus:85
+1049,Kijevo A,43.753805,18.408025,autobus:45 autobus:47 minibus:85
+1353,Kijevo škola A,43.739848,18.405491,autobus:45 minibus:85
+1047,Krupac A,43.777445,18.362918,autobus:45 autobus:47 minibus:85
+1356,Pendičići A,43.679326,18.438226,autobus:45 minibus:85
+1371,Raskršće Šabići A,43.652406,18.237651,minibus:85
+1369,Šabići A,43.659227,18.263582,minibus:85
+1373,Sinanovići ,43.614099,18.261821,minibus:85 minibus:85a
+1368,Bijela voda B ,43.664989,18.264557,minibus:85
+1052,Bogatići B,43.728436,18.410499,autobus:45 autobus:47 minibus:85
+1359,Brutusi B ,43.681836,18.405404,autobus:45 minibus:85
+1363,Dejčići B,43.685377,18.33969,autobus:45 minibus:85
+1361,Dujmovići B ,43.663967,18.357493,autobus:45 minibus:85
+1042,Garež BA,43.684764,18.446973,autobus:47 minibus:85
+1366,Ilovice B ,43.701628,18.443688,autobus:45 minibus:85
+1050,Kijevo B,43.754494,18.408058,autobus:45 autobus:47 minibus:85
+1354,Kijevo škola B,43.74121,18.405461,autobus:45 minibus:85
+1048,Krupac B,43.777597,18.36229,autobus:45 autobus:47 minibus:85
+1357,Pendičići B ,43.679327,18.438393,autobus:45 minibus:85
+1372,Raskršće Šabići B ,43.652489,18.238009,minibus:85
+1370,Šabići B,43.659262,18.263779,minibus:85
+934,Luke,43.807031,18.120124,minibus:81
+932,Luke I A,43.808332,18.116109,minibus:81
+928,Sivci I A,43.799644,18.102607,minibus:81
+930,Sivci II A,43.805682,18.113491,minibus:81
+933,Luke I B,43.808363,18.116039,minibus:81
+929,Sivci I B,43.799695,18.102579,minibus:81
+931,Sivci II B,43.805688,18.113404,minibus:81
+719,Brajkovac,43.848846,18.422822,minibus:59
+714,Cicin Han II A,43.850664,18.420432,minibus:59
+718,Hambina Carina ,43.848018,18.421063,minibus:59
+708,Jevrejsko groblje A,43.848926,18.409717,minibus:59
+720,Komatin I A,43.848626,18.425319,minibus:59
+724,Komatin Okretnica,43.847198,18.426127,minibus:59
+702,Kovačići Minibus A,43.85208,18.405816,minibus:59
+704,Ljubljanska A,43.84825,18.402738,minibus:59
+706,Raskršće Ohridska A,43.84774,18.405829,minibus:59
+716,Širokača A,43.851184,18.424182,minibus:59
+712,Škola Cicin Han A,43.849559,18.4177,minibus:59
+710,Soukbunar A,43.848714,18.414693,minibus:59
+715,Cicin Han II B,43.850735,18.42045,minibus:59
+180,Čobanija,43.855443,18.420804,autobus:18 autobus:41 autobus:41a minibus:59 trolejbus:101 trolejbus:103 trolejbus:104 trolejbus:105
+709,Jevrejsko groblje B,43.848925,18.409896,minibus:59
+721,Komatin I B,43.848634,18.425375,minibus:59
+703,Kovačići Minibus B,43.852181,18.405946,minibus:59
+705,Ljubljanska B,43.848235,18.402927,minibus:59
+707,Raskršće Ohridska B,43.847803,18.405816,minibus:59
+717,Širokača B,43.851581,18.424928,minibus:59
+713,Škola Cicin Han B,43.849585,18.417628,minibus:59
+711,Soukbunar B,43.848757,18.414609,minibus:59
+806,Bakarevac A,43.863466,18.395175,minibus:67
+474,Ekonomska škola A,43.85567,18.392141,autobus:15 autobus:18 autobus:23 autobus:23a minibus:65 minibus:66 minibus:67
+1128,Fabrika duhana I A,43.859987,18.390671,minibus:65 minibus:66 minibus:67
+557,Humska A,43.862509,18.386523,autobus:18 minibus:65 minibus:66 minibus:67
+802,Ruđera Boškovića A,43.863837,18.389259,minibus:67
+804,Vodovod A,43.862286,18.393043,minibus:67
+1127,Bakarevac B,43.863536,18.395195,minibus:67
+475,Ekonomska škola B,43.855856,18.391887,autobus:15 autobus:18 autobus:23 autobus:23a minibus:65 minibus:66 minibus:67
+1129,Fabrika duhana I B,43.859945,18.390589,minibus:65 minibus:66 minibus:67
+558,Humska B,43.862433,18.386603,autobus:18 minibus:65 minibus:66 minibus:67
+803,Ruđera Boškovića B,43.863894,18.389279,minibus:67
+805,Vodovod B,43.862328,18.393093,minibus:67
+559,Donji Pofalići A,43.862577,18.383984,autobus:18 minibus:65 minibus:66
+788,Obad,43.854529,18.367231,minibus:65
+786,Trafostanica (Zahira Panjete) A,43.858224,18.373399,minibus:65
+555,Vranica A,43.8619,18.388549,autobus:18 minibus:65
+782,Zahira Panjete I A,43.861248,18.382474,minibus:65
+784,Zahira Panjete II A,43.859972,18.378118,minibus:65
+560,Donji Pofalići B,43.862609,18.384153,autobus:18 minibus:65 minibus:66
+787,Trafostanica (Zahira Panjete) B,43.858224,18.37359,minibus:65
+783,Zahira Panjete I B,43.860836,18.382413,minibus:65
+785,Zahira Panjete II B,43.860003,18.37819,minibus:65
+515,Briješće II B,43.857166,18.322476,autobus:22a autobus:23 autobus:23a autobus:24 minibus:180 minibus:61 minibus:71
+854,Džamija B,43.864847,18.331506,minibus:61
+517,Kolonija B,43.862747,18.316729,autobus:22a autobus:23 autobus:23a autobus:24 minibus:180 minibus:61 minibus:71
+844,MZ Sokolje B,43.865719,18.317599,minibus:180 minibus:61
+848,Numan paše Ćuprilića B,43.867527,18.321636,minibus:180 minibus:61
+846,Raskršće Sokolje B,43.868678,18.318672,minibus:180 minibus:61
+852,Sokolje B,43.864408,18.329562,minibus:180 minibus:61
+998,Sokolje - deponija,43.861478,18.338183,minibus:61
+850,Sokolje I B,43.866476,18.326629,minibus:180 minibus:61
+571,Stup Terminal,43.843258,18.327845,autobus:22a autobus:24 autobus:26 autobus:26a minibus:61 minibus:71 minibus:71a
+514,Briješće II A,43.857905,18.321662,autobus:22a autobus:23 autobus:23a autobus:24 minibus:180 minibus:61 minibus:71
+853,Džamija A,43.864717,18.331214,minibus:61
+516,Kolonija A,43.860865,18.318604,autobus:22a autobus:23 autobus:23a autobus:24 minibus:180 minibus:61 minibus:71
+843,MZ Sokolje A,43.865773,18.317715,minibus:180 minibus:61
+847,Numan paše Ćuprilića A,43.867506,18.321531,minibus:180 minibus:61
+845,Raskršće Sokolje A,43.868616,18.318688,minibus:180 minibus:61
+851,Sokolje A,43.864044,18.329406,minibus:180 minibus:61
+849,Sokolje I A,43.866407,18.326659,minibus:180 minibus:61
+256,Blažuj A,43.840772,18.256215,autobus:203 autobus:28 autobus:30 autobus:33 autobus:46 autobus:75 (A) minibus:75 minibus:84
+1085,Miševići I A,43.844421,18.219962,minibus:84
+1087,Miševići II A,43.845837,18.22056,minibus:84
+1089,Miševići III A,43.848564,18.218327,minibus:84
+1091,Miševići IV A,43.849655,18.215045,minibus:84
+1093,Miševići okretnica,43.852046,18.217109,minibus:84
+258,Mostarsko raskršće A,43.847665,18.245689,autobus:203 autobus:28 autobus:30 autobus:33 autobus:75 (A) minibus:75 minibus:84
+250,Plandište A,43.832457,18.281237,autobus:28 autobus:28e autobus:30 autobus:33 autobus:43 autobus:46 minibus:84
+254,Sarajevo putevi A,43.833816,18.266727,autobus:28 autobus:30 autobus:33 autobus:46 minibus:84
+277,Šunji A,43.846651,18.232376,autobus:30 autobus:33 minibus:84
+252,Vrelo Bosne A,43.830464,18.273567,autobus:28 autobus:28e autobus:30 autobus:33 autobus:43 autobus:46 minibus:84
+257,Blažuj B,43.839312,18.257944,autobus:203 autobus:28 autobus:30 autobus:33 autobus:46 autobus:75 (A) minibus:75 minibus:84
+1086,Miševići I B,43.844419,18.219511,minibus:84
+1088,Miševići II B,43.845734,18.220296,minibus:84
+1090,Miševići III B,43.848458,18.218106,minibus:84
+1092,Miševići IV B,43.849534,18.214895,minibus:84
+259,Mostarsko raskšće B,43.848148,18.243863,autobus:203 autobus:28 autobus:30 autobus:33 autobus:75 (A) minibus:75 minibus:84
+251,Plandište B,43.832479,18.282787,autobus:28 autobus:28e autobus:30 autobus:33 autobus:43 autobus:46 minibus:84
+255,Sarajevo putevi B,43.833414,18.267166,autobus:28 autobus:30 autobus:33 autobus:46 minibus:84
+278,Šunji B,43.846237,18.227828,autobus:30 autobus:33 minibus:84
+253,Vrelo Bosne B,43.83045,18.272721,autobus:28 autobus:30 autobus:33 autobus:46 minibus:84
+686,Bistrik A,43.85279,18.432655,minibus:54 minibus:56 minibus:63
+727,Mahmutovac ,43.849941,18.43524,minibus:63
+725,Trafostanica A,43.851565,18.43573,minibus:63
+688,Turbe A,43.852918,18.434698,minibus:54 minibus:56 minibus:63
+687,Bistrik B,43.852826,18.432575,minibus:54 minibus:56 minibus:63
+726,Trafostanica B,43.85157,18.435831,minibus:63
+689,Turbe B,43.85297,18.434686,minibus:54 minibus:56 minibus:63
+522,Distributivni centar A,43.880252,18.306066,autobus:23a minibus:71
+1004,Dolina mira A,43.891581,18.313989,minibus:71 minibus:71a
+520,Plinara A,43.875524,18.309373,autobus:23a minibus:71
+524,Reljevo Dom,43.883602,18.304506,autobus:23a minibus:71 minibus:71a
+1038,Rječica I A,43.897322,18.291134,minibus:71 minibus:71a
+1035,Rječica II A,43.898991,18.288131,minibus:71 minibus:71a
+1034,Rječica III A,43.900658,18.286452,minibus:71 minibus:71a
+1006,Rječica - okretnica,43.901585,18.285122,minibus:71 minibus:71a
+1002,Škola A - Rječica,43.888003,18.323315,minibus:71 minibus:71a
+523,Distributivni centar B,43.880157,18.306102,autobus:23a minibus:71
+1005,Dolina mira B,43.891544,18.313717,minibus:71 minibus:71a
+1040,Dom u Rječici B,43.892046,18.307021,minibus:71 minibus:71a
+521,Plinara B,43.875488,18.309278,autobus:23a minibus:71
+1037,Rječica I B,43.897021,18.291599,minibus:71 minibus:71a
+1036,Rječica II B,43.898795,18.288675,minibus:71 minibus:71a
+1033,Rječica III B,43.901041,18.286142,minibus:71 minibus:71a
+1003,Škola B - Rječica,43.887959,18.323131,minibus:71 minibus:71a
+650,Bakije A,43.866679,18.442203,minibus:55
+648,Zmajevac A,43.866288,18.446622,minibus:55
+651,Bakije B,43.866663,18.442148,minibus:55
+649,Zmajevac B,43.866223,18.446666,minibus:55
+773,Bolnica S.M. A,43.891589,18.417277,minibus:69
+1000,Filmski studio A,43.882233,18.415202,minibus:69
+999,Jagomir,43.888284,18.416487,autobus:20 minibus:69
+781,Nahorevo,43.910081,18.410259,minibus:69
+775,Radava A,43.895853,18.415803,minibus:69
+779,Raskršće Nahorevo A,43.90581,18.4116,minibus:69
+777,Vrelo Uroševo A,43.899655,18.415503,minibus:69
+774,Bolnica S.M. B,43.891557,18.417163,minibus:69
+1001,Filmski studio B,43.882201,18.414922,minibus:69
+1146,Jagomir B ,43.887351,18.415995,autobus:20 minibus:69
+776,Radava B,43.895829,18.415733,minibus:69
+780,Raskršće Nahorevo B,43.905817,18.411524,minibus:69
+778,Vrelo Uroševo B,43.899611,18.415457,minibus:69
+1325,Ciglane A (62.lin),43.865223,18.412761,minibus:62
+743,Gornji Velešići,43.872054,18.393157,minibus:62
+737,Gornji Velešići I A,43.869038,18.39835,minibus:62
+739,Gornji Velešići II A,43.870307,18.397058,minibus:62
+990,Kino Radnik,43.859838,18.411938,minibus:62
+735,Mustafe Behmena A,43.867832,18.398031,minibus:62
+741,Plinska stanica A,43.871451,18.395475,minibus:62
+733,Trafostanica Velešića A,43.865198,18.398161,minibus:62
+1145,Ciglane B,43.866474,18.412277,autobus:20 minibus:62
+738,Gornji Velešići I B,43.869124,18.398263,minibus:62
+740,Gornji Velešići II B,43.870252,18.397046,minibus:62
+736,Mustafe Behmena B,43.867877,18.397976,minibus:62
+742,Plinska stanica B,43.871307,18.395488,minibus:62
+734,Trafostanica Velešići B,43.865157,18.398117,minibus:62
+270,Kobiljača I A,43.880094,18.199414,autobus:28 minibus:75
+268,Rakovica A,43.876022,18.206254,autobus:28 autobus:75 (A) minibus:75
+1019,Zelena meraja A,43.882964,18.179918,autobus:75 (A) minibus:75
+271,Kobiljača I B,43.88,18.199735,autobus:28 minibus:75
+269,Rakovica B,43.876743,18.206034,autobus:28 autobus:75 (A) minibus:75
+1020,Zelena meraja B,43.882853,18.179919,autobus:75 (A) minibus:75
+601,Dobroševići A,43.881872,18.286722,autobus:23a autobus:26 autobus:26a minibus:71a
+1039,Dom u Rječici A,43.892062,18.306815,minibus:71a
+1189,Reljevo Dom II A,43.887632,18.31245,minibus:71a
+602,Dobroševići B,43.88171,18.286752,autobus:23a autobus:26 autobus:26a minibus:71a
+1191,Reljevo Dom B ,43.883755,18.304488,minibus:71a
+1190,Reljevo Dom II B ,43.88759,18.312369,minibus:71a
+506,Boljakov Potok A,43.852143,18.345643,autobus:23 autobus:23a autobus:23c minibus:149 minibus:180
+512,Briješće I A,43.854477,18.328659,autobus:23 autobus:23a minibus:149 minibus:180
+1110,Buća Potok (Okretaljka),43.861541,18.338184,minibus:180
+612,Dolačka A,43.85207,18.355907,autobus:23a autobus:23c minibus:149 minibus:180
+510,Elektrotehna A,43.852737,18.333864,autobus:23 autobus:23a minibus:149 minibus:180
+155,GP Bosna A,43.852309,18.33998,minibus:149 minibus:180
+504,Klesar A (Safeta Zajke),43.852013,18.352821,autobus:23 autobus:23a autobus:23c minibus:149 minibus:180
+978,Otoka - Tvin A,43.851493,18.366176,autobus:15b autobus:23c minibus:149 minibus:180
+1313,Ras. Brezanska A,43.862988,18.334045,minibus:180
+500,Safeta Zajke A,43.853049,18.362535,autobus:23 autobus:23a autobus:23c minibus:149 minibus:180
+1311,Sokolje (džamija ) A,43.864781,18.331368,minibus:180
+507,Boljakov Potok B,43.852021,18.346561,autobus:23 autobus:23a autobus:23c minibus:149 minibus:180
+513,Briješće I B,43.854753,18.326719,autobus:23 autobus:23a minibus:180
+613,Dolačka B,43.851904,18.355336,autobus:23a autobus:23c minibus:149 minibus:180
+511,Elektrotehna B,43.852487,18.336022,autobus:23 autobus:23a minibus:149 minibus:180
+509,GP Bosna B,43.852292,18.338922,autobus:23 autobus:23a minibus:149 minibus:180
+505,Klesar B (Safeta Zajke),43.851895,18.351054,autobus:23 autobus:23a autobus:23c minibus:149 minibus:180
+979,Otoka - Tvin B,43.85032,18.366338,autobus:15b autobus:23c minibus:149 minibus:180
+1314,Ras. Brezanska B,43.863017,18.334088,minibus:180
+501,Safeta Zajke B,43.852894,18.362442,autobus:23 autobus:23a autobus:23c minibus:149 minibus:180
+1312,Sokolje (džamija ) B,43.864838,18.331474,minibus:180
+631,Vratnik Višegradska kapija ,43.861799,18.445565,minibus:51
+1030,Trafostanica D.Hadžići A,43.825409,18.21194,minibus:83
+1027,Ušivak I A,43.828064,18.220088,minibus:83
+1029,Ušivak okretnica,43.824016,18.231949,minibus:83
+1031,Trafostanica D.Hadžići B,43.825163,18.211314,minibus:83
+1028,Ušivak I B,43.828138,18.219896,minibus:83
+858,Gornji Zovik B,43.778428,18.172524,minibus:77
+863,Lokve,43.782242,18.200843,minibus:77
+859,Lokve I A,43.783781,18.180424,minibus:77
+861,Lokve II A,43.786205,18.19388,minibus:77
+860,Lokve I B,43.783823,18.180485,minibus:77
+862,Lokve II B,43.78627,18.193839,minibus:77
+1414,Babin Dol A ,43.715617,18.289112,minibus:85a
+1424,Brutusi (85a) A,43.681855,18.405531,minibus:85a
+1416,Dejčići A (85a),43.685792,18.338394,minibus:85a
+1418,Dujmovići (85a) A,43.664016,18.357485,minibus:85a
+1420,Gaj A,43.66179,18.371682,minibus:85a
+1426,Pendičići (85a) A,43.679469,18.438723,minibus:85a
+1413,Šabići (85a) A,43.658581,18.26298,minibus:85a
+1422,Trebečaj A,43.675588,18.392202,minibus:85a
+1428,Trnovo A,43.681263,18.444592,minibus:85a
+1415,Babin Dol B ,43.715748,18.289077,minibus:85a
+1425,Brutusi (85a) B,43.681952,18.405517,minibus:85a
+1417,Dejčići B (85a),43.685314,18.340012,minibus:85a
+1419,Dujmovići (85a) B ,43.66201,18.358859,minibus:85a
+1421,Gaj B,43.663068,18.372264,minibus:85a
+1427,Pendičići (85a) B,43.679536,18.438693,minibus:85a
+1430,Šabići (85a) B,43.659081,18.263464,minibus:85a
+1423,Trebečaj B ,43.676289,18.392371,minibus:85a
+1429,Trnovo B ,43.681388,18.444655,minibus:85a
+692,Hošin Brijeg,43.855024,18.440849,minibus:54
+690,Hrid A,43.853608,18.438052,minibus:54 minibus:56
+1132,Hošin Brijeg B ,43.855042,18.440789,minibus:54
+691,Hrid B,43.853665,18.437993,minibus:54 minibus:56
+815,Derviša Numića,43.848972,18.397519,minibus:70
+816,Dobojska A,43.8465,18.395634,minibus:70
+814,Grbavica Terminal,43.850607,18.395736,minibus:70
+825,Hrasno Brdo,43.840564,18.381019,minibus:70
+818,Novopazarska I A1,43.844425,18.392046,minibus:70
+821,Novopazarska II A1,43.842313,18.388183,minibus:70
+823,Raskršće Teočačka,43.841799,18.384794,minibus:70
+817,Dobojska B,43.84647,18.395593,minibus:70
+819,Novopazarska I B1,43.844391,18.39221,minibus:70
+822,Novopazarska II B1,43.842218,18.388586,minibus:70
+824,Raskršće Teočačka B,43.841781,18.384906,minibus:70
+820,Trafostanica Novopazarska,43.843086,18.390319,minibus:70
+680,Brosulje I A,43.873065,18.458638,minibus:95
+682,Brosulje II A,43.874223,18.462299,minibus:95
+684,Brosulje Okretnica,43.873875,18.467524,minibus:95
+678,Raskršće Hadžine Ravni A,43.872792,18.455728,minibus:95
+676,Rezervoar A,43.87135,18.454156,minibus:95
+681,Brosulje I B,43.873119,18.458692,minibus:95
+683,Brosulje II B,43.874297,18.462304,minibus:95
+679,Raskršće Hadžine Ravni B,43.872857,18.45574,minibus:95
+677,Rezervoar B,43.871343,18.454086,minibus:95
+1453,Hum,43.87263,18.389825,minibus:66
+789,Humska I A,43.861321,18.381552,minibus:66
+793,Humska II A,43.864923,18.383598,minibus:66
+795,Humska III A,43.8658,18.383976,minibus:66
+791,Pofalići MZ A,43.862541,18.380348,minibus:66
+797,Reisa Spahe A,43.867682,18.386942,minibus:66
+799,Reisa Spahe I A,43.869309,18.387365,minibus:66
+1134,Stara okretnica  I A ,43.86183,18.381762,minibus:66
+790,Humska I B,43.861341,18.381651,minibus:66
+794,Humska II B,43.864955,18.383574,minibus:66
+796,Humska III B,43.865855,18.383897,minibus:66
+792,Pofalići MZ B,43.862492,18.380257,minibus:66
+798,Reisa Spahe B,43.867757,18.387036,minibus:66
+800,Reisa Spahe I B,43.869304,18.387307,minibus:66
+1135,Stara okretnica I B,43.861755,18.381807,minibus:66
+1193,Budmolići A,43.771608,18.107193,minibus:78
+902,Čičci A,43.785938,18.103271,minibus:78
+904,Donja Bioča A,43.782373,18.106008,minibus:78
+908,Gornja Bioča A,43.770309,18.113617,minibus:78
+900,Japalaci A,43.790332,18.097977,minibus:78
+906,P. Put A,43.776349,18.109218,minibus:78
+1194,Budmolići B,43.771574,18.107095,minibus:78
+903,Čičci B,43.786326,18.102996,minibus:78
+905,Donja Bioča B,43.78232,18.106152,minibus:78
+909,Gornja Bioča B,43.770282,18.113671,minibus:78
+901,Japalaci B,43.790358,18.098003,minibus:78
+907,P. Put B,43.776377,18.109284,minibus:78
+1121,Briješće (okretaljka),43.859555,18.333845,minibus:149
+1119,Izeta Karšića A,43.858384,18.331658,minibus:149
+1117,Raskršće A,43.857183,18.328278,minibus:149
+1122,Briješće I B (minibus),43.855316,18.327225,minibus:149
+1120,Izeta Karšića B,43.858403,18.331512,minibus:149
+1118,Raskršće B,43.857183,18.32828,minibus:149
+659,Medrese,43.866342,18.432886,minibus:58
+660,Medrese II,43.868315,18.433164,minibus:58
+662,Mihrivode,43.869358,18.429206,minibus:58
+661,Vranica,43.86876,18.431235,minibus:58
+664,KTK,43.867456,18.428342,minibus:58
+663,Mihrivode I,43.868921,18.428326,minibus:58
+666,Sagrdžije,43.863208,18.430283,minibus:58
+665,Vrbanjuša,43.866001,18.429107,minibus:58
+925,Arnauti A,43.745779,18.079772,minibus:80
+917,Duranovići A,43.775292,18.092315,minibus:80
+913,Duranovići I A,43.782351,18.09329,minibus:80
+915,Duranovići II A,43.77817,18.09188,minibus:80
+927,Korča,43.737244,18.081061,minibus:80
+923,Muhibići A,43.755272,18.080792,minibus:80
+919,Odžak A,43.770037,18.089012,minibus:80
+921,OŠ Korča A,43.762968,18.081238,minibus:80
+911,Škola H.E. Šarić A,43.791617,18.092714,minibus:80
+926,Arnauti B,43.745779,18.079881,minibus:80
+918,Duranovići B,43.775322,18.09253,minibus:80
+914,Duranovići I B,43.782368,18.093324,minibus:80
+916,Duranovići II B,43.778185,18.091958,minibus:80
+924,Muhibići B,43.755252,18.080874,minibus:80
+920,Odžak B,43.769991,18.089059,minibus:80
+922,OŠ Korča B,43.763175,18.081404,minibus:80
+912,Škola H.E. Šarić B,43.791636,18.092803,minibus:80
+697,Brdaljka A,43.852262,18.450894,minibus:56
+699,Granap A,43.850663,18.451761,minibus:56
+695,Jarčedoli A,43.853513,18.447195,minibus:56
+701,Jarčedoli Popov Gaj,43.850831,18.454767,minibus:56
+693,Samoposluga A,43.854009,18.444107,minibus:56
+698,Brdaljka B,43.852222,18.45097,minibus:56
+700,Granap B,43.850718,18.451777,minibus:56
+696,Jarčedoli B,43.853584,18.447168,minibus:56
+694,Samoposluga B,43.85406,18.444047,minibus:56
+236,Bjelašnička A,43.813986,18.31731,autobus:27a
+232,H. Ridžanovića A,43.815629,18.312503,autobus:27a
+234,Huseina Đoze A,43.816039,18.315906,autobus:27a
+217,Koledž A,43.819989,18.309644,autobus:27 autobus:27E-1 autobus:27a
+213,Škola A,43.823424,18.319323,autobus:27 autobus:27a
+230,Sokolovići A,43.816269,18.309499,autobus:27a
+238,Sokolović Kolonija (terminus),43.810062,18.31461,autobus:27a
+215,Stadion Butmir A,43.82099,18.315015,autobus:27 autobus:27E-1 autobus:27a
+237,Bjelašnička B,43.813879,18.317375,autobus:27a
+233,H. Ridžanovića B,43.816476,18.311961,autobus:27a
+235,Huseina Đoze B,43.816152,18.315909,autobus:27a
+218,Koledž B,43.819535,18.3086,autobus:27 autobus:27E-1 autobus:27a
+214,Škola B,43.82451,18.319135,autobus:27 autobus:27a
+231,Sokolovići B,43.816754,18.309865,autobus:27a
+216,Stadion Butmir B,43.821013,18.316501,autobus:27 autobus:27E-1 autobus:27a
+618,Boljakov Potok,43.859736,18.347804,autobus:23c
+614,Smaje Šikala I A,43.855096,18.344946,autobus:23c
+616,Smaje Šikala II A,43.858017,18.34659,autobus:23c
+615,Smaje Šikala I B,43.855195,18.34486,autobus:23c
+617,Smaje Šikala II B,43.858046,18.346523,autobus:23c
+621,Avaz Bus,43.844192,18.333514,autobus:24
+518,Rajlovac A,43.869514,18.311358,autobus:22a autobus:23 autobus:23a autobus:24
+586,Smiljevići ,43.86981,18.339331,autobus:24
+584,Smiljevići I A,43.870758,18.330141,autobus:24
+578,Zabrđe I A,43.875675,18.314454,autobus:24
+580,Zabrđe II A,43.873271,18.320202,autobus:24
+582,Zabrđe III A,43.872715,18.323395,autobus:24
+519,Rajlovac B,43.869447,18.311293,autobus:22a autobus:23 autobus:23a autobus:24
+585,Smiljevići I B,43.870814,18.330069,autobus:24
+579,Zabrđe I B,43.875688,18.313933,autobus:24
+581,Zabrđe II B,43.873373,18.320163,autobus:24
+583,Zabrđe III B,43.872821,18.323254,autobus:24
+279,Binježevo A,43.841283,18.216926,autobus:203 autobus:30 autobus:33
+327,Donja Raštelica A,43.777425,18.070204,autobus:33
+281,Donji Hadžići A,43.830951,18.210987,autobus:30 autobus:33
+309,Donji Zovik A,43.796298,18.179059,autobus:33
+331,Džanići A,43.754849,18.051577,autobus:33
+319,Osenik A,43.79022,18.117595,autobus:203 autobus:33
+315,Pazarić A,43.787389,18.149663,autobus:203 autobus:33
+329,Raštelica A,43.77427,18.059601,autobus:203 autobus:33
+323,Tarčin A,43.794169,18.090756,autobus:203 autobus:33
+321,Tarčin pumpa A,43.798411,18.098669,autobus:33
+248,Vreoca A,43.831042,18.290885,autobus:28 autobus:30 autobus:33 autobus:43 autobus:46
+333,Vukovići,43.753908,18.050065,autobus:33
+280,Binježevo B,43.840589,18.216642,autobus:203 autobus:30 autobus:33
+328,Donja Raštelica B,43.777937,18.071033,autobus:33
+282,Donji Hadžići B,43.831528,18.211663,autobus:30 autobus:33
+310,Donji Zovik B,43.796511,18.179081,autobus:33
+332,Džanići B,43.75441,18.051513,autobus:33
+320,Osenik B,43.789476,18.11881,autobus:203 autobus:33
+316,Pazarić B,43.787541,18.151994,autobus:203 autobus:33
+283,Pilana,43.823181,18.207507,autobus:30 autobus:33 autobus:44
+330,Raštelica B,43.774417,18.060305,autobus:203 autobus:33
+324,Tarčin B,43.794086,18.093288,autobus:203 autobus:33
+322,Tarčin pumpa B,43.798088,18.096709,autobus:33
+249,Vreoca B,43.831092,18.290469,autobus:28 autobus:30 autobus:33 autobus:43 autobus:46
+408,Bare A,43.879085,18.399289,autobus:201 autobus:202 autobus:21 autobus:21b autobus:22 autobus:227 autobus:29 trolejbus:105 trolejbus:106
+418,Barica A,43.895088,18.371137,autobus:201 autobus:21 autobus:21b autobus:22 trolejbus:105 trolejbus:106
+424,Biokovo A,43.90087,18.347149,autobus:21 autobus:21b autobus:22 trolejbus:105 trolejbus:106
+429,Donja Jošanica A,43.902733,18.332122,autobus:201 autobus:202 autobus:21b autobus:22
+960,Donja Vogošća A,43.930465,18.303675,autobus:201 autobus:21b autobus:22
+416,Donji Hotonj A,43.893428,18.373772,autobus:202 autobus:21 autobus:21b autobus:227 autobus:29
+414,Gornji Hotonj A,43.888306,18.381745,autobus:201 autobus:202 autobus:21 autobus:21b autobus:22 autobus:227 autobus:29 trolejbus:105 trolejbus:106
+420,Jošanica A,43.897878,18.361905,autobus:21 autobus:21b autobus:22 autobus:227 autobus:29 trolejbus:105 trolejbus:106
+435,Nebočaj A,43.926603,18.305557,autobus:201 autobus:21b autobus:22
+422,TAS A,43.899251,18.357865,autobus:21 autobus:21b autobus:22 autobus:227 autobus:29 trolejbus:105 trolejbus:106
+431,Željeznička stanica Poturovići A,43.912034,18.323315,autobus:201 autobus:202 autobus:21b autobus:22
+419,Barica B,43.895637,18.37011,autobus:201 autobus:21 autobus:21b autobus:22 trolejbus:105 trolejbus:106
+430,Donja Jošanica B,43.90256,18.332916,autobus:201 autobus:202 autobus:21b autobus:22 autobus:22a
+958,Donja Vogošća terminal,43.933409,18.301883,autobus:21b
+417,Donji Hotonj B,43.892849,18.374109,autobus:202 autobus:21 autobus:21b autobus:227 autobus:29 trolejbus:105 trolejbus:106
+415,Gornji Hotonj B,43.889417,18.38211,autobus:201 autobus:202 autobus:21 autobus:21b autobus:22 autobus:227 autobus:29 trolejbus:105 trolejbus:106
+421,Jošanica B,43.897655,18.362249,autobus:21 autobus:21b autobus:22 autobus:227 autobus:29 trolejbus:105 trolejbus:106
+413,Kobilja Glava B,43.882068,18.384408,autobus:201 autobus:202 autobus:21 autobus:21b autobus:22 autobus:227 autobus:29 trolejbus:105 trolejbus:106
+436,Nebočaj B,43.926523,18.305506,autobus:201 autobus:21b autobus:22
+423,TAS B,43.899155,18.357955,autobus:21 autobus:21b autobus:22 autobus:227 autobus:29 trolejbus:105 trolejbus:106
+432,Željeznička stanica Poturovići B,43.912464,18.322913,autobus:201 autobus:202 autobus:21b autobus:22
+371,Alipašina BUS,43.859943,18.411933,autobus:14 autobus:16 autobus:16b autobus:17 autobus:17b autobus:201 autobus:202
+1136,Alipašina Džamija A,43.857097,18.412768,autobus:201 autobus:202
+1149,Autobuska stanica Sarajevo ,43.858627,18.396928,autobus:201 autobus:202 autobus:203 autobus:227
+466,Čevljanovići A,44.038759,18.458311,autobus:202 autobus:223 autobus:224 autobus:227 autobus:29
+472,Kamenica - Crna Rijeka,44.10177,18.462292,autobus:202 autobus:223 autobus:224 autobus:29
+1137,Moševići A,44.029018,18.44798,autobus:202 autobus:223 autobus:224
+468,Nišići A,44.059439,18.479881,autobus:202 autobus:223 autobus:224 autobus:29
+457,Podgora A,43.948005,18.343328,autobus:202 autobus:29
+1147,Podvožnjak A,43.866803,18.409694,autobus:201 autobus:202
+464,Srednje A,44.011253,18.436311,autobus:202 autobus:223 autobus:224 autobus:227 autobus:29
+1152,Stupe A ,43.98295,18.408316,autobus:202
+1150,Topola A,43.899326,18.357722,autobus:201 autobus:202
+467,Čevljanovići B,44.038339,18.457747,autobus:202 autobus:223 autobus:224 autobus:227 autobus:29
+1154,Moševići B ,44.028828,18.447553,autobus:202 autobus:223 autobus:224
+469,Nišići B,44.06061,18.480499,autobus:202 autobus:223 autobus:224 autobus:29
+461,Podgora B,43.947114,18.342321,autobus:202
+1148,Podvožnjak B,43.86656,18.409647,autobus:201 autobus:202
+465,Srednje B,44.010008,18.43571,autobus:202 autobus:223 autobus:224 autobus:227 autobus:29
+1153,Stupe B,43.983412,18.406764,autobus:202 autobus:223
+1151,Topola B ,43.89919,18.357778,autobus:201 autobus:202
+491,Adema Buće I A,43.858914,18.354004,autobus:15 autobus:15b
+493,Adema Buće II A,43.863224,18.351443,autobus:15 autobus:15b
+499,Buća Potok ,43.861418,18.338091,autobus:15 autobus:15b
+1096,Buća Potok R. A,43.854779,18.366281,autobus:15b
+497,Deponija A,43.861874,18.342616,autobus:15 autobus:15b
+485,Odžakovići A,43.861832,18.365964,autobus:15 autobus:15b
+487,Stara okretnica A,43.862088,18.358609,autobus:15 autobus:15b
+495,Vaga A,43.863374,18.346527,autobus:15 autobus:15b
+489,Vidikovac A,43.858252,18.356922,autobus:15 autobus:15b
+483,Zrak A,43.859169,18.366173,autobus:15 autobus:15b
+492,Adema Buće I B,43.859434,18.354108,autobus:15 autobus:15b
+494,Adema Buće II B,43.863531,18.3511,autobus:15 autobus:15b
+1097,Buća Potok R. B,43.854647,18.366214,autobus:15b
+498,Deponija B,43.861825,18.342655,autobus:15 autobus:15b
+486,Odžakovići B,43.861784,18.365673,autobus:15 autobus:15b
+488,Stara okretnica B,43.861259,18.358125,autobus:15 autobus:15b
+496,Vaga B,43.863289,18.346392,autobus:15 autobus:15b
+490,Vidikovac B,43.857796,18.357107,autobus:15 autobus:15b
+484,Zrak B,43.858915,18.365772,autobus:15 autobus:15b
+1437,"Donja Vogošća ( 222, 223) A",43.931359,18.302506,autobus:222 autobus:223
+1441,"Gora (222, 223) A",43.948582,18.34392,autobus:222 autobus:223
+1374,Ilijaš,43.958995,18.264754,autobus:201 autobus:220 autobus:221 autobus:222 autobus:223 autobus:226
+1443,"Ljubina (222, 223) A",43.975955,18.380194,autobus:222 autobus:223
+1435,"Malešići (222, 223) A",43.93872,18.291026,autobus:222 autobus:223
+1439,"Semizovac (222, 223) A",43.923236,18.319389,autobus:222 autobus:223
+1375,Srednje ,44.00954,18.434758,autobus:222 autobus:225
+1445,"Stupe (222, 223) A",43.982971,18.408191,autobus:222 autobus:223
+345,Dalas A,43.857649,18.25035,autobus:46
+343,Energopetrol A,43.850933,18.248141,autobus:46
+347,Klesar A,43.86187,18.250882,autobus:46
+349,Vlakovo,43.865265,18.250517,autobus:46
+346,Dalas B,43.857854,18.250276,autobus:46
+344,Energopetrol B,43.850386,18.247728,autobus:46
+348,Klesar B,43.862355,18.249908,autobus:46
+992,Hrasnica ,43.798436,18.313032,autobus:27b
+1333,Igmanska ,43.813311,18.305411,autobus:27b
+241,Kovači A,43.802125,18.301597,autobus:27b
+1334,Medžlis Glavogodina ,43.810209,18.29672,autobus:27b
+245,Ogrijev A,43.798217,18.309012,autobus:27b
+953,Sokolovići A 27b,43.818626,18.30767,autobus:27b
+243,Stari drum A,43.798725,18.307287,autobus:27b
+239,Stojčevac R. A,43.808368,18.299397,autobus:27b
+1336,Ahmeda Bošnjaka ,43.799208,18.310513,autobus:27b
+1335,Igmanskih bataljona ,43.804509,18.303466,autobus:27b
+242,Kovači B,43.802163,18.301682,autobus:27b
+246,Ogrijev B,43.798289,18.308883,autobus:27b
+954,Sokolovići B 27b,43.817523,18.308333,autobus:27b
+244,Stari drum B,43.798821,18.307191,autobus:27b
+240,Stojčevac R. B,43.808439,18.299448,autobus:27b
+1397,Bioča ,43.916337,18.257145,autobus:220
+1393,Biočki put A,43.936785,18.252789,autobus:220
+1391,Donja Bioča (Ilijaš) A ,43.942047,18.261499,autobus:220
+1398,Ilijaš Crkva A,43.952069,18.265703,autobus:220
+1400,Stari Ilijaš A,43.947083,18.266543,autobus:220
+1395,Vrlješ A,43.921376,18.252935,autobus:220
+1394,Biočki put B,43.936728,18.252806,autobus:220
+1392,Donja Bioča (Ilijaš) B,43.942181,18.261913,autobus:220
+1399,Ilijaš Crkva B,43.951605,18.266921,autobus:220
+1401,Stari Ilijaš B ,43.947106,18.266669,autobus:220
+1396,Vrlješ B,43.921419,18.253044,autobus:220
+221,Cvječara A,43.809718,18.310172,autobus:27 autobus:27E-1
+227,Famos A,43.79404,18.325245,autobus:27 autobus:27E-1
+223,Hrasnica (dom) A,43.79857,18.313931,autobus:27 autobus:27E-1
+229,Hrasnica (fa.),43.793632,18.327144,autobus:27
+247,Hrasnica (terminus),43.798839,18.310025,autobus:27
+225,Obdanište A,43.795294,18.322234,autobus:27 autobus:27E-1
+219,Sokolović Kolonija A,43.814538,18.308816,autobus:27 autobus:27E-1
+222,Cvječara B,43.811265,18.310072,autobus:27 autobus:27E-1
+228,Famos B,43.794151,18.325345,autobus:27 autobus:27E-1
+224,Hrasnica (dom) B,43.79851,18.31438,autobus:27 autobus:27E-1
+226,Obdanište B,43.795342,18.322368,autobus:27 autobus:27E-1
+220,Sokolović Kolonija B,43.817502,18.308331,autobus:27 autobus:27E-1
+576,Krivoglavci A,43.902423,18.32674,autobus:22a
+574,Reljevo Dvor A,43.883775,18.321118,autobus:22a
+572,Zabrđe A,43.875431,18.312205,autobus:22a
+577,Krivoglavci B,43.901718,18.326546,autobus:22a
+575,Reljevo Dvor B,43.883816,18.320967,autobus:22a
+573,Zabrđe B,43.87643,18.312594,autobus:22a
+297,Butmir II A,43.818057,18.326758,autobus:32
+295,Butmir MZ A,43.824051,18.320465,autobus:32
+299,Butmir Okretnica,43.812266,18.326329,autobus:32
+302,Donji Kotorac A,43.814502,18.339442,autobus:32
+304,Donji Kotorac Okretnica,43.817142,18.34208,autobus:32
+300,Elementara A,43.819189,18.330678,autobus:32
+298,Butmir II B,43.818349,18.326682,autobus:32
+296,Butmir MZ B,43.822897,18.324091,autobus:32
+303,Donji Kotorac B,43.814595,18.339418,autobus:32
+301,Elementara B,43.819495,18.330882,autobus:32
+1402,Mrakovo I A ,43.969983,18.271735,autobus:226
+1406,Mrakovo II A,43.973609,18.278722,autobus:226
+1404,Mrakovo Raskršće A,43.971113,18.277374,autobus:226
+1412,Popovići,43.979487,18.29116,autobus:226
+1408,Salkanov Han I A,43.978373,18.28046,autobus:226
+1410,Salkanov Han II A,43.981822,18.279922,autobus:226
+1403,Mrakovo I B ,43.969947,18.2715,autobus:226
+1407,Mrakovo II B ,43.973608,18.278627,autobus:226
+1405,Mrakovo Raskršće B,43.971023,18.277281,autobus:226
+1409,Salkanov Han I B ,43.978436,18.280328,autobus:226
+1411,Salkanov Han II B,43.981849,18.279881,autobus:226
+459,Kamenica A,43.956586,18.353612,autobus:29
+470,Polje A,44.07914,18.46923,autobus:29
+460,Kamenica B,43.957885,18.35546,autobus:29
+458,Podgora B,43.931602,18.332781,autobus:227 autobus:29
+471,Polje B,44.079084,18.469195,autobus:29
+360,Bare I A,43.844812,18.302448,autobus:49
+593,Bare II A1,43.851984,18.302541,autobus:49
+1331,Bare (škola) A,43.847898,18.306009,autobus:49
+368,Doglodi Okretnica,43.852985,18.29533,autobus:49
+358,Otes II,43.840016,18.296711,autobus:49
+359,Otes Okretnica,43.84136,18.296034,autobus:49
+350,Pejton A,43.835406,18.300775,autobus:49
+1329,Spomenik,43.838138,18.298416,autobus:49
+352,Barska,43.83604,18.298117,autobus:49
+356,Otes MZ B,43.839307,18.299696,autobus:49
+351,Pejton B,43.833225,18.300177,autobus:49
+357,Trg Oteškog Bataljona,43.841616,18.297524,autobus:49
+354,Vjekoslava Klaića,43.838275,18.301486,autobus:49
+361,Bare I B,43.844767,18.301639,autobus:49
+1330,Bare II B ,43.850111,18.306435,autobus:49
+1332,Bare (škola) B ,43.847868,18.3059,autobus:49
+367,Doglodi I B,43.850845,18.300867,autobus:49
+398,Asima Ferhatovića A,43.871488,18.415296,autobus:17
+395,Bolnica Koševo A1,43.867344,18.417244,autobus:17 autobus:17b
+400,Breka,43.873214,18.418027,autobus:17
+369,Dom Armije,43.857911,18.424167,autobus:14 autobus:16 autobus:16b autobus:17 autobus:17b
+396,Ortopedija A,43.869643,18.417396,autobus:17
+370,Pozorište,43.857651,18.419943,autobus:14 autobus:16 autobus:16b autobus:17 autobus:17b
+399,Asima Ferhatovića B,43.871119,18.415278,autobus:17
+397,Ortopedija B,43.86954,18.417448,autobus:17
+84,Pošta,43.856564,18.420019,autobus:14 autobus:16 autobus:16b autobus:17 autobus:17b autobus:27E-1 autobus:31e tramvaj:1 tramvaj:11 tramvaj:2 tramvaj:3 tramvaj:5
+1168,Donje Selo A,44.043294,18.518819,autobus:227
+1172,Dragoradi A,44.051546,18.571578,autobus:227
+1160,Draževići A,44.032466,18.500574,autobus:227
+1174,Dugi Do A,44.032488,18.506852,autobus:227
+1162,Gajevi A,44.031817,18.517062,autobus:227
+1166,Gajevi I A,44.034335,18.51024,autobus:227
+1158,Ivančići A,44.04446,18.474062,autobus:227
+895,Podgora A,43.931586,18.332872,autobus:227
+1170,Sudići A,44.052919,18.537096,autobus:227
+1164,Vrutci A,44.024218,18.531166,autobus:227
+1169,Donje Selo B ,44.043355,18.518722,autobus:227
+1173,Dragoradi B ,44.051544,18.571722,autobus:227
+1161,Draževići B,44.033395,18.498235,autobus:227
+1175,Dugi Do B ,44.032592,18.50661,autobus:227
+1163,Gajevi B ,44.032022,18.516981,autobus:227
+1167,Gajevi I B,44.034328,18.510093,autobus:227
+1159,Ivančići B,44.045234,18.469934,autobus:227
+1171,Sudići B,44.052892,18.537274,autobus:227
+1165,Vrutci B ,44.023796,18.530153,autobus:227
+92,Dobrinja III A1,43.830765,18.351197,autobus:31 autobus:31e
+527,Dobrinja Terminal A,43.825227,18.351539,autobus:31 autobus:31e autobus:38 trolejbus:103 trolejbus:107 trolejbus:108
+91,Dobrinja trafostanica A,43.826001,18.349673,autobus:31 autobus:31e autobus:38 trolejbus:103 trolejbus:107 trolejbus:108
+95,Dobrinja V A,43.833234,18.346696,autobus:31 autobus:31e autobus:39
+526,Mojmilo (Ante Babića),43.83816,18.34292,autobus:31 autobus:31e autobus:39
+525,Nedžarići Terminal,43.844504,18.340618,autobus:31 autobus:31e autobus:36 autobus:39
+99,Vojničko polje A,43.840919,18.341911,autobus:31 autobus:31e autobus:39
+93,Dobrinja III B1,43.82714,18.348737,autobus:31 autobus:31e
+90,Dobrinja trafostanica B,43.826179,18.349481,autobus:31 autobus:31e autobus:38 trolejbus:103 trolejbus:107 trolejbus:108
+94,Dobrinja V B,43.83432,18.345296,autobus:31 autobus:31e autobus:39
+96,Mojmilo B,43.836753,18.343649,autobus:31 autobus:31e autobus:39
+98,Vojničko polje B,43.84177,18.341911,autobus:31 autobus:31e autobus:39
+274,Kobiljača A,43.88293,18.179828,autobus:28 autobus:75 (A)
+1069,Mokrine,43.837749,18.124226,autobus:75 (A)
+275,Kobiljača B,43.882899,18.179858,autobus:28 autobus:75 (A)
+380,Podhrastovi,43.868736,18.423498,autobus:14
+376,Višnjik A,43.866308,18.418196,autobus:14
+377,Višnjik B,43.866379,18.418147,autobus:14
+970,Drvenija terminal A,43.856266,18.423336,autobus:18 autobus:41 autobus:41a
+567,Gornji Velešići,43.86977,18.400009,autobus:41
+561,Halida Kajtaza A,43.862488,18.401639,autobus:41 autobus:41a
+975,Kranjčevića A,43.858943,18.402254,autobus:41 autobus:41a
+973,Marijin Dvor A (BUS),43.856463,18.406773,autobus:41 autobus:41a
+563,Tehnički pregled A,43.865212,18.40099,autobus:41 autobus:41a
+565,Velešići MZ A,43.866661,18.399731,autobus:41
+971,Drvenija terminal B,43.856112,18.423456,autobus:18 autobus:41 autobus:41a
+562,Halida Kajtaza B,43.862185,18.401392,autobus:41 autobus:41a
+976,Kranjčevića B,43.858811,18.40212,autobus:41 autobus:41a
+974,Marijin Dvor B (BUS),43.857348,18.406672,autobus:41 autobus:41a
+564,Tehnički pregled B,43.865038,18.400937,autobus:41 autobus:41a
+566,Velešići MZ B,43.866729,18.399745,autobus:41
+966,Aerodrom A,43.827379,18.337839,autobus:47
+1043,Kula A,43.814914,18.352783,autobus:47
+1055,Trnovo centar A,43.663759,18.445326,autobus:47
+1053,Trnovo Općina A,43.66721,18.447484,autobus:47
+1057,Trnovo pilana A,43.655254,18.443768,autobus:47
+1059,Turovi ,43.6443,18.422734,autobus:47
+1045,Vojkovići A,43.801784,18.349416,autobus:47
+967,Aerodrom B,43.82753,18.337635,autobus:47
+1044,Kula B,43.815481,18.353481,autobus:47
+1058,Pilana Trnovo B,43.655449,18.443917,autobus:47
+1056,Trnovo centar B,43.665484,18.446557,autobus:47
+1054,Trnovo Općina B,43.667372,18.447708,autobus:47
+1046,Vojkovići B,43.802791,18.349025,autobus:47
+193,Dobrinja škola A,43.827937,18.344689,autobus:38 trolejbus:103 trolejbus:107 trolejbus:108
+1310,Naselje Aerodrom I,43.831389,18.337458,autobus:36 autobus:38
+194,Dobrinja škola B,43.828639,18.343342,autobus:38 trolejbus:103 trolejbus:107 trolejbus:108
+89,Dobrinja Terminal B,43.82558,18.351696,autobus:31e autobus:38 trolejbus:103 trolejbus:107 trolejbus:108
+968,Naselje Aerodrom B,43.831465,18.337239,autobus:38
+290,Donja Drozgometva A,43.836073,18.175037,autobus:30
+291,Donja Drozgometva B,43.835656,18.175322,autobus:30
+551,Bušća I A,43.880516,18.381327,autobus:20b
+553,Bušća Okretnica,43.879162,18.379089,autobus:20b
+549,Kobilja Glava A1,43.882591,18.383776,autobus:20b
+543,Sam Šop A,43.880732,18.393955,autobus:20b
+547,Šip A1,43.882962,18.387322,autobus:20b
+545,Šip MZ A,43.881788,18.390781,autobus:20b
+552,Bušća I B,43.880471,18.381424,autobus:20b
+550,Kobilja Glava B1,43.882597,18.383823,autobus:20b
+544,Sam Šop B,43.880658,18.39401,autobus:20b
+548,Šip B1,43.882894,18.387347,autobus:20b
+546,Šip MZ B,43.881769,18.390704,autobus:20b
+388,Bare Terminal,43.878659,18.399935,autobus:16
+386,Bosnalijek A,43.875645,18.402698,autobus:16
+384,Koševsko Brdo S A,43.869948,18.406914,autobus:16 autobus:16b
+387,Bosnalijek B,43.874956,18.403139,autobus:16
+201,Hamze Hume A,43.857374,18.41236,autobus:16 autobus:16b trolejbus:102 trolejbus:107
+957,Koševsko brdo S B,43.869857,18.406953,autobus:16 autobus:16b
+1386,Donja Misoča A,43.956397,18.289412,autobus:221
+1390,Gornja Misoča ,43.954288,18.2989,autobus:221
+1384,Kasarna Misoča A,43.953803,18.281705,autobus:221
+1388,Misoča Most A,43.957488,18.294946,autobus:221
+1380,Mlini A,43.951226,18.269318,autobus:221
+1382,MZ (Misoča) A,43.952474,18.278049,autobus:221
+1387,Donja Misoča B ,43.956329,18.291358,autobus:221
+1385,Kasarna Misoča B ,43.954411,18.282668,autobus:221
+1389,Misoča Most B ,43.957531,18.294819,autobus:221
+1381,Mlini B ,43.951458,18.268008,autobus:221
+1383,MZ ( Misoča ) B,43.9529,18.279028,autobus:221
+404,Breka II,43.872733,18.419046,autobus:17b
+402,Himze Polovine A,43.871529,18.421386,autobus:17b
+403,Himze Polovine B,43.871557,18.421221,autobus:17b
+401,Safeta Pašalića ,43.870598,18.41965,autobus:17b
+426,Vogošča Terminal,43.902108,18.341101,autobus:21
+425,Biokovo B,43.90082,18.346821,autobus:21
+481,Buća Potok A,43.854245,18.366738,autobus:15 autobus:23 autobus:23a
+478,Drinska,43.859013,18.386063,autobus:15 autobus:23 autobus:23a
+476,Fabrika duhana A,43.859521,18.389882,autobus:15 autobus:23 autobus:23a
+479,Nadvožnjak A,43.856264,18.377395,autobus:15 autobus:23 autobus:23a
+473,Željeznička stanica Terminal,43.859491,18.400265,autobus:15 autobus:23 autobus:23a autobus:4 (bus)
+482,Buća Potok B,43.854192,18.36701,autobus:15 autobus:23 autobus:23a
+477,Fabrika duhana B,43.859253,18.390767,autobus:15 autobus:18 autobus:23 autobus:23a
+480,Nadvožnjak B,43.856438,18.378102,autobus:15 autobus:23 autobus:23a
+107,Alipašin Most A,43.848278,18.359705,autobus:203 autobus:31e
+111,Čengić Vila A,43.850439,18.371845,autobus:203 autobus:31e
+113,Dolac Malta A,43.851431,18.377933,autobus:203 autobus:27E-1 autobus:31e autobus:4 (bus)
+1192,Ilidža A,43.83218,18.304193,autobus:203
+1196,Nedžarići A,43.84527,18.33977,autobus:203 autobus:27E-1
+1197,Pazarić Džamija A,43.785941,18.167365,autobus:203
+117,Pofalići A,43.854065,18.391671,autobus:203 autobus:27E-1 autobus:31e autobus:4 (bus)
+106,Alipašin Most B,43.848214,18.361517,autobus:203 autobus:31e
+110,Čengić Vila B,43.85059,18.375635,autobus:203 autobus:31e autobus:4 (bus)
+112,Dolac Malta B,43.851557,18.379987,autobus:203 autobus:27E-1 autobus:31e autobus:4 (bus)
+1199,Ilidža B,43.832268,18.305153,autobus:203
+100,Nedžarići B,43.84522,18.341582,autobus:203 autobus:27E-1 autobus:31e
+1198,Pazarić Džamija B,43.78507,18.168476,autobus:203
+116,Pofalići B,43.854267,18.39335,autobus:203 autobus:27E-1 autobus:31e autobus:4 (bus)
+77,Banka,43.858892,18.419738,autobus:27E-1 autobus:31e tramvaj:1 tramvaj:11 tramvaj:2 tramvaj:3 tramvaj:5
+1308,Baščaršija,43.86004,18.431377,autobus:27E-1
+1305,Hrasnica (Famos) A,43.792875,18.329723,autobus:27E-1
+76,Katedrala,43.859685,18.42525,autobus:27E-1 autobus:31e tramvaj:1 tramvaj:11 tramvaj:2 tramvaj:3 tramvaj:5
+78,Marijin dvor A,43.856113,18.408183,autobus:27E-1 autobus:31e tramvaj:1 tramvaj:11 tramvaj:2 tramvaj:3 tramvaj:5 tramvaj:6 tramvaj:7
+1303,Osnovna škola Amer Ćenanović A,43.824442,18.318746,autobus:27E-1
+109,Otoka A,43.849214,18.366019,autobus:27E-1 autobus:31e autobus:44
+988,Park,43.858595,18.413688,autobus:27E-1 autobus:31e tramvaj:1 tramvaj:11 tramvaj:2 tramvaj:3 tramvaj:5
+105,RTV A,43.847261,18.353027,autobus:27E-1 autobus:31e
+115,Socijalno A,43.852541,18.384123,autobus:27E-1 autobus:31e autobus:4 (bus)
+1301,Stup A,43.843037,18.328529,autobus:27E-1
+119,Univerzitet,43.855612,18.397089,autobus:23a autobus:27E-1 autobus:31e autobus:4 (bus)
+85,Drvenija,43.856695,18.423547,autobus:27E-1 autobus:31e tramvaj:1 tramvaj:11 tramvaj:2 tramvaj:3 tramvaj:5
+1306,Hrasnica (Famos) B,43.792956,18.329777,autobus:27E-1
+86,Latinska ćuprija,43.85776,18.4286,autobus:27E-1 autobus:31e tramvaj:1 tramvaj:11 tramvaj:2 tramvaj:3 tramvaj:5
+82,Marijin dvor B,43.855703,18.407423,autobus:27E-1 autobus:31e tramvaj:1 tramvaj:11 tramvaj:2 tramvaj:3 tramvaj:5 tramvaj:6 tramvaj:7
+118,Muzeji,43.85545,18.402239,autobus:27E-1 autobus:31e
+1304,Osnovna škola Amer Ćenanović B ,43.824581,18.319088,autobus:27E-1
+108,Otoka B,43.849142,18.367663,autobus:27E-1 autobus:31e autobus:44
+104,RTV B,43.847183,18.354687,autobus:27E-1 autobus:31e
+83,Skenderija,43.85634,18.413543,autobus:27E-1 autobus:31e tramvaj:1 tramvaj:11 tramvaj:2 tramvaj:3 tramvaj:5
+114,Socijalno B,43.852653,18.386272,autobus:27E-1 autobus:31e autobus:4 (bus)
+1302,Stup B,43.842676,18.328735,autobus:27E-1
+87,Vijećnica,43.858798,18.433422,autobus:27E-1 tramvaj:1 tramvaj:11 tramvaj:2 tramvaj:3 tramvaj:5
+1063,Bjelašnica ,43.716698,18.283204,autobus:44
+1066,Franje Račkog,43.854308,18.403674,autobus:44
+1060,Hadžići 44 A,43.822366,18.206927,autobus:44
+1061,Malo Polje A,43.77156,18.245947,autobus:44
+1067,Nedžarići 44 A,43.845271,18.33973,autobus:44
+1062,Veliko Polje A,43.748273,18.27137,autobus:44
+1065,Malo Polje B,43.772103,18.245803,autobus:44
+1068,Nedžarići 44 B,43.845149,18.341487,autobus:44
+1064,Veliko Polje B,43.748377,18.271378,autobus:44
+508,GP Bosna A,43.852297,18.339992,autobus:23 autobus:23a
+1433,Gaj A (45),43.663054,18.372274,autobus:45
+1431,Trebečaj A (45),43.676261,18.392398,autobus:45
+1434,Gaj B (45),43.661836,18.371685,autobus:45
+1432,Trebečaj B (45),43.675607,18.392199,autobus:45
+338,Dom A,43.843792,18.277405,autobus:43
+340,Drage Filipovića A,43.847655,18.28006,autobus:43
+1011,Hendekuša A,43.852751,18.27559,autobus:43
+1009,Hendekuša II A,43.855083,18.273546,autobus:43
+1008,Hendekuša okretnica,43.860917,18.271835,autobus:43
+336,Kamenjače A,43.838211,18.276693,autobus:43
+342,Osjek (stara okr.),43.850391,18.279245,autobus:43
+334,Tukovi A,43.835573,18.279303,autobus:43
+339,Dom B,43.843736,18.277313,autobus:43
+341,Drage Filipovića B,43.8485,18.279831,autobus:43
+1012,Hendekuša B,43.851842,18.27633,autobus:43
+1010,Hendekuša II B,43.855368,18.273175,autobus:43
+337,Kamenjače B,43.838063,18.276956,autobus:43
+335,Tukovi B,43.835046,18.279587,autobus:43
+956,Vrelo Bosne B1,43.83079,18.273528,autobus:43
+1328,Aerodrom ,43.827917,18.338599,autobus:36
+528,Dom staraca,43.839849,18.335896,autobus:36
+965,Naselje Aerodrom,43.830173,18.336815,autobus:36
+962,Raskršće A,43.832015,18.330036,autobus:36
+530,Nedžarići - selo,43.830817,18.335613,autobus:36
+529,Oslobođenje,43.843851,18.335228,autobus:36
+963,Raskršće B,43.832128,18.329573,autobus:36
+531,Dobrinja II A,43.831196,18.35265,autobus:39
+535,Dobrinja IV,43.826563,18.354231,autobus:39
+533,Dobrinja IV Most A,43.828565,18.355877,autobus:39
+532,Dobrinja II B,43.831874,18.351131,autobus:39
+534,Dobrinja IV Most B,43.830183,18.356454,autobus:39
+1376,Medojevići A,44.013309,18.465719,autobus:225
+1378,Sokolina,44.017709,18.469427,autobus:225
+1377,Medojevići B,44.013345,18.465285,autobus:225
+605,Ahatovići A,43.885222,18.280361,autobus:26
+603,Ahatovići I A,43.884426,18.28351,autobus:26
+589,Azići A,43.848501,18.312433,autobus:26 autobus:26a
+364,Bare II A,43.851282,18.303631,autobus:26 autobus:26a
+591,Bare Škola A,43.850178,18.306552,autobus:26 autobus:26a
+597,Bojnik A,43.872341,18.282417,autobus:26 autobus:26a
+595,Doglodi A,43.856188,18.298998,autobus:26 autobus:26a
+599,Donji Dobroševići A,43.876793,18.291461,autobus:26 autobus:26a
+609,Gornji Ahatovići,43.889846,18.271208,autobus:26
+607,Strana A,43.886041,18.277239,autobus:26
+587,Stup Centar A,43.846943,18.316238,autobus:26 autobus:26a
+606,Ahatovići B,43.885126,18.28071,autobus:26
+604,Ahatovići I B,43.884389,18.283412,autobus:26
+590,Azići B,43.848103,18.313312,autobus:26 autobus:26a
+365,Bare II B,43.851834,18.302633,autobus:26 autobus:26a
+363,Bare škola B,43.850115,18.306428,autobus:26 autobus:26a
+598,Bojnik B,43.872331,18.282232,autobus:26 autobus:26a
+596,Doglodi B,43.856082,18.298979,autobus:26 autobus:26a
+600,Donji Dobroševići B,43.876891,18.291484,autobus:26 autobus:26a
+608,Strana B,43.885834,18.277306,autobus:26
+588,Stup Centar B,43.846831,18.316767,autobus:26
+1094,Čengić Vila (Zamjena tramvaja),43.85023,18.372528,autobus:4 (bus)
+538,Brekin Potok A,43.880757,18.413923,autobus:20
+1144,Ciglane A,43.867561,18.412114,autobus:20
+540,Donji Jagomir A,43.88514,18.415834,autobus:20
+539,Brekin Potok B,43.880928,18.413901,autobus:20
+541,Donji Jagomir B,43.884884,18.415803,autobus:20
+264,Ciglane (Rakovica) A,43.865708,18.214877,autobus:28
+262,Gladno Polje A,43.860182,18.225499,autobus:28
+266,Šamin Gaj A,43.867903,18.20835,autobus:28
+272,Škola Kobiljača A,43.882033,18.193354,autobus:28
+260,Svjetlost A,43.855305,18.231313,autobus:28
+265,Ciglane (Rakovica) B,43.865565,18.214965,autobus:28
+263,Gladno Polje B,43.860386,18.224537,autobus:28
+267,Šamin Gaj B,43.86764,18.209156,autobus:28
+273,Škola Kobiljača B,43.881845,18.193327,autobus:28
+261,Svjetlost B,43.85512,18.231258,autobus:28
+103,Alipašino polje A,43.846172,18.34585,autobus:31e
+120,Vijećnica terminal,43.859519,18.433267,autobus:31e
+102,Alipašino polje B,43.846204,18.348257,autobus:31e
+1095,Vijećnica (Zamjena),43.858805,18.433639,autobus:31e
+391,Antuna Hangija I ,43.865561,18.406596,autobus:16b
+392,Antuna Hangija II,43.863603,18.404991,autobus:16b
+394,Koševsko Brdo,43.860959,18.403627,autobus:16b
+389,Nusreta Šišića Dede,43.867838,18.404459,autobus:16b
+393,Braće Begić,43.863028,18.403402,autobus:16b
+390,Koševsko Brdo Škola,43.867169,18.405435,autobus:16b
+570,Donji Velešići,43.871504,18.401384,autobus:41a
+568,Slovin A,43.869653,18.401916,autobus:41a
+569,Slovin B,43.869828,18.401793,autobus:41a
+554,Fabrika duhana A1,43.859928,18.390653,autobus:18
+996,Gornji Pofalići - okretnica,43.862545,18.380851,autobus:18
+972,Grbavica I A BUS,43.851862,18.395984,autobus:18
+186,Kovačići A,43.852482,18.404265,autobus:18 trolejbus:101 trolejbus:102 trolejbus:103 trolejbus:104 trolejbus:106 trolejbus:107
+997,Grbavica I B,43.850537,18.39575,autobus:18
+178,Kovačići B,43.852263,18.404184,autobus:18 trolejbus:101 trolejbus:102 trolejbus:103 trolejbus:104 trolejbus:105 trolejbus:106 trolejbus:107
+556,Vranica B,43.861802,18.388585,autobus:18
+177,Zagrebačka B,43.849934,18.399455,autobus:18 trolejbus:101 trolejbus:102 trolejbus:103 trolejbus:104 trolejbus:105 trolejbus:106 trolejbus:107
+276,Vrelo Bosne,43.820691,18.267611,autobus:28e
+955,Vrelo Bosne B (28e),43.830259,18.273285,autobus:28e
+502,Alipašin Most A,43.852104,18.355805,autobus:23
+503,Alipašin Most B,43.852284,18.359172,autobus:23
+623,Ilijaš crkva A,43.951603,18.266878,autobus:201
+439,Malešići A,43.938975,18.290654,autobus:201 autobus:22
+441,Malešiči Most A,43.939736,18.279869,autobus:201 autobus:22
+443,Stari Ilijaš A,43.947191,18.266636,autobus:201 autobus:22
+959,Donja Vogošća B,43.931367,18.302577,autobus:201 autobus:22
+624,Ilijaš crkva B,43.952133,18.265642,autobus:201
+440,Malešići B,43.938703,18.291083,autobus:201 autobus:22
+442,Malešići Most B,43.939756,18.279772,autobus:201 autobus:22
+444,Stari Ilijaš B,43.947112,18.266516,autobus:201 autobus:22
+446,Ilijaš A,43.959527,18.266697,autobus:22
+445,Ilijaš policija ,43.957419,18.267846,autobus:22
+456,Lješevo A,43.99375,18.223002,autobus:22
+452,Ljubinići A,43.983394,18.238853,autobus:22
+448,Pekara A,43.966426,18.259574,autobus:22
+450,Podlugovi A,43.969778,18.254657,autobus:22
+454,Stari Drum A,43.989015,18.231561,autobus:22
+447,Ilijaš B,43.959444,18.266778,autobus:22
+961,Lješevo B,43.991645,18.226449,autobus:22
+453,Ljubinići B,43.982835,18.23905,autobus:22
+449,Pekara B,43.965668,18.260686,autobus:22
+451,Podlugovi B,43.969644,18.254558,autobus:22
+455,Stari Drum B,43.988489,18.232075,autobus:22
+1438,Donja Vogošća (223) B ,43.930534,18.303675,autobus:223
+1442,Gora (223) B,43.948124,18.343279,autobus:223
+1436,Malešići (223) B,43.93895,18.290732,autobus:223
+1440,Semizovac (223) B,43.923164,18.318253,autobus:223
+158,Alipašino Polje II B,43.839011,18.343869,trolejbus:103 trolejbus:107 trolejbus:108
+168,Aneks B,43.844974,18.370627,trolejbus:101 trolejbus:102 trolejbus:103 trolejbus:104 trolejbus:105 trolejbus:106 trolejbus:107 trolejbus:108
+196,Dobrinja III B,43.832899,18.345174,trolejbus:103 trolejbus:107 trolejbus:108
+176,Grbavica I B,43.848733,18.3934,trolejbus:101 trolejbus:102 trolejbus:103 trolejbus:104 trolejbus:105 trolejbus:106 trolejbus:107
+170,Hrasno I B,43.846337,18.37809,trolejbus:101 trolejbus:102 trolejbus:103 trolejbus:104 trolejbus:105 trolejbus:106 trolejbus:107 trolejbus:108
+174,Kružni tok Hrasno,43.846745,18.381658,trolejbus:101 trolejbus:102 trolejbus:103 trolejbus:104 trolejbus:105 trolejbus:106 trolejbus:107
+161,Mojmilo B,43.840488,18.350505,trolejbus:103 trolejbus:107 trolejbus:108
+175,Stadion Grbavica B,43.847819,18.389039,trolejbus:101 trolejbus:102 trolejbus:103 trolejbus:104 trolejbus:105 trolejbus:106 trolejbus:107
+164,Švrakino Selo B,43.842307,18.357382,trolejbus:103 trolejbus:104 trolejbus:107 trolejbus:108
+166,Švrakino Selo I B,43.843654,18.364239,trolejbus:101 trolejbus:102 trolejbus:103 trolejbus:104 trolejbus:105 trolejbus:106 trolejbus:107 trolejbus:108
+182,Trg Austrije,43.856692,18.429233,trolejbus:101 trolejbus:103 trolejbus:104 trolejbus:105
+198,"""X"" transferzala B",43.836554,18.343745,trolejbus:103 trolejbus:107 trolejbus:108
+162,Alipašino Polje I,43.841817,18.354453,trolejbus:103 trolejbus:104 trolejbus:107 trolejbus:108
+159,Alipašino Polje II A,43.839032,18.343748,trolejbus:103 trolejbus:107 trolejbus:108
+167,Aneks A,43.844918,18.370176,trolejbus:103 trolejbus:104 trolejbus:106 trolejbus:107 trolejbus:108
+195,Dobrinja III A,43.83222,18.344421,trolejbus:103 trolejbus:107 trolejbus:108
+188,Grbavica I A,43.84886,18.3936,trolejbus:101 trolejbus:102 trolejbus:103 trolejbus:104 trolejbus:106 trolejbus:107
+169,Hrasno I A,43.846154,18.374693,trolejbus:103 trolejbus:104 trolejbus:106 trolejbus:107 trolejbus:108
+160,Mojmilo A,43.840025,18.348321,trolejbus:103 trolejbus:107 trolejbus:108
+211,Safeta Hadžića,43.846476,18.37896,trolejbus:103 trolejbus:104 trolejbus:106 trolejbus:107 trolejbus:108
+189,Stadion Grbavica A,43.847504,18.386284,trolejbus:101 trolejbus:102 trolejbus:103 trolejbus:104 trolejbus:106 trolejbus:107
+163,Švrakino Selo A,43.842333,18.357124,trolejbus:103 trolejbus:104 trolejbus:107 trolejbus:108
+165,Švrakino Selo I A,43.843607,18.362654,trolejbus:103 trolejbus:104 trolejbus:106 trolejbus:107 trolejbus:108
+197,"""X"" transferzala A",43.835344,18.344105,trolejbus:103 trolejbus:107 trolejbus:108
+187,Zagrebačka A,43.850176,18.399591,trolejbus:101 trolejbus:102 trolejbus:103 trolejbus:104 trolejbus:106 trolejbus:107
+994,Depo trolejbusa,43.845864,18.356545,trolejbus:101 trolejbus:102 trolejbus:103 trolejbus:104 trolejbus:105 trolejbus:106 trolejbus:107 trolejbus:108
+192,A. B. Šimića A,43.847893,18.373424,trolejbus:101 trolejbus:102 trolejbus:103 trolejbus:106 trolejbus:108
+190,A. Šaćirbegović,43.847266,18.380624,trolejbus:101 trolejbus:102 trolejbus:103 trolejbus:106 trolejbus:108
+191,Hrasno A,43.84801,18.377763,trolejbus:101 trolejbus:102 trolejbus:103 trolejbus:106 trolejbus:108
+172,A. B. Šimića B,43.847798,18.373244,trolejbus:101 trolejbus:102 trolejbus:106 trolejbus:108
+173,Hrasno B,43.847813,18.377306,trolejbus:101 trolejbus:102 trolejbus:106 trolejbus:108
+1449,Hamze Hume A (105),43.857147,18.412793,trolejbus:105 trolejbus:106
+1447,Stadion Koševo A (105),43.872131,18.406284,trolejbus:105 trolejbus:106
+1450,Hamze Hume B (105),43.856822,18.412586,trolejbus:105 trolejbus:106
+874,Sportska dvorana B,43.900092,18.346696,trolejbus:105 trolejbus:106
+1448,Stadion Koševo B (105),43.871507,18.406933,trolejbus:105 trolejbus:106
+202,Alipašina,43.863323,18.411647,trolejbus:102 trolejbus:107
+200,Hamze Hume B,43.85722,18.412745,trolejbus:102 trolejbus:107
+209,Jezero Terminal B,43.876443,18.412525,trolejbus:102 trolejbus:107
+203,B. Pumpa,43.863863,18.411927,trolejbus:102 trolejbus:107
+537,Jezero Terminal A,43.875953,18.412409,trolejbus:102 trolejbus:107
+199,Alipašino Polje terminus,43.839998,18.349601,trolejbus:104
+135,Alipašin Most A,43.848142,18.359737,tramvaj:11 tramvaj:3 tramvaj:4 tramvaj:4 (Vanredna) tramvaj:5 tramvaj:6 tramvaj:7
+139,Alipašino Polje A,43.846173,18.346771,tramvaj:11 tramvaj:3 tramvaj:4 tramvaj:4 (Vanredna) tramvaj:5 tramvaj:6 tramvaj:7
+143,Avaz A,43.844019,18.333847,tramvaj:11 tramvaj:3 tramvaj:4 tramvaj:6
+1454,Baščaršija,43.860042,18.431385,tramvaj:1 tramvaj:11 tramvaj:2 tramvaj:3 tramvaj:5
+1468,Butmir A,43.820947,18.315137,tramvaj:11
+131,Čengić vila A,43.850055,18.371944,tramvaj:1 tramvaj:11 tramvaj:2 tramvaj:3 tramvaj:4 tramvaj:4 (Vanredna) tramvaj:5 tramvaj:6 tramvaj:7
+129,Dolac malta A,43.851431,18.37828,tramvaj:1 tramvaj:11 tramvaj:2 tramvaj:3 tramvaj:4 tramvaj:4 (Vanredna) tramvaj:5 tramvaj:6 tramvaj:7
+1475,Dom kulture A,43.798563,18.314279,tramvaj:11
+146,Energoinvest A,43.837266,18.317004,tramvaj:11 tramvaj:3 tramvaj:4 tramvaj:6
+1456,Hills A,43.827977,18.315081,tramvaj:11
+1479,Hrasnica,43.793149,18.33055,tramvaj:11
+1462,Ilidža A (Hr) ,43.830657,18.310508,tramvaj:11
+148,Kasindolska A,43.833829,18.311992,tramvaj:11 tramvaj:3 tramvaj:4 tramvaj:6
+141,Nedžarići A,43.845125,18.339905,tramvaj:11 tramvaj:3 tramvaj:4 tramvaj:4 (Vanredna) tramvaj:5 tramvaj:6 tramvaj:7
+133,Otoka A,43.849102,18.366137,tramvaj:1 tramvaj:11 tramvaj:2 tramvaj:3 tramvaj:4 tramvaj:4 (Vanredna) tramvaj:5 tramvaj:6 tramvaj:7
+124,Pofalići A,43.854006,18.391887,tramvaj:1 tramvaj:11 tramvaj:2 tramvaj:3 tramvaj:4 tramvaj:4 (Vanredna) tramvaj:5 tramvaj:6 tramvaj:7
+1474,Rasadnik A,43.810294,18.310115,tramvaj:11
+137,RTV A,43.847187,18.35346,tramvaj:11 tramvaj:3 tramvaj:4 tramvaj:4 (Vanredna) tramvaj:5 tramvaj:6 tramvaj:7
+1464,Škola A,43.823588,18.319466,tramvaj:11
+126,Socijalno A,43.852463,18.384365,tramvaj:1 tramvaj:11 tramvaj:2 tramvaj:3 tramvaj:4 tramvaj:4 (Vanredna) tramvaj:5 tramvaj:6 tramvaj:7
+1471,Sokolović kolonija A,43.815057,18.308822,tramvaj:11
+1477,Stadion Famos A,43.795476,18.322154,tramvaj:11
+1469,Stadion Igman A,43.819662,18.308381,tramvaj:11
+144,Stup A,43.842622,18.327677,tramvaj:11 tramvaj:3 tramvaj:4 tramvaj:6
+121,Tehnička škola A,43.855652,18.400312,tramvaj:1 tramvaj:11 tramvaj:2 tramvaj:3 tramvaj:4 tramvaj:4 (Vanredna) tramvaj:5 tramvaj:6 tramvaj:7
+122,Univerzitet A,43.855567,18.398028,tramvaj:1 tramvaj:11 tramvaj:2 tramvaj:3 tramvaj:4 tramvaj:4 (Vanredna) tramvaj:5 tramvaj:6 tramvaj:7
+134,Alipašin Most B,43.848154,18.360112,tramvaj:11 tramvaj:3 tramvaj:4 tramvaj:4 (Vanredna) tramvaj:5 tramvaj:6 tramvaj:7
+138,Alipašino Polje B,43.846305,18.347891,tramvaj:11 tramvaj:3 tramvaj:4 tramvaj:4 (Vanredna) tramvaj:5 tramvaj:6 tramvaj:7
+142,Avaz B,43.844373,18.335888,tramvaj:11 tramvaj:3 tramvaj:4 tramvaj:6
+1452,Bulevar B,43.841205,18.322563,tramvaj:11 tramvaj:3 tramvaj:4 tramvaj:6
+1467,Butmir B,43.821117,18.316473,tramvaj:11
+130,Čengić vila B,43.850475,18.374307,tramvaj:1 tramvaj:11 tramvaj:2 tramvaj:3 tramvaj:4 tramvaj:4 (Vanredna) tramvaj:5 tramvaj:6 tramvaj:7
+128,Dolac malta B,43.85167,18.379777,tramvaj:1 tramvaj:11 tramvaj:2 tramvaj:3 tramvaj:4 tramvaj:4 (Vanredna) tramvaj:5 tramvaj:6 tramvaj:7
+1476,Dom kulture B,43.798706,18.314116,tramvaj:11
+145,Energoinvest B,43.837903,18.318023,tramvaj:11 tramvaj:3 tramvaj:4 tramvaj:6
+1457,Hills B,43.828699,18.314276,tramvaj:11
+1463,Ilidža B (Hr),43.830746,18.310368,tramvaj:11
+147,Kasindolska B,43.833971,18.312307,tramvaj:11 tramvaj:3 tramvaj:4 tramvaj:6
+81,Muzeji,43.855566,18.402234,tramvaj:1 tramvaj:11 tramvaj:2 tramvaj:3 tramvaj:5 tramvaj:6 tramvaj:7
+140,Nedžarići B,43.845295,18.341251,tramvaj:11 tramvaj:3 tramvaj:4 tramvaj:4 (Vanredna) tramvaj:5 tramvaj:6 tramvaj:7
+132,Otoka B,43.849262,18.367483,tramvaj:1 tramvaj:11 tramvaj:2 tramvaj:3 tramvaj:4 tramvaj:4 (Vanredna) tramvaj:5 tramvaj:6 tramvaj:7
+125,Pofalići B,43.854392,18.393211,tramvaj:1 tramvaj:11 tramvaj:2 tramvaj:3 tramvaj:4 tramvaj:4 (Vanredna) tramvaj:5 tramvaj:6 tramvaj:7
+1473,Rasadnik B,43.811398,18.309905,tramvaj:11
+136,RTV B,43.847252,18.354199,tramvaj:11 tramvaj:3 tramvaj:4 tramvaj:4 (Vanredna) tramvaj:5 tramvaj:6 tramvaj:7
+1465,Škola B,43.823781,18.319512,tramvaj:11
+127,Socijalno B,43.852727,18.385969,tramvaj:1 tramvaj:11 tramvaj:2 tramvaj:3 tramvaj:4 tramvaj:4 (Vanredna) tramvaj:5 tramvaj:6 tramvaj:7
+1472,Sokolović kolonija B,43.816411,18.308515,tramvaj:11
+1478,Stadion Famos B,43.795954,18.32103,tramvaj:11
+1470,Stadion Igman B,43.819642,18.308662,tramvaj:11
+150,Stup B,43.842671,18.327666,tramvaj:11 tramvaj:3 tramvaj:4 tramvaj:6
+123,Univerzitet B,43.855506,18.397746,tramvaj:1 tramvaj:11 tramvaj:2 tramvaj:3 tramvaj:4 tramvaj:4 (Vanredna) tramvaj:5 tramvaj:6 tramvaj:7
+1113,Remiza,43.84871,18.360382,tramvaj:1 tramvaj:11 tramvaj:2 tramvaj:3 tramvaj:4 tramvaj:4 (Vanredna) tramvaj:5 tramvaj:6 tramvaj:7
+1451,Bulevar A,43.840873,18.321859,tramvaj:11 tramvaj:3 tramvaj:4 tramvaj:6
+79,Tehnička škola ŽS,43.8561,18.401434,tramvaj:1 tramvaj:4 tramvaj:4 (Vanredna)
+80,Željeznička stanica,43.859531,18.400045,tramvaj:1 tramvaj:4 tramvaj:4 (Vanredna)
+1455,Čengić Vila terminus,43.850328,18.372928,tramvaj:2
+149,Ilidža,43.831181,18.308794,tramvaj:3 tramvaj:4 tramvaj:6
+154,Nedžarići - okretn.B,43.844206,18.335474,tramvaj:4 (Vanredna) tramvaj:5 tramvaj:7
+153,Nedžarići - okretn.A,43.844386,18.335398,tramvaj:4 (Vanredna) tramvaj:5 tramvaj:7
+152,Skenderija,43.857717,18.41226,tramvaj:6 tramvaj:7

@@ -1,0 +1,328 @@
+linija_id,vrsta,linija,naziv,smjer_id,smjer,stanica,polazaka_radni,polazaka_subota,polazaka_nedjelja,vrsni_sat_7_9,prvi,zadnji
+126,minibus,98,Latinska ćuprija - Trebević,1012,Latinska ćuprija - Trebević,9,0,0,0,0.0,,
+126,minibus,98,Latinska ćuprija - Trebević,1013,Trebević - Latinska ćuprija ,8,0,0,0,0.0,,
+102,minibus,57,Pazarić - Osenik,240,Pazarić - Osenik,6,10,0,0,0.0,10:50,19:10
+102,minibus,57,Pazarić - Osenik,241,Osenik - Pazarić,6,12,0,0,0.5,05:50,19:20
+102,minibus,57,Pazarić - Osenik,242,Pazarić - Hadžići,5,3,0,0,0.5,06:00,13:30
+102,minibus,57,Pazarić - Osenik,243,Hadžići - Pazarić,5,3,0,0,0.0,10:35,16:20
+76,minibus,89,Park - Mrkovići,290,Park - Mrkovići ,13,4,3,2,0.5,07:00,17:00
+76,minibus,89,Park - Mrkovići,291,Mrkovići - Park,13,4,3,2,0.5,07:30,17:30
+124,minibus,94,Vogošća - Ahmeda Rizve - Gora- Ljubina,315,Vogošća - Ljubina,8,3,0,0,0.5,07:45,13:30
+124,minibus,94,Vogošća - Ahmeda Rizve - Gora- Ljubina,316,Ljubina - Vogošća,8,3,0,0,0.5,08:12,13:57
+124,minibus,94,Vogošća - Ahmeda Rizve - Gora- Ljubina,317,Vogošća - Gora,7,4,0,0,0.0,06:45,19:45
+124,minibus,94,Vogošća - Ahmeda Rizve - Gora- Ljubina,318,Gora - Vogošća,7,4,0,0,0.5,07:15,20:15
+124,minibus,94,Vogošća - Ahmeda Rizve - Gora- Ljubina,319,Vogošća - Ahmeda Rizve ,4,3,0,0,0.0,09:00,20:45
+124,minibus,94,Vogošća - Ahmeda Rizve - Gora- Ljubina,320,Ahmeda Rizve - Vogošća ,4,3,0,0,0.0,06:30,13:15
+67,minibus,73,Vijećnica - Hladivode,285,Vijećnica - Hladivode ,8,18,18,7,1.0,05:30,22:30
+67,minibus,73,Vijećnica - Hladivode,286,Hladivode - Vijećnica,8,18,18,7,1.0,06:00,23:00
+114,minibus,76,Hadžići - Mokrine,236,Hadžići - Mokrine,10,10,2,0,0.5,05:15,19:30
+114,minibus,76,Hadžići - Mokrine,237,Mokrine - Hadžići,10,10,2,0,1.0,05:45,20:00
+74,minibus,72,"Park - Hrastovi ""II""",292,Park - Panjina Kula,5,29,28,18,2.0,06:40,22:00
+74,minibus,72,"Park - Hrastovi ""II""",293,Panjina Kula - Park ,6,30,29,18,1.5,06:15,22:10
+101,minibus,53,Otoka - Mojmilo Brdo,294,Otoka - Mojmilo brdo ( R.Turkušića ),10,20,10,0,1.5,06:20,22:00
+101,minibus,53,Otoka - Mojmilo Brdo,295,Mojmilo brdo ( R.Turkušića) - Otoka ,10,20,10,0,1.5,06:00,21:30
+64,minibus,52,Baščaršija - Faletići,172,Baščaršija - Faletići,11,35,22,20,2.5,06:10,23:00
+64,minibus,52,Baščaršija - Faletići,177,Faletići - Baščaršija,11,36,22,21,2.5,06:00,23:15
+119,minibus,82,Hadžići - Kasatići,238,Hadžići - Kasatići,4,1,0,0,0.0,06:05,06:05
+119,minibus,82,Hadžići - Kasatići,239,Kasatići - Hadžići,4,1,0,0,0.0,06:15,06:15
+133,minibus,79,Hadžići - Ljubovčići - Pazarić,225,Hadžići - Ljubovčići - Pazarić,10,3,4,2,1.0,06:15,08:35
+133,minibus,79,Hadžići - Ljubovčići - Pazarić,226,Pazarić - Ljubovčići ,5,11,0,0,0.0,10:45,19:30
+133,minibus,79,Hadžići - Ljubovčići - Pazarić,227,Ljubovčići - Pazarić - Hadžići,10,10,4,2,1.0,05:35,19:40
+133,minibus,79,Hadžići - Ljubovčići - Pazarić,1015,Pazarić - Hadžići,6,5,0,0,0.5,06:40,13:40
+133,minibus,79,Hadžići - Ljubovčići - Pazarić,1016,Hadžići - Pazarić,6,6,0,0,0.0,11:30,19:20
+133,minibus,79,Hadžići - Ljubovčići - Pazarić,1021,Ljubovčići - Pazarić,5,4,0,0,0.0,12:10,16:20
+104,minibus,60,Vogošća - Tihovići,200,Vogošća - Tihovići,9,19,15,12,1.0,06:35,22:20
+104,minibus,60,Vogošća - Tihovići,201,Tihovići - Vogošća,8,20,16,12,1.0,06:15,22:35
+145,minibus,155,Sutjeska - Orahov brijeg,307,Sutjeska - Orahov brijeg ,10,13,0,0,1.0,06:00,20:00
+145,minibus,155,Sutjeska - Orahov brijeg,308,Orahov brijeg - Sutjeska ,11,13,0,0,1.0,06:25,20:30
+75,minibus,74,Park - Sedrenik,189,Park - Sedrenik,9,50,24,23,3.0,06:10,23:00
+75,minibus,74,Park - Sedrenik,190,Sedrenik (Rogina) - Park,9,52,25,24,3.0,05:50,23:15
+123,minibus,90,Tarčin - Trzanj,232,Tarčin - Trzanj,8,7,3,0,0.5,07:25,18:48
+123,minibus,90,Tarčin - Trzanj,233,Trzanj - Tarčin,8,7,3,0,0.5,07:40,19:00
+77,minibus,68,Sutjeska - Poljine,191,Sutjeska - Poljine,10,19,15,9,1.0,06:30,22:00
+77,minibus,68,Sutjeska - Poljine,192,Poljine - Sutjeska,10,20,16,10,1.0,06:00,22:15
+122,minibus,85,Ilidža - Šabići - Sinanovići,1030,Ilidža - Šabići - Sinanovići ,15,2,1,0,0.5,07:30,17:30
+122,minibus,85,Ilidža - Šabići - Sinanovići,1031,Sinanovići - Šabići - Ilidža,15,2,1,1,0.0,05:00,15:00
+118,minibus,81,Tarčin - Luke,230,Tarčin - Luke,5,9,0,0,0.5,06:30,19:10
+118,minibus,81,Tarčin - Luke,231,Luke - Tarčin ,5,9,0,0,0.5,06:40,19:20
+103,minibus,59,Latinska ćuprija - Širokača - Komatin,176,Latinska ćuprija - Širokača - Komatin,16,34,17,9,2.0,06:00,22:30
+103,minibus,59,Latinska ćuprija - Širokača - Komatin,1029,Komatin - Širokača - Latinska ćuprija,14,34,17,9,2.0,06:00,22:30
+108,minibus,67,Ekonomska škola - Bakarevac,301,Ekonomska škola - Bakarevac,6,6,2,0,0.5,06:15,20:15
+108,minibus,67,Ekonomska škola - Bakarevac,302,Bakarevac - Ekonomska škola ,6,6,2,0,0.5,06:30,20:30
+106,minibus,65,Ekonomska škola - Obad,1024,Ekonomska škola - Obad ,9,2,0,0,0.0,05:15,16:45
+106,minibus,65,Ekonomska škola - Obad,1025,Obad - Ekonomska škola,8,2,0,0,0.0,05:30,17:00
+105,minibus,61,Stup - Sokolje (Deponija),203,Sokolje (Deponija) - Stup,10,20,21,20,1.0,06:00,22:20
+105,minibus,61,Stup - Sokolje (Deponija),1007,Stup - Sokolje (Deponija),10,20,19,18,1.5,06:25,23:00
+121,minibus,84,Ilidža - Miševići,246,Ilidža - Miševići,12,4,2,0,0.0,06:30,17:45
+121,minibus,84,Ilidža - Miševići,247,Miševići - Ilidža Terminal,12,4,2,0,0.5,07:00,18:15
+71,minibus,63,Latinska Ćuprija - Mahmutovac,174,Latinska ćuprija - Mahmutovac,5,22,16,7,2.0,06:00,22:00
+71,minibus,63,Latinska Ćuprija - Mahmutovac,264,Mahmutovac - Latinska ćuprija,5,22,16,7,2.0,06:15,22:30
+112,minibus,71,Stup - Rjećica,221,Stup - Rječica,12,12,6,4,0.5,06:50,22:00
+112,minibus,71,Stup - Rjećica,222,Rječica - Stup,13,13,7,4,1.0,06:20,22:20
+65,minibus,55,Baščaršija - Sedrenik,173,Baščaršija - Sedrenik,9,18,18,7,1.0,05:30,22:30
+65,minibus,55,Baščaršija - Sedrenik,179,Sedrenik - Baščaršija,9,18,18,7,1.0,06:00,23:00
+110,minibus,69,Sutjeska - Nahorevo,193,Sutjeska - Nahorevo,11,19,14,10,1.5,06:30,21:55
+110,minibus,69,Sutjeska - Nahorevo,194,Nahorevo - Sutjeska,11,20,15,10,1.0,06:10,22:15
+72,minibus,62,Drvenija - Gornji Velešići (Hum),180,Drvenija - Gornji Velešići ( Hum ),10,10,4,0,1.0,06:45,19:45
+72,minibus,62,Drvenija - Gornji Velešići (Hum),1014,Gornji Velešići ( Hum ) - Drvenija ,10,10,4,0,1.0,06:15,19:15
+100,minibus,75,Ilidža - Mokrine,204,Ilidža - Mokrine,7,0,0,2,0.0,,
+100,minibus,75,Ilidža - Mokrine,205,Mokrine - Ilidža,7,0,0,2,0.0,,
+147,minibus,71a,Stup - Dobroševići - Rječica ,325,Stup - Rječica ,11,1,0,0,0.0,06:00,06:00
+147,minibus,71a,Stup - Dobroševići - Rječica ,326,Rječica - Stup,11,1,0,0,0.0,17:30,17:30
+147,minibus,71a,Stup - Dobroševići - Rječica ,327,Dobroševići - Rječica ,10,10,0,0,0.5,06:50,17:00
+147,minibus,71a,Stup - Dobroševići - Rječica ,328,Rječica - Dobroševići ,10,10,0,0,1.0,06:30,16:30
+143,minibus,180,Otoka - Sokolje,274,Otoka - Sokolje,19,15,10,7,1.0,07:00,23:00
+143,minibus,180,Otoka - Sokolje,1008,Sokolje - Otoka ,19,15,10,7,1.0,06:30,22:30
+63,minibus,51,Baščaršija - Vratnik,152,Baščaršija - Vratnik,4,17,12,0,1.0,06:00,22:00
+63,minibus,51,Baščaršija - Vratnik,153,Vratnik - Baščaršija,4,17,12,0,1.0,06:15,22:15
+120,minibus,83,Hadžići - Ušivak,244,Hadžići - Ušivak,4,2,0,0,0.5,07:05,15:50
+120,minibus,83,Hadžići - Ušivak,245,Ušivak - Hadžići,4,2,0,0,0.5,07:15,16:00
+115,minibus,77,Hadžići - Lokve - Pazarić,250,Hadžići - Lokve - Pazarić,9,4,5,2,0.5,07:15,16:20
+115,minibus,77,Hadžići - Lokve - Pazarić,252,Pazarić - Lokve,5,7,0,0,0.0,10:40,18:15
+115,minibus,77,Hadžići - Lokve - Pazarić,253,Lokve - Hadžići,7,6,6,2,0.0,05:40,19:30
+115,minibus,77,Hadžići - Lokve - Pazarić,254,Pazarić - Hadžići,6,4,0,0,0.5,07:45,19:10
+115,minibus,77,Hadžići - Lokve - Pazarić,255,Pazarić - Lokve - Hadžići,11,0,0,0,0.0,,
+115,minibus,77,Hadžići - Lokve - Pazarić,256,Hadžići - Pazarić,5,0,0,0,0.0,,
+115,minibus,77,Hadžići - Lokve - Pazarić,257,Lokve - Pazarić,5,9,0,0,0.5,07:30,18:30
+115,minibus,77,Hadžići - Lokve - Pazarić,1121,Hadžići - Lokve ,7,3,0,0,0.0,06:30,19:15
+214,minibus,85a,Sinanovići - Trnovo ,1055,Sinanovići - Trnovo ,10,1,0,0,0.0,09:30,09:30
+214,minibus,85a,Sinanovići - Trnovo ,1056,Trnovo - Sinanovići,10,1,0,0,0.0,13:30,13:30
+68,minibus,54,Latinska Ćuprija - Hošin Brijeg,283,Latinska ćuprija - Hošin brijeg ,5,15,15,0,1.0,06:20,22:20
+68,minibus,54,Latinska Ćuprija - Hošin Brijeg,284,Hošin brijeg - Latinska ćuprija,5,15,15,0,1.0,06:30,22:30
+111,minibus,70,Grbavica - Hrasno Brdo,1022,Grbavica - Hrasno brdo,7,1,0,0,0.0,17:30,17:30
+111,minibus,70,Grbavica - Hrasno Brdo,1023,Hrasno brdo - Grbavica ,8,1,0,0,0.5,07:00,07:00
+125,minibus,95,Vijećnica - Brusulje,281,Vijećnica - Brusulje,10,3,2,2,0.5,07:45,17:45
+125,minibus,95,Vijećnica - Brusulje,282,Brusulje - Vijećnica,10,3,2,2,0.5,08:15,18:15
+222,minibus,66,Ekonomska škola- Hum,1123,Ekonomska škola - Hum,12,7,2,0,0.0,05:45,20:45
+222,minibus,66,Ekonomska škola- Hum,1124,Hum - Ekonomska škola ,12,7,2,0,0.5,06:00,21:00
+113,minibus,78,Tarčin - Budmolići,321,Hadžići - Budmolići,8,1,1,1,0.0,05:00,05:00
+113,minibus,78,Tarčin - Budmolići,322,Budmolići - Hadžići ,8,1,1,1,0.0,20:30,20:30
+113,minibus,78,Tarčin - Budmolići,323,Tarčin - Budmolići ,7,14,3,2,1.0,06:30,20:20
+113,minibus,78,Tarčin - Budmolići,324,Budmolići - Tarčin ,7,14,3,2,1.0,05:30,18:40
+141,minibus,149,Otoka - Briješće,270,Otoka - Briješće,12,15,7,4,1.0,05:45,19:30
+141,minibus,149,Otoka - Briješće,271,Briješće - Otoka,12,15,7,4,1.0,05:30,19:00
+66,minibus,58,Baščaršija - Mihrivode,170,Baščaršija - Mihrivode,5,17,12,7,1.0,06:30,22:30
+66,minibus,58,Baščaršija - Mihrivode,178,Mihrivode - Baščaršija,6,17,12,7,1.0,06:45,22:45
+117,minibus,80,Tarčin - Korča,228,Tarčin - Korča,10,10,3,1,0.5,06:58,20:30
+117,minibus,80,Tarčin - Korča,229,Korča - Tarčin ,10,11,4,2,1.0,06:10,20:45
+69,minibus,56,Latinska Ćuprija - Jarčedoli,175,Latinska ćuprija - Jarčedoli ,9,16,12,9,1.0,05:40,22:40
+69,minibus,56,Latinska Ćuprija - Jarčedoli,277,Jarčedoli - Latinska ćuprija,9,16,12,9,1.0,06:00,23:00
+33,autobus,27a,Ilidža - Sokolovići,83,Ilidža - Sokolović Kolonija,9,29,17,11,2.0,06:00,22:00
+33,autobus,27a,Ilidža - Sokolovići,84,Sokolović Kolonija - Ilidža,9,32,19,12,2.0,04:05,22:30
+58,autobus,23c,Otoka - Boljakov Potok,117,Otoka - Boljakov Potok,9,35,18,8,2.0,06:00,23:00
+58,autobus,23c,Otoka - Boljakov Potok,118,Boljakov Potok - Otoka,9,35,18,8,2.0,05:30,22:30
+55,autobus,24,Stup - Smiljevići,213,Stup - Smiljevići,10,15,12,8,1.0,05:30,21:30
+55,autobus,24,Stup - Smiljevići,214,Smiljevići - Stup ,9,15,12,8,1.0,06:00,22:00
+81,autobus,33,Ilidža - Tarčin - Vukovići ,132,Ilidža - Vukovići,26,18,15,4,0.5,06:00,23:10
+81,autobus,33,Ilidža - Tarčin - Vukovići ,133,Vukovići - Ilidža,27,21,17,4,1.0,03:35,22:30
+81,autobus,33,Ilidža - Tarčin - Vukovići ,134,Ilidža - Tarčin,21,5,5,7,1.0,07:00,14:00
+81,autobus,33,Ilidža - Tarčin - Vukovići ,135,Tarčin - Ilidža,22,7,6,8,0.5,06:00,15:00
+43,autobus,21b,Sutjeska - Donja Vogošća,99,Sutjeska - Donja Vogošća,18,7,0,0,0.5,06:15,15:15
+43,autobus,21b,Sutjeska - Donja Vogošća,100,Donja Vogošća - Sutjeska,17,7,0,0,1.0,07:00,16:00
+144,autobus,202,Sarajevo – Kamenica (Crna Rijeka),303,Sarajevo - Kamenica,21,1,0,0,0.0,16:00,16:00
+144,autobus,202,Sarajevo – Kamenica (Crna Rijeka),304,Kamenica - Sarajevo,18,1,0,0,0.0,06:00,06:00
+85,autobus,15b,Otoka - Buća Potok,265,Otoka - Buća Potok,12,26,16,8,2.0,06:00,23:00
+85,autobus,15b,Otoka - Buća Potok,1040,Buća potok - Otoka ,12,26,16,8,2.0,05:30,22:30
+208,autobus,222,Ilijaš - Srednje ,1073,Ilijaš - Srednje ,8,1,0,0,0.0,13:30,13:30
+82,autobus,46,Ilidža - Vlakovo,139,Ilidža - Vlakovo,10,16,11,7,1.0,06:20,21:40
+82,autobus,46,Ilidža - Vlakovo,140,Vlakovo - Ilidža,10,17,12,8,1.0,05:45,22:05
+34,autobus,27b,Ilidža - Kovači ( Hrasnica ),305,Ilidža - Kovači - Hrasnica ,9,0,0,0,0.0,,
+34,autobus,27b,Ilidža - Kovači ( Hrasnica ),1020,Hrasnica - Kovači - Ilidža ,10,0,0,0,0.0,,
+210,autobus,220,Ilijaš - Bioča,1047,Ilijaš - Bioča,7,3,2,0,0.0,06:30,18:50
+210,autobus,220,Ilijaš - Bioča,1048,Bioča - Ilijaš,7,3,2,0,0.5,07:00,19:20
+32,autobus,27,Ilidža - Hrasnica,171,Ilidža - Hrasnica,11,49,35,33,3.0,05:20,23:15
+32,autobus,27,Ilidža - Hrasnica,209,Hrasnica - Ilidža,10,48,34,34,3.0,04:55,22:45
+54,autobus,22a,Stup - Vogošća,187,Stup - Vogošća,8,35,26,22,2.0,05:30,22:30
+54,autobus,22a,Stup - Vogošća,1026,Vogošća - Stup,9,35,26,23,2.0,06:00,23:00
+80,autobus,32,Ilidža - Butmir - Donji Kotorac,131,Ilidža - Donji Kotorac,7,29,27,11,2.0,06:00,23:10
+80,autobus,32,Ilidža - Butmir - Donji Kotorac,136,Donji Kotorac - Ilidža,7,29,28,11,1.5,05:45,23:25
+80,autobus,32,Ilidža - Butmir - Donji Kotorac,137,Ilidža - Butmir,4,21,0,12,1.5,05:45,18:50
+80,autobus,32,Ilidža - Butmir - Donji Kotorac,138,Butmir - Ilidža,4,21,1,12,2.0,06:00,19:05
+212,autobus,226,Ilijaš - Popovići ,1053,Ilijaš - Popovići ,7,8,2,0,0.0,05:45,19:30
+212,autobus,226,Ilijaš - Popovići ,1054,Popovići - Ilijaš ,7,8,2,0,0.5,06:00,19:45
+45,autobus,29,Sutjeska - Kamenica,101,Sutjeska - Kamenica,19,0,0,0,0.0,,
+45,autobus,29,Sutjeska - Kamenica,102,Kamenica - Sutjeska,19,0,0,0,0.0,,
+83,autobus,49,Ilidža - Otes - Bare - Doglodi,141,Ilidža - Doglodi,9,0,0,0,0.0,,
+83,autobus,49,Ilidža - Otes - Bare - Doglodi,143,Ilidža - Otes okretnica,5,0,0,0,0.0,,
+83,autobus,49,Ilidža - Otes - Bare - Doglodi,144,Otes okretnica - Ilidža,7,0,0,0,0.0,,
+83,autobus,49,Ilidža - Otes - Bare - Doglodi,1019,Doglodi - Ilidža ,11,0,0,0,0.0,,
+40,autobus,17,Dom Armije - Breka,93,Dom Armije - Breka,8,0,0,0,0.0,,
+40,autobus,17,Dom Armije - Breka,94,Breka - Dom Armije,8,0,0,0,0.0,,
+146,autobus,227,Sarajevo - Srednje - Dragoradi,309,Sarajevo - Dragoradi ,24,1,0,0,0.0,16:00,16:00
+146,autobus,227,Sarajevo - Srednje - Dragoradi,310,Dragoradi - Sarajevo ,24,1,0,0,0.0,05:25,05:25
+146,autobus,227,Sarajevo - Srednje - Dragoradi,311,Semizovac - Dragoradi ,14,1,0,0,0.0,15:00,15:00
+146,autobus,227,Sarajevo - Srednje - Dragoradi,312,Dragoradi - Semizovac ,14,1,0,0,0.0,10:45,10:45
+146,autobus,227,Sarajevo - Srednje - Dragoradi,313,Srednje - Dragoradi,11,1,0,0,0.0,10:00,10:00
+146,autobus,227,Sarajevo - Srednje - Dragoradi,314,Dragoradi - Srednje,11,1,0,0,0.5,07:00,07:00
+203,autobus,224,Srednje - Kamenica ( Crna Rijeka ) ,1009,Srednje - Kamenica ,5,2,0,0,0.0,12:30,14:10
+203,autobus,224,Srednje - Kamenica ( Crna Rijeka ) ,1010,Kamenica - Srednje ,4,2,0,0,0.5,08:00,13:00
+49,autobus,31,Nedžarići - Dobrinja,109,Nedžarići - Dobrinja,7,20,15,8,1.5,06:00,22:30
+49,autobus,31,Nedžarići - Dobrinja,110,Dobrinja - Nedžarići,6,20,15,8,1.5,06:15,22:45
+134,autobus,75 (A),Ilidža - Mokrine (A),234,Ilidža - Mokrine (A),7,9,7,0,0.5,06:15,20:00
+134,autobus,75 (A),Ilidža - Mokrine (A),235,Mokrine - Ilidža (A),7,10,8,0,0.0,05:30,20:40
+37,autobus,14,Dom Armije - Podhrastovi,87,Dom Armije - Podhrastovi,8,16,11,9,1.0,06:00,23:00
+37,autobus,14,Dom Armije - Podhrastovi,88,Podhrastovi - Dom Armije,8,16,11,9,1.0,06:30,23:30
+53,autobus,41,Drvenija - Gornji Velešići,115,Drvenija - Gornji Velešići,9,17,12,9,1.0,06:30,23:00
+53,autobus,41,Drvenija - Gornji Velešići,116,Gornji Velešići - Drvenija,9,17,12,9,1.0,06:00,22:00
+94,autobus,47,Ilidža - Trnovo - Turovi,217,Ilidža - Trnovo - Turovi,12,7,4,1,0.0,06:50,20:30
+94,autobus,47,Ilidža - Trnovo - Turovi,218,Turovi - Trnovo - Ilidža,12,8,5,1,0.5,05:50,21:30
+95,autobus,38,Dobrinja - Ilidža,1006,Ilidža - Dobrinja,5,13,13,0,1.0,06:45,18:45
+95,autobus,38,Dobrinja - Ilidža,1011,Dobrinja - Ilidža,5,13,13,0,1.0,06:15,18:15
+79,autobus,30,Ilidža - Hadžići - Drozgometva,127,Ilidža - Drozgometva,15,10,6,4,0.5,05:30,22:00
+79,autobus,30,Ilidža - Hadžići - Drozgometva,128,Drozgometva - Ilidža,16,10,6,4,1.0,06:00,22:30
+79,autobus,30,Ilidža - Hadžići - Drozgometva,129,Ilidža - Hadžići,11,4,3,2,0.0,10:00,21:00
+79,autobus,30,Ilidža - Hadžići - Drozgometva,130,Hadžići - Ilidža,12,4,3,2,0.0,10:30,21:30
+52,autobus,20b,Park - Šip - Bušća,113,Park - Bušća,9,25,8,8,1.5,06:30,22:30
+52,autobus,20b,Park - Šip - Bušća,114,Bušća - Park,10,25,8,8,1.5,06:00,22:00
+38,autobus,16,Dom Armije - Bare,89,Dom Armije - Bare,7,15,12,8,1.0,06:15,22:15
+38,autobus,16,Dom Armije - Bare,90,Bare - Dom Armije,7,15,12,8,1.0,05:45,21:45
+209,autobus,221,Ilijaš - Misoča,1045,Ilijaš - Misoča,7,8,1,0,0.5,05:45,19:15
+209,autobus,221,Ilijaš - Misoča,1046,Misoča - Ilijaš,7,8,1,0,0.5,06:00,19:30
+41,autobus,17b,"Dom Armije - Breka ""II""",95,"Dom Armije - Breka ""II""",7,0,0,0,0.0,,
+41,autobus,17b,"Dom Armije - Breka ""II""",96,"Breka ""II"" - Dom Armije",8,0,0,0,0.0,,
+42,autobus,21,Sutjeska - Vogošća,97,Sutjeska - Vogošća,13,46,39,36,2.0,00:00,23:30
+42,autobus,21,Sutjeska - Vogošća,98,Vogošća - Sutjeska,13,46,39,36,2.0,00:00,23:00
+46,autobus,15,Željeznička stanica - Buća Potok,103,Željeznička stanica - Buća Potok,15,0,0,0,0.0,,
+46,autobus,15,Željeznička stanica - Buća Potok,104,Buća Potok - Željeznička stanica,14,0,0,0,0.0,,
+148,autobus,203,Sarajevo - Tarčin - Raštelica,329,Sarajevo - Raštelica,18,4,4,1,0.5,07:15,17:15
+148,autobus,203,Sarajevo - Tarčin - Raštelica,330,Raštelica - Sarajevo,18,4,4,1,0.5,06:45,17:00
+200,autobus,27E-1,Baščaršija - Hrasnica (privremena linija),1002,Baščaršija - Hrasnica,23,23,12,12,0.0,12:25,22:55
+200,autobus,27E-1,Baščaršija - Hrasnica (privremena linija),1003,Hrasnica - Baščaršija,25,29,13,13,1.0,08:20,23:00
+97,autobus,44,Franje Račkog - Ilidža - Bjelašnica,219,Franje Račkog - Ilidža - Bjelašnica,8,0,0,0,0.0,,
+97,autobus,44,Franje Račkog - Ilidža - Bjelašnica,220,Bjelašnica - Ilidža - Franje Račkog,8,0,0,0,0.0,,
+48,autobus,23a,Željeznička stanica - Dobroševići,198,Željeznička stanica - Dobroševići,21,12,13,9,0.5,06:20,22:40
+48,autobus,23a,Željeznička stanica - Dobroševići,199,Dobroševići - Željeznička stanica,19,13,13,9,0.5,05:40,23:15
+98,autobus,45,Ilidža - Garež - Dejčići,1064,Ilidža - Dejčići ,12,1,1,1,0.0,17:30,17:30
+98,autobus,45,Ilidža - Garež - Dejčići,1067,Dejčići - Ilidža,12,1,1,1,0.0,05:30,05:30
+36,autobus,43,Ilidža - Osjek,85,Ilidža - Osjek,12,36,16,10,2.0,06:00,23:30
+36,autobus,43,Ilidža - Osjek,86,Osjek - Ilidža,12,37,17,11,2.0,05:30,23:30
+96,autobus,36,Nedžarići - Naselje - Aerodrom,1017,Nedžarići - Naselje Aerodrom ,5,0,0,0,0.0,,
+96,autobus,36,Nedžarići - Naselje - Aerodrom,1018,Naselje Aerodrom - Nedžarići ,6,0,0,0,0.0,,
+50,autobus,39,"Nedžarići - Dobrinja ""IV""",111,"Nedžarići - Dobrinja ""IV""",7,27,0,0,1.5,06:10,22:15
+50,autobus,39,"Nedžarići - Dobrinja ""IV""",112,"Dobrinja ""IV"" - Nedžarići",7,27,0,0,1.5,06:30,22:35
+207,autobus,225,Srednje - Sokolina,1043,Srednje - Sokolina,3,2,0,0,0.5,08:00,14:10
+207,autobus,225,Srednje - Sokolina,1044,Sokolina - Srednje,3,2,0,0,0.5,08:40,14:30
+56,autobus,26,Stup - Ahatovići,195,Stup -  Gornji Ahatovići,13,7,4,2,0.5,07:00,23:00
+56,autobus,26,Stup - Ahatovići,197,Gornji Ahatovići - Stup,13,7,4,2,0.5,07:30,23:30
+56,autobus,26,Stup - Ahatovići,1076,Stup - Ahatovići,11,12,9,7,0.5,05:00,22:00
+56,autobus,26,Stup - Ahatovići,1077,Ahatovići - Stup ,11,12,9,7,0.5,05:30,22:30
+137,autobus,4 (bus),Čengić Vila (Zamjena tramvaja) - Željeznička stanica,260,Čengić Vila (Zamjena tramvaja) - Željeznička stanica,6,0,0,0,0.0,,
+137,autobus,4 (bus),Čengić Vila (Zamjena tramvaja) - Željeznička stanica,261,Željeznička stanica - Čengić Vila (Zamjena tramvaja),6,0,0,0,0.0,,
+51,autobus,20,Park - Jagomir,299,Park - Jagomir,7,0,0,0,0.0,,
+51,autobus,20,Park - Jagomir,300,Jagomir - Park ,7,0,0,0,0.0,,
+78,autobus,28,Ilidža - Rakovica - Kobiljača,119,Ilidža - Kobiljača,15,0,0,0,0.0,,
+78,autobus,28,Ilidža - Rakovica - Kobiljača,120,Kobiljača - Ilidža,15,0,0,0,0.0,,
+78,autobus,28,Ilidža - Rakovica - Kobiljača,121,Ilidža - Rakovica,12,0,0,0,0.0,,
+78,autobus,28,Ilidža - Rakovica - Kobiljača,122,Rakovica - Ilidža,12,0,0,0,0.0,,
+60,autobus,31e,Vijećnica - Dobrinja,151,Vijećnica - Dobrinja,21,77,33,33,6.0,00:00,23:30
+60,autobus,31e,Vijećnica - Dobrinja,208,Dobrinja - Vijećnica,22,77,33,33,6.0,00:00,23:30
+39,autobus,16b,Dom Armije - Koševsko brdo,91,Dom Armije - Koševsko brdo,9,36,20,12,2.0,06:00,23:30
+39,autobus,16b,Dom Armije - Koševsko brdo,92,Koševsko brdo - Dom Armije,8,36,20,12,2.0,05:30,23:00
+57,autobus,26a,Stup - Dobroševići,196,Stup - Dobroševići,9,18,12,8,1.0,05:30,22:30
+57,autobus,26a,Stup - Dobroševići,212,Dobroševići - Stup,8,18,12,8,1.0,06:00,22:45
+84,autobus,41a,Drvenija - Donji Velešići,147,Drvenija - Donji Velešići,9,16,8,0,1.0,07:00,22:00
+84,autobus,41a,Drvenija - Donji Velešići,148,Donji Velešići - Drvenija,9,16,8,0,1.0,06:30,21:30
+93,autobus,18,Drvenija - Pofalići,183,Drvenija - Pofalići,11,18,17,8,1.0,06:30,23:30
+93,autobus,18,Drvenija - Pofalići,184,Pofalići - Drvenija,12,35,17,8,2.0,06:00,23:00
+35,autobus,28e,Ilidža - Vrelo Bosne,125,Ilidža - Vrelo Bosne,4,0,0,0,0.0,,
+35,autobus,28e,Ilidža - Vrelo Bosne,126,Vrelo Bosne - Ilidža,4,0,0,0,0.0,,
+47,autobus,23,Željeznička stanica - Rajlovac,105,Željeznička stanica - Rajlovac,16,15,13,9,1.0,05:45,22:00
+47,autobus,23,Željeznička stanica - Rajlovac,106,Rajlovac - Željeznička stanica,15,15,13,9,1.0,05:15,21:00
+205,autobus,201,Autobuska stanica - Ilijaš ,1032,Sarajevo - Ilijaš,20,17,4,2,1.0,06:15,22:15
+205,autobus,201,Autobuska stanica - Ilijaš ,1039,Ilijaš - Sarajevo,18,16,4,2,1.0,06:00,21:15
+44,autobus,22,Sutjeska - Ilijaš - Lješevo,185,Sutjeska - Lješevo,27,6,3,3,0.0,06:30,17:00
+44,autobus,22,Sutjeska - Ilijaš - Lješevo,186,Lješevo - Sutjeska,25,7,3,3,0.5,05:50,18:00
+44,autobus,22,Sutjeska - Ilijaš - Lješevo,1100,Sutjeska - Ilijaš,22,20,12,12,2.0,07:00,23:00
+44,autobus,22,Sutjeska - Ilijaš - Lješevo,1101,Ilijaš - Sutjeska,20,20,13,13,1.5,06:30,22:00
+202,autobus,223,Ilijaš - Kamenica ( Crna Rijeka ),1074,Ilijaš - Kamenica,12,3,0,0,0.5,07:00,16:10
+202,autobus,223,Ilijaš - Kamenica ( Crna Rijeka ),1075,Kamenica - Ilijaš ,12,3,0,0,0.5,05:45,15:00
+27,trolejbus,103,Dobrinja - Trg Austrije,79,Dobrinja - Trg Austrije,20,118,92,93,7.0,05:45,23:05
+27,trolejbus,103,Dobrinja - Trg Austrije,80,Trg Austrije - Dobrinja,21,124,96,96,7.5,05:40,23:45
+27,trolejbus,103,Dobrinja - Trg Austrije,162,Depo trojelbusa - Dobrinja,10,0,0,0,0.0,,
+27,trolejbus,103,Dobrinja - Trg Austrije,163,Dobrinja - Depo trolejbusa,8,0,0,0,0.0,,
+27,trolejbus,103,Dobrinja - Trg Austrije,165,Depo trolejbusa - Trg Austrije,12,0,0,0,0.0,,
+27,trolejbus,103,Dobrinja - Trg Austrije,166,Depo trolejbusa - Otoka,7,0,0,0,0.0,,
+26,trolejbus,101,Otoka - Trg Austrije,77,Otoka - Trg Austrije,12,28,11,5,2.5,06:31,22:42
+26,trolejbus,101,Otoka - Trg Austrije,78,Trg Austrije - Otoka ,12,30,12,6,2.5,06:05,23:14
+26,trolejbus,101,Otoka - Trg Austrije,1078,Depo trolejbusa - Otoka,8,0,0,0,0.0,,
+26,trolejbus,101,Otoka - Trg Austrije,1079,Depo trolejbusa - Trg Austrije,13,0,0,0,0.0,,
+225,trolejbus,106,Otoka - Vogošća,1132,Otoka - Vogošća,21,28,28,28,1.5,05:30,22:27
+225,trolejbus,106,Otoka - Vogošća,1133,Vogošća - Otoka,22,27,27,27,1.5,05:45,22:20
+225,trolejbus,106,Otoka - Vogošća,1134,Depo trolejbusa - Vogošća,22,0,0,0,0.0,,
+225,trolejbus,106,Otoka - Vogošća,1135,Vogošća - Depo trolejbusa,23,0,0,0,0.0,,
+225,trolejbus,106,Otoka - Vogošća,1136,Depo trolejbusa - Otoka,8,0,0,0,0.0,,
+29,trolejbus,102,Otoka - Jezero,71,Otoka - Jezero,13,62,53,54,4.0,06:18,22:50
+29,trolejbus,102,Otoka - Jezero,72,Jezero - Otoka,14,65,55,55,4.0,06:00,23:20
+29,trolejbus,102,Otoka - Jezero,1080,Depo trolejbusa - Jezero,14,0,0,0,0.0,,
+29,trolejbus,102,Otoka - Jezero,1081,Depo trolejbusa - Otoka,8,0,0,0,0.0,,
+30,trolejbus,108,Otoka - Dobrinja,73,Otoka - Dobrinja,16,15,15,15,1.0,06:00,21:55
+30,trolejbus,108,Otoka - Dobrinja,74,Dobrinja - Otoka,15,16,16,15,1.0,05:20,22:30
+30,trolejbus,108,Otoka - Dobrinja,1086,Depo trolejbusa - Dobrinja,10,0,0,0,0.0,,
+28,trolejbus,104,Alipašino Polje - Trg Austrije,81,Alipašino Polje - Trg Austrije,13,7,0,0,0.5,06:00,16:34
+28,trolejbus,104,Alipašino Polje - Trg Austrije,82,Trg Austrije - Alipašino Polje,14,7,0,0,1.0,06:28,17:01
+28,trolejbus,104,Alipašino Polje - Trg Austrije,1082,Depo trolejbusa - Alipašino Polje,4,0,0,0,0.0,,
+28,trolejbus,104,Alipašino Polje - Trg Austrije,1088,Alipašino Polje - Trg Austrije - Vanredni RV,14,0,0,0,0.0,,
+28,trolejbus,104,Alipašino Polje - Trg Austrije,1089,Trg Austrije - Alipašino polje - Vanredni RV,15,0,0,0,0.0,,
+28,trolejbus,104,Alipašino Polje - Trg Austrije,1090,Depo trolejbusa - Alipašino Polje - Vanredni RV,4,0,0,0,0.0,,
+28,trolejbus,104,Alipašino Polje - Trg Austrije,1091,Depo trolebusa - Trg Austrije - Vanredni RV,13,0,0,0,0.0,,
+31,trolejbus,107,Dobrinja - Jezero,75,Dobrinja - Jezero,21,51,31,31,3.0,00:45,22:15
+31,trolejbus,107,Dobrinja - Jezero,76,Jezero - Dobrinja,23,53,33,33,3.0,00:00,23:00
+31,trolejbus,107,Dobrinja - Jezero,1083,Depo trolejbusa - Dobrinja,10,0,0,0,0.0,,
+31,trolejbus,107,Dobrinja - Jezero,1084,Depo trolejbusa - Jezero,14,0,0,0,0.0,,
+218,trolejbus,105,Trg Austrije - Vogošća,1105,Trg Austrije - Vogošća,16,81,58,46,4.5,06:00,23:10
+218,trolejbus,105,Trg Austrije - Vogošća,1106,Vogošća - Trg Austrije,17,84,60,48,4.5,06:00,23:55
+218,trolejbus,105,Trg Austrije - Vogošća,1107,Depo trolejbusa - Vogošća,22,0,0,0,0.0,,
+218,trolejbus,105,Trg Austrije - Vogošća,1108,Depo trolejbusa - Trg Austrije,13,0,0,0,0.0,,
+223,tramvaj,11,Baščaršija - Hrasnica,1126,Baščaršija - Hrasnica,30,93,77,61,5.0,05:00,22:53
+223,tramvaj,11,Baščaršija - Hrasnica,1127,Hrasnica - Baščaršija,33,94,77,60,5.0,05:00,22:52
+223,tramvaj,11,Baščaršija - Hrasnica,1128,Baščaršija - Remiza,13,0,0,0,0.0,,
+223,tramvaj,11,Baščaršija - Hrasnica,1129,Remiza - Baščaršija,15,0,0,0,0.0,,
+223,tramvaj,11,Baščaršija - Hrasnica,1130,Remiza - Hrasnica,20,0,0,0,0.0,,
+223,tramvaj,11,Baščaršija - Hrasnica,1131,Hrasnica - Remiza,20,0,0,0,0.0,,
+9,tramvaj,1,Baščaršija - Željeznička stanica,45,Baščaršija - Željeznička stanica,7,75,57,53,5.0,06:00,22:45
+9,tramvaj,1,Baščaršija - Željeznička stanica,46,Željeznička stanica - Baščaršija,8,77,56,55,4.5,06:00,23:03
+9,tramvaj,1,Baščaršija - Željeznička stanica,1092,Remiza - Baščaršija,14,0,0,0,0.0,,
+9,tramvaj,1,Baščaršija - Željeznička stanica,1093,Remiza - Željeznička Stanica,9,0,0,0,0.0,,
+9,tramvaj,1,Baščaršija - Željeznička stanica,1096,Baščaršija - Remiza,12,0,0,0,0.0,,
+9,tramvaj,1,Baščaršija - Željeznička stanica,1097,Željeznička stanica - Remiza,9,0,0,0,0.0,,
+211,tramvaj,2,Baščaršija - Čengić Vila,1069,Baščaršija - Čengić Vila ,11,51,0,0,7.0,06:42,18:19
+211,tramvaj,2,Baščaršija - Čengić Vila,1070,Čengić Vila - Baščaršija,13,52,0,0,7.0,06:37,18:45
+211,tramvaj,2,Baščaršija - Čengić Vila,1071,Remiza - Baščaršija,14,0,0,0,0.0,,
+211,tramvaj,2,Baščaršija - Čengić Vila,1072,Baščaršija - Remiza,12,0,0,0,0.0,,
+211,tramvaj,2,Baščaršija - Čengić Vila,1137,Remiza - Čengić Vila,3,0,0,0,0.0,,
+211,tramvaj,2,Baščaršija - Čengić Vila,1138,Čengić Vila - Remiza,3,0,0,0,0.0,,
+130,tramvaj,3,Baščaršija - Ilidža,207,Ilidža - Baščaršija,24,182,182,182,10.0,00:00,23:30
+130,tramvaj,3,Baščaršija - Ilidža,1000,Baščaršija  - Remiza,12,0,0,0,0.0,,
+130,tramvaj,3,Baščaršija - Ilidža,1001,Remiza - Ilidža,11,0,0,0,0.0,,
+130,tramvaj,3,Baščaršija - Ilidža,1033,Remiza - Baščaršija,15,0,0,0,0.0,,
+130,tramvaj,3,Baščaršija - Ilidža,1034,Ilidža - Remiza,10,0,0,0,0.0,,
+130,tramvaj,3,Baščaršija - Ilidža,1125,Baščaršija - Ilidža,22,179,179,179,10.0,00:00,23:33
+21,tramvaj,5,Baščaršija - Nedžarići,1057,Nedžarići - Baščaršija,19,20,0,0,1.5,06:57,17:12
+21,tramvaj,5,Baščaršija - Nedžarići,1058,Baščaršija - Nedžarići,18,79,59,54,2.0,07:35,23:33
+21,tramvaj,5,Baščaršija - Nedžarići,1059,Remiza - Nedžarići,7,0,0,0,0.0,,
+21,tramvaj,5,Baščaršija - Nedžarići,1060,Nedžarići - Remiza,6,0,0,0,0.0,,
+21,tramvaj,5,Baščaršija - Nedžarići,1063,Remiza - Baščaršija,15,0,0,0,0.0,,
+21,tramvaj,5,Baščaršija - Nedžarići,1109,Baščaršija - Remiza,13,0,0,0,0.0,,
+219,tramvaj,4 (Vanredna),Željeznička stanica - Nedžarići,1110,Željeznička stanica - Nedžarići - okretnica (Vanredna),13,0,0,0,0.0,,
+219,tramvaj,4 (Vanredna),Željeznička stanica - Nedžarići,1111,Nedžarići - okretnica - Željeznička stanica (Vanredna),13,0,0,0,0.0,,
+219,tramvaj,4 (Vanredna),Željeznička stanica - Nedžarići,1112,Željeznička stanica - Remiza (Vanredna),9,0,0,0,0.0,,
+219,tramvaj,4 (Vanredna),Željeznička stanica - Nedžarići,1113,Remiza - Željeznička stanica (Vanredna),9,0,0,0,0.0,,
+219,tramvaj,4 (Vanredna),Željeznička stanica - Nedžarići,1114,Remiza - Nedžarići (Vanredna),6,0,0,0,0.0,,
+213,tramvaj,4,Željeznička stanica - Ilidža,1051,Željeznička stanica - Ilidža,18,0,0,0,0.0,,
+213,tramvaj,4,Željeznička stanica - Ilidža,1052,Ilidža - Željeznička stanica,17,0,0,0,0.0,,
+213,tramvaj,4,Željeznička stanica - Ilidža,1094,Remiza - Ilidža,11,0,0,0,0.0,,
+213,tramvaj,4,Željeznička stanica - Ilidža,1095,Remiza - Željeznička Stanica,9,0,0,0,0.0,,
+213,tramvaj,4,Željeznička stanica - Ilidža,1098,Ilidža - Remiza,10,0,0,0,0.0,,
+213,tramvaj,4,Željeznička stanica - Ilidža,1099,Željeznička stanica - Remiza,9,0,0,0,0.0,,
+204,tramvaj,6,Skenderija - Ilidža,1027,Skenderija - Ilidža,19,55,0,0,3.5,05:35,21:05
+204,tramvaj,6,Skenderija - Ilidža,1028,Ilidža - Skenderija,18,54,0,0,3.5,05:35,21:05
+204,tramvaj,6,Skenderija - Ilidža,1035,Remiza - Skenderija,10,0,0,0,0.0,,
+204,tramvaj,6,Skenderija - Ilidža,1036,Remiza - Ilidža,11,0,0,0,0.0,,
+204,tramvaj,6,Skenderija - Ilidža,1037,Ilidža - Remiza,10,0,0,0,0.0,,
+204,tramvaj,6,Skenderija - Ilidža,1038,Skenderija - Remiza,10,0,0,0,0.0,,
+206,tramvaj,7,Skenderija - Nedžarići ,1041,Skenderija - Nedžarići,14,22,0,0,3.0,07:30,17:15
+206,tramvaj,7,Skenderija - Nedžarići ,1042,Nedžarići - Skenderija,14,20,0,0,4.0,07:00,16:45
+206,tramvaj,7,Skenderija - Nedžarići ,1065,Remiza - Nedžarići,6,0,0,0,0.0,,
+206,tramvaj,7,Skenderija - Nedžarići ,1066,Nedžarići - Remiza,6,0,0,0,0.0,,
+206,tramvaj,7,Skenderija - Nedžarići ,1068,Remiza - Skenderija,10,0,0,0,0.0,,
+206,tramvaj,7,Skenderija - Nedžarići ,1120,Skenderija - Remiza,10,0,0,0,0.0,,

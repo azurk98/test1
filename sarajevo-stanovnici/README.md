@@ -252,6 +252,22 @@ najdaljeg od stanice do najbliže tramvajske/trolejbuske stanice; M8 Dobroševi�
 Skice za raspravu: širinu ulica i okretišta za minibus treba provjeriti na terenu, a OSM nema
 veći dio autobuskih linija.
 
+## Stvarni redovi vožnje (`27_javniprevozks.py`)
+
+Javni API portala Ministarstva saobraćaja KS (javniprevozks.ba; isti izvor koristi aplikacija
+Arrivo BiH): 117 linija (44 minibus, 56 autobus, 8 trolejbus, 9 tramvaj, uključujući tramvaj 11
+Baščaršija – Hrasnica), 327 smjerova, 1.167 stanica, ~4.750 polazaka radnim danom. Preuzeto
+05.11.2026 uz dozvolu korisnika, 1 zahtjev u sekundi; sirovi JSON u `raw/javniprevozks/` (ne
+commituje se), izvedene tabele u `data/jpks_*.csv`. `18_javni_prevoz.py` sada računa PTAL iz
+stvarnih stanica i polazaka (7–9 h radnim danom, jači smjer) umjesto OSM-a i pretpostavki:
+stanovnika u PTAL 5–6b je 14% (prije 4%), a periferija (Zabrđe, Dolac, Betanija, Vraca) je nešto
+slabija nego što je pretpostavka govorila.
+
+`26_nove_linije.py` uz svaki prijedlog navodi postojeće autobuske/minibus linije na dijelu trase
+izvan tramvaja/trolejbusa i preporuku: skoro svugdje već vozi linija, ali 0,5–2 puta na sat ili
+mimo naselja; P3 (Stup – Alipašin Most) je izbačen jer tim pravcem voze tramvaji 3, 6 i 11, a nova
+linija u pravom smislu je samo M1 (Hrastovi-Mrkovići).
+
 ## Google Places (`12_google_places.py`, opcionalno)
 
 Nearby Search (New) za tipove supermarket, grocery_store, convenience_store, market, food_store u
