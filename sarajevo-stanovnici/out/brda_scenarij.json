@@ -1,0 +1,45 @@
+{
+ "brdskih_zona": 126,
+ "stanovnika_brdo": 143269.21236580572,
+ "rez": {
+  "B1": {
+   "udio_brdo_dolina_danas": 0.405,
+   "udio_brdo_dolina_poslije": 0.567,
+   "auto_iz_brda_promjena_pct": -27.307,
+   "udio_grad_danas": 0.45,
+   "udio_grad_poslije": 0.53,
+   "auto_grad_promjena_pct": -14.631
+  },
+  "B2": {
+   "udio_brdo_dolina_danas": 0.405,
+   "udio_brdo_dolina_poslije": 0.605,
+   "auto_iz_brda_promjena_pct": -33.716,
+   "udio_grad_danas": 0.45,
+   "udio_grad_poslije": 0.57,
+   "auto_grad_promjena_pct": -21.894
+  }
+ },
+ "vozilo_sati": {
+  "0": 191274.1751511978,
+  "B1": 184778.4093095097,
+  "B2": 182313.71258901356
+ },
+ "presjeci": {
+  "B1": {
+   "Obala Kulina bana": -8.7,
+   "Maršala Tita": -7.7,
+   "Zmaja od Bosne (Čengić Vila)": -5.9,
+   "Bulevar Meše Selimovića": -3.5,
+   "Alipašina": -10.0,
+   "Safeta Zajke": -9.0
+  },
+  "B2": {
+   "Obala Kulina bana": -15.7,
+   "Maršala Tita": -12.2,
+   "Zmaja od Bosne (Čengić Vila)": -6.2,
+   "Bulevar Meše Selimovića": -3.5,
+   "Alipašina": -15.0,
+   "Safeta Zajke": -9.3
+  }
+ }
+}

@@ -64,7 +64,8 @@ def scen_data():
           "T6": "Sixth transversal (planned): Hrasno – Čengić Vila – Buća Potok – Hotonj",
           "T16": "First and Sixth transversals together",
           "T6O": "Sixth transversal via Otoka (at-grade junction)",
-          "T6D": "Sixth transversal via Otoka, grade-separated (no junction at Otoka)"}
+          "T6D": "Sixth transversal via Otoka, grade-separated (no junction at Otoka)",
+          "SC": "New northern road: Zabrđe – Sokolje – Buća Potok – Velešići – Koševsko brdo – Koševo (8.8 km, ≤5%, 6.3 km in tunnel)"}
     out = []
     for sc in [x for x in R.index if x != "0"]:
         r = R.loc[sc]
@@ -74,6 +75,14 @@ def scen_data():
                     "corr": [[p.presjek, float(p.promjena_pct)] for p in pr.itertuples()],
                     "times": [[c.replace("min: ", ""), float(R.loc["0", c]), float(r[c])] for c in R.columns if c.startswith("min: ")],
                     "geo": [[round(c, 5) for xy in g.coords for c in xy] for g in G[G.scenarij == sc].geometry]})
+        if sc == "SC" and (OUT / "sjeverna_cesta.json").exists():   # trasa iz 34: dijelovi u tunelu i podaci o gradnji
+            k = json.load(open(OUT / "sjeverna_cesta.json"))
+            sg = gpd.read_file(OUT / "sjeverna_cesta.geojson")
+            out[-1]["geo"] = [[round(c, 5) for xy in g.coords for c in xy] for g in sg.geometry]
+            out[-1]["tun"] = [v == "tunel" for v in sg.vrsta]
+            out[-1]["road"] = [["Length", f"{k['duzina_km']} km"], ["Steepest grade", f"{k['max_nagib_pct']:g}%"],
+                               ["In tunnel (dotted)", f"{k['tunel_km']} km"], ["Cuttings · embankments", f"{k['usjek_km']} · {k['nasip_km']} km"],
+                               ["Curves tighter than 80 m radius", str(k["ostrih_krivina_R<80m"])], ["Buildings to demolish", str(k["zgrada_za_rusenje"])]]
     pf = OUT / "prevoz_scenarij.json"
     if pf.exists():
         d = json.load(open(pf))

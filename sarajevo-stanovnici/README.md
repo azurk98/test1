@@ -350,6 +350,52 @@ Javnim prevozom: Alipašin most → Marijin Dvor 31 → 24 min, Pale → Marijin
 Ograničenja: S0 i β su pretpostavke; pješačenje i bicikl nisu u modelu; inducirana potražnja nije
 uključena; traži oko 2× vozila i vozača.
 
+## Brdska naselja i javni prevoz (`33_brda_scenarij.py`)
+
+126 brdskih zona (≥ 40 m iznad dna doline, oko 143.000 stanovnika). Isti model izbora kao u 32,
+ali samo za putovanja iz brda ili u brdo. B1: brdske linije s 8 usklađenih polazaka na sat, hod do
+stanice −40 % (gušće stanice, kosi liftovi), presjedanje 2 min. B2: B1 + 5 min više za auto s
+ciljem u centru (naplata i traženje parkinga).
+
+| | udio javnog brdo↔dolina | auta iz brda | udio javnog, cijeli grad | vozilo-sati dnevno |
+|---|---|---|---|---|
+| danas | 40 % | | 45 % | 191.274 |
+| B1 | 57 % | −27 % | 53 % | −6.500 |
+| B2 | 61 % | −34 % | 57 % | −9.000 |
+
+Presjeci B2: Obala Kulina bana −16 %, Maršala Tita −12 %, Alipašina −15 %, Safeta Zajke −9 %.
+Udio danas (45 %) i osjetljivost (β) su pretpostavke, nema ankete o načinu putovanja.
+
+## Nova sjeverna cesta (`34_sjeverna_cesta.py`, scenarij SC u `31_scenariji.py`)
+
+Trasa Zabrđe – Sokolje – Buća Potok – Velešići – Koševsko brdo – Koševo za autobuse: najviše 6 %
+uspona, poluprečnik krivine ≥ 80 m, dozvoljeno kopanje i rušenje.
+1. Najjeftiniji put na mreži 20 m (Copernicus DEM 30 m): cijena raste sa strminom terena i s
+   blizinom zgrada (OSM), tačke u naseljima su obavezne.
+2. Pojednostavljenje (Douglas–Peucker 45 m) i zaglađivanje (Chaikin), pa provjera poluprečnika.
+3. Visinski profil dinamičkim programiranjem svakih 20 m: nagib ≤ 6 %, cijena usjeka/nasipa po
+   metru razlike, tunel kad je trasa > 15 m ispod terena (cijena 60), most kad je > 12 m iznad
+   (40), rušenje (`C_RUSENJE`, zadano 120) za stanicu sa zgradom do 10 m van tunela.
+4. Izlaz: `out/sjeverna_cesta.json` (zbir), `sjeverna_cesta.geojson` (dijelovi: teren, usjek,
+   nasip, tunel, most), `sjeverna_cesta_rusenje.geojson` (zgrade na trasi).
+
+Varijante po cijeni rušenja (sve 8,8 km, najveći uspon 5 %, jedna krivina ispod 80 m, najmanji
+poluprečnik 66 m):
+
+| `C_RUSENJE` | tunel | mostovi | usjek | nasip | zgrada za rušenje |
+|---|---|---|---|---|---|
+| 0 | 2,4 km | 2,1 km | 1,6 km | 1,0 km | 149 |
+| 40 | 3,8 km | 0,2 km | 1,8 km | 1,2 km | 108 |
+| 120 (zadano) | 6,3 km | 0 | 1,1 km | 0,4 km | 16 |
+
+U modelu prometa (SC): dvije trake, 60 km/h, priključci samo u šest naselja, vrijeme po dužini
+trase. ~28.900 vozila dnevno na novoj cesti, ušteda 1.485 vozilo-sati dnevno (najviše od svih
+testiranih cesta). Safeta Zajke −32 %, Maršala Tita −18 %, Zmaja od Bosne −14 %, Alipašina −9 %;
+Otoka vršno opterećenje +7 %. Velešići → Zabrđe 17,8 → 9,6 min.
+Ograničenja: teren s 30 m modela (±3–4 % nagiba na 100 m), bez geologije, klizišta, portala,
+vlasništva i cijene; nova potražnja koju bi cesta privukla nije uključena.
+`SAMO_GEO=1 python src/31_scenariji.py` obnavlja samo geometrije svih scenarija za kartu.
+
 ## Google Places (`12_google_places.py`, opcionalno)
 
 Nearby Search (New) za tipove supermarket, grocery_store, convenience_store, market, food_store u

@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import os
 from pathlib import Path
 
 import geopandas as gpd
@@ -63,6 +64,7 @@ SCENARIJI = {
     "T16": ("Prva i Šesta transverzala zajedno",
             [[(18.3890, 43.8556), (18.3990, 43.8590), (18.4025, 43.8680), (18.3985, 43.8790), (18.3940, 43.8845)],
              [(18.3745, 43.8445), (18.3705, 43.8515), (18.3715, 43.8580), (18.3725, 43.8650), (18.3760, 43.8760), (18.3770, 43.8850)]], 50, 2),
+    "SC": ("Nova sjeverna cesta: Zabrđe – Sokolje – Buća Potok – Velešići – Koševsko brdo – Koševo (34)", "sjeverna_cesta", 60, 1),
     "SP": ("Sjeverni obilazak: Put života – Koševo + planirani tunel Koševo – Bentbaša",
            [[(18.3883, 43.8570), (18.3990, 43.8640), (18.4080, 43.8700)], [(18.4140, 43.8665), (18.4380, 43.8590)]], 50, 2),
 }
@@ -107,6 +109,16 @@ def main() -> None:
         """Vrati DataFrame dodatnih grana (u, v, t0, w=-1, kap) i geometrije za kartu."""
         naziv, trase, v, trake = SCENARIJI[sc]
         rows, geoms = [], []
+        if trase == "sjeverna_cesta":
+            # nova cesta (34): priključci u naseljima, vrijeme po dužini trase između priključaka
+            sc_ = json.load(open(OUT / "sjeverna_cesta.json"))["prikljucci"]
+            cv_ = [glavni_cv[tg.query(m_xy(p["lon"], p["lat"]))[1]] for p in sc_]
+            for (pa, a), (pb, b) in zip(zip(sc_[:-1], cv_[:-1]), zip(sc_[1:], cv_[1:])):
+                L = max((pb["km"] - pa["km"]) * 1000, float(np.hypot(*(xy[a] - xy[b]))))
+                tt = L / 1000 / v * 60
+                rows += [(a, b, tt, -1, trake * 1800), (b, a, tt, -1, trake * 1800)]
+            geoms += list(gpd.read_file(OUT / "sjeverna_cesta.geojson").to_crs(CRS_M).geometry)
+            return pd.DataFrame(rows, columns=["u", "v", "t0", "w", "kap"]), np.array([], int), geoms
         if trase == "sjeverna":
             # nadogradnja: grane duž trase linije S dobiju brzinu v i 1 traku po smjeru; + spojevi N6, N4 iz 30
             g = gpd.read_file(OUT / "sjeverna_linija.geojson").to_crs(CRS_M).geometry.iloc[0]
@@ -139,6 +151,8 @@ def main() -> None:
     def pokreni(sc):
         e = e0.copy()
         dod, nadogr, geoms = (pd.DataFrame(columns=["u", "v", "t0", "w", "kap"]), np.array([], int), []) if sc == "0" else nove_dionice(sc)
+        if os.environ.get("SAMO_GEO"):
+            return geoms
         if len(nadogr):
             v = SCENARIJI[sc][2] * mp.dost.FAKTOR_GRADSKE_VOZNJE
             duz = np.hypot(*(xy[e.u.to_numpy()[nadogr]] - xy[e.v.to_numpy()[nadogr]]).T)
@@ -195,7 +209,10 @@ def main() -> None:
 
     rez, pre, geo = [], [], []
     baza = None
-    import os
+    if os.environ.get("SAMO_GEO"):   # samo geometrije svih scenarija (bez dodjele), za kartu
+        geo = [{"scenarij": sc, "naziv": SCENARIJI[sc][0], "geometry": g} for sc in SCENARIJI for g in pokreni(sc)]
+        gpd.GeoDataFrame(geo, crs=CRS_M).to_crs(CRS_WGS).to_file(OUT / "scenariji.geojson", driver="GeoJSON", COORDINATE_PRECISION=5)
+        print(pd.DataFrame(geo).groupby("scenarij").size().to_string()); return
     izbor = os.environ.get("SCEN", "0," + ",".join(SCENARIJI)).split(",")
     for sc in izbor:
         print(f"Scenarij {sc} ...", flush=True)
@@ -219,6 +236,9 @@ def main() -> None:
             R = pd.concat([R0[~R0.scenarij.isin(R.scenarij)], R]).sort_values("scenarij")
             Pp = pd.concat([P0[~P0.scenarij.isin(Pp.scenarij)], Pp])
     R.to_csv(OUT / "scenariji.csv", index=False); Pp.to_csv(OUT / "scenariji_presjeci.csv", index=False)
+    if geo and os.environ.get("SCEN") and (OUT / "scenariji.geojson").exists():   # zadrži geometrije ostalih scenarija
+        G0 = gpd.read_file(OUT / "scenariji.geojson").to_crs(CRS_M)
+        geo = G0[~G0.scenarij.isin({g["scenarij"] for g in geo})].to_dict("records") + geo
     if geo:
         gpd.GeoDataFrame(geo, crs=CRS_M).to_crs(CRS_WGS).to_file(OUT / "scenariji.geojson", driver="GeoJSON", COORDINATE_PRECISION=5)
     pd.set_option("display.width", 250)
