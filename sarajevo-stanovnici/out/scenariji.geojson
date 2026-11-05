@@ -4,23 +4,19 @@
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "xy_coordinate_resolution": 1e-05,
 "features": [
-{ "type": "Feature", "properties": { "scenarij": "T1", "naziv": "Prva transverzala: Pofalići (Ambasada SAD) – Željeznička – Koševsko brdo/Velešići – Kobilja Glava" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.38874, 43.857 ], [ 18.39917, 43.85855 ] ] } },
-{ "type": "Feature", "properties": { "scenarij": "T1", "naziv": "Prva transverzala: Pofalići (Ambasada SAD) – Željeznička – Koševsko brdo/Velešići – Kobilja Glava" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.39917, 43.85855 ], [ 18.40198, 43.86835 ] ] } },
-{ "type": "Feature", "properties": { "scenarij": "T1", "naziv": "Prva transverzala: Pofalići (Ambasada SAD) – Željeznička – Koševsko brdo/Velešići – Kobilja Glava" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.40198, 43.86835 ], [ 18.39853, 43.87904 ] ] } },
-{ "type": "Feature", "properties": { "scenarij": "T1", "naziv": "Prva transverzala: Pofalići (Ambasada SAD) – Željeznička – Koševsko brdo/Velešići – Kobilja Glava" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.39853, 43.87904 ], [ 18.3883, 43.88075 ] ] } },
 { "type": "Feature", "properties": { "scenarij": "T6", "naziv": "Šesta transverzala: Hrasno – Čengić Vila – Buća Potok – Hotonj" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.37389, 43.84594 ], [ 18.37188, 43.8504 ] ] } },
 { "type": "Feature", "properties": { "scenarij": "T6", "naziv": "Šesta transverzala: Hrasno – Čengić Vila – Buća Potok – Hotonj" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.37188, 43.8504 ], [ 18.37072, 43.85873 ] ] } },
 { "type": "Feature", "properties": { "scenarij": "T6", "naziv": "Šesta transverzala: Hrasno – Čengić Vila – Buća Potok – Hotonj" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.37072, 43.85873 ], [ 18.36675, 43.86165 ] ] } },
 { "type": "Feature", "properties": { "scenarij": "T6", "naziv": "Šesta transverzala: Hrasno – Čengić Vila – Buća Potok – Hotonj" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.36675, 43.86165 ], [ 18.38494, 43.8813 ] ] } },
 { "type": "Feature", "properties": { "scenarij": "T6", "naziv": "Šesta transverzala: Hrasno – Čengić Vila – Buća Potok – Hotonj" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.38494, 43.8813 ], [ 18.37988, 43.88771 ] ] } },
-{ "type": "Feature", "properties": { "scenarij": "T16", "naziv": "Prva i Šesta transverzala zajedno" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.38874, 43.857 ], [ 18.39917, 43.85855 ] ] } },
-{ "type": "Feature", "properties": { "scenarij": "T16", "naziv": "Prva i Šesta transverzala zajedno" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.39917, 43.85855 ], [ 18.40198, 43.86835 ] ] } },
-{ "type": "Feature", "properties": { "scenarij": "T16", "naziv": "Prva i Šesta transverzala zajedno" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.40198, 43.86835 ], [ 18.39853, 43.87904 ] ] } },
-{ "type": "Feature", "properties": { "scenarij": "T16", "naziv": "Prva i Šesta transverzala zajedno" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.39853, 43.87904 ], [ 18.3883, 43.88075 ] ] } },
-{ "type": "Feature", "properties": { "scenarij": "T16", "naziv": "Prva i Šesta transverzala zajedno" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.37389, 43.84594 ], [ 18.37188, 43.8504 ] ] } },
-{ "type": "Feature", "properties": { "scenarij": "T16", "naziv": "Prva i Šesta transverzala zajedno" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.37188, 43.8504 ], [ 18.37072, 43.85873 ] ] } },
-{ "type": "Feature", "properties": { "scenarij": "T16", "naziv": "Prva i Šesta transverzala zajedno" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.37072, 43.85873 ], [ 18.36675, 43.86165 ] ] } },
-{ "type": "Feature", "properties": { "scenarij": "T16", "naziv": "Prva i Šesta transverzala zajedno" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.36675, 43.86165 ], [ 18.38494, 43.8813 ] ] } },
-{ "type": "Feature", "properties": { "scenarij": "T16", "naziv": "Prva i Šesta transverzala zajedno" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.38494, 43.8813 ], [ 18.37988, 43.88771 ] ] } }
+{ "type": "Feature", "properties": { "scenarij": "T6O", "naziv": "Šesta transverzala preko Otoke (priključak u nivou)" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.3712, 43.84514 ], [ 18.36377, 43.84884 ] ] } },
+{ "type": "Feature", "properties": { "scenarij": "T6O", "naziv": "Šesta transverzala preko Otoke (priključak u nivou)" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.36377, 43.84884 ], [ 18.36574, 43.85805 ] ] } },
+{ "type": "Feature", "properties": { "scenarij": "T6O", "naziv": "Šesta transverzala preko Otoke (priključak u nivou)" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.36574, 43.85805 ], [ 18.36675, 43.86165 ] ] } },
+{ "type": "Feature", "properties": { "scenarij": "T6O", "naziv": "Šesta transverzala preko Otoke (priključak u nivou)" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.36675, 43.86165 ], [ 18.38494, 43.8813 ] ] } },
+{ "type": "Feature", "properties": { "scenarij": "T6O", "naziv": "Šesta transverzala preko Otoke (priključak u nivou)" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.38494, 43.8813 ], [ 18.37988, 43.88771 ] ] } },
+{ "type": "Feature", "properties": { "scenarij": "T6D", "naziv": "Šesta transverzala preko Otoke, denivelisano (bez priključka na Otoci)" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.3712, 43.84514 ], [ 18.36574, 43.85805 ] ] } },
+{ "type": "Feature", "properties": { "scenarij": "T6D", "naziv": "Šesta transverzala preko Otoke, denivelisano (bez priključka na Otoci)" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.36574, 43.85805 ], [ 18.36675, 43.86165 ] ] } },
+{ "type": "Feature", "properties": { "scenarij": "T6D", "naziv": "Šesta transverzala preko Otoke, denivelisano (bez priključka na Otoci)" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.36675, 43.86165 ], [ 18.38494, 43.8813 ] ] } },
+{ "type": "Feature", "properties": { "scenarij": "T6D", "naziv": "Šesta transverzala preko Otoke, denivelisano (bez priključka na Otoci)" }, "geometry": { "type": "LineString", "coordinates": [ [ 18.38494, 43.8813 ], [ 18.37988, 43.88771 ] ] } }
 ]
 }

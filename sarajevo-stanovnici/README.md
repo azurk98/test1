@@ -327,6 +327,11 @@ trasa približna) 21.500; 617 (Alipašina −59%, Safeta Zajke −10%, Maršala 
 T6 Šesta transverzala (planirana; Hrasno – Čengić Vila – Buća Potok – Hotonj, približno) 21.500;
 1.113 (Zmaja od Bosne −15%, Maršala Tita −14%, Alipašina −19%, Safeta Zajke −11%) – najveći
 pojedinačni efekat. T1 + T6 zajedno 1.216 (Alipašina −64%, Zmaja od Bosne −21%, Safeta Zajke −15%).
+Čvor Otoka (ulazni tok u krug 200 m, danas ~63.600 vozila dnevno): T6-O, Šesta preko Otoke s
+priključkom u nivou, +33% ulaznog toka (+15% najvećeg opterećenja; model ne računa čekanje na
+semaforima, pa je stvarno stanje lošije), ušteda 1.130; T6-D, denivelisano bez priključka na Otoci,
+−1% ulaza, ali manje rasterećenje centra (Maršala Tita −7%, Zmaja od Bosne −8%), ušteda 966.
+Prijedlog: denivelisana Šesta s rampama na Džemala Bijedića zapadno od Otoke.
 Zaključak: ceste uglavnom pomjeraju gužvu prema istim uskim grlima; za putovanje zapad → centar
 veći efekat se očekuje od P+R uz tramvaj, BRT/žutih traka, pomjerenog radnog vremena i radnih mjesta
 u Novom Gradu (model ne računa promjenu načina prevoza). Inducirani promet nije uključen.
