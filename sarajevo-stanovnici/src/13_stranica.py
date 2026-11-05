@@ -62,7 +62,9 @@ def scen_data():
           "SP": "Northern bypass: Put života – Koševo + planned tunnel Koševo – Bentbaša",
           "T1": "First transversal (planned): Pofalići – railway station – Koševsko brdo/Velešići – Kobilja Glava",
           "T6": "Sixth transversal (planned): Hrasno – Čengić Vila – Buća Potok – Hotonj",
-          "T16": "First and Sixth transversals together"}
+          "T16": "First and Sixth transversals together",
+          "T6O": "Sixth transversal via Otoka (at-grade junction)",
+          "T6D": "Sixth transversal via Otoka, grade-separated (no junction at Otoka)"}
     out = []
     for sc in [x for x in R.index if x != "0"]:
         r = R.loc[sc]

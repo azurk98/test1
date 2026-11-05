@@ -55,6 +55,11 @@ SCENARIJI = {
            [[(18.3890, 43.8556), (18.3990, 43.8590), (18.4025, 43.8680), (18.3985, 43.8790), (18.3940, 43.8845)]], 50, 2),
     "T6": ("Šesta transverzala: Hrasno – Čengić Vila – Buća Potok – Hotonj",
            [[(18.3745, 43.8445), (18.3705, 43.8515), (18.3715, 43.8580), (18.3725, 43.8650), (18.3760, 43.8760), (18.3770, 43.8850)]], 50, 2),
+    # Šesta preko Otoke (prema tenderu: prva dionica Džemala Bijedića/Otoka – Safeta Zajke/Buća Potok)
+    "T6O": ("Šesta transverzala preko Otoke (priključak u nivou)",
+            [[(18.3720, 43.8440), (18.3640, 43.8487), (18.3660, 43.8580), (18.3725, 43.8650), (18.3760, 43.8760), (18.3770, 43.8850)]], 50, 2),
+    "T6D": ("Šesta transverzala preko Otoke, denivelisano (bez priključka na Otoci)",
+            [[(18.3720, 43.8440), (18.3660, 43.8580), (18.3725, 43.8650), (18.3760, 43.8760), (18.3770, 43.8850)]], 50, 2),
     "T16": ("Prva i Šesta transverzala zajedno",
             [[(18.3890, 43.8556), (18.3990, 43.8590), (18.4025, 43.8680), (18.3985, 43.8790), (18.3940, 43.8845)],
              [(18.3745, 43.8445), (18.3705, 43.8515), (18.3715, 43.8580), (18.3725, 43.8650), (18.3760, 43.8760), (18.3770, 43.8850)]], 50, 2),
@@ -66,6 +71,7 @@ PRESJECI = [("Obala Kulina bana", "Obala Kulina bana", 18.4160, 43.8566), ("Mar�
             ("Zmaja od Bosne (Čengić Vila)", "Zmaja od Bosne", 18.3742, 43.8510),
             ("Bulevar Meše Selimovića", "Meše Selimovića", 18.3423, 43.8453), ("Alipašina", "Alipašina", 18.4076, 43.8705),
             ("Safeta Zajke", "Safeta Zajke", 18.3421, 43.8521), ("Džemala Bijedića", "Džemala Bijedića", 18.3600, 43.8470)]
+CVORISTA = [("Otoka", 18.3640, 43.8487)]
 PAROVI = [("Velešići → Zabrđe", (18.4015, 43.8655), (18.3097, 43.8741)),
           ("Dobrinja → Alipašino Polje", (18.3470, 43.8290), (18.3480, 43.8450)),
           ("Alipašin most → Bentbaša", (18.3475, 43.8480), (18.4380, 43.8586)),
@@ -169,6 +175,15 @@ def main() -> None:
             j = sel[np.argmax(tok[sel])]
             rev = eid[e.v[j], e.u[j]]
             pres[nz] = float(tok[j] + (tok[int(rev) - 1] if rev else 0))
+        # čvorišta: ukupan dnevni tok u grane koje ulaze u krug (oba smjera, sve ulice) i najveće
+        # opterećenje (vršni sat) na granama do 300 m od centra
+        for nz, lon, lat in CVORISTA:
+            p = m_xy(lon, lat)
+            du = np.hypot(*(xy[e.u.to_numpy()] - p).T); dv = np.hypot(*(xy[e.v.to_numpy()] - p).T)
+            ulaz = (du > 200) & (dv <= 200)
+            pres[f"{nz}: ulazni tok"] = float(tok[ulaz].sum())
+            blizu = (np.minimum(du, dv) <= 300)
+            pres[f"{nz}: najveće opterećenje (vršni sat)"] = float((tok[blizu] * mp.UDIO_VRSNOG_SATA / kap[blizu]).max())
         # vrijeme za parove (zastoj)
         G = mp.graf(e, n, t)
         vr = {}
