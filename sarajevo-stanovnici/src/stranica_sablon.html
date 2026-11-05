@@ -461,7 +461,8 @@ trfP.append("title");
 const trfC = trfG.append("g").selectAll("g").data(TRF.cnt).join("g").attr("class","trfc");
 trfC.append("circle").attr("r",4.5);
 trfC.append("title").text(d => `${d[0]} · ${d[1]}\nCounted 2025 average: ${fmt(d[4])} vehicles a day` +
-  (d[6] >= 0 ? `\nModel: ${fmt(d[6])} (${d[6] >= d[4] ? "+" : ""}${Math.round((d[6]/d[4]-1)*100)}%); without this counter: ${fmt(d[7])}` : ""));
+  (d[6] >= 0 ? (d[9] ? `\nModel: ${fmt(d[6])}; trip model alone: ${fmt(d[8])}; estimated without this counter: ${fmt(d[7])}`
+    : `\nModel: ${fmt(d[6])}. The publication gives no position for this counter, so it is shown but not used to correct the model.`) : ""));
 let trfHour = 8, trfDay = "radni", trfTimer = null;
 const TRF_T = [0.3,0.5,0.7,0.9], TRF_C = ["#1a9850","#91cf60","#fee08b","#fc8d59","#d73027"];
 const trfVol = s => s[0] * TRF.prof[s[2]][trfHour] * TRF.day[trfDay];
@@ -810,19 +811,19 @@ function show(c){
   if (!c && mode === "trf"){
     const city = d3.range(24).map(h => d3.sum(TRF.cnt.filter(d => d[5] >= 0), d => d[4] * TRF.prof[d[5]][h]));
     const mx = d3.max(city);
-    const byName = d3.rollups(TRF.seg.filter(s => s[4] >= 0), v => d3.max(v, trfVC), s => TRF.names[s[4]]).sort((a,b) => b[1]-a[1]);
+    const byName = d3.rollups(TRF.seg.filter(s => s[4] >= 0 && s[6]), v => d3.max(v, trfVC), s => TRF.names[s[4]]).sort((a,b) => b[1]-a[1]);
     const cnt = TRF.cnt.filter(d => d[5] >= 0).map(d => [d[1], d[4] * TRF.prof[d[5]][trfHour] * TRF.day[trfDay]]).sort((a,b) => b[1]-a[1]);
     el.innerHTML = `<div class="k">Traffic · ${hh(trfHour)}–${hh(trfHour+1)} · ${{radni:"weekday",subota:"Saturday",nedjelja:"Sunday"}[trfDay]}</div>
       <div class="hbars" role="group" aria-label="Pick an hour">${city.map((v,h) => `<button data-h="${h}" aria-pressed="${h === trfHour}" style="height:${Math.max(3, v/mx*100)}%" title="${hh(h)}: ${Math.round(v/mx*100)}% of the busiest hour"></button>`).join("")}</div>
       <div class="rng num" style="display:flex;justify-content:space-between"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
-      <div class="k">Most congested streets now</div>
+      <div class="k">Most congested streets now (four municipalities)</div>
       <dl>${byName.slice(0,8).map(([n,v]) => `<dt>${n}</dt><dd class="num">${Math.round(v*100)}%</dd>`).join("")}</dl>
       <div class="k">Busiest counters, vehicles this hour</div>
       <dl>${cnt.slice(0,5).map(([n,v]) => `<dt>${n}</dt><dd class="num">${fmt(Math.round(v))}</dd>`).join("")}</dl>
       ${TRF.model ? `<div class="k">Model vs counters (vehicles a day)</div>
-      <dl>${TRF.cnt.filter(d => d[6] >= 0).sort((a,b) => b[4]-a[4]).map(d => `<dt>${d[0]} <span class="tag">${d[1].slice(0,28)}</span></dt><dd class="num">${fmt(d[4])} · ${fmt(d[6])}</dd>`).join("")}</dl>
-      <p class="hint">Counted 2025 average · model. Fit: R² ${TRF.model.faza2.R2}, median error ${TRF.model.faza2.medijan_aps_greska_pct}%. Before the matrix was adjusted to the counts, the trip model alone gave R² ${TRF.model.faza1.R2}. Estimating each counter with that counter left out gives R² ${TRF.model.unakrsna.R2} and median error ${TRF.model.unakrsna.medijan_aps_greska_pct}%, a fair guide to accuracy on roads without a counter.</p>` : ""}
-      <p class="hint">${TRF.model ? "Road volumes come from a trip model: residents, jobs and outside traffic in 0.7 km² zones, trips by car spread by travel time and assigned to the fastest routes with some route variety and congestion, then adjusted until the model matches the 25 automatic counters of the Sarajevo Canton road directorate (white dots, real 2025 counts). Hours follow the nearest counter's average day." : "Volumes come from the automatic counters of the Sarajevo Canton road directorate (2025 averages by hour) and are carried along the same street; dashed roads use an assumed volume for their class."} Capacity comes from the number of lanes (800 vehicles an hour per lane at traffic lights). Percentages are an estimate of load, not measured speeds.</p>`;
+      <dl>${TRF.cnt.filter(d => d[6] >= 0).sort((a,b) => b[4]-a[4]).map(d => `<dt>${d[0]} <span class="tag">${d[1].slice(0,28)}</span></dt><dd class="num">${fmt(d[4])} · ${fmt(d[6])}${d[9] ? "" : " *"}</dd>`).join("")}</dl>
+      <p class="hint">Counted 2025 average · model, vehicles a day. On each counted street the model is scaled to its counter, so the two match; * no position in the publication, not used. The trip model alone, before that scaling, gives R² ${TRF.model.faza1.R2} with a median error of ${TRF.model.faza1.medijan_aps_greska_pct}%. Leaving each counter out and estimating it from the rest gives R² ${TRF.model.unakrsna.R2} and a median error of ${TRF.model.unakrsna.medijan_aps_greska_pct}%: expect errors of about a third on roads without a counter.</p>` : ""}
+      <p class="hint">${TRF.model ? "Road volumes come from a trip model: residents, jobs and outside traffic in 0.7 km² zones, car trips spread by travel time and assigned to the fastest routes with some route variety and congestion. Along each counted street (up to 2.5 km, in the direction the counter counts) the volume is scaled to the counter of the Sarajevo Canton road directorate (white dots, real 2025 counts). Hours follow the nearest counter's average day." : "Volumes come from the automatic counters of the Sarajevo Canton road directorate (2025 averages by hour) and are carried along the same street; dashed roads use an assumed volume for their class."} Capacity comes from the number of lanes (800 vehicles an hour per lane at traffic lights). Percentages are an estimate of load, not measured speeds.</p>`;
     el.querySelectorAll(".hbars button").forEach(b => b.onclick = () => trfSet(+b.dataset.h));
     return;
   }

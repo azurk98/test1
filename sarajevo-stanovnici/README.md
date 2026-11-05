@@ -35,6 +35,7 @@ python 19_autopraonica.py       # lokacije za autopraonicu -> out/autopraonica_*
 python 20_biznisi.py            # dostavna kuhinja i muzička škola -> out/biz_*.csv
 python 22_guzva.py              # gužva po satu na glavnim cestama -> out/guzva_*.{geojson,json}
 python 23_radna_mjesta.py       # radna mjesta po polju -> out/radna_mjesta_{h3,mz}.csv
+python 24_putovanja.py          # model putovanja autom kalibriran na brojače -> out/model_*.{geojson,csv,json}
 python 13_stranica.py           # interaktivna stranica (artifact) -> out/stranica.html
 python 07_karta.py              # ponovo, da karta dobije slojeve iz koraka 08–11
 ```
@@ -205,6 +206,30 @@ poslovno prizemlje stambene zgrade 70% otiska / 40 m²) plus 2 po objektu iz Ove
 Najviše: Željeznička 13.800, Marijin Dvor 11.800, Park-Višnjik 8.700 (KCUS), Trg oslobođenja 7.800,
 Briješće 5.900. Ograničenja: FZS broji po sjedištu poslovne jedinice; m² po radniku su tipične
 vrijednosti; nema provjere na nivou ulice.
+
+## Model putovanja autom (`24_putovanja.py`, pogled „Traffic“)
+
+Zone H3 rezolucije 8 (~0,7 km², 328) na cijelom području mreže, uključujući Ilidžu, Vogošću i
+Istočno Sarajevo (stanovnici izvan 4 općine iz WorldPop-a), plus 19 ulaza u područje. Putovanja:
+na posao (dvostruko ograničen gravitacioni model; 40% zaposlenih autom, fiksno, jer je raspored
+skoro isti kao kod ostalih putovanja pa se ne može zasebno kalibrirati), ostala putovanja i
+saobraćaj izvana (kalibrirani na brojače). Dodjela: najbrži put, 4 dodjele sa slučajno izmijenjenim
+vremenima (±30%, više ruta) po iteraciji, 5 iteracija MSA s BPR zastojem.
+
+Važno iz publikacije: šest brojača broji samo jedan smjer (KSBS03, 04, 05, 06, 17, 24; npr.
+Zmaja od Bosne 34.500 je samo smjer Dolac Malta → Čengić Vila) i model ih poredi samo s tim
+smjerom. Bez toga slaganje je bilo R² −0,6.
+
+Rezultat (25 brojača u okviru mreže): model putovanja sam R² 0,46, medijan greške 28%.
+Procjena matrice iz brojanja (ODME, 6 jačina) je isprobana i odbačena: poklapa brojače, ali na
+izostavljenom brojaču griješi 42–50% (lošije od samog modela). Umjesto nje lokalna korekcija:
+na ulici brojača (do 2,5 km, u smjeru brojanja) tok se množi omjerom brojač/model; tako se
+24 brojača poklapaju tačno, a ostale ceste ostaju na modelu. Unakrsna provjera (brojač izostavljen):
+R² 0,27, medijan 32%, pa na cestama bez brojača treba računati s greškom oko trećine.
+KSBS22 (Džemala Bijedića kod „Žice“) nema koordinate u publikaciji, prikazan je ali ne koriguje
+model. KSBS30 (Kasindolska) nema odgovarajuću ulicu u OSM-u. Male ceste uz rub područja
+(Igmanska, Ravnogorska) i Vilsonovo šetalište vjerovatno su precijenjeni (ulazi u područje,
+OSM klasifikacija).
 
 ## Google Places (`12_google_places.py`, opcionalno)
 

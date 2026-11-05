@@ -160,17 +160,21 @@ def podaci() -> dict:
         mb = pd.read_csv(OUT / "model_brojaci.csv").set_index("brojac")
         mi = json.load(open(OUT / "model_info.json"))
     gimena = sorted({x for x in gz.ime if isinstance(x, str) and x})
+    _op, _ = ucitaj_granice()
+    unutra = gz.geometry.interpolate(0.5, normalized=True).within(_op.to_crs(gz.crs).union_all()).to_numpy()
     gbr = pd.read_csv(DATA / "brojaci_2025.csv").dropna(subset=["lat", "lon"])
     gbr = mb.reset_index()[["brojac", "lokacija", "lat", "lon", "pgds_2025"]] if model else gbr[gbr.brojac.isin(set(gz.brojac))]
     trf = {"prof": [gp["profili"][k] for k in pk], "day": gp["dan"], "names": gimena,
            "seg": [[round(float(r.pgds_smjer)), int(r.kapacitet), pk.index(r.profil), 0 if r.izvor in ("brojac", "model") else 1,
                     gimena.index(r.ime) if isinstance(r.ime, str) and r.ime else -1,
-                    [round(c, 5) for xy in r.geometry.coords for c in xy]] for r in gz.itertuples()],
+                    [round(c, 5) for xy in r.geometry.coords for c in xy], int(u)]
+                   for r, u in zip(gz.itertuples(), unutra)],
            "cnt": [[r.brojac, r.lokacija, round(r.lat, 5), round(r.lon, 5), int(r.pgds_2025),
                     pk.index(r.brojac) if r.brojac in pk else -1,
                     int(mb.model.get(r.brojac, -1)) if model else -1,
                     int(mb.unakrsna.get(r.brojac, -1)) if model else -1,
-                    int(mb.model_faza1.get(r.brojac, -1)) if model else -1] for r in gbr.itertuples()],
+                    int(mb.model_faza1.get(r.brojac, -1)) if model else -1,
+                    int(bool(mb.korigovan.get(r.brojac, False))) if model else 0] for r in gbr.itertuples()],
            "model": mi if model else None}
     rmo = pd.read_csv(DATA / "radna_mjesta_opcine.csv")
     rmz = pd.read_csv(OUT / "radna_mjesta_mz.csv")
