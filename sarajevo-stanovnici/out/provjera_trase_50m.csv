@@ -1,13 +1,13 @@
 od_m,do_m,ulica,visina_m,nagib_50m_max_pct,nagib_100m_max_pct,skretanje_max_stepeni,koridor_min_m,podloga_osm,moguca_stanica,ocjena,razlozi,lon,lat
-0,50,Halilovići,500,0.2,,1,40.0,asphalt,True,1,pristupni put / stambena zona (OSM),18.33077,43.84587
-50,100,Halilovići,500,0.7,0.9,0,40.0,asphalt,True,1,pristupni put / stambena zona (OSM),18.33086,43.84543
-100,150,Halilovići,500,3.2,1.7,8,40.0,asphalt,True,1,pristupni put / stambena zona (OSM),18.33095,43.84498
-150,200,Džemala Bijedića,501,2.7,1.5,76,40.0,asphalt,True,1,pristupni put / stambena zona (OSM),18.3312,43.84465
-200,250,Džemala Bijedića,501,0.4,0.4,0,40.0,asphalt,True,0,,18.33181,43.84475
-250,300,Džemala Bijedića,501,0.4,0.2,1,40.0,asphalt,True,0,,18.33241,43.84485
-300,350,Džemala Bijedića,501,0.4,0.4,66,40.0,asphalt,True,0,,18.33294,43.84482
-350,400,,501,1.1,0.7,46,40.0,,True,0,,18.33337,43.84468
-400,450,,501,1.0,0.7,99,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom); oštro skretanje 90–120°,18.3339,43.84459
+0,50,Halilovići,500,0.2,,1,36.6,asphalt,True,1,pristupni put / stambena zona (OSM),18.33077,43.84587
+50,100,Halilovići,500,0.7,0.9,0,36.6,asphalt,True,1,pristupni put / stambena zona (OSM),18.33086,43.84543
+100,150,Halilovići,500,3.2,1.7,8,36.6,asphalt,True,1,pristupni put / stambena zona (OSM),18.33095,43.84498
+150,200,Džemala Bijedića,501,2.7,1.5,76,22.6,asphalt,True,1,pristupni put / stambena zona (OSM),18.3312,43.84465
+200,250,Džemala Bijedića,501,0.4,0.4,0,22.6,asphalt,True,0,,18.33181,43.84475
+250,300,Džemala Bijedića,501,0.4,0.2,1,22.6,asphalt,True,0,,18.33241,43.84485
+300,350,Džemala Bijedića,501,0.4,0.4,66,30.6,asphalt,True,0,,18.33294,43.84482
+350,400,,501,1.1,0.7,46,5.3,,True,2,"razmak zgrada < 5,5 m",18.33337,43.84468
+400,450,,501,1.0,0.7,99,5.5,asphalt,True,1,"jednosmjerna (povratak drugom ulicom); oštro skretanje 90–120°; razmak zgrada 5,5–8 m",18.3339,43.84459
 450,500,Džemala Bijedića,501,0.4,0.2,47,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.33407,43.84431
 500,550,Džemala Bijedića,501,0.7,1.4,2,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.3335,43.84413
 550,600,Džemala Bijedića,501,2.7,1.4,2,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.33293,43.84395
@@ -130,284 +130,303 @@ od_m,do_m,ulica,visina_m,nagib_50m_max_pct,nagib_100m_max_pct,skretanje_max_step
 6400,6450,Avde Palića,537,1.1,1.4,5,40.0,,True,0,,18.33696,43.86927
 6450,6500,Avde Palića,536,3.2,2.6,3,40.0,,True,0,,18.33634,43.86933
 6500,6550,Avde Palića,535,2.5,2.7,16,23.5,,True,0,,18.33572,43.86935
-6550,6600,Avde Palića,534,6.7,6.8,75,23.5,,True,0,,18.33513,43.86947
-6600,6650,Avde Palića,538,15.5,9.7,5,24.8,,False,2,"nagib 10–15% (50 m, zima); nagib > 15% (50 m)",18.3347,43.86929
-6650,6700,Avde Palića,544,10.5,8.4,41,24.8,,True,1,"nagib 10–15% (50 m, zima)",18.33429,43.86908
-6700,6750,Avde Palića,545,7.4,3.5,39,23.6,,True,0,,18.33371,43.86909
-6750,6800,Avde Palića,546,2.5,2.9,5,25.7,,True,0,,18.33312,43.86917
-6800,6850,Avde Palića,547,6.9,1.1,40,40.0,,False,0,,18.33251,43.86923
-6850,6900,Avde Palića,546,8.9,1.0,168,40.0,,True,2,trasa se vraća istim putem (ispraviti),18.33215,43.86957
-6900,6950,Avde Palića,547,6.9,1.0,47,40.0,,True,0,,18.33247,43.86925
-6950,7000,Avde Palića,546,3.7,2.9,3,25.7,,True,0,,18.33307,43.86918
-7000,7050,Avde Palića,546,7.3,2.7,40,22.2,,True,0,,18.33367,43.86907
-7050,7100,Avde Palića,544,8.8,7.9,74,24.8,,True,0,,18.33424,43.86909
-7100,7150,Avde Palića,539,15.9,9.5,9,24.8,,False,2,"nagib 10–15% (50 m, zima); nagib > 15% (50 m)",18.33467,43.86926
-7150,7200,Avde Palića,534,7.5,8.0,77,40.0,,True,0,,18.33466,43.86956
-7200,7250,Avde Palića,533,4.5,4.1,3,40.0,,True,0,,18.33406,43.86966
-7250,7300,Avde Palića,531,5.8,5.5,8,30.4,,False,0,,18.33345,43.86975
-7300,7350,Avde Palića,528,6.8,4.5,5,25.5,,True,0,,18.3329,43.86996
-7350,7400,Avde Palića,528,1.6,2.4,9,19.5,,True,0,,18.33236,43.87018
-7400,7450,Avde Palića,527,1.1,1.7,2,31.7,,True,0,,18.33177,43.87032
-7450,7500,Avde Palića,527,3.7,3.1,10,10.2,asphalt,True,0,,18.33118,43.87046
-7500,7550,Avde Palića,525,3.7,3.4,6,10.2,asphalt,True,0,,18.33064,43.87068
-7550,7600,Avde Palića,524,1.8,1.1,26,21.2,asphalt,True,0,,18.33005,43.87078
-7600,7650,Avde Palića,525,1.8,1.2,10,23.3,asphalt,True,0,,18.32943,43.87084
-7650,7700,Avde Palića,524,4.3,5.2,16,27.8,asphalt,True,0,,18.32886,43.87101
-7700,7750,Avde Palića,521,7.4,5.4,25,29.2,asphalt,True,0,,18.32843,43.87131
-7750,7800,Avde Palića,519,4.0,5.3,4,40.0,asphalt,True,0,,18.32806,43.87165
-7800,7850,Avde Palića,517,3.8,2.4,16,28.2,asphalt,True,0,,18.32755,43.8719
-7850,7900,Avde Palića,518,5.2,3.3,14,40.0,asphalt,True,0,,18.32694,43.87186
-7900,7950,Avde Palića,520,2.9,2.5,5,40.0,asphalt,True,0,,18.32633,43.87185
-7950,8000,Avde Palića,519,3.6,2.4,0,40.0,asphalt,True,0,,18.32572,43.87193
-8000,8050,Avde Palića,518,1.9,2.7,6,32.4,asphalt,True,0,,18.32511,43.87202
-8050,8100,Porodice Dizdarević,516,5.0,4.3,10,18.8,asphalt,True,0,,18.32453,43.87218
-8100,8150,Porodice Dizdarević,514,5.2,4.4,4,18.8,asphalt,True,0,,18.32404,43.87246
-8150,8200,Porodice Dizdarević,512,2.9,3.3,6,35.2,asphalt,True,0,,18.32354,43.87272
-8200,8250,Porodice Dizdarević,512,1.7,1.8,6,31.9,asphalt,True,0,,18.32297,43.8729
-8250,8300,Porodice Dizdarević,511,2.3,1.2,14,25.3,asphalt,True,0,,18.32239,43.87302
-8300,8350,Porodice Dizdarević,512,2.5,1.7,42,36.6,asphalt,True,0,,18.32187,43.87279
-8350,8400,Avde Palića,513,6.0,6.8,73,23.4,asphalt,True,0,,18.32132,43.87278
-8400,8450,Zaima Imamovića,516,15.3,14.5,12,40.0,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.32085,43.87262
-8450,8500,Zaima Imamovića,524,17.0,16.9,15,40.0,asphalt,False,2,nagib > 12% (100 m); nagib > 15% (50 m),18.32036,43.87234
-8500,8550,Zaima Imamovića,533,18.2,18.2,0,40.0,asphalt,False,2,nagib > 12% (100 m); nagib > 15% (50 m),18.32001,43.87197
-8550,8600,Zaima Imamovića,542,18.4,18.1,7,40.0,asphalt,False,2,nagib > 12% (100 m); nagib > 15% (50 m),18.31969,43.87159
-8600,8650,Zaima Imamovića,550,16.2,16.0,5,40.0,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.31932,43.87123
-8650,8700,Zaima Imamovića,557,13.3,13.0,9,40.0,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m)",18.3189,43.8709
-8700,8750,Zaima Imamovića,562,10.0,9.1,3,40.0,asphalt,True,0,,18.31863,43.87049
-8750,8800,Zaima Imamovića,563,2.0,2.3,16,40.0,asphalt,True,0,,18.31833,43.8701
-8800,8850,Zaima Imamovića,562,6.0,4.1,26,40.0,asphalt,True,0,,18.31828,43.86968
-8850,8900,Zaima Imamovića,559,5.4,3.7,8,40.0,asphalt,True,0,,18.31859,43.8693
-8900,8950,Zaima Imamovića,559,2.5,3.4,26,40.0,asphalt,True,0,,18.31894,43.86894
-8950,9000,Numan paše Čuprilića,560,12.0,8.6,67,40.0,asphalt,True,1,"nagib 10–15% (50 m, zima)",18.3189,43.86856
-9000,9050,Numan paše Čuprilića,565,11.1,10.2,12,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.31923,43.86818
-9050,9100,Numan paše Čuprilića,570,8.8,8.6,5,40.0,asphalt,False,0,,18.31965,43.86785
-9100,9150,Numan paše Čuprilića,574,9.3,8.5,19,40.0,asphalt,False,0,,18.32017,43.86763
-9150,9200,Numan paše Čuprilića,578,7.5,7.7,3,40.0,asphalt,False,0,,18.32079,43.86764
-9200,9250,Numan paše Čuprilića,581,9.2,9.5,14,40.0,asphalt,False,0,,18.3214,43.8676
-9250,9300,Numan paše Čuprilića,586,13.1,12.4,11,40.0,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m)",18.32197,43.86742
-9300,9350,Numan paše Čuprilića,592,13.0,12.4,6,40.0,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m)",18.32242,43.86711
-9350,9400,Numan paše Čuprilića,598,11.1,10.8,8,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.32271,43.86672
-9400,9450,Numan paše Čuprilića,602,6.5,6.8,10,40.0,asphalt,True,0,,18.32307,43.86636
-9450,9500,Numan paše Čuprilića,603,1.9,2.0,4,40.0,asphalt,True,0,,18.32359,43.8661
-9500,9550,Numan paše Čuprilića,602,1.3,2.0,14,40.0,asphalt,True,0,,18.32415,43.86592
-9550,9600,Numan paše Čuprilića,603,10.7,7.3,5,40.0,asphalt,True,1,"nagib 10–15% (50 m, zima)",18.32477,43.86595
-9600,9650,Numan paše Čuprilića,608,10.3,9.2,7,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.32539,43.86599
-9650,9700,Numan paše Čuprilića,612,8.4,8.2,12,40.0,asphalt,False,0,,18.32594,43.86617
-9700,9750,Numan paše Čuprilića,614,5.0,4.0,46,40.0,asphalt,True,0,,18.32645,43.86643
-9750,9800,Numan paše Čuprilića,614,4.2,4.0,10,40.0,asphalt,True,0,,18.32703,43.86636
-9800,9850,Numan paše Čuprilića,617,12.1,11.2,9,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.32765,43.86631
-9850,9900,Numan paše Čuprilića,623,15.1,11.2,22,40.0,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 15% (50 m)",18.32825,43.86624
-9900,9950,Numan paše Čuprilića,627,7.4,9.3,3,40.0,asphalt,False,0,,18.32867,43.86592
-9950,10000,Numan paše Čuprilića,630,9.5,8.0,0,40.0,asphalt,False,0,,18.32908,43.86558
-10000,10050,Numan paše Čuprilića,635,9.9,9.6,21,40.0,asphalt,False,0,,18.32941,43.8652
-10050,10100,Numan paše Čuprilića,640,10.4,8.4,15,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.32961,43.86478
-10100,10150,Numan paše Čuprilića,642,9.2,8.0,21,40.0,asphalt,True,0,,18.32952,43.86434
-10150,10200,Briješko brdo,647,12.1,9.8,79,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.32975,43.86413
-10200,10250,Briješko brdo,652,9.3,9.7,0,40.0,asphalt,False,0,,18.33022,43.86442
-10250,10300,Briješko brdo,655,5.4,5.4,23,40.0,asphalt,True,0,,18.3307,43.8647
-10300,10350,Briješko brdo,655,1.6,2.2,38,40.0,asphalt,True,0,,18.3313,43.8648
-10350,10400,Viteška,654,4.5,3.7,104,24.0,asphalt,True,1,oštro skretanje 90–120°,18.33144,43.86469
-10400,10450,Viteška,652,4.5,2.2,180,40.0,asphalt,True,2,trasa se vraća istim putem (ispraviti),18.33107,43.86433
-10450,10500,Viteška,653,4.6,3.7,3,24.0,asphalt,True,0,,18.33131,43.86455
-10500,10550,Briješko brdo,655,3.1,2.8,118,31.0,asphalt,True,1,oštro skretanje 90–120°,18.33152,43.86485
-10550,10600,Briješko brdo,655,3.9,3.5,26,40.0,asphalt,True,0,,18.33091,43.86476
-10600,10650,Briješko brdo,653,8.1,7.7,0,40.0,asphalt,False,0,,18.3304,43.86452
-10650,10700,Briješko brdo,649,12.0,9.9,13,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.32992,43.86424
-10700,10750,Numan paše Čuprilića,644,11.3,9.1,72,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.3295,43.86418
-10750,10800,Numan paše Čuprilića,641,7.3,7.2,15,40.0,asphalt,True,0,,18.32961,43.86461
-10800,10850,Numan paše Čuprilića,640,7.0,4.4,179,40.0,asphalt,True,2,trasa se vraća istim putem (ispraviti),18.32963,43.86473
-10850,10900,Numan paše Čuprilića,643,10.4,8.5,57,40.0,asphalt,True,1,"nagib 10–15% (50 m, zima)",18.32951,43.86429
-10900,10950,Briješko brdo,648,11.9,9.9,48,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.3298,43.86416
-10950,11000,Briješko brdo,652,9.6,9.1,0,40.0,asphalt,False,0,,18.33028,43.86445
-11000,11050,Briješko brdo,655,5.2,4.9,31,27.8,"asphalt,concrete:lanes",True,0,,18.33076,43.86474
-11050,11100,Briješko brdo,655,1.6,0.6,16,40.0,asphalt,True,0,,18.33137,43.86482
-11100,11150,Briješko brdo,656,2.9,0.9,13,40.0,asphalt,True,0,,18.33197,43.86478
-11150,11200,Briješko brdo,655,4.3,1.1,8,40.0,asphalt,True,0,,18.33242,43.86448
-11200,11250,Briješko brdo,655,2.7,2.9,4,40.0,asphalt,True,0,,18.33286,43.86416
-11250,11300,Briješko brdo,656,5.4,4.9,2,40.0,asphalt,True,0,,18.33327,43.86382
-11300,11350,Briješko brdo,659,8.2,7.7,4,40.0,asphalt,False,0,,18.33364,43.86346
-11350,11400,Briješko brdo,663,9.6,7.4,14,40.0,asphalt,False,0,,18.33399,43.86309
-11400,11450,Briješko brdo,665,3.7,4.7,8,40.0,asphalt,True,0,,18.33449,43.86283
-11450,11500,Briješko brdo,666,1.2,1.4,1,40.0,asphalt,True,0,,18.33505,43.86264
-11500,11550,Briješko brdo,665,4.3,3.1,1,40.0,asphalt,True,0,,18.33562,43.86245
-11550,11600,Briješko brdo,664,4.0,3.6,0,40.0,asphalt,True,0,,18.33618,43.86225
-11600,11650,Briješko brdo,662,4.0,2.4,8,40.0,asphalt,True,0,,18.33674,43.86207
-11650,11700,Briješko brdo,662,2.2,2.9,9,40.0,asphalt,True,0,,18.33732,43.86191
-11700,11750,Briješko brdo,663,8.4,6.3,19,40.0,asphalt,False,0,,18.33786,43.86168
-11750,11800,Adema Buće,667,8.4,6.3,6,40.0,asphalt,True,0,,18.33825,43.86134
-11800,11850,Adema Buće,668,2.5,1.6,18,40.0,asphalt,True,0,,18.33859,43.86097
-11850,11900,Adema Buće,667,1.7,0.6,11,40.0,asphalt,True,0,,18.33919,43.86091
-11900,11950,Adema Buće,668,0.7,0.5,4,40.0,asphalt,True,0,,18.33979,43.86099
-11950,12000,Adema Buće,667,2.0,1.5,0,40.0,asphalt,True,0,,18.34037,43.86115
-12000,12050,Adema Buće,668,3.2,2.9,0,40.0,asphalt,True,0,,18.34095,43.86132
-12050,12100,Adema Buće,670,2.9,2.8,1,40.0,asphalt,True,0,,18.34153,43.86148
-12100,12150,Adema Buće,671,1.9,1.7,9,40.0,asphalt,True,0,,18.34211,43.86165
-12150,12200,Adema Buće,671,1.9,0.9,0,40.0,asphalt,True,0,,18.34263,43.86189
-12200,12250,Adema Buće,670,2.0,1.7,10,40.0,asphalt,True,0,,18.34313,43.86216
-12250,12300,Adema Buće,669,3.1,2.1,8,40.0,asphalt,True,0,,18.34372,43.86229
-12300,12350,Adema Buće,669,5.3,4.0,16,40.0,asphalt,True,0,,18.3443,43.86245
-12350,12400,Adema Buće,666,6.4,5.1,24,40.0,asphalt,False,0,,18.34491,43.8625
-12400,12450,Adema Buće,664,7.3,5.7,3,40.0,asphalt,True,0,,18.34533,43.8628
-12450,12500,Adema Buće,661,7.3,8.2,11,40.0,asphalt,False,0,,18.34573,43.86314
-12500,12550,Adema Buće,657,12.7,9.4,3,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.3463,43.86331
-12550,12600,Adema Buće,652,12.2,4.1,8,40.0,asphalt,True,1,"nagib 10–15% (50 m, zima)",18.34687,43.86348
-12600,12650,Adema Buće,657,12.9,7.5,7,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.34749,43.86351
-12650,12700,Adema Buće,659,3.5,3.8,11,40.0,asphalt,True,0,,18.34808,43.86338
-12700,12750,Adema Buće,658,2.7,1.5,15,40.0,asphalt,True,0,,18.34867,43.86346
-12750,12800,Adema Buće,659,4.8,3.3,6,40.0,asphalt,True,0,,18.34914,43.86375
-12800,12850,Adema Buće,661,4.3,3.4,8,40.0,asphalt,True,0,,18.34968,43.86396
-12850,12900,Adema Buće,663,3.4,2.8,9,40.0,asphalt,True,0,,18.3503,43.86399
-12900,12950,Adema Buće,664,3.3,2.2,9,40.0,asphalt,True,0,,18.35086,43.86381
-12950,13000,Adema Buće,664,1.7,2.2,6,40.0,asphalt,True,0,,18.35126,43.86347
-13000,13050,Adema Buće,665,9.5,3.5,17,40.0,asphalt,True,0,,18.35167,43.86314
-13050,13100,Adema Buće,667,4.7,2.8,19,40.0,asphalt,True,0,,18.35223,43.86299
-13100,13150,Adema Buće,666,4.7,3.6,4,40.0,asphalt,True,0,,18.35267,43.86267
-13150,13200,Adema Buće,664,2.3,2.8,1,40.0,asphalt,True,0,,18.35307,43.86233
-13200,13250,Adema Buće,663,4.2,4.1,18,40.0,asphalt,True,0,,18.35345,43.86197
-13250,13300,Adema Buće,661,6.2,6.3,10,40.0,asphalt,False,0,,18.35362,43.86155
-13300,13350,Adema Buće,658,7.3,6.4,1,40.0,asphalt,False,0,,18.35352,43.86111
-13350,13400,Adema Buće,655,5.6,4.8,14,40.0,asphalt,True,0,,18.35346,43.86067
-13400,13450,Adema Buće,654,5.1,3.8,3,40.0,asphalt,False,0,,18.35378,43.86028
-13450,13500,Adema Buće,652,3.7,4.8,14,40.0,asphalt,True,0,,18.3541,43.8599
-13500,13550,Adema Buće,649,7.6,6.3,12,40.0,asphalt,False,0,,18.35416,43.85947
-13550,13600,Adema Buće,646,6.7,7.0,3,40.0,asphalt,False,0,,18.35399,43.85903
-13600,13650,Adema Buće,642,8.0,6.6,12,40.0,asphalt,False,0,,18.35379,43.85861
-13650,13700,Adema Buće,640,4.3,5.3,13,40.0,asphalt,True,0,,18.35377,43.85817
-13700,13750,Adema Buće,638,5.0,4.4,21,40.0,asphalt,True,0,,18.35422,43.85791
-13750,13800,Adema Buće,636,5.1,3.2,14,40.0,asphalt,True,0,,18.35479,43.85806
-13800,13850,Adema Buće,635,4.4,4.2,0,40.0,asphalt,True,0,,18.35517,43.85842
-13850,13900,Adema Buće,632,6.5,4.8,12,40.0,asphalt,False,0,,18.35559,43.85875
-13900,13950,Adema Buće,630,6.8,6.7,14,40.0,asphalt,True,0,,18.35619,43.85882
-13950,14000,Adema Buće,627,12.0,10.4,22,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.35669,43.85858
-14000,14050,Adema Buće,621,11.2,10.8,9,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.35692,43.85816
-14050,14100,Adema Buće,617,9.2,6.9,18,40.0,asphalt,True,0,,18.3573,43.85782
-14100,14150,Bužimska,615,9.2,5.5,37,9.0,asphalt,False,0,,18.35786,43.85779
-14150,14200,Bužimska,612,5.8,5.0,13,8.0,asphalt,True,0,,18.35844,43.85764
-14200,14250,Bužimska,611,5.9,5.3,13,9.2,asphalt,True,0,,18.35896,43.8574
-14250,14300,Bužimska,608,8.5,8.6,3,9.2,asphalt,False,0,,18.35956,43.85729
-14300,14350,Bužimska,603,11.3,9.0,15,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.36016,43.85718
-14350,14400,Bužimska,599,8.2,8.7,23,14.6,asphalt,False,0,,18.36068,43.85697
-14400,14450,Bužimska,595,12.6,9.5,2,21.1,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.36102,43.85659
-14450,14500,Nazifa Hadžovića,590,8.7,9.2,54,11.6,asphalt,True,0,,18.36111,43.85626
-14500,14550,Nazifa Hadžovića,586,17.8,16.2,17,14.2,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.36057,43.85606
-14550,14600,Tuzlanska,577,21.6,19.9,56,14.4,asphalt,False,2,nagib > 12% (100 m); nagib > 15% (50 m),18.36051,43.85572
-14600,14650,Tuzlanska,567,19.7,19.8,48,14.3,asphalt,False,2,nagib > 12% (100 m); nagib > 15% (50 m),18.36074,43.85532
-14650,14700,Tuzlanska,558,18.9,18.8,43,21.7,asphalt,False,2,nagib > 12% (100 m); nagib > 15% (50 m),18.36105,43.85498
-14700,14750,Tuzlanska,549,19.6,16.6,14,23.0,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.36143,43.85465
-14750,14800,Tuzlanska,542,12.2,13.6,11,23.0,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m)",18.36202,43.85452
-14800,14850,Tuzlanska,537,11.1,8.8,50,19.9,asphalt,True,1,"nagib 10–15% (50 m, zima)",18.36263,43.85448
-14850,14900,Nusreta Prohića,536,2.2,2.3,13,27.5,,True,0,,18.36294,43.85478
-14900,14950,Nusreta Prohića,537,1.8,1.1,3,27.3,,True,0,,18.36322,43.85518
-14950,15000,Nusreta Prohića,537,6.1,5.8,2,29.7,,True,0,,18.36355,43.85556
-15000,15050,Nusreta Prohića,533,9.7,8.7,2,29.9,,False,0,,18.36389,43.85593
-15050,15100,Nusreta Prohića,529,9.6,8.6,58,17.7,asphalt,False,0,,18.36425,43.8563
-15100,15150,Nusreta Prohića,526,6.0,4.8,4,17.7,asphalt,True,0,,18.36482,43.85634
-15150,15200,Nusreta Prohića,526,4.9,2.1,0,24.6,asphalt,True,0,,18.36544,43.85637
-15200,15250,Adema Buće,528,2.3,1.4,86,24.6,asphalt,True,0,,18.36579,43.85657
-15250,15300,Adema Buće,527,9.8,5.8,79,40.0,asphalt,True,0,,18.3658,43.85702
-15300,15350,Bana Mateja Ninoslava,531,10.3,8.0,18,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.36642,43.85708
-15350,15400,Bana Mateja Ninoslava,534,5.8,5.0,21,40.0,asphalt,True,0,,18.36673,43.85741
-15400,15450,Bana Mateja Ninoslava,535,5.5,8.9,25,40.0,asphalt,True,0,,18.36662,43.85785
-15450,15500,Bana Mateja Ninoslava,539,22.2,14.5,26,40.0,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.36684,43.85821
-15500,15550,Bana Mateja Ninoslava,548,20.3,13.6,6,40.0,asphalt,True,2,nagib > 12% (100 m); nagib > 15% (50 m),18.36745,43.85825
-15550,15600,Bana Mateja Ninoslava,550,9.2,8.1,2,40.0,asphalt,True,0,,18.36806,43.85835
-15600,15650,Bana Mateja Ninoslava,555,16.3,16.1,8,40.0,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.36867,43.85845
-15650,15700,Bana Mateja Ninoslava,563,19.4,17.2,2,40.0,asphalt,False,2,nagib > 12% (100 m); nagib > 15% (50 m),18.36929,43.85848
-15700,15750,Bana Mateja Ninoslava,571,16.8,15.2,8,40.0,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.3699,43.85854
-15750,15800,Bana Mateja Ninoslava,576,9.8,10.2,10,40.0,asphalt,False,0,,18.3705,43.85865
-15800,15850,Bana Mateja Ninoslava,580,7.0,6.5,3,40.0,asphalt,True,0,,18.37103,43.85888
-15850,15900,Bana Mateja Ninoslava,581,2.9,2.6,17,40.0,asphalt,True,0,,18.37159,43.85907
-15900,15950,Bana Mateja Ninoslava,582,4.2,3.1,11,40.0,"asphalt,gravel",True,1,makadam; neasfaltirano (OSM),18.37221,43.85903
-15950,16000,Orlovačka,584,2.5,2.8,7,40.0,gravel,True,1,makadam; neasfaltirano (OSM),18.37282,43.85908
-16000,16050,Orlovačka,584,1.0,0.6,18,40.0,gravel,True,1,makadam; neasfaltirano (OSM),18.37343,43.85913
-16050,16100,Orlovačka,584,0.8,2.2,18,40.0,gravel,True,1,makadam; neasfaltirano (OSM),18.37385,43.85946
-16100,16150,Orlovačka,585,9.9,6.7,31,40.0,"asphalt,gravel",True,1,makadam; neasfaltirano (OSM),18.37438,43.85967
-16150,16200,Orlovačka,589,9.4,7.9,9,40.0,asphalt,False,0,,18.37498,43.85959
-16200,16250,Orlovačka,592,5.9,6.4,0,40.0,asphalt,False,0,,18.3756,43.85964
-16250,16300,Orlovačka,595,6.8,7.5,4,40.0,asphalt,False,0,,18.37622,43.85968
-16300,16350,Orlovačka,598,9.7,7.9,9,40.0,asphalt,False,0,,18.37684,43.85975
-16350,16400,Orlovačka,603,8.1,7.6,2,40.0,asphalt,False,0,,18.37743,43.85988
-16400,16450,Orlovačka,606,8.8,7.7,63,25.2,asphalt,False,0,,18.378,43.86005
-16450,16500,Orlovačka,610,9.2,5.5,180,25.2,asphalt,True,2,trasa se vraća istim putem (ispraviti),18.37788,43.86036
-16500,16550,Orlovačka,608,9.3,2.0,90,25.2,asphalt,True,1,oštro skretanje 90–120°,18.37807,43.86023
-16550,16600,Braće Panjeta,609,5.1,1.3,6,40.0,asphalt,True,0,,18.37856,43.86034
-16600,16650,Braće Panjeta,608,2.7,2.6,7,40.0,asphalt,True,0,,18.37915,43.86049
-16650,16700,Braće Panjeta,607,3.5,2.2,5,40.0,asphalt,True,0,,18.37976,43.86057
-16700,16750,Braće Panjeta,607,6.4,7.3,10,40.0,asphalt,True,0,,18.38038,43.86061
-16750,16800,Braće Panjeta,611,11.3,8.1,16,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.38099,43.86054
-16800,16850,Braće Panjeta,615,5.9,5.7,6,40.0,asphalt,True,0,,18.3816,43.8606
-16850,16900,Zahira Panjete,614,6.7,3.5,11,40.0,asphalt,True,0,,18.38218,43.86075
-16900,16950,Zahira Panjete,612,6.2,2.3,17,40.0,asphalt,True,0,,18.38254,43.8611
-16950,17000,Zahira Panjete,612,8.2,4.2,21,40.0,asphalt,True,0,,18.38273,43.86152
-17000,17050,Zahira Panjete,609,8.9,5.6,1,40.0,asphalt,True,0,,18.38328,43.86171
-17050,17100,Zahira Panjete,607,6.2,6.6,6,40.0,asphalt,True,0,,18.38386,43.86188
-17100,17150,Pofalićka,604,11.7,9.5,45,15.8,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.38441,43.86192
-17150,17200,Pofalićka,598,12.3,7.8,69,9.1,asphalt,True,1,"nagib 10–15% (50 m, zima)",18.38492,43.86167
-17200,17250,Humska,598,4.1,1.7,34,23.4,asphalt,True,0,,18.38527,43.86198
-17250,17300,Humska,599,7.1,5.3,13,40.0,asphalt,True,0,,18.38552,43.86239
-17300,17350,Humska,596,9.4,8.7,17,40.0,asphalt,False,0,,18.38608,43.86253
-17350,17400,Humska,591,9.7,4.9,95,12.6,asphalt,True,1,oštro skretanje 90–120°,18.3867,43.86248
-17400,17450,Ruđera Boškovića,594,10.9,4.8,18,12.6,asphalt,True,1,"nagib 10–15% (50 m, zima)",18.38655,43.86282
-17450,17500,Ruđera Boškovića,595,3.8,3.7,11,40.0,asphalt,True,0,,18.38672,43.86325
-17500,17550,Ruđera Boškovića,598,8.6,5.3,12,12.6,asphalt,False,0,,18.38684,43.86369
-17550,17600,Ruđera Boškovića,600,4.6,3.3,62,13.4,asphalt,True,0,,18.38709,43.864
-17600,17650,Ruđera Boškovića,601,10.4,6.2,20,12.8,asphalt,True,1,"nagib 10–15% (50 m, zima)",18.38766,43.86386
-17650,17700,Ruđera Boškovića,605,10.8,7.0,17,14.1,asphalt,True,1,"nagib 10–15% (50 m, zima)",18.38825,43.86397
-17700,17750,Ruđera Boškovića,607,5.9,3.9,41,20.6,asphalt,True,0,,18.38883,43.86398
-17750,17800,Ruđera Boškovića,608,4.3,3.6,10,18.2,asphalt,True,0,,18.38942,43.86386
-17800,17850,Ruđera Boškovića,610,6.9,6.4,3,18.2,asphalt,False,0,,18.38994,43.86362
-17850,17900,Ruđera Boškovića,613,7.3,5.7,15,10.2,asphalt,True,0,,18.39051,43.86346
-17900,17950,Ruđera Boškovića,613,4.7,1.9,5,21.8,asphalt,True,0,,18.39108,43.86329
-17950,18000,Ruđera Boškovića,612,2.0,1.5,1,21.8,asphalt,True,0,,18.39162,43.86307
-18000,18050,Ruđera Boškovića,613,3.2,1.0,4,16.8,asphalt,True,0,,18.39217,43.86285
-18050,18100,Ruđera Boškovića,612,8.4,7.1,102,23.8,asphalt,True,1,oštro skretanje 90–120°,18.39272,43.86265
-18100,18150,Ruđera Boškovića,616,15.5,15.3,15,14.4,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.39294,43.86281
-18150,18200,Ruđera Boškovića,624,15.9,14.3,33,6.5,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m); razmak zgrada 5,5–8 m",18.39267,43.86322
-18200,18250,Ruđera Boškovića,628,6.5,7.4,4,9.5,asphalt,True,0,,18.39311,43.86349
-18250,18300,Ruđera Boškovića,627,7.7,8.0,2,15.1,asphalt,True,0,,18.39369,43.86365
-18300,18350,Ruđera Boškovića,623,12.1,8.8,54,16.3,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.39427,43.86381
-18350,18400,,619,6.6,5.6,180,26.1,,True,2,trasa se vraća istim putem (ispraviti),18.39459,43.86404
-18400,18450,Ruđera Boškovića,621,12.1,8.6,52,16.3,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.39443,43.86382
-18450,18500,Ruđera Boškovića,626,9.9,8.6,7,16.3,asphalt,False,0,,18.39385,43.86369
-18500,18550,Ruđera Boškovića,628,3.0,5.1,7,15.1,asphalt,True,0,,18.39327,43.86354
-18550,18600,Ruđera Boškovića,626,16.1,12.7,30,7.9,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m); razmak zgrada 5,5–8 m",18.39272,43.86333
-18600,18650,Ruđera Boškovića,618,15.7,15.8,12,21.3,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.39287,43.86293
-18650,18700,Ruđera Boškovića,611,16.3,14.8,8,26.1,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.39297,43.86249
-18700,18750,Ruđera Boškovića,604,17.2,15.3,60,26.1,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.39306,43.86205
-18750,18800,Ruđera Boškovića,596,18.2,14.6,70,17.0,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.39278,43.86177
-18800,18850,Ruđera Boškovića,590,11.3,12.7,5,23.4,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m)",18.3927,43.86133
-18850,18900,Ruđera Boškovića,584,13.7,15.7,3,18.3,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m)",18.39253,43.8609
-18900,18950,Ruđera Boškovića,576,23.3,16.8,15,11.5,asphalt,False,2,nagib > 12% (100 m); nagib > 15% (50 m),18.39224,43.86051
-18950,19000,Ruđera Boškovića,570,9.9,10.1,124,18.2,asphalt,True,2,serpentina (skretanje > 120°),18.39196,43.86048
-19000,19050,Ruđera Boškovića,567,19.7,9.6,85,8.1,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 15% (50 m)",18.39177,43.86051
-19050,19100,Ruđera Boškovića,564,12.2,8.8,117,21.3,asphalt,True,1,"nagib 10–15% (50 m, zima); oštro skretanje 90–120°",18.39165,43.86067
-19100,19150,Ruđera Boškovića,558,17.7,13.2,32,16.2,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.3912,43.86059
-19150,19200,Ruđera Boškovića,552,13.2,12.6,10,19.5,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m)",18.39094,43.86024
-19200,19250,Ruđera Boškovića,546,15.5,12.0,42,31.9,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.39084,43.85979
-19250,19300,Hamdije Čemerlića,541,9.2,10.4,23,40.0,asphalt,False,0,,18.39078,43.8594
-19300,19350,Hamdije Čemerlića,538,4.7,4.8,0,40.0,asphalt,True,0,,18.39092,43.85896
-19350,19400,Hamdije Čemerlića,537,6.6,5.6,2,40.0,asphalt,True,0,,18.39107,43.85852
-19400,19450,Hamdije Čemerlića,533,8.2,6.0,20,40.0,asphalt,False,1,jednosmjerna (povratak drugom ulicom),18.3912,43.85808
-19450,19500,Krupska,531,3.7,3.4,34,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39112,43.85766
-19500,19550,Put života,532,2.0,1.7,33,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39155,43.85772
-19550,19600,Put života,533,2.1,1.3,4,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39207,43.85794
-19600,19650,Put života,533,0.4,0.4,4,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39267,43.85807
-19650,19700,Put života,532,0.9,0.8,3,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39328,43.85814
-19700,19750,Put života,532,1.1,0.9,2,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.3939,43.85818
-19750,19800,Put života,532,0.7,0.8,0,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39452,43.8582
-19800,19850,Put života,532,0.9,0.5,1,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39514,43.85823
-19850,19900,Put života,532,0.7,0.7,0,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39576,43.85826
-19900,19950,Put života,532,0.8,0.7,0,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39638,43.85829
-19950,20000,Put života,533,0.8,0.8,0,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.397,43.85832
-20000,20050,Put života,533,0.8,0.6,4,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39762,43.85834
-20050,20100,Put života,533,0.8,0.2,2,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39825,43.85837
-20100,20150,Put života,533,0.6,0.2,2,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39886,43.85842
-20150,20200,Put života,533,0.2,0.2,3,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39948,43.8585
-20200,20250,Put života,533,0.3,0.5,0,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.40008,43.8586
-20250,20300,Put života,533,1.4,0.7,3,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.40069,43.85869
-20300,20350,Put života,532,0.3,0.7,81,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.4013,43.85878
-20350,20400,Put života,532,1.7,0.7,6,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.40085,43.85882
-20400,20450,Put života,533,0.8,0.9,0,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.40024,43.85872
-20450,20500,Put života,533,0.2,1.1,0,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39964,43.85862
-20500,20550,Put života,533,2.5,0.9,73,29.7,asphalt,True,1,jednosmjerna (povratak drugom ulicom); pristupni put / stambena zona (OSM),18.39912,43.85865
-20550,20600,,534,1.4,,2,29.7,asphalt,True,1,pristupni put / stambena zona (OSM),18.39944,43.85891
+6550,6600,Avde Palića,534,1.5,1.0,4,23.5,,True,0,,18.33513,43.86947
+6600,6650,Avde Palića,534,2.6,2.4,0,40.0,,True,0,,18.33452,43.86958
+6650,6700,Avde Palića,533,4.6,4.5,2,40.0,,True,0,,18.33391,43.86968
+6700,6750,Avde Palića,531,6.5,5.5,8,26.9,,False,0,,18.33331,43.86979
+6750,6800,Avde Palića,528,6.7,3.8,6,19.5,,True,0,,18.33278,43.87002
+6800,6850,Avde Palića,528,1.5,1.5,7,19.5,,True,0,,18.33223,43.87022
+6850,6900,Avde Palića,527,2.0,1.8,2,31.7,,True,0,,18.33163,43.87035
+6900,6950,Avde Palića,526,3.9,3.2,8,10.2,asphalt,True,0,,18.33105,43.8705
+6950,7000,Avde Palića,524,3.8,4.4,108,10.2,asphalt,True,1,oštro skretanje 90–120°,18.33051,43.87073
+7000,7050,Avde Palića,527,13.1,12.1,5,19.9,,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m)",18.33033,43.8705
+7050,7100,Avde Palića,534,13.2,12.4,2,27.3,,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m)",18.3303,43.87006
+7100,7150,Avde Palića,539,11.5,12.4,0,27.3,,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m)",18.33029,43.86961
+7150,7200,Avde Palića,546,14.3,11.8,10,27.3,,False,1,"nagib 10–15% (50 m, zima)",18.33027,43.86916
+7200,7250,Avde Palića,546,14.5,10.8,178,27.3,,False,2,"nagib 10–15% (50 m, zima); trasa se vraća istim putem (ispraviti)",18.33027,43.86912
+7250,7300,Avde Palića,540,11.7,12.5,0,27.3,,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m)",18.33028,43.86957
+7300,7350,Avde Palića,534,13.1,12.4,1,27.3,,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m)",18.3303,43.87002
+7350,7400,Avde Palića,528,13.2,12.2,5,19.9,,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m)",18.33033,43.87047
+7400,7450,Avde Palića,524,6.4,6.1,47,21.2,asphalt,True,0,,18.33012,43.87078
+7450,7500,Avde Palića,525,1.9,0.7,12,21.2,asphalt,True,0,,18.3295,43.87083
+7500,7550,Avde Palića,524,4.5,5.0,13,22.4,asphalt,True,0,,18.32892,43.87099
+7550,7600,Avde Palića,521,7.3,5.4,19,29.2,asphalt,False,0,,18.32845,43.87126
+7600,7650,Avde Palića,519,4.6,5.2,9,40.0,asphalt,True,0,,18.32812,43.87162
+7650,7700,Avde Palića,517,4.0,2.7,21,13.5,asphalt,True,0,,18.32761,43.87189
+7700,7750,Avde Palića,518,5.3,3.3,15,40.0,asphalt,True,0,,18.32701,43.87187
+7750,7800,Avde Palića,520,3.7,2.8,4,40.0,asphalt,True,0,,18.3264,43.87185
+7800,7850,Avde Palića,519,3.5,2.4,2,40.0,asphalt,True,0,,18.32578,43.87192
+7850,7900,Avde Palića,518,2.1,2.6,1,32.4,asphalt,True,0,,18.32517,43.87201
+7900,7950,Porodice Dizdarević,517,5.0,4.2,11,18.8,asphalt,True,0,,18.32459,43.87215
+7950,8000,Porodice Dizdarević,514,5.0,4.4,3,18.8,asphalt,True,0,,18.32409,43.87242
+8000,8050,Porodice Dizdarević,512,3.2,3.5,11,10.0,asphalt,True,0,,18.3236,43.8727
+8050,8100,Porodice Dizdarević,512,1.7,1.8,4,31.9,asphalt,True,0,,18.32303,43.87288
+8100,8150,Porodice Dizdarević,511,2.2,1.1,16,25.3,asphalt,True,0,,18.32246,43.87303
+8150,8200,Porodice Dizdarević,512,2.6,1.7,46,28.2,asphalt,True,0,,18.32192,43.87282
+8200,8250,Avde Palića,513,4.2,5.9,33,23.4,asphalt,True,0,,18.32138,43.87277
+8250,8300,Zaima Imamovića,516,15.2,13.6,38,40.0,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.3209,43.87265
+8300,8350,Zaima Imamovića,523,16.5,16.8,10,40.0,asphalt,False,2,nagib > 12% (100 m); nagib > 15% (50 m),18.32042,43.87237
+8350,8400,Zaima Imamovića,532,18.2,18.1,2,40.0,asphalt,False,2,nagib > 12% (100 m); nagib > 15% (50 m),18.32004,43.87202
+8400,8450,Zaima Imamovića,541,18.3,18.2,3,40.0,asphalt,False,2,nagib > 12% (100 m); nagib > 15% (50 m),18.31973,43.87163
+8450,8500,Zaima Imamovića,549,16.9,16.3,5,40.0,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.31937,43.87126
+8500,8550,Zaima Imamovića,556,13.4,13.3,10,40.0,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m)",18.31893,43.87094
+8550,8600,Zaima Imamovića,561,10.6,9.7,3,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.31866,43.87054
+8600,8650,Zaima Imamovića,563,2.4,3.0,12,40.0,asphalt,True,0,,18.31837,43.87014
+8650,8700,Zaima Imamovića,562,6.0,4.1,19,40.0,asphalt,True,0,,18.31826,43.86973
+8700,8750,Zaima Imamovića,559,5.9,3.8,9,40.0,asphalt,True,0,,18.31854,43.86933
+8750,8800,Zaima Imamovića,559,1.9,2.6,24,40.0,asphalt,True,0,,18.31893,43.86899
+8800,8850,Numan paše Čuprilića,559,11.9,8.1,60,40.0,asphalt,True,1,"nagib 10–15% (50 m, zima)",18.31887,43.8686
+8850,8900,Numan paše Čuprilića,565,11.6,10.4,9,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.31919,43.86822
+8900,8950,Numan paše Čuprilića,569,8.6,8.8,5,40.0,asphalt,False,0,,18.3196,43.86788
+8950,9000,Numan paše Čuprilića,573,9.3,8.5,21,40.0,asphalt,False,0,,18.3201,43.86763
+9000,9050,Numan paše Čuprilića,577,8.1,7.7,2,40.0,asphalt,False,0,,18.32072,43.86764
+9050,9100,Numan paše Čuprilića,581,8.7,9.0,9,40.0,asphalt,False,0,,18.32134,43.86762
+9100,9150,Numan paše Čuprilića,585,13.2,12.3,12,40.0,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m)",18.32191,43.86744
+9150,9200,Numan paše Čuprilića,592,13.0,12.4,5,40.0,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m)",18.32238,43.86715
+9200,9250,Numan paše Čuprilića,597,11.4,11.1,8,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.32268,43.86676
+9250,9300,Numan paše Čuprilića,601,7.4,7.2,8,40.0,asphalt,True,0,,18.32302,43.86639
+9300,9350,Numan paše Čuprilića,603,2.1,2.5,8,40.0,asphalt,True,0,,18.32353,43.86613
+9350,9400,Numan paše Čuprilića,602,1.2,1.4,9,40.0,asphalt,True,0,,18.32409,43.86594
+9400,9450,Numan paše Čuprilića,603,9.9,6.9,8,40.0,asphalt,True,0,,18.3247,43.86594
+9450,9500,Numan paše Čuprilića,607,10.6,9.3,7,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.32532,43.86599
+9500,9550,Numan paše Čuprilića,611,8.8,8.5,12,40.0,asphalt,False,0,,18.32589,43.86614
+9550,9600,Numan paše Čuprilića,614,5.9,4.6,35,40.0,asphalt,True,0,,18.32639,43.86641
+9600,9650,Numan paše Čuprilića,614,3.3,3.2,10,40.0,asphalt,True,0,,18.32696,43.86637
+9650,9700,Numan paše Čuprilića,616,10.7,10.9,5,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.32758,43.86632
+9700,9750,Numan paše Čuprilića,622,14.9,11.3,22,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.32819,43.86626
+9750,9800,Numan paše Čuprilića,627,8.6,9.8,5,40.0,asphalt,False,0,,18.32863,43.86595
+9800,9850,Numan paše Čuprilića,630,9.4,7.6,0,40.0,asphalt,False,0,,18.32903,43.86562
+9850,9900,Numan paše Čuprilića,634,9.4,9.5,14,40.0,asphalt,False,0,,18.32938,43.86525
+9900,9950,Numan paše Čuprilića,639,10.3,8.9,13,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.3296,43.86483
+9950,10000,Numan paše Čuprilića,642,7.6,7.8,8,40.0,asphalt,True,0,,18.32953,43.86439
+10000,10050,Briješko brdo,646,11.9,9.9,58,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.32969,43.8641
+10050,10100,Briješko brdo,651,9.6,9.8,0,40.0,asphalt,False,0,,18.33017,43.86438
+10100,10150,Briješko brdo,655,5.6,5.9,25,40.0,asphalt,True,0,,18.33065,43.86467
+10150,10200,Briješko brdo,655,1.6,2.0,13,40.0,asphalt,True,0,,18.33123,43.86479
+10200,10250,Viteška,654,4.5,3.6,116,24.0,asphalt,True,1,oštro skretanje 90–120°,18.33148,43.86473
+10250,10300,Viteška,652,4.6,2.6,180,24.0,asphalt,True,2,trasa se vraća istim putem (ispraviti),18.33111,43.86437
+10300,10350,Viteška,653,4.6,3.6,3,24.0,asphalt,True,0,,18.33127,43.86451
+10350,10400,Briješko brdo,655,3.5,3.0,114,31.0,asphalt,True,1,oštro skretanje 90–120°,18.33159,43.86485
+10400,10450,Briješko brdo,655,3.0,2.8,25,40.0,asphalt,True,0,,18.33098,43.86476
+10450,10500,Briješko brdo,654,7.9,7.4,0,40.0,asphalt,False,0,,18.33045,43.86456
+10500,10550,Briješko brdo,650,11.7,9.9,2,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.32998,43.86427
+10550,10600,Numan paše Čuprilića,644,11.9,9.4,60,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.3295,43.86413
+10600,10650,Numan paše Čuprilića,641,6.4,7.5,13,40.0,asphalt,True,0,,18.3296,43.86457
+10650,10700,Numan paše Čuprilića,640,6.9,3.7,178,40.0,asphalt,True,2,trasa se vraća istim putem (ispraviti),18.32962,43.86478
+10700,10750,Numan paše Čuprilića,642,9.3,8.1,22,40.0,asphalt,True,0,,18.32952,43.86434
+10750,10800,Briješko brdo,647,12.1,9.8,82,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.32975,43.86413
+10800,10850,Briješko brdo,652,9.4,9.7,0,40.0,asphalt,False,0,,18.33023,43.86442
+10850,10900,Briješko brdo,655,5.4,5.4,22,40.0,asphalt,True,0,,18.33071,43.86471
+10900,10950,Briješko brdo,655,1.7,0.7,14,40.0,asphalt,True,0,,18.3313,43.8648
+10950,11000,Briješko brdo,655,3.3,0.9,12,40.0,asphalt,True,0,,18.3319,43.8648
+11000,11050,Briješko brdo,655,4.1,1.0,6,40.0,asphalt,True,0,,18.33237,43.86452
+11050,11100,Briješko brdo,655,2.7,2.6,5,40.0,asphalt,True,0,,18.33281,43.8642
+11100,11150,Briješko brdo,656,5.0,4.6,2,40.0,asphalt,True,0,,18.33323,43.86386
+11150,11200,Briješko brdo,658,7.9,7.7,5,40.0,asphalt,False,0,,18.3336,43.86351
+11200,11250,Briješko brdo,663,9.5,7.6,9,40.0,asphalt,False,0,,18.33395,43.86313
+11250,11300,Briješko brdo,665,4.7,5.1,14,40.0,asphalt,True,0,,18.33443,43.86285
+11300,11350,Briješko brdo,666,1.2,1.4,0,40.0,asphalt,True,0,,18.33499,43.86266
+11350,11400,Briješko brdo,665,4.1,2.9,0,40.0,asphalt,True,0,,18.33555,43.86247
+11400,11450,Briješko brdo,664,3.4,3.5,1,40.0,asphalt,True,0,,18.33611,43.86227
+11450,11500,Briješko brdo,662,4.1,2.5,5,40.0,asphalt,True,0,,18.33668,43.86208
+11500,11550,Briješko brdo,662,0.9,2.3,6,40.0,asphalt,True,0,,18.33726,43.86193
+11550,11600,Briješko brdo,663,7.7,6.2,15,40.0,asphalt,True,0,,18.3378,43.86171
+11600,11650,Adema Buće,666,8.8,6.3,7,40.0,asphalt,True,0,,18.33821,43.86138
+11650,11700,Adema Buće,668,2.6,1.9,23,40.0,asphalt,True,0,,18.33853,43.861
+11700,11750,Adema Buće,667,1.7,0.4,12,40.0,asphalt,True,0,,18.33912,43.86091
+11750,11800,Adema Buće,668,0.7,0.6,11,40.0,asphalt,True,0,,18.33973,43.86098
+11800,11850,Adema Buće,667,1.5,1.2,0,40.0,asphalt,True,0,,18.34031,43.86113
+11850,11900,Adema Buće,668,3.1,2.9,0,40.0,asphalt,True,0,,18.34089,43.8613
+11900,11950,Adema Buće,670,2.9,2.9,1,40.0,asphalt,True,0,,18.34147,43.86147
+11950,12000,Adema Buće,671,2.2,1.8,6,40.0,asphalt,True,0,,18.34205,43.86163
+12000,12050,Adema Buće,671,1.9,1.0,1,40.0,asphalt,True,0,,18.34257,43.86186
+12050,12100,Adema Buće,670,2.0,1.9,7,40.0,asphalt,True,0,,18.34307,43.86213
+12100,12150,Adema Buće,670,3.1,1.8,12,40.0,asphalt,True,0,,18.34365,43.86229
+12150,12200,Adema Buće,669,4.5,3.8,15,40.0,asphalt,True,0,,18.34424,43.86243
+12200,12250,Adema Buće,667,6.5,5.1,30,40.0,asphalt,False,0,,18.34484,43.86248
+12250,12300,Adema Buće,664,7.0,5.8,9,40.0,asphalt,True,0,,18.34529,43.86276
+12300,12350,Adema Buće,661,7.4,7.6,13,40.0,asphalt,False,0,,18.34567,43.86311
+12350,12400,Adema Buće,658,12.8,9.5,4,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.34623,43.86329
+12400,12450,Adema Buće,652,12.7,5.3,5,40.0,asphalt,True,1,"nagib 10–15% (50 m, zima)",18.34681,43.86347
+12450,12500,Adema Buće,656,12.5,7.7,10,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.34742,43.86352
+12500,12550,Adema Buće,659,4.5,4.8,12,40.0,asphalt,True,0,,18.34802,43.8634
+12550,12600,Adema Buće,658,2.9,1.1,14,40.0,asphalt,True,0,,18.34861,43.86343
+12600,12650,Adema Buće,659,4.8,3.3,3,40.0,asphalt,True,0,,18.34909,43.86372
+12650,12700,Adema Buće,661,4.7,3.3,13,40.0,asphalt,True,0,,18.34962,43.86395
+12700,12750,Adema Buće,663,3.0,2.8,16,40.0,asphalt,True,0,,18.35023,43.864
+12750,12800,Adema Buće,664,3.6,2.4,12,40.0,asphalt,True,0,,18.3508,43.86384
+12800,12850,Adema Buće,664,2.0,1.6,9,40.0,asphalt,True,0,,18.35123,43.86351
+12850,12900,Adema Buće,665,9.2,3.5,22,40.0,asphalt,True,0,,18.3516,43.86317
+12900,12950,Adema Buće,667,6.1,2.9,25,40.0,asphalt,True,0,,18.35218,43.86302
+12950,13000,Adema Buće,666,5.0,3.6,4,40.0,asphalt,True,0,,18.35262,43.86271
+13000,13050,Adema Buće,664,3.0,2.8,1,40.0,asphalt,True,0,,18.35302,43.86237
+13050,13100,Adema Buće,663,4.4,3.7,9,40.0,asphalt,True,0,,18.35341,43.86201
+13100,13150,Adema Buće,661,5.8,6.0,12,40.0,asphalt,True,0,,18.35362,43.8616
+13150,13200,Adema Buće,658,7.5,6.4,1,40.0,asphalt,False,0,,18.35354,43.86116
+13200,13250,Adema Buće,655,6.3,4.9,20,40.0,asphalt,True,0,,18.35345,43.86072
+13250,13300,Adema Buće,654,5.3,3.7,4,40.0,asphalt,False,0,,18.35374,43.86032
+13300,13350,Adema Buće,652,4.5,4.6,14,40.0,asphalt,True,0,,18.35407,43.85994
+13350,13400,Adema Buće,650,7.3,6.3,11,40.0,asphalt,False,0,,18.35418,43.85951
+13400,13450,Adema Buće,646,6.7,7.0,4,40.0,asphalt,False,0,,18.35401,43.85908
+13450,13500,Adema Buće,643,8.1,6.8,11,40.0,asphalt,False,0,,18.35381,43.85865
+13500,13550,Adema Buće,640,5.2,5.4,12,40.0,asphalt,True,0,,18.35375,43.85822
+13550,13600,Adema Buće,638,5.7,4.5,22,40.0,asphalt,True,0,,18.35415,43.85791
+13600,13650,Adema Buće,636,5.1,3.5,17,40.0,asphalt,True,0,,18.35474,43.85803
+13650,13700,Adema Buće,635,4.2,3.7,0,40.0,asphalt,True,0,,18.35513,43.85838
+13700,13750,Adema Buće,633,6.9,4.8,19,40.0,asphalt,True,0,,18.35553,43.85872
+13750,13800,Adema Buće,631,5.6,6.5,23,40.0,asphalt,True,0,,18.35612,43.85883
+13800,13850,Adema Buće,627,11.6,10.0,12,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.35664,43.85861
+13850,13900,Adema Buće,622,11.6,10.8,6,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.3569,43.8582
+13900,13950,Adema Buće,617,10.2,7.4,17,40.0,asphalt,True,1,"nagib 10–15% (50 m, zima)",18.35724,43.85784
+13950,14000,Bužimska,615,9.4,5.7,65,9.0,asphalt,True,0,,18.35781,43.85782
+14000,14050,Bužimska,612,7.0,5.1,16,9.0,asphalt,True,0,,18.35838,43.85767
+14050,14100,Bužimska,611,5.9,4.9,10,10.5,asphalt,True,0,,18.35889,43.85742
+14100,14150,Bužimska,608,7.8,8.2,3,9.2,asphalt,False,0,,18.3595,43.85731
+14150,14200,Bužimska,604,11.2,9.1,3,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.3601,43.85719
+14200,14250,Bužimska,599,9.0,8.8,23,21.1,asphalt,False,0,,18.36064,43.85701
+14250,14300,Bužimska,595,13.7,9.7,2,21.1,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.36098,43.85663
+14300,14350,Nazifa Hadžovića,590,10.6,8.8,88,11.6,asphalt,True,1,"nagib 10–15% (50 m, zima)",18.36117,43.85629
+14350,14400,Nazifa Hadžovića,587,16.4,15.1,24,14.2,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.36064,43.85608
+14400,14450,Tuzlanska,578,22.4,19.8,75,14.4,asphalt,False,2,nagib > 12% (100 m); nagib > 15% (50 m),18.36046,43.85576
+14450,14500,Tuzlanska,568,20.0,19.9,25,14.3,asphalt,False,2,nagib > 12% (100 m); nagib > 15% (50 m),18.36072,43.85536
+14500,14550,Tuzlanska,559,18.7,18.9,63,21.7,asphalt,False,2,nagib > 12% (100 m); nagib > 15% (50 m),18.36105,43.85503
+14550,14600,Tuzlanska,550,19.6,16.9,16,23.0,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.36137,43.85468
+14600,14650,Tuzlanska,543,12.2,14.1,13,23.0,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m)",18.36195,43.85454
+14650,14700,Tuzlanska,537,11.5,9.7,83,12.1,asphalt,True,1,"nagib 10–15% (50 m, zima)",18.36256,43.85448
+14700,14750,Nusreta Prohića,536,2.8,3.0,8,18.7,,True,0,,18.36291,43.85473
+14750,14800,Nusreta Prohića,537,1.7,1.5,4,27.3,,True,0,,18.36318,43.85513
+14800,14850,Nusreta Prohića,537,5.6,5.1,5,27.3,,True,0,,18.36351,43.85552
+14850,14900,Nusreta Prohića,534,9.6,8.4,2,29.9,,False,0,,18.36385,43.85589
+14900,14950,Nusreta Prohića,529,9.8,8.7,31,17.7,asphalt,False,0,,18.36421,43.85626
+14950,15000,Nusreta Prohića,526,6.8,5.5,5,17.7,asphalt,True,0,,18.36475,43.85634
+15000,15050,Nusreta Prohića,526,4.8,2.2,0,24.6,asphalt,True,0,,18.36537,43.85637
+15050,15100,Adema Buće,528,2.7,1.6,60,24.6,asphalt,True,1,pristupni put / stambena zona (OSM),18.3658,43.85652
+15100,15150,Adema Buće,527,8.2,5.3,44,40.0,asphalt,True,0,,18.3658,43.85697
+15150,15200,Bana Mateja Ninoslava,531,10.2,8.2,13,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.36635,43.85707
+15200,15250,Bana Mateja Ninoslava,534,7.3,5.6,20,40.0,asphalt,True,0,,18.36675,43.85736
+15250,15300,Bana Mateja Ninoslava,535,3.6,7.5,23,40.0,asphalt,True,0,,18.36663,43.8578
+15300,15350,Bana Mateja Ninoslava,538,22.3,14.5,25,40.0,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.36677,43.85819
+15350,15400,Bana Mateja Ninoslava,548,21.5,14.0,7,40.0,asphalt,True,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.36739,43.85824
+15400,15450,Bana Mateja Ninoslava,550,7.4,7.2,1,40.0,asphalt,True,0,,18.36799,43.85834
+15450,15500,Bana Mateja Ninoslava,554,15.8,15.4,9,40.0,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.3686,43.85844
+15500,15550,Bana Mateja Ninoslava,562,19.2,17.2,2,40.0,asphalt,False,2,nagib > 12% (100 m); nagib > 15% (50 m),18.36922,43.85848
+15550,15600,Bana Mateja Ninoslava,571,17.7,15.6,7,40.0,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.36983,43.85853
+15600,15650,Bana Mateja Ninoslava,576,9.9,10.8,14,40.0,asphalt,False,0,,18.37044,43.85863
+15650,15700,Bana Mateja Ninoslava,580,7.2,7.0,4,40.0,asphalt,True,0,,18.37097,43.85886
+15700,15750,Bana Mateja Ninoslava,581,2.5,2.8,14,40.0,asphalt,True,0,,18.37152,43.85906
+15750,15800,Bana Mateja Ninoslava,582,4.1,3.0,13,40.0,"asphalt,gravel",True,1,makadam; neasfaltirano (OSM),18.37214,43.85903
+15800,15850,Orlovačka,584,3.0,2.9,6,40.0,gravel,True,1,makadam; neasfaltirano (OSM),18.37275,43.85908
+15850,15900,Orlovačka,584,1.3,0.6,20,40.0,gravel,True,1,makadam; neasfaltirano (OSM),18.37337,43.85912
+15900,15950,Orlovačka,584,0.8,1.5,9,40.0,gravel,True,1,makadam; neasfaltirano (OSM),18.37381,43.85942
+15950,16000,Orlovačka,584,9.4,6.2,25,40.0,"asphalt,gravel",True,1,makadam; neasfaltirano (OSM),18.37432,43.85966
+16000,16050,Orlovačka,588,9.8,7.8,15,40.0,asphalt,False,0,,18.37492,43.85959
+16050,16100,Orlovačka,592,6.3,6.5,0,40.0,asphalt,False,0,,18.37553,43.85963
+16100,16150,Orlovačka,594,6.6,7.2,1,40.0,asphalt,False,0,,18.37615,43.85968
+16150,16200,Orlovačka,598,9.6,7.9,5,40.0,asphalt,False,0,,18.37677,43.85974
+16200,16250,Orlovačka,602,8.6,7.6,5,40.0,asphalt,False,0,,18.37736,43.85986
+16250,16300,Orlovačka,605,8.6,7.7,68,40.0,asphalt,False,0,,18.37794,43.86002
+16300,16350,Orlovačka,609,9.3,7.7,19,11.8,asphalt,False,0,,18.37793,43.86033
+16350,16400,Orlovačka,611,4.1,2.8,14,11.8,asphalt,True,0,,18.37747,43.86064
+16400,16450,Orlovačka,610,2.7,4.3,14,15.7,asphalt,True,0,,18.37724,43.86103
+16450,16500,Orlovačka,612,15.6,5.7,79,12.1,asphalt,True,2,"nagib 10–15% (50 m, zima); nagib > 15% (50 m)",18.37737,43.8614
+16500,16550,,616,6.2,8.8,26,8.9,asphalt,True,0,,18.37776,43.86163
+16550,16600,,619,25.7,19.1,74,8.5,asphalt,True,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.37799,43.86198
+16600,16650,,631,24.2,20.3,0,8.5,asphalt,False,2,nagib > 12% (100 m); nagib > 15% (50 m),18.37859,43.86189
+16650,16700,Humska,635,5.2,9.1,95,8.5,asphalt,True,1,oštro skretanje 90–120°,18.3789,43.86166
+16700,16750,Humska,635,3.3,4.0,17,23.4,,True,0,,18.37951,43.86158
+16750,16800,Humska,637,10.6,6.9,66,13.5,,False,1,"nagib 10–15% (50 m, zima)",18.38006,43.86161
+16800,16850,Humska,641,9.8,6.5,34,20.4,asphalt,True,0,,18.37991,43.86198
+16850,16900,Humska,640,8.3,7.9,99,15.2,asphalt,False,1,oštro skretanje 90–120°,18.38028,43.86233
+16900,16950,Humska,636,11.2,10.6,4,21.5,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.38066,43.86212
+16950,17000,Humska,630,12.0,10.4,5,11.7,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.38098,43.86173
+17000,17050,Humska,626,8.3,9.0,1,11.7,asphalt,False,0,,18.38121,43.86131
+17050,17100,Humska,623,7.6,3.9,63,16.7,asphalt,True,0,,18.38145,43.861
+17100,17150,Humska,625,9.4,7.6,2,16.7,asphalt,False,0,,18.3809,43.8611
+17150,17200,Humska,629,11.3,3.5,29,9.6,asphalt,True,1,"nagib 10–15% (50 m, zima)",18.38035,43.86131
+17200,17250,Humska,625,12.8,7.6,15,9.6,asphalt,True,1,"nagib 10–15% (50 m, zima)",18.37979,43.86113
+17250,17300,Humska,622,4.4,4.6,6,12.0,asphalt,True,0,,18.37919,43.86104
+17300,17350,Humska,622,2.2,1.6,0,13.7,asphalt,True,0,,18.3786,43.8609
+17350,17400,Humska,622,2.2,1.6,180,13.7,asphalt,True,2,trasa se vraća istim putem (ispraviti),18.37859,43.8609
+17400,17450,Humska,622,4.4,4.6,5,12.0,asphalt,True,0,,18.37919,43.86104
+17450,17500,Humska,625,12.7,7.7,17,9.6,asphalt,True,1,"nagib 10–15% (50 m, zima)",18.37979,43.86113
+17500,17550,Humska,629,11.6,3.4,30,9.6,asphalt,True,1,"nagib 10–15% (50 m, zima)",18.38035,43.86131
+17550,17600,Humska,625,9.4,7.7,2,16.7,asphalt,False,0,,18.3809,43.8611
+17600,17650,Humska,622,5.3,4.3,40,14.4,asphalt,True,0,,18.38144,43.86099
+17650,17700,Humska,623,2.3,2.0,14,13.8,asphalt,True,0,,18.38161,43.8614
+17700,17750,Humska,624,9.8,5.3,102,14.9,asphalt,True,1,oštro skretanje 90–120°,18.38171,43.86184
+17750,17800,Humska,620,11.0,4.9,44,14.9,asphalt,True,1,"nagib 10–15% (50 m, zima)",18.38221,43.8616
+17800,17850,Humska,619,3.3,2.8,19,19.0,asphalt,True,0,,18.38255,43.86193
+17850,17900,Humska,618,7.4,8.1,15,16.1,asphalt,False,0,,18.38301,43.8622
+17900,17950,Humska,614,10.6,7.3,40,16.1,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.38362,43.86225
+17950,18000,Humska,612,2.2,3.5,27,32.8,asphalt,True,0,,18.38403,43.86252
+18000,18050,Humska,610,10.9,9.2,26,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.38449,43.86272
+18050,18100,Humska,605,11.0,10.8,4,40.0,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.38479,43.86233
+18100,18150,Humska,600,12.0,8.9,61,40.0,asphalt,True,1,"nagib 10–15% (50 m, zima)",18.38504,43.86192
+18150,18200,Humska,599,4.2,2.5,15,40.0,asphalt,True,0,,18.38533,43.86214
+18200,18250,Humska,598,9.4,7.4,13,40.0,asphalt,True,0,,18.3857,43.86249
+18250,18300,Humska,594,9.4,8.8,10,40.0,asphalt,False,0,,18.38631,43.86252
+18300,18350,Ruđera Boškovića,592,10.9,3.5,134,12.6,asphalt,True,2,"nagib 10–15% (50 m, zima); serpentina (skretanje > 120°)",18.38669,43.86256
+18350,18400,Ruđera Boškovića,595,8.0,5.0,20,12.6,asphalt,True,0,,18.38657,43.86298
+18400,18450,Ruđera Boškovića,596,8.5,5.3,13,12.6,asphalt,True,0,,18.3868,43.8634
+18450,18500,Ruđera Boškovića,599,8.5,5.4,73,12.6,asphalt,True,0,,18.38689,43.86384
+18500,18550,Ruđera Boškovića,600,4.1,3.5,28,12.8,asphalt,True,0,,18.38728,43.86391
+18550,18600,Ruđera Boškovića,602,10.9,6.3,13,14.1,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.38788,43.86389
+18600,18650,Ruđera Boškovića,606,6.1,6.8,36,18.5,asphalt,True,0,,18.38847,43.86395
+18650,18700,Ruđera Boškovića,607,5.9,3.5,29,20.6,asphalt,True,0,,18.38905,43.86395
+18700,18750,Ruđera Boškovića,608,6.5,5.1,8,18.2,asphalt,True,0,,18.38961,43.86377
+18750,18800,Ruđera Boškovića,611,7.3,6.4,18,10.2,asphalt,False,0,,18.39014,43.86353
+18800,18850,Ruđera Boškovića,614,7.0,3.3,9,11.6,asphalt,True,0,,18.39074,43.86342
+18850,18900,Ruđera Boškovića,612,4.9,1.9,0,21.8,asphalt,True,0,,18.39128,43.86321
+18900,18950,Ruđera Boškovića,612,1.9,0.5,3,16.8,asphalt,True,0,,18.39182,43.86298
+18950,19000,Ruđera Boškovića,612,3.2,1.7,1,16.8,asphalt,True,0,,18.39237,43.86277
+19000,19050,Ruđera Boškovića,612,14.9,10.2,82,23.8,asphalt,True,1,"nagib 10–15% (50 m, zima)",18.39292,43.86257
+19050,19100,Ruđera Boškovića,619,15.8,15.2,11,14.4,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.39284,43.86296
+19100,19150,Ruđera Boškovića,626,15.6,12.1,30,23.0,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.39276,43.86336
+19150,19200,Ruđera Boškovića,628,3.5,4.1,6,9.5,asphalt,True,0,,18.39332,43.86355
+19200,19250,Ruđera Boškovića,626,10.6,8.8,6,16.3,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.39391,43.8637
+19250,19300,Ruđera Boškovića,621,11.9,8.4,48,16.3,asphalt,True,1,"nagib 10–15% (50 m, zima)",18.39448,43.86381
+19300,19350,,619,8.4,6.4,180,26.1,,True,2,trasa se vraća istim putem (ispraviti),18.39461,43.864
+19350,19400,Ruđera Boškovića,623,12.1,8.7,43,16.3,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.39422,43.8638
+19400,19450,Ruđera Boškovića,627,7.4,7.4,2,15.1,asphalt,True,0,,18.39364,43.86364
+19450,19500,Ruđera Boškovića,628,8.5,8.2,8,15.1,asphalt,True,0,,18.39306,43.86348
+19500,19550,Ruđera Boškovića,623,15.9,14.9,30,7.9,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m); razmak zgrada 5,5–8 m",18.39269,43.86318
+19550,19600,Ruđera Boškovića,616,16.2,15.8,11,21.3,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.39295,43.86278
+19600,19650,Ruđera Boškovića,608,15.1,15.0,12,26.1,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.39302,43.86233
+19650,19700,Ruđera Boškovića,601,18.1,15.3,65,26.1,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.39305,43.86189
+19700,19750,Ruđera Boškovića,593,15.4,14.4,21,17.0,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.39278,43.86161
+19750,19800,Ruđera Boškovića,588,11.4,11.7,2,23.4,asphalt,False,1,"nagib 10–15% (50 m, zima)",18.39264,43.86117
+19800,19850,Ruđera Boškovića,582,18.9,16.9,13,18.3,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.39245,43.86074
+19850,19900,Ruđera Boškovića,572,23.0,14.7,82,11.5,asphalt,True,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.39207,43.8604
+19900,19950,Ruđera Boškovića,571,18.9,9.7,107,17.6,asphalt,True,2,"nagib 10–15% (50 m, zima); nagib > 15% (50 m); oštro skretanje 90–120°",18.39206,43.86062
+19950,20000,Ruđera Boškovića,564,17.8,9.3,76,8.1,asphalt,True,2,nagib > 15% (50 m),18.39157,43.86044
+20000,20050,Ruđera Boškovića,563,17.6,10.2,124,16.2,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 15% (50 m); serpentina (skretanje > 120°)",18.39156,43.86071
+20050,20100,Ruđera Boškovića,555,17.6,13.3,33,16.2,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.391,43.86051
+20100,20150,Ruđera Boškovića,550,15.4,12.4,3,19.5,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.39092,43.86007
+20150,20200,Ruđera Boškovića,543,15.4,12.0,38,31.9,asphalt,False,2,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",18.39074,43.85965
+20200,20250,Hamdije Čemerlića,539,7.3,7.9,1,40.0,asphalt,True,0,,18.39083,43.85924
+20250,20300,Hamdije Čemerlića,538,3.3,4.3,0,40.0,asphalt,True,0,,18.39098,43.8588
+20300,20350,Hamdije Čemerlića,536,8.2,6.0,6,40.0,asphalt,False,0,,18.39113,43.85836
+20350,20400,Hamdije Čemerlića,532,7.5,5.7,31,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39123,43.85792
+20400,20450,,531,1.5,1.6,36,40.0,asphalt,True,0,,18.39129,43.85756
+20450,20500,Put života,532,2.1,1.7,27,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39171,43.85783
+20500,20550,Put života,533,1.5,1.2,5,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39229,43.858
+20550,20600,Put života,533,0.5,0.6,3,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39289,43.8581
+20600,20650,Put života,532,1.1,0.9,1,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39351,43.85816
+20650,20700,Put života,532,1.1,0.9,0,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39413,43.85819
+20700,20750,Put života,532,0.6,0.5,1,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39475,43.85821
+20750,20800,Put života,532,0.9,0.7,0,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39537,43.85824
+20800,20850,Put života,532,0.6,0.7,0,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39599,43.85827
+20850,20900,Put života,532,0.8,0.7,1,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39661,43.8583
+20900,20950,Put života,533,0.8,0.8,3,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39723,43.85833
+20950,21000,Put života,533,0.7,0.3,4,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39785,43.85835
+21000,21050,Put života,533,0.8,0.2,3,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39847,43.85838
+21050,21100,Put života,533,0.6,0.2,4,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39909,43.85844
+21100,21150,Put života,533,0.2,0.1,1,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.3997,43.85853
+21150,21200,Put života,533,0.9,0.7,1,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.4003,43.85863
+21200,21250,Put života,532,1.4,0.8,6,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.40091,43.85873
+21250,21300,Put života,532,0.8,0.7,78,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.40124,43.85887
+21300,21350,Put života,533,1.7,0.9,0,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.40063,43.85878
+21350,21400,Put života,533,0.3,0.5,0,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.40002,43.85868
+21400,21450,Put života,533,1.6,1.1,83,40.0,asphalt,True,1,jednosmjerna (povratak drugom ulicom),18.39941,43.85859
+21450,21500,,534,2.6,0.7,72,29.7,asphalt,True,1,pristupni put / stambena zona (OSM),18.39908,43.8588
+21500,21540,,533,1.4,,2,29.7,asphalt,True,1,pristupni put / stambena zona (OSM),18.39965,43.85898
