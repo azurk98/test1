@@ -239,6 +239,41 @@ def podaci() -> dict:
                  "pts": [[int(r.mjesto), 2 if r.ocjena == "problem" else 1, r.ulica, r.razlozi, round(r.lat, 5),
                           round(r.lon, 5), float(r.od_km), int(r.duzina_m)] for r in at.itertuples()],
                  "km": [round(float((ag.do_m - ag.od_m)[ag.ocjena == k].sum()) / 1000, 1) for k in (0, 1, 2)]}
+    # kratki novi spojevi i linije kroz njih (30_dogradnje.py); Dobrinja je namjerno bez prolaza
+    if (OUT / "dogradnje.geojson").exists():
+        dg = gpd.read_file(OUT / "dogradnje.geojson")
+        dsp = pd.read_csv(OUT / "dogradnje_spojevi.csv")
+        dsp["id"] = [f"N{i}" for i in range(1, len(dsp) + 1)]
+        dli = pd.read_csv(OUT / "dogradnje_linije.csv")
+        pj = gpd.read_file(OUT / "putevi.geojson")
+        pj = pj[pj.klasa.isin(["pjesacka", "stepenice"])].to_crs(32634)
+        dsp["ulica_a"] = dsp.ulica_a.where(dsp.ulica_a.notna(), "")
+        dsp["ulica_b"] = dsp.ulica_b.where(dsp.ulica_b.notna(), "")
+        for r in dsp.itertuples():
+            if "Dobrinja" in str(r.naselje):
+                continue
+            g = dg[(dg.tip == "spoj") & (dg.id == r.id)].geometry.iloc[0]
+            gm = gpd.GeoSeries([g], crs=4326).to_crs(32634).iloc[0]
+            staza = float(pj[pj.intersects(gm.buffer(8))].intersection(gm.buffer(8)).length.sum()) / max(gm.length, 1)
+            opis = (f"New link of about {r.spoj_m} m between {r.ulica_a or 'an unnamed street'} and "
+                    f"{r.ulica_b or 'an unnamed street'} ({r.naselje.split(' / ')[0]}). By road the two ends are "
+                    f"{r.cestom_m / 1000:.1f} km apart today. Grade about {r.nagib_pct}% (30 m terrain model)."
+                    + (" Crosses a stream: needs a culvert or small bridge." if r.prelaz != "—" else "")
+                    + (" A footpath or steps already run along part of it, so it could widen an existing path." if staza > 0.3 else
+                       " No mapped path along it; check land ownership and walls on site."))
+            nove.append([r.id, "spoj", f"{r.ulica_a or 'unnamed street'} – {r.ulica_b or 'unnamed street'}", round(r.spoj_m / 1000, 2),
+                         int(r.slabo_pokriveni_400m), 0, int(r.slabo_pokriveni_400m), 0, 0,
+                         [round(c, 5) for xy in g.coords for c in xy], "", 0.0, "spoj", opis])
+        for r in dli.itertuples():
+            if "Dobrinja" in str(r.naselje):
+                continue
+            g = dg[(dg.tip == "linija") & (dg.id == r.id)].geometry.iloc[0]
+            opis = (f"Short line from {r.od} to {r.do} through a new link ({r.spoj}, about {r.spoj_m} m, "
+                    f"grade about {r.nagib_spoja_pct}%). It serves {r.danas_slabo_pokriveni:,} residents who today walk over "
+                    f"8 minutes to a stop or have poor service. Ends at stops with at least 4 departures an hour.")
+            nove.append([r.id, "dogradnja", f"{r.od} – {r.do}", float(r.duzina_km), int(r.stanovnici_400m), 0,
+                         int(r.danas_slabo_pokriveni), int(r.voznja_min), max(2, round(float(r.duzina_km) / 0.4)),
+                         [round(c, 5) for xy in g.coords for c in xy], "", 0.0, "dogradnja", opis])
     return {"lines": linije, "newlines": nove, "audit": audit, "aq": stanice, "acc": acc, "poi": poi,
             "stores": [[round(a, 5), round(b, 5), (n if isinstance(n, str) else "")]
                        for a, b, n in zip(st.lon, st.lat, st.ime)],

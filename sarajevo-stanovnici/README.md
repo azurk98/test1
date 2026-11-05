@@ -297,6 +297,19 @@ Tačnost i bolji izvori: Copernicus 30 m daje nagib na 100 m ±3–4%. Bolje: FG
 1:1000–1:5000 (ZPR WebCity), novi LiDAR FBiH (snimanje pri kraju, pristup po procedurama FGU),
 ortofoto KS 2017 25 cm (na zahtjev) za širine.
 
+## Kratki novi spojevi za javni prevoz (`30_dogradnje.py`)
+
+Traže se mjesta gdje kratka nova dionica (60–400 m, nagib ≤ 10%, ne siječe zgrade) spaja dvije
+ulice koje su cestom ≥ 3× dalje (≥ 800 m), a oko njih živi mnogo ljudi sa slabim prevozom (> 8 min
+do stanice ili PTAL ≤ 1b). Krajevi su slijepe ulice ili raskrsnice. Od 48.516 parova do 400 m,
+561 ne siječe zgrade; izabrano 10 (najmanje 600 m razmaka). Kroz spoj se crta linija između najbližih
+stanica s ≥ 4 polaska na sat na obje strane. Spojevi u Dobrinji (preko potoka, unutar namjerno
+pješačkih blokova) su izostavljeni s karte. Najjači: Breka (157 m, 3.400 ljudi), Alipašin Most I
+(Hekim Oglu Alipaše – Safeta Zajke, 298 m), Dolac (103 m), Pofalići (Ruđera Boškovića, 127 m),
+Sokolje – Zabrđe (363 m, linija Kolonija – Rajlovac: 6.700 slabo pokrivenih), Sedrenik (181 m).
+Ograničenja: OSM možda nema postojeći put; nagib iz Copernicus 30 m; vlasništvo, potporni zidovi
+i nosivost nisu provjereni.
+
 ## Google Places (`12_google_places.py`, opcionalno)
 
 Nearby Search (New) za tipove supermarket, grocery_store, convenience_store, market, food_store u

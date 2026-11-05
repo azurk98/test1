@@ -179,7 +179,9 @@ aside.read{border-left:1px solid var(--line);padding:16px;max-height:calc(min(68
 .lnk{all:unset;cursor:pointer;color:var(--accent)} .lnk:focus-visible{outline:2px solid var(--accent)}
 .ptline{fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;stroke-width:calc(2px * var(--zw));opacity:.9;pointer-events:visibleStroke}
 .newl{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke;stroke-dasharray:7 4;cursor:pointer;pointer-events:visibleStroke}
-.newl.n-glavna{stroke-width:calc(4px * var(--zw))} .newl.n-minibus{stroke-width:calc(2.6px * var(--zw))}
+.newl.n-glavna{stroke-width:calc(4px * var(--zw))} .newl.n-minibus,.newl.n-dogradnja{stroke-width:calc(2.6px * var(--zw))}
+.newl.n-spoj{stroke-width:calc(7px * var(--zw));stroke-dasharray:none}
+.newlab text{fill:#fff} .n-spoj + text{fill:#000}
 .newl.sel{stroke-width:calc(6px * var(--zw));stroke-dasharray:none}
 .audl{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke;stroke-width:calc(5px * var(--zw));pointer-events:none}
 .audm{cursor:pointer} .audm circle{stroke:#fff;stroke-width:1.5px} .audm text{font:700 9px var(--mono);fill:#fff;pointer-events:none}
@@ -530,13 +532,14 @@ const ptP = ptG.selectAll("path").data(D.lines.slice().sort((a,b) => ptOrder[a[0
   .attr("class", d => "ptline m-" + d[0]).attr("stroke", d => MODE_C[d[0]]);
 ptP.append("title").text(d => `${d[2] || d[1]} · ${d[3] ? d[3] + " departures/hour (assumed)" : "frequency unknown"}`);
 // predložene linije
-const NEW_C = {glavna:"#ff006e", minibus:"#9b5de5"};
+const NEW_C = {glavna:"#ff006e", minibus:"#9b5de5", dogradnja:"#00b4d8", spoj:"#ffd60a"};
 const REC = {"nova linija":"New line: nothing runs here today",
   "jedna jaka linija (6–8 polazaka/h) umjesto više rijetkih":"One strong line (6–8 an hour) instead of several sparse ones",
   "jedna jaka linija (6–8 polazaka/h) umjesto više rijetkih; voziti i kroz nepokrivene ulice":"One strong line (6–8 an hour) instead of several sparse ones, also through the streets they miss",
   "produžiti/preusmjeriti postojeće kroz nepokriveni dio":"Extend or reroute existing lines through the part they miss",
   "pojačati na ≥ 3 polaska/h i proširiti trasu":"Run existing lines at least 3 times an hour and widen the route",
   "pojačati na ≥ 3 polaska/h":"Run existing lines at least 3 times an hour", "dovoljno pokriveno":"Already well served",
+  "spoj":"Build a short road link (bus-capable)", "dogradnja":"New short line, possible once the link is built",
   "sjeverna":"Hillside line by midibus (8–9 m) every 10 minutes; best run as two overlapping halves meeting at Buća Potok"};
 let newSel = null;
 const newP = ptG.append("g").selectAll("path").data(D.newlines).join("path").attr("class", d => "newl n-" + d[1])
@@ -545,7 +548,7 @@ newP.append("title").text(d => `Proposed ${d[0]}: ${d[2]}`);
 const newL = ptG.append("g").selectAll("g").data(D.newlines).join("g").attr("class","newlab")
   .on("click", (e, d) => { e.stopPropagation(); newSel = d; newP.classed("sel", x => x === d); audShow(); show(null); });
 newL.append("rect").attr("x",-12).attr("y",-8).attr("width",24).attr("height",16).attr("rx",8).attr("fill", d => NEW_C[d[1]]);
-newL.append("text").attr("text-anchor","middle").attr("dy","0.35em").text(d => d[0]);
+newL.append("text").attr("text-anchor","middle").attr("dy","0.35em").text(d => d[0]).style("fill", d => d[1] === "spoj" ? "#000" : null);
 // provjera trase linije S (29_provjera_trase.py)
 const AUD_C = ["#a7c957", "#f4a261", "#e63946"];
 const AUD_R = {"nagib > 15% (50 m)":"over 15% grade (50 m)", "nagib 10–15% (50 m, zima)":"10–15% grade (50 m), winter risk",
@@ -710,7 +713,7 @@ function legend0(){
     el.innerHTML = `<div style="font-size:12px;color:var(--muted)">Public transport accessibility level (PTAL), 0 = none, 6b = excellent</div>
       <div class="row">${PTAL_K.map(k => `<div class="sw"><i style="background:${PTAL_C[k]}"></i><span>${k}</span></div>`).join("")}</div>
       <div class="cat"><span><i class="rl" style="border-color:${MODE_C.tram}"></i>tram</span><span><i class="rl" style="border-color:${MODE_C.trolleybus}"></i>trolleybus</span><span><i class="rl" style="border-color:${MODE_C.bus}"></i>bus (OSM has only part of the bus network)</span></div>
-      <div class="cat"><span><i class="rl" style="border-top:4px dashed ${NEW_C.glavna}"></i>proposed main line (P)</span><span><i class="rl" style="border-top:2.5px dashed ${NEW_C.minibus}"></i>proposed minibus (M)</span></div>`;
+      <div class="cat"><span><i class="rl" style="border-top:4px dashed ${NEW_C.glavna}"></i>proposed main line (P)</span><span><i class="rl" style="border-top:2.5px dashed ${NEW_C.minibus}"></i>proposed minibus (M)</span><span><i class="rl" style="border-top:2.5px dashed ${NEW_C.dogradnja}"></i>line through a new link (D)</span><span><i class="rl" style="border-top:5px solid ${NEW_C.spoj}"></i>new road link (N)</span></div>`;
     return;
   }
   if (mode === "best"){
@@ -906,7 +909,7 @@ function show(c){
   if (!c && mode === "pt" && D.newlines.length){
     const d = newSel;
     const lst = D.newlines.map(x => `<dt><button class="lnk" data-nl="${x[0]}"><b style="color:${NEW_C[x[1]]}">${x[0]}</b> ${x[2]}</button></dt><dd class="num">${fmt(x[6])}</dd>`).join("");
-    el.innerHTML = (d ? `<div class="k">Proposed ${d[1] === "glavna" ? "main line" : "minibus"} ${d[0]}</div>
+    el.innerHTML = (d ? `<div class="k">Proposed ${{glavna:"main line", minibus:"minibus", dogradnja:"line through a new link", spoj:"new road link"}[d[1]]} ${d[0]}</div>
       <div style="font-weight:600">${d[2]}</div>
       <dl><dt>Length</dt><dd class="num">${d[3]} km</dd><dt>Running time, one way</dt><dd class="num">~${d[7]} min</dd>
       <dt>Stops (every ~400 m)</dt><dd class="num">${d[8]}</dd><dt>Residents within 400 m</dt><dd class="num">${fmt(d[4])}</dd>
@@ -923,7 +926,7 @@ function show(c){
       <p class="hint" style="font-size:13px">${{P1:"The busiest corridor with no tram or trolleybus at either end (about 3,700 trips a day). Trolleybus or electric bus every 7–10 minutes, changing to the tram at Alipašin most.",
         P2:"About 2,200 trips a day; the cantonal timetable has no line on the Lukavica side, so check whether a Republika Srpska operator runs one.",
         S:"Runs along the northern hills instead of down by the tram: roads lower than 40 m above the valley floor are avoided except at Stup and the railway station. It links hillside neighbourhoods that today connect only through the valley: about 31,000 trips a day run between places along it, and 8,400 residents along it walk over 8 minutes to a stop. The hill roads wind, so it is long (about 26 km and 90 minutes end to end, Stup to Zabrđe crossing the plain), with up to 25% gradients and about 2.6 km of narrow streets: a midibus, run as two halves meeting at Buća Potok (west about 44 min, east about 31 min), and Pofalići–Velešići is 1.3 km apart but 3.4 km by road."}[d[0]] ||
-        "Small bus for a steep neighbourhood, from the part farthest from a stop to the nearest tram or trolleybus stop. Check street width and a turning point on site."}</p>` :
+        d[13] || "Small bus for a steep neighbourhood, from the part farthest from a stop to the nearest tram or trolleybus stop. Check street width and a turning point on site."}</p>` :
       `<div class="k">Proposed new lines</div><p class="hint">Drawn from the trip model: corridors with the most daily trips and no tram or trolleybus, and steep neighbourhoods where many people walk over 8 minutes to a stop. Most already have a bus or minibus, but one that runs once or twice an hour or misses whole streets; each line says what to change. Tap a line or a label.</p>`)
       + `<div class="k">Lines · residents gaining a stop within 400 m</div><dl>${lst}</dl>
       <p class="hint" style="font-size:12.5px">Sketches for discussion, not designs. Existing service comes from the timetables of the Sarajevo Canton Ministry of Transport (javniprevozks.ba, weekday 7–9 h).</p>`;
