@@ -170,6 +170,25 @@ def main() -> None:
         return rez, pd.DataFrame(rows), g
 
     tacke_s = [tacka(i, o) for i, o in TACKE]
+    # doradi međutačke: brdske ćelije naselja koje su "na putu" između susjednih tačaka
+    # (zbir udaljenosti do susjeda ≤ 1,25 × njihova udaljenost), da trasa ne ide gore pa nazad
+    m_xy = np.c_[pc.x, pc.y]
+    def u_m(t_):
+        p = gpd.GeoSeries([Point(*t_)], crs=CRS_WGS).to_crs(CRS_M)[0]
+        return np.array([p.x, p.y])
+    for _ in range(2):
+        for k in range(1, len(TACKE) - 1):
+            ime, op = TACKE[k]
+            a_, b_ = u_m(tacke_s[k - 1]), u_m(tacke_s[k + 1])
+            m = ((polja.mz == ime) & (polja.opcina == op)).to_numpy() & (polja.stanovnici.to_numpy() > 0) & (hc >= H_DOLINA)
+            dz = np.hypot(*(m_xy - a_).T) + np.hypot(*(m_xy - b_).T)
+            for f_ in (1.15, 1.25, 1.4, 1.7):
+                mm = m & (dz <= f_ * np.hypot(*(a_ - b_)))
+                if mm.sum() >= 3:
+                    break
+            if mm.sum() >= 3:
+                w = polja.stanovnici.to_numpy()[mm]
+                tacke_s[k] = (float(np.average(pcw.x[mm], weights=w)), float(np.average(pcw.y[mm], weights=w)))
     tacke_p1 = [tacka("Zabrđe", "Novi Grad Sarajevo"), tacka("Briješće", "Novi Grad Sarajevo"),
                 tacka("Naselje heroja Sokolje", "Novi Grad Sarajevo"), (18.3475, 43.8480)]
     tacke_imena = {"Sjeverna (prijedlog)": [i for i, _ in TACKE],

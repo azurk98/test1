@@ -281,6 +281,22 @@ putovanja u koridoru). Za poređenje, prva (dolinska) verzija trase: 23 km, 69 m
 midibus, dvije polovine s preklapanjem u Buća Potoku; Pofalići – Velešići je 1,3 km zračno a
 3,4 km cestom (kandidat za kratki spoj).
 
+## Provjera trase za midibus (`29_provjera_trase.py`)
+
+Trasa linije S (28; međutačke biraju brdski dio naselja koji je na putu između susjednih tačaka,
+da trasa ne ide gore pa nazad: 20,6 km, bez Stupa 13,7 km) se dijeli na tačke na 10 m: nagib na
+20/50/100 m (Copernicus, tlo, bilinearno), ugao skretanja na ±10 m, razmak zgrada (15_ulice),
+OSM oznake (podloga, jednosmjerna, vrsta ulice), moguće stanice (≤ 4%, ≥ 8 m). Pragovi: nagib na
+50 m > 15% ili na 100 m > 12% problem, 10–15% provjeriti; razmak < 5,5 m problem, 5,5–8 m provjeriti;
+serpentina > 120° problem. Rezultat: u redu 9,8 km, provjeriti 7,4 km, problem 3,4 km; 40 mjesta
+(20 problem: najviše usponi na Enesa Herića, Adema Buće, Zaima Imamovića, Bana Mateja Ninoslava,
+Ruđera Boškovića; jednosmjerna Safeta Zajke/Kurta Schorka). Na karti: izabrati liniju S u Transit.
+
+Tačnost i bolji izvori: Copernicus 30 m daje nagib na 100 m ±3–4%. Bolje: FGU model reljefa FBiH
+5 m (WMS/WCS, katastar.ba/servisi, traži korisnički nalog), KS model terena 5 m iz izohipsi
+1:1000–1:5000 (ZPR WebCity), novi LiDAR FBiH (snimanje pri kraju, pristup po procedurama FGU),
+ortofoto KS 2017 25 cm (na zahtjev) za širine.
+
 ## Google Places (`12_google_places.py`, opcionalno)
 
 Nearby Search (New) za tipove supermarket, grocery_store, convenience_store, market, food_store u

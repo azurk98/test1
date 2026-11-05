@@ -181,6 +181,9 @@ aside.read{border-left:1px solid var(--line);padding:16px;max-height:calc(min(68
 .newl{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke;stroke-dasharray:7 4;cursor:pointer;pointer-events:visibleStroke}
 .newl.n-glavna{stroke-width:calc(4px * var(--zw))} .newl.n-minibus{stroke-width:calc(2.6px * var(--zw))}
 .newl.sel{stroke-width:calc(6px * var(--zw));stroke-dasharray:none}
+.audl{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke;stroke-width:calc(5px * var(--zw));pointer-events:none}
+.audm{cursor:pointer} .audm circle{stroke:#fff;stroke-width:1.5px} .audm text{font:700 9px var(--mono);fill:#fff;pointer-events:none}
+.audl-list dt{font-size:13px}
 .newlab{cursor:pointer} .newlab text{font:700 9.5px var(--mono);fill:#fff;pointer-events:none}
 .ptline.m-tram{stroke-width:calc(3px * var(--zw))}
 .lchips{display:flex;flex-wrap:wrap;gap:4px}
@@ -537,12 +540,29 @@ const REC = {"nova linija":"New line: nothing runs here today",
   "sjeverna":"Hillside line by midibus (8–9 m) every 10 minutes; best run as two overlapping halves meeting at Buća Potok"};
 let newSel = null;
 const newP = ptG.append("g").selectAll("path").data(D.newlines).join("path").attr("class", d => "newl n-" + d[1])
-  .attr("stroke", d => NEW_C[d[1]]).on("click", (e, d) => { e.stopPropagation(); newSel = d; newP.classed("sel", x => x === d); show(null); });
+  .attr("stroke", d => NEW_C[d[1]]).on("click", (e, d) => { e.stopPropagation(); newSel = d; newP.classed("sel", x => x === d); audShow(); show(null); });
 newP.append("title").text(d => `Proposed ${d[0]}: ${d[2]}`);
 const newL = ptG.append("g").selectAll("g").data(D.newlines).join("g").attr("class","newlab")
-  .on("click", (e, d) => { e.stopPropagation(); newSel = d; newP.classed("sel", x => x === d); show(null); });
+  .on("click", (e, d) => { e.stopPropagation(); newSel = d; newP.classed("sel", x => x === d); audShow(); show(null); });
 newL.append("rect").attr("x",-12).attr("y",-8).attr("width",24).attr("height",16).attr("rx",8).attr("fill", d => NEW_C[d[1]]);
 newL.append("text").attr("text-anchor","middle").attr("dy","0.35em").text(d => d[0]);
+// provjera trase linije S (29_provjera_trase.py)
+const AUD_C = ["#a7c957", "#f4a261", "#e63946"];
+const AUD_R = {"nagib > 15% (50 m)":"over 15% grade (50 m)", "nagib 10–15% (50 m, zima)":"10–15% grade (50 m), winter risk",
+  "nagib > 12% (100 m)":"over 12% grade (100 m)", "razmak zgrada < 5,5 m":"under 5.5 m between buildings",
+  "razmak zgrada 5,5–8 m":"5.5–8 m between buildings", "serpentina (skretanje > 120°)":"hairpin (turn over 120°)",
+  "oštro skretanje 90–120°":"sharp turn 90–120°", "trasa se vraća istim putem (ispraviti)":"route doubles back (fix the sketch)",
+  "makadam":"gravel", "neasfaltirano (OSM)":"unpaved (OSM)", "pristupni put / stambena zona (OSM)":"access road or residential zone (OSM)",
+  "jednosmjerna (povratak drugom ulicom)":"one-way (return by another street)"};
+const audG = ptG.append("g").attr("display","none");
+const audP = audG.selectAll("path").data(D.audit ? D.audit.seg : []).join("path").attr("class","audl").attr("stroke", d => AUD_C[d[0]]);
+const audM = audG.append("g").selectAll("g").data(D.audit ? D.audit.pts : []).join("g").attr("class","audm")
+  .on("click", (e, d) => { e.stopPropagation(); audZoom(d); });
+audM.append("circle").attr("r", 7.5).attr("fill", d => AUD_C[d[1]]);
+audM.append("text").attr("text-anchor","middle").attr("dy","0.35em").text(d => d[0]);
+audM.append("title").text(d => `${d[0]}. ${d[2]} · km ${d[6]} · ${d[3].split("; ").map(x => AUD_R[x] || x).join("; ")}`);
+const audShow = () => audG.attr("display", newSel && newSel[0] === "S" ? null : "none");
+function audZoom(d){ const [x,y] = proj([d[5]*KX, d[4]]); svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(W()/2,H()/2).scale(9).translate(-x,-y)); }
 const newMid = d => { const c = d[9], i = Math.floor(c.length / 4) * 2; return proj([c[i]*KX, c[i+1]]); };
 const aqG = g.append("g").attr("class","aq").attr("display","none");
 const aqS = aqG.selectAll("g").data(D.aq).join("g").attr("class","aqs");
@@ -572,6 +592,8 @@ function layout(){
   ptP.attr("d", d => d[4].map(line).join(""));
   newP.attr("d", d => line(d[9]));
   newL.attr("transform", d => { const [x,y] = newMid(d); return `translate(${x},${y}) scale(${1/zk})`; });
+  audP.attr("d", d => line(d[1]));
+  audM.attr("transform", d => { const [x,y] = proj([d[5]*KX, d[4]]); return `translate(${x},${y}) scale(${1/zk})`; });
   aqS.attr("transform", d => { const [x,y] = proj([d[2]*KX, d[1]]); return `translate(${x},${y}) scale(${1/zk})`; });
   const rd = k => ROADS[k].map(line).join("");
   const cache = {}; RORDER.forEach(k => { if (ROADS[k]) cache[k] = rd(k); });
@@ -593,6 +615,7 @@ const zoom = d3.zoom().scaleExtent([1,14]).on("zoom", e => { g.attr("transform",
   if (e.transform.k !== zk){ zk = e.transform.k; siteG.attr("transform", d => { const [x,y] = proj([d.lon*KX, d.lat]); return `translate(${x},${y}) scale(${1/zk})`; }); storeP.attr("r", 2.2/zk);
     wsiteG.attr("transform", d => { const [x,y] = proj([d.lon*KX, d.lat]); return `translate(${x},${y}) scale(${1/zk})`; }); washP.attr("r", 3/zk); bizPlace();
     newL.attr("transform", d => { const [x,y] = newMid(d); return `translate(${x},${y}) scale(${1/zk})`; });
+    audM.attr("transform", d => { const [x,y] = proj([d[5]*KX, d[4]]); return `translate(${x},${y}) scale(${1/zk})`; });
     trfC.attr("transform", d => { const [x,y] = proj([d[3]*KX, d[2]]); return `translate(${x},${y}) scale(${1/zk})`; }); if (mode === "trf") trfPaint();
     poiG.selectAll("circle").attr("r", d => (d.k === "bolnica" ? 4.6 : 3.2)/zk).attr("stroke-width", 1/zk);
     aqS.attr("transform", d => { const [x,y] = proj([d[2]*KX, d[1]]); return `translate(${x},${y}) scale(${1/zk})`; });
@@ -891,6 +914,12 @@ function show(c){
       <dt>Existing buses off the tram/trolleybus</dt><dd class="num">${d[11] ? d[11] + "/h" : "none"}</dd></dl>
       <div class="k">Recommendation</div><div style="font-weight:600">${REC[d[12]] || d[12]}</div>
       ${d[10] ? `<p class="hint" style="font-size:12.5px">Lines already on the route (weekday 7–9 h departures per hour): ${d[10].replace(/autobus/g,"bus")}</p>` : ""}
+      ${d[0] === "S" && D.audit ? `<div class="k">Route check for a midibus, every 50 m</div>
+      <dl><dt><i class="nd" style="background:${AUD_C[0]}"></i>Fine</dt><dd class="num">${D.audit.km[0]} km</dd>
+      <dt><i class="nd" style="background:${AUD_C[1]}"></i>Check on site</dt><dd class="num">${D.audit.km[1]} km</dd>
+      <dt><i class="nd" style="background:${AUD_C[2]}"></i>Problem</dt><dd class="num">${D.audit.km[2]} km</dd></dl>
+      <dl class="audl-list">${D.audit.pts.filter(p => p[1] === 2).map(p => `<dt><button class="lnk" data-aud="${p[0]}"><b style="color:${AUD_C[2]}">${p[0]}</b> ${p[2]}</button><div class="tag">${p[3].split("; ").map(x => AUD_R[x] || x).join("; ")}</div></dt><dd class="num">km ${p[6]}</dd>`).join("")}</dl>
+      <p class="hint" style="font-size:12.5px">Red: problem places; ${D.audit.pts.filter(p => p[1] === 1).length} more amber places to check are on the map. Grades come from the 30 m Copernicus terrain model (about ±3–4% over 100 m) and widths from gaps between mapped buildings, which miss fences, walls and parked cars: measure these places on site.</p>` : ""}
       <p class="hint" style="font-size:13px">${{P1:"The busiest corridor with no tram or trolleybus at either end (about 3,700 trips a day). Trolleybus or electric bus every 7–10 minutes, changing to the tram at Alipašin most.",
         P2:"About 2,200 trips a day; the cantonal timetable has no line on the Lukavica side, so check whether a Republika Srpska operator runs one.",
         S:"Runs along the northern hills instead of down by the tram: roads lower than 40 m above the valley floor are avoided except at Stup and the railway station. It links hillside neighbourhoods that today connect only through the valley: about 31,000 trips a day run between places along it, and 8,400 residents along it walk over 8 minutes to a stop. The hill roads wind, so it is long (about 26 km and 90 minutes end to end, Stup to Zabrđe crossing the plain), with up to 25% gradients and about 2.6 km of narrow streets: a midibus, run as two halves meeting at Buća Potok (west about 44 min, east about 31 min), and Pofalići–Velešići is 1.3 km apart but 3.4 km by road."}[d[0]] ||
@@ -898,7 +927,8 @@ function show(c){
       `<div class="k">Proposed new lines</div><p class="hint">Drawn from the trip model: corridors with the most daily trips and no tram or trolleybus, and steep neighbourhoods where many people walk over 8 minutes to a stop. Most already have a bus or minibus, but one that runs once or twice an hour or misses whole streets; each line says what to change. Tap a line or a label.</p>`)
       + `<div class="k">Lines · residents gaining a stop within 400 m</div><dl>${lst}</dl>
       <p class="hint" style="font-size:12.5px">Sketches for discussion, not designs. Existing service comes from the timetables of the Sarajevo Canton Ministry of Transport (javniprevozks.ba, weekday 7–9 h).</p>`;
-    el.querySelectorAll("[data-nl]").forEach(b => b.onclick = () => { newSel = D.newlines.find(x => x[0] === b.dataset.nl); newP.classed("sel", x => x === newSel);
+    el.querySelectorAll("[data-aud]").forEach(b => b.onclick = () => audZoom(D.audit.pts.find(x => x[0] === +b.dataset.aud)));
+    el.querySelectorAll("[data-nl]").forEach(b => b.onclick = () => { newSel = D.newlines.find(x => x[0] === b.dataset.nl); newP.classed("sel", x => x === newSel); audShow();
       const [x,y] = newMid(newSel); svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(W()/2,H()/2).scale(3.5).translate(-x,-y)); show(null); });
     return;
   }

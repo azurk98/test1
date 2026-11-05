@@ -231,7 +231,15 @@ def podaci() -> dict:
             nove.append([sid, "glavna", naz, float(r.km), int(r.stanovnici_400m), int(r.radna_mjesta_400m),
                          int(r["danas_>8min_od_stanice"]), int(r.voznja_min), max(2, round(float(r.km) / 0.4)),
                          [round(c, 5) for xy in r.geometry.coords for c in xy], *sjev_post(sid), "sjeverna"])
-    return {"lines": linije, "newlines": nove, "aq": stanice, "acc": acc, "poi": poi,
+    audit = None
+    if (OUT / "provjera_trase.geojson").exists():
+        ag = gpd.read_file(OUT / "provjera_trase.geojson")
+        at = pd.read_csv(OUT / "provjera_trase_tacke.csv")
+        audit = {"seg": [[int(r.ocjena), [round(c, 5) for xy in r.geometry.coords for c in xy]] for r in ag.itertuples()],
+                 "pts": [[int(r.mjesto), 2 if r.ocjena == "problem" else 1, r.ulica, r.razlozi, round(r.lat, 5),
+                          round(r.lon, 5), float(r.od_km), int(r.duzina_m)] for r in at.itertuples()],
+                 "km": [round(float((ag.do_m - ag.od_m)[ag.ocjena == k].sum()) / 1000, 1) for k in (0, 1, 2)]}
+    return {"lines": linije, "newlines": nove, "audit": audit, "aq": stanice, "acc": acc, "poi": poi,
             "stores": [[round(a, 5), round(b, 5), (n if isinstance(n, str) else "")]
                        for a, b, n in zip(st.lon, st.lat, st.ime)],
             "sites": sites, "washes": praonice, "wsites": wsites, "biz": biz, "trf": trf, "jobs": jobs, "cells": cells, "summ": summ, "mz": mzrows,
