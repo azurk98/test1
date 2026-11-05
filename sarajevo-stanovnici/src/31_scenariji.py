@@ -46,6 +46,12 @@ SCENARIJI = {
     "C": ("Tunel ispod Mojmila: Alipašino Polje – Dobrinja", [[(18.3505, 43.8430), (18.3500, 43.8325)]], 50, 2),
     "C2": ("Tunel ispod Mojmila, istočnije: Alipašino Polje (istok) – Dobrinja I", [[(18.3590, 43.8440), (18.3600, 43.8305)]], 50, 2),
     "C3": ("Tunel Hrasno – istočna Dobrinja (prema Lukavici)", [[(18.3720, 43.8440), (18.3700, 43.8305)]], 50, 2),
+    # pravci za putovanje na posao zapad -> centar
+    "G": ("Produžetak Gradskog autoputa uz prugu: Drinska (Pofalići) – Željeznička – Marijin Dvor",
+          [[(18.3826, 43.8579), (18.3920, 43.8590), (18.4000, 43.8585), (18.4085, 43.8565)]], 60, 2),
+    "S": ("Sjeverna longitudinala: Put života (Pofalići) – Koševo", [[(18.3883, 43.8570), (18.3990, 43.8640), (18.4080, 43.8700)]], 50, 2),
+    "SP": ("Sjeverni obilazak: Put života – Koševo + planirani tunel Koševo – Bentbaša",
+           [[(18.3883, 43.8570), (18.3990, 43.8640), (18.4080, 43.8700)], [(18.4140, 43.8665), (18.4380, 43.8590)]], 50, 2),
 }
 # mjerni presjeci: (naziv, ulica u OSM-u, lon, lat)
 PRESJECI = [("Obala Kulina bana", "Obala Kulina bana", 18.4160, 43.8566), ("Maršala Tita", "Maršala Tita", 18.4166, 43.8590),
@@ -57,6 +63,7 @@ PAROVI = [("Velešići → Zabrđe", (18.4015, 43.8655), (18.3097, 43.8741)),
           ("Alipašin most → Bentbaša", (18.3475, 43.8480), (18.4380, 43.8586)),
           ("Koševo → Bentbaša", (18.4100, 43.8700), (18.4380, 43.8586)),
           ("Dobrinja I → Hrasno", (18.3600, 43.8300), (18.3720, 43.8450)),
+          ("Alipašin most → Marijin Dvor", (18.3475, 43.8480), (18.4100, 43.8560)),
           ("Pale (ulaz) → Marijin Dvor", (18.5130, 43.8510), (18.4100, 43.8560))]
 
 
