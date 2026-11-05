@@ -215,7 +215,7 @@ def podaci() -> dict:
         if not f_.exists():
             return "", 0.0
         d = pd.read_csv(f_)
-        d = d.iloc[1:4] if sid == "S1" else d.iloc[4:]
+        d = d.iloc[1:4] if sid == "S1" else d.iloc[4:] if sid == "S2" else d.iloc[1:]
         lin = {}
         for txt in d.postojece:
             for v, k, h in re.findall(r"(minibus|autobus|trolejbus|tramvaj) (\S+) \(([\d.]+)/h\)", str(txt)):
@@ -224,8 +224,8 @@ def podaci() -> dict:
         top = sorted(lin.items(), key=lambda x: -x[1])
         return ", ".join(f"{k} ({h:g}/h)" for k, h in top), round(sum(lin.values()), 1)
 
-    for sid, fajl, naz in (("S1", "sjeverna_s_zapad.geojson", "Zabrđe – Briješće – Sokolje – Buća Potok – Otoka"),
-                           ("S2", "sjeverna_s_istok.geojson", "Buća Potok – Pofalići – Velešići – Željeznička stanica")):
+    for sid, fajl, naz in (("S", "sjeverna_linija.geojson",
+                            "Stup – Zabrđe – Briješće – Sokolje – Buća Potok – Pofalići – Velešići – Željeznička (preko brda)"),):
         if (OUT / fajl).exists():
             r = gpd.read_file(OUT / fajl).iloc[0]
             nove.append([sid, "glavna", naz, float(r.km), int(r.stanovnici_400m), int(r.radna_mjesta_400m),

@@ -534,7 +534,7 @@ const REC = {"nova linija":"New line: nothing runs here today",
   "produžiti/preusmjeriti postojeće kroz nepokriveni dio":"Extend or reroute existing lines through the part they miss",
   "pojačati na ≥ 3 polaska/h i proširiti trasu":"Run existing lines at least 3 times an hour and widen the route",
   "pojačati na ≥ 3 polaska/h":"Run existing lines at least 3 times an hour", "dovoljno pokriveno":"Already well served",
-  "sjeverna":"Northern hillside line, half of a pair: midibus (8–9 m) every 10 minutes, the two halves overlapping at Buća Potok"};
+  "sjeverna":"Hillside line by midibus (8–9 m) every 10 minutes; best run as two overlapping halves meeting at Buća Potok"};
 let newSel = null;
 const newP = ptG.append("g").selectAll("path").data(D.newlines).join("path").attr("class", d => "newl n-" + d[1])
   .attr("stroke", d => NEW_C[d[1]]).on("click", (e, d) => { e.stopPropagation(); newSel = d; newP.classed("sel", x => x === d); show(null); });
@@ -893,8 +893,7 @@ function show(c){
       ${d[10] ? `<p class="hint" style="font-size:12.5px">Lines already on the route (weekday 7–9 h departures per hour): ${d[10].replace(/autobus/g,"bus")}</p>` : ""}
       <p class="hint" style="font-size:13px">${{P1:"The busiest corridor with no tram or trolleybus at either end (about 3,700 trips a day). Trolleybus or electric bus every 7–10 minutes, changing to the tram at Alipašin most.",
         P2:"About 2,200 trips a day; the cantonal timetable has no line on the Lukavica side, so check whether a Republika Srpska operator runs one.",
-        S1:"Western half of a northern hillside line. Today these neighbourhoods are linked only through the valley; about 12,000 trips a day run between places on this route, and 7,800 residents along it walk over 8 minutes to a stop. Up to 25% gradients and short narrow stretches call for a midibus.",
-        S2:"Eastern half of a northern hillside line, down to the railway station. About 21,000 trips a day run between places on this route. Pofalići and Velešići are 1.7 km apart but 3.2 km by road, so a short bus-only link there would save several minutes."}[d[0]] ||
+        S:"Runs along the northern hills instead of down by the tram: roads lower than 40 m above the valley floor are avoided except at Stup and the railway station. It links hillside neighbourhoods that today connect only through the valley: about 31,000 trips a day run between places along it, and 8,400 residents along it walk over 8 minutes to a stop. The hill roads wind, so it is long (about 26 km and 90 minutes end to end, Stup to Zabrđe crossing the plain), with up to 25% gradients and about 2.6 km of narrow streets: a midibus, run as two halves meeting at Buća Potok (west about 44 min, east about 31 min), and Pofalići–Velešići is 1.3 km apart but 3.4 km by road."}[d[0]] ||
         "Small bus for a steep neighbourhood, from the part farthest from a stop to the nearest tram or trolleybus stop. Check street width and a turning point on site."}</p>` :
       `<div class="k">Proposed new lines</div><p class="hint">Drawn from the trip model: corridors with the most daily trips and no tram or trolleybus, and steep neighbourhoods where many people walk over 8 minutes to a stop. Most already have a bus or minibus, but one that runs once or twice an hour or misses whole streets; each line says what to change. Tap a line or a label.</p>`)
       + `<div class="k">Lines · residents gaining a stop within 400 m</div><dl>${lst}</dl>

@@ -270,14 +270,16 @@ linija u pravom smislu je samo M1 (Hrastovi-Mrkovići).
 
 ## Sjeverna brdska linija (`28_sjeverna_linija.py`)
 
-Ocjena prijedloga Stup – Zabrđe – Briješće – Sokolje – Buća Potok – Pofalići – Velešići – Željeznička
-(trasa kroz brdske dijelove naselja, najkraćim putem po cestama). Cijela: 23 km, ~69 min, 50.400
-stanovnika do 400 m (11.100 danas > 8 min od stanice), 45.500 putovanja dnevno između zona uz trasu,
-nagib do 25,5%, 700 m uskih ulica. Dionica Stup – Zabrđe ide dolinom uz tramvaje 3/6/7/11, a cesta
-nema kontinuitet po brdu (Sokolje – Buća Potok +37%, Pofalići – Velešići +88% u odnosu na zračnu
-liniju). Preporuka: dvije linije midibusom s preklapanjem u Buća Potoku – S1 Zabrđe – Buća Potok –
-Otoka (11,7 km, ~33 min, 7.800 danas daleko od stanice) i S2 Buća Potok – Velešići – Željeznička
-(7,4 km, ~26 min, 21.200 putovanja dnevno u koridoru); obje su na karti (Transit).
+Prijedlog korisnika: Stup – Zabrđe – Briješće – Sokolje – Buća Potok – Pofalići – Velešići – Željeznička,
+**preko brda**, ne dolinom uz tramvaj. Trasa: ceste niže od 40 m iznad dna doline (teren minus
+najniža tačka u krugu 3 km, kao 17_zrak) su 6 puta "skuplje" osim 800 m oko Stupa i Željezničke;
+tačke su u višim dijelovima naselja. Rezultat: 25,8 km, ~93 min (vrijeme autom · 1,4), u dolini
+5,4 km (uglavnom ravnica Stup – Zabrđe; bez Stupa 2,1 km), 37.000 stanovnika do 400 m, 8.400 danas
+> 8 min od stanice, 31.400 putovanja dnevno između zona uz trasu, nagib do 25%, 2,6 km uskih ulica.
+Polovine: zapad Zabrđe – Buća Potok ~44 min, istok Buća Potok – Željeznička ~31 min (18.200
+putovanja u koridoru). Za poređenje, prva (dolinska) verzija trase: 23 km, 69 min. Preporuka:
+midibus, dvije polovine s preklapanjem u Buća Potoku; Pofalići – Velešići je 1,3 km zračno a
+3,4 km cestom (kandidat za kratki spoj).
 
 ## Google Places (`12_google_places.py`, opcionalno)
 

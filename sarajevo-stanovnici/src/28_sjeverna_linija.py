@@ -1,4 +1,4 @@
-"""Ocjena prijedloga: sjeverna brdska linija Stup – Zabrđe – Briješće – Sokolje – Buća Potok –
+"""Ocjena prijedloga: sjeverna brdska linija (trasa preko brda, ne dolinom) Stup – Zabrđe – Briješće – Sokolje – Buća Potok –
 Pofalići – Velešići – Željeznička stanica (u poređenju s P1 Zabrđe – Alipašin Most).
 
 Izlaz: out/sjeverna_linija.geojson (trasa s dionicama), ispis pokazatelja.
@@ -36,6 +36,10 @@ mp = _uvezi("mp", "24_putovanja.py")
 TACKE = [("Stup", None), ("Zabrđe", "Novi Grad Sarajevo"), ("Briješće", "Novi Grad Sarajevo"),
          ("Naselje heroja Sokolje", "Novi Grad Sarajevo"), ("Buća Potok", "Novi Grad Sarajevo"),
          ("Pofalići II", "Novo Sarajevo"), ("Velešići", "Novo Sarajevo"), ("Željeznička stanica", None)]
+PREKO_BRDA = True      # trasa preko brda: ceste niže od H_DOLINA iznad dna doline su KAZNA_DOLINA puta "skuplje"
+H_DOLINA = 40.0
+KAZNA_DOLINA = 6.0
+IZUZETAK_M = 800       # oko Stupa i Željezničke (krajevi su u dolini)
 FIKSNE = {"Stup": (18.3317, 43.8460), "Željeznička stanica": (18.3998, 43.8590)}
 
 
@@ -53,12 +57,39 @@ def main() -> None:
     pcw = pc.to_crs(CRS_WGS)
     daleko = (pv.stanica_min.to_numpy() > 8) & (polja.stanovnici.to_numpy() > 0)
 
+    # visina iznad dna doline (kao 17_zrak.py): teren minus najniža tačka u krugu 3 km
+    from scipy.ndimage import gaussian_filter, grey_opening, minimum_filter
+    ter = _uvezi("ter", "10_teren.py")
+    zr, tr = ter.dem()
+    zr = gaussian_filter(grey_opening(zr, size=(3, 3)), 1)
+    py_, px_ = abs(tr.e) * 111_320, tr.a * 111_320 * np.cos(np.radians(43.86))
+    hr = zr - gaussian_filter(minimum_filter(zr, size=(int(6000 / py_), int(6000 / px_))), 15)
+
+    def h_at(lon, lat):
+        c = np.clip(((np.asarray(lon) - tr.c) / tr.a).astype(int), 0, hr.shape[1] - 1)
+        r = np.clip(((np.asarray(lat) - tr.f) / tr.e).astype(int), 0, hr.shape[0] - 1)
+        return hr[r, c]
+
+    hn = h_at(ll[:, 0], ll[:, 1])
+    hc = h_at(pcw.x.to_numpy(), pcw.y.to_numpy())
+    he = (hn[e.u.to_numpy()] + hn[e.v.to_numpy()]) / 2
+    dolina_e = he < H_DOLINA
+    izuzeto = np.zeros(len(e), bool)
+    for lon, lat in FIKSNE.values():
+        p = gpd.GeoSeries([Point(lon, lat)], crs=CRS_WGS).to_crs(CRS_M)[0]
+        mid = (xy[e.u.to_numpy()] + xy[e.v.to_numpy()]) / 2
+        izuzeto |= np.hypot(mid[:, 0] - p.x, mid[:, 1] - p.y) < IZUZETAK_M
+    G_brdo = mp.graf(e, n, e.t0.to_numpy() * np.where(dolina_e & ~izuzeto, KAZNA_DOLINA, 1.0))
+    eid = {(u, v): k for k, (u, v) in enumerate(zip(e.u.to_numpy(), e.v.to_numpy()))}
+
     def tacka(ime, op):
         if ime in FIKSNE:
             return FIKSNE[ime]
         m = ((polja.mz == ime) & (polja.opcina == op)).to_numpy() & (polja.stanovnici.to_numpy() > 0)
+        if (m & (hc >= H_DOLINA)).sum() >= 3:
+            m &= hc >= H_DOLINA                           # brdski dio naselja (iznad dna doline)
         if (m & daleko).sum() >= 3:
-            m &= daleko                                   # brdski dio naselja (daleko od stanice)
+            m &= daleko                                   # i daleko od stanice
         w = polja.stanovnici.to_numpy()[m]
         return float(np.average(pcw.x[m], weights=w)), float(np.average(pcw.y[m], weights=w))
 
@@ -70,13 +101,15 @@ def main() -> None:
         cv = [cvor(*t) for t in tacke]
         put, dion, minute = [cv[0]], [], 0.0
         for a, b in zip(cv[:-1], cv[1:]):
-            D, P = dijkstra(G, indices=[a], return_predecessors=True)
-            minute += D[0, b]
+            D, P = dijkstra(G_brdo if PREKO_BRDA else G, indices=[a], return_predecessors=True)
             seg = [b]
             while seg[-1] != a:
                 seg.append(P[0, seg[-1]])
             dion.append(seg[::-1])
             put += seg[::-1][1:]
+        ids = [eid[(u, v)] for u, v in zip(put[:-1], put[1:])]
+        minute = float(e.t0.to_numpy()[ids].sum())
+        trasa.dolina_km = float((np.hypot(*(xy[put[1:]] - xy[put[:-1]]).T) * dolina_e[ids]).sum() / 1000)
         return put, dion, minute
 
     vis = mp.dost.visine_cvorova(ll[:, 0], ll[:, 1], tlo=True)
@@ -133,7 +166,7 @@ def main() -> None:
                "putovanja_u_koridoru_dnevno": round(koridor), "zona_uz_trasu": len(uz),
                "max_nagib_100m_pct": round(100 * max(nag), 1) if nag else None,
                "nagib_>10pct_km": round(sum(1 for x in nag if x > 0.10) * float(np.mean(np.diff(dd))) / 1000, 1) if nag else 0,
-               "uske_ulice_m": round(uska_m)}
+               "uske_ulice_m": round(uska_m), "u_dolini_km": round(trasa.dolina_km, 1)}
         return rez, pd.DataFrame(rows), g
 
     tacke_s = [tacka(i, o) for i, o in TACKE]
