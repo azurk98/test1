@@ -1,82 +1,142 @@
 opcina,mz,radna_mjesta,stanovnici,rm_na_100_stanovnika
-Novo Sarajevo,Željeznička,13758,7931,173.0
-Centar Sarajevo,Marijin Dvor,11769,2405,489.0
-Centar Sarajevo,Park-Višnjik,8659,2894,299.0
-Centar Sarajevo,Trg oslobođenja-Centar,7775,4134,188.0
-Novi Grad Sarajevo,Briješće,5867,7679,76.0
-Centar Sarajevo,Skenderija-Podtekija,5555,3162,176.0
-Novi Grad Sarajevo,Zabrđe,4680,8221,57.0
-Novi Grad Sarajevo,Alipašin Most I,3326,7591,44.0
-Novo Sarajevo,Pofalići II,2939,7186,41.0
-Stari Grad Sarajevo,Mošćanica,2743,3815,72.0
-Novi Grad Sarajevo,Alipašin Most III,2685,7536,36.0
-Centar Sarajevo,Koševsko Brdo,2432,4652,52.0
-Stari Grad Sarajevo,Baščaršija,2349,2029,116.0
-Novi Grad Sarajevo,Saraj Polje,2335,6723,35.0
-Centar Sarajevo,Crni Vrh-Gorica,2195,2196,100.0
-Novo Sarajevo,Pofalići I,2140,3857,55.0
-Novi Grad Sarajevo,Alipašino Polje AI,2104,2340,90.0
-Novo Sarajevo,Malta,1998,4230,47.0
-Novo Sarajevo,Velešići,1750,3570,49.0
-Centar Sarajevo,Šip,1736,3062,57.0
-Novi Grad Sarajevo,Naselje heroja Sokolje,1655,6130,27.0
-Novi Grad Sarajevo,Alipašino Polje AII,1579,2582,61.0
-Centar Sarajevo,Džidžikovac-Koševo I,1457,3424,43.0
-Novo Sarajevo,Grbavica I,1333,5814,23.0
-Novo Sarajevo,Čengić Vila I,1226,3762,33.0
-Novo Sarajevo,Hrasno,1211,1938,62.0
-Stari Grad Sarajevo,Ferhadija,1183,633,187.0
-Novo Sarajevo,Grbavica II,1169,5583,21.0
-Centar Sarajevo,Koševo II,1164,3441,34.0
-Novi Grad Sarajevo,Dobrinja D,1018,5730,18.0
-Novo Sarajevo,Kovačići,965,2719,35.0
-Centar Sarajevo,Donji Velešići,905,549,165.0
-Stari Grad Sarajevo,Logavina,899,3321,27.0
-Novo Sarajevo,Trg heroja,868,4745,18.0
-Stari Grad Sarajevo,Bistrik,772,3083,25.0
-Centar Sarajevo,Pionirska Dolina,750,1812,41.0
-Stari Grad Sarajevo,Kovači,713,1101,65.0
-Novi Grad Sarajevo,Dolac,712,5918,12.0
-Stari Grad Sarajevo,Mjedenica,692,407,170.0
-Novi Grad Sarajevo,Dobroševići,658,5878,11.0
-Novi Grad Sarajevo,Reljevo,649,2153,30.0
-Novi Grad Sarajevo,Otoka,629,2875,22.0
-Novi Grad Sarajevo,Švrakino Selo II,621,4188,15.0
-Centar Sarajevo,Mejtaš-Bjelave,618,3255,19.0
-Centar Sarajevo,Ciglane,598,2678,22.0
-Novi Grad Sarajevo,Alipašino Polje BII,420,3161,13.0
-Centar Sarajevo,Hrastovi-Mrkovići,390,3262,12.0
-Novi Grad Sarajevo,Buća Potok,389,4624,8.0
-Novi Grad Sarajevo,Čengić Vila,386,2890,13.0
-Novi Grad Sarajevo,Aneks,363,2901,13.0
-Novi Grad Sarajevo,Dobrinja A,334,5231,6.0
-Novi Grad Sarajevo,Dobrinja B,291,4996,6.0
-Stari Grad Sarajevo,Širokača,289,2220,13.0
-Novi Grad Sarajevo,Olimpijsko Selo,286,2627,11.0
-Novo Sarajevo,Čengić Vila II,231,1680,14.0
-Stari Grad Sarajevo,Vratnik,226,3065,7.0
-Novi Grad Sarajevo,Alipašino Polje CI,225,2018,11.0
-Novi Grad Sarajevo,Staro Hrasno,203,3139,6.0
-Centar Sarajevo,Breka,198,1743,11.0
-Centar Sarajevo,Betanija,190,4189,5.0
-Stari Grad Sarajevo,Sedrenik,189,2673,7.0
-Novi Grad Sarajevo,Alipašino Polje BI,177,3346,5.0
-Centar Sarajevo,Bardakčije,149,1713,9.0
-Novi Grad Sarajevo,Dobrinja C,144,4969,3.0
-Novi Grad Sarajevo,Alipašin Most II,118,2068,6.0
-Stari Grad Sarajevo,Medrese,118,2767,4.0
-Novi Grad Sarajevo,Švrakino Selo I,113,2001,6.0
-Novo Sarajevo,Kvadrant,112,647,17.0
-Novo Sarajevo,Vraca,100,2854,4.0
-Centar Sarajevo,Soukbunar,98,2304,4.0
-Novi Grad Sarajevo,Alipašino Polje CII,75,2586,3.0
-Stari Grad Sarajevo,Babića bašča,70,1208,6.0
-Novo Sarajevo,Hrasno Brdo,60,2765,2.0
-Novo Sarajevo,Gornji Velešići,45,1338,3.0
-Stari Grad Sarajevo,Hrid-Jarčedoli,33,2152,2.0
-Centar Sarajevo,Nahorevo,32,968,3.0
-Stari Grad Sarajevo,Mahmutovac,29,1815,2.0
-Novo Sarajevo,Gornji Kovačići,21,1100,2.0
-Novi Grad Sarajevo,Švrakino Selo III,14,2124,1.0
-Stari Grad Sarajevo,Sumbuluša,9,1099,1.0
+Novo Sarajevo,Željeznička,13670,8001,171.0
+Centar Sarajevo,Marijin Dvor,11708,2407,486.0
+Centar Sarajevo,Park-Višnjik,8543,2848,300.0
+Centar Sarajevo,Trg oslobođenja-Centar,7660,4220,182.0
+Novi Grad Sarajevo,Briješće,6013,7650,79.0
+Centar Sarajevo,Skenderija-Podtekija,5479,3223,170.0
+Novi Grad Sarajevo,Zabrđe,4511,8468,53.0
+Vogošća,Vogošća,3931,12470,32.0
+Novi Grad Sarajevo,Alipašin Most I,3255,7526,43.0
+Ilidža,Ilidža,3120,5490,57.0
+Novo Sarajevo,Pofalići II,2977,7247,41.0
+Stari Grad Sarajevo,Mošćanica,2858,3810,75.0
+Ilidža,Naselje Bulevar,2797,6154,45.0
+Novi Grad Sarajevo,Alipašin Most III,2639,7878,33.0
+Ilidža,Lipe,2617,3323,79.0
+Centar Sarajevo,Koševsko Brdo,2440,4659,52.0
+Stari Grad Sarajevo,Baščaršija,2317,2038,114.0
+Centar Sarajevo,Crni Vrh-Gorica,2164,2189,99.0
+Novo Sarajevo,Pofalići I,2140,3787,57.0
+Novi Grad Sarajevo,Saraj Polje,2135,6539,33.0
+Novi Grad Sarajevo,Alipašino Polje AI,2112,2290,92.0
+Ilidža,Gladno polje,2111,2397,88.0
+Ilidža,Lasica,1996,1762,113.0
+Novo Sarajevo,Malta,1947,4219,46.0
+Centar Sarajevo,Šip,1926,3139,61.0
+Ilidža,Stupsko Brdo,1860,4037,46.0
+Novo Sarajevo,Velešići,1749,3524,50.0
+Novi Grad Sarajevo,Naselje heroja Sokolje,1667,5940,28.0
+Novi Grad Sarajevo,Alipašino Polje AII,1574,2561,61.0
+Centar Sarajevo,Džidžikovac-Koševo I,1352,3536,38.0
+Novo Sarajevo,Grbavica I,1333,5700,23.0
+Ilidža,Donji Kotorac,1305,2727,48.0
+Novo Sarajevo,Grbavica II,1254,5838,21.0
+Ilidža,Stup,1251,4209,30.0
+Novo Sarajevo,Hrasno,1235,1956,63.0
+Novo Sarajevo,Čengić Vila I,1226,3768,33.0
+Ilidža,Lužani,1196,3160,38.0
+Centar Sarajevo,Koševo II,1196,3414,35.0
+Ilidža,Sokolović-kolonija,1178,5646,21.0
+Stari Grad Sarajevo,Ferhadija,1007,630,160.0
+Ilidža,Blažuj,997,2570,39.0
+Novi Grad Sarajevo,Dobrinja D,972,5264,18.0
+Novo Sarajevo,Kovačići,959,2700,36.0
+Ilidža,Plandište,943,1310,72.0
+Centar Sarajevo,Donji Velešići,928,543,171.0
+Centar Sarajevo,Pionirska Dolina,924,1772,52.0
+Ilidža,Rakovica,910,1514,60.0
+Centar Sarajevo,Mejtaš-Bjelave,879,3442,26.0
+Novo Sarajevo,Trg heroja,871,4740,18.0
+Stari Grad Sarajevo,Logavina,864,3324,26.0
+Vogošća,Hotonj,849,4922,17.0
+Novi Grad Sarajevo,Reljevo,782,2616,30.0
+Ilidža,Vreoca,770,1334,58.0
+Stari Grad Sarajevo,Bistrik,764,3079,25.0
+Stari Grad Sarajevo,Mjedenica,686,406,169.0
+Novi Grad Sarajevo,Dolac,674,5783,12.0
+Novi Grad Sarajevo,Švrakino Selo II,669,4202,16.0
+Novi Grad Sarajevo,Dobroševići,663,5907,11.0
+Novi Grad Sarajevo,Otoka,650,3057,21.0
+Ilidža,Azići,642,3203,20.0
+Ilidža,Butmir,619,3469,18.0
+Stari Grad Sarajevo,Kovači,616,1105,56.0
+Centar Sarajevo,Ciglane,588,2444,24.0
+Ilidža,Hrasnica,525,2256,23.0
+Novi Grad Sarajevo,Alipašino Polje BII,410,3158,13.0
+Centar Sarajevo,Hrastovi-Mrkovići,396,3196,12.0
+Ilidža,Kakrinje,384,747,51.0
+Novi Grad Sarajevo,Čengić Vila,364,2879,13.0
+Novi Grad Sarajevo,Buća Potok,358,4742,8.0
+Novi Grad Sarajevo,Aneks,355,2770,13.0
+Stari Grad Sarajevo,Širokača,332,2222,15.0
+Novi Grad Sarajevo,Dobrinja A,325,5267,6.0
+Novi Grad Sarajevo,Dobrinja B,324,5006,6.0
+Ilidža,Pejton,292,3530,8.0
+Novi Grad Sarajevo,Olimpijsko Selo,282,2624,11.0
+Vogošća,Gora,264,819,32.0
+Ilidža,Kobiljača,257,390,66.0
+Ilidža,Rudnik,255,509,50.0
+Vogošća,Semizovac,247,1985,12.0
+Vogošća,Ugorsko,236,859,27.0
+Novo Sarajevo,Čengić Vila II,231,1763,13.0
+Vogošća,Ljubina-Poturovići,214,651,33.0
+Centar Sarajevo,Betanija,207,4180,5.0
+Vogošća,Krivoglavci,206,1161,18.0
+Novi Grad Sarajevo,Staro Hrasno,199,3142,6.0
+Stari Grad Sarajevo,Vratnik,198,3064,6.0
+Centar Sarajevo,Breka,197,1674,12.0
+Vogošća,Nebočaj,194,463,42.0
+Novi Grad Sarajevo,Alipašino Polje BI,191,3527,5.0
+Stari Grad Sarajevo,Sedrenik,184,2693,7.0
+Novi Grad Sarajevo,Alipašino Polje CI,179,2016,9.0
+Ilidža,Zenik,173,329,53.0
+Vogošća,Donja Vogošća,172,397,43.0
+Novi Grad Sarajevo,Dobrinja C,164,5129,3.0
+Centar Sarajevo,Bardakčije,150,1681,9.0
+Vogošća,Kobilja Glava,143,2050,7.0
+Vogošća,Kremeš,138,467,30.0
+Ilidža,Buhotina,138,261,53.0
+Vogošća,Svrake,127,1037,12.0
+Stari Grad Sarajevo,Medrese,118,2768,4.0
+Novo Sarajevo,Kvadrant,110,670,16.0
+Novi Grad Sarajevo,Alipašin Most II,108,2023,5.0
+Novi Grad Sarajevo,Švrakino Selo I,106,1966,5.0
+Novo Sarajevo,Vraca,99,2760,4.0
+Ilidža,Doglodi,98,2623,4.0
+Centar Sarajevo,Soukbunar,96,2326,4.0
+Vogošća,Tihovići,95,228,42.0
+Ilidža,Osjek,83,1764,5.0
+Novi Grad Sarajevo,Alipašino Polje CII,74,2535,3.0
+Stari Grad Sarajevo,Babića bašča,71,1204,6.0
+Ilidža,Stojčevac,69,419,16.0
+Ilidža,Dolovi,68,1336,5.0
+Centar Sarajevo,Nahorevo,67,1050,6.0
+Novo Sarajevo,Hrasno Brdo,60,2606,2.0
+Ilidža,Kovači (Ilidža),47,1726,3.0
+Ilidža,Kamenjača,46,1207,4.0
+Ilidža,Vrelo Bosne,44,181,24.0
+Novo Sarajevo,Gornji Velešići,41,1288,3.0
+Stari Grad Sarajevo,Mahmutovac,34,1814,2.0
+Stari Grad Sarajevo,Hrid-Jarčedoli,33,2148,2.0
+Ilidža,Otes,29,3097,1.0
+Ilidža,Vlakovo,28,136,21.0
+Ilidža,Vrutci,25,52,48.0
+Vogošća,Garež,23,79,29.0
+Vogošća,Blagovac,22,1924,1.0
+Novo Sarajevo,Gornji Kovačići,20,1005,2.0
+Vogošća,Grahovište,17,252,7.0
+Novi Grad Sarajevo,Švrakino Selo III,14,1954,1.0
+Ilidža,Vela,12,27,44.0
+Stari Grad Sarajevo,Sumbuluša,9,1097,1.0
 Stari Grad Sarajevo,Toka-Džeka,8,1433,1.0
+Vogošća,Uglješići,4,407,1.0
+Vogošća,Kamenica,2,234,1.0
+Ilidža,Krupac,1,93,1.0
+Ilidža,Jasen,1,1,100.0
+Ilidža,Zoranovići,1,15,7.0
+Ilidža,Bjelaće,0,718,0.0
+Ilidža,Donji Doglodi,0,299,0.0
+Vogošća,Budišići,0,0,0.0
+Vogošća,Perca,0,0,0.0
+Vogošća,Vrapče,0,0,0.0

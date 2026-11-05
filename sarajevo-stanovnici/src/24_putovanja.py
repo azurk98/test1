@@ -323,7 +323,10 @@ def main() -> None:
             br.loc[br.brojac == k_, ["lat", "lon"]] = p
     br = br.dropna(subset=["lat", "lon"])
     import shapely
-    br = br[shapely.contains_xy(POKR, br.lon.to_numpy(), br.lat.to_numpy())].reset_index(drop=True)
+    # samo brojači u modeliranim općinama (+1 km): izvan njih mreža je samo rub dopune
+    op_ = ucitaj_granice()[0].union_all().buffer(1000)
+    bm = gpd.GeoSeries(gpd.points_from_xy(br.lon, br.lat), crs=CRS_WGS).to_crs(CRS_M)
+    br = br[shapely.contains_xy(POKR, br.lon.to_numpy(), br.lat.to_numpy()) & bm.within(op_).to_numpy()].reset_index(drop=True)
     bxy = gpd.GeoSeries(gpd.points_from_xy(br.lon, br.lat), crs=CRS_WGS).to_crs(CRS_M)
     mid = (xy[e.u] + xy[e.v]) / 2
     ehw = e.w.map(lambda k: wmeta[k]["hw"]).to_numpy()
