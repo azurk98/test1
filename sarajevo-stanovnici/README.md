@@ -163,6 +163,17 @@ zaglavlju skripta). Dvije strategije: `najvise` (najveći udio) i `bijela_mrlja`
   Trg heroja (~105); Novi Grad nema javnu muzičku školu u modelu, a najbliža je ~2 km.
   Bijela mrlja: Zabrđe (~1.750 djece bez škole u 15 min), Betanija, Alipašin Most I.
 
+## Brojači saobraćaja KS 2025 (`21_brojaci_saobracaja.py`)
+
+Ministarstvo saobraćaja KS / Direkcija za puteve objavljuje godišnju publikaciju brojanja
+(za 2025. izašla u maju 2026). Iz nje su izvučeni `data/brojaci_2025.csv` (29 brojača:
+lokacija, koordinate, PGDS 2025) i `data/brojaci_2025_dnevno.csv` (vozila po danu, ~7.700
+dana). Najopterećenije: Zmaja od Bosne kod Čengić Vile 34.500 vozila/dan, Zapadni prilaz
+(Mostarsko raskršće) 33.500, GGL kod BBI 33.100, Bulevar Meše Selimovića 30.300.
+Subotom ~11%, nedjeljom ~27% manje vozila nego radnim danom; januar ~6% ispod prosjeka.
+Podaci po satima postoje u bazi Direkcije, ali u publikaciji su samo kao grafikoni.
+Novijih ni dnevnih javnih podataka (npr. za prošli mjesec) nema.
+
 ## Google Places (`12_google_places.py`, opcionalno)
 
 Nearby Search (New) za tipove supermarket, grocery_store, convenience_store, market, food_store u
