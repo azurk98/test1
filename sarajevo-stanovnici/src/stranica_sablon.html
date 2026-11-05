@@ -178,6 +178,10 @@ aside.read{border-left:1px solid var(--line);padding:16px;max-height:calc(min(68
 .mini i{display:block;height:100%;background:var(--accent)}
 .lnk{all:unset;cursor:pointer;color:var(--accent)} .lnk:focus-visible{outline:2px solid var(--accent)}
 .ptline{fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;stroke-width:calc(2px * var(--zw));opacity:.9;pointer-events:visibleStroke}
+.newl{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke;stroke-dasharray:7 4;cursor:pointer;pointer-events:visibleStroke}
+.newl.n-glavna{stroke-width:calc(4px * var(--zw))} .newl.n-minibus{stroke-width:calc(2.6px * var(--zw))}
+.newl.sel{stroke-width:calc(6px * var(--zw));stroke-dasharray:none}
+.newlab{cursor:pointer} .newlab text{font:700 9.5px var(--mono);fill:#fff;pointer-events:none}
 .ptline.m-tram{stroke-width:calc(3px * var(--zw))}
 .lchips{display:flex;flex-wrap:wrap;gap:4px}
 .lchip{font:500 11.5px var(--mono);padding:2px 6px;border-radius:4px;border:1px solid var(--line);background:var(--surface)}
@@ -522,6 +526,17 @@ const ptOrder = {bus:0, trolleybus:1, tram:2};
 const ptP = ptG.selectAll("path").data(D.lines.slice().sort((a,b) => ptOrder[a[0]] - ptOrder[b[0]])).join("path")
   .attr("class", d => "ptline m-" + d[0]).attr("stroke", d => MODE_C[d[0]]);
 ptP.append("title").text(d => `${d[2] || d[1]} · ${d[3] ? d[3] + " departures/hour (assumed)" : "frequency unknown"}`);
+// predložene linije
+const NEW_C = {glavna:"#ff006e", minibus:"#9b5de5"};
+let newSel = null;
+const newP = ptG.append("g").selectAll("path").data(D.newlines).join("path").attr("class", d => "newl n-" + d[1])
+  .attr("stroke", d => NEW_C[d[1]]).on("click", (e, d) => { e.stopPropagation(); newSel = d; newP.classed("sel", x => x === d); show(null); });
+newP.append("title").text(d => `Proposed ${d[0]}: ${d[2]}`);
+const newL = ptG.append("g").selectAll("g").data(D.newlines).join("g").attr("class","newlab")
+  .on("click", (e, d) => { e.stopPropagation(); newSel = d; newP.classed("sel", x => x === d); show(null); });
+newL.append("rect").attr("x",-12).attr("y",-8).attr("width",24).attr("height",16).attr("rx",8).attr("fill", d => NEW_C[d[1]]);
+newL.append("text").attr("text-anchor","middle").attr("dy","0.35em").text(d => d[0]);
+const newMid = d => { const c = d[9], i = Math.floor(c.length / 4) * 2; return proj([c[i]*KX, c[i+1]]); };
 const aqG = g.append("g").attr("class","aq").attr("display","none");
 const aqS = aqG.selectAll("g").data(D.aq).join("g").attr("class","aqs");
 aqS.append("rect").attr("x",-15).attr("y",-9).attr("width",30).attr("height",18).attr("rx",4);
@@ -548,6 +563,8 @@ function layout(){
   contP.attr("d", d => line(d[2]));
   accP.attr("d", d => d[1].map(line).join(""));
   ptP.attr("d", d => d[4].map(line).join(""));
+  newP.attr("d", d => line(d[9]));
+  newL.attr("transform", d => { const [x,y] = newMid(d); return `translate(${x},${y}) scale(${1/zk})`; });
   aqS.attr("transform", d => { const [x,y] = proj([d[2]*KX, d[1]]); return `translate(${x},${y}) scale(${1/zk})`; });
   const rd = k => ROADS[k].map(line).join("");
   const cache = {}; RORDER.forEach(k => { if (ROADS[k]) cache[k] = rd(k); });
@@ -568,6 +585,7 @@ const zoom = d3.zoom().scaleExtent([1,14]).on("zoom", e => { g.attr("transform",
   svg.style("--zw", Math.pow(e.transform.k, 0.35).toFixed(2)); svg.classed("zin", e.transform.k >= 2.5);
   if (e.transform.k !== zk){ zk = e.transform.k; siteG.attr("transform", d => { const [x,y] = proj([d.lon*KX, d.lat]); return `translate(${x},${y}) scale(${1/zk})`; }); storeP.attr("r", 2.2/zk);
     wsiteG.attr("transform", d => { const [x,y] = proj([d.lon*KX, d.lat]); return `translate(${x},${y}) scale(${1/zk})`; }); washP.attr("r", 3/zk); bizPlace();
+    newL.attr("transform", d => { const [x,y] = newMid(d); return `translate(${x},${y}) scale(${1/zk})`; });
     trfC.attr("transform", d => { const [x,y] = proj([d[3]*KX, d[2]]); return `translate(${x},${y}) scale(${1/zk})`; }); if (mode === "trf") trfPaint();
     poiG.selectAll("circle").attr("r", d => (d.k === "bolnica" ? 4.6 : 3.2)/zk).attr("stroke-width", 1/zk);
     aqS.attr("transform", d => { const [x,y] = proj([d[2]*KX, d[1]]); return `translate(${x},${y}) scale(${1/zk})`; });
@@ -661,7 +679,8 @@ function legend0(){
   if (mode === "pt"){
     el.innerHTML = `<div style="font-size:12px;color:var(--muted)">Public transport accessibility level (PTAL), 0 = none, 6b = excellent</div>
       <div class="row">${PTAL_K.map(k => `<div class="sw"><i style="background:${PTAL_C[k]}"></i><span>${k}</span></div>`).join("")}</div>
-      <div class="cat"><span><i class="rl" style="border-color:${MODE_C.tram}"></i>tram</span><span><i class="rl" style="border-color:${MODE_C.trolleybus}"></i>trolleybus</span><span><i class="rl" style="border-color:${MODE_C.bus}"></i>bus (OSM has only part of the bus network)</span></div>`;
+      <div class="cat"><span><i class="rl" style="border-color:${MODE_C.tram}"></i>tram</span><span><i class="rl" style="border-color:${MODE_C.trolleybus}"></i>trolleybus</span><span><i class="rl" style="border-color:${MODE_C.bus}"></i>bus (OSM has only part of the bus network)</span></div>
+      <div class="cat"><span><i class="rl" style="border-top:4px dashed ${NEW_C.glavna}"></i>proposed main line (P)</span><span><i class="rl" style="border-top:2.5px dashed ${NEW_C.minibus}"></i>proposed minibus (M)</span></div>`;
     return;
   }
   if (mode === "best"){
@@ -852,6 +871,25 @@ function show(c){
     el.innerHTML = `<div class="k">Without a supermarket in a 10-min walk</div>
       <div class="big num">${fmt(far)}</div><div class="rng num">${Math.round(far/tot*100)}% of ${fmt(tot)} residents</div>
       <p class="hint">Orange cells are more than a 10-minute walk from any supermarket in OpenStreetMap or Overture Maps. Both miss many small shops: comparing the two suggests they hold only 35–60% of the area's grocery stores. Numbered markers are the proposed sites; tap one, or use the table below the map.</p>`;
+    return;
+  }
+  if (!c && mode === "pt" && D.newlines.length){
+    const d = newSel;
+    const lst = D.newlines.map(x => `<dt><button class="lnk" data-nl="${x[0]}"><b style="color:${NEW_C[x[1]]}">${x[0]}</b> ${x[2]}</button></dt><dd class="num">${fmt(x[6])}</dd>`).join("");
+    el.innerHTML = (d ? `<div class="k">Proposed ${d[1] === "glavna" ? "main line" : "minibus"} ${d[0]}</div>
+      <div style="font-weight:600">${d[2]}</div>
+      <dl><dt>Length</dt><dd class="num">${d[3]} km</dd><dt>Running time, one way</dt><dd class="num">~${d[7]} min</dd>
+      <dt>Stops (every ~400 m)</dt><dd class="num">${d[8]}</dd><dt>Residents within 400 m</dt><dd class="num">${fmt(d[4])}</dd>
+      <dt>Jobs within 400 m</dt><dd class="num">${fmt(d[5])}</dd><dt>…now over 8 min from a stop</dt><dd class="num">${fmt(d[6])}</dd></dl>
+      <p class="hint" style="font-size:13px">${{P1:"The busiest corridor with no tram or trolleybus at either end (about 3,700 trips a day). Trolleybus or electric bus every 7–10 minutes, changing to the tram at Alipašin most.",
+        P2:"About 2,200 trips a day and no line in OpenStreetMap; check first whether a Republika Srpska operator already runs one.",
+        P3:"About 2,100 trips a day; links Stup and eastern Ilidža to Alipašin most without a change."}[d[0]] ||
+        "Small bus for a steep neighbourhood, from the part farthest from a stop to the nearest tram or trolleybus stop. Check street width and a turning point on site."}</p>` :
+      `<div class="k">Proposed new lines</div><p class="hint">Drawn from the trip model: corridors with the most daily trips and no tram or trolleybus, and steep neighbourhoods where many people walk over 8 minutes to a stop. Routes follow existing roads; tap a line or a label.</p>`)
+      + `<div class="k">Lines · residents gaining a stop within 400 m</div><dl>${lst}</dl>
+      <p class="hint" style="font-size:12.5px">Sketches for discussion, not designs. OpenStreetMap lacks much of the bus network, so some areas may already have a bus.</p>`;
+    el.querySelectorAll("[data-nl]").forEach(b => b.onclick = () => { newSel = D.newlines.find(x => x[0] === b.dataset.nl); newP.classed("sel", x => x === newSel);
+      const [x,y] = newMid(newSel); svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(W()/2,H()/2).scale(3.5).translate(-x,-y)); show(null); });
     return;
   }
   if (!c){

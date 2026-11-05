@@ -243,6 +243,15 @@ glavna longitudinala, Obala Kulina bana i Alipašina, što odgovara već planira
 Južnoj longitudinali. OSM nema veći dio autobuskih linija, pa „nema linije“ vrijedi samo za
 tramvaj/trolejbus.
 
+## Predložene linije na karti (`26_nove_linije.py`, pogled „Transit“)
+
+Trase (najkraći put po cestama) za prijedloge iz 25: P1 Zabrđe – Briješće – Sokolje – Alipašin Most
+(10,3 km, ~4.500 stanovnika danas > 8 min od stanice dobija stanicu do 400 m), P2 Lukavica –
+Željeznička, P3 Stup – Alipašin Most, i 8 minibus linija za strma naselja (M1–M8, od dijela naselja
+najdaljeg od stanice do najbliže tramvajske/trolejbuske stanice; M8 Dobroševići vozi do početka P1).
+Skice za raspravu: širinu ulica i okretišta za minibus treba provjeriti na terenu, a OSM nema
+veći dio autobuskih linija.
+
 ## Google Places (`12_google_places.py`, opcionalno)
 
 Nearby Search (New) za tipove supermarket, grocery_store, convenience_store, market, food_store u

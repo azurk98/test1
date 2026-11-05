@@ -202,7 +202,11 @@ def podaci() -> dict:
         parts = getattr(r.geometry, "geoms", [r.geometry])
         linije.append([r.mod, r.linija, r.ime, None if pd.isna(r.polazaka_na_sat) else float(r.polazaka_na_sat),
                        [[round(c, 5) for xy in p.coords for c in xy] for p in parts]])
-    return {"lines": linije, "aq": stanice, "acc": acc, "poi": poi,
+    nl = gpd.read_file(OUT / "nove_linije.geojson") if (OUT / "nove_linije.geojson").exists() else None
+    nove = [] if nl is None else [[r.id, r.tip, r.naziv, float(r.duzina_km), int(r.stanovnici_400m),
+                                   int(r.radna_mjesta_400m), int(r.novi_korisnici), int(r.voznja_min), int(r.stanica),
+                                   [round(c, 5) for xy in r.geometry.coords for c in xy]] for r in nl.itertuples()]
+    return {"lines": linije, "newlines": nove, "aq": stanice, "acc": acc, "poi": poi,
             "stores": [[round(a, 5), round(b, 5), (n if isinstance(n, str) else "")]
                        for a, b, n in zip(st.lon, st.lat, st.ime)],
             "sites": sites, "washes": praonice, "wsites": wsites, "biz": biz, "trf": trf, "jobs": jobs, "cells": cells, "summ": summ, "mz": mzrows,
