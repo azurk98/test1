@@ -139,6 +139,18 @@ def podaci() -> dict:
                        for r in bp.itertuples()],
             "cov": [[None if pd.isna(m) else round(float(m), 1), None if pd.isna(n) else int(n)]
                     for m, n in zip(bc.min_do_najblizeg, bc.u_blizini)]}
+    gz = gpd.read_file(OUT / "guzva_dionice.geojson")
+    gp = json.load(open(OUT / "guzva_profili.json"))
+    pk = list(gp["profili"])
+    gimena = sorted({x for x in gz.ime if isinstance(x, str) and x})
+    gbr = pd.read_csv(DATA / "brojaci_2025.csv").dropna(subset=["lat", "lon"])
+    gbr = gbr[gbr.brojac.isin(set(gz.brojac))]
+    trf = {"prof": [gp["profili"][k] for k in pk], "day": gp["dan"], "names": gimena,
+           "seg": [[round(float(r.pgds_smjer)), int(r.kapacitet), pk.index(r.profil), 0 if r.izvor == "brojac" else 1,
+                    gimena.index(r.ime) if isinstance(r.ime, str) and r.ime else -1,
+                    [round(c, 5) for xy in r.geometry.coords for c in xy]] for r in gz.itertuples()],
+           "cnt": [[r.brojac, r.lokacija, round(r.lat, 5), round(r.lon, 5), int(r.pgds_2025),
+                    pk.index(r.brojac) if r.brojac in pk else -1] for r in gbr.itertuples()]}
     sd = gpd.read_file(OUT / "sadrzaji.geojson")
     x0, y0, x1, y1 = SAT_OKVIR
     sd = sd[(sd.geometry.x.between(x0, x1)) & (sd.geometry.y.between(y0, y1))]
@@ -164,7 +176,7 @@ def podaci() -> dict:
     return {"lines": linije, "aq": stanice, "acc": acc, "poi": poi,
             "stores": [[round(a, 5), round(b, 5), (n if isinstance(n, str) else "")]
                        for a, b, n in zip(st.lon, st.lat, st.ime)],
-            "sites": sites, "washes": praonice, "wsites": wsites, "biz": biz, "cells": cells, "summ": summ, "mz": mzrows,
+            "sites": sites, "washes": praonice, "wsites": wsites, "biz": biz, "trf": trf, "cells": cells, "summ": summ, "mz": mzrows,
             "op": [rnd(x) for x in op.geometry],
             "mzlines": [[OP.index(o) if o in OP else -1, n, rnd(x)]
                         for o, n, x in zip(mzall.opcina, mzall.mz, mzall.geometry)]}

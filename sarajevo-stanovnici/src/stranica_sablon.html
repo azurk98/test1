@@ -155,6 +155,18 @@ aside.read{border-left:1px solid var(--line);padding:16px;max-height:calc(min(68
   .legend{position:static;margin:8px 12px 0;max-width:none}
 }
 .bestp[hidden]{display:none}
+.trfp{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--bg)}
+.trfp[hidden]{display:none}
+.trfp label{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);flex:1 1 320px;min-width:0}
+.trfp input[type=range]{flex:1;min-width:120px;accent-color:var(--accent)}
+.trfp output{font:600 15px var(--mono);color:var(--fg);min-width:96px}
+.trf{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke;pointer-events:visibleStroke}
+.trfc circle{fill:#fff;stroke:#111;stroke-width:1.5px}
+.trfc text{font:600 9px var(--mono);fill:#fff;paint-order:stroke;stroke:#111;stroke-width:2.5px;pointer-events:none}
+.hbars{display:grid;grid-template-columns:repeat(24,minmax(0,1fr));gap:1px;align-items:end;height:48px}
+.hbars button{all:unset;cursor:pointer;background:var(--line);border-radius:1px 1px 0 0;min-height:2px}
+.hbars button[aria-pressed="true"]{background:var(--accent)}
+.hbars button:focus-visible{outline:2px solid var(--accent)}
 .bestp{display:grid;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--bg)}
 .sliders{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:4px 18px}
 .sliders label{display:grid;grid-template-columns:minmax(0,1fr) 110px 26px;align-items:center;gap:8px;font-size:13px}
@@ -232,6 +244,7 @@ footer{font-size:13px;color:var(--muted);max-width:80ch}
           <button id="m-smog" aria-pressed="false">Smog</button>
           <button id="m-fog" aria-pressed="false">Fog</button>
           <button id="m-pt" aria-pressed="false">Transit</button>
+          <button id="m-trf" aria-pressed="false">Traffic</button>
         </div>
         <div>
           <span class="chips chips-sm" role="group" aria-label="Background">
@@ -244,6 +257,11 @@ footer{font-size:13px;color:var(--muted);max-width:80ch}
           <button class="btn" id="mzToggle" aria-pressed="true">MZ outlines: on</button>
           <button class="btn" id="reset">Reset view</button>
         </div>
+      </div>
+      <div class="trfp" id="trfPanel" hidden>
+        <label for="trfHour">Hour <input id="trfHour" type="range" min="0" max="23" step="1" value="8"><output id="trfOut">08:00–09:00</output></label>
+        <span class="chips chips-sm" role="group" aria-label="Day" id="trfDays"><button data-day="radni" aria-pressed="true">Weekday</button><button data-day="subota" aria-pressed="false">Saturday</button><button data-day="nedjelja" aria-pressed="false">Sunday</button></span>
+        <button class="btn" id="trfPlay" aria-pressed="false">▶ Play 24 h</button>
       </div>
       <div class="bestp" id="bestPanel" hidden>
         <div class="chips chips-sm" role="group" aria-label="Who is choosing" id="profiles"></div>
@@ -376,6 +394,7 @@ cells.forEach(c => { c.den = c.s / c.km2; c.ring = sc(h3.cellToBoundary(c.h, tru
 
 function binColor(v, T){ const r = ramp(); if (v < T[0]) return css("--zero"); let i = 0; while (i < T.length-1 && v >= T[i+1]) i++; return r[i]; }
 function color(c){
+  if (mode === "trf") return "transparent";
   if (mode === "kit"){ if (c.s === 0 || c.kitN == null) return css("--zero"); return c.kitN < 10 ? css("--rel-c") : c.kitN < 50 ? css("--r3") : css("--r1"); }
   if (mode === "mus"){ if (c.s === 0 || c.musMin == null) return css("--zero"); return c.musMin <= 10 ? css("--r1") : c.musMin <= 15 ? css("--r3") : css("--rel-c"); }
   if (mode === "rel") return c.s === 0 ? css("--zero") : css({A:"--rel-a",B:"--rel-b",C:"--rel-c"}[c.p]);
@@ -432,6 +451,34 @@ let showRoads = true;
 const roadG = g.append("g").attr("class","roads");
 const roadCase = roadG.append("g").selectAll("path").data(RORDER.filter(k => ["tercijarna","sekundarna","primarna","magistrala","autoput"].includes(k) && ROADS[k])).join("path").attr("class", k => "rcase r-" + k);
 const roadP = roadG.append("g").selectAll("path").data(RORDER.filter(k => ROADS[k])).join("path").attr("class", k => "road r-" + k);
+const TRF = D.trf;
+const trfG = g.append("g").attr("display","none");
+const trfP = trfG.append("g").selectAll("path").data(TRF.seg.slice().sort((a,b) => a[0]-b[0])).join("path").attr("class","trf");
+trfP.append("title");
+const trfC = trfG.append("g").selectAll("g").data(TRF.cnt).join("g").attr("class","trfc");
+trfC.append("circle").attr("r",4.5);
+trfC.append("title").text(d => `${d[0]} · ${d[1]}\nCounted 2025 average: ${fmt(d[4])} vehicles a day`);
+let trfHour = 8, trfDay = "radni", trfTimer = null;
+const TRF_T = [0.3,0.5,0.7,0.9], TRF_C = ["#1a9850","#91cf60","#fee08b","#fc8d59","#d73027"];
+const trfVol = s => s[0] * TRF.prof[s[2]][trfHour] * TRF.day[trfDay];
+const trfVC = s => trfVol(s) / s[1];
+const hh = h => String(h).padStart(2,"0") + ":00";
+function trfPaint(){
+  trfP.attr("stroke", s => TRF_C[d3.bisect(TRF_T, trfVC(s))]).style("stroke-width", s => (1.6 + Math.min(5, trfVol(s)/350)) * Math.pow(zk, 0.35) + "px")
+    .attr("stroke-dasharray", s => s[3] ? "5 3" : null);
+  trfP.select("title").text(s => `${s[4] >= 0 ? TRF.names[s[4]] : "unnamed road"}: about ${fmt(Math.round(trfVol(s)/10)*10)} vehicles/h each way, ${Math.round(trfVC(s)*100)}% of capacity${s[3] ? " (volume assumed by road class)" : " (from a counter)"}`);
+  trfC.select("text").remove();
+  trfC.filter(d => d[5] >= 0).append("text").attr("text-anchor","middle").attr("dy","-0.9em")
+    .text(d => k(Math.round(d[4] * TRF.prof[d[5]][trfHour] * TRF.day[trfDay])));
+  document.getElementById("trfOut").textContent = hh(trfHour) + "–" + hh(trfHour + 1 === 24 ? 24 : trfHour + 1);
+}
+function trfSet(h){ trfHour = h; document.getElementById("trfHour").value = h; trfPaint(); if (mode === "trf"){ legend(); show(selected); } }
+document.getElementById("trfHour").addEventListener("input", e => { if (trfTimer){ clearInterval(trfTimer); trfTimer = null; document.getElementById("trfPlay").textContent = "▶ Play 24 h"; } trfSet(+e.target.value); });
+document.querySelectorAll("[data-day]").forEach(b => b.onclick = () => { trfDay = b.dataset.day;
+  document.querySelectorAll("[data-day]").forEach(x => x.setAttribute("aria-pressed", x === b)); trfSet(trfHour); });
+document.getElementById("trfPlay").onclick = e => {
+  if (trfTimer){ clearInterval(trfTimer); trfTimer = null; e.target.textContent = "▶ Play 24 h"; return; }
+  e.target.textContent = "❚❚ Pause"; trfTimer = setInterval(() => trfSet((trfHour + 1) % 24), 900); };
 const mzG = g.append("g");
 const mzP = mzG.selectAll("path").data(D.mzlines).join("path").attr("class","mzl");
 const opP = g.append("g").selectAll("path").data(D.op).join("path").attr("class","opl");
@@ -507,6 +554,8 @@ function layout(){
   washP.attr("cx", d => proj([d[0]*KX, d[1]])[0]).attr("cy", d => proj([d[0]*KX, d[1]])[1]).attr("r", 3/zk);
   wsiteG.attr("transform", d => { const [x,y] = proj([d.lon*KX, d.lat]); return `translate(${x},${y}) scale(${1/zk})`; });
   bizPlace();
+  trfP.attr("d", s => line(s[5]));
+  trfC.attr("transform", d => { const [x,y] = proj([d[3]*KX, d[2]]); return `translate(${x},${y}) scale(${1/zk})`; });
   poiG.selectAll("circle").attr("cx", d => proj([d.lon*KX, d.lat])[0]).attr("cy", d => proj([d.lon*KX, d.lat])[1])
     .attr("r", d => (d.k === "bolnica" ? 4.6 : 3.2)/zk).attr("stroke-width", 1/zk);
 }
@@ -514,6 +563,7 @@ const zoom = d3.zoom().scaleExtent([1,14]).on("zoom", e => { g.attr("transform",
   svg.style("--zw", Math.pow(e.transform.k, 0.35).toFixed(2)); svg.classed("zin", e.transform.k >= 2.5);
   if (e.transform.k !== zk){ zk = e.transform.k; siteG.attr("transform", d => { const [x,y] = proj([d.lon*KX, d.lat]); return `translate(${x},${y}) scale(${1/zk})`; }); storeP.attr("r", 2.2/zk);
     wsiteG.attr("transform", d => { const [x,y] = proj([d.lon*KX, d.lat]); return `translate(${x},${y}) scale(${1/zk})`; }); washP.attr("r", 3/zk); bizPlace();
+    trfC.attr("transform", d => { const [x,y] = proj([d[3]*KX, d[2]]); return `translate(${x},${y}) scale(${1/zk})`; }); if (mode === "trf") trfPaint();
     poiG.selectAll("circle").attr("r", d => (d.k === "bolnica" ? 4.6 : 3.2)/zk).attr("stroke-width", 1/zk);
     aqS.attr("transform", d => { const [x,y] = proj([d[2]*KX, d[1]]); return `translate(${x},${y}) scale(${1/zk})`; });
     contL.attr("transform", d => { const i = Math.floor(d[2].length/4)*2; const [x,y] = proj([d[2][i]*KX, d[2][i+1]]); return `translate(${x},${y}) scale(${1/zk})`; }); } });
@@ -556,10 +606,12 @@ function updateFocus(zoomTo){
   } else if (zoomTo) svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity);
   show(selected);
 }
-const MODES = ["best","pop","den","rel","att","sup","wash","kit","mus","liv","car","sun","smog","fog","pt"];
+const MODES = ["best","pop","den","rel","att","sup","wash","kit","mus","trf","liv","car","sun","smog","fog","pt"];
 MODES.forEach(m => document.getElementById("m-"+m).onclick = () => {
   mode = m; MODES.forEach(x => document.getElementById("m-"+x).setAttribute("aria-pressed", x === m)); supG.attr("display", m === "sup" ? null : "none"); washG.attr("display", m === "wash" ? null : "none");
-  Object.entries(BIZ).forEach(([k, b]) => b.g.attr("display", m === k ? null : "none")); accG.attr("display", m === "car" ? null : "none");
+  Object.entries(BIZ).forEach(([k, b]) => b.g.attr("display", m === k ? null : "none"));
+  trfG.attr("display", m === "trf" ? null : "none"); document.getElementById("trfPanel").hidden = m !== "trf";
+  if (m === "trf") trfPaint(); else if (trfTimer){ clearInterval(trfTimer); trfTimer = null; document.getElementById("trfPlay").textContent = "▶ Play 24 h"; } accG.attr("display", m === "car" ? null : "none");
   aqG.attr("display", m === "smog" || m === "fog" ? null : "none");
   ptG.attr("display", m === "pt" ? null : "none");
   if (m === "liv" && !showPoi) document.getElementById("poiToggle").click(); paint(); show(selected); });
@@ -579,6 +631,12 @@ function legend0(){
     el.innerHTML = `<div style="font-size:12px;color:var(--muted)">Walk to nearest supermarket</div>
       <div class="cat"><span><i style="background:var(--r1)"></i>≤ 5 min</span><span><i style="background:var(--r3)"></i>5–10 min</span><span><i style="background:var(--rel-c)"></i>over 10 min</span></div>
       <div class="cat"><span><i class="dot"></i>existing supermarket</span><span><b class="mk gapsite">1</b>gap site</span><span><b class="mk topsite">1</b>top-sales site</span></div>`;
+    return;
+  }
+  if (mode === "trf"){
+    el.innerHTML = `<div style="font-size:12px;color:var(--muted)">Traffic as a share of road capacity, ${hh(trfHour)}–${hh(trfHour+1)}, ${{radni:"weekday",subota:"Saturday",nedjelja:"Sunday"}[trfDay]}</div>
+      <div class="cat">${["under 30%","30–50%","50–70%","70–90%","over 90%"].map((t,i) => `<span><i style="background:${TRF_C[i]}"></i>${t}</span>`).join("")}</div>
+      <div class="cat"><span><i class="rl" style="border-top:3px solid var(--muted)"></i>volume from a counter</span><span><i class="rl" style="border-top:3px dashed var(--muted)"></i>volume assumed by road class</span><span><i class="dot" style="background:#fff;border:1.5px solid #111;opacity:1"></i>counter, vehicles this hour</span></div>`;
     return;
   }
   if (mode === "kit" || mode === "mus"){
@@ -723,6 +781,22 @@ function show(c){
       <div class="k">Lowest MZ</div>
       <dl>${grp.slice(-3).reverse().map(([m, v]) => `<dt>${m} <span class="tag">${OPN[v.op]}</span></dt><dd class="num">${Math.round(v.sc)}</dd>`).join("")}</dl>`;
     el.querySelectorAll("button.lnk").forEach(b => b.onclick = () => pickCell(b.dataset.h));
+    return;
+  }
+  if (!c && mode === "trf"){
+    const city = d3.range(24).map(h => d3.sum(TRF.cnt.filter(d => d[5] >= 0), d => d[4] * TRF.prof[d[5]][h]));
+    const mx = d3.max(city);
+    const byName = d3.rollups(TRF.seg.filter(s => s[4] >= 0), v => d3.max(v, trfVC), s => TRF.names[s[4]]).sort((a,b) => b[1]-a[1]);
+    const cnt = TRF.cnt.filter(d => d[5] >= 0).map(d => [d[1], d[4] * TRF.prof[d[5]][trfHour] * TRF.day[trfDay]]).sort((a,b) => b[1]-a[1]);
+    el.innerHTML = `<div class="k">Traffic · ${hh(trfHour)}–${hh(trfHour+1)} · ${{radni:"weekday",subota:"Saturday",nedjelja:"Sunday"}[trfDay]}</div>
+      <div class="hbars" role="group" aria-label="Pick an hour">${city.map((v,h) => `<button data-h="${h}" aria-pressed="${h === trfHour}" style="height:${Math.max(3, v/mx*100)}%" title="${hh(h)}: ${Math.round(v/mx*100)}% of the busiest hour"></button>`).join("")}</div>
+      <div class="rng num" style="display:flex;justify-content:space-between"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
+      <div class="k">Most congested streets now</div>
+      <dl>${byName.slice(0,8).map(([n,v]) => `<dt>${n}</dt><dd class="num">${Math.round(v*100)}%</dd>`).join("")}</dl>
+      <div class="k">Busiest counters, vehicles this hour</div>
+      <dl>${cnt.slice(0,5).map(([n,v]) => `<dt>${n}</dt><dd class="num">${fmt(Math.round(v))}</dd>`).join("")}</dl>
+      <p class="hint">Volumes come from the 28 automatic counters of the Sarajevo Canton road directorate (2025 averages by hour) and are carried along the same street; dashed roads use an assumed volume for their class. Capacity comes from the number of lanes (800 vehicles an hour per lane at traffic lights). Percentages are an estimate of load, not measured speeds.</p>`;
+    el.querySelectorAll(".hbars button").forEach(b => b.onclick = () => trfSet(+b.dataset.h));
     return;
   }
   if (!c && (mode === "kit" || mode === "mus")){

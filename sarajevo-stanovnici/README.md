@@ -33,6 +33,7 @@ python 17_zrak.py               # smog i magla zimi: izloženost inverziji -> ou
 python 18_javni_prevoz.py       # javni prevoz: linije, frekvencija, PTAL -> out/prevoz_h3.csv, out/linije.geojson
 python 19_autopraonica.py       # lokacije za autopraonicu -> out/autopraonica_*.csv
 python 20_biznisi.py            # dostavna kuhinja i muzička škola -> out/biz_*.csv
+python 22_guzva.py              # gužva po satu na glavnim cestama -> out/guzva_*.{geojson,json}
 python 13_stranica.py           # interaktivna stranica (artifact) -> out/stranica.html
 python 07_karta.py              # ponovo, da karta dobije slojeve iz koraka 08–11
 ```
@@ -173,6 +174,20 @@ dana). Najopterećenije: Zmaja od Bosne kod Čengić Vile 34.500 vozila/dan, Zap
 Subotom ~11%, nedjeljom ~27% manje vozila nego radnim danom; januar ~6% ispod prosjeka.
 Podaci po satima postoje u bazi Direkcije, ali u publikaciji su samo kao grafikoni.
 Novijih ni dnevnih javnih podataka (npr. za prošli mjesec) nema.
+
+## Gužva po satu (`21b_brojaci_satno.py`, `22_guzva.py`, pogled „Traffic“)
+
+`21b` čita satni profil svakog brojača iz vektorskih grafikona publikacije (grafik 2, kriva
+„ukupni“; razmjer tako da je zbir 24 sata = PGDS) -> `data/brojaci_2025_satno.csv`. Vršni sat nosi
+6–9% dnevnog saobraćaja; vrhovi ujutro oko 8 h i popodne 14–16 h. KSBS27 nema grafikon.
+
+`22` veže brojače za dionice iste ulice (do 2,5 km), ostale glavne ceste dobijaju pretpostavljeni
+PGDS po klasi (primarna 12.000, sekundarna 8.000, tercijarna 4.000; brojači stoje na
+najprometnijim pravcima, pa bi njihov medijan precijenio ostale). Kapacitet = trake (OSM, inače
+tipično) × 800 voz/h (semafori), autoput 1.800. Gužva = PGDS · udio sata · faktor dana /
+kapacitet; faktor dana iz dnevnih brojanja (radni 1,06, subota 0,95, nedjelja 0,77 prosjeka).
+Ograničenja: prosjek 2025, ne određeni dan; vikendom isti oblik dana; procjena opterećenja, ne
+izmjerena brzina. Na stranici: klizač 00–24 h, izbor dana, animacija.
 
 ## Google Places (`12_google_places.py`, opcionalno)
 
