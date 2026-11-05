@@ -1,587 +1,628 @@
 vrsta,ime,izvor,A,procjena,lon,lat
-fast_food,Sur Moneta,overture,1.0,26.9,18.30894,43.87591
-fast_food,Montana,overture,1.0,25.9,18.36639,43.84967
-fast_food,Baltazar,osm,1.0,25.4,18.36541,43.85096
-fast_food,Restoran Maestro,overture,1.0,24.9,18.37417,43.85021
-fast_food,Fast Food KING 3,osm,1.0,24.8,18.37267,43.85102
-fast_food,Pikante Food,osm,1.0,24.5,18.31141,43.87172
-fast_food,LUIGI Caffe Pizzeria,overture,1.0,23.8,18.38572,43.85106
-fast_food,Mr. Gurman,osm,1.0,23.6,18.39185,43.85508
-fast_food,Njam Njam,overture,1.0,23.4,18.36334,43.84931
-fast_food,U2,osm,1.0,23.3,18.37512,43.84725
-fast_food,Kapsula Waffle & Doner House,osm,1.0,23.3,18.3926,43.85488
-fast_food,Turkish Doner Kebab,overture,1.0,23.2,18.37881,43.84825
-fast_food,"Buregdžinica ""Sač""",osm,1.0,23.2,18.35764,43.84231
-fast_food,,osm,1.0,23.1,18.37031,43.84812
-fast_food,,osm,1.0,23.0,18.36825,43.84972
-fast_food,Linija,overture,1.0,22.9,18.37106,43.85076
-fast_food,Ćevabdžinica Đulić,overture,1.0,22.8,18.31177,43.87021
-fast_food,,osm,1.0,22.8,18.39277,43.85548
-fast_food,Kambera,osm,1.0,22.7,18.32229,43.85753
-fast_food,Fenix,osm,1.0,22.6,18.37097,43.84484
-fast_food,Fast food LUX,osm,1.0,22.4,18.34803,43.8451
-fast_food,Bosniana Sarajevo,overture,1.0,22.3,18.3751,43.8527
-fast_food,Cepelin,overture,1.0,22.2,18.37101,43.84754
-fast_food,Restoran Pizzeria Ame,overture,1.0,22.2,18.36111,43.84712
-fast_food,Burgerland,overture,1.0,21.9,18.35714,43.84317
-fast_food,Ćevabdžinica Venera,osm,1.0,21.8,18.34139,43.84401
-fast_food,,osm,1.0,21.6,18.41297,43.85557
-fast_food,Pečenjara Chicken Chef,overture,1.0,21.5,18.37797,43.84633
-fast_food,,osm,1.0,21.4,18.34022,43.84271
-fast_food,Fast food AS,osm,1.0,21.3,18.3404,43.84394
-fast_food,Mut Vak,osm,1.0,21.3,18.40882,43.85619
-fast_food,Naruči,overture,1.0,21.2,18.38435,43.85202
-fast_food,Restoran Pizzeria Arci,overture,1.0,21.2,18.37882,43.85412
-fast_food,Snack bar BarDo,overture,1.0,21.1,18.35219,43.84922
-fast_food,Fast Food Pile,overture,1.0,21.1,18.38512,43.8509
-fast_food,Ćevabdžinica Mladost,osm,1.0,21.1,18.38104,43.85327
-fast_food,Nagib,osm,1.0,21.1,18.38185,43.85317
-fast_food,Havana,overture,1.0,21.0,18.37812,43.85214
-fast_food,A2,osm,1.0,21.0,18.39181,43.85074
-fast_food,Grill Tale,osm,1.0,21.0,18.34051,43.84458
-fast_food,Ćevabdžinica Agronom,osm,1.0,21.0,18.40182,43.85117
-fast_food,Kućica,osm,1.0,20.9,18.41158,43.85725
-fast_food,Restoran Gondola,overture,1.0,20.9,18.3982,43.84891
-fast_food,Bagrem,osm,1.0,20.9,18.40515,43.85829
-fast_food,Paša Doner Sarajevo,overture,1.0,20.9,18.37817,43.84701
-fast_food,Besplanta Dostava,osm,1.0,20.8,18.38366,43.85584
-fast_food,BASH,osm,1.0,20.8,18.40844,43.85551
-fast_food,Restoran Amerigo,overture,1.0,20.6,18.3649,43.85534
-fast_food,Caffe Restaurant Pizzeria Happy,overture,1.0,20.6,18.38422,43.84887
-fast_food,Alibaba,osm,1.0,20.6,18.4026,43.85184
-fast_food,Nova Koliba,overture,1.0,20.5,18.34984,43.84258
-fast_food,Kuća Hrane,osm,1.0,20.2,18.3418,43.84242
-fast_food,Piccolo Mondo,overture,1.0,20.1,18.40997,43.85508
-fast_food,,osm,1.0,19.9,18.33829,43.84091
-fast_food,,osm,1.0,19.9,18.38579,43.84752
-fast_food,Piccollo,osm,1.0,19.9,18.40313,43.85817
-fast_food,"Rođendaonica, Caffe i Pizzeria Kutak",overture,1.0,19.7,18.37525,43.85404
-fast_food,Burekdzinica,osm,1.0,19.7,18.33644,43.84047
-fast_food,BASH,osm,1.0,19.7,18.42029,43.85765
-fast_food,Ćevabdžinica Besko,overture,1.0,19.5,18.37831,43.84931
-fast_food,Fast Food Tomato,overture,1.0,19.5,18.39554,43.85084
-fast_food,Jp Ceste Fbih,overture,1.0,19.4,18.41074,43.85391
-fast_food,Čiko Food Truck,osm,1.0,19.4,18.40354,43.8574
-fast_food,PTNcreative,overture,1.0,19.4,18.33787,43.84314
-fast_food,Romanca,overture,1.0,19.4,18.33547,43.83947
-fast_food,Nino's Pizza Sarajevo,overture,1.0,19.2,18.32566,43.84287
-fast_food,,osm,1.0,19.1,18.41512,43.85735
-fast_food,Blind Tiger,overture,1.0,19.0,18.42045,43.85909
-fast_food,Doner Stanica,osm,1.0,18.8,18.41319,43.86538
-fast_food,KFC,osm,1.0,18.8,18.4077,43.85538
-fast_food,Sara Pizzeria,overture,1.0,18.7,18.4053,43.85765
-fast_food,Oklagija,overture,1.0,18.7,18.4192,43.85784
-fast_food,Surf N' Fries,osm,1.0,18.7,18.42044,43.85834
-restoran,Kameleon,osm,0.5,18.7,18.29177,43.87708
-fast_food,Buregdžinica MM,osm,1.0,18.7,18.37891,43.85264
-fast_food,Orijent & apart hotel,overture,1.0,18.6,18.41377,43.86092
-fast_food,"Caffe Pizzeria ""Half - Time""",overture,1.0,18.5,18.38867,43.84778
-fast_food,Buregdžinica Skend,osm,1.0,18.4,18.41788,43.85453
-fast_food,Fast Food Lux,overture,1.0,18.4,18.38593,43.84935
-fast_food,Simple Sefte,overture,1.0,18.3,18.42489,43.86018
-fast_food,KFC,osm,1.0,18.3,18.35236,43.84971
-fast_food,Žeks doner Koševo,overture,1.0,18.2,18.41424,43.86041
-fast_food,Kokoda,osm,1.0,18.1,18.41375,43.86147
-fast_food,,osm,1.0,18.1,18.4209,43.85755
-fast_food,Caffe Bar Pizzeria Da Vinci,overture,1.0,18.1,18.38875,43.85596
-fast_food,Pingvin,osm,1.0,18.0,18.42174,43.85896
-fast_food,Mamma's Food,overture,1.0,17.9,18.40136,43.86453
-fast_food,Buregdžinica Sarajka,osm,1.0,17.9,18.41694,43.8579
-fast_food,Amar's Doner II,osm,1.0,17.8,18.42261,43.85625
-fast_food,Burgerizam,osm,1.0,17.8,18.41235,43.86134
-fast_food,Pizzeria Uspon,osm,1.0,17.8,18.33134,43.84279
-fast_food,KFC,osm,1.0,17.6,18.42571,43.85814
-fast_food,Hollywood Sandwiches,overture,1.0,17.5,18.42025,43.86179
-fast_food,Forino Burek,osm,1.0,17.5,18.41773,43.85875
-fast_food,PAPI Burger & Sandwich Bar Sarajevo,overture,1.0,17.4,18.32324,43.84034
-fast_food,Buregdžinica Aščinica Četvorka,overture,1.0,17.3,18.34421,43.8421
-fast_food,Cevabdzinica Buregdzinica ZMBT Mirza Aljovic,overture,1.0,17.3,18.41538,43.86727
-fast_food,ADK Doner,overture,1.0,17.2,18.43095,43.85987
-fast_food,Chipas Concept,osm,1.0,17.2,18.38827,43.85539
-fast_food,Da Vinci,overture,1.0,17.1,18.38912,43.85672
-fast_food,Pizza Bassta,osm,1.0,17.1,18.41337,43.86225
-fast_food,American Fried chicken,overture,1.0,17.1,18.3188,43.83852
-fast_food,Pirpa,osm,1.0,17.0,18.42036,43.85606
-fast_food,Food Box,overture,1.0,16.9,18.41881,43.85566
-fast_food,Buregdžinica Taak Koševsko Brdo,osm,1.0,16.8,18.40668,43.87019
-fast_food,Ćevabdžinica Šahbaz,osm,1.0,16.8,18.41645,43.86694
-fast_food,Fast Food El Pollo,overture,1.0,16.8,18.42194,43.86712
-fast_food,Piccolo Caffè Pizzeria,overture,1.0,16.8,18.4192,43.86898
-fast_food,Grill Student,osm,1.0,16.8,18.42084,43.86689
-fast_food,Bash,osm,1.0,16.7,18.337,43.84414
-fast_food,KarKin,overture,1.0,16.6,18.41575,43.86351
-fast_food,Pekara Kovači,overture,1.0,16.5,18.43369,43.86128
-fast_food,La Taberna,overture,1.0,16.5,18.42607,43.85638
-fast_food,,osm,1.0,16.4,18.42494,43.85788
-fast_food,Fast food GARO,overture,1.0,16.3,18.42577,43.85997
-fast_food,Chickies,osm,1.0,16.3,18.41624,43.85826
-fast_food,Express One,overture,1.0,16.2,18.30318,43.87395
-fast_food,Chipas,osm,1.0,16.2,18.42517,43.85926
-fast_food,Dino,overture,1.0,16.1,18.34042,43.82983
-fast_food,aGo Sandwich & Pizza,osm,1.0,16.0,18.42442,43.85955
-fast_food,Kebab House Sarajevo,overture,1.0,16.0,18.4267,43.85796
-fast_food,Doner Pikant,overture,1.0,16.0,18.42278,43.85869
-fast_food,Only One Chinese Restaurant,overture,1.0,15.9,18.41191,43.87539
-fast_food,Sarway,overture,1.0,15.7,18.41705,43.86335
-fast_food,No Name,overture,1.0,15.7,18.33954,43.83023
-fast_food,Ćevabdžinica Mrkva,osm,1.0,15.6,18.43176,43.85904
-fast_food,Pazarske Mantije Sarajevo - NiNa,overture,1.0,15.6,18.43108,43.85891
-restoran,ZM Salon,overture,0.5,15.5,18.30281,43.88297
-fast_food,Sushi San,overture,1.0,15.5,18.42526,43.86277
-fast_food,Ortakoy,osm,1.0,15.3,18.42291,43.85779
-fast_food,Smart Time,overture,1.0,15.2,18.41495,43.86829
-fast_food,El Pollo,overture,1.0,15.1,18.41697,43.86254
-fast_food,"Instalacije ""Nezirević""",overture,1.0,14.9,18.32534,43.84028
-fast_food,Buregdžinica Bosna 2,osm,1.0,14.9,18.42369,43.85888
-fast_food,Zinger Šef,overture,1.0,14.9,18.32441,43.83996
-fast_food,Slatko iskušenje,osm,1.0,14.9,18.32228,43.83986
-fast_food,Bambus Lounge Club,overture,1.0,14.5,18.42657,43.85916
-fast_food,Pizzeria Orhideja,overture,1.0,14.4,18.32541,43.84165
-fast_food,Restoran Dom za vješanje,osm,1.0,14.3,18.40841,43.86523
-fast_food,KOTA Sarajevo,overture,1.0,14.3,18.34547,43.828
-fast_food,Burgerica Burger Bar,overture,1.0,14.1,18.34871,43.82793
-fast_food,Bujrun Doner,osm,1.0,14.1,18.43069,43.85929
-fast_food,Bureck,osm,1.0,14.1,18.33912,43.82727
-fast_food,Pizza Company,overture,1.0,14.1,18.34969,43.82796
+fast_food,Fast Food Pizzeria FRESH,overture,1.0,40.8,18.3388,43.90167
+fast_food,Fast food GRICKO,overture,1.0,39.9,18.3447,43.90057
+fast_food,Inn,overture,1.0,38.5,18.34655,43.90016
+fast_food,Sur Moneta,overture,1.0,38.1,18.30894,43.87591
+fast_food,Buregdžinica,osm,1.0,37.9,18.34322,43.90258
+fast_food,Pikante Food,osm,1.0,36.7,18.31141,43.87172
+fast_food,Windmolen,overture,1.0,35.0,18.3487,43.89901
+fast_food,Ćevabdžinica Đulić,overture,1.0,34.3,18.31177,43.87021
+fast_food,Kambera,osm,1.0,33.1,18.32229,43.85753
+fast_food,Nino's Pizza Sarajevo,overture,1.0,32.7,18.32566,43.84287
+fast_food,PAPI Burger & Sandwich Bar Sarajevo,overture,1.0,32.2,18.32324,43.84034
+fast_food,Magickids_vog,overture,1.0,31.6,18.35087,43.8994
+fast_food,American Fried chicken,overture,1.0,31.0,18.3188,43.83852
+fast_food,Ćevabdžinica Venera,osm,1.0,29.9,18.34139,43.84401
+fast_food,Montana,overture,1.0,29.9,18.36639,43.84967
+fast_food,,osm,1.0,29.7,18.34022,43.84271
+fast_food,Fast food AS,osm,1.0,29.3,18.3404,43.84394
+fast_food,Baltazar,osm,1.0,29.1,18.36541,43.85096
+fast_food,Fast food LUX,osm,1.0,28.9,18.34803,43.8451
+fast_food,Grill Tale,osm,1.0,28.8,18.34051,43.84458
+fast_food,Pizzeria Uspon,osm,1.0,28.4,18.33134,43.84279
+fast_food,Restoran Maestro,overture,1.0,28.2,18.37417,43.85021
+fast_food,PTNcreative,overture,1.0,28.1,18.33787,43.84314
+fast_food,iChicken,overture,1.0,28.1,18.30788,43.83134
+fast_food,Fast Food KING 3,osm,1.0,28.0,18.37267,43.85102
+fast_food,Romanca,overture,1.0,27.9,18.33547,43.83947
+fast_food,Burekdzinica,osm,1.0,27.7,18.33644,43.84047
+fast_food,"Buregdžinica ""Sač""",osm,1.0,27.6,18.35764,43.84231
+fast_food,A burger GORA,overture,1.0,27.6,18.31927,43.92307
+fast_food,"Instalacije ""Nezirević""",overture,1.0,27.6,18.32534,43.84028
+fast_food,,osm,1.0,27.5,18.33829,43.84091
+fast_food,Kuća Hrane,osm,1.0,27.3,18.3418,43.84242
+fast_food,,osm,1.0,27.3,18.30722,43.83208
+fast_food,Zinger Šef,overture,1.0,27.3,18.32441,43.83996
+fast_food,Njam Njam,overture,1.0,26.9,18.36334,43.84931
+fast_food,Slatko iskušenje,osm,1.0,26.8,18.32228,43.83986
+fast_food,Snack bar BarDo,overture,1.0,26.8,18.35219,43.84922
+fast_food,Restoran Pizzeria Ame,overture,1.0,26.7,18.36111,43.84712
+fast_food,Pizzeria Orhideja,overture,1.0,26.6,18.32541,43.84165
+fast_food,,osm,1.0,26.5,18.36825,43.84972
+fast_food,Burgerland,overture,1.0,26.4,18.35714,43.84317
+fast_food,,osm,1.0,26.4,18.37031,43.84812
+fast_food,U2,osm,1.0,26.1,18.37512,43.84725
+fast_food,LUIGI Caffe Pizzeria,overture,1.0,26.1,18.38572,43.85106
+fast_food,Nova Koliba,overture,1.0,26.0,18.34984,43.84258
+fast_food,Belami,overture,1.0,26.0,18.2257,43.85946
+fast_food,Linija,overture,1.0,25.9,18.37106,43.85076
+fast_food,Pizzerija Mala Stanica,overture,1.0,25.7,18.30599,43.83097
+fast_food,Turkish Doner Kebab,overture,1.0,25.5,18.37881,43.84825
+fast_food,Mr. Gurman,osm,1.0,25.5,18.39185,43.85508
+fast_food,Fenix,osm,1.0,25.4,18.37097,43.84484
+fast_food,Bash,osm,1.0,25.3,18.337,43.84414
+fast_food,Cepelin,overture,1.0,25.2,18.37101,43.84754
+fast_food,Kapsula Waffle & Doner House,osm,1.0,25.2,18.3926,43.85488
+fast_food,Bosniana Sarajevo,overture,1.0,24.9,18.3751,43.8527
+fast_food,Pizzeria MAMA MIA,overture,1.0,24.8,18.30918,43.8298
+fast_food,Čevabdžinica Ilidžanka,osm,1.0,24.6,18.30804,43.83084
+fast_food,,osm,1.0,24.5,18.39277,43.85548
+fast_food,"Pekara Urban Food ""TAAN """,overture,1.0,23.8,18.30888,43.83077
+restoran,Kameleon,osm,0.5,23.8,18.29177,43.87708
+fast_food,Ortakoy Kumpir,overture,1.0,23.6,18.30803,43.82896
+fast_food,KFC,osm,1.0,23.6,18.30915,43.83026
+fast_food,Pečenjara Chicken Chef,overture,1.0,23.6,18.37797,43.84633
+fast_food,,osm,1.0,23.4,18.41297,43.85557
+fast_food,Buregdžinica Aščinica Četvorka,overture,1.0,23.3,18.34421,43.8421
+fast_food,Restoran Pizzeria Arci,overture,1.0,23.3,18.37882,43.85412
+fast_food,Havana,overture,1.0,23.2,18.37812,43.85214
+fast_food,Naruči,overture,1.0,23.2,18.38435,43.85202
+fast_food,Dino,overture,1.0,23.2,18.34042,43.82983
+fast_food,Ćevabdžinica Mladost,osm,1.0,23.2,18.38104,43.85327
+fast_food,Nagib,osm,1.0,23.2,18.38185,43.85317
+fast_food,Restoran Amerigo,overture,1.0,23.1,18.3649,43.85534
+fast_food,Mut Vak,osm,1.0,23.1,18.40882,43.85619
+fast_food,Fast Food Pile,overture,1.0,23.0,18.38512,43.8509
+fast_food,Paša Doner Sarajevo,overture,1.0,23.0,18.37817,43.84701
+fast_food,No Name,overture,1.0,22.9,18.33954,43.83023
+fast_food,KFC,osm,1.0,22.8,18.35236,43.84971
+fast_food,Kućica,osm,1.0,22.8,18.41158,43.85725
+fast_food,Besplanta Dostava,osm,1.0,22.5,18.38366,43.85584
+fast_food,BASH,osm,1.0,22.4,18.40844,43.85551
+fast_food,Caffe Restaurant Pizzeria Happy,overture,1.0,22.3,18.38422,43.84887
+fast_food,Bureck,osm,1.0,22.3,18.33912,43.82727
+fast_food,A2,osm,1.0,22.2,18.39181,43.85074
+fast_food,Express One,overture,1.0,22.1,18.30318,43.87395
+fast_food,Bagrem,osm,1.0,22.1,18.40515,43.85829
+fast_food,Ćevabdžinica Agronom,osm,1.0,22.0,18.40182,43.85117
+fast_food,Restoran Gondola,overture,1.0,21.9,18.3982,43.84891
+fast_food,"Rođendaonica, Caffe i Pizzeria Kutak",overture,1.0,21.7,18.37525,43.85404
+fast_food,Alibaba,osm,1.0,21.6,18.4026,43.85184
+fast_food,,osm,1.0,21.6,18.38579,43.84752
+fast_food,BASH,osm,1.0,21.5,18.30838,43.83023
+fast_food,Pizzeria Riva,overture,1.0,21.5,18.30309,43.82989
+fast_food,Piccolo Mondo,overture,1.0,21.5,18.40997,43.85508
+fast_food,Ćevabdžinica Besko,overture,1.0,21.4,18.37831,43.84931
+fast_food,Piccollo,osm,1.0,21.0,18.40313,43.85817
+fast_food,Doner Stanica,osm,1.0,21.0,18.41319,43.86538
+fast_food,Buregdžinica Taak Koševsko Brdo,osm,1.0,20.9,18.40668,43.87019
+fast_food,BASH,osm,1.0,20.8,18.42029,43.85765
+fast_food,Čiko Food Truck,osm,1.0,20.7,18.40354,43.8574
+fast_food,Ukusno I Fino,overture,1.0,20.6,18.30626,43.83016
+fast_food,Jp Ceste Fbih,overture,1.0,20.6,18.41074,43.85391
+fast_food,Fast Food Tomato,overture,1.0,20.6,18.39554,43.85084
+fast_food,Orijent & apart hotel,overture,1.0,20.5,18.41377,43.86092
+fast_food,AL-Forno,overture,1.0,20.5,18.30309,43.83476
+fast_food,,osm,1.0,20.4,18.41512,43.85735
+fast_food,Buregdžinica MM,osm,1.0,20.4,18.37891,43.85264
+fast_food,,osm,1.0,20.3,18.33657,43.82618
+fast_food,Sarajka,osm,1.0,20.0,18.2963,43.8302
+fast_food,KOTA Sarajevo,overture,1.0,20.0,18.34547,43.828
+fast_food,KFC,osm,1.0,19.9,18.4077,43.85538
+fast_food,Kokoda,osm,1.0,19.9,18.41375,43.86147
+fast_food,Žeks doner Koševo,overture,1.0,19.9,18.41424,43.86041
+restoran,ZM Salon,overture,0.5,19.8,18.30281,43.88297
+fast_food,Food Station,overture,1.0,19.8,18.30723,43.82981
+fast_food,Blind Tiger,overture,1.0,19.7,18.42045,43.85909
+fast_food,Sara Pizzeria,overture,1.0,19.7,18.4053,43.85765
+fast_food,,osm,1.0,19.7,18.39888,43.88043
+fast_food,Buregdžinica Skend,osm,1.0,19.6,18.41788,43.85453
+fast_food,Oklagija,overture,1.0,19.6,18.4192,43.85784
+fast_food,Surf N' Fries,osm,1.0,19.6,18.42044,43.85834
+fast_food,Fast Food Lux,overture,1.0,19.6,18.38593,43.84935
+fast_food,Poco Loco,overture,1.0,19.6,18.3286,43.84773
+fast_food,Burgerizam,osm,1.0,19.5,18.41235,43.86134
+fast_food,Mamma's Food,overture,1.0,19.5,18.40136,43.86453
+fast_food,"Caffe Pizzeria ""Half - Time""",overture,1.0,19.4,18.38867,43.84778
+fast_food,Caffe Bar Pizzeria Da Vinci,overture,1.0,19.2,18.38875,43.85596
+fast_food,Pizza Bassta,osm,1.0,19.1,18.41337,43.86225
+fast_food,Burgerica Burger Bar,overture,1.0,19.0,18.34871,43.82793
+fast_food,Pizza Company,overture,1.0,18.9,18.34969,43.82796
+restoran,"Restoran ""Cardak""",osm,0.5,18.9,18.35858,43.89899
+fast_food,Buregdžinica Sarajka,osm,1.0,18.8,18.41694,43.8579
+fast_food,,osm,1.0,18.8,18.4209,43.85755
+fast_food,Cevabdzinica Buregdzinica ZMBT Mirza Aljovic,overture,1.0,18.7,18.41538,43.86727
+fast_food,Simple Sefte,overture,1.0,18.6,18.42489,43.86018
+fast_food,Amar's Doner II,osm,1.0,18.6,18.42261,43.85625
+fast_food,Pingvin,osm,1.0,18.4,18.42174,43.85896
+fast_food,Ćevabdžinica Šeha,osm,1.0,18.4,18.34498,43.8292
+fast_food,KFC,osm,1.0,18.3,18.42571,43.85814
+fast_food,BASH,osm,1.0,18.2,18.40092,43.879
+fast_food,Da Vinci,overture,1.0,18.2,18.38912,43.85672
+fast_food,Hollywood Sandwiches,overture,1.0,18.2,18.42025,43.86179
+fast_food,Fastfood Nane,osm,1.0,18.2,18.2577,43.83985
+fast_food,Chipas Concept,osm,1.0,18.2,18.38827,43.85539
+fast_food,Ćevabdžinica Šahbaz,osm,1.0,18.1,18.41645,43.86694
+restoran,Paris,overture,0.5,18.0,18.34052,43.90191
+fast_food,Forino Burek,osm,1.0,18.0,18.41773,43.85875
+fast_food,Piccolo Caffè Pizzeria,overture,1.0,17.9,18.4192,43.86898
+fast_food,Panera,osm,1.0,17.8,18.30909,43.81585
+fast_food,,osm,1.0,17.8,18.31012,43.81689
+fast_food,KarKin,overture,1.0,17.8,18.41575,43.86351
+restoran,Restoran Zlatni Lav,overture,0.5,17.8,18.32354,43.84333
+fast_food,Pirpa,osm,1.0,17.7,18.42036,43.85606
+fast_food,Only One Chinese Restaurant,overture,1.0,17.7,18.41191,43.87539
+fast_food,La'Havana,overture,1.0,17.6,18.34471,43.82634
+restoran,"Restoran ""Bosanska avlija""",osm,0.5,17.6,18.35947,43.89893
+fast_food,Food Box,overture,1.0,17.6,18.41881,43.85566
+fast_food,Picerija De Luxe,overture,1.0,17.5,18.35133,43.8267
+fast_food,Grill Student,osm,1.0,17.4,18.42084,43.86689
+fast_food,ADK Doner,overture,1.0,17.4,18.43095,43.85987
+restoran,"Restoran i Prenoćiste ""odiseja""",overture,0.5,17.4,18.3123,43.86828
+restoran,"Restoran ""Kod Gerija""",overture,0.5,17.3,18.3122,43.86931
+fast_food,Fast Food El Pollo,overture,1.0,17.2,18.42194,43.86712
+restoran,Fast Food 'Muki',osm,0.5,17.2,18.3611,43.89791
+restoran,Restoran SAMIN GAJ,overture,0.5,17.1,18.20603,43.87761
+fast_food,Chickies,osm,1.0,17.0,18.41624,43.85826
+fast_food,Sarway,overture,1.0,17.0,18.41705,43.86335
+fast_food,Only One Chinese restorant,overture,1.0,17.0,18.35624,43.83039
+fast_food,La Taberna,overture,1.0,16.9,18.42607,43.85638
+fast_food,,osm,1.0,16.8,18.42494,43.85788
+restoran,Motel Royal,osm,0.5,16.7,18.32549,43.90016
+restoran,Heljdaeko Restoran Sinija,overture,0.5,16.7,18.31431,43.86519
+fast_food,Pekara Kovači,overture,1.0,16.6,18.43369,43.86128
+fast_food,Restoran Dom za vješanje,osm,1.0,16.6,18.40841,43.86523
+restoran,Esmeralda,overture,0.5,16.5,18.32919,43.84062
+fast_food,Fast food GARO,overture,1.0,16.5,18.42577,43.85997
+restoran,Restoran CIGO,overture,0.5,16.4,18.32857,43.90513
+fast_food,Smart Time,overture,1.0,16.4,18.41495,43.86829
+fast_food,Chipas,osm,1.0,16.4,18.42517,43.85926
+fast_food,Kebab House Sarajevo,overture,1.0,16.3,18.4267,43.85796
+fast_food,Doner Pikant,overture,1.0,16.3,18.42278,43.85869
+fast_food,aGo Sandwich & Pizza,osm,1.0,16.3,18.42442,43.85955
+restoran,Izvor Cafe & Restaurant,overture,0.5,16.3,18.32368,43.84264
+restoran,Restoran Dvor,overture,0.5,16.2,18.32488,43.84283
+fast_food,El Pollo,overture,1.0,16.2,18.41697,43.86254
+restoran,Dolcetto,overture,0.5,16.1,18.3435,43.89972
+restoran,The Quart Coffee,overture,0.5,16.1,18.32405,43.8409
+restoran,Me Gusta,overture,0.5,15.9,18.32686,43.84532
+restoran,Ćevabdžinica Đulić,overture,0.5,15.8,18.31772,43.88093
+fast_food,Pazarske Mantije Sarajevo - NiNa,overture,1.0,15.8,18.43108,43.85891
+restoran,Restoran Edi Svadbeni Salon,overture,0.5,15.8,18.31117,43.86948
+restoran,Ćevabdžinica Brajlović br. 2,osm,0.5,15.7,18.31717,43.83794
+fast_food,,osm,1.0,15.7,18.40941,43.86548
+fast_food,Ćevabdžinica Mrkva,osm,1.0,15.7,18.43176,43.85904
+restoran,Ju Ksc Vogošća,overture,0.5,15.7,18.34437,43.90008
+fast_food,Sushi San,overture,1.0,15.7,18.42526,43.86277
+fast_food,Ortakoy,osm,1.0,15.7,18.42291,43.85779
+restoran,FOOD CLUB Sarajevo,overture,0.5,15.4,18.32196,43.84027
+restoran,ĆEvabdŽInica Desetka VogoŠĆA,overture,0.5,15.1,18.36049,43.89775
+fast_food,Buregdžinica Bosna 2,osm,1.0,15.0,18.42369,43.85888
+fast_food,Caffe Pizzeria Ogi,overture,1.0,15.0,18.35521,43.82264
+restoran,Sahat Kula,overture,0.5,14.8,18.32814,43.85418
+restoran,Buregdžinica Ćejf,overture,0.5,14.7,18.33379,43.84465
+restoran,Stari Orah,overture,0.5,14.7,18.36747,43.84659
+restoran,Restoran Kod Amidze,overture,0.5,14.7,18.33313,43.84473
+fast_food,Bambus Lounge Club,overture,1.0,14.7,18.42657,43.85916
+fast_food,Burger King,osm,1.0,14.6,18.31123,43.82924
+restoran,Tolledo,overture,0.5,14.6,18.36752,43.8481
+restoran,Restoran AS,overture,0.5,14.6,18.37329,43.89386
+restoran,Pizzeria La Piacere,osm,0.5,14.6,18.324,43.84395
+restoran,Bread and Co,overture,0.5,14.5,18.31937,43.83811
+restoran,Restoran Reuff,osm,0.5,14.4,18.33813,43.84158
+fast_food,Buregdžinica,osm,1.0,14.4,18.36684,43.82685
+restoran,"Burgedžinica i Ćevapbdžinica ""Sofra""",osm,0.5,14.4,18.36565,43.85259
+restoran,Buregdzinica EDINA,overture,0.5,14.4,18.30665,43.83353
+fast_food,Yolda Food,osm,1.0,14.3,18.34682,43.82959
+restoran,Ćevabdžinica i Aščinica AČE,overture,0.5,14.3,18.31664,43.92147
+fast_food,Bujrun Doner,osm,1.0,14.2,18.43069,43.85929
+restoran,Restoran Igman,overture,0.5,14.2,18.30877,43.83248
+restoran,Bijela Vila,overture,0.5,14.2,18.33467,43.84179
+restoran,Restoran Almanas Sarajevo,overture,0.5,14.1,18.32875,43.83742
+restoran,Gazi-Han,overture,0.5,14.0,18.33012,43.8319
+restoran,Caffe Restoran Saray Bosna,overture,0.5,14.0,18.31119,43.83081
+restoran,Doner Lux Sarajevo,overture,0.5,14.0,18.3682,43.84768
+fast_food,,osm,1.0,13.9,18.42968,43.85904
+fast_food,Lianhua Chinese Restaurant,overture,1.0,13.9,18.42912,43.85858
 fast_food,"""Fast Food ""Trovač""""",overture,1.0,13.9,18.42953,43.86693
-fast_food,,osm,1.0,13.7,18.42968,43.85904
-fast_food,Lianhua Chinese Restaurant,overture,1.0,13.6,18.42912,43.85858
+restoran,DonerRing,overture,0.5,13.9,18.37152,43.8945
+restoran,Restoran Bosna,osm,0.5,13.9,18.30994,43.83112
+restoran,Lezzet Cafe Restaurant,overture,0.5,13.9,18.32059,43.87298
+restoran,"Restoran ""Terasa""",overture,0.5,13.8,18.32442,43.84624
+restoran,Restoran AEMS,overture,0.5,13.7,18.30489,43.83185
+restoran,Idillio,osm,0.5,13.7,18.36841,43.85084
+restoran,Dolcetto,osm,0.5,13.6,18.34576,43.90009
+restoran,Restoran Tomasi,overture,0.5,13.6,18.32341,43.84081
 fast_food,Pečeno pile,osm,1.0,13.6,18.44086,43.86239
-fast_food,,osm,1.0,13.6,18.40941,43.86548
-fast_food,Pizzeria Merak,overture,1.0,13.4,18.42757,43.8593
-fast_food,Only One Chinese restorant,overture,1.0,13.1,18.35624,43.83039
-fast_food,Ćevabdžinica Šeha,osm,1.0,13.1,18.34498,43.8292
-fast_food,Poco Loco,overture,1.0,13.0,18.3286,43.84773
+fast_food,Pizzeria Merak,overture,1.0,13.6,18.42757,43.8593
+fast_food,"Buregdžinica ""Tomašević""",osm,1.0,13.5,18.3569,43.81954
+restoran,Turkuaz Cafe&Restaurant,overture,0.5,13.5,18.30715,43.83263
+restoran,Restoran Carina,overture,0.5,13.4,18.32391,43.88608
+restoran,Konoba Stari Točak,osm,0.5,13.4,18.32894,43.83251
+restoran,Bistro Šamin Gaj  od 1972.,overture,0.5,13.4,18.21218,43.86702
+restoran,Restoran SAMIN GAJ,overture,0.5,13.4,18.21141,43.8673
+restoran,Crema e Piccolo,overture,0.5,13.4,18.36992,43.84982
+restoran,TMP restoran,overture,0.5,13.3,18.3377,43.84051
+restoran,Melia,overture,0.5,13.3,18.34839,43.84572
+restoran,Igman Rooftop Bistro,osm,0.5,13.2,18.3494,43.84839
+restoran,Buregdzinica EN&GA,overture,0.5,13.1,18.37798,43.84793
+restoran,FOOD CLUB Sarajevo,overture,0.5,13.1,18.33639,43.84509
+fast_food,Sprind d.d.,overture,1.0,13.0,18.30325,43.87144
 fast_food,B-king,osm,1.0,12.9,18.44206,43.86253
-restoran,Stari Orah,overture,0.5,12.8,18.36747,43.84659
-fast_food,,osm,1.0,12.8,18.33657,43.82618
-restoran,Tolledo,overture,0.5,12.6,18.36752,43.8481
-fast_food,Picerija De Luxe,overture,1.0,12.6,18.35133,43.8267
-fast_food,La'Havana,overture,1.0,12.6,18.34471,43.82634
-restoran,"Burgedžinica i Ćevapbdžinica ""Sofra""",osm,0.5,12.6,18.36565,43.85259
-restoran,Doner Lux Sarajevo,overture,0.5,12.1,18.3682,43.84768
-restoran,Idillio,osm,0.5,12.0,18.36841,43.85084
-restoran,Buregdzinica EN&GA,overture,0.5,11.9,18.37798,43.84793
-restoran,"Restoran i Prenoćiste ""odiseja""",overture,0.5,11.6,18.3123,43.86828
-restoran,Crema e Piccolo,overture,0.5,11.6,18.36992,43.84982
-fast_food,,osm,1.0,11.6,18.39888,43.88043
-restoran,IChicken,osm,0.5,11.5,18.38154,43.84953
-restoran,"Restoran ""Kod Gerija""",overture,0.5,11.5,18.3122,43.86931
-restoran,Restoran Regal,overture,0.5,11.4,18.38447,43.85537
-restoran,,osm,0.5,11.4,18.39227,43.8559
-restoran,Bistro Bosna,overture,0.5,11.3,18.37581,43.8473
-restoran,Heljdaeko Restoran Sinija,overture,0.5,11.3,18.31431,43.86519
-restoran,RUŽA,osm,0.5,11.2,18.37667,43.84578
-fast_food,Buregdžinica,osm,1.0,11.2,18.36684,43.82685
-restoran,Ragazzi,osm,0.5,11.2,18.37976,43.84628
-restoran,Taj Mahal,osm,0.5,11.1,18.37774,43.85402
-fast_food,BASH,osm,1.0,11.1,18.40092,43.879
-restoran,HUT - Pizzeria Mineli,osm,0.5,11.1,18.36827,43.85182
-fast_food,iChicken,overture,1.0,11.1,18.30788,43.83134
-restoran,Naša Priča,overture,0.5,11.1,18.38789,43.85446
-restoran,Bistro Kašika,overture,0.5,11.1,18.39451,43.85095
-restoran,Lava caffe & restaurant,overture,0.5,11.0,18.39741,43.85534
-restoran,Buregdžinica Žigo,overture,0.5,10.9,18.40871,43.85718
-restoran,Bager Snack bar,overture,0.5,10.9,18.37031,43.84879
-restoran,Paper Moon,osm,0.5,10.9,18.39433,43.85006
-restoran,Pizzeria Calabria,overture,0.5,10.9,18.36241,43.85047
-fast_food,Sprind d.d.,overture,1.0,10.8,18.30325,43.87144
-restoran,Baileys,overture,0.5,10.8,18.38752,43.85347
-fast_food,Yolda Food,osm,1.0,10.8,18.34682,43.82959
-restoran,Le Petit Food Gallery,osm,0.5,10.7,18.40808,43.85798
-restoran,Hotel Plavi Zamak,osm,0.5,10.7,18.38806,43.84753
-restoran,Fast Food M,overture,0.5,10.7,18.41002,43.85781
-restoran,Picolo Angolo,osm,0.5,10.7,18.38153,43.85461
-restoran,La Perla,osm,0.5,10.7,18.36764,43.85162
-restoran,Sahat Kula,overture,0.5,10.6,18.32814,43.85418
-restoran,_taqueria_mexico,overture,0.5,10.6,18.39117,43.85435
-restoran,,osm,0.5,10.6,18.40793,43.85672
-fast_food,,osm,1.0,10.6,18.30722,43.83208
-restoran,Vapiano,osm,0.5,10.6,18.40549,43.85635
-restoran,Sjaj,overture,0.5,10.6,18.36505,43.85842
-restoran,Restoran Bristol,overture,0.5,10.6,18.38985,43.85238
-restoran,Nóstimo Sarajevo,overture,0.5,10.6,18.3631,43.8499
-restoran,Bistro Sabic,overture,0.5,10.5,18.3968,43.84746
-restoran,Buregdžinica Bosna,osm,0.5,10.5,18.37857,43.85128
-restoran,Restoran Edi Svadbeni Salon,overture,0.5,10.5,18.31117,43.86948
-restoran,Il Nostro Cortile - Nasa avlija,overture,0.5,10.5,18.3826,43.85504
-restoran,Anatolia Restaurant Lounge Sarajevo,overture,0.5,10.5,18.38765,43.85395
-restoran,Easy Bites Gastro Pub,overture,0.5,10.5,18.38292,43.85371
-restoran,Druga Kuća Lora,osm,0.5,10.4,18.38859,43.85397
-restoran,Restoran Zlatni Lav,overture,0.5,10.3,18.32354,43.84333
-restoran,Igman Rooftop Bistro,osm,0.5,10.3,18.3494,43.84839
-restoran,Melia,overture,0.5,10.3,18.34839,43.84572
-restoran,S One Sky Lounge,overture,0.5,10.3,18.4152,43.85568
-restoran,UR Bistro Kvart,overture,0.5,10.3,18.35753,43.8504
-restoran,Kod Dvije Domaćice,osm,0.5,10.3,18.41158,43.86059
-restoran,Restoran Reuff,osm,0.5,10.2,18.33813,43.84158
-restoran,Restoran Casa El Gitano,osm,0.5,10.2,18.38066,43.85485
-restoran,Four Seasons,osm,0.5,10.2,18.40635,43.85632
-restoran,Mala Bašta,osm,0.5,10.1,18.37664,43.85433
-restoran,Bistro Zdravo,osm,0.5,10.1,18.38304,43.85625
-restoran,Špica,overture,0.5,10.0,18.40629,43.85712
-restoran,,osm,0.5,10.0,18.38702,43.84735
-restoran,Carlsberg Winter Garden,overture,0.5,10.0,18.40167,43.85794
-restoran,Ascinica NUR,overture,0.5,10.0,18.39372,43.85528
-restoran,Piano,overture,0.5,9.9,18.38489,43.8567
-restoran,BUREK PLUS Sarajevo,overture,0.5,9.9,18.39944,43.84979
-restoran,Buregdžinica Ćejf,overture,0.5,9.9,18.33379,43.84465
-fast_food,Čevabdžinica Ilidžanka,osm,1.0,9.8,18.30804,43.83084
-fast_food,Caffe Pizzeria Ogi,overture,1.0,9.8,18.35521,43.82264
-restoran,"Trattoria ""Roma""",osm,0.5,9.8,18.40218,43.85247
-restoran,Brasserie August Braun,osm,0.5,9.8,18.41198,43.85642
-fast_food,Pizzerija Mala Stanica,overture,1.0,9.8,18.30599,43.83097
-restoran,,osm,0.5,9.8,18.42211,43.85677
-restoran,Restoran Kod Amidze,overture,0.5,9.8,18.33313,43.84473
-restoran,Me Gusta,overture,0.5,9.7,18.32686,43.84532
-restoran,scc,osm,0.5,9.7,18.40786,43.85482
-restoran,Lezzet Cafe Restaurant,overture,0.5,9.7,18.32059,43.87298
-restoran,Kašahana,overture,0.5,9.7,18.40473,43.85794
-restoran,"Cafe Pizzeria ""Bell""",osm,0.5,9.7,18.40153,43.8522
-restoran,Restoran Maksumić,overture,0.5,9.7,18.41245,43.86639
-restoran,Restoran San Martino,overture,0.5,9.7,18.36554,43.84387
-restoran,Omnia,osm,0.5,9.6,18.3776,43.85188
-restoran,Pizzeria Wisa,overture,0.5,9.6,18.40237,43.85901
-restoran,TMP restoran,overture,0.5,9.6,18.3377,43.84051
-fast_food,"Pekara Urban Food ""TAAN """,overture,1.0,9.6,18.30888,43.83077
-restoran,Esmeralda,overture,0.5,9.6,18.32919,43.84062
-restoran,Jam - pita ispod saca,overture,0.5,9.6,18.38902,43.85483
-restoran,Restoran Dvor,overture,0.5,9.6,18.32488,43.84283
-fast_food,Pizzeria MAMA MIA,overture,1.0,9.5,18.30918,43.8298
-restoran,,osm,0.5,9.5,18.41645,43.8554
-restoran,FOOD CLUB Sarajevo,overture,0.5,9.5,18.33639,43.84509
-restoran,Barrique Konoba Restoran,overture,0.5,9.5,18.40006,43.84902
-restoran,Blanco,osm,0.5,9.5,18.41579,43.85751
-restoran,Apetit Gastro Wine Bar,overture,0.5,9.4,18.39774,43.85428
-restoran,Čevabdžinica Zmaj,osm,0.5,9.4,18.39927,43.859
-restoran,Bijela Vila,overture,0.5,9.4,18.33467,43.84179
-restoran,Magarac,overture,0.5,9.4,18.3787,43.84973
-restoran,Restaurant & Bar Lava,overture,0.5,9.4,18.38639,43.85491
-restoran,Velika Bašta,osm,0.5,9.4,18.37716,43.85473
-fast_food,Mocart,overture,1.0,9.4,18.35857,43.82809
-restoran,Metropolis,osm,0.5,9.4,18.41915,43.85895
-restoran,METROPOLIS Family,osm,0.5,9.3,18.35467,43.85049
-fast_food,U2,osm,1.0,9.3,18.34598,43.82888
-restoran,Goool,osm,0.5,9.3,18.38403,43.85276
-fast_food,Decidela,overture,1.0,9.3,18.36497,43.82316
-restoran,Casper,overture,0.5,9.3,18.41192,43.86751
-restoran,Slatko i slano,osm,0.5,9.2,18.38464,43.8536
-restoran,Biber I So,overture,0.5,9.2,18.40195,43.85852
-restoran,Izvor Cafe & Restaurant,overture,0.5,9.2,18.32368,43.84264
-restoran,Spazio Gourmet,osm,0.5,9.1,18.41096,43.85561
-restoran,Ćevabdžinica Đulić,overture,0.5,9.1,18.31772,43.88093
-fast_food,KFC,osm,1.0,9.1,18.30915,43.83026
-restoran,Svadbeni salon NS Sarajevo,overture,0.5,9.0,18.36391,43.86204
-restoran,KUP Coffee Pastry & Bakery,osm,0.5,9.0,18.3552,43.84702
-restoran,La Trattoria,osm,0.5,9.0,18.41799,43.85702
-fast_food,Fast Food Popeye,overture,1.0,9.0,18.3694,43.82448
-restoran,Pizzeria La Piacere,osm,0.5,9.0,18.324,43.84395
-restoran,,osm,0.5,9.0,18.35041,43.84276
-restoran,Monolit Lounge&Bar,overture,0.5,9.0,18.40336,43.85233
-restoran,SARAJ cevabdzinica,overture,0.5,9.0,18.43158,43.85983
-restoran,Amber Dining Experience,overture,0.5,8.9,18.42748,43.85772
-restoran,,osm,0.5,8.9,18.39947,43.85271
-restoran,The Place,overture,0.5,8.9,18.39994,43.85476
-restoran,Cakum Pakum,osm,0.5,8.8,18.42194,43.85964
-restoran,Trattoria Uno,osm,0.5,8.8,18.38987,43.85317
-restoran,Sadiković,osm,0.5,8.8,18.35018,43.84592
-fast_food,Ortakoy Kumpir,overture,1.0,8.8,18.30803,43.82896
-restoran,Veranda,osm,0.5,8.8,18.42541,43.86077
-restoran,Restoran Augusta Brauna,osm,0.5,8.8,18.411,43.86374
-restoran,Inat kuća,osm,0.5,8.8,18.43422,43.85855
-restoran,Bistro Ćumurija,overture,0.5,8.7,18.426,43.85711
-restoran,The Quart Coffee,overture,0.5,8.7,18.32405,43.8409
-restoran,MAK Restaurant,overture,0.5,8.7,18.34894,43.84601
-restoran,PekSar,overture,0.5,8.7,18.42862,43.85809
-restoran,STUDIO 1,osm,0.5,8.7,18.38726,43.85638
-fast_food,Pizzeria Zlatno Zrno,overture,1.0,8.7,18.3645,43.82253
-restoran,Galija,osm,0.5,8.6,18.42108,43.85455
-restoran,Dundee,osm,0.5,8.6,18.41186,43.873
-fast_food,BASH,osm,1.0,8.6,18.30838,43.83023
-restoran,Mejtas Bistro,overture,0.5,8.6,18.4196,43.86149
-restoran,Zara iz Duvara,osm,0.5,8.6,18.42381,43.85985
-restoran,Midpoint Sarajevo ,overture,0.5,8.6,18.39748,43.85387
-restoran,Fast Food Stambol,overture,0.5,8.6,18.41736,43.85554
-restoran,"Restoran ""Terasa""",overture,0.5,8.6,18.32442,43.84624
-restoran,Mesnice Ćevabdžinice Mujanić-Adi,overture,0.5,8.5,18.39536,43.84353
-restoran,Poppi',overture,0.5,8.5,18.41838,43.85984
-restoran,,osm,0.5,8.5,18.35134,43.8426
-fast_food,"Buregdžinica ""Tomašević""",osm,1.0,8.5,18.3569,43.81954
-restoran,4 sobe gospođe Safije,osm,0.5,8.5,18.41484,43.86404
-restoran,Čobanija,osm,0.5,8.4,18.4196,43.85521
-restoran,Restoran San Sarajevo,overture,0.5,8.4,18.41372,43.85954
-restoran,Restoran Almanas Sarajevo,overture,0.5,8.4,18.32875,43.83742
-restoran,FOOD CLUB Sarajevo,overture,0.5,8.4,18.32196,43.84027
-restoran,Restoran Nello,osm,0.5,8.4,18.4074,43.86858
-restoran,Terra,osm,0.5,8.4,18.41788,43.85758
-restoran,Restoran Stara Konoba,overture,0.5,8.4,18.33375,43.8359
-restoran,"Restoran ""Kan""",osm,0.5,8.4,18.4044,43.86448
-restoran,Gazi-Han,overture,0.5,8.4,18.33012,43.8319
-restoran,Kod Advije,overture,0.5,8.4,18.4309,43.86041
-restoran,La pasta di mamma,osm,0.5,8.3,18.42095,43.85861
-restoran,Caffe Palacinkara Carolija,overture,0.5,8.3,18.38276,43.84837
-restoran,Dođi ba,osm,0.5,8.3,18.34483,43.84227
-restoran,Konyali,osm,0.5,8.3,18.43046,43.85829
-restoran,Ciposs Pika,overture,0.5,8.3,18.35107,43.84623
-restoran,Carpaccio,overture,0.5,8.2,18.4281,43.85991
-restoran,,osm,0.5,8.2,18.41744,43.86098
-restoran,Restoran Mahala Kovači,overture,0.5,8.2,18.43287,43.86108
-restoran,,osm,0.5,8.2,18.41181,43.87722
-restoran,Restoran Amerikanac,osm,0.5,8.1,18.41834,43.85843
-restoran,Sandrax Vuković,overture,0.5,8.1,18.4357,43.85948
-restoran,Neretva,osm,0.5,8.1,18.3376,43.83095
-restoran,Konoba Fakat,osm,0.5,8.1,18.43241,43.85912
-restoran,Koto,osm,0.5,8.1,18.34288,43.84468
-restoran,"Restoran ""BAZENI""",osm,0.5,8.0,18.43727,43.86023
-restoran,"Pivnica ""HS""",osm,0.5,8.0,18.43284,43.85618
-restoran,Konoba Stari Točak,osm,0.5,8.0,18.32894,43.83251
-restoran,La Delicia Galerija Dining & Lounge,overture,0.5,7.9,18.38694,43.85591
-restoran,Zembilj Steak House,overture,0.5,7.9,18.42957,43.85973
-restoran,H&S,osm,0.5,7.9,18.35175,43.84531
-fast_food,Nomad Pizza and Craft House,overture,1.0,7.9,18.3623,43.82187
-restoran,Ćevabdžinica Brajlović br. 2,osm,0.5,7.8,18.31717,43.83794
-restoran,La Vie Caffe & Restaurant Bihac,overture,0.5,7.8,18.42359,43.86077
-fast_food,Picerija Kitchen Lukavica,overture,1.0,7.8,18.36156,43.81964
-restoran,Piatto,osm,0.5,7.7,18.41894,43.86697
+fast_food,Burger House,overture,1.0,12.9,18.30978,43.81625
+fast_food,Pizzeria Ildžis,overture,1.0,12.8,18.30453,43.82468
+restoran,Ikram,overture,0.5,12.8,18.30659,43.83083
+restoran,U.R Novi Samin Gaj kod Elvedina,overture,0.5,12.8,18.20851,43.8675
+restoran,IChicken,osm,0.5,12.7,18.38154,43.84953
+fast_food,U.R.Pizzeria Hrasnica,overture,1.0,12.7,18.31161,43.79707
+fast_food,Decidela,overture,1.0,12.6,18.36497,43.82316
+restoran,Pizzeria Calabria,overture,0.5,12.6,18.36241,43.85047
+restoran,Bistro Bosna,overture,0.5,12.6,18.37581,43.8473
+restoran,HUT - Pizzeria Mineli,osm,0.5,12.6,18.36827,43.85182
+restoran,İstanbul Çiğköfte,osm,0.5,12.5,18.32624,43.83939
+restoran,Restoran Stara Konoba,overture,0.5,12.5,18.33375,43.8359
+restoran,Restoran Regal,overture,0.5,12.5,18.38447,43.85537
+restoran,Restoran Stari Krovovi,overture,0.5,12.4,18.30422,43.83301
+restoran,Bager Snack bar,overture,0.5,12.4,18.37031,43.84879
+restoran,RUŽA,osm,0.5,12.3,18.37667,43.84578
+fast_food,U2,osm,1.0,12.3,18.34598,43.82888
+restoran,Taj Mahal,osm,0.5,12.3,18.37774,43.85402
+restoran,Ragazzi,osm,0.5,12.2,18.37976,43.84628
+restoran,,osm,0.5,12.2,18.39227,43.8559
+restoran,La Perla,osm,0.5,12.2,18.36764,43.85162
+restoran,UR Bistro Kvart,overture,0.5,12.2,18.35753,43.8504
+restoran,Nóstimo Sarajevo,overture,0.5,12.2,18.3631,43.8499
+restoran,Naša Priča,overture,0.5,12.1,18.38789,43.85446
+restoran,Prava prica,overture,0.5,12.1,18.30473,43.82871
+fast_food,Mocart,overture,1.0,12.1,18.35857,43.82809
+restoran,Neretva,osm,0.5,12.0,18.3376,43.83095
+restoran,Sjaj,overture,0.5,12.0,18.36505,43.85842
+restoran,Turkuazz cafe,osm,0.5,12.0,18.30474,43.82916
+restoran,Mamine i Tatine tajne anonimne i javne,overture,0.5,11.9,18.2385,43.8502
+fast_food,Pizzeria Zlatno Zrno,overture,1.0,11.9,18.3645,43.82253
+restoran,Lava caffe & restaurant,overture,0.5,11.9,18.39741,43.85534
+restoran,FO Food Products Bosna i Hercegovina,overture,0.5,11.9,18.31768,43.84378
+restoran,Buregdžinica Žigo,overture,0.5,11.8,18.40871,43.85718
+restoran,Buregdžinica Bosna,osm,0.5,11.8,18.37857,43.85128
+restoran,Bistro Kašika,overture,0.5,11.8,18.39451,43.85095
+restoran,Restoran Pizzeria Golden,overture,0.5,11.8,18.29733,43.8396
+restoran,Baileys,overture,0.5,11.8,18.38752,43.85347
+restoran,Brajlović,osm,0.5,11.7,18.30385,43.83001
+restoran,Karadeniz,osm,0.5,11.7,18.30998,43.83316
+restoran,Hotel Imzit,osm,0.5,11.6,18.29586,43.82966
+restoran,Picolo Angolo,osm,0.5,11.6,18.38153,43.85461
+restoran,Fast Food M,overture,0.5,11.6,18.41002,43.85781
+restoran,Restoran Bristol,overture,0.5,11.6,18.38985,43.85238
+restoran,Paper Moon,osm,0.5,11.6,18.39433,43.85006
+restoran,Magnum,overture,0.5,11.6,18.24372,43.84804
+fast_food,Fast Food Popeye,overture,1.0,11.6,18.3694,43.82448
+fast_food,Picerija Kitchen Lukavica,overture,1.0,11.5,18.36156,43.81964
+restoran,Kod Dvije Domaćice,osm,0.5,11.5,18.41158,43.86059
+restoran,Le Petit Food Gallery,osm,0.5,11.5,18.40808,43.85798
+restoran,Pizzeria Espero,overture,0.5,11.5,18.29609,43.84156
+restoran,,osm,0.5,11.5,18.40793,43.85672
+restoran,Hotel Plavi Zamak,osm,0.5,11.5,18.38806,43.84753
+restoran,Vapiano,osm,0.5,11.4,18.40549,43.85635
+fast_food,Nomad Pizza and Craft House,overture,1.0,11.4,18.3623,43.82187
+restoran,Konoba Mali Dvori,overture,0.5,11.4,18.29805,43.8386
+restoran,Easy Bites Gastro Pub,overture,0.5,11.4,18.38292,43.85371
+restoran,"Restoran ""NM""",overture,0.5,11.4,18.24696,43.84795
+restoran,Anatolia Restaurant Lounge Sarajevo,overture,0.5,11.4,18.38765,43.85395
+restoran,Il Nostro Cortile - Nasa avlija,overture,0.5,11.4,18.3826,43.85504
+restoran,Sadiković,osm,0.5,11.3,18.35018,43.84592
+restoran,_taqueria_mexico,overture,0.5,11.3,18.39117,43.85435
+restoran,,osm,0.5,11.3,18.35041,43.84276
+restoran,MAK Restaurant,overture,0.5,11.3,18.34894,43.84601
+restoran,METROPOLIS Family,osm,0.5,11.2,18.35467,43.85049
+restoran,Shrimp&Chicken Sarajevo,overture,0.5,11.2,18.33578,43.83095
+restoran,Druga Kuća Lora,osm,0.5,11.2,18.38859,43.85397
+fast_food,Mozaik,overture,1.0,11.2,18.36382,43.81906
+restoran,Restoran San Martino,overture,0.5,11.1,18.36554,43.84387
+restoran,S One Sky Lounge,overture,0.5,11.1,18.4152,43.85568
+restoran,Bistro Sabic,overture,0.5,11.1,18.3968,43.84746
+restoran,Mala Bašta,osm,0.5,11.1,18.37664,43.85433
+restoran,Restoran Casa El Gitano,osm,0.5,11.1,18.38066,43.85485
+restoran,Kod Gagane,overture,0.5,11.1,18.33305,43.82933
+restoran,KUP Coffee Pastry & Bakery,osm,0.5,11.0,18.3552,43.84702
+restoran,Koto,osm,0.5,11.0,18.34288,43.84468
+restoran,Four Seasons,osm,0.5,11.0,18.40635,43.85632
+restoran,Dođi ba,osm,0.5,10.9,18.34483,43.84227
+restoran,Restoran Plava Prizma,overture,0.5,10.9,18.3359,43.84354
+restoran,Kod Kule,overture,0.5,10.9,18.31222,43.83107
+restoran,Bistro Zdravo,osm,0.5,10.9,18.38304,43.85625
+restoran,,osm,0.5,10.8,18.38702,43.84735
+restoran,Restoran SOKAK,overture,0.5,10.8,18.30852,43.82934
+restoran,Restoran Maksumić,overture,0.5,10.7,18.41245,43.86639
+restoran,Restoran Nova Bentbaša,overture,0.5,10.7,18.30882,43.82887
+restoran,Restoran Bulbul kod Samira,overture,0.5,10.7,18.24074,43.8477
+restoran,Piano,overture,0.5,10.7,18.38489,43.8567
+restoran,Špica,overture,0.5,10.6,18.40629,43.85712
+restoran,,osm,0.5,10.6,18.35134,43.8426
+restoran,Carlsberg Winter Garden,overture,0.5,10.6,18.40167,43.85794
+restoran,Brasserie August Braun,osm,0.5,10.6,18.41198,43.85642
+restoran,UR bistro Kod Avde,overture,0.5,10.6,18.34008,43.82677
+restoran,Ascinica NUR,overture,0.5,10.6,18.39372,43.85528
+restoran,Restoran Bosanska Kraljica ,overture,0.5,10.5,18.33459,43.82966
+restoran,Restoran Stadion,overture,0.5,10.5,18.33197,43.83688
+restoran,Omnia,osm,0.5,10.5,18.3776,43.85188
+restoran,Ciposs Pika,overture,0.5,10.4,18.35107,43.84623
+fast_food,Manđarija,osm,1.0,10.4,18.36131,43.81841
+restoran,Restaurant Vrelo Bosne,osm,0.5,10.4,18.26927,43.83221
+restoran,Velika Bašta,osm,0.5,10.3,18.37716,43.85473
+restoran,,osm,0.5,10.3,18.42211,43.85677
+restoran,Jam - pita ispod saca,overture,0.5,10.3,18.38902,43.85483
+restoran,scc,osm,0.5,10.3,18.40786,43.85482
+restoran,Magarac,overture,0.5,10.3,18.3787,43.84973
+restoran,BUREK PLUS Sarajevo,overture,0.5,10.3,18.39944,43.84979
+restoran,,osm,0.5,10.2,18.41645,43.8554
+restoran,Restoran Nello,osm,0.5,10.2,18.4074,43.86858
+restoran,Casper,overture,0.5,10.2,18.41192,43.86751
+restoran,Kašahana,overture,0.5,10.2,18.40473,43.85794
+restoran,Bazen Ilidža,overture,0.5,10.2,18.30703,43.82222
+restoran,"Trattoria ""Roma""",osm,0.5,10.2,18.40218,43.85247
+restoran,Pizzeria Wisa,overture,0.5,10.1,18.40237,43.85901
+restoran,"Cafe Pizzeria ""Bell""",osm,0.5,10.1,18.40153,43.8522
+restoran,Blanco,osm,0.5,10.1,18.41579,43.85751
+restoran,Restaurant & Bar Lava,overture,0.5,10.1,18.38639,43.85491
+restoran,Ur La Guitara Sarajevo,overture,0.5,10.1,18.32121,43.85307
+restoran,Goool,osm,0.5,10.0,18.38403,43.85276
+restoran,Apetit Gastro Wine Bar,overture,0.5,10.0,18.39774,43.85428
+restoran,Restoran Stare Vrbe,osm,0.5,10.0,18.40255,43.87533
+restoran,,osm,0.5,10.0,18.32237,43.82301
+restoran,Caffe Bar Pizzeria Špica,overture,0.5,10.0,18.39965,43.88037
+restoran,Svadbeni salon NS Sarajevo,overture,0.5,10.0,18.36391,43.86204
+restoran,Fijaker Ilidža,overture,0.5,10.0,18.30187,43.82478
+restoran,Slatko i slano,osm,0.5,9.9,18.38464,43.8536
+restoran,Siriana Restaurant,overture,0.5,9.9,18.29993,43.82954
+restoran,Čevabdžinica Zmaj,osm,0.5,9.9,18.39927,43.859
+restoran,Dundee,osm,0.5,9.9,18.41186,43.873
+restoran,Lounge RibicE,overture,0.5,9.8,18.3403,43.83291
+restoran,Restoran Stari Bunker,overture,0.5,9.8,18.30715,43.82502
+restoran,Del Gusto,overture,0.5,9.8,18.32408,43.82268
+restoran,Barrique Konoba Restoran,overture,0.5,9.8,18.40006,43.84902
+restoran,Cafe restoran Mabelli,overture,0.5,9.8,18.29952,43.83104
+restoran,Restoran Augusta Brauna,osm,0.5,9.8,18.411,43.86374
+restoran,Sahan,osm,0.5,9.7,18.31289,43.83683
+restoran,H&S,osm,0.5,9.7,18.35175,43.84531
+restoran,Biber I So,overture,0.5,9.7,18.40195,43.85852
+restoran,Metropolis,osm,0.5,9.7,18.41915,43.85895
+restoran,,osm,0.5,9.6,18.29661,43.82843
+restoran,Spazio Gourmet,osm,0.5,9.6,18.41096,43.85561
+restoran,,osm,0.5,9.6,18.39823,43.88045
+restoran,La Trattoria,osm,0.5,9.6,18.41799,43.85702
+restoran,,osm,0.5,9.5,18.41181,43.87722
+restoran,4 sobe gospođe Safije,osm,0.5,9.4,18.41484,43.86404
+restoran,The Place,overture,0.5,9.4,18.39994,43.85476
+restoran,Trattoria Uno,osm,0.5,9.4,18.38987,43.85317
+restoran,Pizza Napoli,overture,0.5,9.4,18.32921,43.84818
+restoran,Mehana Food,overture,0.5,9.4,18.39994,43.88084
+restoran,"Restoran ""Kan""",osm,0.5,9.3,18.4044,43.86448
+restoran,Monolit Lounge&Bar,overture,0.5,9.3,18.40336,43.85233
+restoran,Imidz-T,overture,0.5,9.3,18.33567,43.93578
+restoran,Kedaš,osm,0.5,9.3,18.34193,43.82896
+restoran,STUDIO 1,osm,0.5,9.3,18.38726,43.85638
+restoran,SARAJ cevabdzinica,overture,0.5,9.2,18.43158,43.85983
+restoran,Kafana TUNEL,overture,0.5,9.2,18.34537,43.82703
+restoran,,osm,0.5,9.2,18.39947,43.85271
+restoran,Amber Dining Experience,overture,0.5,9.2,18.42748,43.85772
+restoran,Bistro Ćumurija,overture,0.5,9.1,18.426,43.85711
+restoran,Cakum Pakum,osm,0.5,9.1,18.42194,43.85964
+restoran,Midpoint Sarajevo ,overture,0.5,9.1,18.39748,43.85387
+restoran,,osm,0.5,9.1,18.29872,43.83269
+restoran,Restoran San Sarajevo,overture,0.5,9.1,18.41372,43.85954
+restoran,Fast Food Stambol,overture,0.5,9.0,18.41736,43.85554
+restoran,Veranda,osm,0.5,9.0,18.42541,43.86077
+restoran,,osm,0.5,9.0,18.25934,43.83999
+restoran,Mejtas Bistro,overture,0.5,9.0,18.4196,43.86149
+restoran,Zlatne strune,osm,0.5,8.9,18.35121,43.83
+restoran,Galija,osm,0.5,8.9,18.42108,43.85455
+restoran,Mesnice Ćevabdžinice Mujanić-Adi,overture,0.5,8.9,18.39536,43.84353
+restoran,"Bosansko Sijelo ""Restoran CIGO Vogosca""",overture,0.5,8.9,18.33883,43.8913
+restoran,Inat kuća,osm,0.5,8.9,18.43422,43.85855
+restoran,Naš Dom,osm,0.5,8.9,18.40842,43.86611
+restoran,Terra,osm,0.5,8.9,18.41788,43.85758
+fast_food,Domaci proizvodi Hasanbegovic,overture,1.0,8.9,18.22623,43.87431
+restoran,PekSar,overture,0.5,8.9,18.42862,43.85809
+restoran,Čobanija,osm,0.5,8.8,18.4196,43.85521
+restoran,Caffe Palacinkara Carolija,overture,0.5,8.8,18.38276,43.84837
+restoran,Poppi',overture,0.5,8.8,18.41838,43.85984
+restoran,,osm,0.5,8.7,18.41744,43.86098
+fast_food,Nom Nom,osm,1.0,8.7,18.36417,43.8181
+restoran,Zara iz Duvara,osm,0.5,8.7,18.42381,43.85985
+restoran,Konyali,osm,0.5,8.6,18.43046,43.85829
+restoran,Kod Advije,overture,0.5,8.5,18.4309,43.86041
+restoran,La pasta di mamma,osm,0.5,8.5,18.42095,43.85861
+restoran,Restoran Amerikanac,osm,0.5,8.4,18.41834,43.85843
+restoran,La Delicia Galerija Dining & Lounge,overture,0.5,8.4,18.38694,43.85591
+restoran,Carpaccio,overture,0.5,8.3,18.4281,43.85991
+restoran,Restoran Mahala Kovači,overture,0.5,8.3,18.43287,43.86108
+restoran,Pizzeria Sendi,osm,0.5,8.2,18.34726,43.82837
+restoran,Mujanić Restaurant,overture,0.5,8.2,18.25574,43.84305
+restoran,Konoba Fakat,osm,0.5,8.2,18.43241,43.85912
+restoran,Sandrax Vuković,overture,0.5,8.2,18.4357,43.85948
+restoran,Restoran Esmeralda,overture,0.5,8.1,18.323,43.84702
+fast_food,A burger GORA,overture,1.0,8.1,18.36109,43.96234
+restoran,"Pivnica ""HS""",osm,0.5,8.1,18.43284,43.85618
+restoran,"Restoran ""BAZENI""",osm,0.5,8.1,18.43727,43.86023
+restoran,Zembilj Steak House,overture,0.5,8.0,18.42957,43.85973
+restoran,"FIORI Ristorante, Sarajevo",osm,0.5,8.0,18.40504,43.86313
+restoran,La Vie Caffe & Restaurant Bihac,overture,0.5,8.0,18.42359,43.86077
+restoran,Piatto,osm,0.5,7.9,18.41894,43.86697
+restoran,Bulevar Caffe Restoran,osm,0.5,7.9,18.35367,43.8262
+fast_food,,osm,1.0,7.9,18.36293,43.82091
+restoran,Ur Caffe Bar Jesenjin 1979,osm,0.5,7.9,18.39113,43.85045
+restoran,Cappuccino,osm,0.5,7.8,18.40013,43.85308
+restoran,Blažuj,osm,0.5,7.8,18.25399,43.84292
+restoran,Restoran Marrakech,overture,0.5,7.8,18.42993,43.85863
 restoran,Libertas,osm,0.5,7.7,18.42803,43.86054
-restoran,Restoran Marrakech,overture,0.5,7.7,18.42993,43.85863
-restoran,Naš Dom,osm,0.5,7.6,18.40842,43.86611
-restoran,Cappuccino,osm,0.5,7.6,18.40013,43.85308
-fast_food,Mozaik,overture,1.0,7.6,18.36382,43.81906
-restoran,Shrimp&Chicken Sarajevo,overture,0.5,7.6,18.33578,43.83095
-restoran,Restoran Carina,overture,0.5,7.6,18.32391,43.88608
-restoran,"FIORI Ristorante, Sarajevo",osm,0.5,7.5,18.40504,43.86313
-restoran,Ur Caffe Bar Jesenjin 1979,osm,0.5,7.5,18.39113,43.85045
-restoran,Restoran Tomasi,overture,0.5,7.5,18.32341,43.84081
-fast_food,AL-Forno,overture,1.0,7.5,18.30309,43.83476
-fast_food,Ukusno I Fino,overture,1.0,7.5,18.30626,43.83016
-restoran,Mado,osm,0.5,7.4,18.43278,43.85274
-restoran,Kibe,osm,0.5,7.3,18.42765,43.87151
-fast_food,Pizzeria Riva,overture,1.0,7.3,18.30309,43.82989
-restoran,Restoran Plava Prizma,overture,0.5,7.3,18.3359,43.84354
-restoran,Restoran ''Breka'',overture,0.5,7.2,18.42113,43.87012
-fast_food,Food Station,overture,1.0,7.2,18.30723,43.82981
+restoran,Kantina,overture,0.5,7.6,18.34617,43.82945
+restoran,Istanbul Garden,overture,0.5,7.5,18.31449,43.81545
+restoran,Slatko i Slano,osm,0.5,7.5,18.34551,43.82956
+restoran,Restoran Stadion,osm,0.5,7.5,18.41065,43.87273
+restoran,Mado,osm,0.5,7.5,18.43278,43.85274
+restoran,Maestro Caffe Pizzeria,overture,0.5,7.4,18.36786,43.82794
+restoran,Shane,osm,0.5,7.4,18.35621,43.82584
+restoran,Kibe,osm,0.5,7.4,18.42765,43.87151
+restoran,Restoran ''Breka'',overture,0.5,7.3,18.42113,43.87012
+restoran,Restoran Vidikovac Sarajevo,overture,0.5,7.3,18.41593,43.88574
+restoran,Café Bubamara,osm,0.5,7.3,18.41268,43.87835
+restoran,Golf club,osm,0.5,7.2,18.40932,43.88524
 restoran,Lovac,osm,0.5,7.2,18.42292,43.86068
-restoran,Ur La Guitara Sarajevo,overture,0.5,7.2,18.32121,43.85307
-restoran,Bread and Co,overture,0.5,7.1,18.31937,43.83811
+restoran,Cocolino,osm,0.5,7.2,18.36985,43.8294
+restoran,Restoran Almanas Sarajevo,overture,0.5,7.1,18.32177,43.84727
 restoran,Galatarasay,osm,0.5,7.1,18.42822,43.85945
-restoran,FO Food Products Bosna i Hercegovina,overture,0.5,7.0,18.31768,43.84378
-fast_food,Manđarija,osm,1.0,6.9,18.36131,43.81841
-restoran,Zlatne strune,osm,0.5,6.8,18.35121,43.83
-restoran,Kod Gagane,overture,0.5,6.8,18.33305,43.82933
-restoran,Restoran Vidikovac Sarajevo,overture,0.5,6.8,18.41593,43.88574
-restoran,UR bistro Kod Avde,overture,0.5,6.8,18.34008,43.82677
-restoran,Restoran Bosanska Kraljica ,overture,0.5,6.8,18.33459,43.82966
-restoran,İstanbul Çiğköfte,osm,0.5,6.8,18.32624,43.83939
-restoran,Sedef,overture,0.5,6.7,18.42594,43.85886
-restoran,Bistrik,overture,0.5,6.7,18.43566,43.85197
-restoran,Restoran Stadion,overture,0.5,6.7,18.33197,43.83688
-restoran,Lounge RibicE,overture,0.5,6.7,18.3403,43.83291
-restoran,Slastičarna Dženita,overture,0.5,6.7,18.43251,43.85132
-restoran,Restoran Minjo,osm,0.5,6.6,18.43187,43.87265
-restoran,Café Bubamara,osm,0.5,6.6,18.41268,43.87835
+restoran,Global Food,osm,0.5,7.1,18.4063,43.86978
+restoran,LOFT,overture,0.5,7.1,18.3675,43.82704
+restoran,Sedlo,overture,0.5,7.0,18.33054,43.81828
+restoran,Filipovo ognjište,osm,0.5,6.9,18.36814,43.82835
+restoran,Piazza A2 bar,osm,0.5,6.8,18.35657,43.82523
+restoran,Bistrik,overture,0.5,6.8,18.43566,43.85197
+restoran,Restoran Luka,overture,0.5,6.8,18.37179,43.82912
+restoran,Sedef,overture,0.5,6.8,18.42594,43.85886
+restoran,KNEZ,osm,0.5,6.8,18.36958,43.8299
+restoran,Pecenjara Pajic,overture,0.5,6.8,18.37529,43.83029
+restoran,Slastičarna Dženita,overture,0.5,6.8,18.43251,43.85132
+restoran,Restoran Minjo,osm,0.5,6.7,18.43187,43.87265
+restoran,"""Kamin""",osm,0.5,6.7,18.35445,43.81945
+restoran,Hedona Vino Klub,osm,0.5,6.7,18.40426,43.89598
+restoran,Restoran Žuč/ Dom oslobodilaca Žuč,overture,0.5,6.6,18.35939,43.86575
 restoran,,osm,0.5,6.5,18.43772,43.8615
-restoran,Kafana TUNEL,overture,0.5,6.5,18.34537,43.82703
-restoran,Restoran Stare Vrbe,osm,0.5,6.5,18.40255,43.87533
-restoran,Restoran Stadion,osm,0.5,6.4,18.41065,43.87273
-restoran,Global Food,osm,0.5,6.4,18.4063,43.86978
-fast_food,Sarajka,osm,1.0,6.4,18.2963,43.8302
+restoran,S K S,osm,0.5,6.5,18.36507,43.82682
+restoran,DON,osm,0.5,6.5,18.37718,43.83156
+restoran,,osm,0.5,6.4,18.41199,43.90786
+restoran,Wolf Restauracije Sarajevo,overture,0.5,6.4,18.35305,43.82341
+restoran,Caffe Restaurant Soho,overture,0.5,6.3,18.36921,43.82677
+restoran,Restoran Čenga,overture,0.5,6.2,18.29972,43.8238
 restoran,Restoran Bob Exclusive,overture,0.5,6.2,18.40776,43.8422
-restoran,Pizza Napoli,overture,0.5,6.2,18.32921,43.84818
 restoran,Sendi Pub,overture,0.5,6.2,18.43675,43.85103
-restoran,Golf club,osm,0.5,6.2,18.40932,43.88524
 restoran,Park Prinčeva,osm,0.5,6.1,18.43622,43.85379
-restoran,Kedaš,osm,0.5,6.1,18.34193,43.82896
-restoran,Pizzeria Sendi,osm,0.5,6.1,18.34726,43.82837
-restoran,Restoran Žuč/ Dom oslobodilaca Žuč,overture,0.5,6.1,18.35939,43.86575
-restoran,Restoran Esmeralda,overture,0.5,6.0,18.323,43.84702
-restoran,Bulevar Caffe Restoran,osm,0.5,6.0,18.35367,43.8262
-fast_food,Nom Nom,osm,1.0,6.0,18.36417,43.8181
+restoran,Pečenjara Stanković,overture,0.5,6.0,18.35127,43.81263
+restoran,Paravento,overture,0.5,6.0,18.33407,43.86429
 restoran,Bob,osm,0.5,6.0,18.40844,43.84213
-restoran,Caffe Bar Pizzeria Špica,overture,0.5,5.9,18.39965,43.88037
-restoran,Karadeniz,osm,0.5,5.9,18.30998,43.83316
-restoran,Cocolino,osm,0.5,5.9,18.36985,43.8294
-restoran,Restoran Igman,overture,0.5,5.8,18.30877,43.83248
-restoran,Maestro Caffe Pizzeria,overture,0.5,5.8,18.36786,43.82794
-restoran,Pecenjara Pajic,overture,0.5,5.8,18.37529,43.83029
-restoran,,osm,0.5,5.8,18.41199,43.90786
-restoran,DON,osm,0.5,5.7,18.37718,43.83156
-restoran,,osm,0.5,5.7,18.39823,43.88045
-restoran,Kantina,overture,0.5,5.7,18.34617,43.82945
-restoran,Slatko i Slano,osm,0.5,5.7,18.34551,43.82956
-restoran,Restoran Luka,overture,0.5,5.6,18.37179,43.82912
-restoran,LOFT,overture,0.5,5.6,18.3675,43.82704
-fast_food,,osm,1.0,5.6,18.36293,43.82091
+restoran,Gostionica Muharemovic,overture,0.5,5.9,18.41191,43.90503
+restoran,Caffe & Restaurant Vanilla,overture,0.5,5.7,18.36225,43.82414
+restoran,Vrelo Bosne,osm,0.5,5.7,18.26719,43.82104
+restoran,Ekspres restoran,osm,0.5,5.6,18.35881,43.82063
 restoran,Vidikovac,osm,0.5,5.6,18.44206,43.86659
+restoran,La Terrazza,overture,0.5,5.6,18.3651,43.82172
+restoran,Bašča kod Ene,osm,0.5,5.5,18.43698,43.87468
 restoran,"Vikendica ""Mali Raj"" Sarajevo",overture,0.5,5.5,18.44172,43.86877
-restoran,KNEZ,osm,0.5,5.5,18.36958,43.8299
-restoran,Buregdzinica EDINA,overture,0.5,5.5,18.30665,43.83353
-restoran,Shane,osm,0.5,5.5,18.35621,43.82584
-restoran,Filipovo ognjište,osm,0.5,5.5,18.36814,43.82835
-restoran,Mehana Food,overture,0.5,5.5,18.39994,43.88084
-restoran,Restoran Almanas Sarajevo,overture,0.5,5.4,18.32177,43.84727
-restoran,Bašča kod Ene,osm,0.5,5.4,18.43698,43.87468
+restoran,Kula,osm,0.5,5.4,18.3495,43.816
 restoran,Bijela tabija,osm,0.5,5.4,18.44537,43.8609
-restoran,Gostionica Muharemovic,overture,0.5,5.4,18.41191,43.90503
-restoran,Turkuaz Cafe&Restaurant,overture,0.5,5.3,18.30715,43.83263
-restoran,Paravento,overture,0.5,5.3,18.33407,43.86429
-restoran,Restoran Bosna,osm,0.5,5.3,18.30994,43.83112
-restoran,Caffe Restoran Saray Bosna,overture,0.5,5.3,18.31119,43.83081
-restoran,Restoran AEMS,overture,0.5,5.1,18.30489,43.83185
-fast_food,Burger King,osm,1.0,5.1,18.31123,43.82924
-restoran,S K S,osm,0.5,5.1,18.36507,43.82682
-restoran,Pizzeria Espero,overture,0.5,5.1,18.29609,43.84156
-restoran,Piazza A2 bar,osm,0.5,5.0,18.35657,43.82523
+restoran,Zavičaj,overture,0.5,5.3,18.37053,43.82466
+restoran,Tavolino Caffe and Restaurant,overture,0.5,5.3,18.36466,43.81975
+fast_food,Blažuj,overture,1.0,5.2,18.24528,43.84177
+restoran,Kuhinjica Ketering,overture,0.5,5.2,18.36489,43.82049
+restoran,Kibicfenster Lounge Bar,overture,0.5,5.2,18.36205,43.81607
+restoran,Kod Kule,overture,0.5,5.0,18.3259,43.79383
 restoran,Kod Bibana,osm,0.5,5.0,18.44159,43.85559
-restoran,Caffe Restaurant Soho,overture,0.5,5.0,18.36921,43.82677
-fast_food,Fast Food Pizzeria FRESH,overture,1.0,4.9,18.3388,43.90167
-restoran,Ikram,overture,0.5,4.9,18.30659,43.83083
-restoran,Restoran Pizzeria Golden,overture,0.5,4.9,18.29733,43.8396
-restoran,Sahan,osm,0.5,4.9,18.31289,43.83683
-restoran,Hedona Vino Klub,osm,0.5,4.8,18.40426,43.89598
-restoran,Konoba Mali Dvori,overture,0.5,4.8,18.29805,43.8386
+restoran,Orac,osm,0.5,5.0,18.345,43.80708
+restoran,Caffe and Restaurant Perla,overture,0.5,5.0,18.36271,43.81604
+restoran,Restoran Han Binjezevo-Hadzici,overture,0.5,4.9,18.23327,43.84681
+restoran,Restoran Zovik,overture,0.5,4.9,18.21597,43.83931
+restoran,"Restoran ""Drašković""",osm,0.5,4.8,18.37573,43.82361
+restoran,Restoran Lovački dom,overture,0.5,4.8,18.41331,43.90743
+restoran,Svadbeni salon Florida,overture,0.5,4.7,18.29494,43.81059
 restoran,Restoran Moscanica,overture,0.5,4.7,18.45248,43.86615
-restoran,Restoran Stari Krovovi,overture,0.5,4.7,18.30422,43.83301
+restoran,Lovac na jelene,osm,0.5,4.7,18.34377,43.80915
 restoran,Restoran Stara Kola,overture,0.5,4.5,18.44936,43.864
-restoran,Restoran Lovački dom,overture,0.5,4.4,18.41331,43.90743
-restoran,Wolf Restauracije Sarajevo,overture,0.5,4.4,18.35305,43.82341
-restoran,Mali raj,osm,0.5,4.3,18.45252,43.86498
 restoran,Đulbašča,osm,0.5,4.3,18.44615,43.87313
-restoran,Motel Royal,osm,0.5,4.3,18.32549,43.90016
 restoran,Ranch Mošćanica,overture,0.5,4.3,18.45172,43.86614
-restoran,Turkuazz cafe,osm,0.5,4.3,18.30474,43.82916
-restoran,Caffe & Restaurant Vanilla,overture,0.5,4.3,18.36225,43.82414
-restoran,Prava prica,overture,0.5,4.3,18.30473,43.82871
-restoran,La Terrazza,overture,0.5,4.2,18.3651,43.82172
-restoran,Zavičaj,overture,0.5,4.2,18.37053,43.82466
-restoran,Brajlović,osm,0.5,4.2,18.30385,43.83001
-restoran,Kod Kule,overture,0.5,4.1,18.31222,43.83107
-restoran,"Restoran ""Drašković""",osm,0.5,4.1,18.37573,43.82361
+restoran,Bašta Stojčevac,overture,0.5,4.3,18.29332,43.80989
+restoran,Mali raj,osm,0.5,4.3,18.45252,43.86498
 restoran,Kod Kere,overture,0.5,4.1,18.41245,43.8458
-restoran,"""Kamin""",osm,0.5,4.0,18.35445,43.81945
-restoran,Restoran SOKAK,overture,0.5,4.0,18.30852,43.82934
-restoran,Restoran Nova Bentbaša,overture,0.5,3.9,18.30882,43.82887
-restoran,Kuhinjica Ketering,overture,0.5,3.7,18.36489,43.82049
-restoran,Tavolino Caffe and Restaurant,overture,0.5,3.7,18.36466,43.81975
-restoran,Ekspres restoran,osm,0.5,3.7,18.35881,43.82063
-fast_food,Fast food GRICKO,overture,1.0,3.7,18.3447,43.90057
-restoran,Hotel Imzit,osm,0.5,3.6,18.29586,43.82966
-fast_food,Buregdžinica,osm,1.0,3.6,18.34322,43.90258
-fast_food,Panera,osm,1.0,3.4,18.30909,43.81585
+restoran,Restoran Zujevina,overture,0.5,3.9,18.21576,43.83623
+fast_food,Divanhana Han Ploča,overture,1.0,3.6,18.1517,43.89914
+restoran,PSD Centar Čavljak,overture,0.5,3.4,18.44692,43.90371
 restoran,,osm,0.5,3.4,18.41431,43.84152
-restoran,Klub Muzej,osm,0.5,3.3,18.43132,43.87974
-restoran,Kibicfenster Lounge Bar,overture,0.5,3.3,18.36205,43.81607
-fast_food,Inn,overture,1.0,3.3,18.34655,43.90016
-fast_food,,osm,1.0,3.2,18.31012,43.81689
-restoran,Cafe restoran Mabelli,overture,0.5,3.2,18.29952,43.83104
-restoran,,osm,0.5,3.2,18.29872,43.83269
-restoran,Caffe and Restaurant Perla,overture,0.5,3.2,18.36271,43.81604
-fast_food,Pizzeria Ildžis,overture,1.0,3.2,18.30453,43.82468
-restoran,Almir M & Tribun band,overture,0.5,3.2,18.45253,43.87811
-restoran,,osm,0.5,3.1,18.44461,43.88933
-restoran,Siriana Restaurant,overture,0.5,3.1,18.29993,43.82954
+restoran,Klub Muzej,osm,0.5,3.4,18.43132,43.87974
+restoran,,osm,0.5,3.3,18.44461,43.88933
+restoran,Almir M & Tribun band,overture,0.5,3.3,18.45253,43.87811
+restoran,DP restoran,overture,0.5,3.1,18.21189,43.83221
 restoran,Restaurant Palata Sopra,overture,0.5,3.1,18.46372,43.88075
-restoran,,osm,0.5,3.1,18.32237,43.82301
-restoran,Del Gusto,overture,0.5,3.0,18.32408,43.82268
-restoran,PSD Centar Čavljak,overture,0.5,3.0,18.44692,43.90371
-restoran,Pečenjara Stanković,overture,0.5,3.0,18.35127,43.81263
-restoran,Restoran Stari Bunker,overture,0.5,2.9,18.30715,43.82502
-restoran,,osm,0.5,2.7,18.29661,43.82843
-fast_food,Windmolen,overture,1.0,2.7,18.3487,43.89901
-restoran,Kula,osm,0.5,2.6,18.3495,43.816
-fast_food,Fastfood Nane,osm,1.0,2.6,18.2577,43.83985
-restoran,Bazen Ilidža,overture,0.5,2.6,18.30703,43.82222
-restoran,Fijaker Ilidža,overture,0.5,2.5,18.30187,43.82478
-fast_food,Magickids_vog,overture,1.0,2.4,18.35087,43.8994
-restoran,Restoran CIGO,overture,0.5,2.3,18.32857,43.90513
-restoran,Restoran AS,overture,0.5,2.2,18.37329,43.89386
-restoran,Orac,osm,0.5,2.0,18.345,43.80708
-restoran,Klopa kod Rameta - Barice,overture,0.5,2.0,18.4412,43.89098
-restoran,DonerRing,overture,0.5,1.9,18.37152,43.8945
+restoran,Restoran Han,overture,0.5,2.9,18.15661,43.89493
+restoran,Restaurant Labud,osm,0.5,2.8,18.26933,43.81866
+restoran,Restoran Konak,overture,0.5,2.6,18.37266,43.97258
+restoran,Restoran Best Way,overture,0.5,2.5,18.34575,43.8898
+restoran,Cafe Royale,overture,0.5,2.4,18.34184,43.814
+restoran,DFAC,osm,0.5,2.3,18.34115,43.81376
+restoran,Klopa kod Rameta - Barice,overture,0.5,2.1,18.4412,43.89098
 restoran,Kod Pucana,osm,0.5,1.9,18.47055,43.88126
-restoran,Paris,overture,0.5,1.9,18.34052,43.90191
-fast_food,A burger GORA,overture,1.0,1.8,18.31927,43.92307
-restoran,Lovac na jelene,osm,0.5,1.8,18.34377,43.80915
-restoran,Sedlo,overture,0.5,1.7,18.33054,43.81828
+restoran,Hacienda Restaurant,overture,0.5,1.7,18.38531,43.97632
+restoran,Restoran i Pekara As Hadzici,overture,0.5,1.7,18.21095,43.83126
+restoran,Restoran Konoba Han,overture,0.5,1.7,18.14825,43.90134
 restoran,Restoran Vrelo,overture,0.5,1.7,18.47719,43.8828
-fast_food,Burger House,overture,1.0,1.7,18.30978,43.81625
-restoran,"Restoran ""Cardak""",osm,0.5,1.7,18.35858,43.89899
-restoran,Fast Food 'Muki',osm,0.5,1.6,18.3611,43.89791
-restoran,"Restoran ""Bosanska avlija""",osm,0.5,1.6,18.35947,43.89893
-restoran,Restaurant Vrelo Bosne,osm,0.5,1.6,18.26927,43.83221
-restoran,Dolcetto,overture,0.5,1.4,18.3435,43.89972
-restoran,Ju Ksc Vogošća,overture,0.5,1.4,18.34437,43.90008
-restoran,ĆEvabdŽInica Desetka VogoŠĆA,overture,0.5,1.3,18.36049,43.89775
-restoran,Istanbul Garden,overture,0.5,1.2,18.31449,43.81545
+restoran,CJ10 ECHOS,osm,0.5,1.6,18.33945,43.81224
+restoran,As,osm,0.5,1.2,18.35382,43.78701
+restoran,Restoran Toplik,osm,0.5,1.2,18.38884,43.81131
 restoran,Toplik,osm,0.5,1.1,18.38888,43.81059
-restoran,Restoran Toplik,osm,0.5,1.1,18.38884,43.81131
-restoran,Ćevabdžinica i Aščinica AČE,overture,0.5,1.0,18.31664,43.92147
-restoran,Restoran Čenga,overture,0.5,1.0,18.29972,43.8238
-restoran,Dolcetto,osm,0.5,1.0,18.34576,43.90009
-restoran,,osm,0.5,0.9,18.25934,43.83999
-restoran,"Restoran ""NM""",overture,0.5,0.9,18.24696,43.84795
-restoran,Prvi Šumar,osm,0.5,0.9,18.45329,43.83761
-restoran,Centar za odmor i rekreaciju Brus Trebević,overture,0.5,0.8,18.45662,43.8379
-restoran,Blažuj,osm,0.5,0.7,18.25399,43.84292
-restoran,Cafe Royale,overture,0.5,0.7,18.34184,43.814
-restoran,DFAC,osm,0.5,0.6,18.34115,43.81376
-restoran,Mujanić Restaurant,overture,0.5,0.6,18.25574,43.84305
-restoran,Brus,osm,0.5,0.5,18.46608,43.83386
-restoran,"Bosansko Sijelo ""Restoran CIGO Vogosca""",overture,0.5,0.4,18.33883,43.8913
-restoran,Restoran Bulbul kod Samira,overture,0.5,0.4,18.24074,43.8477
+restoran,Prvi Šumar,osm,0.5,1.0,18.45329,43.83761
+restoran,Centar za odmor i rekreaciju Brus Trebević,overture,0.5,0.9,18.45662,43.8379
+restoran,Brus,osm,0.5,0.6,18.46608,43.83386
+restoran,Restoran Vidikovac,osm,0.5,0.4,18.46971,43.83397
 restoran,PD Trebević,osm,0.5,0.4,18.44862,43.83069
-restoran,CJ10 ECHOS,osm,0.5,0.4,18.33945,43.81224
-restoran,Vrelo Bosne,osm,0.5,0.4,18.26719,43.82104
-restoran,Restoran Best Way,overture,0.5,0.4,18.34575,43.8898
-restoran,Restoran Vidikovac,osm,0.5,0.3,18.46971,43.83397
-restoran,Trebevićki Raj,overture,0.5,0.3,18.47098,43.8306
+restoran,Trebevićki Raj,overture,0.5,0.4,18.47098,43.8306
+restoran,Vila Andrea,overture,0.5,0.3,18.46819,43.83079
 restoran,Trebevićki raj,osm,0.5,0.3,18.46955,43.83049
-restoran,Vila Andrea,overture,0.5,0.2,18.46819,43.83079
-restoran,Svadbeni salon Florida,overture,0.5,0.2,18.29494,43.81059
-restoran,Imidz-T,overture,0.5,0.2,18.33567,43.93578
-restoran,Bašta Stojčevac,overture,0.5,0.1,18.29332,43.80989
-restoran,Mamine i Tatine tajne anonimne i javne,overture,0.5,0.1,18.2385,43.8502
-restoran,Magnum,overture,0.5,0.1,18.24372,43.84804
-restoran,As,osm,0.5,0.1,18.35382,43.78701
-restoran,Alegria Restaurant,overture,0.5,0.0,18.25064,43.97214
-fast_food,Caffe & Pizzeria Centar,overture,1.0,0.0,18.26442,43.96394
+restoran,Sarajevski begluk,overture,0.5,0.3,18.24392,43.77492
+restoran,Korzo.ba,overture,0.5,0.0,18.18134,43.98791
+fast_food,Gradska kafana Pizzeria Milano,overture,1.0,0.0,18.18185,43.98862
+restoran,Ćevabdžinica EMA,overture,0.5,0.0,18.18155,43.9891
+restoran,Restoran Sunce,overture,0.5,0.0,18.17784,43.99066
+restoran,Semić & Meat,overture,0.5,0.0,18.18012,43.99184
+restoran,"Caffe slastičarna ""Lanterna"" ",overture,0.5,0.0,18.2613,44.0125
+restoran,Gurman,overture,0.5,0.0,18.25718,44.00443
+fast_food,Ihtijarević,overture,1.0,0.0,18.18081,43.98531
+fast_food,Verdi,overture,1.0,0.0,18.17251,43.99491
+restoran,Konzum,overture,0.5,0.0,18.17124,43.99598
+fast_food,Vispak,overture,1.0,0.0,18.17674,43.99872
+fast_food,Vispak,overture,1.0,0.0,18.17754,43.99931
+restoran,Caffe Bar Bumerang,overture,0.5,0.0,18.17854,44.01305
+restoran,Vizija doo Visoko,overture,0.5,0.0,18.18215,43.99051
+restoran,Restoran Mahala,overture,0.5,0.0,18.18142,43.99072
+fast_food,Kase,overture,1.0,0.0,18.18066,43.99115
 restoran,Restoran Dva Goluba,overture,0.5,0.0,18.55794,43.82273
+restoran,Restoran Mir,overture,0.5,0.0,18.41184,43.75512
+restoran,Restoran Vukovi,overture,0.5,0.0,18.55623,43.80937
 restoran,Dolina mira,overture,0.5,0.0,18.55422,43.80384
 restoran,Restaurant Kumbara,overture,0.5,0.0,18.55874,43.82488
-restoran,Cafe Restoran,overture,0.5,0.0,18.249,43.97289
-restoran,Leyla Restaurant,overture,0.5,0.0,18.25235,43.9709
-restoran,Sunčani gaj,osm,0.5,0.0,18.41732,43.78851
-restoran,Restoran Vukovi,overture,0.5,0.0,18.55623,43.80937
-restoran,Restaurant Labud,osm,0.5,0.0,18.26933,43.81866
-restoran,Ćevabdžinica i aščinica Hollywood - Podlugovi,overture,0.5,0.0,18.25343,43.97035
-fast_food,Belami,overture,1.0,0.0,18.2257,43.85946
-restoran,Bistro Šamin Gaj  od 1972.,overture,0.5,0.0,18.21218,43.86702
-restoran,Restoran SAMIN GAJ,overture,0.5,0.0,18.21141,43.8673
-fast_food,Domaci proizvodi Hasanbegovic,overture,1.0,0.0,18.22623,43.87431
-restoran,Restoran SAMIN GAJ,overture,0.5,0.0,18.20603,43.87761
-restoran,Ćevabdžinica Sajo,overture,0.5,0.0,18.26712,43.95751
-fast_food,Fast Food Domaćica 2,overture,1.0,0.0,18.26451,43.95754
-fast_food,Azzuro Pizzeria & Bistro,overture,1.0,0.0,18.26667,43.96143
-restoran,Restaurant Diana,overture,0.5,0.0,18.26396,43.96176
-restoran,U.R Novi Samin Gaj kod Elvedina,overture,0.5,0.0,18.20851,43.8675
+restoran,Ćevabdžinica Kod Ibre,overture,0.5,0.0,18.1734,43.99201
+fast_food,Fast Food Chilli,overture,1.0,0.0,18.17814,43.9923
+fast_food,Zeka,overture,1.0,0.0,18.17494,43.99384
 restoran,Damsy,overture,0.5,0.0,18.26467,43.96018
-restoran,Kod Kule,overture,0.5,0.0,18.3259,43.79383
-fast_food,U.R.Pizzeria Hrasnica,overture,1.0,0.0,18.31161,43.79707
-restoran,Restoran i Pekara As Hadzici,overture,0.5,0.0,18.21095,43.83126
-restoran,Restoran Zujevina,overture,0.5,0.0,18.21576,43.83623
-restoran,Restoran Han Binjezevo-Hadzici,overture,0.5,0.0,18.23327,43.84681
-restoran,DP restoran,overture,0.5,0.0,18.21189,43.83221
-restoran,Restoran Zovik,overture,0.5,0.0,18.21597,43.83931
-fast_food,Blažuj,overture,1.0,0.0,18.24528,43.84177
+fast_food,Fast Food Domaćica 2,overture,1.0,0.0,18.26451,43.95754
+fast_food,Caffe- Pizzeria No1,overture,1.0,0.0,18.18525,43.97842
+restoran,Restoran Valentino,overture,0.5,0.0,18.1815,43.98387
+fast_food,Džan food,overture,1.0,0.0,18.18191,43.99123
+restoran,Begova sofra,overture,0.5,0.0,18.19821,43.82252
+restoran,In Chicken,overture,0.5,0.0,18.20805,43.82363
+restoran,Buregdžinica Sarajka,overture,0.5,0.0,18.26725,43.95827
+restoran,Ćevabdžinica Sajo,overture,0.5,0.0,18.26712,43.95751
+fast_food,Azzuro Pizzeria & Bistro,overture,1.0,0.0,18.26667,43.96143
+restoran,Ćevabdžinica i aščinica Hollywood - Podlugovi,overture,0.5,0.0,18.25343,43.97035
+fast_food,Caffe & Pizzeria Centar,overture,1.0,0.0,18.26442,43.96394
+restoran,Restaurant Diana,overture,0.5,0.0,18.26396,43.96176
+restoran,Alegria Restaurant,overture,0.5,0.0,18.25064,43.97214
+restoran,Leyla Restaurant,overture,0.5,0.0,18.25235,43.9709
+restoran,"""Restoran ""Piramida Mjeseca""""",overture,0.5,0.0,18.18791,43.9716
+restoran,Cafe Restoran,overture,0.5,0.0,18.249,43.97289
+restoran,Vrutak,overture,0.5,0.0,18.18359,43.96627
+restoran,Sunčani gaj,osm,0.5,0.0,18.41732,43.78851
+fast_food,Konoba Hadzici,overture,1.0,0.0,18.20611,43.82315
+restoran,Pizzeria Garfild,overture,0.5,0.0,18.20654,43.82261
+restoran,Restaurant & Motel FS,overture,0.5,0.0,18.17503,43.78555
 restoran,panna cotta,overture,0.5,0.0,18.20156,43.82154
 fast_food,Pizzeria Viktorija,overture,1.0,0.0,18.20372,43.82185
 fast_food,EGGcellent,overture,1.0,0.0,18.20415,43.82228
-restoran,Pizzeria Garfild,overture,0.5,0.0,18.20654,43.82261
-restoran,In Chicken,overture,0.5,0.0,18.20805,43.82363
-fast_food,Konoba Hadzici,overture,1.0,0.0,18.20611,43.82315
-restoran,Buregdžinica Sarajka,overture,0.5,0.0,18.26725,43.95827
-fast_food,A burger GORA,overture,1.0,0.0,18.36109,43.96234
-restoran,Restoran Konak,overture,0.5,0.0,18.37266,43.97258
-restoran,Hacienda Restaurant,overture,0.5,0.0,18.38531,43.97632
+restoran,Ohran Pečenjara,overture,0.5,0.0,18.14093,44.01457
+restoran,Restaurant Zovik MB (Zado),overture,0.5,0.0,18.18009,43.78903
+restoran,Svadbeni salon SARAJ,overture,0.5,0.0,18.18143,43.79228
+fast_food,Čardak,overture,1.0,0.0,18.26071,44.01849
+restoran,DZE-KA Restoran,overture,0.5,0.0,18.13443,44.00902
+restoran,Restoran Ajdin,overture,0.5,0.0,18.15729,44.00238
+fast_food,Fast Food Kole,overture,1.0,0.0,18.14498,44.01054
+restoran,Ribarski Dom,overture,0.5,0.0,18.18421,43.98076
+fast_food,Pizzeria Kod Mehe,overture,1.0,0.0,18.18387,43.99437
+fast_food,Korpa,overture,1.0,0.0,18.14996,43.8497
 restoran,Vučiji Vajat,overture,0.5,0.0,18.51631,43.86486
 restoran,Restoran “Garden”,overture,0.5,0.0,18.55424,43.86783
