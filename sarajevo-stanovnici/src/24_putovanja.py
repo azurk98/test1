@@ -20,9 +20,11 @@ Dodjela: najbrži put (vrijeme vožnje kao u 08, 65% ograničenja), 5 iteracija 
   zastojem na vršnom satu (8% dnevnog prometa). Faza 1: putovanja na posao fiksno (40% zaposlenih autom,
   tamo i nazad); ostala po stanovniku i izvana po ulazu iz najmanjih kvadrata na brojačima.
   Šest brojača broji samo jedan smjer (SMJER_BROJANJA) i porede se samo s tim smjerom.
-  Faza 2: procjena matrice iz brojanja (multiplikativna korekcija parova zona čiji put prolazi
-  kroz brojač) dok se model ne poklopi s brojačima. Unakrsna provjera: svaki brojač izostavljen
-  iz faze 2 i procijenjen iz ostalih (koliko model vrijedi tamo gdje nema brojača).
+  Faza 2: lokalna korekcija: na ulici brojača (isti naziv, do 2,5 km, u smjeru brojanja) tok se
+  množi omjerom brojač/model najbližeg brojača, pa se model na brojačima poklapa; ostale ceste
+  ostaju na modelu putovanja. (Procjena matrice iz brojanja, ODME, je isprobana i odbačena: na
+  izostavljenom brojaču bila je lošija od faze 1.) Unakrsna provjera: svaki brojač izostavljen
+  i procijenjen iz modela i ostalih brojača (koliko vrijedi tamo gdje nema brojača).
 """
 from __future__ import annotations
 
@@ -75,6 +77,8 @@ SMJER_BROJANJA = {"KSBS03": "E", "KSBS04": "W", "KSBS05": "W", "KSBS06": "E", "K
 TACKA = {"KSBS22": ("Džemala Bijedića", (43.8452, 18.3470)), "KSBS27": ("*", None)}
 MSA_ITER = int(os.environ.get("MSA_ITER", 5))
 ODME_ITER = 40
+KOREKCIJA_M = 2500
+NESIGURNA_LOKACIJA = {"KSBS22"}   # publikacija nema koordinate; tačka je približna
 AUTOM_NA_POSAO = 0.4
 R_RUTA = int(os.environ.get("R_RUTA", 4))
 SIGMA_RUTA = 0.3
@@ -345,6 +349,8 @@ def main() -> None:
             cos = smjer[kand] @ smjer[j]
             grane_br.append((kand[cos > 0.3], kand[cos < -0.3]))
     br["grane"] = grane_br
+    br["index_src"] = np.arange(len(br))
+    bxy_m = bxy
     br = br[br.grane.notna()].reset_index(drop=True)
     kandidati = list(br.grane)
     y = br.pgds_2025.to_numpy(float)
@@ -389,62 +395,44 @@ def main() -> None:
     m_faza1 = np.array([tok[g].sum() for g in br.grane])
     T = sum(c * mats[k] for c, k in zip(koef, K3))
 
-    # ---- faza 2: procjena matrice iz brojanja (fiksna stabla zadnje iteracije)
-    e_brojac = np.full(len(e), -1)
+    # ---- faza 2: lokalna korekcija uz brojače. Procjena matrice iz brojanja (ODME) je isprobana
+    # (6 jačina): poklapa brojače, ali unakrsna provjera na izostavljenom brojaču bila je lošija nego
+    # bez nje (medijan 42–50% prema 28%), pa se ne koristi. Umjesto toga: tok na ulici brojača
+    # (isti naziv, do KOREKCIJA_M, u smjeru koji brojač broji) množi se omjerom brojač/model
+    # najbližeg brojača; ostale ceste ostaju na modelu putovanja.
+    omjer = y / np.maximum(m_faza1, 1)
+    bpt = np.c_[bxy_m.x, bxy_m.y][br.index_src.to_numpy()]
+    faktor = np.ones(len(e))
+    dmin = np.full(len(e), np.inf)
+    vlasnik = np.full(len(e), -1)
+    ulice = []
     for c, g in enumerate(br.grane):
-        e_brojac[g] = c
-    inc = sum(incidencija(P, cv, eid, e_brojac, len(br)).astype(np.float32) for P in Ps) / len(Ps)
-
-    np.savez_compressed(OUT.parent / "interim" / "model_odme.npz", T=T, inc=inc, y=y)
-
-    def odme(T0, aktivni, iters=ODME_ITER, damp=0.7, lam=0.0):
-        """lam > 0: svaka iteracija povlači matricu prema početnoj (manje izobličenje)."""
-        Tk = T0.copy()
-        for _ in range(iters):
-            m = np.einsum("od,odc->c", Tk, inc)
-            r = np.where(aktivni & (m > 0), y / np.maximum(m, 1e-9), 1.0)
-            # faktor para = geometrijska sredina omjera brojača na putu (prigušeno)
-            lr = np.log(r)
-            nk = inc[:, :, aktivni].sum(axis=2)
-            s = np.einsum("odc,c->od", inc[:, :, aktivni], lr[aktivni])
-            Tk = Tk * np.exp(damp * np.where(nk > 0, s / np.maximum(nk, 1), 0))
-            if lam:
-                Tk = np.exp((1 - lam) * np.log(np.maximum(Tk, 1e-12)) + lam * np.log(np.maximum(T0, 1e-12)))
-        return Tk
-
-    # izbor jačine korekcije: poklapanje s brojačima ≤ 5% (medijan) uz najbolju unakrsnu provjeru
-    sve = np.ones(len(br), bool)
-    varijante = [(40, 0.7, 0.0), (20, 0.5, 0.0), (10, 0.5, 0.0), (6, 0.4, 0.0), (40, 0.7, 0.05), (40, 0.7, 0.15)]
-    rez = []
-    for v in varijante:
-        m_in = np.einsum("od,odc->c", odme(T, sve, *v), inc)
-        lo = np.array([np.einsum("od,od->", odme(T, np.where(np.arange(len(br)) == c, False, sve), *v), inc[:, :, c])
-                       for c in range(len(br))])
-        mi_ = float(np.median(np.abs(m_in / y - 1)) * 100)
-        ml_ = float(np.median(np.abs(lo / y - 1)) * 100)
-        r2l = float(1 - ((y - lo) ** 2).sum() / ((y - y.mean()) ** 2).sum())
-        rez.append((v, mi_, ml_, r2l))
-        print(f"ODME iter {v[0]}, prigušenje {v[1]}, povlačenje {v[2]}: brojači medijan {mi_:.1f}%, "
-              f"unakrsno medijan {ml_:.1f}% (R² {r2l:.2f})")
-    dobri = [r for r in rez if r[1] <= 5] or rez
-    izbor = min(dobri, key=lambda r: r[2])[0]
-    print("Izabrano:", izbor)
-    odme_v = odme
-    odme = lambda T0, akt: odme_v(T0, akt, *izbor)  # noqa: E731
-
-    T2 = odme(T, sve)
-    m_faza2 = np.einsum("od,odc->c", T2, inc)
-    # unakrsna provjera
+        ime = eime[g[0]]
+        dist = np.hypot(*(mid - bpt[c]).T)
+        sel = (eime == ime) & (dist <= KOREKCIJA_M) if ime else (ehw == ehw[g[0]]) & (dist <= 300)
+        sm = SMJER_BROJANJA.get(br.brojac[c])
+        if sm:
+            sel &= (smjer[:, 0] > 0.3) if sm == "E" else (smjer[:, 0] < -0.3)
+        sel[g] = True
+        ulice.append(sel)
+    def faktori(aktivni):
+        f_ = np.ones(len(e)); dm = np.full(len(e), np.inf); vl = np.full(len(e), -1)
+        for c, sel in enumerate(ulice):
+            if not aktivni[c]:
+                continue
+            dist = np.hypot(*(mid - bpt[c]).T)
+            bolje = sel & (dist < dm)
+            f_[bolje], dm[bolje], vl[bolje] = omjer[c], dist[bolje], c
+        return f_, vl
+    aktivni = ~br.brojac.isin(NESIGURNA_LOKACIJA).to_numpy()
+    faktor, vlasnik = faktori(aktivni)
+    tok_kon = tok * faktor
+    m_faza2 = np.array([tok_kon[g].sum() for g in br.grane])
     loo = np.zeros(len(br))
     for c in range(len(br)):
-        a = sve.copy(); a[c] = False
-        loo[c] = np.einsum("od,od->", odme(T, a), inc[:, :, c])
-    # konačni tokovi po grani: tok faze 1 skaliran omjerom matrica preko istih stabala
-    tok2, tok1 = np.zeros(len(e)), np.zeros(len(e))
-    for P in Ps:
-        a2, a1 = dodijeli(P, cv, [T2, T], eid, n)
-        tok2 += a2 / len(Ps); tok1 += a1 / len(Ps)
-    tok_kon = tok * np.where(tok1 > 0, tok2 / np.maximum(tok1, 1e-9), 1.0)
+        a_ = aktivni.copy(); a_[c] = False
+        f_, _ = faktori(a_)
+        loo[c] = (tok * f_)[br.grane[c]].sum()
 
     def pok(m):
         gre = (m - y) / y
@@ -454,19 +442,18 @@ def main() -> None:
                 "medijan_aps_greska_pct": round(float(np.median(np.abs(gre)) * 100), 1),
                 "GEH_satni_<5_udio": round(float((geh < 5).mean()), 2)}
 
-    info = {"odme": {"iteracija": izbor[0], "prigusenje": izbor[1], "povlacenje": izbor[2],
-                     "varijante": [{"v": list(v), "brojaci_medijan_pct": round(a, 1), "unakrsno_medijan_pct": round(b, 1),
-                                    "unakrsno_R2": round(c, 2)} for v, a, b, c in rez]},
+    info = {"odme_odbacen": "procjena matrice iz brojanja: unakrsni medijan 42–50% (lošije od faze 1)",
             "faza1": pok(m_faza1), "faza2": pok(m_faza2), "unakrsna": pok(loo),
             "koef": dict(zip(("posao_po_zaposlenom", "ostalo_po_stanovniku", "izvana_po_ulazu"),
                              map(float, koef))),
             "putovanja_dnevno": {"posao": float((koef[0] * mats["hbw"]).sum() / 2),
                                  "ostalo": float((koef[1] * mats["oth"]).sum() / 2),
                                  "izvana": float((koef[2] * mats["ext"]).sum() / 2),
-                                 "nakon_faze2": float(T2.sum() / 2)}}
+                                 }}
     print(json.dumps(info, indent=1, ensure_ascii=False))
     br_out = br[["brojac", "lokacija", "lat", "lon", "pgds_2025"]].assign(
-        model_faza1=m_faza1.round(), model=m_faza2.round(), unakrsna=loo.round())
+        model_faza1=m_faza1.round(), model=m_faza2.round(), unakrsna=loo.round(),
+        korigovan=aktivni)
     br_out.to_csv(OUT / "model_brojaci.csv", index=False)
     print(br_out.drop(columns=["lat", "lon"]).to_string(index=False))
     json.dump(info, open(OUT / "model_info.json", "w"), ensure_ascii=False, indent=1)
