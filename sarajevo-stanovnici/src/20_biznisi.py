@@ -42,7 +42,7 @@ from scipy.spatial import cKDTree
 from shapely.geometry import Polygon
 
 from common import OSM_IME
-from common import CRS_M, CRS_WGS, INTERIM, OUT, RAW
+from common import CRS_M, CRS_WGS, DATA, INTERIM, OUT, RAW
 
 
 def _uvezi(ime, fajl):
@@ -136,6 +136,8 @@ def main() -> None:
 
     o = pd.DataFrame(osm_mjesta(RAW / OSM_IME, nodes) + overture_mjesta(),
                      columns=["vrsta", "ime", "lon", "lat", "izvor"])
+    if (DATA / "rucno_mjesta.csv").exists():   # ručne dopune (npr. škole kojih nema u OSM/Overture)
+        o = pd.concat([o, pd.read_csv(DATA / "rucno_mjesta.csv")[["vrsta", "ime", "lon", "lat", "izvor"]]], ignore_index=True)
     o = gpd.GeoDataFrame(o, geometry=gpd.points_from_xy(o.lon, o.lat), crs=CRS_WGS).to_crs(CRS_M)
     o["A"] = o.vrsta.map({"fast_food": 1.0, "restoran": 0.5, "muzicka_javna": 3.0, "muzicka_privatna": 1.0})
     o = bez_duplikata(o[o.vrsta.str.startswith("muzicka")], 40).pipe(

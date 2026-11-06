@@ -1,21 +1,21 @@
 strategija,rang,h3_id,opcina,mz,procjena,potraznja_blizu,novo_pokriveno,najblizi_konkurent_m,konkurenata_1500m,cesta_m,stanica_m,nagib_pct,znakovi_zemljista,lon,lat
-najvise,1,8a1ef4596467fff,Ilidža,Stup,269.5,22783,1443,1940,0,1,47,1.0,—,18.32742,43.84362
-najvise,2,8a1ea92c9837fff,Novi Grad Sarajevo,Zabrđe,202.1,12083,2112,4589,0,1,16,4.0,—,18.3123,43.87572
-najvise,3,8a1ef4596b9ffff,Novi Grad Sarajevo,Briješće,147.7,22984,61,3150,0,0,96,10.0,parking 300 m²,18.33721,43.85244
-najvise,4,8a1ef45962a7fff,Novi Grad Sarajevo,Alipašino Polje AII,133.8,23584,0,2387,0,3,84,5.0,parking 620 m²; poslovni_objekat 314 m²,18.34115,43.84382
-najvise,5,8a1ef45b0467fff,Vogošća,Vogošća,132.0,4219,1723,6781,0,1,161,4.0,parking 571 m²,18.34332,43.90182
-najvise,6,8a1ef4590077fff,Novi Grad Sarajevo,Čengić Vila,121.0,26550,12,1731,0,21,33,2.0,—,18.3673,43.84895
-najvise,7,8a1ef459052ffff,Novi Grad Sarajevo,Švrakino Selo II,109.1,25415,0,2049,0,11,98,3.0,parking 2.840 m²,18.35422,43.84639
-najvise,8,8a1ef6965867fff,Ilidža,Naselje Bulevar,97.9,21722,24,999,1,1,21,1.0,—,18.31828,43.83796
-najvise,9,8a1ef4591d97fff,Novo Sarajevo,Trg heroja,93.1,26212,0,778,2,18,109,1.0,parking 441 m²,18.37907,43.8507
-najvise,10,8a1ef458278ffff,Centar Sarajevo,Džidžikovac-Koševo I,83.5,20797,111,846,5,4,9,8.0,—,18.41176,43.85985
-bijela_mrlja,1,8a1ef45b6257fff,Vogošća,Vogošća,204.4,4359,3863,7420,0,49,116,9.0,poslovni_objekat 378 m²,18.33088,43.90242
-bijela_mrlja,2,8a1ea92cd0cffff,Novi Grad Sarajevo,Reljevo,113.9,4032,1179,5390,0,7,84,8.0,—,18.30411,43.88309
-bijela_mrlja,3,8a1ea92dd917fff,Ilidža,Gladno polje,54.2,1842,811,6621,0,14,1448,10.0,—,18.23028,43.85669
-bijela_mrlja,4,8a1ef4586817fff,Vogošća,Kobilja Glava,55.6,3239,440,4648,0,919,65,12.0,—,18.39273,43.89506
-bijela_mrlja,5,8a1ef4596ae7fff,Novi Grad Sarajevo,Alipašin Most I,142.0,23170,301,3073,0,0,82,12.0,—,18.34342,43.85214
-bijela_mrlja,6,8a1ef696036ffff,Ilidža,Sokolović-kolonija,54.6,3823,199,2833,0,396,65,1.0,—,18.31541,43.8099
+najvise,1,8a1ef4596407fff,Ilidža,Stup,180.2,23257,949,1577,0,70,133,1.0,—,18.32317,43.84237
+najvise,2,8a1ef45962a7fff,Novi Grad Sarajevo,Alipašino Polje AII,149.3,23584,77,2387,0,3,84,5.0,parking 620 m²; poslovni_objekat 314 m²,18.34115,43.84382
+najvise,3,8a1ef4590077fff,Novi Grad Sarajevo,Čengić Vila,133.4,26550,23,1731,0,21,33,2.0,—,18.3673,43.84895
+najvise,4,8a1ef459052ffff,Novi Grad Sarajevo,Švrakino Selo II,120.5,25415,0,2049,0,11,98,3.0,parking 2.840 m²,18.35422,43.84639
+najvise,5,8a1ef459699ffff,Novi Grad Sarajevo,Briješće,103.0,21650,487,2735,0,6,85,8.0,—,18.32576,43.85503
+najvise,6,8a1ef4591d97fff,Novo Sarajevo,Trg heroja,98.6,26212,0,778,2,18,109,1.0,parking 441 m²,18.37907,43.8507
+najvise,7,8a1ef696580ffff,Ilidža,Naselje Bulevar,90.6,21481,0,742,1,8,142,1.0,parking 3.191 m²,18.31567,43.83634
+najvise,8,8a1ef4596b9ffff,Novi Grad Sarajevo,Briješće,83.6,22984,0,3150,0,0,96,10.0,parking 300 m²,18.33721,43.85244
+najvise,9,8a1ef4591897fff,Novo Sarajevo,Željeznička,78.9,24337,19,343,3,8,102,1.0,poslovni_objekat 4.370 m²; parking 875 m²,18.39051,43.85363
+najvise,10,8a1ef6965aeffff,Ilidža,Stupsko Brdo,74.6,20605,0,1816,0,30,47,0.0,—,18.32908,43.8322
+bijela_mrlja,1,8a1ea92cd0cffff,Novi Grad Sarajevo,Reljevo,93.4,4032,1543,3850,0,7,84,8.0,—,18.30411,43.88309
+bijela_mrlja,2,8a1ea92dd917fff,Ilidža,Gladno polje,54.2,1842,811,6621,0,14,1448,10.0,—,18.23028,43.85669
+bijela_mrlja,3,8a1ef4596ae7fff,Novi Grad Sarajevo,Alipašin Most I,136.9,23170,305,3073,0,0,82,12.0,—,18.34342,43.85214
+bijela_mrlja,4,8a1ef4586817fff,Vogošća,Kobilja Glava,35.6,3239,306,3935,0,919,65,12.0,—,18.39273,43.89506
+bijela_mrlja,5,8a1ef696036ffff,Ilidža,Sokolović-kolonija,54.6,3823,199,2833,0,396,65,1.0,—,18.31541,43.8099
+bijela_mrlja,6,8a1ef45b45b7fff,Vogošća,Semizovac,39.9,3267,170,3025,0,5,98,5.0,—,18.31677,43.91994
 bijela_mrlja,7,8a1ef4581d9ffff,Stari Grad Sarajevo,Mošćanica,13.1,1533,123,3457,0,1853,232,10.0,—,18.44476,43.8899
-bijela_mrlja,8,8a1ef45b45b7fff,Vogošća,Semizovac,64.6,3267,117,9516,0,5,98,5.0,—,18.31677,43.91994
-bijela_mrlja,9,8a1ea92c899ffff,Novi Grad Sarajevo,Dobroševići,49.3,2971,100,4925,0,374,398,5.0,—,18.27764,43.87361
-bijela_mrlja,10,8a1ef4580d27fff,Centar Sarajevo,Betanija,26.7,3825,85,3903,0,114,179,9.0,—,18.41433,43.89459
+bijela_mrlja,8,8a1ea92c899ffff,Novi Grad Sarajevo,Dobroševići,48.0,2971,100,4925,0,374,398,5.0,—,18.27764,43.87361
+bijela_mrlja,9,8a1ef4580d27fff,Centar Sarajevo,Betanija,25.9,3825,85,3903,0,114,179,9.0,—,18.41433,43.89459
+bijela_mrlja,10,8a1ea92c0757fff,Ilidža,Rakovica,18.2,660,77,9360,0,144,3790,5.0,—,18.20732,43.8784
