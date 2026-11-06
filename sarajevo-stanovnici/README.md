@@ -223,6 +223,9 @@ zaglavlju skripta). Dvije strategije: `najvise` (najveći udio) i `bijela_mrlja`
   Trg heroja (~105); Novi Grad nema javnu muzičku školu u modelu, a najbliža je ~2 km.
   Bijela mrlja: Zabrđe (~1.750 djece bez škole u 15 min), Betanija, Alipašin Most I.
 
+Muzička škola: kao postojeća ponuda računaju se samo javne škole (`MUZ_SAMO_JAVNE` u
+`20_biznisi.py`, odluka korisnika); privatne se zanemaruju.
+
 Ručne dopune: `data/rucno_mjesta.csv` (objekti kojih nema u OSM/Overture). Za sada područno
 odjeljenje javne osnovne muzičke škole u Vogošći (potvrdio korisnik; tačka u centru Vogošće je
 približna, adresa nije utvrđena). Sa njom Vogošća više nije „bijela mrlja“ za muzičku školu.

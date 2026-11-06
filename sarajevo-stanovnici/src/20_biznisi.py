@@ -61,6 +61,7 @@ DUPLIKAT_M = 50
 BRZA_HRANA = {"fast_food_restaurant", "pizza_restaurant", "burger_restaurant", "doner_kebab_restaurant",
               "chicken_restaurant", "sandwich_shop", "sushi_restaurant", "food_delivery_service",
               "chinese_restaurant", "fast_food"}
+MUZ_SAMO_JAVNE = True   # privatne muzičke škole se ne računaju kao postojeća ponuda
 MUZ_RE = re.compile(r"(muzick\w* (i balet\w* )?(skol|atelje)|music school|school of music|rock ?school|"
                     r"pop rock skola|skola za muziku|osnovno muzicko)")
 JAVNA_RE = re.compile(r"(osnovn|srednj|\bju\b|javn|mladen pozajic)")
@@ -262,7 +263,8 @@ def main() -> None:
 
     # --- muzička škola
     djeca = 0.55 * polja.d0_14.to_numpy(float) + 0.04 * polja.d15_64.to_numpy(float)
-    ms = o[o.vrsta.str.startswith("muzicka")]
+    # samo javne muzičke škole kao konkurencija (odluka korisnika: privatne se zanemaruju)
+    ms = o[o.vrsta == "muzicka_javna"] if MUZ_SAMO_JAVNE else o[o.vrsta.str.startswith("muzicka")]
     print("Muzičke škole:", ms[["vrsta", "ime", "izvor"]].to_string(index=False))
     kand = (u4 & ((acc.stanica_m.to_numpy() <= 400) | (cesta_m <= 150)) & (nagib <= 12) & (pristup >= 40)
             & (izgr >= 0.05))
