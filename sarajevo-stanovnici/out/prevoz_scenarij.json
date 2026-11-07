@@ -1,0 +1,137 @@
+{
+ "pretpostavke": {
+  "beta": 0.07,
+  "S0": 0.45,
+  "poboljsanje": {
+   "frekvencija": 2.0,
+   "brzina": 1.25,
+   "hod_brda": 0.7,
+   "presjedanje": 0.5
+  }
+ },
+ "osjetljivost": {
+  "0.35": {
+   "udio_danas": 0.35,
+   "udio_poslije": 0.457,
+   "auto_putovanja_promjena_pct": -16.476,
+   "putnika_javni_promjena_pct": 30.599
+  },
+  "0.45": {
+   "udio_danas": 0.45,
+   "udio_poslije": 0.562,
+   "auto_putovanja_promjena_pct": -20.403,
+   "putnika_javni_promjena_pct": 24.938
+  },
+  "0.55": {
+   "udio_danas": 0.55,
+   "udio_poslije": 0.659,
+   "auto_putovanja_promjena_pct": -24.236,
+   "putnika_javni_promjena_pct": 19.829
+  }
+ },
+ "vozilo_sati": [
+  107870,
+  95099
+ ],
+ "km_preko_90pct_vrsni_sat": [
+  24.8,
+  8.9
+ ],
+ "presjeci": {
+  "Obala Kulina bana": [
+   23368,
+   20546,
+   -12.1
+  ],
+  "Maršala Tita": [
+   27390,
+   23262,
+   -15.1
+  ],
+  "Zmaja od Bosne (Čengić Vila)": [
+   29138,
+   25207,
+   -13.5
+  ],
+  "Bulevar Meše Selimovića": [
+   36596,
+   31494,
+   -13.9
+  ],
+  "Alipašina": [
+   16171,
+   13041,
+   -19.4
+  ],
+  "Safeta Zajke": [
+   14267,
+   11701,
+   -18.0
+  ],
+  "Džemala Bijedića": [
+   0,
+   0,
+   NaN
+  ]
+ },
+ "auto_min_vrsni": {
+  "Velešići → Zabrđe": [
+   17.8,
+   17.3
+  ],
+  "Dobrinja → Alipašino Polje": [
+   7.1,
+   7.1
+  ],
+  "Alipašin most → Bentbaša": [
+   14.3,
+   14.0
+  ],
+  "Koševo → Bentbaša": [
+   8.5,
+   8.3
+  ],
+  "Dobrinja I → Hrasno": [
+   8.8,
+   8.6
+  ],
+  "Alipašin most → Marijin Dvor": [
+   9.3,
+   9.2
+  ],
+  "Pale (ulaz) → Marijin Dvor": [
+   16.3,
+   16.3
+  ]
+ },
+ "javni_min": {
+  "Velešići → Zabrđe": [
+   51.0,
+   38.0
+  ],
+  "Dobrinja → Alipašino Polje": [
+   24.0,
+   19.0
+  ],
+  "Alipašin most → Bentbaša": [
+   43.0,
+   34.0
+  ],
+  "Koševo → Bentbaša": [
+   30.0,
+   24.0
+  ],
+  "Dobrinja I → Hrasno": [
+   33.0,
+   25.0
+  ],
+  "Alipašin most → Marijin Dvor": [
+   31.0,
+   24.0
+  ],
+  "Pale (ulaz) → Marijin Dvor": [
+   60.0,
+   42.0
+  ]
+ }
+}

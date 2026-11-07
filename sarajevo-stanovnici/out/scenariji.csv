@@ -1,0 +1,16 @@
+scenarij,naziv,vozilo_sati_dnevno,usteda_vozilo_sati,na_novoj_dionici_dnevno,min: Velešići → Zabrđe,min: Dobrinja → Alipašino Polje,min: Alipašin most → Bentbaša,min: Koševo → Bentbaša,min: Dobrinja I → Hrasno,min: Alipašin most → Marijin Dvor,min: Pale (ulaz) → Marijin Dvor
+0,Osnovno stanje,107870,0,,17.8,7.1,14.3,8.5,8.8,9.3,16.3
+P,"Planirani tunel Bentbaša – Koševo (ispod Bjelava, prema tunelu Ciglane)",107747,123,8169.0,17.8,7.1,14.2,8.4,8.8,9.3,16.3
+B,Sjeverna brdska veza: Zabrđe – Sokolje – Buća Potok – Pofalići – Velešići,107710,160,100.0,18.0,7.1,14.3,8.5,8.8,9.4,16.3
+C,Tunel ispod Mojmila: Alipašino Polje – Dobrinja,107729,141,12296.0,17.8,5.1,14.3,8.5,8.1,9.3,16.3
+C2,"Tunel ispod Mojmila, istočnije: Alipašino Polje (istok) – Dobrinja I",107373,496,19224.0,17.7,7.1,14.3,8.5,4.5,9.4,16.3
+C3,Tunel Hrasno – istočna Dobrinja (prema Lukavici),107263,606,26060.0,17.8,7.1,14.3,8.5,5.4,9.3,16.3
+G,Produžetak Gradskog autoputa uz prugu: Drinska (Pofalići) – Željeznička – Marijin Dvor,107687,182,24589.0,17.6,7.1,14.2,8.6,8.7,9.3,16.3
+S,Sjeverna longitudinala: Put života (Pofalići) – Koševo,107622,248,16885.0,18.0,7.1,14.3,8.4,8.7,9.3,16.3
+T1,Prva transverzala: Pofalići (Ambasada SAD) – Željeznička – Koševsko brdo/Velešići – Kobilja Glava,107517,353,17216.0,17.6,7.1,14.2,8.4,8.8,9.2,16.3
+T6,Šesta transverzala: Hrasno – Čengić Vila – Buća Potok – Hotonj,107177,693,23845.0,17.8,7.1,14.3,8.4,8.7,9.3,16.3
+T6O,Šesta transverzala preko Otoke (priključak u nivou),107234,635,19559.0,17.8,7.1,14.2,8.4,8.7,9.3,16.3
+T6D,"Šesta transverzala preko Otoke, denivelisano (bez priključka na Otoci)",107353,516,18816.0,17.6,7.1,14.1,8.4,8.9,9.2,16.3
+T16,Prva i Šesta transverzala zajedno,106934,936,19221.0,17.6,7.1,14.2,8.4,8.7,9.3,16.3
+SC,Nova sjeverna cesta: Zabrđe – Sokolje – Buća Potok – Velešići – Koševsko brdo – Koševo (34),106963,907,26246.0,9.6,7.1,14.1,8.5,8.6,9.2,16.3
+SP,Sjeverni obilazak: Put života – Koševo + planirani tunel Koševo – Bentbaša,107566,304,16344.0,17.5,7.1,14.2,8.3,8.7,9.4,16.3

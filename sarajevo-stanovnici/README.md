@@ -1,0 +1,629 @@
+# Procjena broja stanovnika po H3 polju: Grad Sarajevo, Ilidža i Vogošća
+
+Mreža: H3 rezolucija **10** (~0,015 km², stranica šestougla ~66 m; 22.163 polja u šest općina), zadano u `common.py`
+(`H3_RES`, ili varijabla okruženja `H3_RES=9` za rezoluciju iz SPEC-a, ~0,105 km²). Na rezoluciji 10
+procjena po polju je nesigurnija (manje zgrada po polju), ali zbirovi po općini ostaju tačni; MAPE za
+Stari Grad 17,1% (rezolucija 9: 16,4%).
+
+Implementacija specifikacije iz [`SPEC.md`](SPEC.md).
+
+## Pokretanje
+
+```bash
+pip install -r requirements.txt
+cd src
+python 01_preuzimanje.py        # OSM (Overpass; --bbbike za BBBike ekstrakt), WorldPop, GHSL, PDF-ovi -> raw/
+python 01b_dopuna_overture.py   # Ilidža i Vogošća: granice, MZ i OSM objekti izvan BBBike okvira (Overture) -> raw/Sarajewo_sire.osm.gz
+python 02_zgrade.py             # zgrade, spratnost, stambeni udio + KONTROLNA TAČKA
+python 03_mreza.py              # H3 res 9, dijelovi polja (polje ∩ općina ∩ MZ), WorldPop
+python 04_mz_novi_grad.py --nastavi  # MZ Novog Grada iz adresa (bez --nastavi staje ako je < 40% adresirano)
+python 04b_mz_centar.py         # MZ Centra iz Odluke o MZ (2022): ulice -> zgrade -> poligoni
+python 05_raspodjela.py         # težine, kontrolni zbirovi, starosne grupe, 9 scenarija
+python kalibracija_gustine.py   # (dijagnostika) omjer gustine kuće/blokovi i α na MZ Novog Grada
+python 06_provjera.py           # -> out/validacija.md
+python 07_karta.py              # -> out/karta.html
+python 08_dostupnost.py         # dostupnost i atraktivnost lokacije -> out/dostupnost_h3.gpkg/.csv
+python 09_supermarket.py        # lokacije za novi supermarket (Huff) -> out/supermarket_*.csv/.gpkg
+python 12_google_places.py      # (opcionalno, treba GOOGLE_MAPS_API_KEY) trgovine iz Google Places -> raw/
+python 10_teren.py              # topografija: reljef, izohipse, visina i nagib po polju -> out/teren_*
+python 11_putevi.py             # mreža puteva za prikaz (10 klasa: autoput … stepenice, tramvaj) -> out/putevi.geojson
+python 15_ulice.py              # pristup autom: uske i strme ulice -> out/ulice_h3.csv (prije koraka 14)
+python 14_kvalitet_zivota.py    # kvalitet života: pješačka dostupnost sadržaja -> out/kvalitet_zivota_h3.csv
+python 16_sunce.py              # sati sunca zimi (zasjenjenje brdima) -> out/sunce_h3.csv
+python 17_zrak.py               # smog i magla zimi: izloženost inverziji -> out/zrak_h3.csv
+python 18_javni_prevoz.py       # javni prevoz: linije, frekvencija, PTAL -> out/prevoz_h3.csv, out/linije.geojson
+python 19_autopraonica.py       # lokacije za autopraonicu -> out/autopraonica_*.csv
+python 20_biznisi.py            # dostavna kuhinja i muzička škola -> out/biz_*.csv
+python 22_guzva.py              # gužva po satu na glavnim cestama -> out/guzva_*.{geojson,json}
+python 23_radna_mjesta.py       # radna mjesta po polju -> out/radna_mjesta_{h3,mz}.csv
+python 24_putovanja.py          # model putovanja autom kalibriran na brojače -> out/model_*.{geojson,csv,json}
+python 13_stranica.py           # interaktivna stranica (artifact) -> out/stranica.html
+python 07_karta.py              # ponovo, da karta dobije slojeve iz koraka 08–11
+```
+
+**Kontrolna tačka prije koraka 5:** `02_zgrade.py` ispisuje (i sprema u
+`interim/zgrade_statistika.json`) koliko zgrada ima `building:levels` i adresu,
+ukupno i po općini. Pregledati prije pokretanja `05_raspodjela.py`.
+
+## Ručni koraci (ne mogu se automatizovati pouzdano)
+
+| Šta | Gdje | Posljedica ako se preskoči |
+|---|---|---|
+| (Opcionalno) pregledati `interim/novi_grad_ulice_mz_auto.csv` (620 pravila, 290 ulica, izvučeno iz tabela PDF-a; napomene o izuzecima u koloni `izvorni_tekst` se ne primjenjuju) i ispravljenu verziju spremiti kao `data/novi_grad_ulice_mz.csv` | `raw/novi_grad_ulice_mz.pdf` | Izuzeci iz napomena (npr. brojevi koji pripadaju Novom Sarajevu) se ignorišu |
+| Utvrditi matične MZ za Alipašin Most III i Zabrđe, upisati u `MATICNE_MZ_NOVI_GRAD` u `src/common.py` | odluka općine | Koristi se pravilo za nepoznatu matičnu MZ (SPEC 5.2) |
+
+## Ilidža i Vogošća (05.11.2026)
+
+Model pokriva šest općina: Centar, Stari Grad, Novo Sarajevo, Novi Grad, **Ilidža** (74.137 st.)
+i **Vogošća** (30.450 st., FZS 30.06.2026). Radna mjesta 2024: Ilidža 26.600, Vogošća 6.888;
+zaposleni stanovnici 07/2025: 23.474 i 10.354 (FZS KS u brojkama 2025, tabela 4.2; ZIS KS).
+- **OSM podaci**: BBBike ekstrakt ne pokriva sjever Vogošće ni zapad i jug Ilidže, a Overpass i
+  Geofabrik nisu bili dostupni iz okruženja. `01b_dopuna_overture.py` dopunjuje taj dio iz Overture
+  Maps (izdanje 2026-10-21): zgrade samo iz OSM izvora (10.186; Microsoftove ML zgrade nisu uzete,
+  da metoda bude ista kao u ostalim općinama), ceste i pruge (čvorovi na rubu spojeni s ekstraktom),
+  namjena zemljišta, rijeke i sadržaji (škole, vrtići, ambulante ...). Rezultat je
+  `raw/Sarajewo_sire.osm.gz` u istom XML obliku; svi koraci ga koriste preko `common.OSM_IME`.
+  Overture nema broj traka ni sve jednosmjerne oznake, pa je model prometa tu grublji.
+- **Granice**: općine iz OSM relacija 2528207 (Ilidža) i 2528291 (Vogošća), preko Overture.
+  Vogošća: 21 MZ iz OSM poligona. Ilidža: 15 MZ iz OSM poligona (38% površine, uglavnom ruralno);
+  gradski dio (Stup, Otes, Hrasnica, Sokolović Kolonija, Butmir ...) podijeljen je oko Overture
+  naziva naselja (Voronoi), pa su te „MZ“ približne i ne odgovaraju zvaničnim granicama.
+  Isti naziv u dvije općine dobija oznaku općine, npr. „Kovači (Ilidža)“.
+- **Parametri raspodjele**: nema podataka ispod općine, pa Ilidža i Vogošća koriste parametre
+  Novog Grada (α 0,9, gustina niskih zgrada 0,5): mješavina blokova i kuća. Spratnost je u OSM-u
+  rijetka (Ilidža 2%, Vogošća 0,3%), pa je procjena iz modela spratnosti.
+- Okviri karte, terena, smoga i GHSL-a prošireni na 18,13–18,56 E, 43,72–44,02 N; satelitska
+  podloga se ponovo preuzima (`raw/s2cloudless_2016_sire.jpg`). Model putovanja: WorldPop izvan
+  šest općina samo unutar područja s OSM cestama (`common.pokrivenost_osm`), ulazi na rubu tog područja.
+
+### Rezultati scenarija sa šest općina (zamjenjuju brojke u odjeljcima 31–34 niže)
+
+Proširenje je uklonilo vještačku gužvu na rubu starog okvira: saobraćaj sa zapada (Hadžići,
+Kiseljak) je ulazio na rubu ekstrakta kod Stupa i išao Igmanskom i Ravnogorskom kao lokalnim
+ulicama (v/c do 1,9). Sada su to dionice ispod kapaciteta, a najopterećenije su Obala Kulina bana i
+Vilsonovo šetalište. Dionica preko kapaciteta u vršnom satu: 130 → 69; vozilo-km dnevno 4,88 → 4,20
+miliona; vozilo-sati dnevno 191.300 → 107.900. Zato su i uštede scenarija manje u apsolutnom iznosu.
+Model vs brojači (prije prilagođavanja): R² 0,46 → 0,51, medijan greške 27,7 → 27,2%; izostavljeni
+brojač 31,8 → 28,0%. Novi brojači u modelu: Mostarsko raskršće i Bojnička (Ilidža).
+
+| Scenarij | vozila/dan na novoj dionici | ušteda vozilo-sati/dan | glavni efekti |
+|---|---|---|---|
+| T16 Prva + Šesta transverzala | 19.200 | 936 | Alipašina −54%, Otoka vršno −12% |
+| SC nova sjeverna cesta (34) | 26.200 | 907 | Safeta Zajke −21%, Zmaja od Bosne −13%, Otoka ulaz −8% |
+| T6 Šesta transverzala | 23.800 | 693 | Alipašina −26%, Zmaja od Bosne −12%, Otoka vršno +29% |
+| T6O Šesta preko Otoke, u nivou | 19.600 | 635 | Otoka ulaz +31%, vršno +43% |
+| C3 Hrasno – istočna Dobrinja | 26.100 | 606 | Bulevar M. Selimovića −9% |
+| T6D Šesta preko Otoke, denivelisano | 18.800 | 516 | Otoka vršno −10%, Alipašina −22% |
+| C2 Mojmilo istočnije | 19.200 | 496 | Bulevar M. Selimovića −10% |
+| T1 Prva transverzala | 17.200 | 353 | Alipašina −52% |
+| SP sjeverni obilazak + tunel | 16.300 | 304 | Maršala Tita −9%, Alipašina +37% |
+| S sjeverna longitudinala | 16.900 | 248 | Maršala Tita −9%, Alipašina +32% |
+| G autoput do Marijin Dvora | 24.600 | 182 | Maršala Tita +18% |
+| B brdska veza | – | 160 | |
+| C Mojmilo | 12.300 | 141 | Bulevar M. Selimovića −11% |
+| P tunel Bentbaša – Koševo | 8.200 | 123 | Obala −5% |
+
+Javni prevoz (32, S0 45%): udio 45 → 56%, putovanja autom −20% (S0 35%: −16%, 55%: −24%),
+vozilo-sati 107.900 → 95.100 (−12.800 dnevno, ~14× najbolje ceste); svi koridori −12 do −19%.
+Brda (33; sada 233 brdske zone, ~178.000 stanovnika): B1 udio brdo↔dolina 39 → 56%, auta iz brda
+−28%, vozilo-sati −10.100; B2 (+ parking u centru) 60%, −34%, −13.000; Alipašina −27%, Obala −19%.
+
+## Prvo pokretanje (04.11.2026)
+
+- **OSM**: Overpass nije bio dostupan (prekid veze / preopterećen), pa je korišten BBBike
+  sedmični ekstrakt za Sarajevo (`--bbbike`). Granice koje izlaze iz okvira ekstrakta
+  (Centar, Stari Grad, Grad Sarajevo, MZ Mošćanica) dopunjene su s `api.openstreetmap.org`.
+  Dijelovi Centra i Starog Grada izvan okvira imaju ~40 stanovnika po WorldPopu (zanemarivo).
+- **Kontrolna tačka**: 46.838 zgrada; `building:levels` ima **4,7%**, adresu **11,2%**
+  (Novi Grad stambene: **8,3%**, ispod praga od 40%). Nastavljeno sa `--nastavi`; adrese
+  su svrstane u MZ u 95% slučajeva, sve 29 MZ dobile su poligon, ali su granice grube.
+- **Spratnost**: GHSL je na zgradama s poznatom spratnošću gotovo nekoristan (r = 0,13,
+  ~3 sprata bez obzira na stvarnu visinu). Zato se, umjesto GHSL/3, spratnost procjenjuje
+  modelom (gradient boosting na 2.194 zgrade s `building:levels`; ulazi: površina i oblik
+  otiska, tip, gustina i veličina okolnih zgrada, GHSL). Prostorna unakrsna provjera
+  (blokovi 500 m): r = 0,70, MAE 1,7 sprata.
+- **Validacija**: zbirovi općina i starosnih grupa tačni. Stambena površina je precijenjena
+  (medijan ~80 m²/st.; vjerovatno pomoćni objekti tipa `yes`), što utiče samo na apsolutni
+  nivo, ne na raspodjelu unutar općine. Visoke zgrade (Alipašino Polje, Dobrinja C/D) su
+  bile potcijenjene u odnosu na prigradska naselja (Briješće, Dobroševići); vidi ispravku ispod.
+- **Ispravka potcjenjivanja visokih zgrada** (`src/kalibracija_gustine.py`, na MZ Novog Grada 2010):
+  1. *Gustina stanovanja*: m² u zgradama ispod 5 spratova nosi ~0,5 stanovnika u odnosu na m²
+     u blokovima (~100 vs ~50 m²/st.; stabilno za pragove 4–6). `GUSTINA_NISKA = 0.5`.
+  2. *α = 0,9* umjesto 0,7: WorldPop daje visokim MZ 11% stanovnika Novog Grada (evidencija 2010: 30%),
+     a prigradskim 34% (2010: 13%). Greška udjela MZ pada s α (0,7: 0,40; 0,9: 0,375; 1,0: 0,37).
+     Scenariji raspona ostaju 0,5 / 0,7 / 0,9.
+  Rezultat: Alipašino Polje 0,70–1,10 udjela iz 2010 (prije 0,29–0,69), Dobrinja D 0,92 (0,65),
+  Olimpijsko Selo 0,83 (0,61); Briješće 1,75 (2,24), Dobroševići 2,50 (3,14).
+  Preostala odstupanja (Dobrinja C, Švrakino Selo I, Aneks) potiču od grubih MZ poligona.
+
+## Dostupnost i atraktivnost lokacije (`08_dostupnost.py`)
+
+Dodatni pokazatelji po polju, za analizu lokacija; procjena stanovnika se ne mijenja.
+
+| Kolona | Značenje |
+|---|---|
+| `pjesice_5/10/15` | stanovnici dostupni pješice (OSM ulice i staze; 4,8 km/h na ravnom, nagib po Toblerovoj formuli iz Copernicus DEM-a: 10% uzbrdo 3,4 km/h, 20% uzbrdo 2,4 km/h) |
+| `auto_5/10/15` | stanovnici dostupni autom (jednosmjerne, `maxspeed` ili tipična brzina klase × 0,65) |
+| `poi_10min` | trgovine, usluge, uredi (`shop`/`amenity`/`office`) za 10 min pješice |
+| `stanica_m`, `stanica_tip` | najbliža stanica (tramvaj / trolejbus / autobus; oznake < 40 m spojene) |
+| `stanice_400m`, `tramvaj_400m` | broj stanica u krugu 400 m |
+| `glavna_cesta_m` | udaljenost do magistralne/primarne/sekundarne ceste |
+| `ulice_km_km2`, `raskrsnice_km2` | gustina ulica i raskrsnica |
+| `atraktivnost` | 0–100: ponderisani percentilni rangovi (pješice 10 min 20%, auto 10 min 15%, POI 20%, stanice 400 m 15%, najbliža stanica 10%, glavna cesta 10%, raskrsnice 10%); ponderi u `TEZINE` |
+
+Ograničenja: dostupni stanovnici samo iz četiri modelirane općine (rubni efekat prema Ilidži,
+Vogošći, Istočnom Sarajevu); bez podataka o gužvi; javni prevoz je samo blizina stanica, bez voznog reda.
+
+## Lokacije za supermarket (`09_supermarket.py`)
+
+Huffov model: stanovnici polja dijele kupovinu namirnica na trgovine do 20 min
+(P ∝ veličina · vrijeme^-2; vrijeme = min(pješice, autom + 2 min)). Postojeće trgovine iz OSM-a:
+supermarket = 1 (ili površina/1000 m², 0,5–4), mall 1, department_store 0,5, convenience 0,25.
+Nova trgovina (A = 1) u svakom polju bez supermarketa, ≤ 400 m od glavne ceste; izbor redom
+(svaki izbor ulazi u konkurenciju), najmanje 700 m razmaka. Dvije strategije:
+
+- **bijela_mrlja**: najviše stanovnika koji danas hodaju > 10 min do supermarketa dolazi na ≤ 10 min.
+  Prva tri: Briješće, Naselje heroja Sokolje, Švrakino Selo III (najviše kupaca među njima, ~1.900).
+- **najveci_promet**: najviše osvojenih kupaca (uglavnom od konkurencije): Željeznička, Trg heroja,
+  Alipašino Polje BII; stabilno za λ 1,5–2,5.
+
+Postojeće trgovine: OSM + 28 trgovina koje ima samo Overture Maps Places (`raw/overture_places.parquet`,
+filtrirano po kategoriji, pouzdanosti i nazivu; duplikati < 75 m od OSM-a uklonjeni). Poređenje dva
+izvora (Lincoln–Petersen) procjenjuje 400–675 trgovina namirnica u četiri općine, a OSM ih ima 237
+(35–60%); nedostaju uglavnom male nezavisne trgovine. Uz nagib u pješačkom vremenu ~73.100 od 270.600 stanovnika (27%)
+nema supermarket u 10 min pješice (prema OSM + Overture; bez nagiba bilo bi ~53.900). Nagib smanjuje
+pješački doseg na strmim padinama (> 20%) na manje od pola, pa u bijele mrlje ulaze i brdska naselja
+(Hrasno Brdo, Velešići, Hrid-Jarčedoli).
+Oprez: bijele mrlje su u prigradskim dijelovima Novog Grada, gdje je model stanovništva najnesigurniji
+(1,75–2,5× udjela iz 2010) i gdje OSM vjerovatno ne bilježi sve male trgovine. Kolona
+`znakovi_zemljista` (parking, poslovni objekat, gradilište) je samo nagovještaj; vlasništvo i
+namjenu provjeriti u katastru i prostornom planu.
+
+## Lokacije za autopraonicu (`19_autopraonica.py`)
+
+Autopraonica ima dvije vrste kupaca, pa se oba svode na pranja mjesečno (red veličine za
+poređenje lokacija, ne prognoza prihoda):
+
+- **stanovnici koji dovezu auto**: Huff na vremenu vožnje (λ = 2, do 12 min); postojeća
+  praonica A = 1, pumpa s pranjem 0,6, detailing 0,4; 0,35 auta po stanovniku, 1 plaćeno pranje
+  po autu mjesečno (pretpostavke);
+- **promet koji prolazi**: tipičan dnevni promet po klasi ceste (magistrala 30.000, primarna
+  20.000, sekundarna 10.000, tercijarna 4.000 vozila/dan, pretpostavka jer nema brojanja),
+  0,1% svrati, podijeljeno sa svim praonicama na ≤ 1 km.
+
+Kandidat-polje: cesta tercijarna ili veća na ≤ 60 m, nagib ≤ 8%, ocjena pristupa ulica ≥ 50,
+zgrade na < 30% površine polja, bez postojeće praonice. Dvije strategije, kao za supermarket:
+`najveci_promet` (najviše pranja) i `bijela_mrlja` (najviše stanovnika koji sad voze > 5 min
+do praonice dovodi na ≤ 5 min).
+
+Postojeće: OSM 54 praonice i 2 pumpe s pranjem, plus 25 praonica i 26 detailing studija koje su samo
+u Overture (bez praonica ćilima). U 5 min vožnje nema praonicu ~39.800 od 270.600 stanovnika.
+
+Rezultat (04.11.2026): obje strategije na prvo mjesto stavljaju **Zabrđe / Rajlovac** (Safeta Zajke,
+Rajlovačka cesta): ~7.000 stanovnika bez praonice u 5 min, najbliža praonica ~1,6 km, ravno.
+Zatim slijede rubna naselja bez praonice (Pionirska Dolina uz Nahorevsku, Alipašin Most I,
+Sokolje, Sedrenik) i gusti dio grada uz glavne ceste (Bulevar Meše Selimovića, Zmaja od Bosne),
+gdje je potražnja velika, ali je i konkurencija na 200–400 m. Ograničenja: nema podataka o
+broju auta ni o prometu po ulici; ručne praonice uz vulkanizere često nisu u OSM-u ni u
+Overture; parcelu, priključak vode i kanalizacije i dozvole treba provjeriti posebno.
+
+## Dostavna kuhinja i muzička škola (`20_biznisi.py`)
+
+Isti Huffov model kao 09 i 19, s drugim kupcima, dolaskom i konkurencijom (pretpostavke u
+zaglavlju skripta). Dvije strategije: `najvise` (najveći udio) i `bijela_mrlja`.
+
+- **Dostavna kuhinja**: odrasli (15–64, 65+ × 0,2), dostava do 15 min vožnje, λ = 1;
+  konkurencija ~590 restorana i fast fooda (OSM + Overture); 0,03 narudžbe po odraslom dnevno.
+  Kandidat: cesta ≥ tercijarna na ≤ 100 m, nagib ≤ 10%, pristup ≥ 50.
+  Najviše narudžbi: Čengić Vila II, Malta, Švrakino Selo (≈ 45–50 narudžbi dnevno, ali s
+  50–100 restorana na 1,5 km). Bijela mrlja: Dobroševići, Pionirska Dolina, Zabrđe.
+- **Muzička škola**: 0,55 · (0–14) + 0,04 · (15–64), 5% upis; pješice ili autom do 20 min;
+  javne škole A = 3, privatne 1. Pronađeno 11 škola (OMŠ Pozajić i Srednja muzička su u istoj
+  zgradi i broje se kao jedna). Najviše učenika: Švrakino Selo II (~145), Čengić Vila (~125),
+  Trg heroja (~105); Novi Grad nema javnu muzičku školu u modelu, a najbliža je ~2 km.
+  Bijela mrlja: Zabrđe (~1.750 djece bez škole u 15 min), Betanija, Alipašin Most I.
+
+Muzička škola: kao postojeća ponuda računaju se samo javne škole (`MUZ_SAMO_JAVNE` u
+`20_biznisi.py`, odluka korisnika); privatne se zanemaruju.
+
+Ručne dopune: `data/rucno_mjesta.csv` (objekti kojih nema u OSM/Overture). Za sada područno
+odjeljenje javne osnovne muzičke škole u Vogošći (potvrdio korisnik; tačka u centru Vogošće je
+približna, adresa nije utvrđena). Sa njom Vogošća više nije „bijela mrlja“ za muzičku školu.
+
+## Brojači saobraćaja KS 2025 (`21_brojaci_saobracaja.py`)
+
+Ministarstvo saobraćaja KS / Direkcija za puteve objavljuje godišnju publikaciju brojanja
+(za 2025. izašla u maju 2026). Iz nje su izvučeni `data/brojaci_2025.csv` (29 brojača:
+lokacija, koordinate, PGDS 2025) i `data/brojaci_2025_dnevno.csv` (vozila po danu, ~7.700
+dana). Najopterećenije: Zmaja od Bosne kod Čengić Vile 34.500 vozila/dan, Zapadni prilaz
+(Mostarsko raskršće) 33.500, GGL kod BBI 33.100, Bulevar Meše Selimovića 30.300.
+Subotom ~11%, nedjeljom ~27% manje vozila nego radnim danom; januar ~6% ispod prosjeka.
+Podaci po satima postoje u bazi Direkcije, ali u publikaciji su samo kao grafikoni.
+Novijih ni dnevnih javnih podataka (npr. za prošli mjesec) nema.
+
+## Gužva po satu (`21b_brojaci_satno.py`, `22_guzva.py`, pogled „Traffic“)
+
+`21b` čita satni profil svakog brojača iz vektorskih grafikona publikacije (grafik 2, kriva
+„ukupni“; razmjer tako da je zbir 24 sata = PGDS) -> `data/brojaci_2025_satno.csv`. Vršni sat nosi
+6–9% dnevnog saobraćaja; vrhovi ujutro oko 8 h i popodne 14–16 h. KSBS27 nema grafikon.
+
+`22` veže brojače za dionice iste ulice (do 2,5 km), ostale glavne ceste dobijaju pretpostavljeni
+PGDS po klasi (primarna 12.000, sekundarna 8.000, tercijarna 4.000; brojači stoje na
+najprometnijim pravcima, pa bi njihov medijan precijenio ostale). Kapacitet = trake (OSM, inače
+tipično) × 800 voz/h (semafori), autoput 1.800. Gužva = PGDS · udio sata · faktor dana /
+kapacitet; faktor dana iz dnevnih brojanja (radni 1,06, subota 0,95, nedjelja 0,77 prosjeka).
+Ograničenja: prosjek 2025, ne određeni dan; vikendom isti oblik dana; procjena opterećenja, ne
+izmjerena brzina. Na stranici: klizač 00–24 h, izbor dana, animacija.
+
+## Radna mjesta (`23_radna_mjesta.py`, pogled „Jobs“)
+
+Kontrolni zbirovi (`data/radna_mjesta_opcine.csv`): FZS, *Kanton Sarajevo u brojkama 2025*, tabela 4.2,
+prosječan broj zaposlenih 2024 po općini (mjesto rada): Centar 46.573, Novi Grad 32.134, Novo Sarajevo
+29.789, Stari Grad 10.478. Za poređenje, zaposleni stanovnici (ZIS KS, 31.07.2025, Porezna uprava):
+20.232 / 43.268 / 23.848 / 12.706. Centar ima 2,3 radna mjesta po zaposlenom stanovniku, Novi Grad
+0,74, pa je glavni smjer putovanja na posao iz Novog Grada prema Centru i Novom Sarajevu.
+
+Unutar općine radna mjesta se raspoređuju po nestambenoj površini zgrade (m² po radnom mjestu
+po vrsti: kancelarija 25, bolnica 45, škola 60, industrija 120, skladište 200; nepoznato 50;
+poslovno prizemlje stambene zgrade 70% otiska / 40 m²) plus 2 po objektu iz Overture
+(~6.500 u zgradi). Velikim poslovnim otiscima s modelskom spratnošću visina je ograničena na 3.
+Najviše: Željeznička 13.800, Marijin Dvor 11.800, Park-Višnjik 8.700 (KCUS), Trg oslobođenja 7.800,
+Briješće 5.900. Ograničenja: FZS broji po sjedištu poslovne jedinice; m² po radniku su tipične
+vrijednosti; nema provjere na nivou ulice.
+
+## Model putovanja autom (`24_putovanja.py`, pogled „Traffic“)
+
+Zone H3 rezolucije 8 (~0,7 km², 328) na cijelom području mreže, uključujući Ilidžu, Vogošću i
+Istočno Sarajevo (stanovnici izvan 4 općine iz WorldPop-a), plus 19 ulaza u područje. Putovanja:
+na posao (dvostruko ograničen gravitacioni model; 40% zaposlenih autom, fiksno, jer je raspored
+skoro isti kao kod ostalih putovanja pa se ne može zasebno kalibrirati), ostala putovanja i
+saobraćaj izvana (kalibrirani na brojače). Dodjela: najbrži put, 4 dodjele sa slučajno izmijenjenim
+vremenima (±30%, više ruta) po iteraciji, 5 iteracija MSA s BPR zastojem.
+
+Važno iz publikacije: šest brojača broji samo jedan smjer (KSBS03, 04, 05, 06, 17, 24; npr.
+Zmaja od Bosne 34.500 je samo smjer Dolac Malta → Čengić Vila) i model ih poredi samo s tim
+smjerom. Bez toga slaganje je bilo R² −0,6.
+
+Rezultat (25 brojača u okviru mreže): model putovanja sam R² 0,46, medijan greške 28%.
+Procjena matrice iz brojanja (ODME, 6 jačina) je isprobana i odbačena: poklapa brojače, ali na
+izostavljenom brojaču griješi 42–50% (lošije od samog modela). Umjesto nje lokalna korekcija:
+na ulici brojača (do 2,5 km, u smjeru brojanja) tok se množi omjerom brojač/model; tako se
+24 brojača poklapaju tačno, a ostale ceste ostaju na modelu. Unakrsna provjera (brojač izostavljen):
+R² 0,27, medijan 32%, pa na cestama bez brojača treba računati s greškom oko trećine.
+KSBS22 (Džemala Bijedića kod „Žice“) nema koordinate u publikaciji, prikazan je ali ne koriguje
+model. KSBS30 (Kasindolska) nema odgovarajuću ulicu u OSM-u. Male ceste uz rub područja
+(Igmanska, Ravnogorska) i Vilsonovo šetalište vjerovatno su precijenjeni (ulazi u područje,
+OSM klasifikacija).
+
+## Prijedlozi linija i cesta (`25_prijedlozi.py`)
+
+Iz modela putovanja (24): pravci s najviše putovanja bez tramvaja/trolejbusa na bar jednom kraju,
+naselja s najviše stanovnika > 8 min hoda do stanice, najopterećenije ulice i kandidati za kratke
+nove cestovne spojeve (ocjena: ušteda vremena svih putovanja autom). Nalaz (05.11.2026): najjači
+pravac bez trunk linije je sjeverozapad Novog Grada (Zabrđe – Briješće – Alipašin Most, ~3.700
+putovanja dnevno, 34.500 stanovnika u 400 m); kratki novi spojevi donose malo (najbolji Sokolje–Zabrđe
+~25 sati vožnje dnevno), a kandidati prema Briješću su artefakt položaja čvora zone. Uska grla su
+glavna longitudinala, Obala Kulina bana i Alipašina, što odgovara već planiranoj Prvoj transverzali i
+Južnoj longitudinali. OSM nema veći dio autobuskih linija, pa „nema linije“ vrijedi samo za
+tramvaj/trolejbus.
+
+## Predložene linije na karti (`26_nove_linije.py`, pogled „Transit“)
+
+Trase (najkraći put po cestama) za prijedloge iz 25: P1 Zabrđe – Briješće – Sokolje – Alipašin Most
+(10,3 km, ~4.500 stanovnika danas > 8 min od stanice dobija stanicu do 400 m), P2 Lukavica –
+Željeznička, P3 Stup – Alipašin Most, i 8 minibus linija za strma naselja (M1–M8, od dijela naselja
+najdaljeg od stanice do najbliže tramvajske/trolejbuske stanice; M8 Dobroševići vozi do početka P1).
+Skice za raspravu: širinu ulica i okretišta za minibus treba provjeriti na terenu, a OSM nema
+veći dio autobuskih linija.
+
+## Stvarni redovi vožnje (`27_javniprevozks.py`)
+
+Javni API portala Ministarstva saobraćaja KS (javniprevozks.ba; isti izvor koristi aplikacija
+Arrivo BiH): 117 linija (44 minibus, 56 autobus, 8 trolejbus, 9 tramvaj, uključujući tramvaj 11
+Baščaršija – Hrasnica), 327 smjerova, 1.167 stanica, ~4.750 polazaka radnim danom. Preuzeto
+05.11.2026 uz dozvolu korisnika, 1 zahtjev u sekundi; sirovi JSON u `raw/javniprevozks/` (ne
+commituje se), izvedene tabele u `data/jpks_*.csv`. `18_javni_prevoz.py` sada računa PTAL iz
+stvarnih stanica i polazaka (7–9 h radnim danom, jači smjer) umjesto OSM-a i pretpostavki:
+stanovnika u PTAL 5–6b je 14% (prije 4%), a periferija (Zabrđe, Dolac, Betanija, Vraca) je nešto
+slabija nego što je pretpostavka govorila.
+
+`26_nove_linije.py` uz svaki prijedlog navodi postojeće autobuske/minibus linije na dijelu trase
+izvan tramvaja/trolejbusa i preporuku: skoro svugdje već vozi linija, ali 0,5–2 puta na sat ili
+mimo naselja; P3 (Stup – Alipašin Most) je izbačen jer tim pravcem voze tramvaji 3, 6 i 11, a nova
+linija u pravom smislu je samo M1 (Hrastovi-Mrkovići).
+
+## Sjeverna brdska linija (`28_sjeverna_linija.py`)
+
+Prijedlog korisnika: Stup – Zabrđe – Briješće – Sokolje – Buća Potok – Pofalići – Velešići – Željeznička,
+**preko brda**, ne dolinom uz tramvaj. Trasa: ceste niže od 40 m iznad dna doline (teren minus
+najniža tačka u krugu 3 km, kao 17_zrak) su 6 puta "skuplje" osim 800 m oko Stupa i Željezničke;
+tačke su u višim dijelovima naselja. Rezultat: 25,8 km, ~93 min (vrijeme autom · 1,4), u dolini
+5,4 km (uglavnom ravnica Stup – Zabrđe; bez Stupa 2,1 km), 37.000 stanovnika do 400 m, 8.400 danas
+> 8 min od stanice, 31.400 putovanja dnevno između zona uz trasu, nagib do 25%, 2,6 km uskih ulica.
+Polovine: zapad Zabrđe – Buća Potok ~44 min, istok Buća Potok – Željeznička ~31 min (18.200
+putovanja u koridoru). Za poređenje, prva (dolinska) verzija trase: 23 km, 69 min. Preporuka:
+midibus, dvije polovine s preklapanjem u Buća Potoku; Pofalići – Velešići je 1,3 km zračno a
+3,4 km cestom (kandidat za kratki spoj).
+
+## Provjera trase za midibus (`29_provjera_trase.py`)
+
+Trasa linije S (28; međutačke biraju brdski dio naselja koji je na putu između susjednih tačaka,
+da trasa ne ide gore pa nazad: 20,6 km, bez Stupa 13,7 km) se dijeli na tačke na 10 m: nagib na
+20/50/100 m (Copernicus, tlo, bilinearno), ugao skretanja na ±10 m, razmak zgrada (15_ulice),
+OSM oznake (podloga, jednosmjerna, vrsta ulice), moguće stanice (≤ 4%, ≥ 8 m). Pragovi: nagib na
+50 m > 15% ili na 100 m > 12% problem, 10–15% provjeriti; razmak < 5,5 m problem, 5,5–8 m provjeriti;
+serpentina > 120° problem. Rezultat: u redu 9,8 km, provjeriti 7,4 km, problem 3,4 km; 40 mjesta
+(20 problem: najviše usponi na Enesa Herića, Adema Buće, Zaima Imamovića, Bana Mateja Ninoslava,
+Ruđera Boškovića; jednosmjerna Safeta Zajke/Kurta Schorka). Na karti: izabrati liniju S u Transit.
+
+Tačnost i bolji izvori: Copernicus 30 m daje nagib na 100 m ±3–4%. Bolje: FGU model reljefa FBiH
+5 m (WMS/WCS, katastar.ba/servisi, traži korisnički nalog), KS model terena 5 m iz izohipsi
+1:1000–1:5000 (ZPR WebCity), novi LiDAR FBiH (snimanje pri kraju, pristup po procedurama FGU),
+ortofoto KS 2017 25 cm (na zahtjev) za širine.
+
+## Kratki novi spojevi za javni prevoz (`30_dogradnje.py`)
+
+Traže se mjesta gdje kratka nova dionica (60–400 m, nagib ≤ 10%, ne siječe zgrade) spaja dvije
+ulice koje su cestom ≥ 3× dalje (≥ 800 m), a oko njih živi mnogo ljudi sa slabim prevozom (> 8 min
+do stanice ili PTAL ≤ 1b). Krajevi su slijepe ulice ili raskrsnice. Od 48.516 parova do 400 m,
+561 ne siječe zgrade; izabrano 10 (najmanje 600 m razmaka). Kroz spoj se crta linija između najbližih
+stanica s ≥ 4 polaska na sat na obje strane. Spojevi u Dobrinji (preko potoka, unutar namjerno
+pješačkih blokova) su izostavljeni s karte. Najjači: Breka (157 m, 3.400 ljudi), Alipašin Most I
+(Hekim Oglu Alipaše – Safeta Zajke, 298 m), Dolac (103 m), Pofalići (Ruđera Boškovića, 127 m),
+Sokolje – Zabrđe (363 m, linija Kolonija – Rajlovac: 6.700 slabo pokrivenih), Sedrenik (181 m).
+Ograničenja: OSM možda nema postojeći put; nagib iz Copernicus 30 m; vlasništvo, potporni zidovi
+i nosivost nisu provjereni.
+
+## Koncepti novih cesta (`31_scenariji.py`, pogled „Traffic“)
+
+Ista dnevna matrica putovanja autom (24, faza 1) dodijeljena s MSA (3 iteracije, 2 rute) za osnovno
+stanje i za svaki scenarij (isti slučajni brojevi; razlike < ~150 vozilo-sati su šum). Tunel ispod
+Bistrika (A) je odbačen. Rezultat (vozila dnevno na novoj dionici; ušteda vozilo-sati dnevno):
+P planirani tunel Bentbaša – Koševo 9.100; 135 (Maršala Tita −8%, Obala −7%).
+B sjeverna brdska veza –; 447 (Zmaja od Bosne −13%) – bolja za autobuse nego kao cesta.
+C Mojmilo 18.500; 328. C2 Mojmilo istočnije 26.400; 809 (Dobrinja I → Hrasno 9,0 → 4,7 min).
+C3 Hrasno – istočna Dobrinja 31.100; 893 (ali Zmaja od Bosne +11%).
+G produžetak Gradskog autoputa uz prugu do Marijin Dvora 36.700; −257 (gore: puni centar).
+S sjeverna longitudinala Pofalići – Koševo 17.700; 556 (Maršala Tita −21%, Alipašina +26%).
+SP S + planirani tunel 18.400; 287 (Maršala Tita −17%, Obala −9%, Alipašina +29%).
+T1 Prva transverzala (planirana; Pofalići – Željeznička – Koševsko brdo/Velešići – Kobilja Glava,
+trasa približna) 21.500; 617 (Alipašina −59%, Safeta Zajke −10%, Maršala Tita −6%).
+T6 Šesta transverzala (planirana; Hrasno – Čengić Vila – Buća Potok – Hotonj, približno) 21.500;
+1.113 (Zmaja od Bosne −15%, Maršala Tita −14%, Alipašina −19%, Safeta Zajke −11%) – najveći
+pojedinačni efekat. T1 + T6 zajedno 1.216 (Alipašina −64%, Zmaja od Bosne −21%, Safeta Zajke −15%).
+Čvor Otoka (ulazni tok u krug 200 m, danas ~63.600 vozila dnevno): T6-O, Šesta preko Otoke s
+priključkom u nivou, +33% ulaznog toka (+15% najvećeg opterećenja; model ne računa čekanje na
+semaforima, pa je stvarno stanje lošije), ušteda 1.130; T6-D, denivelisano bez priključka na Otoci,
+−1% ulaza, ali manje rasterećenje centra (Maršala Tita −7%, Zmaja od Bosne −8%), ušteda 966.
+Prijedlog: denivelisana Šesta s rampama na Džemala Bijedića zapadno od Otoke.
+Zaključak: ceste uglavnom pomjeraju gužvu prema istim uskim grlima; za putovanje zapad → centar
+veći efekat se očekuje od P+R uz tramvaj, BRT/žutih traka, pomjerenog radnog vremena i radnih mjesta
+u Novom Gradu (model ne računa promjenu načina prevoza). Inducirani promet nije uključen.
+
+## Drastično bolji javni prevoz (`32_prevoz_scenarij.py`)
+
+Model izbora auto/javni prevoz (binarni logit, β = 0,07/min) po paru zona: auto = vožnja sa zastojem +
+parking (Centar/Stari Grad 6 min, Novo Sarajevo 3, ostalo 1); javni = hod do stanice (18) + čekanje
+(0,5 · 60 / f + 2, f = polasci u dosegu / 4) + vožnja (auto bez zastoja · 1,6) + presjedanje (5 min
+preko 3 km). Konstanta podešena na današnji udio javnog u motorizovanim putovanjima S0 = 45%
+(pretpostavka; nema ankete). Unapređenje: 2× polazaka, +25% brzina, hod u brdima −30%, presjedanje
+upola. Rezultat (S0 45%): udio 45% → 57%, putovanja autom −22% (S0 35%: −18%, 55%: −26%), putnika
++27%; vozilo-sati 191.300 → 180.300 (−11.000 dnevno, desetostruko više od najbolje ceste T1+T6:
+1.216); km cesta iznad 90% kapaciteta u vršnom satu 133 → 116; svi koridori −10 do −15% istovremeno.
+Javnim prevozom: Alipašin most → Marijin Dvor 31 → 24 min, Pale → Marijin Dvor 60 → 42 min.
+Ograničenja: S0 i β su pretpostavke; pješačenje i bicikl nisu u modelu; inducirana potražnja nije
+uključena; traži oko 2× vozila i vozača.
+
+## Brdska naselja i javni prevoz (`33_brda_scenarij.py`)
+
+126 brdskih zona (≥ 40 m iznad dna doline, oko 143.000 stanovnika). Isti model izbora kao u 32,
+ali samo za putovanja iz brda ili u brdo. B1: brdske linije s 8 usklađenih polazaka na sat, hod do
+stanice −40 % (gušće stanice, kosi liftovi), presjedanje 2 min. B2: B1 + 5 min više za auto s
+ciljem u centru (naplata i traženje parkinga).
+
+| | udio javnog brdo↔dolina | auta iz brda | udio javnog, cijeli grad | vozilo-sati dnevno |
+|---|---|---|---|---|
+| danas | 40 % | | 45 % | 191.274 |
+| B1 | 57 % | −27 % | 53 % | −6.500 |
+| B2 | 61 % | −34 % | 57 % | −9.000 |
+
+Presjeci B2: Obala Kulina bana −16 %, Maršala Tita −12 %, Alipašina −15 %, Safeta Zajke −9 %.
+Udio danas (45 %) i osjetljivost (β) su pretpostavke, nema ankete o načinu putovanja.
+
+## Nova sjeverna cesta (`34_sjeverna_cesta.py`, scenarij SC u `31_scenariji.py`)
+
+Trasa Zabrđe – Sokolje – Buća Potok – Velešići – Koševsko brdo – Koševo za autobuse: najviše 6 %
+uspona, poluprečnik krivine ≥ 80 m, dozvoljeno kopanje i rušenje.
+1. Najjeftiniji put na mreži 20 m (Copernicus DEM 30 m): cijena raste sa strminom terena i s
+   blizinom zgrada (OSM), tačke u naseljima su obavezne.
+2. Pojednostavljenje (Douglas–Peucker 45 m) i zaglađivanje (Chaikin), pa provjera poluprečnika.
+3. Visinski profil dinamičkim programiranjem svakih 20 m: nagib ≤ 6 %, cijena usjeka/nasipa po
+   metru razlike, tunel kad je trasa > 15 m ispod terena (cijena 60), most kad je > 12 m iznad
+   (40), rušenje (`C_RUSENJE`, zadano 120) za stanicu sa zgradom do 10 m van tunela.
+4. Izlaz: `out/sjeverna_cesta.json` (zbir), `sjeverna_cesta.geojson` (dijelovi: teren, usjek,
+   nasip, tunel, most), `sjeverna_cesta_rusenje.geojson` (zgrade na trasi).
+
+Varijante po cijeni rušenja (sve 8,8 km, najveći uspon 5 %, jedna krivina ispod 80 m, najmanji
+poluprečnik 66 m):
+
+| `C_RUSENJE` | tunel | mostovi | usjek | nasip | zgrada za rušenje |
+|---|---|---|---|---|---|
+| 0 | 2,4 km | 2,1 km | 1,6 km | 1,0 km | 149 |
+| 40 | 3,8 km | 0,2 km | 1,8 km | 1,2 km | 108 |
+| 120 (zadano) | 6,3 km | 0 | 1,1 km | 0,4 km | 16 |
+
+U modelu prometa (SC): dvije trake, 60 km/h, priključci samo u šest naselja, vrijeme po dužini
+trase. ~28.900 vozila dnevno na novoj cesti, ušteda 1.485 vozilo-sati dnevno (najviše od svih
+testiranih cesta). Safeta Zajke −32 %, Maršala Tita −18 %, Zmaja od Bosne −14 %, Alipašina −9 %;
+Otoka vršno opterećenje +7 %. Velešići → Zabrđe 17,8 → 9,6 min.
+Ograničenja: teren s 30 m modela (±3–4 % nagiba na 100 m), bez geologije, klizišta, portala,
+vlasništva i cijene; nova potražnja koju bi cesta privukla nije uključena.
+`SAMO_GEO=1 python src/31_scenariji.py` obnavlja samo geometrije svih scenarija za kartu.
+
+## Magla na lokacijama za aerodrom (`35_magla_lokacije.py`)
+
+METAR aerodroma Sarajevo 2016–2025 (Iowa Environmental Mesonet): ~245 h godišnje ispod CAT I
+(vidljivost < 550 m ili oblaci do 200 ft), ~48 dana s bar jednim takvim satom, gotovo samo
+novembar–januar, 5–9 h ujutro. MODIS Terra snimci (NASA GIBS, ~10:30, 10 zima, 1.171 dan):
+oblak = svijetao pojas 7 (2,1 µm, snijeg je taman) i svijetle prave boje. Ocjenjuju se samo jutra s
+vedrim planinama (inverzija; 502 dana); test na Butmiru pogađa 76% jutara s maglom (METAR), lažno 18%.
+
+| lokacija | pod niskim oblakom u inverzijsko jutro | kad je Butmir u magli | jutara po zimi |
+|---|---|---|---|
+| Butmir (danas) | 35% | 76% | 18 |
+| Kiseljak | 49% | 85% | 26 |
+| Glasinac | 31% | 46% | 16 |
+| Pazarić / Tarčin | 25% | 30% | 13 |
+| **Nišići** | **16%** | **7%** | **8** |
+
+Nišići su vedri u 93% jutara kad je Butmir u magli; 16% je blizu stope lažnih javljanja testa (18%),
+pa je stvarna učestalost vjerovatno još niža. Glasinac ima svoju maglu (hladna visoravan).
+Ograničenja: frontalni oblaci (planine pod oblakom) nisu ocijenjeni; jedan snimak dnevno; tačke ~1 km.
+
+## Vjetar na lokacijama za aerodrom (`36_vjetar.py`)
+
+| stanica | tiho (< 3 kt) | srednje | 95. percentil | udari ≥ 35 kt | pista upotrebljiva (bočni ≤ 20 kt) |
+|---|---|---|---|---|---|
+| Butmir (METAR, pista 119°) | 52% | 3,3 kt | 9 kt | 0,2% sati | 99,96% |
+| Ivan Sedlo 970 m (pista 005°) | 51% | 3,6 kt | 10 kt | 0,1% | 99,96% |
+| Bjelašnica 2053 m (pista 005°) | 6% | 17,9 kt | 43 kt | 10% | 96,1% |
+
+Doline i sedla su mirni; na vrhovima vjetar puše pretežno sa sjevera (40%) i juga (33%), pa je pista
+sjever–jug na Nišićima dobro usmjerena: čak i uz vjetar s Bjelašnice bila bi iznad ICAO granice (95%).
+Nišići (945 m, otvorena visoravan) su između ta dva režima; stvarnu brzinu, udare i turbulenciju
+s rubova visoravni treba izmjeriti na lokaciji. SYNOP za 2021–2025 nije potpun (OGIMET ograničava broj zahtjeva).
+
+## Google Places (`12_google_places.py`, opcionalno)
+
+Nearby Search (New) za tipove supermarket, grocery_store, convenience_store, market, food_store u
+krugovima oko H3 polja rezolucije 8 koja pokrivaju naseljena polja (183 kruga, gusta područja se dijele;
+procjena 180–550 zahtjeva: `--koliko`). Ključ se čita iz `GOOGLE_MAPS_API_KEY`. Prema uslovima Google
+Maps Platform: koordinate se koriste najviše 30 dana od preuzimanja (`09_supermarket.py` ih poslije
+ignoriše), a Google trgovine se ne crtaju na kartama (ulaze samo u model).
+
+## Kvalitet života (`14_kvalitet_zivota.py`)
+
+Minute hoda (OSM mreža, nagib po Tobleru) od svakog polja do najbližeg sadržaja: trgovina namirnica
+(iz 09), stanica javnog prevoza, osnovna škola, ambulanta/dom zdravlja/poliklinika, park (pristup s
+ruba parka), vrtić, apoteka, dječije igralište, bolnica, sportski teren ili centar (sve iz OSM-a;
+`out/sadrzaji.geojson`). Bodovi po kategoriji 1/(1+(t/t50)²), indeks 0–100 = ponderisani zbir minus
+kazne za buku (≤ 150 m od autoputa/magistrale/primarne ceste), industriju (> 25% polja) i vrlo strm
+teren (> 20%). Ponderi i t50 u `KATEGORIJE` su procjena. Prosječan indeks po stanovniku: Novo Sarajevo 71,
+Centar 58, Novi Grad 51, Stari Grad 47. Najbolje MZ: Kovačići, Čengić Vila I, Malta, Željeznička, Trg heroja;
+najslabije: Reljevo, Zabrđe, Dobroševići, Mošćanica.
+
+## Pristup autom: uske i strme ulice (`15_ulice.py`)
+
+OSM gotovo nema širinu ulica (29 od 6.650 stambenih), pa se širina procjenjuje kao koridor između
+zgrada (okomice lijevo i desno do 20 m s polovine svake dionice): < 9 m usko, < 6 m vrlo usko; uske su
+i `lanes=1`, `living_street`, `track`. Ograde i zidovi nisu u OSM-u, pa stvarna ulica može biti uža.
+Nagib: Copernicus DSM bez zgrada (najniža tačka u 90 m, pa izglađivanje), mjeren na 100 m duž ulice
+(kraće dionice su šum DEM-a od 30 m); mostovi i tuneli isključeni. Provjera: primarne ceste 90%
+dionica ≤ 6,8%. Za svako polje: put autom do najbliže tercijarne ili veće ceste (najveći nagib, metri
+uskog puta, makadam) i udio strmih/uskih ulica u polju; ocjena 0–100. Loš pristup oduzima do 15 bodova
+od indeksa kvaliteta života. Najteži pristup: Toka-Džeka, Gornji Velešići, Sumbuluša, Mahmutovac,
+Hrid-Jarčedoli. Najveći uspon na putu do glavne ceste: ≤ 8% za ~182.000 stanovnika, 8–12% ~21.000,
+12–16% ~23.000, 16–20% ~20.000, > 20% ~24.000; ~33.000 stanovnika ima više od 100 m uske ulice do glavne ceste.
+
+## Javni prevoz (`18_javni_prevoz.py`)
+
+Trase iz OSM ruta: svi tramvaji (1–6) i trolejbusi (101, 102, 103, 105, 107, 108), a od autobusa samo dio
+(15, 16, 18, 21, 23, 24, 27, 27A, 31E, 32, 41, 61, 200E; međunarodne i FlixBus isključene). GTFS za Sarajevo
+ne postoji (Mobility Database), a GRAS-ova stranica ne dozvoljava automatski pristup, pa su polasci na sat
+u `data/linije_frekvencija.csv` **pretpostavke** (kolona `izvor`): tramvaj 3 = 10/h, ostali tramvaji 5,
+trolejbusi 103 i 107 = 6, ostali 4, autobusi 3, 31E 4, 200E 2. Upisati stvarne iz voznog reda i ponovo
+pokrenuti 18 i 13. Stanice bez OSM linije (454 od 670) računaju se kao jedna nepoznata autobuska linija (2/h).
+PTAL (Transport for London): hod do stanica uz nagib (autobus/trolejbus ≤ 8 min, tramvaj ≤ 12), čekanje =
+pola intervala + pouzdanost, svaka linija jednom; razredi 0–6b. Najbolje: Baščaršija, Ferhadija, Čengić Vila,
+Hrasno, Kovačići; najslabije: Dobroševići, Reljevo, Mošćanica, Hrid-Jarčedoli, Mahmutovac; ~35.000 stanovnika
+u razredu 0. U „Best to live“ javni prevoz je poseban faktor (blizina stanice više nije u svakodnevnim sadržajima).
+
+## Najbolje za život (stranica, pogled „Best to live“)
+
+Jedna ocjena 0–100 po naseljenom polju, računa se u pregledniku iz svih slojeva: svakodnevni sadržaji
+pješice (koji se broje najviše zavisi od profila), pristup autom, zimsko sunce (≤ 3 h = 0, 7,8 h = 100),
+čist zrak i malo magle (100 − indeks), mir (udaljenost od bučnih cesta, industrija) i blag teren
+(≤ 5% = 100, ≥ 25% = 0). Profili: uravnoteženo, porodica s djecom, penzioneri, bez auta, zrak i sunce;
+klizači za vlastite pondere. Ocjena je rang u gradu: svaki faktor se pretvara u percentil među naseljenim
+poljima, percentili se ponderišu, a rezultat se ponovo rangira (87 = bolje od 87% naseljenih polja), da se
+ocjene ne zbijaju oko sredine. Uravnoteženo: najbolje Čengić Vila II (99), Kvadrant, Čengić Vila I, Malta,
+Dobrinja D; najslabije Reljevo, Toka-Džeka, Hrid-Jarčedoli (15–17). „Zrak i sunce“: Sedrenik (95), Medrese (87);
+najslabije Babića bašča, Bistrik, Toka-Džeka (4–9).
+
+## Smog i magla (`17_zrak.py`)
+
+Relativni indeksi izloženosti (0–100), ne mjerenje. Inverzija: udio inverzionih dana kad je polje ispod
+gornje granice, iz visine iznad dna doline (najniža tačka terena u krugu 3 km), uz pretpostavljenu granicu
+~200 m iznad dna (logistička, širina 50 m). Smog = inverzija × (1 + 0,5 × blizina prometnih cesta);
+magla = inverzija × blizina rijeka. Provjera na FHMZ stanicama (godišnji PM2.5 2025, izvještaj u
+`raw/zrak/`; koordinate stanica približne): Spearman 0,56 (0,74 bez Saraj Polja, obuhvat 66%). Prva
+verzija s gustinom malih kuća kao znakom grijanja na čvrsto gorivo dala je obrnut odnos (r = −0,42; oko
+Bjelava je mnogo kuća, a zrak je najčišći jer centar grije plin), pa je izbačena; podaci o gasnoj mreži
+bi to riješili. ~210.000 stanovnika je ispod inverzije u > 90% inverzionih dana; najmanje izloženi: Mošćanica,
+Sedrenik, Toka-Džeka, Širokača (200–260 m iznad dna doline).
+
+## Sati sunca zimi (`16_sunce.py`)
+
+Sati direktnog sunca 21. decembra i 21. januara (vedar dan): položaj sunca svakih 5 minuta, za 7 tačaka
+po polju zraka prema suncu do 25 km kroz Copernicus DEM (bez zgrada, uz zakrivljenost Zemlje i refrakciju).
+Na ravnom horizontu 21. decembar ima 8,8 h. Najviše sunca: južne padine (Medrese, Sedrenik ~7,9 h) i
+otvoreni zapad (Dobroševići, Sokolje, Briješće); najmanje: Mahmutovac (2,2 h), Toka-Džeka (2,7 h),
+Hrid-Jarčedoli, Širokača, Babića bašča, Bistrik, Mjedenica (4,2–5,6 h; sjeverne padine ispod Trebevića i
+kanjon Miljacke). Sjena susjednih zgrada i zimska magla u dolini nisu uključeni.
+
+## Topografija (`10_teren.py`)
+
+Copernicus DEM GLO-30 (30 m; © DLR e.V. 2010–2014, © Airbus Defence and Space GmbH 2014–2018,
+Copernicus licenca). To je model površine (uključuje zgrade i krošnje), pa se prije računanja
+izglađuje (~60 m). Izlazi: `teren_h3.csv` (srednja/min/max visina, srednji nagib u % po polju),
+`teren_reljef.png` (sjenčenje + boje po visini), `teren_sjena.png`, `teren_izohipse.geojson`
+(50 m, glavne 250 m), `teren_okvir.json` (okvir slika). Stanovnici po nagibu polja: ravno (< 5%)
+~93.000, 5–10% ~51.000, 10–20% ~90.000, > 20% ~36.000; iznad 700 m n.v. ~15.600.
+
+Lokalna karta (`out/karta.html`): podloge Esri satelit (zadano), OpenTopoMap, OpenStreetMap;
+preko njih Esri sjenčenje reljefa i izohipse.
+
+## MZ Novog Grada po nazivima ulica
+
+Pored adresa s kućnim brojem (8% stambenih zgrada), zgrada bez adrese dobija najbližu imenovanu OSM
+ulicu (≤ 50 m); ako cijela ta ulica po spisku pripada jednoj MZ, zgrada ide u tu MZ. Direktno svrstano:
+70% stambenih zgrada (adresa 8%, ulica 62%), ostatak glasanjem susjeda. Dobrinja C više nije uska
+traka (0,92 udjela iz 2010; prije 0,08), Švrakino Selo I 0,58 (0,20), Aneks 0,71 (0,38). Reljevo sada
+dobija svih ~830 zgrada svojih ulica (3,2× udjela iz 2010: 1.193 stanovnika 2010. na 828 kuća, vjerovatno
+rast ili vikendice), pa je ukupna MAPE prema 2010. 0,396 (prije 0,375).
+
+## MZ Centra (`04b_mz_centar.py`)
+
+Odluka o osnivanju i organizaciji MZ Općine Centar (Službene novine KS, 04.08.2022; `raw/centar_odluka_mz.pdf`)
+navodi ulice i raspone kućnih brojeva za svih 19 MZ. Dokument je u dva stupca i čita se stupac po stupac;
+izvučeno 514 pravila za 257 ulica („Naselje Nahorevo“ se poklapa i s OSM nazivom „Nahorevo“). Zgrade se
+svrstavaju kao u Novom Gradu: adresa 12%, najbliža ulica 63%, glasanje susjeda 24%; Voronoi poligoni za
+svih 19 MZ. Centar i dalje nema broj stanovnika po MZ, pa nema MZ kontrolnih zbirova: MZ služe za prikaz
+i izvještaj (`out/mz_zbirovi.csv`). Glasovi s izbora za savjete MZ (oktobar 2025) su glasovi po kandidatu,
+ne broj birača, pa nisu upotrebljivi; broj upisanih birača po biračkom mjestu (CIK) bi bio dobar izvor, ali
+CIK ga ne nudi za preuzimanje.
+
+## Graf 3 i parametri po općini
+
+Nazivi MZ na Grafu 3 (Strategija Starog Grada 2024–2027, str. 16) pročitani su s renderovane stranice
+(`data/stari_grad_graf3.csv`; redoslijed stubova nije abecedni). Stari Grad sada ima MZ kontrolne zbirove,
+a provjera 2 (MAPE) je moguća. S parametrima kalibrisanim na Novom Gradu (α 0,9, niske 0,5) MAPE je bila
+29,5%; u Starom Gradu (stare mahale, malo blokova) najbolje odgovara α ≈ 0,5 bez korekcije za kuće
+(MAPE 16,4%, izmjereno na istim podacima na kojima je kalibrisano). Zato su α i gustina niskih zgrada
+po općini (`ALFA_OPCINA`, `GUSTINA_NISKA_OPCINA` u `common.py`); Novo Sarajevo preuzima parametre
+Novog Grada (blokovi), Centar sredinu (nema podataka).
+
+## Odluke u implementaciji (gdje SPEC ostavlja prostor)
+
+- Metrički CRS: EPSG:32634 (UTM 34N).
+- Raspon (korak 8): puna mreža 3 × 3 scenarija (α ∈ {0.5, 0.7, 0.9} × spratnost −1/0/+1);
+  glavni scenarij α = 0.7, pomak 0. Pomak se primjenjuje na procijenjenu spratnost (model ili
+  podrazumijevana), ne na spratnost upisanu u OSM.
+- „Značajan WorldPop" za oznaku C: ≥ 5 stanovnika u dijelu polja (`C_PRAG_WORLDPOP`). U takvom dijelu težina je samo WorldPop.
+- Netipizirane zgrade i nepoznati tipovi (`building=*` koji nije ni na jednom spisku) tretiraju se kao `yes`.
+- Kad se landuse poligoni preklapaju, prioritet je industrial > commercial/retail > residential.
+- Stari Grad: dijelovi općine koje OSM MZ poligoni ne pokrivaju pripajaju se susjednoj MZ. Novo Sarajevo: ostaju bez MZ (npr. Dolac Malta).
+- Cijeli brojevi: metoda najvećeg ostatka po općini (zbir tačno = FZS), pa po dijelu polja za starosne grupe (zbir grupa = ukupno u polju). Zbir grupa po općini zbog toga može odstupati od FZS-a za nekoliko osoba; prikazano u validaciji.
+- Pouzdanost polja: C ako dijelovi s oznakom C nose ≥ 50% stanovnika polja, inače A ako dijelovi s MZ kontrolnim zbirom nose ≥ 50%, inače B.
+- Opcionalna korekcija starosti po MZ Novog Grada (korak 7) nije implementirana.
+- Polja izlaze s dodatnim kolonama `stambeni_m2` i `worldpop` (za provjeru gustine).

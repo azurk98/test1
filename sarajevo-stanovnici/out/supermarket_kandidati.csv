@@ -1,0 +1,21 @@
+strategija,rang,h3_id,opcina,mz,kupci_procjena,stanovnici_10min_pjesice,od_toga_bez_supermarketa_10min,najblizi_supermarket_m,glavna_cesta_m,stabilno_lambda,znakovi_zemljista,lon,lat
+bijela_mrlja,1,8a1ef4596467fff,Ilidža,Stup,2249,6542,2874,427,67,,—,18.32742,43.84362
+bijela_mrlja,2,8a1ea92c9c57fff,Novi Grad Sarajevo,Naselje heroja Sokolje,773,2686,2686,1115,307,,—,18.30807,43.86895
+bijela_mrlja,3,8a1ea92cd2dffff,Novi Grad Sarajevo,Zabrđe,1388,2091,2023,747,62,,—,18.31425,43.87969
+bijela_mrlja,4,8a1ef45b3b0ffff,Vogošća,Hotonj,1354,1894,1816,1046,92,,—,18.37277,43.89516
+bijela_mrlja,5,8a1ea92c972ffff,Novi Grad Sarajevo,Naselje heroja Sokolje,1754,1783,1715,719,26,,poslovni_objekat 158 m²,18.31757,43.8624
+bijela_mrlja,6,8a1ea92e92effff,Vogošća,Semizovac,1594,1520,1520,2868,113,,—,18.31513,43.92031
+bijela_mrlja,7,8a1ef4582437fff,Novo Sarajevo,Velešići,1570,4266,1464,367,26,,—,18.40161,43.86325
+bijela_mrlja,8,8a1ef6965667fff,Ilidža,Butmir,1149,1458,1408,809,299,,—,18.3229,43.82146
+bijela_mrlja,9,8a1ea92ca31ffff,Ilidža,Osjek,1307,1348,1348,1324,48,,—,18.27772,43.84601
+bijela_mrlja,10,8a1ef4591517fff,Novo Sarajevo,Hrasno Brdo,1549,2260,1317,579,128,,—,18.38365,43.84524
+najveci_promet,1,8a1ea92c30a7fff,Ilidža,Gladno polje,3524,531,531,2825,3,da/da,—,18.21751,43.86398
+najveci_promet,2,8a1ea92c0627fff,Ilidža,Rakovica,2518,859,859,4550,6,da/da,—,18.20601,43.87759
+najveci_promet,3,8a1ef4596407fff,Ilidža,Stup,2412,6922,1982,192,71,da/da,—,18.32317,43.84237
+najveci_promet,4,8a1ef45962a7fff,Novi Grad Sarajevo,Alipašino Polje AII,2282,13438,48,102,4,da/da,parking 620 m²; poslovni_objekat 314 m²,18.34115,43.84382
+najveci_promet,5,8a1ef459014ffff,Novo Sarajevo,Čengić Vila II,2266,14261,0,206,144,da/da,parking 11.324 m²,18.36828,43.85093
+najveci_promet,6,8a1ef459052ffff,Novi Grad Sarajevo,Švrakino Selo II,2204,8244,38,126,88,ne/da,parking 2.840 m²,18.35422,43.84639
+najveci_promet,7,8a1ef4591d97fff,Novo Sarajevo,Trg heroja,2125,18023,0,138,18,ne/da,parking 441 m²,18.37907,43.8507
+najveci_promet,8,8a1ef4596727fff,Ilidža,Stupsko Brdo,2073,3100,1656,530,0,da/ne,—,18.332,43.84369
+najveci_promet,9,8a1ef459699ffff,Novi Grad Sarajevo,Briješće,2029,1629,837,543,7,da/ne,—,18.32576,43.85503
+najveci_promet,10,8a1ef4592947fff,Novi Grad Sarajevo,Alipašino Polje BI,2006,14005,4,288,1,ne/da,parking 7.216 m²,18.34835,43.83999

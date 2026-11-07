@@ -1,0 +1,48 @@
+mjesto,od_km,duzina_m,ocjena,ulica,razlozi,lat,lon
+1,0.0,200,provjeriti,"Džemala Bijedića, Halilovići",pristupni put / stambena zona (OSM),43.84587,18.33077
+2,0.35,500,problem,Džemala Bijedića,"jednosmjerna (povratak drugom ulicom); oštro skretanje 90–120°; razmak zgrada 5,5–8 m; razmak zgrada < 5,5 m",43.84468,18.33337
+3,0.95,1800,problem,"Kurta Schorka, Safeta Zajke",jednosmjerna (povratak drugom ulicom); pristupni put / stambena zona (OSM); serpentina (skretanje > 120°),43.8441,18.32837
+4,2.85,450,problem,Enesa Herića,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",43.85249,18.3392
+5,3.45,100,provjeriti,Enesa Herića,"razmak zgrada 5,5–8 m",43.85583,18.34282
+6,3.6,200,problem,Enesa Herića,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); razmak zgrada 5,5–8 m",43.85713,18.34327
+7,3.85,350,problem,"Enesa Herića, Vitkovac","nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m); razmak zgrada 5,5–8 m",43.85927,18.34338
+8,4.5,1900,problem,"Adema Buće, Smiljevići","nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m); pristupni put / stambena zona (OSM)",43.86339,18.34653
+9,6.95,450,problem,Avde Palića,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); oštro skretanje 90–120°; trasa se vraća istim putem (ispraviti)",43.87073,18.33051
+10,8.25,350,problem,Zaima Imamovića,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",43.87265,18.3209
+11,8.8,100,provjeriti,Numan paše Čuprilića,"nagib 10–15% (50 m, zima)",43.8686,18.31887
+12,9.1,150,problem,Numan paše Čuprilića,"nagib 10–15% (50 m, zima); nagib > 12% (100 m)",43.86744,18.32191
+13,9.45,50,provjeriti,Numan paše Čuprilića,"nagib 10–15% (50 m, zima)",43.86599,18.32532
+14,9.65,100,provjeriti,Numan paše Čuprilića,"nagib 10–15% (50 m, zima)",43.86632,18.32758
+15,9.9,50,provjeriti,Numan paše Čuprilića,"nagib 10–15% (50 m, zima)",43.86483,18.3296
+16,10.0,50,provjeriti,Briješko brdo,"nagib 10–15% (50 m, zima)",43.8641,18.32969
+17,10.2,100,problem,Viteška,oštro skretanje 90–120°; trasa se vraća istim putem (ispraviti),43.86473,18.33148
+18,10.35,50,provjeriti,Briješko brdo,oštro skretanje 90–120°,43.86485,18.33159
+19,10.5,100,provjeriti,"Briješko brdo, Numan paše Čuprilića","nagib 10–15% (50 m, zima)",43.86427,18.32998
+20,10.65,50,problem,Numan paše Čuprilića,trasa se vraća istim putem (ispraviti),43.86478,18.32962
+21,10.75,50,provjeriti,Briješko brdo,"nagib 10–15% (50 m, zima)",43.86413,18.32975
+22,12.35,150,provjeriti,Adema Buće,"nagib 10–15% (50 m, zima)",43.86329,18.34623
+23,13.8,150,provjeriti,Adema Buće,"nagib 10–15% (50 m, zima)",43.85861,18.35664
+24,14.15,50,provjeriti,Bužimska,"nagib 10–15% (50 m, zima)",43.85719,18.3601
+25,14.25,450,problem,"Bužimska, Nazifa Hadžovića, Tuzlanska","nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",43.85663,18.36098
+26,15.05,50,provjeriti,Adema Buće,pristupni put / stambena zona (OSM),43.85652,18.3658
+27,15.15,50,provjeriti,Bana Mateja Ninoslava,"nagib 10–15% (50 m, zima)",43.85707,18.36635
+28,15.3,100,problem,Bana Mateja Ninoslava,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",43.85819,18.36677
+29,15.45,150,problem,Bana Mateja Ninoslava,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",43.85844,18.3686
+30,15.75,250,provjeriti,"Bana Mateja Ninoslava, Orlovačka",makadam; neasfaltirano (OSM),43.85903,18.37214
+31,16.45,50,problem,Orlovačka,"nagib 10–15% (50 m, zima); nagib > 15% (50 m)",43.8614,18.37737
+32,16.55,150,problem,Humska,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m); oštro skretanje 90–120°",43.86198,18.37799
+33,16.75,50,provjeriti,Humska,"nagib 10–15% (50 m, zima)",43.86161,18.38006
+34,16.85,150,provjeriti,Humska,"nagib 10–15% (50 m, zima); oštro skretanje 90–120°",43.86233,18.38028
+35,17.15,100,provjeriti,Humska,"nagib 10–15% (50 m, zima)",43.86131,18.38035
+36,17.35,50,problem,Humska,trasa se vraća istim putem (ispraviti),43.8609,18.37859
+37,17.45,100,provjeriti,Humska,"nagib 10–15% (50 m, zima)",43.86113,18.37979
+38,17.7,100,provjeriti,Humska,"nagib 10–15% (50 m, zima); oštro skretanje 90–120°",43.86184,18.38171
+39,17.9,50,provjeriti,Humska,"nagib 10–15% (50 m, zima)",43.86225,18.38362
+40,18.0,150,provjeriti,Humska,"nagib 10–15% (50 m, zima)",43.86272,18.38449
+41,18.3,50,problem,Ruđera Boškovića,"nagib 10–15% (50 m, zima); serpentina (skretanje > 120°)",43.86256,18.38669
+42,18.55,50,provjeriti,Ruđera Boškovića,"nagib 10–15% (50 m, zima)",43.86389,18.38788
+43,19.0,150,problem,Ruđera Boškovića,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m)",43.86257,18.39292
+44,19.2,200,problem,Ruđera Boškovića,"nagib 10–15% (50 m, zima); trasa se vraća istim putem (ispraviti)",43.8637,18.39391
+45,19.5,700,problem,Ruđera Boškovića,"nagib 10–15% (50 m, zima); nagib > 12% (100 m); nagib > 15% (50 m); oštro skretanje 90–120°; razmak zgrada 5,5–8 m; serpentina (skretanje > 120°)",43.86318,18.39269
+46,20.35,50,provjeriti,Hamdije Čemerlića,jednosmjerna (povratak drugom ulicom),43.85792,18.39123
+47,20.45,1090,provjeriti,Put života,jednosmjerna (povratak drugom ulicom); pristupni put / stambena zona (OSM),43.85783,18.39171

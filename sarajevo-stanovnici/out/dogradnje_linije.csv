@@ -1,0 +1,7 @@
+id,od,do,spoj,naselje,duzina_km,voznja_min,danas_cestom_km,stanovnici_400m,danas_slabo_pokriveni,spoj_m,nagib_spoja_pct,prelaz
+D3,Stadion Koševo A,Studentski dom A,Ahmeda Muradbegovića – Breka čikma,Breka / Breka,1.8,6,2.3,10929,7037,157,6.9,—
+D4,Ilidža,Vreoca A,Prve samostalne brigade – Lužansko polje,Pejton / Pejton,2.4,8,2.9,9018,4967,333,0.2,"river, pruga"
+D6,"""X"" transferzala A",Dobrinja škola B,Uzeira Sarača – ?,Dobrinja A / Dobrinja A,3.2,11,1.6,16639,6822,68,0.4,stream
+D7,Studentski dom A,Sedrenik samoposluga B,Brdovita – Alije Nametka,Sedrenik / Sedrenik,1.6,5,2.7,8466,6843,181,8.6,—
+D9,Dobrinja III B1,Dobrinja III A1,Emila Zole – Trg Djece Dobrinje,Dobrinja C / Dobrinja C,1.4,5,1.3,11493,2308,288,0.2,stream
+D10,Kolonija B,Rajlovac A,Ibrahima Perviza – Porodice Bećirbašić,Naselje heroja Sokolje / Zabrđe,3.0,10,1.7,7458,7458,363,5.6,—

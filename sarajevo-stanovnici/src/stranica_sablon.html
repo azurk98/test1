@@ -1,0 +1,1124 @@
+<title>Sarajevo Population Grid</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one working column; municipality strip, then a large map with a docked readout, then the MZ ledger. */
+:root{
+  --bg:#f3f5f4; --surface:#ffffff; --fg:#17201f; --muted:#5b6866; --line:#d5dcda; --accent:#1d6b74;
+  --r0:#e4ece6; --r1:#bcd9c9; --r2:#86bfab; --r3:#4c9a8f; --r4:#2a6f7c; --r5:#1f4867; --r6:#1a2a4a;
+  --zero:#e9ecea; --rel-a:#2a6f7c; --rel-b:#9bb8b3; --rel-c:#d08a3c;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0f1515; --surface:#161e1e; --fg:#e6eeec; --muted:#93a3a0; --line:#2a3635; --accent:#6cc0b4;
+  --r0:#1c2b2b; --r1:#22433f; --r2:#2a6159; --r3:#3a8577; --r4:#5aa98f; --r5:#9dd0a6; --r6:#e3f2c4;
+  --zero:#1a2222; --rel-a:#5aa98f; --rel-b:#4a5d5a; --rel-c:#e0a05a; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#0f1515; --surface:#161e1e; --fg:#e6eeec; --muted:#93a3a0; --line:#2a3635; --accent:#6cc0b4;
+  --r0:#1c2b2b; --r1:#22433f; --r2:#2a6159; --r3:#3a8577; --r4:#5aa98f; --r5:#9dd0a6; --r6:#e3f2c4;
+  --zero:#1a2222; --rel-a:#5aa98f; --rel-b:#4a5d5a; --rel-c:#e0a05a; color-scheme:dark }
+html,body{background:var(--bg);color:var(--fg)}
+body{font-family:var(--body);font-size:15px;line-height:1.5;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 48px}
+.wrap{max-width:1180px;margin:0 auto;display:grid;gap:28px}
+header{display:grid;gap:8px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(28px,4.4vw,44px);line-height:1.05;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h2{font-family:var(--display);font-weight:600;font-size:22px;margin:0;text-wrap:balance}
+.lede{max-width:68ch;color:var(--muted);margin:0}
+.lede b{color:var(--fg);font-weight:600}
+.num{font-variant-numeric:tabular-nums}
+.strip{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+@media (max-width:1100px){.strip{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:560px){.strip{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.op{all:unset;box-sizing:border-box;cursor:pointer;display:grid;gap:6px;padding:14px 14px 12px;border:1px solid var(--line);border-radius:6px;background:var(--surface);min-width:0}
+.op:hover{border-color:var(--accent)}
+.op:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.op[aria-pressed="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.op .n{font-size:13px;color:var(--muted)}
+.op .t{font-family:var(--display);font-size:26px;font-weight:600;line-height:1}
+.op .s{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.abc{display:flex;height:6px;border-radius:3px;overflow:hidden;background:var(--line)}
+.abc i{display:block;height:100%}
+.mapbox{display:grid;grid-template-columns:minmax(0,1fr) 280px;align-items:start;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+@media (max-width:860px){.mapbox{grid-template-columns:minmax(0,1fr)}}
+.mapcol{position:relative;min-width:0;display:grid;grid-template-rows:auto 1fr}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid var(--line)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{all:unset;cursor:pointer;padding:6px 11px;font-size:13px;color:var(--muted)}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--surface)}
+.seg button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.btn{all:unset;cursor:pointer;font-size:13px;color:var(--accent);padding:6px 8px;border-radius:6px}
+.btn:focus-visible{outline:2px solid var(--accent)}
+svg#map{display:block;width:100%;height:min(68vh,640px);min-height:380px;touch-action:none;cursor:grab;background:var(--bg)}
+svg#map:active{cursor:grabbing}
+.hex{stroke:var(--surface);stroke-width:.4px;vector-effect:non-scaling-stroke}
+.hex.dim{opacity:.18}
+.hex.sel{stroke:var(--fg);stroke-width:2px}
+.op-l{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);padding:0 6px}
+.op-l input{width:90px;accent-color:var(--accent)}
+.sat{pointer-events:none}
+svg.on-sat .opl{stroke:#fff;opacity:.9}
+svg.on-sat .mzl{stroke:#fff;opacity:.55}
+svg.on-sat .store{fill:#fff;opacity:.9}
+svg.on-sat .hex{stroke:rgba(255,255,255,.35)}
+.seg-sm button{padding:5px 9px;font-size:12.5px}
+.shade{mix-blend-mode:multiply;opacity:.55}
+.cont{fill:none;stroke:#fff;stroke-width:.5px;opacity:.45;vector-effect:non-scaling-stroke;pointer-events:none}
+.cont.major{stroke-width:1.1px;opacity:.75}
+svg.on-rel .cont{stroke:#5a4632}
+svg.on-rel .store{fill:#1b1b1b;opacity:.85}
+.contl{font:500 9px var(--mono);fill:#fff;paint-order:stroke;stroke:rgba(0,0,0,.55);stroke-width:2.5px;pointer-events:none}
+svg.on-rel .contl{fill:#4a3826;stroke:rgba(255,255,255,.7)}
+svg#map{--zw:1}
+.road,.rcase{fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;pointer-events:none}
+.rcase{stroke:rgba(20,20,20,.55)}
+.rcase.r-autoput{stroke-width:calc(5.6px * var(--zw))} .road.r-autoput{stroke:#e8590c;stroke-width:calc(3.8px * var(--zw))}
+.rcase.r-magistrala{stroke-width:calc(4.6px * var(--zw))} .road.r-magistrala{stroke:#f4a259;stroke-width:calc(3px * var(--zw))}
+.rcase.r-primarna{stroke-width:calc(3.6px * var(--zw))} .road.r-primarna{stroke:#ffd166;stroke-width:calc(2.3px * var(--zw))}
+.rcase.r-sekundarna{stroke-width:calc(2.8px * var(--zw))} .road.r-sekundarna{stroke:#fff1a8;stroke-width:calc(1.7px * var(--zw))}
+.rcase.r-tercijarna{stroke-width:calc(2.2px * var(--zw))} .road.r-tercijarna{stroke:#ffffff;stroke-width:calc(1.25px * var(--zw))}
+.road.r-ulica{stroke:#ffffff;stroke-width:calc(.6px * var(--zw));opacity:.45}
+svg.zin .road.r-ulica{opacity:.85}
+.road.r-pristupna{stroke:#d9d9d9;stroke-width:calc(.45px * var(--zw));opacity:0}
+.road.r-pjesacka{stroke:#cdb4db;stroke-width:calc(.5px * var(--zw));stroke-dasharray:3 2;opacity:0}
+.road.r-stepenice{stroke:#ff70a6;stroke-width:calc(1.1px * var(--zw));stroke-dasharray:1 2;opacity:0}
+svg.zin .road.r-pristupna{opacity:.7} svg.zin .road.r-pjesacka{opacity:.85} svg.zin .road.r-stepenice{opacity:1}
+.road.r-tramvaj{stroke:#e63946;stroke-width:calc(1.3px * var(--zw));stroke-dasharray:4 3}
+svg.on-rel .road.r-ulica,svg.on-rel .road.r-tercijarna{stroke:#6b6258}
+svg.on-rel .road.r-pristupna{stroke:#8a8178} svg.on-rel .road.r-pjesacka{stroke:#7b5e91}
+svg:not(.on-sat) .road.r-pristupna{stroke:var(--muted)}
+svg:not(.on-sat) .road.r-ulica,svg:not(.on-sat) .road.r-tercijarna{stroke:var(--muted)}
+.legend .rl{display:inline-block;width:18px;height:0;border-top:3px solid;border-radius:0}
+.legend .rl.r-autoput{border-top-width:4px;border-color:#e8590c}.legend .rl.r-magistrala{border-top-width:3.5px;border-color:#f4a259}
+.legend .rl.r-primarna{border-color:#ffd166}.legend .rl.r-sekundarna{border-top-width:2.5px;border-color:#e9d77a}
+.legend .rl.r-tercijarna{border-top-width:2px;border-color:#bdbdbd}.legend .rl.r-ulica{border-top-width:1px;border-color:var(--muted)}
+.legend .rl.r-pristupna{border-top-width:1px;border-color:#bdbdbd}.legend .rl.r-pjesacka{border-top:1.5px dashed #b392c9}
+.legend .rl.r-stepenice{border-top:2px dotted #ff70a6}.legend .rl.r-tramvaj{border-top:2px dashed #e63946}
+.legend .rleg{font-size:11px;gap:8px;border-top:1px solid var(--line);padding-top:6px}
+.satcredit{max-width:calc(100% - 460px);text-align:right;position:absolute;right:calc(8px + env(safe-area-inset-right,0px));bottom:6px;font-size:10.5px;color:#fff;text-shadow:0 0 3px #000;pointer-events:none}
+.opl{fill:none;stroke:var(--fg);stroke-width:1.4px;vector-effect:non-scaling-stroke;opacity:.75;pointer-events:none}
+.mzl{fill:none;stroke:var(--fg);stroke-width:.6px;stroke-dasharray:2 2;vector-effect:non-scaling-stroke;opacity:.35;pointer-events:none}
+.legend{position:absolute;left:calc(12px + env(safe-area-inset-left,0px));bottom:12px;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:8px 10px;font-size:12px;display:grid;gap:6px;max-width:calc(100% - 24px)}
+.legend .row{display:flex;gap:0;align-items:stretch}
+.legend .sw{display:grid;gap:2px;justify-items:center;min-width:38px}
+.legend .sw i{display:block;width:100%;height:10px}
+.legend .sw span{font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+.legend .cat{display:flex;gap:12px;flex-wrap:wrap}
+.legend .cat span{display:inline-flex;gap:6px;align-items:center}
+.legend .cat i{width:12px;height:12px;border-radius:2px;display:inline-block}
+aside.read{border-left:1px solid var(--line);padding:16px;max-height:calc(min(68vh,640px) + 54px);overflow-y:auto;display:grid;grid-template-columns:minmax(0,1fr);align-content:start;gap:14px;min-width:0}
+@media (max-width:860px){aside.read{border-left:0;border-top:1px solid var(--line);max-height:none}}
+.read .k{font-size:12px;color:var(--muted);font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em}
+.read .big{font-family:var(--display);font-size:38px;font-weight:600;line-height:1}
+.read .rng{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.read dl{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;margin:0;font-size:14px}
+.read dt{color:var(--muted)} .read dd{margin:0;text-align:right;white-space:nowrap}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:3px 9px;border-radius:999px;border:1px solid var(--line)}
+.pill i{width:8px;height:8px;border-radius:50%}
+.score{height:8px;border-radius:4px;background:var(--line);overflow:hidden}
+.score i{display:block;height:100%;background:var(--accent)}
+.read dl.loc dt{font-size:13px}
+.store{fill:var(--fg);opacity:.55;pointer-events:none}
+.site{cursor:pointer}
+.site circle{stroke:var(--surface);stroke-width:1.5px}
+.site text{font:600 9.5px var(--mono);fill:var(--surface);pointer-events:none}
+.gapsite circle{fill:var(--rel-c)} .topsite circle{fill:var(--accent)}
+.legend i.dot{width:6px;height:6px;border-radius:50%;background:var(--fg);opacity:.6}
+.legend b.mk{display:inline-grid;place-items:center;width:15px;height:15px;border-radius:50%;font:600 9px var(--mono);color:var(--surface)}
+.mk.gapsite{background:var(--rel-c)} .mk.topsite{background:var(--accent)}
+.sites{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+@media (max-width:860px){.sites{grid-template-columns:minmax(0,1fr)}}
+.sites h3{font-family:var(--display);font-weight:600;font-size:17px;margin:0 0 4px}
+.sites p{margin:0 0 10px;color:var(--muted);font-size:14px}
+.sites table{min-width:0;font-size:13.5px}
+.sites tbody tr{cursor:pointer}
+.sites td:first-child{width:28px}
+.aqs rect{fill:#2b2d42;stroke:#fff;stroke-width:1px}
+.aqs text{font:600 10px var(--mono);fill:#fff;pointer-events:none}
+.legend b.aqk{display:inline-grid;place-items:center;min-width:22px;height:15px;border-radius:3px;background:#2b2d42;color:#fff;font:600 9.5px var(--mono);padding:0 3px}
+.bestbtn{font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:4px;min-width:0}
+.chips button{all:unset;cursor:pointer;padding:6px 11px;font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:999px;background:var(--surface);white-space:nowrap}
+.chips button:hover{border-color:var(--accent);color:var(--fg)}
+.chips button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.chips button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.chips-sm{display:inline-flex}
+.chips-sm button{padding:4px 9px;font-size:12.5px}
+.tools > div{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;min-width:0}
+#profiles{flex-wrap:wrap}
+@media (max-width:860px){
+  .satcredit{position:static;max-width:none;text-align:left;color:var(--muted);text-shadow:none;padding:4px 12px 8px}
+  .legend{position:static;margin:8px 12px 0;max-width:none}
+}
+.bestp[hidden]{display:none}
+.trfp{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--bg)}
+.trfp[hidden]{display:none}
+.trfp label{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);flex:1 1 320px;min-width:0}
+.trfp input[type=range]{flex:1;min-width:120px;accent-color:var(--accent)}
+.trfp output{font:600 15px var(--mono);color:var(--fg);min-width:96px}
+.trf{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke;pointer-events:visibleStroke}
+.scnl{fill:none;stroke:#fff;stroke-width:calc(5px * var(--zw));stroke-dasharray:10 6;vector-effect:non-scaling-stroke;opacity:.95;pointer-events:none}
+.scnl.scnt{stroke-dasharray:2 5;stroke-linecap:round;opacity:.8}
+.scnlab rect{fill:#111;stroke:#fff;stroke-width:1.5px} .scnlab text{font:700 10px var(--mono);fill:#fff;pointer-events:none}
+.scnk{display:inline-grid;place-items:center;min-width:18px;height:18px;border-radius:3px;background:#111;color:#fff;font:700 10px var(--mono);margin-right:4px}
+.trfc circle{fill:#fff;stroke:#111;stroke-width:1.5px}
+.trfc text{font:600 9px var(--mono);fill:#fff;paint-order:stroke;stroke:#111;stroke-width:2.5px;pointer-events:none}
+.hbars{display:grid;grid-template-columns:repeat(24,minmax(0,1fr));gap:1px;align-items:end;height:48px}
+.hbars button{all:unset;cursor:pointer;background:var(--line);border-radius:1px 1px 0 0;min-height:2px}
+.hbars button[aria-pressed="true"]{background:var(--accent)}
+.hbars button:focus-visible{outline:2px solid var(--accent)}
+.bestp{display:grid;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--bg)}
+.sliders{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:4px 18px}
+.sliders label{display:grid;grid-template-columns:minmax(0,1fr) 110px 26px;align-items:center;gap:8px;font-size:13px}
+.sliders input{width:100%;accent-color:var(--accent)}
+.sliders b{text-align:right;font-weight:500;color:var(--muted)}
+.fb dd{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+.mini{display:inline-block;width:52px;height:6px;border-radius:3px;background:var(--line);overflow:hidden;flex:none}
+.fb dd b{min-width:24px;text-align:right}
+.mini i{display:block;height:100%;background:var(--accent)}
+.lnk{all:unset;cursor:pointer;color:var(--accent)} .lnk:focus-visible{outline:2px solid var(--accent)}
+.ptline{fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;stroke-width:calc(2px * var(--zw));opacity:.9;pointer-events:visibleStroke}
+.newl{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke;stroke-dasharray:7 4;cursor:pointer;pointer-events:visibleStroke}
+.newl.n-glavna{stroke-width:calc(4px * var(--zw))} .newl.n-minibus,.newl.n-dogradnja{stroke-width:calc(2.6px * var(--zw))}
+.newl.n-spoj{stroke-width:calc(7px * var(--zw));stroke-dasharray:none}
+.newlab text{fill:#fff} .n-spoj + text{fill:#000}
+.newl.sel{stroke-width:calc(6px * var(--zw));stroke-dasharray:none}
+.audl{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke;stroke-width:calc(5px * var(--zw));pointer-events:none}
+.audm{cursor:pointer} .audm circle{stroke:#fff;stroke-width:1.5px} .audm text{font:700 9px var(--mono);fill:#fff;pointer-events:none}
+.audl-list dt{font-size:13px}
+.newlab{cursor:pointer} .newlab text{font:700 9.5px var(--mono);fill:#fff;pointer-events:none}
+.ptline.m-tram{stroke-width:calc(3px * var(--zw))}
+.lchips{display:flex;flex-wrap:wrap;gap:4px}
+.lchip{font:500 11.5px var(--mono);padding:2px 6px;border-radius:4px;border:1px solid var(--line);background:var(--surface)}
+.acc{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke;pointer-events:none;stroke-width:calc(1.6px * var(--zw))}
+.acc.a1{stroke:#ff8c1a}.acc.a2{stroke:#e63946}.acc.a3{stroke:#b5179e;stroke-width:calc(2.2px * var(--zw))}
+.poi{stroke:#fff;pointer-events:visiblePainted;cursor:help}
+.legend .pleg{font-size:11px;gap:4px;border-top:1px solid var(--line);padding-top:6px}
+.legend .pleg button{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:5px;padding:2px 5px;border-radius:4px}
+.legend .pleg button[aria-pressed="false"]{opacity:.4;text-decoration:line-through}
+.legend .pleg button:focus-visible{outline:2px solid var(--accent)}
+.legend .pleg i{width:9px;height:9px;border-radius:50%;border:1px solid #fff}
+.nd{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.nd.g{background:#52b788}.nd.m{background:#e9c46a}.nd.f{background:#e76f51}
+.ages{display:flex;height:8px;border-radius:4px;overflow:hidden}
+.ages i{display:block}
+.hint{color:var(--muted);font-size:14px;margin:0}
+.notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 28px;margin:0;padding:0;list-style:none}
+@media (max-width:760px){.notes{grid-template-columns:minmax(0,1fr)}}
+.notes li{border-top:1px solid var(--line);padding-top:10px;font-size:14px;color:var(--muted);min-width:0}
+.notes li b{color:var(--fg);font-weight:600;display:block;margin-bottom:2px}
+.ledger{display:grid;gap:12px}
+.ledger .bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.ledger input{font:inherit;font-size:14px;padding:7px 10px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--fg);min-width:0;width:240px;max-width:100%}
+.ledger input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
+th,td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--line)}
+th{font-size:12px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:500;cursor:pointer;white-space:nowrap}
+th:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+td.r,th.r{text-align:right}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--bg)}
+.tag{font-size:12px;font-family:var(--mono);color:var(--muted)}
+.tag.mz{color:var(--accent)}
+footer{font-size:13px;color:var(--muted);max-width:80ch}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">H3 resolution 10 · ≈0.015 km² per cell (about 66 m across a side) · FZS estimate 30.06.2026</div>
+    <h1>Sarajevo Population Grid</h1>
+    <p class="lede">Estimated residents in every hexagonal cell of <b>Centar, Stari Grad, Novo Sarajevo, Novi Grad, Ilidža and Vogošća</b>. Each municipality adds up exactly to the official FZS figure; everything below that level is a model allocation from OSM buildings and WorldPop, so each cell also carries a range and a reliability grade.</p>
+  </header>
+
+  <section class="strip" id="strip" aria-label="Municipalities"></section>
+
+  <section class="mapbox">
+    <div class="mapcol">
+      <div class="tools">
+        <div class="chips" role="group" aria-label="Colour cells by">
+          <button id="m-best" aria-pressed="false" class="bestbtn">Best to live</button>
+          <button id="m-pop" aria-pressed="true">Residents</button>
+          <button id="m-den" aria-pressed="false">Per km²</button>
+          <button id="m-rel" aria-pressed="false">Reliability</button>
+          <button id="m-att" aria-pressed="false">Attractiveness</button>
+          <button id="m-sup" aria-pressed="false">Supermarket</button>
+          <button id="m-wash" aria-pressed="false">Car wash</button>
+          <button id="m-kit" aria-pressed="false">Delivery kitchen</button>
+          <button id="m-mus" aria-pressed="false">Music school</button>
+          <button id="m-liv" aria-pressed="false">Livability</button>
+          <button id="m-car" aria-pressed="false">Car access</button>
+          <button id="m-sun" aria-pressed="false">Winter sun</button>
+          <button id="m-smog" aria-pressed="false">Smog</button>
+          <button id="m-fog" aria-pressed="false">Fog</button>
+          <button id="m-pt" aria-pressed="false">Transit</button>
+          <button id="m-trf" aria-pressed="false">Traffic</button>
+          <button id="m-job" aria-pressed="false">Jobs</button>
+        </div>
+        <div>
+          <span class="chips chips-sm" role="group" aria-label="Background">
+            <button data-bg="sat" aria-pressed="false">Satellite</button><button data-bg="satrel" aria-pressed="true">Sat + relief</button><button data-bg="rel" aria-pressed="false">Relief</button><button data-bg="none" aria-pressed="false">None</button>
+          </span>
+          <button class="btn" id="contToggle" aria-pressed="true">Contours: on</button>
+          <button class="btn" id="roadToggle" aria-pressed="true">Roads: on</button>
+          <button class="btn" id="poiToggle" aria-pressed="false">Places: off</button>
+          <label class="op-l" for="hexop">Cells <input id="hexop" type="range" min="0.15" max="1" step="0.05" value="0.6"></label>
+          <button class="btn" id="mzToggle" aria-pressed="true">MZ outlines: on</button>
+          <button class="btn" id="reset">Reset view</button>
+        </div>
+      </div>
+      <div class="trfp" id="trfPanel" hidden>
+        <label for="trfHour">Hour <input id="trfHour" type="range" min="0" max="23" step="1" value="8"><output id="trfOut">08:00–09:00</output></label>
+        <span class="chips chips-sm" role="group" aria-label="Day" id="trfDays"><button data-day="radni" aria-pressed="true">Weekday</button><button data-day="subota" aria-pressed="false">Saturday</button><button data-day="nedjelja" aria-pressed="false">Sunday</button></span>
+        <button class="btn" id="trfPlay" aria-pressed="false">▶ Play 24 h</button>
+      </div>
+      <div class="bestp" id="bestPanel" hidden>
+        <div class="chips chips-sm" role="group" aria-label="Who is choosing" id="profiles"></div>
+        <div class="sliders" id="sliders"></div>
+      </div>
+      <svg id="map" role="img" aria-label="Hexagon map of estimated residents"></svg>
+      <div class="legend" id="legend"></div>
+      <div class="satcredit" id="satcredit"></div>
+    </div>
+    <aside class="read" id="read" aria-live="polite"></aside>
+  </section>
+
+  <ul class="notes">
+    <li><b>Grades</b>A: the cell's MZ total is constrained (Stari Grad from the MZ figures in its 2024–2027 strategy; Novi Grad from 2010 MZ records blended 50/50 with the model). B: only the municipality total is known. C: no mapped buildings, so WorldPop alone places people.</li>
+    <li><b>Range</b>Min and max across nine runs: building weight α = 0.5 / 0.7 / 0.9 against WorldPop, and estimated floor counts −1 / 0 / +1. The main estimate uses α per municipality: 0.9 in Novi Grad and Novo Sarajevo, 0.5 in Stari Grad, 0.7 in Centar.</li>
+    <li><b>Calibration</b>In Novi Grad and Novo Sarajevo a square metre of house counts half as much as one in a block of 5+ floors, and WorldPop gets 10% of the weight, fitted to Novi Grad's 2010 MZ records. Stari Grad's old neighbourhoods fit best with no house correction and an even split with WorldPop: the MZ shares then differ from the municipality's own figures by 16% on average (30% with Novi Grad's settings). Centar has no MZ data and takes the midpoint.</li>
+    <li><b>Floor counts</b>Only 4.7% of OSM buildings record their floors. The rest come from a model trained on those that do (spatial cross-check: r = 0.70), since GHSL heights alone barely separate houses from towers (r = 0.13).</li>
+    <li><b>Attractiveness</b>A location score from 0 to 100, separate from the population estimate. It weighs, as percentile ranks among populated cells: residents within a 10-minute walk (20%) and a 10-minute drive (15%), shops and services within a 10-minute walk (20%), stops within 400 m (15%), distance to the nearest stop (10%), distance to a main road (10%) and intersection density (10%). Walking and driving times run on the OSM street network. Walking slows on slopes (Tobler's hiking function: 4.8 km/h on the flat, 3.4 km/h up a 10% grade); driving assumes 65% of the speed limit, and transit counts stops only, without timetables. Cells at the edge toward Ilidža and Vogošća under-count reachable residents, since those municipalities are not modelled.</li>
+    <li><b>Livability</b>Walking minutes, with slopes, from each cell to the nearest grocery, transit stop, primary school, clinic, park, kindergarten, pharmacy, playground, hospital and sports ground. Each counts half at a set time (5 min for a stop, 8 for a shop or park, 12 for a school or clinic, 25 for a hospital) and is weighted: grocery, transit and school 15% each, clinic and park 12%, kindergarten 8%, pharmacy 7%, playground 6%, hospital and sports 5%. Points come off near a motorway or primary road (up to 10), in industrial areas (10) and on very steep ground (5). Weights are a judgement, not a calibration. Places come from OpenStreetMap.</li>
+    <li><b>Transit</b>Routes of all tram and trolleybus lines and part of the bus network come from OpenStreetMap. Each cell gets a Public Transport Accessibility Level (PTAL, the Transport for London method): walking time to stops (8 min for bus and trolleybus, 12 for tram, with slopes), plus half the interval as waiting time, with each line counted once at its best stop. There is no published timetable data for Sarajevo, so departures per hour are assumptions by line type (tram 3: 10 an hour, other trams 5, main trolleybuses 6, others 4, buses 3, stops without a mapped line 2) kept in data/linije_frekvencija.csv until real timetables replace them.</li>
+    <li><b>Best to live</b>One score that mixes every layer, weighted by who is choosing: public transport (PTAL), daily needs within walking distance (the profile sets which needs count most, such as school and kindergarten for families or clinic and pharmacy for seniors), car access, winter sun (3 h or less scores 0, 7.8 h scores 100), clean winter air and little fog (from the smog and fog indices), distance from main-road noise and industry, and gentle terrain (5% slope or less scores 100, 25% scores 0). Only cells with residents are scored. Scores are ranks within the city: each factor is first turned into its rank among populated cells (0 = worst, 100 = best), the ranks are weighted, and the result is ranked again, so a score of 87 means the cell beats 87% of populated cells for that profile. This spreads scores across the full range instead of bunching them near the middle. Move the sliders to set your own weights.</li>
+    <li><b>Smog and fog</b>Winter smog and fog in Sarajevo come from the temperature inversion that traps cold air and smoke in the valley. Each cell's exposure is the share of inversion days it lies below the inversion top, from its height above the valley floor (lowest ground within 3 km) assuming a typical top about 200 m above the floor, raised near busy roads (smog) or rivers (fog). These are relative indices, not measurements. They agree in direction with the FHMZ stations shown on the map (2025 annual PM2.5: Bjelave 26, Otoka 35, Saraj Polje 61, Ilidža 29, Vogošća 26 µg/m³; station positions approximate), but five stations cannot pin down street-level values, and the biggest local factor, gas versus wood or coal heating, has no open data.</li>
+    <li><b>Winter sun</b>Hours of direct sun on 21 December and 21 January on a clear day. For seven points per cell the sun's path is traced every 5 minutes against the horizon formed by the surrounding mountains (Trebević, Igman, Hum and others, up to 25 km away, with the Earth's curvature) from the Copernicus surface model with buildings filtered out. Shade from neighbouring buildings and the valley's winter fog are not included. On a flat horizon the day would give 8.8 hours.</li>
+    <li><b>Car access</b>For each cell, the drive along OSM streets from its centre to the nearest tertiary or larger road: the steepest 100 m on the way, metres of narrow road, and the share of the cell's own streets that are steep (over 12%) or narrow. OSM almost never records street width, so width is estimated as the gap between buildings on both sides; fences and walls are not mapped, so real streets can be narrower. Gradients come from the Copernicus surface model with buildings filtered out, measured over 100 m. Poor access takes up to 15 points off livability.</li>
+    <li><b>MZ outlines</b>Novi Grad's MZ outlines come from the official street list: buildings are matched by address, or by the nearest named street when that whole street belongs to one MZ (70% of homes), and the rest by their neighbours. Novo Sarajevo and Stari Grad outlines come from OpenStreetMap.</li>
+  </ul>
+
+  <section class="ledger" aria-labelledby="sh">
+    <h2 id="sh">Supermarket sites</h2>
+    <p class="lede">A Huff model splits each cell's grocery trips over the supermarkets within 20 minutes, weighted by store size and by travel time squared (walking with slopes taken into account, or driving plus two minutes to park). A new standard supermarket is placed in every cell that has none and lies within 400 m of a main road, and sites are picked one at a time so later picks compete with earlier ones. Customer figures are residents, not sales.</p>
+    <div class="sites">
+      <div><h3>Fill a gap</h3><p>Brings the most residents who now walk over 10 minutes to a supermarket within a 10-minute walk.</p>
+        <div class="tbl"><table><thead><tr><th>#</th><th>Location</th><th class="r">Customers</th><th class="r">Newly covered</th></tr></thead><tbody id="tgap"></tbody></table></div></div>
+      <div><h3>Most customers</h3><p>Wins the largest share of grocery trips, mostly from nearby competitors. Holds for a λ of 1.5 to 2.5 except where noted.</p>
+        <div class="tbl"><table><thead><tr><th>#</th><th>Location</th><th class="r">Customers</th><th class="r">Nearest rival</th></tr></thead><tbody id="ttop"></tbody></table></div></div>
+    </div>
+    <p class="hint">Existing stores come from OpenStreetMap plus 28 found only in Overture Maps Places. Comparing the two sources suggests they still hold only 35–60% of grocery stores, mostly missing small independent shops, so some gaps may already have a shop. Gap sites cluster in Novi Grad's suburbs, where the population model is least certain (it runs 1.75–2.5× above the 2010 MZ shares there) and where small shops are more likely to be missing from OpenStreetMap. Check ground ownership and zoning in the cadastre before acting on any site.</p>
+  </section>
+
+  <section class="ledger" aria-labelledby="wh">
+    <h2 id="wh">Car wash sites</h2>
+    <p class="lede">A car wash lives on two kinds of customer: residents who drive to it, and drivers who stop on the way. Residents are shared over the washes within a 12-minute drive by a Huff model (travel time squared, a fuel station's wash counts 0.6, a detailing studio 0.4), assuming 0.35 cars per resident and one paid wash per car a month. Passing trade assumes 0.1% of the road's typical daily traffic stops, split with every wash within 1 km. Candidate cells sit on a tertiary or bigger road, have slopes of 8% or less, no narrow or steep access, buildings on under 30% of the ground, and no wash yet.</p>
+    <div class="sites">
+      <div><h3>Fill a gap</h3><p>Brings the most residents who now drive over 5 minutes to a wash within 5 minutes.</p>
+        <div class="tbl"><table><thead><tr><th>#</th><th>Location</th><th class="r">Washes / month</th><th class="r">Newly covered</th></tr></thead><tbody id="wgap"></tbody></table></div></div>
+      <div><h3>Most washes</h3><p>Wins the most washes a month, from residents and passing drivers together.</p>
+        <div class="tbl"><table><thead><tr><th>#</th><th>Location</th><th class="r">Washes / month</th><th class="r">Nearest rival</th></tr></thead><tbody id="wtop"></tbody></table></div></div>
+    </div>
+    <p class="hint">Washes a month are an order of magnitude for comparing sites, not a forecast: there are no car ownership or traffic counts per street. Self-service and hand-wash bays at tyre shops are often missing from OpenStreetMap and Overture Maps, so check each site on the ground, and check the plot, the water and sewer connection and the permits before acting.</p>
+  </section>
+
+  <section class="ledger" aria-labelledby="kh">
+    <h2 id="kh">Delivery kitchen sites</h2>
+    <p class="lede">A delivery-only kitchen needs no shop window: what counts is how many adults its couriers reach and how many restaurants already deliver there. Adults aged 15–64 (and 65+ at a fifth) are shared over every restaurant and fast-food place within a 15-minute drive, with distance mattering less than for a shop (travel time to the power 1). A new kitchen running several brands counts double a fast-food place, a sit-down restaurant half. Orders assume one delivery per adult a month. Sites sit within 100 m of a tertiary or bigger road for couriers, on slopes of 10% or less, with easy street access.</p>
+    <div class="sites">
+      <div><h3>Fill a gap</h3><p>Brings the most adults who now have fewer than 10 restaurants within a 10-minute drive into reach.</p>
+        <div class="tbl"><table><thead><tr><th>#</th><th>Location</th><th class="r">Orders / day</th><th class="r">Newly in reach</th></tr></thead><tbody id="kitgap"></tbody></table></div></div>
+      <div><h3>Most orders</h3><p>Takes the largest share from existing competitors and earlier picks.</p>
+        <div class="tbl"><table><thead><tr><th>#</th><th>Location</th><th class="r">Orders / day</th><th class="r">Nearest rival</th></tr></thead><tbody id="kittop"></tbody></table></div></div>
+    </div>
+    <p class="hint">Orders a day are an order of magnitude for comparing sites, not a forecast. Delivery platforms set their own delivery zones and fees, which can matter more than distance. Rent is not modelled; the cheapest suitable space is usually a ground-floor commercial unit or a small industrial hall near a main road.</p>
+  </section>
+
+  <section class="ledger" aria-labelledby="mh">
+    <h2 id="mh">Music school sites</h2>
+    <p class="lede">Pupils are children aged about 7 to 18, estimated as 55% of under-15s plus 4% of 15–64-year-olds, of whom 5% take music lessons. They reach a school on foot (with slopes) or are driven (plus three minutes to park), whichever is quicker, up to 20 minutes. Public music schools count three times a private one, since they are free and larger. Sites need a transit stop within 400 m or a road within 150 m, slopes of 12% or less, easy street access, and existing buildings to rent space in.</p>
+    <div class="sites">
+      <div><h3>Fill a gap</h3><p>Brings the most children with no music school within 15 minutes into reach.</p>
+        <div class="tbl"><table><thead><tr><th>#</th><th>Location</th><th class="r">Pupils</th><th class="r">Newly in reach</th></tr></thead><tbody id="musgap"></tbody></table></div></div>
+      <div><h3>Most pupils</h3><p>Takes the largest share from existing competitors and earlier picks.</p>
+        <div class="tbl"><table><thead><tr><th>#</th><th>Location</th><th class="r">Pupils</th><th class="r">Nearest rival</th></tr></thead><tbody id="mustop"></tbody></table></div></div>
+    </div>
+    <p class="hint">Eleven music schools were found: the public schools in Novo Sarajevo, Centar (primary and secondary share a building and count as one), Ilidža and Istočno Novo Sarajevo, plus private schools such as Pop Rock Škola, Mali Mozart, BASIC, Espressivo, Rockschool and Atelje Maya. Private teachers and small studios are mostly missing, so check each area before acting.</p>
+  </section>
+
+  <section class="ledger" aria-labelledby="lh">
+    <div class="bar">
+      <h2 id="lh">Totals by MZ</h2>
+      <input id="q" type="search" placeholder="Filter by MZ or municipality" aria-label="Filter MZ table">
+    </div>
+    <div class="tbl"><table>
+      <thead><tr>
+        <th data-k="0" tabindex="0">Municipality</th><th data-k="1" tabindex="0">MZ</th>
+        <th data-k="2" class="r" tabindex="0">Residents</th><th data-k="3" class="r" tabindex="0">Range</th><th data-k="5" tabindex="0">Constraint</th>
+      </tr></thead>
+      <tbody id="tb"></tbody>
+    </table></div>
+  </section>
+
+  <footer>Sources: FZS population estimate (30.06.2026); OpenStreetMap via the BBBike Sarajevo extract (buildings, addresses, landuse, boundaries; ODbL); WorldPop R2025A 2026 constrained 100 m; GHSL GHS-BUILT-H 2018; relief and contours from Copernicus DEM GLO-30 (© DLR e.V. 2010–2014, © Airbus Defence and Space GmbH 2014–2018, provided under COPERNICUS by the European Union and ESA), smoothed to about 60 m; satellite background Sentinel-2 cloudless 2016 by EOX IT Services GmbH, CC BY 4.0, 10 m resolution (contains modified Copernicus Sentinel data 2016); Novi Grad street list by MZ (04.11.2025); Novi Grad MZ records 2010. Novo Sarajevo MZ outlines in OSM do not match the municipal edge, and Dolac Malta has none.</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/h3-js@4.1.0/dist/h3-js.umd.js"></script>
+<script>
+const D = __DATA__;
+const OPN = ["Centar","Novi Grad","Novo Sarajevo","Stari Grad","Ilidža","Vogošća"];
+const fmt = d3.format(",");
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const ramp = () => ["--r0","--r1","--r2","--r3","--r4","--r5","--r6"].map(css);
+const POP_T = [1,50,150,300,600,1000,1600], DEN_T = [1,500,1500,3000,6000,10000,16000], ATT_T = [0,20,35,50,65,80,90];
+let mode = "pop", focusOp = -1, selected = null, showMZ = true;
+
+const cells = D.cells.map(c => ({h:c[0],op:c[1],mz:c[2],s:c[3],mn:c[4],mx:c[5],a:[c[6],c[7],c[8]],p:c[9],km2:c[10],
+  att:c[11],w:[c[12],c[13],c[14]],car:[c[15],c[16],c[17]],poi:c[18],stm:c[19],stt:c[20],s4:c[21],t4:c[22],road:c[23],sup:c[24],elev:c[25],slope:c[26],liv:c[27],need:c.slice(28,38),acc:c[38],accMax:c[39],accNarrow:c[40],accNarrowPct:c[41],accSteepPct:c[42],accMinW:c[43],sun:c[44],sunFrom:c[45],sunTo:c[46],sunJan:c[47],sunMax:c[48],aboveFloor:c[49],inv:c[50],smog:c[51],fog:c[52],noise:c[53],ind:c[54],ai:c[55],ptal:c[56],lines:c[57],dep:c[58],stopMin:c[59],wash:c[60],job:c[61]}));
+const PTAL_K = ["0","1a","1b","2","3","4","5","6a","6b"],
+  PTAL_C = {"0":"#1f2a44","1a":"#2f4b7c","1b":"#3f6fa5","2":"#4ca3c7","3":"#7fcdbb","4":"#c7e9b4","5":"#fee08b","6a":"#fc8d59","6b":"#d73027"};
+const MODE_C = {tram:"#e63946", trolleybus:"#3a86ff", bus:"#06d6a0"};
+const AIR_T = [0,20,35,50,65,80,90], SMOG_C = ["#f1f7e8","#d9ead3","#f6e3a1","#f3b562","#e07a5f","#b5446e","#5c2a5e"],
+  FOG_C = ["#f4f6f8","#dfe6ec","#c3ced8","#a3b3c2","#8496a8","#66798c","#4a5a6b"];
+function airColor(v, C){ let i = 0; while (i < AIR_T.length-1 && v >= AIR_T[i+1]) i++; return C[i]; }
+const SUN_T = [0,2,4,5,6,7,7.5], SUN_C = ["#1d1f3a","#3b3a6b","#6b4f8a","#a8577e","#e07a5f","#f2a65a","#ffd166"];
+function sunColor(h){ let i = 0; while (i < SUN_T.length-1 && h >= SUN_T[i+1]) i++; return SUN_C[i]; }
+const NEEDS = [["trgovina","grocery"],["stanica","transit stop"],["osnovna_skola","primary school"],["ambulanta","clinic"],
+  ["park","park"],["vrtic","kindergarten"],["apoteka","pharmacy"],["igraliste","playground"],["bolnica","hospital"],["sport","sports"]];
+const POIK = {osnovna_skola:["primary school","#4361ee"], vrtic:["kindergarten","#4cc9f0"], ambulanta:["clinic","#e63946"],
+  bolnica:["hospital","#9d0208"], apoteka:["pharmacy","#2a9d8f"], park:["park","#52b788"], igraliste:["playground","#c7e66a"], sport:["sports","#8338ec"]};
+const poiOn = new Set(Object.keys(POIK)); let showPoi = false;
+const byH = new Map(cells.map(c => [c.h, c]));
+const RCLS = {magistrala:"trunk road", primarna:"primary road", sekundarna:"secondary road", tercijarna:"tertiary road"};
+const roadEn = t => { const [k, ...n] = t.split(" "); return n.length ? n.join(" ") + " (" + (RCLS[k] || k) + ")" : (RCLS[k] || k); };
+const WSITES = D.wsites.map(r => ({strat:r[0],rank:r[1],h:r[2],mz:r[3],op:r[4],wash:r[5],res:r[6],pass:r[7],d10:r[8],gap:r[9],near:r[10],fuel:r[11],road:roadEn(r[12]),land:r[13],lon:r[14],lat:r[15]}));
+const SITES = D.sites.map(r => ({strat:r[0],rank:r[1],h:r[2],mz:r[3],op:r[4],cap:r[5],w10:r[6],gap:r[7],near:r[8],road:r[9],land:r[10],lon:r[11],lat:r[12]}));
+// planar coordinates: longitude scaled by cos(latitude) so the city keeps its shape
+const KX = Math.cos(43.86 * Math.PI / 180);
+const sc = co => typeof co[0] === "number" ? [co[0] * KX, co[1]] : co.map(sc);
+const flat = g => ({type: g.type, coordinates: sc(g.coordinates)});
+D.op = D.op.map(flat); D.mzlines.forEach(m => m[2] = flat(m[2]));
+cells.forEach(c => { c.den = c.s / c.km2; c.ring = sc(h3.cellToBoundary(c.h, true)); });
+
+function binColor(v, T){ const r = ramp(); if (v < T[0]) return css("--zero"); let i = 0; while (i < T.length-1 && v >= T[i+1]) i++; return r[i]; }
+const JOB_T = [1,20,50,100,250,500,1000];
+function color(c){
+  if (mode === "trf") return "transparent";
+  if (mode === "job") return binColor(c.job, JOB_T);
+  if (mode === "kit"){ if (c.s === 0 || c.kitN == null) return css("--zero"); return c.kitN < 10 ? css("--rel-c") : c.kitN < 50 ? css("--r3") : css("--r1"); }
+  if (mode === "mus"){ if (c.s === 0 || c.musMin == null) return css("--zero"); return c.musMin <= 10 ? css("--r1") : c.musMin <= 15 ? css("--r3") : css("--rel-c"); }
+  if (mode === "rel") return c.s === 0 ? css("--zero") : css({A:"--rel-a",B:"--rel-b",C:"--rel-c"}[c.p]);
+  if (mode === "att") return binColor(c.att, ATT_T);
+  if (mode === "liv") return binColor(c.liv, ATT_T);
+  if (mode === "pt") return c.s === 0 ? css("--zero") : PTAL_C[c.ptal];
+  if (mode === "best") return c.s === 0 ? css("--zero") : binColor(c.best, BEST_T);
+  if (mode === "sun") return sunColor(c.sun);
+  if (mode === "smog") return c.s === 0 ? css("--zero") : airColor(c.smog, SMOG_C);
+  if (mode === "fog") return airColor(c.fog, FOG_C);
+  if (mode === "car") return c.s === 0 ? css("--zero") : binColor(c.acc, ATT_T);
+  if (mode === "wash"){ if (c.s === 0 || c.wash == null) return css("--zero"); return c.wash <= 3 ? css("--r1") : c.wash <= 5 ? css("--r3") : css("--rel-c"); }
+  if (mode === "sup"){ if (c.s === 0 || c.sup == null) return css("--zero"); return c.sup <= 5 ? css("--r1") : c.sup <= 10 ? css("--r3") : css("--rel-c"); }
+  return mode === "pop" ? binColor(c.s, POP_T) : binColor(c.den, DEN_T);
+}
+
+// strip
+const strip = document.getElementById("strip");
+D.summ.forEach((m,i) => {
+  const b = document.createElement("button"); b.className = "op"; b.setAttribute("aria-pressed","false");
+  const tot = m.abc[0]+m.abc[1]+m.abc[2] || 1;
+  b.innerHTML = `<span class="n">${OPN[i]}</span><span class="t num">${fmt(m.total)}</span>
+    <span class="s num">${m.cells} cells · 65+ ${Math.round(m.ages[2]/m.total*100)}%</span>
+    <span class="abc" title="Residents by grade A / B / C">${["--rel-a","--rel-b","--rel-c"].map((v,k)=>`<i style="width:${m.abc[k]/tot*100}%;background:var(${v})"></i>`).join("")}</span>`;
+  b.addEventListener("click", () => { focusOp = focusOp === i ? -1 : i; updateFocus(true); });
+  strip.appendChild(b);
+});
+
+// map
+const svg = d3.select("#map"), g = svg.append("g");
+const SAT = {src:"__SAT__", x0:__X0__, y0:__Y0__, x1:__X1__, y1:__Y1__};
+const TER = __TEREN__;
+let bg = "satrel", sat = true, hexOp = 0.6, showCont = true;
+const satImg = g.append("image").attr("href", SAT.src).attr("preserveAspectRatio","none").attr("class","sat");
+const relImg = g.append("image").attr("href", TER.rel).attr("preserveAspectRatio","none").attr("class","sat");
+const sjImg = g.append("image").attr("href", TER.sj).attr("preserveAspectRatio","none").attr("class","sat shade");
+const CREDIT = {sat:"Sentinel-2 cloudless 2016 © EOX IT Services GmbH (modified Copernicus Sentinel data 2016)",
+  rel:"Relief: Copernicus DEM GLO-30 © DLR e.V. 2010–2014, © Airbus Defence and Space GmbH 2014–2018"};
+const W = () => svg.node().clientWidth, H = () => svg.node().clientHeight;
+const fc = {type:"FeatureCollection", features:D.op.map(x=>({type:"Feature",geometry:x}))};
+const proj = d3.geoIdentity().reflectY(true);
+const path = d3.geoPath(proj);
+const hexes = g.append("g").selectAll("path").data(cells).join("path").attr("class","hex")
+  .on("mouseenter", (e,c) => { if (!selected) show(c); })
+  .on("mouseleave", () => { if (!selected) show(null); })
+  .on("click", (e,c) => { selected = selected === c ? null : c; hexes.classed("sel", d => d === selected); show(selected || c); e.stopPropagation(); });
+const line = coords => { let d = ""; for (let i = 0; i < coords.length; i += 2){ const [x,y] = proj([coords[i]*KX, coords[i+1]]); d += (i ? "L" : "M") + x.toFixed(1) + "," + y.toFixed(1); } return d; };
+const contG = g.append("g").attr("class","contours");
+const contP = contG.selectAll("path").data(TER.cont).join("path").attr("class", d => d[1] ? "cont major" : "cont");
+const contL = contG.selectAll("text").data(TER.cont.filter(d => d[1] && d[2].length > 40)).join("text").attr("class","contl").attr("text-anchor","middle").attr("dy","0.35em").text(d => d[0] + " m");
+const ROADS = __ROADS__;
+const RORDER = ["pjesacka","stepenice","pristupna","ulica","tercijarna","sekundarna","primarna","magistrala","autoput","tramvaj"];
+let showRoads = true;
+const roadG = g.append("g").attr("class","roads");
+const roadCase = roadG.append("g").selectAll("path").data(RORDER.filter(k => ["tercijarna","sekundarna","primarna","magistrala","autoput"].includes(k) && ROADS[k])).join("path").attr("class", k => "rcase r-" + k);
+const roadP = roadG.append("g").selectAll("path").data(RORDER.filter(k => ROADS[k])).join("path").attr("class", k => "road r-" + k);
+const TRF = D.trf;
+const trfG = g.append("g").attr("display","none");
+const trfP = trfG.append("g").selectAll("path").data(TRF.seg.slice().sort((a,b) => a[0]-b[0])).join("path").attr("class","trf");
+trfP.append("title");
+const trfC = trfG.append("g").selectAll("g").data(TRF.cnt).join("g").attr("class","trfc");
+trfC.append("circle").attr("r",4.5);
+trfC.append("title").text(d => `${d[0]} · ${d[1]}\nCounted 2025 average: ${fmt(d[4])} vehicles a day` +
+  (d[6] >= 0 ? (d[9] ? `\nModel: ${fmt(d[6])}; trip model alone: ${fmt(d[8])}; estimated without this counter: ${fmt(d[7])}`
+    : `\nModel: ${fmt(d[6])}. The publication gives no position for this counter, so it is shown but not used to correct the model.`) : ""));
+let trfHour = 8, trfDay = "radni", trfTimer = null;
+// koncepti novih cesta (31_scenariji.py)
+const SCN = TRF.scen || [];
+const scnG = trfG.append("g");
+const scnP = scnG.selectAll("path").data(SCN.flatMap(d => d.geo.map((g,i) => ({id:d.id, g, t: d.tun && d.tun[i]})))).join("path").attr("class", d => d.t ? "scnl scnt" : "scnl");
+const scnL = scnG.selectAll("g").data(SCN.filter(d => d.geo.length)).join("g").attr("class","scnlab");
+scnL.append("rect").attr("x",-10).attr("y",-9).attr("width",20).attr("height",18).attr("rx",3);
+scnL.append("text").attr("text-anchor","middle").attr("dy","0.35em").text(d => d.id);
+const scnMid = d => { const g = d.geo.reduce((a,b) => b.length > a.length ? b : a, []), i = Math.floor(g.length/4)*2; return proj([g[i]*KX, g[i+1]]); };
+const TRF_T = [0.3,0.5,0.7,0.9], TRF_C = ["#1a9850","#91cf60","#fee08b","#fc8d59","#d73027"];
+const trfVol = s => s[0] * TRF.prof[s[2]][trfHour] * TRF.day[trfDay];
+const trfVC = s => trfVol(s) / s[1];
+const hh = h => String(h).padStart(2,"0") + ":00";
+function trfPaint(){
+  trfP.attr("stroke", s => TRF_C[d3.bisect(TRF_T, trfVC(s))]).style("stroke-width", s => (1.6 + Math.min(5, trfVol(s)/350)) * Math.pow(zk, 0.35) + "px")
+    .attr("stroke-dasharray", s => s[3] ? "5 3" : null);
+  trfP.select("title").text(s => `${s[4] >= 0 ? TRF.names[s[4]] : "unnamed road"}: about ${fmt(Math.round(trfVol(s)/10)*10)} vehicles/h in the busier direction, ${Math.round(trfVC(s)*100)}% of capacity${TRF.model ? " (trip model)" : s[3] ? " (volume assumed by road class)" : " (from a counter)"}`);
+  trfC.select("text").remove();
+  trfC.filter(d => d[5] >= 0).append("text").attr("text-anchor","middle").attr("dy","-0.9em")
+    .text(d => k(Math.round(d[4] * TRF.prof[d[5]][trfHour] * TRF.day[trfDay])));
+  document.getElementById("trfOut").textContent = hh(trfHour) + "–" + hh(trfHour + 1 === 24 ? 24 : trfHour + 1);
+}
+function trfSet(h){ trfHour = h; document.getElementById("trfHour").value = h; trfPaint(); if (mode === "trf"){ legend(); show(selected); } }
+document.getElementById("trfHour").addEventListener("input", e => { if (trfTimer){ clearInterval(trfTimer); trfTimer = null; document.getElementById("trfPlay").textContent = "▶ Play 24 h"; } trfSet(+e.target.value); });
+document.querySelectorAll("[data-day]").forEach(b => b.onclick = () => { trfDay = b.dataset.day;
+  document.querySelectorAll("[data-day]").forEach(x => x.setAttribute("aria-pressed", x === b)); trfSet(trfHour); });
+document.getElementById("trfPlay").onclick = e => {
+  if (trfTimer){ clearInterval(trfTimer); trfTimer = null; e.target.textContent = "▶ Play 24 h"; return; }
+  e.target.textContent = "❚❚ Pause"; trfTimer = setInterval(() => trfSet((trfHour + 1) % 24), 900); };
+const mzG = g.append("g");
+const mzP = mzG.selectAll("path").data(D.mzlines).join("path").attr("class","mzl");
+const opP = g.append("g").selectAll("path").data(D.op).join("path").attr("class","opl");
+const supG = g.append("g").attr("display","none");
+const storeP = supG.append("g").selectAll("circle").data(D.stores).join("circle").attr("class","store").attr("r",2.2);
+const siteG = supG.append("g").selectAll("g").data(SITES).join("g").attr("class", d => "site " + (d.strat === "bijela_mrlja" ? "gapsite" : "topsite"))
+  .on("click", (e,d) => { e.stopPropagation(); pickSite(d); });
+siteG.append("circle").attr("r",7.5);
+siteG.append("text").attr("text-anchor","middle").attr("dy","0.35em").text(d => d.rank);
+cells.forEach((c, i) => { c.kitMin = D.biz.dostava.cov[i][0]; c.kitN = D.biz.dostava.cov[i][1]; c.musMin = D.biz.muzicka.cov[i][0]; c.musN = D.biz.muzicka.cov[i][1]; });
+const BIZ = {
+  kit:{d:D.biz.dostava, name:"Delivery kitchen", unit:"orders a day", near:"Adults within a 10-min drive", place:"restaurant"},
+  mus:{d:D.biz.muzicka, name:"Music school", unit:"pupils", near:"Children within 15 min", place:"music school"}};
+Object.entries(BIZ).forEach(([m, b]) => {
+  b.sites = b.d.sites.map(r => ({strat:r[0],rank:r[1],h:r[2],mz:r[3],op:r[4],est:r[5],near:r[6],gap:r[7],rival:r[8],rivals:r[9],land:r[10],lon:r[11],lat:r[12]}));
+  b.g = g.append("g").attr("display","none");
+  b.pts = b.g.append("g").selectAll("circle").data(b.d.places).join("circle").attr("class","store").attr("r",2.2);
+  b.sg = b.g.append("g").selectAll("g").data(b.sites).join("g").attr("class", d => "site " + (d.strat === "bijela_mrlja" ? "gapsite" : "topsite"))
+    .on("click", (e,d) => { e.stopPropagation(); pickBiz(m, d); });
+  b.sg.append("circle").attr("r",7.5);
+  b.sg.append("text").attr("text-anchor","middle").attr("dy","0.35em").text(d => d.rank);
+});
+const bizPlace = () => Object.values(BIZ).forEach(b => {
+  b.pts.attr("cx", d => proj([d[0]*KX, d[1]])[0]).attr("cy", d => proj([d[0]*KX, d[1]])[1]).attr("r", 2.2/zk);
+  b.sg.attr("transform", d => { const [x,y] = proj([d.lon*KX, d.lat]); return `translate(${x},${y}) scale(${1/zk})`; }); });
+const washG = g.append("g").attr("display","none");
+const washP = washG.append("g").selectAll("circle").data(D.washes).join("circle").attr("class", d => "store wash w-" + d[3]).attr("r",3);
+washP.append("title").text(d => (d[2] || "car wash") + (d[3] === "detailing" ? " (detailing)" : d[3] === "pumpa_pranje" ? " (at a fuel station)" : ""));
+const wsiteG = washG.append("g").selectAll("g").data(WSITES).join("g").attr("class", d => "site " + (d.strat === "bijela_mrlja" ? "gapsite" : "topsite"))
+  .on("click", (e,d) => { e.stopPropagation(); pickWash(d); });
+wsiteG.append("circle").attr("r",7.5);
+wsiteG.append("text").attr("text-anchor","middle").attr("dy","0.35em").text(d => d.rank);
+let zk = 1;
+const ptG = g.append("g").attr("class","ptl").attr("display","none");
+const ptOrder = {bus:0, trolleybus:1, tram:2};
+const ptP = ptG.selectAll("path").data(D.lines.slice().sort((a,b) => ptOrder[a[0]] - ptOrder[b[0]])).join("path")
+  .attr("class", d => "ptline m-" + d[0]).attr("stroke", d => MODE_C[d[0]]);
+ptP.append("title").text(d => `${d[2] || d[1]} · ${d[3] ? d[3] + " departures/hour (assumed)" : "frequency unknown"}`);
+// predložene linije
+const NEW_C = {glavna:"#ff006e", minibus:"#9b5de5", dogradnja:"#00b4d8", spoj:"#ffd60a"};
+const REC = {"nova linija":"New line: nothing runs here today",
+  "jedna jaka linija (6–8 polazaka/h) umjesto više rijetkih":"One strong line (6–8 an hour) instead of several sparse ones",
+  "jedna jaka linija (6–8 polazaka/h) umjesto više rijetkih; voziti i kroz nepokrivene ulice":"One strong line (6–8 an hour) instead of several sparse ones, also through the streets they miss",
+  "produžiti/preusmjeriti postojeće kroz nepokriveni dio":"Extend or reroute existing lines through the part they miss",
+  "pojačati na ≥ 3 polaska/h i proširiti trasu":"Run existing lines at least 3 times an hour and widen the route",
+  "pojačati na ≥ 3 polaska/h":"Run existing lines at least 3 times an hour", "dovoljno pokriveno":"Already well served",
+  "spoj":"Build a short road link (bus-capable)", "dogradnja":"New short line, possible once the link is built",
+  "sjeverna":"Hillside line by midibus (8–9 m) every 10 minutes; best run as two overlapping halves meeting at Buća Potok"};
+let newSel = null;
+const newP = ptG.append("g").selectAll("path").data(D.newlines).join("path").attr("class", d => "newl n-" + d[1])
+  .attr("stroke", d => NEW_C[d[1]]).on("click", (e, d) => { e.stopPropagation(); newSel = d; newP.classed("sel", x => x === d); audShow(); show(null); });
+newP.append("title").text(d => `Proposed ${d[0]}: ${d[2]}`);
+const newL = ptG.append("g").selectAll("g").data(D.newlines).join("g").attr("class","newlab")
+  .on("click", (e, d) => { e.stopPropagation(); newSel = d; newP.classed("sel", x => x === d); audShow(); show(null); });
+newL.append("rect").attr("x",-12).attr("y",-8).attr("width",24).attr("height",16).attr("rx",8).attr("fill", d => NEW_C[d[1]]);
+newL.append("text").attr("text-anchor","middle").attr("dy","0.35em").text(d => d[0]).style("fill", d => d[1] === "spoj" ? "#000" : null);
+// provjera trase linije S (29_provjera_trase.py)
+const AUD_C = ["#a7c957", "#f4a261", "#e63946"];
+const AUD_R = {"nagib > 15% (50 m)":"over 15% grade (50 m)", "nagib 10–15% (50 m, zima)":"10–15% grade (50 m), winter risk",
+  "nagib > 12% (100 m)":"over 12% grade (100 m)", "razmak zgrada < 5,5 m":"under 5.5 m between buildings",
+  "razmak zgrada 5,5–8 m":"5.5–8 m between buildings", "serpentina (skretanje > 120°)":"hairpin (turn over 120°)",
+  "oštro skretanje 90–120°":"sharp turn 90–120°", "trasa se vraća istim putem (ispraviti)":"route doubles back (fix the sketch)",
+  "makadam":"gravel", "neasfaltirano (OSM)":"unpaved (OSM)", "pristupni put / stambena zona (OSM)":"access road or residential zone (OSM)",
+  "jednosmjerna (povratak drugom ulicom)":"one-way (return by another street)"};
+const audG = ptG.append("g").attr("display","none");
+const audP = audG.selectAll("path").data(D.audit ? D.audit.seg : []).join("path").attr("class","audl").attr("stroke", d => AUD_C[d[0]]);
+const audM = audG.append("g").selectAll("g").data(D.audit ? D.audit.pts : []).join("g").attr("class","audm")
+  .on("click", (e, d) => { e.stopPropagation(); audZoom(d); });
+audM.append("circle").attr("r", 7.5).attr("fill", d => AUD_C[d[1]]);
+audM.append("text").attr("text-anchor","middle").attr("dy","0.35em").text(d => d[0]);
+audM.append("title").text(d => `${d[0]}. ${d[2]} · km ${d[6]} · ${d[3].split("; ").map(x => AUD_R[x] || x).join("; ")}`);
+const audShow = () => audG.attr("display", newSel && newSel[0] === "S" ? null : "none");
+function audZoom(d){ const [x,y] = proj([d[5]*KX, d[4]]); svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(W()/2,H()/2).scale(9).translate(-x,-y)); }
+const newMid = d => { const c = d[9], i = Math.floor(c.length / 4) * 2; return proj([c[i]*KX, c[i+1]]); };
+const aqG = g.append("g").attr("class","aq").attr("display","none");
+const aqS = aqG.selectAll("g").data(D.aq).join("g").attr("class","aqs");
+aqS.append("rect").attr("x",-15).attr("y",-9).attr("width",30).attr("height",18).attr("rx",4);
+aqS.append("text").attr("text-anchor","middle").attr("dy","0.35em").text(d => d[3]);
+aqS.append("title").text(d => `${d[0]}: PM2.5 ${d[3]} µg/m³ (FHMZ, annual mean 2025)`);
+const accG = g.append("g").attr("class","accl").attr("display","none");
+const accP = accG.selectAll("path").data(Object.entries(D.acc)).join("path").attr("class", d => "acc a" + d[0]);
+const poiG = g.append("g").attr("class","pois").attr("display","none");
+const POIS = Object.entries(D.poi).flatMap(([k, arr]) => arr.map(a => ({k, lon:a[0], lat:a[1], n:a[2]})));
+const poiP = poiG.selectAll("circle").data(POIS).join("circle").attr("class", d => "poi p-" + d.k).attr("r", d => d.k === "bolnica" ? 4.6 : 3.2)
+  .attr("fill", d => POIK[d.k][1]).on("mouseenter", (e,d) => { if (!selected) document.getElementById("read").insertAdjacentHTML("afterbegin", ""); })
+  .append("title").text(d => (d.n || POIK[d.k][0]) + " · " + POIK[d.k][0]);
+svg.on("click", () => { selected = null; hexes.classed("sel", false); show(null); });
+
+function layout(){
+  proj.fitExtent([[12,12],[W()-12,H()-84]], fc);
+  hexes.attr("d", c => path({type:"Polygon",coordinates:[c.ring]}));
+  mzP.attr("d", d => path(d[2]));
+  opP.attr("d", d => path(d));
+  const [ax, ay] = proj([SAT.x0*KX, SAT.y1]), [bx, by] = proj([SAT.x1*KX, SAT.y0]);
+  satImg.attr("x", ax).attr("y", ay).attr("width", bx-ax).attr("height", by-ay);
+  const [rx, ry] = proj([TER.box.x0*KX, TER.box.y1]), [sx2, sy2] = proj([TER.box.x1*KX, TER.box.y0]);
+  [relImg, sjImg].forEach(im => im.attr("x", rx).attr("y", ry).attr("width", sx2-rx).attr("height", sy2-ry));
+  contP.attr("d", d => line(d[2]));
+  accP.attr("d", d => d[1].map(line).join(""));
+  ptP.attr("d", d => d[4].map(line).join(""));
+  newP.attr("d", d => line(d[9]));
+  newL.attr("transform", d => { const [x,y] = newMid(d); return `translate(${x},${y}) scale(${1/zk})`; });
+  audP.attr("d", d => line(d[1]));
+  audM.attr("transform", d => { const [x,y] = proj([d[5]*KX, d[4]]); return `translate(${x},${y}) scale(${1/zk})`; });
+  aqS.attr("transform", d => { const [x,y] = proj([d[2]*KX, d[1]]); return `translate(${x},${y}) scale(${1/zk})`; });
+  const rd = k => ROADS[k].map(line).join("");
+  const cache = {}; RORDER.forEach(k => { if (ROADS[k]) cache[k] = rd(k); });
+  roadP.attr("d", k => cache[k]); roadCase.attr("d", k => cache[k]);
+  contL.attr("transform", d => { const i = Math.floor(d[2].length/4)*2; const [x,y] = proj([d[2][i]*KX, d[2][i+1]]); return `translate(${x},${y}) scale(${1/zk})`; });
+  storeP.attr("cx", d => proj([d[0]*KX, d[1]])[0]).attr("cy", d => proj([d[0]*KX, d[1]])[1]);
+  siteG.attr("transform", d => { const [x,y] = proj([d.lon*KX, d.lat]); return `translate(${x},${y}) scale(${1/zk})`; });
+  storeP.attr("r", 2.2/zk);
+  washP.attr("cx", d => proj([d[0]*KX, d[1]])[0]).attr("cy", d => proj([d[0]*KX, d[1]])[1]).attr("r", 3/zk);
+  wsiteG.attr("transform", d => { const [x,y] = proj([d.lon*KX, d.lat]); return `translate(${x},${y}) scale(${1/zk})`; });
+  bizPlace();
+  trfP.attr("d", s => line(s[5]));
+  scnP.attr("d", d => line(d.g));
+  scnL.attr("transform", d => { const [x,y] = scnMid(d); return `translate(${x},${y}) scale(${1/zk})`; });
+  trfC.attr("transform", d => { const [x,y] = proj([d[3]*KX, d[2]]); return `translate(${x},${y}) scale(${1/zk})`; });
+  poiG.selectAll("circle").attr("cx", d => proj([d.lon*KX, d.lat])[0]).attr("cy", d => proj([d.lon*KX, d.lat])[1])
+    .attr("r", d => (d.k === "bolnica" ? 4.6 : 3.2)/zk).attr("stroke-width", 1/zk);
+}
+const zoom = d3.zoom().scaleExtent([1,14]).on("zoom", e => { g.attr("transform", e.transform);
+  svg.style("--zw", Math.pow(e.transform.k, 0.35).toFixed(2)); svg.classed("zin", e.transform.k >= 2.5);
+  if (e.transform.k !== zk){ zk = e.transform.k; siteG.attr("transform", d => { const [x,y] = proj([d.lon*KX, d.lat]); return `translate(${x},${y}) scale(${1/zk})`; }); storeP.attr("r", 2.2/zk);
+    wsiteG.attr("transform", d => { const [x,y] = proj([d.lon*KX, d.lat]); return `translate(${x},${y}) scale(${1/zk})`; }); washP.attr("r", 3/zk); bizPlace();
+    newL.attr("transform", d => { const [x,y] = newMid(d); return `translate(${x},${y}) scale(${1/zk})`; });
+    audM.attr("transform", d => { const [x,y] = proj([d[5]*KX, d[4]]); return `translate(${x},${y}) scale(${1/zk})`; });
+    trfC.attr("transform", d => { const [x,y] = proj([d[3]*KX, d[2]]); return `translate(${x},${y}) scale(${1/zk})`; }); if (mode === "trf") trfPaint();
+    scnL.attr("transform", d => { const [x,y] = scnMid(d); return `translate(${x},${y}) scale(${1/zk})`; });
+    poiG.selectAll("circle").attr("r", d => (d.k === "bolnica" ? 4.6 : 3.2)/zk).attr("stroke-width", 1/zk);
+    aqS.attr("transform", d => { const [x,y] = proj([d[2]*KX, d[1]]); return `translate(${x},${y}) scale(${1/zk})`; });
+    contL.attr("transform", d => { const i = Math.floor(d[2].length/4)*2; const [x,y] = proj([d[2][i]*KX, d[2][i+1]]); return `translate(${x},${y}) scale(${1/zk})`; }); } });
+svg.call(zoom);
+document.getElementById("reset").onclick = () => { focusOp = -1; updateFocus(false); svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity); };
+document.getElementById("mzToggle").onclick = e => { showMZ = !showMZ; mzG.attr("display", showMZ ? null : "none"); e.target.textContent = "MZ outlines: " + (showMZ ? "on" : "off"); e.target.setAttribute("aria-pressed", showMZ); };
+
+function paint(){
+  sat = bg !== "none";
+  hexes.attr("fill", color).attr("fill-opacity", c => !sat ? 1 : (c.s === 0 && mode !== "att") ? 0 : hexOp);
+  satImg.attr("display", bg === "sat" || bg === "satrel" ? null : "none");
+  relImg.attr("display", bg === "rel" ? null : "none");
+  sjImg.attr("display", bg === "satrel" ? null : "none");
+  contG.attr("display", showCont ? null : "none");
+  roadG.attr("display", showRoads ? null : "none");
+  poiG.attr("display", showPoi ? null : "none");
+  poiG.selectAll("circle").attr("display", d => poiOn.has(d.k) ? null : "none");
+  svg.classed("on-rel", bg === "rel");
+  const cr = document.getElementById("satcredit");
+  cr.textContent = [bg === "sat" || bg === "satrel" ? CREDIT.sat : "", bg === "rel" || bg === "satrel" || showCont ? CREDIT.rel : "", showRoads ? "Roads © OpenStreetMap contributors" : ""].filter(Boolean).join(" · ");
+  cr.hidden = !sat && !showCont && !showRoads;
+  svg.classed("on-sat", sat);
+  legend();
+}
+document.querySelectorAll("[data-bg]").forEach(b => b.onclick = () => { bg = b.dataset.bg;
+  document.querySelectorAll("[data-bg]").forEach(x => x.setAttribute("aria-pressed", x === b)); document.getElementById("hexop").disabled = bg === "none"; paint(); });
+document.getElementById("poiToggle").onclick = e => { showPoi = !showPoi; e.target.textContent = "Places: " + (showPoi ? "on" : "off"); e.target.setAttribute("aria-pressed", showPoi); paint(); };
+document.getElementById("legend").addEventListener("click", e => { const b = e.target.closest("[data-poi]"); if (!b) return;
+  const k = b.dataset.poi; poiOn.has(k) ? poiOn.delete(k) : poiOn.add(k); paint(); });
+document.getElementById("roadToggle").onclick = e => { showRoads = !showRoads; e.target.textContent = "Roads: " + (showRoads ? "on" : "off"); e.target.setAttribute("aria-pressed", showRoads); paint(); };
+document.getElementById("contToggle").onclick = e => { showCont = !showCont; e.target.textContent = "Contours: " + (showCont ? "on" : "off"); e.target.setAttribute("aria-pressed", showCont); paint(); };
+document.getElementById("hexop").addEventListener("input", e => { hexOp = +e.target.value; paint(); });
+function updateFocus(zoomTo){
+  [...strip.children].forEach((b,i) => b.setAttribute("aria-pressed", i === focusOp));
+  hexes.classed("dim", c => focusOp >= 0 && c.op !== focusOp);
+  if (zoomTo && focusOp >= 0){
+    const [[x0,y0],[x1,y1]] = path.bounds(D.op[focusOp]);
+    const k = Math.min(14, 0.9/Math.max((x1-x0)/W(), (y1-y0)/H()));
+    svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(W()/2,H()/2).scale(k).translate(-(x0+x1)/2,-(y0+y1)/2));
+  } else if (zoomTo) svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity);
+  show(selected);
+}
+const MODES = ["best","pop","den","rel","att","sup","wash","kit","mus","trf","job","liv","car","sun","smog","fog","pt"];
+MODES.forEach(m => document.getElementById("m-"+m).onclick = () => {
+  mode = m; MODES.forEach(x => document.getElementById("m-"+x).setAttribute("aria-pressed", x === m)); supG.attr("display", m === "sup" ? null : "none"); washG.attr("display", m === "wash" ? null : "none");
+  Object.entries(BIZ).forEach(([k, b]) => b.g.attr("display", m === k ? null : "none"));
+  trfG.attr("display", m === "trf" ? null : "none"); document.getElementById("trfPanel").hidden = m !== "trf";
+  if (m === "trf") trfPaint(); else if (trfTimer){ clearInterval(trfTimer); trfTimer = null; document.getElementById("trfPlay").textContent = "▶ Play 24 h"; } accG.attr("display", m === "car" ? null : "none");
+  aqG.attr("display", m === "smog" || m === "fog" ? null : "none");
+  ptG.attr("display", m === "pt" ? null : "none");
+  if (m === "liv" && !showPoi) document.getElementById("poiToggle").click(); paint(); show(selected); });
+
+const ROADLEG = `<div class="cat rleg">${[["autoput","motorway"],["magistrala","trunk road"],["primarna","primary"],["sekundarna","secondary"],["tercijarna","tertiary"],["ulica","street"],["pristupna","access, service*"],["pjesacka","footpath*"],["stepenice","steps*"],["tramvaj","tram"]].map(([k,n]) => `<span><i class="rl r-${k}"></i>${n}</span>`).join("")}<span class="tag">* shown when zoomed in</span></div>`;
+function legend(){ legend0(); const el = document.getElementById("legend");
+  if (showPoi) el.insertAdjacentHTML("beforeend", `<div class="cat pleg">${Object.entries(POIK).map(([k,[n,c]]) =>
+    `<button data-poi="${k}" aria-pressed="${poiOn.has(k)}"><i style="background:${c}"></i>${n}</button>`).join("")}</div>`);
+  if (showRoads) el.insertAdjacentHTML("beforeend", ROADLEG); }
+function legend0(){
+  const el = document.getElementById("legend");
+  if (mode === "rel"){
+    el.innerHTML = `<div class="cat"><span><i style="background:var(--rel-a)"></i>A · MZ total</span><span><i style="background:var(--rel-b)"></i>B · municipality only</span><span><i style="background:var(--rel-c)"></i>C · WorldPop only</span></div>`;
+    return;
+  }
+  if (mode === "sup"){
+    el.innerHTML = `<div style="font-size:12px;color:var(--muted)">Walk to nearest supermarket</div>
+      <div class="cat"><span><i style="background:var(--r1)"></i>≤ 5 min</span><span><i style="background:var(--r3)"></i>5–10 min</span><span><i style="background:var(--rel-c)"></i>over 10 min</span></div>
+      <div class="cat"><span><i class="dot"></i>existing supermarket</span><span><b class="mk gapsite">1</b>gap site</span><span><b class="mk topsite">1</b>top-sales site</span></div>`;
+    return;
+  }
+  if (mode === "trf"){
+    el.innerHTML = `<div style="font-size:12px;color:var(--muted)">Traffic as a share of road capacity, ${hh(trfHour)}–${hh(trfHour+1)}, ${{radni:"weekday",subota:"Saturday",nedjelja:"Sunday"}[trfDay]}</div>
+      <div class="cat">${["under 30%","30–50%","50–70%","70–90%","over 90%"].map((t,i) => `<span><i style="background:${TRF_C[i]}"></i>${t}</span>`).join("")}</div>
+      <div class="cat">${TRF.model ? `<span><i class="rl" style="border-top:3px solid var(--muted)"></i>volume from the calibrated trip model</span>` : `<span><i class="rl" style="border-top:3px solid var(--muted)"></i>volume from a counter</span><span><i class="rl" style="border-top:3px dashed var(--muted)"></i>volume assumed by road class</span>`}<span><i class="dot" style="background:#fff;border:1.5px solid #111;opacity:1"></i>counter, vehicles this hour</span></div>`;
+    return;
+  }
+  if (mode === "kit" || mode === "mus"){
+    el.innerHTML = (mode === "kit" ? `<div style="font-size:12px;color:var(--muted)">Restaurants and fast food within a 10-min drive</div>
+      <div class="cat"><span><i style="background:var(--rel-c)"></i>under 10</span><span><i style="background:var(--r3)"></i>10–49</span><span><i style="background:var(--r1)"></i>50 or more</span></div>`
+      : `<div style="font-size:12px;color:var(--muted)">Nearest music school, on foot or by car</div>
+      <div class="cat"><span><i style="background:var(--r1)"></i>≤ 10 min</span><span><i style="background:var(--r3)"></i>10–15 min</span><span><i style="background:var(--rel-c)"></i>over 15 min</span></div>`)
+      + `<div class="cat"><span><i class="dot"></i>existing ${BIZ[mode].place}</span><span><b class="mk gapsite">1</b>gap site</span><span><b class="mk topsite">1</b>${mode === "kit" ? "most orders" : "most pupils"}</span></div>`;
+    return;
+  }
+  if (mode === "wash"){
+    el.innerHTML = `<div style="font-size:12px;color:var(--muted)">Drive to nearest car wash</div>
+      <div class="cat"><span><i style="background:var(--r1)"></i>≤ 3 min</span><span><i style="background:var(--r3)"></i>3–5 min</span><span><i style="background:var(--rel-c)"></i>over 5 min</span></div>
+      <div class="cat"><span><i class="dot"></i>existing car wash</span><span><b class="mk gapsite">1</b>gap site</span><span><b class="mk topsite">1</b>most washes</span></div>`;
+    return;
+  }
+  if (mode === "pt"){
+    el.innerHTML = `<div style="font-size:12px;color:var(--muted)">Public transport accessibility level (PTAL), 0 = none, 6b = excellent</div>
+      <div class="row">${PTAL_K.map(k => `<div class="sw"><i style="background:${PTAL_C[k]}"></i><span>${k}</span></div>`).join("")}</div>
+      <div class="cat"><span><i class="rl" style="border-color:${MODE_C.tram}"></i>tram</span><span><i class="rl" style="border-color:${MODE_C.trolleybus}"></i>trolleybus</span><span><i class="rl" style="border-color:${MODE_C.bus}"></i>bus (OSM has only part of the bus network)</span></div>
+      <div class="cat"><span><i class="rl" style="border-top:4px dashed ${NEW_C.glavna}"></i>proposed main line (P)</span><span><i class="rl" style="border-top:2.5px dashed ${NEW_C.minibus}"></i>proposed minibus (M)</span><span><i class="rl" style="border-top:2.5px dashed ${NEW_C.dogradnja}"></i>line through a new link (D)</span><span><i class="rl" style="border-top:5px solid ${NEW_C.spoj}"></i>new road link (N)</span></div>`;
+    return;
+  }
+  if (mode === "best"){
+    const r = ramp();
+    el.innerHTML = `<div style="font-size:12px;color:var(--muted)">Best to live: ${PROFILES[profile] ? PROFILES[profile].name : "custom weights"} · rank in the city, 0 = worst, 100 = best populated cell</div>
+      <div class="row"><div class="sw"><i style="background:var(--zero)"></i><span>empty</span></div>${BEST_T.map((t,i)=>`<div class="sw"><i style="background:${r[i]}"></i><span>${Math.round(t)}</span></div>`).join("")}</div>`;
+    return;
+  }
+  if (mode === "smog" || mode === "fog"){
+    const C = mode === "smog" ? SMOG_C : FOG_C;
+    el.innerHTML = `<div style="font-size:12px;color:var(--muted)">${mode === "smog" ? "Winter smog exposure, relative 0–100 (inversion + traffic)" : "Winter fog exposure, relative 0–100 (inversion + rivers)"}</div>
+      <div class="row">${AIR_T.map((t,i)=>`<div class="sw"><i style="background:${C[i]}"></i><span>${t}${i===AIR_T.length-1?"+":""}</span></div>`).join("")}</div>
+      <div class="cat"><span><b class="aqk">26</b>measured PM2.5, µg/m³, 2025 annual mean (FHMZ)</span></div>`;
+    return;
+  }
+  if (mode === "sun"){
+    el.innerHTML = `<div style="font-size:12px;color:var(--muted)">Hours of direct sun on 21 December, clear sky (flat horizon: ${cells[0].sunMax} h)</div>
+      <div class="row">${SUN_T.map((t,i)=>`<div class="sw"><i style="background:${SUN_C[i]}"></i><span>${t}${i===SUN_T.length-1?"+":""}</span></div>`).join("")}</div>`;
+    return;
+  }
+  if (mode === "car"){
+    const r = ramp();
+    el.innerHTML = `<div style="font-size:12px;color:var(--muted)">Car access, 0–100 (steep or narrow streets lower it)</div>
+      <div class="row">${ATT_T.map((t,i)=>`<div class="sw"><i style="background:${r[i]}"></i><span>${t}${i===ATT_T.length-1?"+":""}</span></div>`).join("")}</div>
+      <div class="cat"><span><i class="rl" style="border-color:#ff8c1a"></i>steep street (over 12% on 100 m)</span><span><i class="rl" style="border-color:#e63946"></i>narrow (under 9 m between buildings)</span><span><i class="rl" style="border-color:#b5179e"></i>both</span></div>`;
+    return;
+  }
+  if (mode === "job"){
+    const r = ramp();
+    el.innerHTML = `<div style="font-size:12px;color:var(--muted)">Estimated jobs per cell (place of work)</div>
+      <div class="row"><div class="sw"><i style="background:var(--zero)"></i><span>0</span></div>${JOB_T.map((t,i)=>`<div class="sw"><i style="background:${r[i]}"></i><span>${t}${i===JOB_T.length-1?"+":""}</span></div>`).join("")}</div>`;
+    return;
+  }
+  if (mode === "att" || mode === "liv"){
+    const r = ramp();
+    el.innerHTML = `<div style="font-size:12px;color:var(--muted)">${mode === "liv" ? "Livability: daily needs on foot, 0–100" : "Location attractiveness, 0–100"}</div>
+      <div class="row">${ATT_T.map((t,i)=>`<div class="sw"><i style="background:${r[i]}"></i><span>${t}${i===ATT_T.length-1?"+":""}</span></div>`).join("")}</div>`;
+    return;
+  }
+  const T = mode === "pop" ? POP_T : DEN_T, r = ramp();
+  const lab = v => v >= 1000 ? (v/1000)+"k" : v;
+  el.innerHTML = `<div style="font-size:12px;color:var(--muted)">${mode === "pop" ? "Residents per cell" : "Residents per km²"}</div>
+    <div class="row"><div class="sw"><i style="background:var(--zero)"></i><span>0</span></div>${T.map((t,i)=>`<div class="sw"><i style="background:${r[i]}"></i><span>${lab(t)}${i===T.length-1?"+":""}</span></div>`).join("")}</div>`;
+}
+
+const k = v => v >= 10000 ? Math.round(v/1000)+"k" : v >= 1000 ? (v/1000).toFixed(1)+"k" : String(v);
+function washBlock(c){
+  const ss = WSITES.filter(x => x.h === c.h); if (!ss.length) return "";
+  return ss.map(d => `<div class="k">Car wash site · ${d.strat === "bijela_mrlja" ? "gap" : "most washes"} #${d.rank}</div>
+    <dl><dt>Washes a month (model)</dt><dd class="num">${fmt(d.wash)}</dd><dt>…from residents / passing</dt><dd class="num">${fmt(d.res)} / ${fmt(d.pass)}</dd>
+    <dt>Residents within 10 min drive</dt><dd class="num">${fmt(d.d10)}</dd><dt>…now without a wash in 5 min</dt><dd class="num">${fmt(d.gap)}</dd>
+    <dt>Nearest car wash</dt><dd class="num">${fmt(d.near)} m</dd><dt>Nearest fuel station</dt><dd class="num">${fmt(d.fuel)} m</dd></dl>
+    <p class="hint" style="font-size:13px">On ${d.road}. Possible ground: ${landTxt(d.land)}</p>`).join("");
+}
+function bizBlock(c){
+  const b = BIZ[mode], ss = b.sites.filter(x => x.h === c.h); if (!ss.length) return "";
+  return ss.map(d => `<div class="k">${b.name} site · ${d.strat === "bijela_mrlja" ? "gap" : "top"} #${d.rank}</div>
+    <dl><dt>Estimated ${b.unit}</dt><dd class="num">${fmt(d.est)}</dd><dt>${b.near}</dt><dd class="num">${fmt(d.near)}</dd>
+    <dt>…newly in reach</dt><dd class="num">${fmt(d.gap)}</dd><dt>Nearest ${b.place}</dt><dd class="num">${fmt(d.rival)} m</dd>
+    <dt>${b.place[0].toUpperCase() + b.place.slice(1)}s within 1.5 km</dt><dd class="num">${d.rivals}</dd></dl>
+    <p class="hint" style="font-size:13px">Possible ground: ${landTxt(d.land)}</p>`).join("");
+}
+function siteBlock(c){
+  if (mode === "wash") return washBlock(c);
+  if (mode === "kit" || mode === "mus") return bizBlock(c);
+  const ss = SITES.filter(x => x.h === c.h); if (!ss.length) return "";
+  return ss.map(d => `<div class="k">Proposed site · ${d.strat === "bijela_mrlja" ? "gap" : "top sales"} #${d.rank}</div>
+    <dl><dt>Expected customers</dt><dd class="num">${fmt(d.cap)}</dd><dt>Within 10 min walk</dt><dd class="num">${fmt(d.w10)}</dd>
+    <dt>…now without supermarket</dt><dd class="num">${fmt(d.gap)}</dd><dt>Nearest supermarket</dt><dd class="num">${fmt(d.near)} m</dd></dl>
+    <p class="hint" style="font-size:13px">Possible ground: ${landTxt(d.land)}</p>`).join("");
+}
+const LAND = {parking:"surface car park", poslovni_objekat:"commercial building", construction:"construction site", brownfield:"brownfield", greenfield:"greenfield"};
+const landTxt = t => t === "—" ? "nothing mapped; check on site" : t.split("; ").map(x => { const [v,...r] = x.split(" "); return (LAND[v]||v) + " " + r.join(" "); }).join(", ");
+const STT = {tramvaj:"tram", trolejbus:"trolleybus", autobus:"bus"};
+const GR = {A:["--rel-a","A · MZ total constrained"],B:["--rel-b","B · municipality total only"],C:["--rel-c","C · WorldPop only, no buildings"]};
+function pickSite(d){
+  const c = byH.get(d.h); if (!c) return;
+  if (mode !== "sup") document.getElementById("m-sup").click();
+  selected = c; hexes.classed("sel", x => x === c); show(c);
+  const [x,y] = proj([d.lon*KX, d.lat]);
+  svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(W()/2,H()/2).scale(5).translate(-x,-y));
+  document.getElementById("map").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"center"});
+}
+function pickWash(d){
+  const c = byH.get(d.h); if (!c) return;
+  if (mode !== "wash") document.getElementById("m-wash").click();
+  selected = c; hexes.classed("sel", x => x === c); show(c);
+  const [x,y] = proj([d.lon*KX, d.lat]);
+  svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(W()/2,H()/2).scale(5).translate(-x,-y));
+  document.getElementById("map").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"center"});
+}
+function pickBiz(m, d){
+  const c = byH.get(d.h); if (!c) return;
+  if (mode !== m) document.getElementById("m-" + m).click();
+  selected = c; hexes.classed("sel", x => x === c); show(c);
+  const [x,y] = proj([d.lon*KX, d.lat]);
+  svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(W()/2,H()/2).scale(5).translate(-x,-y));
+  document.getElementById("map").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"center"});
+}
+function pickCell(h){
+  const c = byH.get(h); if (!c) return;
+  selected = c; hexes.classed("sel", x => x === c); show(c);
+  const [x, y] = proj(d3.polygonCentroid(c.ring.map(p => [p[0], p[1]])));
+  svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(W()/2,H()/2).scale(6).translate(-x,-y));
+}
+function bestBlock(c){
+  if (!c.bestF) return "";
+  const tw = d3.sum(FACT, ([k]) => weights[k]) || 1;
+  return `<div class="k">Best to live ${Math.round(c.best)}/100</div>
+    <div class="score"><i style="width:${c.best}%"></i></div>
+    <p class="hint" style="font-size:12.5px;margin:0">Better than ${Math.round(c.best)}% of populated cells in the city. Each bar is that factor's rank in the city.</p>
+    <dl class="fb">${FACT.map(([k, n]) => weights[k] ? `<dt>${n} <span class="tag">${Math.round(weights[k]/tw*100)}%</span></dt>
+      <dd><span class="mini"><i style="width:${Math.round(c.bestF[k])}%"></i></span><b class="num">${Math.round(c.bestF[k])}</b></dd>` : "").join("")}</dl>`;
+}
+function show(c){
+  const el = document.getElementById("read");
+  if (!c && mode === "best"){
+    const pool = (focusOp >= 0 ? cells.filter(x => x.op === focusOp) : cells).filter(x => x.s > 0);
+    const top = pool.slice().sort((a,b) => b.best - a.best).slice(0, 8);
+    const grp = d3.rollups(pool.filter(x => x.mz), v => ({st: d3.sum(v, x => x.s), sc: d3.sum(v, x => x.s * x.best) / d3.sum(v, x => x.s), op: v[0].op}), x => x.mz)
+      .filter(([, v]) => v.st >= 500).sort((a,b) => b[1].sc - a[1].sc);
+    el.innerHTML = `<div class="k">Best to live · ${PROFILES[profile] ? PROFILES[profile].name : "custom weights"}</div>
+      <p class="hint">Pick who is choosing above the map, or move the sliders. Tap a cell to see what drives its score.</p>
+      <div class="k">Top cells (rank)</div>
+      <dl class="toplist">${top.map((x, i) => `<dt><button class="lnk" data-h="${x.h}">${x.mz || OPN[x.op]}</button></dt><dd class="num">#${i + 1} of ${fmt(pool.length)}</dd>`).join("")}</dl>
+      <div class="k">Top MZ (residents' average)</div>
+      <dl>${grp.slice(0, 6).map(([m, v]) => `<dt>${m} <span class="tag">${OPN[v.op]}</span></dt><dd class="num">${Math.round(v.sc)}</dd>`).join("")}</dl>
+      <div class="k">Lowest MZ</div>
+      <dl>${grp.slice(-3).reverse().map(([m, v]) => `<dt>${m} <span class="tag">${OPN[v.op]}</span></dt><dd class="num">${Math.round(v.sc)}</dd>`).join("")}</dl>`;
+    el.querySelectorAll("button.lnk").forEach(b => b.onclick = () => pickCell(b.dataset.h));
+    return;
+  }
+  if (!c && mode === "job"){
+    const pool = focusOp >= 0 ? cells.filter(x => x.op === focusOp) : cells;
+    const ops = D.jobs.op.filter(r => focusOp < 0 || r[0] === focusOp);
+    const tj = d3.sum(ops, r => r[1]), tw = d3.sum(ops, r => r[2]);
+    const mzs = D.jobs.mz.filter(r => focusOp < 0 || r[0] === focusOp);
+    el.innerHTML = `<div class="k">Jobs · ${focusOp >= 0 ? OPN[focusOp] : "six municipalities"}</div>
+      <div class="big num">${fmt(tj)}</div><div class="rng num">${fmt(tw)} working residents · ${(tj/tw).toFixed(2)} jobs per worker living here</div>
+      <div class="k">Jobs per working resident</div>
+      <dl>${ops.map(r => `<dt>${OPN[r[0]]}</dt><dd class="num">${fmt(r[1])} / ${fmt(r[2])} = ${(r[1]/r[2]).toFixed(2)}</dd>`).join("")}</dl>
+      <div class="k">Most jobs (MZ)</div>
+      <dl>${mzs.slice(0,8).map(r => `<dt>${r[1]} <span class="tag">${OPN[r[0]]}</span></dt><dd class="num">${fmt(r[2])}</dd>`).join("")}</dl>
+      <p class="hint">Jobs by place of work per municipality come from the FZS (2024 average); working residents from the cantonal statistics office (July 2025, tax records). Within a municipality, jobs are spread by the non-residential floor space of each building (about 25 m² per office job, 45 per hospital job, 120 per factory job) plus two jobs for each business listed in Overture Maps. The FZS may count some staff at their employer's head office rather than where they work.</p>`;
+    return;
+  }
+  if (!c && mode === "trf"){
+    const city = d3.range(24).map(h => d3.sum(TRF.cnt.filter(d => d[5] >= 0), d => d[4] * TRF.prof[d[5]][h]));
+    const mx = d3.max(city);
+    const byName = d3.rollups(TRF.seg.filter(s => s[4] >= 0 && s[6]), v => d3.max(v, trfVC), s => TRF.names[s[4]]).sort((a,b) => b[1]-a[1]);
+    const cnt = TRF.cnt.filter(d => d[5] >= 0).map(d => [d[1], d[4] * TRF.prof[d[5]][trfHour] * TRF.day[trfDay]]).sort((a,b) => b[1]-a[1]);
+    el.innerHTML = `<div class="k">Traffic · ${hh(trfHour)}–${hh(trfHour+1)} · ${{radni:"weekday",subota:"Saturday",nedjelja:"Sunday"}[trfDay]}</div>
+      <div class="hbars" role="group" aria-label="Pick an hour">${city.map((v,h) => `<button data-h="${h}" aria-pressed="${h === trfHour}" style="height:${Math.max(3, v/mx*100)}%" title="${hh(h)}: ${Math.round(v/mx*100)}% of the busiest hour"></button>`).join("")}</div>
+      <div class="rng num" style="display:flex;justify-content:space-between"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
+      <div class="k">Most congested streets now (six municipalities)</div>
+      <dl>${byName.slice(0,8).map(([n,v]) => `<dt>${n}</dt><dd class="num">${Math.round(v*100)}%</dd>`).join("")}</dl>
+      <div class="k">Busiest counters, vehicles this hour</div>
+      <dl>${cnt.slice(0,5).map(([n,v]) => `<dt>${n}</dt><dd class="num">${fmt(Math.round(v))}</dd>`).join("")}</dl>
+      ${TRF.model ? `<div class="k">Model vs counters (vehicles a day)</div>
+      <dl>${TRF.cnt.filter(d => d[6] >= 0).sort((a,b) => b[4]-a[4]).map(d => `<dt>${d[0]} <span class="tag">${d[1].slice(0,28)}</span></dt><dd class="num">${fmt(d[4])} · ${fmt(d[6])}${d[9] ? "" : " *"}</dd>`).join("")}</dl>
+      <p class="hint">Counted 2025 average · model, vehicles a day. On each counted street the model is scaled to its counter, so the two match; * no position in the publication, not used. The trip model alone, before that scaling, gives R² ${TRF.model.faza1.R2} with a median error of ${TRF.model.faza1.medijan_aps_greska_pct}%. Leaving each counter out and estimating it from the rest gives R² ${TRF.model.unakrsna.R2} and a median error of ${TRF.model.unakrsna.medijan_aps_greska_pct}%: expect errors of about a third on roads without a counter.</p>` : ""}
+      ${SCN.length ? `<div class="k">Ideas tested in the model</div>
+      ${SCN.map(d => `<div style="font-weight:600;margin-top:4px"><b class="scnk">${d.id}</b> ${d.name}</div>
+        <dl>${d.share ? `<dt>Public transport share of motorised trips</dt><dd class="num">${d.share[0]}% → ${d.share[1]}%</dd><dt>Car trips</dt><dd class="num">${d.share[2]}%</dd>` : ""}
+        ${d.road ? d.road.map(r => `<dt>${r[0]}</dt><dd class="num">${r[1]}</dd>`).join("") : ""}
+        ${d.on_new ? `<dt>Vehicles a day on the new link</dt><dd class="num">${fmt(d.on_new)}</dd>` : ""}
+        ${d.corr.filter(c => Math.abs(c[1]) >= 5).map(c => `<dt>${c[0]}</dt><dd class="num">${c[1] > 0 ? "+" : ""}${c[1]}%</dd>`).join("")}
+        ${d.times.filter(t => t[1] - t[2] >= 0.8).map(t => `<dt>${t[0]}</dt><dd class="num">${t[1]} → ${t[2]} min</dd>`).join("")}
+        <dt>Driving time ${d.saved_vh >= 0 ? "saved" : "added"}, whole city</dt><dd class="num">${fmt(Math.abs(d.saved_vh))} vehicle-hours/day</dd></dl>`).join("")}
+      <p class="hint" style="font-size:12.5px">JP adds a choice between car and public transport (logit, today's public transport share assumed at 45%: with 35% or 55% car trips fall 18% or 26% instead of 22%); it needs roughly twice today's vehicles and drivers. Road concepts are for discussion, not designs: the same daily trips are re-assigned with each new link, so new traffic a road would attract is not counted; cost, geology, portals and land are not checked. Differences under about 150 vehicle-hours are within the model's noise. Roads mostly move congestion: G carries a lot of traffic but saves little because it delivers it into Marijin Dvor (Maršala Tita +18%), and S and SP relieve Maršala Tita but load Alipašina by a third. The model now covers Ilidža and Vogošća, so traffic from the west no longer squeezes through local Ilidža streets at the old map edge; totals are lower than in earlier versions for that reason. B works by speeding up hillside streets, so it fits buses better than cars. SC is the new northern road (two lanes, 60 km/h, at most 5%), joined to streets only in the six named settlements; most of it is in tunnel to keep demolitions low, and its terrain comes from a 30 m elevation model.</p>` : ""}
+      <p class="hint">${TRF.model ? "Road volumes come from a trip model: residents, jobs and outside traffic in 0.7 km² zones, car trips spread by travel time and assigned to the fastest routes with some route variety and congestion. Along each counted street (up to 2.5 km, in the direction the counter counts) the volume is scaled to the counter of the Sarajevo Canton road directorate (white dots, real 2025 counts). Hours follow the nearest counter's average day." : "Volumes come from the automatic counters of the Sarajevo Canton road directorate (2025 averages by hour) and are carried along the same street; dashed roads use an assumed volume for their class."} Capacity comes from the number of lanes (800 vehicles an hour per lane at traffic lights). Percentages are an estimate of load, not measured speeds.</p>`;
+    el.querySelectorAll(".hbars button").forEach(b => b.onclick = () => trfSet(+b.dataset.h));
+    return;
+  }
+  if (!c && (mode === "kit" || mode === "mus")){
+    const pool = focusOp >= 0 ? cells.filter(x => x.op === focusOp) : cells;
+    const far = mode === "kit" ? d3.sum(pool.filter(x => x.kitN != null && x.kitN < 10), x => x.s)
+      : d3.sum(pool.filter(x => x.musMin != null && x.musMin > 15), x => x.s), tot = d3.sum(pool, x => x.s);
+    el.innerHTML = `<div class="k">${mode === "kit" ? "Fewer than 10 restaurants in a 10-min drive" : "No music school within 15 min"}</div>
+      <div class="big num">${fmt(far)}</div><div class="rng num">${Math.round(far/tot*100)}% of ${fmt(tot)} residents</div>
+      <p class="hint">${mode === "kit" ? `Dots are the ${fmt(BIZ.kit.d.places.length)} restaurants and fast-food places in OpenStreetMap and Overture Maps; most deliver through Wolt or Glovo.`
+        : `Dots are the ${BIZ.mus.d.places.length} music schools found in OpenStreetMap and Overture Maps, public and private. Small private studios and teachers working from home are mostly missing.`}
+      Numbered markers are the proposed sites; tap one, or use the table below the map.</p>`;
+    return;
+  }
+  if (!c && mode === "wash"){
+    const pool = focusOp >= 0 ? cells.filter(x => x.op === focusOp) : cells;
+    const far = d3.sum(pool.filter(x => x.wash != null && x.wash > 5), x => x.s), tot = d3.sum(pool, x => x.s);
+    el.innerHTML = `<div class="k">Without a car wash in a 5-min drive</div>
+      <div class="big num">${fmt(far)}</div><div class="rng num">${Math.round(far/tot*100)}% of ${fmt(tot)} residents</div>
+      <p class="hint">Dots are the ${fmt(D.washes.length)} car washes, fuel stations with a wash and detailing studios in OpenStreetMap and Overture Maps. Hand-wash bays at tyre shops are often missing from both. Numbered markers are the proposed sites; tap one, or use the table below the map.</p>`;
+    return;
+  }
+  if (!c && mode === "sup"){
+    const pool = focusOp >= 0 ? cells.filter(x => x.op === focusOp) : cells;
+    const far = d3.sum(pool.filter(x => x.sup != null && x.sup > 10), x => x.s), tot = d3.sum(pool, x => x.s);
+    el.innerHTML = `<div class="k">Without a supermarket in a 10-min walk</div>
+      <div class="big num">${fmt(far)}</div><div class="rng num">${Math.round(far/tot*100)}% of ${fmt(tot)} residents</div>
+      <p class="hint">Orange cells are more than a 10-minute walk from any supermarket in OpenStreetMap or Overture Maps. Both miss many small shops: comparing the two suggests they hold only 35–60% of the area's grocery stores. Numbered markers are the proposed sites; tap one, or use the table below the map.</p>`;
+    return;
+  }
+  if (!c && mode === "pt" && D.newlines.length){
+    const d = newSel;
+    const lst = D.newlines.map(x => `<dt><button class="lnk" data-nl="${x[0]}"><b style="color:${NEW_C[x[1]]}">${x[0]}</b> ${x[2]}</button></dt><dd class="num">${fmt(x[6])}</dd>`).join("");
+    el.innerHTML = (d ? `<div class="k">Proposed ${{glavna:"main line", minibus:"minibus", dogradnja:"line through a new link", spoj:"new road link"}[d[1]]} ${d[0]}</div>
+      <div style="font-weight:600">${d[2]}</div>
+      <dl><dt>Length</dt><dd class="num">${d[3]} km</dd><dt>Running time, one way</dt><dd class="num">~${d[7]} min</dd>
+      <dt>Stops (every ~400 m)</dt><dd class="num">${d[8]}</dd><dt>Residents within 400 m</dt><dd class="num">${fmt(d[4])}</dd>
+      <dt>Jobs within 400 m</dt><dd class="num">${fmt(d[5])}</dd><dt>…now over 8 min from a stop</dt><dd class="num">${fmt(d[6])}</dd>
+      <dt>Existing buses off the tram/trolleybus</dt><dd class="num">${d[11] ? d[11] + "/h" : "none"}</dd></dl>
+      <div class="k">Recommendation</div><div style="font-weight:600">${REC[d[12]] || d[12]}</div>
+      ${d[10] ? `<p class="hint" style="font-size:12.5px">Lines already on the route (weekday 7–9 h departures per hour): ${d[10].replace(/autobus/g,"bus")}</p>` : ""}
+      ${d[0] === "S" && D.audit ? `<div class="k">Route check for a midibus, every 50 m</div>
+      <dl><dt><i class="nd" style="background:${AUD_C[0]}"></i>Fine</dt><dd class="num">${D.audit.km[0]} km</dd>
+      <dt><i class="nd" style="background:${AUD_C[1]}"></i>Check on site</dt><dd class="num">${D.audit.km[1]} km</dd>
+      <dt><i class="nd" style="background:${AUD_C[2]}"></i>Problem</dt><dd class="num">${D.audit.km[2]} km</dd></dl>
+      <dl class="audl-list">${D.audit.pts.filter(p => p[1] === 2).map(p => `<dt><button class="lnk" data-aud="${p[0]}"><b style="color:${AUD_C[2]}">${p[0]}</b> ${p[2]}</button><div class="tag">${p[3].split("; ").map(x => AUD_R[x] || x).join("; ")}</div></dt><dd class="num">km ${p[6]}</dd>`).join("")}</dl>
+      <p class="hint" style="font-size:12.5px">Red: problem places; ${D.audit.pts.filter(p => p[1] === 1).length} more amber places to check are on the map. Grades come from the 30 m Copernicus terrain model (about ±3–4% over 100 m) and widths from gaps between mapped buildings, which miss fences, walls and parked cars: measure these places on site.</p>` : ""}
+      <p class="hint" style="font-size:13px">${{P1:"The busiest corridor with no tram or trolleybus at either end (about 3,700 trips a day). Trolleybus or electric bus every 7–10 minutes, changing to the tram at Alipašin most.",
+        P2:"About 2,200 trips a day; the cantonal timetable has no line on the Lukavica side, so check whether a Republika Srpska operator runs one.",
+        S:"Runs along the northern hills instead of down by the tram: roads lower than 40 m above the valley floor are avoided except at Stup and the railway station. It links hillside neighbourhoods that today connect only through the valley: about 31,000 trips a day run between places along it, and 8,400 residents along it walk over 8 minutes to a stop. The hill roads wind, so it is long (about 26 km and 90 minutes end to end, Stup to Zabrđe crossing the plain), with up to 25% gradients and about 2.6 km of narrow streets: a midibus, run as two halves meeting at Buća Potok (west about 44 min, east about 31 min), and Pofalići–Velešići is 1.3 km apart but 3.4 km by road."}[d[0]] ||
+        d[13] || "Small bus for a steep neighbourhood, from the part farthest from a stop to the nearest tram or trolleybus stop. Check street width and a turning point on site."}</p>` :
+      `<div class="k">Proposed new lines</div><p class="hint">Drawn from the trip model: corridors with the most daily trips and no tram or trolleybus, and steep neighbourhoods where many people walk over 8 minutes to a stop. Most already have a bus or minibus, but one that runs once or twice an hour or misses whole streets; each line says what to change. Tap a line or a label.</p>`)
+      + `<div class="k">Lines · residents gaining a stop within 400 m</div><dl>${lst}</dl>
+      <p class="hint" style="font-size:12.5px">Sketches for discussion, not designs. Existing service comes from the timetables of the Sarajevo Canton Ministry of Transport (javniprevozks.ba, weekday 7–9 h).</p>`;
+    el.querySelectorAll("[data-aud]").forEach(b => b.onclick = () => audZoom(D.audit.pts.find(x => x[0] === +b.dataset.aud)));
+    el.querySelectorAll("[data-nl]").forEach(b => b.onclick = () => { newSel = D.newlines.find(x => x[0] === b.dataset.nl); newP.classed("sel", x => x === newSel); audShow();
+      const [x,y] = newMid(newSel); svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(W()/2,H()/2).scale(3.5).translate(-x,-y)); show(null); });
+    return;
+  }
+  if (!c){
+    const pool = focusOp >= 0 ? cells.filter(x => x.op === focusOp) : cells;
+    const key = mode === "att" ? "att" : mode === "liv" ? "liv" : mode === "car" ? "acc" : mode === "sun" ? "sun" : mode === "smog" ? "smog" : mode === "fog" ? "fog" : mode === "pt" ? "ai" : "s";
+    const tot = d3.sum(pool, x => x.s), top = pool.filter(x => x.s > 0).sort((a,b)=>b[key]-a[key]).slice(0,5);
+    el.innerHTML = `<div class="k">${focusOp >= 0 ? OPN[focusOp] : "Six municipalities"}</div>
+      <div class="big num">${fmt(tot)}</div><div class="rng num">${pool.filter(x=>x.s>0).length} populated cells of ${pool.length}</div>
+      <p class="hint">Hover or tap a cell to read it. Drag to pan, scroll or pinch to zoom, pick a municipality above to focus it.</p>
+      <div class="k">${mode === "att" ? "Most attractive cells" : mode === "liv" ? "Best cells to live in" : mode === "car" ? "Easiest car access" : mode === "sun" ? "Most winter sun (hours)" : mode === "smog" ? "Most smog-exposed cells" : mode === "fog" ? "Most fog-exposed cells" : mode === "pt" ? "Best public transport (PTAL index)" : "Fullest cells"}</div>
+      <dl>${top.map(x=>`<dt>${x.mz || OPN[x.op]}</dt><dd class="num">${fmt(x[key])}</dd>`).join("")}</dl>`;
+    return;
+  }
+  const t = c.s || 1;
+  el.innerHTML = `<div class="k">${OPN[c.op] ?? ""}${c.mz ? " · " + c.mz : ""}</div>
+    <div class="big num">${fmt(c.s)}</div>
+    <div class="rng num">range ${fmt(c.mn)} – ${fmt(c.mx)} · ${fmt(Math.round(c.den))} per km²</div>
+    <span class="pill"><i style="background:var(${GR[c.p][0]})"></i>${GR[c.p][1]}</span>
+    ${mode === "best" ? bestBlock(c) : ""}
+    <div class="k">Age groups</div>
+    <div class="ages">${["--r2","--r4","--r6"].map((v,k)=>`<i style="width:${c.a[k]/t*100}%;background:var(${v})"></i>`).join("")}</div>
+    <dl><dt>0–14</dt><dd class="num">${fmt(c.a[0])}</dd><dt>15–64</dt><dd class="num">${fmt(c.a[1])}</dd><dt>65+</dt><dd class="num">${fmt(c.a[2])}</dd></dl>
+    <div class="k">Livability ${c.liv}/100 · minutes on foot</div>
+    <div class="score"><i style="width:${c.liv}%"></i></div>
+    <dl class="needs">${NEEDS.map(([k,n],i) => `<dt><i class="nd ${c.need[i] <= 5 ? "g" : c.need[i] <= 15 ? "m" : "f"}"></i>${n}</dt><dd class="num">${c.need[i] >= 60 ? "60+" : c.need[i]} min</dd>`).join("")}</dl>
+    <div class="k">Public transport · PTAL ${c.ptal}</div>
+    <dl><dt>Accessibility index</dt><dd class="num">${c.ai}</dd>
+      <dt>Departures per hour in reach</dt><dd class="num">${c.dep}${c.dep ? " (assumed)" : ""}</dd>
+      <dt>Nearest stop on foot</dt><dd class="num">${c.stopMin >= 99 ? "over 12 min" : c.stopMin + " min"}</dd></dl>
+    ${c.lines ? `<div class="lchips">${c.lines.split(" ").map(l => `<span class="lchip">${l === "bus" ? "other bus" : l}</span>`).join("")}</div>` : ""}
+    <div class="k">Winter air</div>
+    <dl><dt>Height above valley floor</dt><dd class="num">${c.aboveFloor} m</dd>
+      <dt>Inside the inversion</dt><dd class="num">${Math.round(c.inv*100)}% of inversion days</dd>
+      <dt>Smog / fog exposure</dt><dd class="num">${c.smog} / ${c.fog}</dd></dl>
+    <div class="k">Winter sun · clear day</div>
+    <dl><dt>21 December</dt><dd class="num">${c.sun} h${c.sunFrom ? " · " + c.sunFrom + "–" + c.sunTo : ""}</dd>
+      <dt>21 January</dt><dd class="num">${c.sunJan} h</dd>
+      <dt>Lost behind hills (21 Dec)</dt><dd class="num">${(c.sunMax - c.sun).toFixed(1)} h of ${c.sunMax}</dd></dl>
+    <div class="k">Car access ${c.acc}/100</div>
+    <div class="score"><i style="width:${c.acc}%"></i></div>
+    <dl>
+      <dt>Steepest climb to a main road</dt><dd class="num">${c.accMax}%</dd>
+      <dt>Narrow road on the way</dt><dd class="num">${fmt(c.accNarrow)} m</dd>
+      <dt>Tightest gap between buildings</dt><dd class="num">${c.accMinW >= 40 ? "open" : c.accMinW + " m"}</dd>
+      <dt>Streets in cell: narrow / steep</dt><dd class="num">${c.accNarrowPct}% / ${c.accSteepPct}%</dd>
+    </dl>
+    <div class="k">Location · attractiveness ${c.att}/100</div>
+    <div class="hint" style="font-size:12px">Residents reachable on foot and by car</div>
+    <div class="score"><i style="width:${c.att}%"></i></div>
+    <dl>
+      <dt>Walk 5 / 10 / 15 min</dt><dd class="num">${c.w.map(k).join(" / ")}</dd>
+      <dt>Drive 5 / 10 / 15 min</dt><dd class="num">${c.car.map(k).join(" / ")}</dd>
+      <dt>Shops, services ≤10 min walk</dt><dd class="num">${fmt(c.poi)}</dd>
+      <dt>Nearest stop</dt><dd class="num">${fmt(c.stm)} m ${STT[c.stt] || c.stt}</dd>
+      <dt>Stops within 400 m</dt><dd class="num">${c.s4}${c.t4 ? ` (${c.t4} tram)` : ""}</dd>
+      <dt>Main road</dt><dd class="num">${fmt(c.road)} m</dd>
+      <dt>Elevation, slope</dt><dd class="num">${c.elev == null ? "—" : fmt(c.elev) + " m · " + c.slope + "%"}</dd>
+      <dt>Supermarket, walking</dt><dd class="num">${c.sup == null ? "—" : c.sup >= 20 ? "20+ min" : c.sup + " min"}</dd>
+      <dt>Jobs (estimate)</dt><dd class="num">${fmt(c.job)}</dd>
+      <dt>Restaurants ≤10 min drive</dt><dd class="num">${c.kitN == null ? "—" : fmt(c.kitN)}</dd>
+      <dt>Music school</dt><dd class="num">${c.musMin == null ? "—" : c.musMin >= 20 ? "20+ min" : c.musMin + " min"}</dd>
+      <dt>Car wash, driving</dt><dd class="num">${c.wash == null ? "—" : c.wash >= 12 ? "12+ min" : c.wash + " min"}</dd>
+    </dl>
+    ${siteBlock(c)}
+    <div class="tag">${c.h}</div>`;
+}
+
+// ledger
+let sortK = 2, sortDir = -1;
+function table(){
+  const q = document.getElementById("q").value.trim().toLowerCase();
+  const rows = D.mz.filter(r => !q || (OPN[r[0]]+" "+r[1]).toLowerCase().includes(q))
+    .sort((a,b) => { const x = sortK===0 ? OPN[a[0]] : a[sortK], y = sortK===0 ? OPN[b[0]] : b[sortK]; return (x>y?1:x<y?-1:0)*sortDir; });
+  document.getElementById("tb").innerHTML = rows.map(r => `<tr><td>${OPN[r[0]]}</td><td>${r[1]}</td><td class="r num">${fmt(r[2])}</td>
+    <td class="r num">${r[3]===r[4] ? "—" : fmt(r[3])+" – "+fmt(r[4])}</td><td><span class="tag ${r[5]==="MZ"?"mz":""}">${r[5]==="MZ"?"MZ total":"municipality"}</span></td></tr>`).join("");
+}
+document.getElementById("q").addEventListener("input", table);
+document.querySelectorAll("th").forEach(th => { const go = () => { const k = +th.dataset.k; sortDir = sortK === k ? -sortDir : (k>=2&&k<=4 ? -1 : 1); sortK = k; table(); };
+  th.addEventListener("click", go); th.addEventListener("keydown", e => { if (e.key==="Enter"||e.key===" "){ e.preventDefault(); go(); } }); });
+
+function siteTables(){
+  const row = d => `<tr tabindex="0" data-h="${d.h}" data-s="${d.strat}"><td class="num">${d.rank}</td><td>${d.mz || OPN[d.op]}<div class="tag">${OPN[d.op]}</div></td>
+    <td class="r num">${fmt(d.cap)}</td><td class="r num">${d.strat === "bijela_mrlja" ? fmt(d.gap) : fmt(d.near) + " m"}</td></tr>`;
+  document.getElementById("tgap").innerHTML = SITES.filter(d => d.strat === "bijela_mrlja").map(row).join("");
+  document.getElementById("ttop").innerHTML = SITES.filter(d => d.strat !== "bijela_mrlja").map(row).join("");
+  const wrow = d => `<tr tabindex="0" data-h="${d.h}" data-s="${d.strat}" data-w="1"><td class="num">${d.rank}</td><td>${d.mz || OPN[d.op]}<div class="tag">${d.road}</div></td>
+    <td class="r num">${fmt(d.wash)}</td><td class="r num">${d.strat === "bijela_mrlja" ? fmt(d.gap) : fmt(d.near) + " m"}</td></tr>`;
+  document.getElementById("wgap").innerHTML = WSITES.filter(d => d.strat === "bijela_mrlja").map(wrow).join("");
+  document.getElementById("wtop").innerHTML = WSITES.filter(d => d.strat !== "bijela_mrlja").map(wrow).join("");
+  Object.entries(BIZ).forEach(([m, b]) => {
+    const brow = d => `<tr tabindex="0" data-h="${d.h}" data-s="${d.strat}" data-b="${m}"><td class="num">${d.rank}</td><td>${d.mz || OPN[d.op]}<div class="tag">${OPN[d.op]}</div></td>
+      <td class="r num">${fmt(d.est)}</td><td class="r num">${d.strat === "bijela_mrlja" ? fmt(d.gap) : fmt(d.rival) + " m"}</td></tr>`;
+    document.getElementById(m + "gap").innerHTML = b.sites.filter(d => d.strat === "bijela_mrlja").map(brow).join("");
+    document.getElementById(m + "top").innerHTML = b.sites.filter(d => d.strat !== "bijela_mrlja").map(brow).join(""); });
+  document.querySelectorAll(".sites tbody tr").forEach(tr => { const go = () => tr.dataset.b ? pickBiz(tr.dataset.b, BIZ[tr.dataset.b].sites.find(d => d.h === tr.dataset.h && d.strat === tr.dataset.s)) : tr.dataset.w ? pickWash(WSITES.find(d => d.h === tr.dataset.h && d.strat === tr.dataset.s)) : pickSite(SITES.find(d => d.h === tr.dataset.h && d.strat === tr.dataset.s));
+    tr.addEventListener("click", go); tr.addEventListener("keydown", e => { if (e.key === "Enter"){ go(); } }); });
+}
+// ---- Best to live: weighted mix of every factor, computed in the browser
+const T50 = [8,5,12,12,8,10,8,8,25,12];   // same order as NEEDS
+const FACT = [["needs","Daily needs on foot"],["car","Car access"],["sun","Winter sun"],["air","Clean winter air"],
+  ["fog","Little fog"],["quiet","Away from traffic noise"],["flat","Gentle terrain"],["transit","Public transport"]];
+const PROFILES = {
+  balanced: {name:"Balanced", f:{needs:30,car:15,sun:15,air:15,fog:5,quiet:10,flat:5,transit:10}, n:[15,0,15,12,12,8,7,6,5,5]},
+  family:   {name:"Family with children", f:{needs:35,car:15,sun:10,air:15,fog:5,quiet:10,flat:5,transit:5}, n:[12,0,22,10,14,18,4,10,2,0]},
+  seniors:  {name:"Seniors", f:{needs:35,car:5,sun:15,air:15,fog:5,quiet:5,flat:15,transit:10}, n:[18,0,0,22,10,0,18,0,15,2]},
+  nocar:    {name:"No car", f:{needs:35,car:0,sun:10,air:15,fog:5,quiet:10,flat:5,transit:30}, n:[15,0,10,12,10,5,8,4,4,2]},
+  airsun:   {name:"Air and sun", f:{needs:20,car:10,sun:30,air:25,fog:10,quiet:5,flat:0,transit:5}, n:[15,0,15,12,12,8,7,6,5,5]},
+};
+let profile = "balanced", weights = {...PROFILES.balanced.f}, needW = PROFILES.balanced.n.slice(), BEST_T = ATT_T.slice();
+const clamp01 = v => Math.max(0, Math.min(1, v));
+function factorScores(c){
+  let a = 0, b = 0;
+  NEEDS.forEach((_, i) => { const t = c.need[i]; a += needW[i] / (1 + (t / T50[i]) ** 2); b += needW[i]; });
+  return {
+    needs: b ? a / b * 100 : 0,
+    car: c.acc,
+    sun: clamp01((c.sun - 3) / (7.8 - 3)) * 100,
+    air: 100 - c.smog,
+    fog: 100 - c.fog,
+    quiet: clamp01((c.noise - 50) / 350) * (1 - 0.6 * clamp01(c.ind / 0.3)) * 100,
+    flat: clamp01(1 - (c.slope - 5) / 20) * 100,
+    transit: clamp01(c.ai / 20) * 100,
+  };
+}
+// Ocjene se rangiraju u odnosu na grad: svaki faktor i konačni zbir pretvaraju se u percentil među
+// naseljenim poljima (0 = najlošije, 100 = najbolje), da prosjek više faktora ne zbije ocjene oko sredine.
+function pctRank(vals){
+  const idx = vals.map((v, i) => i).sort((a, b) => vals[a] - vals[b]), r = new Array(vals.length), n = vals.length;
+  for (let i = 0; i < n;){ let j = i; while (j + 1 < n && vals[idx[j + 1]] === vals[idx[i]]) j++;
+    const p = n > 1 ? ((i + j) / 2) / (n - 1) * 100 : 50; for (let k = i; k <= j; k++) r[idx[k]] = p; i = j + 1; }
+  return r;
+}
+function recompute(){
+  const pop = cells.filter(c => c.s > 0), tw = d3.sum(FACT, ([k]) => weights[k]) || 1;
+  const raw = pop.map(factorScores);
+  const pr = {};
+  FACT.forEach(([k]) => { pr[k] = pctRank(raw.map(r => r[k])); });
+  const mix = pop.map((c, i) => d3.sum(FACT, ([k]) => weights[k] * pr[k][i]) / tw);
+  const fin = pctRank(mix);
+  pop.forEach((c, i) => { c.best = fin[i]; c.bestF = Object.fromEntries(FACT.map(([k]) => [k, pr[k][i]])); c.bestRaw = raw[i]; });
+  cells.filter(c => c.s === 0).forEach(c => { c.best = 0; c.bestF = null; });
+  BEST_T = [0, 10, 25, 45, 65, 82, 93];
+}
+function buildPanel(){
+  document.getElementById("profiles").innerHTML = Object.entries(PROFILES).map(([k, p]) =>
+    `<button data-prof="${k}" aria-pressed="${k === profile}">${p.name}</button>`).join("");
+  document.getElementById("sliders").innerHTML = FACT.map(([k, n]) =>
+    `<label for="w-${k}"><span>${n}</span><input id="w-${k}" type="range" min="0" max="60" step="5" value="${weights[k]}"><b class="num" id="v-${k}">${weights[k]}</b></label>`).join("");
+  document.querySelectorAll("[data-prof]").forEach(b => b.onclick = () => {
+    profile = b.dataset.prof; weights = {...PROFILES[profile].f}; needW = PROFILES[profile].n.slice(); buildPanel(); update(); });
+  FACT.forEach(([k]) => document.getElementById("w-" + k).addEventListener("input", e => {
+    weights[k] = +e.target.value; document.getElementById("v-" + k).textContent = weights[k];
+    profile = "custom"; document.querySelectorAll("[data-prof]").forEach(x => x.setAttribute("aria-pressed", "false")); update(); }));
+}
+function update(){ recompute(); if (mode === "best"){ paint(); show(selected); } }
+document.getElementById("m-best").addEventListener("click", () => { document.getElementById("bestPanel").hidden = false; });
+MODES.filter(m => m !== "best").forEach(m => document.getElementById("m-" + m).addEventListener("click", () => { document.getElementById("bestPanel").hidden = true; }));
+buildPanel(); recompute();
+
+layout(); paint(); show(null); table(); siteTables();
+new ResizeObserver(() => layout()).observe(svg.node());
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", paint);
+new MutationObserver(paint).observe(document.documentElement, {attributes:true, attributeFilter:["data-theme"]});
+</script>

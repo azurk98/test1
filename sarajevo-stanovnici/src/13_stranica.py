@@ -1,0 +1,391 @@
+"""Interaktivna stranica (claude.ai artifact) -> out/stranica.html
+
+Sastavlja jednu samostalnu HTML stranicu iz izlaza koraka 05–11 i šablona
+src/stranica_sablon.html: H3 polja (stanovnici, dostupnost, supermarket, teren),
+granice, postojeće trgovine i predložene lokacije, satelitsku podlogu
+(Sentinel-2 cloudless 2016, EOX, CC BY 4.0), reljef i izohipse (10_teren.py)
+i mrežu puteva (11_putevi.py). Slike i podaci su ugrađeni, jer stranica ne
+smije učitavati sadržaj s drugih servera.
+
+Zamjene u šablonu: __DATA__, __SAT__, __X0__/__Y0__/__X1__/__Y1__, __TEREN__, __ROADS__.
+"""
+from __future__ import annotations
+
+import base64
+import io
+import json
+
+import geopandas as gpd
+import h3
+import numpy as np
+import pandas as pd
+import requests
+from PIL import Image
+from shapely.geometry import LineString, mapping
+
+from common import DATA, INTERIM, OUT, RAW, ucitaj_granice
+
+KZ_KAT = ["trgovina", "stanica", "osnovna_skola", "ambulanta", "park", "vrtic", "apoteka", "igraliste",
+          "bolnica", "sport"]
+POI_KAT = ["osnovna_skola", "vrtic", "ambulanta", "bolnica", "apoteka", "park", "igraliste", "sport"]
+OP = ["Centar Sarajevo", "Novi Grad Sarajevo", "Novo Sarajevo", "Stari Grad Sarajevo", "Ilidža", "Vogošća"]
+SAT_OKVIR = (18.15, 43.73, 18.53, 43.99)
+SAT_SIRINA = 2800
+SAT_URL = ("https://tiles.maps.eox.at/wms?service=WMS&version=1.1.1&request=GetMap&layers=s2cloudless"
+           "&styles=&srs=EPSG:4326&bbox={},{},{},{}&width={}&height={}&format=image/jpeg")
+SABLON = OUT.parent / "src" / "stranica_sablon.html"
+
+
+def rnd(g):
+    def f(c):
+        if isinstance(c[0], (list, tuple)):
+            return [f(x) for x in c]
+        return [round(c[0], 5), round(c[1], 5)]
+    m = mapping(g)
+    return {"type": m["type"], "coordinates": f(m["coordinates"])}
+
+
+def scen_data():
+    """Scenariji novih cesta (31_scenariji.py): rezultati i geometrije."""
+    if not (OUT / "scenariji.csv").exists():
+        return None
+    R = pd.read_csv(OUT / "scenariji.csv", dtype={"scenarij": str}).set_index("scenarij")
+    P = pd.read_csv(OUT / "scenariji_presjeci.csv", dtype={"scenarij": str})
+    G = gpd.read_file(OUT / "scenariji.geojson")
+    en = {"P": "Planned tunnel Bentbaša – Koševo, under Bjelave (planned; effect check)",
+          "B": "Northern hillside road: Zabrđe – Sokolje – Buća Potok – Pofalići – Velešići",
+          "C": "Tunnel under Mojmilo: Alipašino Polje – Dobrinja (1.1 km)",
+          "C2": "Tunnel under Mojmilo, further east: Alipašino Polje (east) – Dobrinja I",
+          "C3": "Tunnel Hrasno – eastern Dobrinja (towards Lukavica)",
+          "G": "City motorway extended along the railway: Drinska – railway station – Marijin Dvor",
+          "S": "Northern longitudinal: Put života (Pofalići) – Koševo",
+          "SP": "Northern bypass: Put života – Koševo + planned tunnel Koševo – Bentbaša",
+          "T1": "First transversal (planned): Pofalići – railway station – Koševsko brdo/Velešići – Kobilja Glava",
+          "T6": "Sixth transversal (planned): Hrasno – Čengić Vila – Buća Potok – Hotonj",
+          "T16": "First and Sixth transversals together",
+          "T6O": "Sixth transversal via Otoka (at-grade junction)",
+          "T6D": "Sixth transversal via Otoka, grade-separated (no junction at Otoka)",
+          "SC": "New northern road: Zabrđe – Sokolje – Buća Potok – Velešići – Koševsko brdo – Koševo (8.8 km, ≤5%, 6.3 km in tunnel)"}
+    out = []
+    for sc in [x for x in R.index if x != "0"]:
+        r = R.loc[sc]
+        pr = P[P.scenarij == sc].dropna(subset=["promjena_pct"])
+        out.append({"id": sc, "name": en.get(sc, r.naziv), "saved_vh": int(r.usteda_vozilo_sati),
+                    "on_new": None if pd.isna(r.na_novoj_dionici_dnevno) or sc == "B" else int(r.na_novoj_dionici_dnevno),
+                    "corr": [[p.presjek, float(p.promjena_pct)] for p in pr.itertuples()],
+                    "times": [[c.replace("min: ", ""), float(R.loc["0", c]), float(r[c])] for c in R.columns if c.startswith("min: ")],
+                    "geo": [[round(c, 5) for xy in g.coords for c in xy] for g in G[G.scenarij == sc].geometry]})
+        if sc == "SC" and (OUT / "sjeverna_cesta.json").exists():   # trasa iz 34: dijelovi u tunelu i podaci o gradnji
+            k = json.load(open(OUT / "sjeverna_cesta.json"))
+            sg = gpd.read_file(OUT / "sjeverna_cesta.geojson")
+            out[-1]["geo"] = [[round(c, 5) for xy in g.coords for c in xy] for g in sg.geometry]
+            out[-1]["tun"] = [v == "tunel" for v in sg.vrsta]
+            out[-1]["road"] = [["Length", f"{k['duzina_km']} km"], ["Steepest grade", f"{k['max_nagib_pct']:g}%"],
+                               ["In tunnel (dotted)", f"{k['tunel_km']} km"], ["Cuttings · embankments", f"{k['usjek_km']} · {k['nasip_km']} km"],
+                               ["Curves tighter than 80 m radius", str(k["ostrih_krivina_R<80m"])], ["Buildings to demolish", str(k["zgrada_za_rusenje"])]]
+    pf = OUT / "prevoz_scenarij.json"
+    if pf.exists():
+        d = json.load(open(pf))
+        o = d["osjetljivost"]["0.45"]
+        out.insert(0, {"id": "JP", "name": "Much better public transport: 2× departures, +25% speed, shorter walks in the hills, easy transfers",
+                       "saved_vh": int(d["vozilo_sati"][0] - d["vozilo_sati"][1]), "on_new": None,
+                       "corr": [[k, v[2]] for k, v in d["presjeci"].items() if v[2] == v[2]],
+                       "times": [[f"{k} by public transport", v[0], v[1]] for k, v in d["javni_min"].items()],
+                       "geo": [], "share": [round(o["udio_danas"] * 100), round(o["udio_poslije"] * 100),
+                                            round(o["auto_putovanja_promjena_pct"])]})
+    return out
+
+
+def podaci() -> dict:
+    p = gpd.read_file(OUT / "polja_h3.gpkg")
+    acc = pd.read_csv(OUT / "dostupnost_h3.csv").set_index("h3_id")
+    sm = pd.read_csv(OUT / "supermarket_pokrivenost.csv").set_index("h3_id").supermarket_pjesice_min
+    ter = pd.read_csv(OUT / "teren_h3.csv").set_index("h3_id")
+    kz = pd.read_csv(OUT / "kvalitet_zivota_h3.csv").set_index("h3_id")
+    kz_kol = ["indeks"] + [f"min_{k}" for k in KZ_KAT]
+    ul = pd.read_csv(OUT / "ulice_h3.csv").set_index("h3_id")
+    su = pd.read_csv(OUT / "sunce_h3.csv", keep_default_na=False).set_index("h3_id")
+    zr = pd.read_csv(OUT / "zrak_h3.csv").set_index("h3_id")
+    rmj = pd.read_csv(OUT / "radna_mjesta_h3.csv").set_index("h3_id").radna_mjesta
+    ap = pd.read_csv(OUT / "autopraonica_pokrivenost.csv").set_index("h3_id").praonica_auto_min
+    pv = pd.read_csv(OUT / "prevoz_h3.csv", dtype={"ptal": str}, keep_default_na=False).set_index("h3_id")
+    cells = []
+    for r in p.itertuples():
+        cells.append(
+            [r.h3_id, OP.index(r.opcina) if r.opcina in OP else -1, r.mz if isinstance(r.mz, str) else "",
+             int(r.stanovnici), int(r.stanovnici_min), int(r.stanovnici_max), int(r.d0_14), int(r.d15_64),
+             int(r.d65plus), r.pouzdanost, round(h3.cell_area(r.h3_id, "km^2"), 4)]
+            + [int(acc.loc[r.h3_id, k]) if k != "stanica_tip" else acc.loc[r.h3_id, k]
+               for k in ("atraktivnost", "pjesice_5", "pjesice_10", "pjesice_15", "auto_5", "auto_10", "auto_15",
+                         "poi_10min", "stanica_m", "stanica_tip", "stanice_400m", "tramvaj_400m", "glavna_cesta_m")]
+            + [None if pd.isna(sm.get(r.h3_id)) else round(float(sm.get(r.h3_id)), 1)]
+            + ([int(ter.loc[r.h3_id, "visina_m"]), int(ter.loc[r.h3_id, "nagib_pct"])]
+               if r.h3_id in ter.index else [None, None])
+            + [int(round(float(kz.loc[r.h3_id, k]))) for k in kz_kol]
+            + [int(ul.loc[r.h3_id, "ocjena_pristupa"]), float(ul.loc[r.h3_id, "put_max_nagib"]),
+               int(ul.loc[r.h3_id, "put_usko_m"]), int(round(ul.loc[r.h3_id, "udio_usko"] * 100)),
+               int(round(ul.loc[r.h3_id, "udio_strmo"] * 100)), int(ul.loc[r.h3_id, "put_min_koridor_m"])]
+            + [float(su.loc[r.h3_id, "sunce_21dec_h"]), su.loc[r.h3_id, "sunce_21dec_od"],
+               su.loc[r.h3_id, "sunce_21dec_do"], float(su.loc[r.h3_id, "sunce_21jan_h"]),
+               float(su.loc[r.h3_id, "astro_21dec_h"])]
+            + [int(zr.loc[r.h3_id, "iznad_dna_m"]), float(zr.loc[r.h3_id, "inverzija"]),
+               int(zr.loc[r.h3_id, "smog_indeks"]), int(zr.loc[r.h3_id, "magla_indeks"])]
+            + [int(kz.loc[r.h3_id, "buka_m"]), float(kz.loc[r.h3_id, "industrija_udio"])]
+            + [float(pv.loc[r.h3_id, "ptal_ai"]), pv.loc[r.h3_id, "ptal"], pv.loc[r.h3_id, "linije"],
+               int(pv.loc[r.h3_id, "polazaka_na_sat"]), float(pv.loc[r.h3_id, "stanica_min"])]
+            + [None if pd.isna(ap.get(r.h3_id)) else round(float(ap.get(r.h3_id)), 1)]
+            + [int(rmj.get(r.h3_id, 0))])
+
+    op, _ = ucitaj_granice()
+    op = op.set_index("opcina").loc[OP].reset_index()
+    op["geometry"] = op.simplify(12)
+    op = op.to_crs(4326)
+    mz = gpd.read_file(INTERIM / "mz_granice.gpkg")
+    sl = [mz[["opcina", "mz", "geometry"]]]
+    if (INTERIM / "mz_novi_grad.gpkg").exists():
+        sl.append(gpd.read_file(INTERIM / "mz_novi_grad.gpkg")[["opcina", "mz", "geometry"]])
+    if (INTERIM / "mz_centar.gpkg").exists():
+        sl.append(gpd.read_file(INTERIM / "mz_centar.gpkg")[["opcina", "mz", "geometry"]])
+    mzall = gpd.GeoDataFrame(pd.concat(sl, ignore_index=True), crs=mz.crs)
+    mzall["geometry"] = mzall.simplify(10)
+    mzall = mzall.to_crs(4326)
+
+    fzs = pd.read_csv(DATA / "opcine_procjena_2026.csv").set_index("opcina")
+    d = gpd.read_file(INTERIM / "raspodjela_dijelovi.gpkg")
+    summ = []
+    for o in OP:
+        dd = d[d.opcina == o]
+        pz = dd.groupby("pouzdanost").stanovnici.sum()
+        summ.append({"name": o, "total": int(fzs.loc[o, "stanovnici"]),
+                     "ages": [int(fzs.loc[o, k]) for k in ("d0_14", "d15_64", "d65plus")],
+                     "cells": int(dd.h3_id.nunique()), "abc": [int(pz.get(k, 0)) for k in "ABC"]})
+    mzt = pd.read_csv(OUT / "mz_zbirovi.csv")
+    mzrows = [[OP.index(r.opcina), r.mz, int(r.stanovnici), int(r.stanovnici_min), int(r.stanovnici_max),
+               r.kontrolni_zbir] for r in mzt.itertuples()]
+
+    st = pd.read_csv(OUT / "supermarket_trgovine.csv")
+    st = st[st.tip.isin(["supermarket", "mall", "department_store"])]
+    if "izvor" in st:  # Google Places se ne prikazuje na karti koja nije Google karta
+        st = st[st.izvor != "google"]
+    kd = pd.read_csv(OUT / "supermarket_kandidati.csv")
+    sites = [[r.strategija, int(r.rang), r.h3_id, r.mz if isinstance(r.mz, str) else "", OP.index(r.opcina),
+              int(r.kupci_procjena), int(r.stanovnici_10min_pjesice), int(r.od_toga_bez_supermarketa_10min),
+              int(r.najblizi_supermarket_m), int(r.glavna_cesta_m), r.znakovi_zemljista, r.lon, r.lat]
+             for r in kd.itertuples()]
+    pr = pd.read_csv(OUT / "autopraonica_postojece.csv")
+    praonice = [[round(r.lon, 5), round(r.lat, 5), r.ime if isinstance(r.ime, str) else "", r.vrsta]
+                for r in pr.itertuples()]
+    ak = pd.read_csv(OUT / "autopraonica_kandidati.csv")
+    wsites = [[r.strategija, int(r.rang), r.h3_id, r.mz if isinstance(r.mz, str) else "", OP.index(r.opcina),
+               int(r.pranja_mj), int(r.od_stanovnika), int(r.od_prolaza), int(r.stanovnici_10min_voznje),
+               int(r.bez_praonice_5min), int(r.najbliza_praonica_m), int(r.najbliza_pumpa_m), r.cesta,
+               r.znakovi_zemljista, r.lon, r.lat] for r in ak.itertuples()]
+    biz = {}
+    for k in ("dostava", "muzicka"):
+        bk = pd.read_csv(OUT / f"biz_{k}_kandidati.csv")
+        bp = pd.read_csv(OUT / f"biz_{k}_postojeci.csv")
+        bc = pd.read_csv(OUT / f"biz_{k}_pokrivenost.csv").set_index("h3_id").reindex(p.h3_id)
+        biz[k] = {
+            "sites": [[r.strategija, int(r.rang), r.h3_id, r.mz if isinstance(r.mz, str) else "", OP.index(r.opcina),
+                       float(r.procjena), int(r.potraznja_blizu), int(r.novo_pokriveno), int(r.najblizi_konkurent_m),
+                       int(r.konkurenata_1500m), r.znakovi_zemljista, r.lon, r.lat] for r in bk.itertuples()],
+            "places": [[round(r.lon, 5), round(r.lat, 5), r.ime if isinstance(r.ime, str) else "", r.vrsta]
+                       for r in bp.itertuples()],
+            "cov": [[None if pd.isna(m) else round(float(m), 1), None if pd.isna(n) else int(n)]
+                    for m, n in zip(bc.min_do_najblizeg, bc.u_blizini)]}
+    gz = gpd.read_file(OUT / "guzva_dionice.geojson")
+    gp = json.load(open(OUT / "guzva_profili.json"))
+    pk = list(gp["profili"])
+    model = (OUT / "model_dionice.geojson").exists()
+    if model:
+        # tokovi iz modela putovanja (24_putovanja.py), profil sata s najbližeg brojača
+        from scipy.spatial import cKDTree
+        md = gpd.read_file(OUT / "model_dionice.geojson")
+        bp = pd.read_csv(DATA / "brojaci_2025.csv").dropna(subset=["lat", "lon"])
+        bp = bp[bp.brojac.isin(pk)]
+        tk = cKDTree(np.c_[bp.lon * 0.72, bp.lat])
+        c = md.geometry.interpolate(0.5, normalized=True)
+        prof = bp.brojac.to_numpy()[tk.query(np.c_[c.x * 0.72, c.y])[1]]
+        gz = gpd.GeoDataFrame({"pgds_smjer": md.jaci_smjer, "kapacitet": md.kap_smjer, "profil": prof,
+                               "izvor": "model", "ime": md.ime, "brojac": ""}, geometry=md.geometry, crs=md.crs)
+        mb = pd.read_csv(OUT / "model_brojaci.csv").set_index("brojac")
+        mi = json.load(open(OUT / "model_info.json"))
+    gimena = sorted({x for x in gz.ime if isinstance(x, str) and x})
+    _op, _ = ucitaj_granice()
+    unutra = gz.geometry.interpolate(0.5, normalized=True).within(_op.to_crs(gz.crs).union_all()).to_numpy()
+    gbr = pd.read_csv(DATA / "brojaci_2025.csv").dropna(subset=["lat", "lon"])
+    gbr = mb.reset_index()[["brojac", "lokacija", "lat", "lon", "pgds_2025"]] if model else gbr[gbr.brojac.isin(set(gz.brojac))]
+    trf = {"prof": [gp["profili"][k] for k in pk], "day": gp["dan"], "names": gimena,
+           "seg": [[round(float(r.pgds_smjer)), int(r.kapacitet), pk.index(r.profil), 0 if r.izvor in ("brojac", "model") else 1,
+                    gimena.index(r.ime) if isinstance(r.ime, str) and r.ime else -1,
+                    [round(c, 5) for xy in r.geometry.coords for c in xy], int(u)]
+                   for r, u in zip(gz.itertuples(), unutra)],
+           "cnt": [[r.brojac, r.lokacija, round(r.lat, 5), round(r.lon, 5), int(r.pgds_2025),
+                    pk.index(r.brojac) if r.brojac in pk else -1,
+                    int(mb.model.get(r.brojac, -1)) if model else -1,
+                    int(mb.unakrsna.get(r.brojac, -1)) if model else -1,
+                    int(mb.model_faza1.get(r.brojac, -1)) if model else -1,
+                    int(bool(mb.korigovan.get(r.brojac, False))) if model else 0] for r in gbr.itertuples()],
+           "model": mi if model else None,
+           "scen": scen_data()}
+    rmo = pd.read_csv(DATA / "radna_mjesta_opcine.csv")
+    rmz = pd.read_csv(OUT / "radna_mjesta_mz.csv")
+    jobs = {"op": [[OP.index(r.opcina), int(r.radna_mjesta_2024), int(r.zaposleni_stanovnici_2025)] for r in rmo.itertuples()],
+            "mz": [[OP.index(r.opcina), r.mz, int(r.radna_mjesta), int(r.stanovnici)] for r in rmz.itertuples()]}
+    sd = gpd.read_file(OUT / "sadrzaji.geojson")
+    x0, y0, x1, y1 = SAT_OKVIR
+    sd = sd[(sd.geometry.x.between(x0, x1)) & (sd.geometry.y.between(y0, y1))]
+    poi = {k: [[round(g.x, 5), round(g.y, 5), (n if isinstance(n, str) else "")]
+               for g, n in zip(sd[sd.kategorija == k].geometry, sd[sd.kategorija == k].ime)] for k in POI_KAT}
+    dio = gpd.read_file(OUT / "ulice_dionice.gpkg")
+    dio = dio[~dio.klasa.isin(["motorway", "motorway_link", "trunk", "trunk_link", "primary", "primary_link",
+                               "secondary", "secondary_link", "tertiary", "tertiary_link"])]
+    dio["kod"] = (dio.nagib > 12).astype(int) + 2 * dio.uska.astype(bool).astype(int)
+    dio = dio[dio.kod > 0].to_crs(4326)
+    acc = {}
+    for kod, g in dio.groupby("kod"):
+        acc[int(kod)] = [[round(c, 5) for xy in geom.coords for c in xy] for geom in g.geometry]
+    zs = pd.read_csv(OUT / "zrak_stanice.csv")
+    stanice = [[r.stanica, round(r.lat, 5), round(r.lon, 5), int(r.pm25)] for r in zs.itertuples()]
+    li = gpd.read_file(OUT / "linije.geojson")
+    li["geometry"] = li.to_crs(32634).simplify(8).to_crs(4326)
+    linije = []
+    for r in li.itertuples():
+        parts = getattr(r.geometry, "geoms", [r.geometry])
+        linije.append([r.mod, r.linija, r.ime, None if pd.isna(r.polazaka_na_sat) else float(r.polazaka_na_sat),
+                       [[round(c, 5) for xy in p.coords for c in xy] for p in parts]])
+    nl = gpd.read_file(OUT / "nove_linije.geojson") if (OUT / "nove_linije.geojson").exists() else None
+    nove = [] if nl is None else [[r.id, r.tip, r.naziv, float(r.duzina_km), int(r.stanovnici_400m),
+                                   int(r.radna_mjesta_400m), int(r.novi_korisnici), int(r.voznja_min), int(r.stanica),
+                                   [round(c, 5) for xy in r.geometry.coords for c in xy],
+                                   getattr(r, "postojece_linije", "") or "", float(getattr(r, "postojeci_polasci_h", 0) or 0),
+                                   getattr(r, "preporuka", "") or ""] for r in nl.itertuples()]
+    def sjev_post(sid):
+        """Postojeće linije na dionicama sjeverne linije (28): S1 = dionice 2–4, S2 = 5–7 (bez tramvaja)."""
+        import re
+        f_ = OUT / "sjeverna_linija_dionice.csv"
+        if not f_.exists():
+            return "", 0.0
+        d = pd.read_csv(f_)
+        d = d.iloc[1:4] if sid == "S1" else d.iloc[4:] if sid == "S2" else d.iloc[1:]
+        lin = {}
+        for txt in d.postojece:
+            for v, k, h in re.findall(r"(minibus|autobus|trolejbus|tramvaj) (\S+) \(([\d.]+)/h\)", str(txt)):
+                if v not in ("tramvaj", "trolejbus"):
+                    lin[f"{v} {k}"] = float(h)
+        top = sorted(lin.items(), key=lambda x: -x[1])
+        return ", ".join(f"{k} ({h:g}/h)" for k, h in top), round(sum(lin.values()), 1)
+
+    for sid, fajl, naz in (("S", "sjeverna_linija.geojson",
+                            "Stup – Zabrđe – Briješće – Sokolje – Buća Potok – Pofalići – Velešići – Željeznička (preko brda)"),):
+        if (OUT / fajl).exists():
+            r = gpd.read_file(OUT / fajl).iloc[0]
+            nove.append([sid, "glavna", naz, float(r.km), int(r.stanovnici_400m), int(r.radna_mjesta_400m),
+                         int(r["danas_>8min_od_stanice"]), int(r.voznja_min), max(2, round(float(r.km) / 0.4)),
+                         [round(c, 5) for xy in r.geometry.coords for c in xy], *sjev_post(sid), "sjeverna"])
+    audit = None
+    if (OUT / "provjera_trase.geojson").exists():
+        ag = gpd.read_file(OUT / "provjera_trase.geojson")
+        at = pd.read_csv(OUT / "provjera_trase_tacke.csv")
+        audit = {"seg": [[int(r.ocjena), [round(c, 5) for xy in r.geometry.coords for c in xy]] for r in ag.itertuples()],
+                 "pts": [[int(r.mjesto), 2 if r.ocjena == "problem" else 1, r.ulica, r.razlozi, round(r.lat, 5),
+                          round(r.lon, 5), float(r.od_km), int(r.duzina_m)] for r in at.itertuples()],
+                 "km": [round(float((ag.do_m - ag.od_m)[ag.ocjena == k].sum()) / 1000, 1) for k in (0, 1, 2)]}
+    # kratki novi spojevi i linije kroz njih (30_dogradnje.py); Dobrinja je namjerno bez prolaza
+    if (OUT / "dogradnje.geojson").exists():
+        dg = gpd.read_file(OUT / "dogradnje.geojson")
+        dsp = pd.read_csv(OUT / "dogradnje_spojevi.csv")
+        dsp["id"] = [f"N{i}" for i in range(1, len(dsp) + 1)]
+        dli = pd.read_csv(OUT / "dogradnje_linije.csv")
+        pj = gpd.read_file(OUT / "putevi.geojson")
+        pj = pj[pj.klasa.isin(["pjesacka", "stepenice"])].to_crs(32634)
+        dsp["ulica_a"] = dsp.ulica_a.where(dsp.ulica_a.notna(), "")
+        dsp["ulica_b"] = dsp.ulica_b.where(dsp.ulica_b.notna(), "")
+        for r in dsp.itertuples():
+            if "Dobrinja" in str(r.naselje):
+                continue
+            g = dg[(dg.tip == "spoj") & (dg.id == r.id)].geometry.iloc[0]
+            gm = gpd.GeoSeries([g], crs=4326).to_crs(32634).iloc[0]
+            staza = float(pj[pj.intersects(gm.buffer(8))].intersection(gm.buffer(8)).length.sum()) / max(gm.length, 1)
+            opis = (f"New link of about {r.spoj_m} m between {r.ulica_a or 'an unnamed street'} and "
+                    f"{r.ulica_b or 'an unnamed street'} ({r.naselje.split(' / ')[0]}). By road the two ends are "
+                    f"{r.cestom_m / 1000:.1f} km apart today. Grade about {r.nagib_pct}% (30 m terrain model)."
+                    + (" Crosses a stream: needs a culvert or small bridge." if r.prelaz != "—" else "")
+                    + (" A footpath or steps already run along part of it, so it could widen an existing path." if staza > 0.3 else
+                       " No mapped path along it; check land ownership and walls on site."))
+            nove.append([r.id, "spoj", f"{r.ulica_a or 'unnamed street'} – {r.ulica_b or 'unnamed street'}", round(r.spoj_m / 1000, 2),
+                         int(r.slabo_pokriveni_400m), 0, int(r.slabo_pokriveni_400m), 0, 0,
+                         [round(c, 5) for xy in g.coords for c in xy], "", 0.0, "spoj", opis])
+        for r in dli.itertuples():
+            if "Dobrinja" in str(r.naselje):
+                continue
+            g = dg[(dg.tip == "linija") & (dg.id == r.id)].geometry.iloc[0]
+            opis = (f"Short line from {r.od} to {r.do} through a new link ({r.spoj}, about {r.spoj_m} m, "
+                    f"grade about {r.nagib_spoja_pct}%). It serves {r.danas_slabo_pokriveni:,} residents who today walk over "
+                    f"8 minutes to a stop or have poor service. Ends at stops with at least 4 departures an hour.")
+            nove.append([r.id, "dogradnja", f"{r.od} – {r.do}", float(r.duzina_km), int(r.stanovnici_400m), 0,
+                         int(r.danas_slabo_pokriveni), int(r.voznja_min), max(2, round(float(r.duzina_km) / 0.4)),
+                         [round(c, 5) for xy in g.coords for c in xy], "", 0.0, "dogradnja", opis])
+    return {"lines": linije, "newlines": nove, "audit": audit, "aq": stanice, "acc": acc, "poi": poi,
+            "stores": [[round(a, 5), round(b, 5), (n if isinstance(n, str) else "")]
+                       for a, b, n in zip(st.lon, st.lat, st.ime)],
+            "sites": sites, "washes": praonice, "wsites": wsites, "biz": biz, "trf": trf, "jobs": jobs, "cells": cells, "summ": summ, "mz": mzrows,
+            "op": [rnd(x) for x in op.geometry],
+            "mzlines": [[OP.index(o) if o in OP else -1, n, rnd(x)]
+                        for o, n, x in zip(mzall.opcina, mzall.mz, mzall.geometry)]}
+
+
+def satelit() -> tuple[str, tuple]:
+    f = RAW / "s2cloudless_2016_sire.jpg"
+    x0, y0, x1, y1 = SAT_OKVIR
+    if not f.exists():
+        import math
+        h = round(SAT_SIRINA * (y1 - y0) / ((x1 - x0) * math.cos(math.radians((y0 + y1) / 2))))
+        r = requests.get(SAT_URL.format(x0, y0, x1, y1, SAT_SIRINA, h), timeout=180)
+        r.raise_for_status()
+        f.write_bytes(r.content)
+    return "data:image/jpeg;base64," + base64.b64encode(f.read_bytes()).decode(), SAT_OKVIR
+
+
+def teren() -> dict:
+    def jpg(path, mode, q):
+        b = io.BytesIO()
+        Image.open(OUT / path).convert(mode).save(b, "JPEG", quality=q, optimize=True)
+        return "data:image/jpeg;base64," + base64.b64encode(b.getvalue()).decode()
+
+    gj = json.loads((OUT / "teren_izohipse.geojson").read_text())
+    cont = []
+    for f in gj["features"]:
+        ln = LineString(f["geometry"]["coordinates"]).simplify(0.00015)
+        if ln.length < 0.003:
+            continue
+        cont.append([f["properties"]["m"], 1 if f["properties"]["glavna"] else 0,
+                     [round(c, 4) for xy in ln.coords for c in xy]])
+    return {"rel": jpg("teren_reljef.png", "RGB", 82), "sj": jpg("teren_sjena.png", "L", 80),
+            "cont": cont, "box": json.loads((OUT / "teren_okvir.json").read_text())}
+
+
+def putevi() -> dict:
+    gj = json.loads((OUT / "putevi.geojson").read_text())
+    roads: dict[str, list] = {}
+    for f in gj["features"]:
+        k = f["properties"]["klasa"]
+        nd = 4 if k in ("ulica", "pristupna", "pjesacka", "stepenice") else 5
+        roads.setdefault(k, []).append([round(c, nd) for xy in f["geometry"]["coordinates"] for c in xy])
+    return roads
+
+
+def main() -> None:
+    sat, (x0, y0, x1, y1) = satelit()
+    t = SABLON.read_text(encoding="utf-8")
+    t = (t.replace("__X0__", str(x0)).replace("__Y0__", str(y0)).replace("__X1__", str(x1)).replace("__Y1__", str(y1))
+         .replace("__ROADS__", json.dumps(putevi(), separators=(",", ":")))
+         .replace("__TEREN__", json.dumps(teren(), separators=(",", ":")))
+         .replace("__DATA__", json.dumps(podaci(), ensure_ascii=False, separators=(",", ":")))
+         .replace("__SAT__", sat))
+    (OUT / "stranica.html").write_text(t, encoding="utf-8")
+    print(f"-> out/stranica.html ({len(t) // 1024} KB)")
+
+
+if __name__ == "__main__":
+    main()

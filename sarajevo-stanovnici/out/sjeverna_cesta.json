@@ -1,0 +1,61 @@
+{
+ "duzina_km": 8.81,
+ "max_nagib_pct": 5.0,
+ "tunel_km": 6.3,
+ "most_km": 0.0,
+ "usjek_km": 1.08,
+ "nasip_km": 0.38,
+ "na_terenu_km": 1.04,
+ "iskop_m3": 155740,
+ "nasip_m3": 44899,
+ "zgrada_za_rusenje": 16,
+ "otisak_rusenja_m2": 4146,
+ "ostrih_krivina_R<80m": 1,
+ "min_radijus_m": 66,
+ "tacke": [
+  "Zabrđe",
+  "Sokolje",
+  "Buća Potok",
+  "Velešići",
+  "Koševsko brdo",
+  "Koševo"
+ ],
+ "prikljucci": [
+  {
+   "naziv": "Zabrđe",
+   "lon": 18.3097,
+   "lat": 43.8741,
+   "km": 0.02
+  },
+  {
+   "naziv": "Sokolje",
+   "lon": 18.319,
+   "lat": 43.869,
+   "km": 0.96
+  },
+  {
+   "naziv": "Buća Potok",
+   "lon": 18.37,
+   "lat": 43.864,
+   "km": 5.24
+  },
+  {
+   "naziv": "Velešići",
+   "lon": 18.399,
+   "lat": 43.8655,
+   "km": 7.68
+  },
+  {
+   "naziv": "Koševsko brdo",
+   "lon": 18.404,
+   "lat": 43.8705,
+   "km": 8.42
+  },
+  {
+   "naziv": "Koševo",
+   "lon": 18.4085,
+   "lat": 43.872,
+   "km": 8.8
+  }
+ ]
+}

@@ -1,0 +1,21 @@
+strategija,rang,h3_id,opcina,mz,procjena,potraznja_blizu,novo_pokriveno,najblizi_konkurent_m,konkurenata_1500m,cesta_m,stanica_m,nagib_pct,znakovi_zemljista,lon,lat
+najvise,1,8a1ef45b0467fff,Vogošća,Vogošća,75.1,19885,554,85,18,1,161,4.0,parking 571 m²,18.34332,43.90182
+najvise,2,8a1ef4596407fff,Ilidža,Stup,70.3,121056,122,50,52,70,133,1.0,—,18.32317,43.84237
+najvise,3,8a1ea92cd3b7fff,Novi Grad Sarajevo,Reljevo,64.2,17400,2237,233,7,21,64,8.0,—,18.30541,43.88389
+najvise,4,8a1ef459699ffff,Novi Grad Sarajevo,Briješće,61.2,107899,71,213,22,6,85,8.0,—,18.32576,43.85503
+najvise,5,8a1ef45b075ffff,Vogošća,Vogošća,60.4,19329,295,183,16,13,325,7.0,—,18.35314,43.8996
+najvise,6,8a1ef4596347fff,Novi Grad Sarajevo,Alipašin Most I,58.2,133094,0,269,44,29,231,1.0,construction 14.405 m²; parking 407 m²,18.34605,43.84824
+najvise,7,8a1ef4590077fff,Novi Grad Sarajevo,Čengić Vila,56.9,138768,0,96,74,21,33,2.0,—,18.3673,43.84895
+najvise,8,8a1ea92c98a7fff,Novi Grad Sarajevo,Zabrđe,56.4,37660,281,223,12,6,219,9.0,—,18.31133,43.87373
+najvise,9,8a1ef4596b9ffff,Novi Grad Sarajevo,Briješće,55.5,120414,5,754,47,0,96,10.0,parking 300 m²,18.33721,43.85244
+najvise,10,8a1ef696580ffff,Ilidža,Naselje Bulevar,54.5,106520,0,215,64,8,142,1.0,parking 3.191 m²,18.31567,43.83634
+bijela_mrlja,1,8a1ea92c8117fff,Novi Grad Sarajevo,Dobroševići,58.9,14376,3856,1307,1,14,439,1.0,—,18.2806,43.86853
+bijela_mrlja,2,8a1ea92c0627fff,Ilidža,Rakovica,39.7,4094,2623,2,4,6,3855,3.0,—,18.20601,43.87759
+bijela_mrlja,3,8a1ef45b4537fff,Vogošća,Semizovac,43.4,11708,1512,41,2,56,288,8.0,—,18.31905,43.92273
+bijela_mrlja,4,8a1ea92dda97fff,Ilidža,Lipe,39.7,12500,1039,128,8,4,178,1.0,—,18.24175,43.84859
+bijela_mrlja,5,8a1ef458651ffff,Vogošća,Kobilja Glava,42.2,28721,819,1099,6,91,37,9.0,—,18.38523,43.88352
+bijela_mrlja,6,8a1ef6960ad7fff,Ilidža,Sokolović-kolonija,28.1,20183,594,549,7,25,55,1.0,—,18.3105,43.81101
+bijela_mrlja,7,8a1ef4580c17fff,Centar Sarajevo,Pionirska Dolina,20.3,16987,556,460,5,96,189,7.0,—,18.41564,43.88988
+bijela_mrlja,8,8a1ea92c9987fff,Novi Grad Sarajevo,Zabrđe,61.4,29951,498,77,13,15,27,1.0,—,18.30936,43.87528
+bijela_mrlja,9,8a1ea92eb487fff,Novi Grad Sarajevo,Dobroševići,20.2,2696,361,2674,0,0,789,8.0,—,18.27267,43.89679
+bijela_mrlja,10,8a1ef4596197fff,Novi Grad Sarajevo,Briješće,49.0,83657,329,185,50,55,445,1.0,—,18.32643,43.84715

@@ -1,0 +1,9 @@
+tip,od,do,putovanja_dnevno,duzina_km,stanovnici_400m,radna_mjesta_400m,udio_na_tramvaju_trolejbusu,osm_bus_blizu_oba_kraja
+pravac,Zabrđe,Alipašin Most III,3682,7.0,35487,11501,0.04,True
+pravac,Sumbuluša,Željeznička,3308,4.8,42114,49849,0.83,True
+pravac,Trg oslobođenja-Centar,Željeznička,3215,2.9,29310,41184,0.93,True
+pravac,Zabrđe,Alipašino Polje BII,2483,5.7,23010,10003,0.24,True
+pravac,Željeznička,Dolac,2453,4.0,41531,13879,0.41,True
+pravac,Trg oslobođenja-Centar,Pofalići II,2162,3.4,20686,36984,0.5,True
+pravac,Željeznička,"izvan 6 općina (43.824, 18.371)",2120,5.6,22746,8137,0.08,False
+pravac,Željeznička,Dobrinja D,2046,6.4,71747,24961,0.73,True
