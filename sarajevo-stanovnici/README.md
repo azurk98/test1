@@ -480,6 +480,19 @@ Nišići su vedri u 93% jutara kad je Butmir u magli; 16% je blizu stope lažnih
 pa je stvarna učestalost vjerovatno još niža. Glasinac ima svoju maglu (hladna visoravan).
 Ograničenja: frontalni oblaci (planine pod oblakom) nisu ocijenjeni; jedan snimak dnevno; tačke ~1 km.
 
+## Vjetar na lokacijama za aerodrom (`36_vjetar.py`)
+
+| stanica | tiho (< 3 kt) | srednje | 95. percentil | udari ≥ 35 kt | pista upotrebljiva (bočni ≤ 20 kt) |
+|---|---|---|---|---|---|
+| Butmir (METAR, pista 119°) | 52% | 3,3 kt | 9 kt | 0,2% sati | 99,96% |
+| Ivan Sedlo 970 m (pista 005°) | 51% | 3,6 kt | 10 kt | 0,1% | 99,96% |
+| Bjelašnica 2053 m (pista 005°) | 6% | 17,9 kt | 43 kt | 10% | 96,1% |
+
+Doline i sedla su mirni; na vrhovima vjetar puše pretežno sa sjevera (40%) i juga (33%), pa je pista
+sjever–jug na Nišićima dobro usmjerena: čak i uz vjetar s Bjelašnice bila bi iznad ICAO granice (95%).
+Nišići (945 m, otvorena visoravan) su između ta dva režima; stvarnu brzinu, udare i turbulenciju
+s rubova visoravni treba izmjeriti na lokaciji. SYNOP za 2021–2025 nije potpun (OGIMET ograničava broj zahtjeva).
+
 ## Google Places (`12_google_places.py`, opcionalno)
 
 Nearby Search (New) za tipove supermarket, grocery_store, convenience_store, market, food_store u
