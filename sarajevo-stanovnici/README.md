@@ -460,6 +460,26 @@ Ograničenja: teren s 30 m modela (±3–4 % nagiba na 100 m), bez geologije, kl
 vlasništva i cijene; nova potražnja koju bi cesta privukla nije uključena.
 `SAMO_GEO=1 python src/31_scenariji.py` obnavlja samo geometrije svih scenarija za kartu.
 
+## Magla na lokacijama za aerodrom (`35_magla_lokacije.py`)
+
+METAR aerodroma Sarajevo 2016–2025 (Iowa Environmental Mesonet): ~245 h godišnje ispod CAT I
+(vidljivost < 550 m ili oblaci do 200 ft), ~48 dana s bar jednim takvim satom, gotovo samo
+novembar–januar, 5–9 h ujutro. MODIS Terra snimci (NASA GIBS, ~10:30, 10 zima, 1.171 dan):
+oblak = svijetao pojas 7 (2,1 µm, snijeg je taman) i svijetle prave boje. Ocjenjuju se samo jutra s
+vedrim planinama (inverzija; 502 dana); test na Butmiru pogađa 76% jutara s maglom (METAR), lažno 18%.
+
+| lokacija | pod niskim oblakom u inverzijsko jutro | kad je Butmir u magli | jutara po zimi |
+|---|---|---|---|
+| Butmir (danas) | 35% | 76% | 18 |
+| Kiseljak | 49% | 85% | 26 |
+| Glasinac | 31% | 46% | 16 |
+| Pazarić / Tarčin | 25% | 30% | 13 |
+| **Nišići** | **16%** | **7%** | **8** |
+
+Nišići su vedri u 93% jutara kad je Butmir u magli; 16% je blizu stope lažnih javljanja testa (18%),
+pa je stvarna učestalost vjerovatno još niža. Glasinac ima svoju maglu (hladna visoravan).
+Ograničenja: frontalni oblaci (planine pod oblakom) nisu ocijenjeni; jedan snimak dnevno; tačke ~1 km.
+
 ## Google Places (`12_google_places.py`, opcionalno)
 
 Nearby Search (New) za tipove supermarket, grocery_store, convenience_store, market, food_store u
