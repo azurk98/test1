@@ -143,6 +143,19 @@ Server: **HytaleServer 0.7.7** (`com.hypixel.hytale:Server:0.7.7`, najnovija ver
 - **Sigurnost:** postojanje sigurno; dostupnost danas: **ne**.
 - **Posljedica:** UI sloj (`zs-ui`) projektovati kao view-model (stanje + komande), ne kao `.ui` selektore. Tada je kasniji prelaz na XAML zamjena prikaza, ne prepisivanje. Opcija F dobija ocjenu za budućnost, ne za MVP.
 
+### 3.11a Dopuna: NoesisGUI u pre-release grani (0.8.0-pre.5)
+- Na `maven.hytale.com/pre-release` postoji `Server-0.8.0-pre.5` (2026-11-12).
+- U toj verziji `UIModule` u constant poolu ima `java/lang/System.getProperty` i string **`hytale.serverside_ui_preview`**. Zastavica `SERVERSIDE_NOESIS_UI_ENABLED` se dakle (vjerovatno) uključuje JVM svojstvom `-Dhytale.serverside_ui_preview=true`. To je zvanični „preview" prekidač, ne hak.
+- U 0.7.7 (release) toga nema; tamo je isključeno bez prekidača.
+- Proširen je i API: `ExecuteServersideUICommand`, `NotifyServersideUIPropertyChanged` (dvosmjerno vezivanje), `GlobalResourceRegistry`, demo stranice `Form`, `TwoWay`, `StaticResource`, `Bindings`.
+- Vjerovatno treba i **pre-release klijent** kod igrača.
+- **Sigurnost:** ime svojstva sigurno; tačna očekivana vrijednost (`true`) vjerovatno.
+- **Ručni test S11:**
+  1. Pokreni `Server-0.8.0-pre.5` sa `java -Dhytale.serverside_ui_preview=true -jar ...`.
+  2. Uđi pre-release klijentom kao operator.
+  3. Ukucaj `/uidemo page` (ili `/uidemo` → pogledaj podkomande).
+  4. Treba vidjeti XAML testnu stranicu. Bez svojstva treba dobiti poruku „Serverside Noesis UI is disabled".
+
 ## 3. Ispravke hipoteza iz briefa
 
 | Hipoteza | Stvarno (0.7.7) |
